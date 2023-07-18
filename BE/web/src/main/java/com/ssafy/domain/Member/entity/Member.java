@@ -1,6 +1,6 @@
-package com.ssafy.domain.sign.entity;
+package com.ssafy.domain.Member.entity;
 
-import com.ssafy.domain.sign.dto.request.SignUpRequest;
+import com.ssafy.domain.Member.dto.request.SignUpRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Member implements UserDetails {
 

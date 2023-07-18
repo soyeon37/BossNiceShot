@@ -1,4 +1,4 @@
-package com.ssafy.domain.sign.dto.response;
+package com.ssafy.domain.Member.dto.response;
 
 import com.ssafy.config.security.jwt.TokenInfo;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,13 +1,13 @@
-package com.ssafy.domain.sign.service;
+package com.ssafy.domain.Member.service;
 
 import com.ssafy.config.security.jwt.JwtTokenProvider;
-import com.ssafy.domain.sign.entity.Member;
-import com.ssafy.domain.sign.repository.MemberRepository;
+import com.ssafy.domain.Member.entity.Member;
+import com.ssafy.domain.Member.repository.MemberRepository;
 import com.ssafy.config.security.jwt.TokenInfo;
-import com.ssafy.domain.sign.dto.response.SignInResponse;
-import com.ssafy.domain.sign.dto.request.SignInRequest;
-import com.ssafy.domain.sign.dto.response.SignUpResponse;
-import com.ssafy.domain.sign.dto.request.SignUpRequest;
+import com.ssafy.domain.Member.dto.response.SignInResponse;
+import com.ssafy.domain.Member.dto.request.SignInRequest;
+import com.ssafy.domain.Member.dto.response.SignUpResponse;
+import com.ssafy.domain.Member.dto.request.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,8 +21,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class SignService {
-
+public class MemberService {
     private final MemberRepository memberRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
@@ -38,6 +37,7 @@ public class SignService {
         }
         return SignUpResponse.from(member);
     }
+
     @Transactional(readOnly = true)
     public SignInResponse signIn(SignInRequest request) {
 
@@ -46,7 +46,7 @@ public class SignService {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(request.memberId(), request.password());
 
         // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
-//         authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
+        // authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
         // 2-1. 비밀번호 체크

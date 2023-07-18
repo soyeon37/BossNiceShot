@@ -1,11 +1,10 @@
-package com.ssafy.domain.sign.repository;
+package com.ssafy.domain.Member.repository;
 
-import com.ssafy.domain.sign.entity.Member;
+import com.ssafy.domain.Member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    Optional<Member> findByMemberId(String username);
+    Optional<Member> findByMemberId(String memberId);
 }
