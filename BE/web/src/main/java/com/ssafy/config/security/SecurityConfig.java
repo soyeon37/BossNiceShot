@@ -13,10 +13,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * 인증(authentication) 와 인가(authorization) 처리를 위한 스프링 시큐리티 설정 정의.
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
     private final JwtTokenProvider jwtTokenProvider;
 
     private static final String[] AUTH_WHITELIST = {
@@ -33,9 +37,15 @@ public class SecurityConfig {
             "/actuator/*",
             "/swagger-ui/**",
             "/api-docs/**",
-            "/members/**",
-            "/swagger*/**"
+            "/members/login",
+            "/members/sign-up",
+            "/members/sign-in",
     };
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -43,14 +53,24 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(AUTH_WHITELIST).permitAll()
+                        .requestMatchers("/members/test").hasRole("USER")
+                        .requestMatchers("/members/sign-up").hasRole("USER")
+                        .requestMatchers("/members/sign-in").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+//                .httpBasic(withDefaults()); // 권한이 없으면 로그인 페이지로 이동
         return http.build();
     }
 
+//    // prefix
+//    @Bean
+//    ForwardedHeaderFilter forwardedHeaderFilter() {
+//        return new ForwardedHeaderFilter();
+//    }
+
     @Bean
-    public BCryptPasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/v3/api-docs/**");
     }
 }
