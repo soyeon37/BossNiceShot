@@ -1,14 +1,25 @@
 import React from "react";
 import "./full-banner.css";
+import golfImage from "../../assets/source/icons/golf.png";
 
 function MainBanner() {
   return (
-    <div id="Banner" style={{ height: "500px", backgroundColor: "skyblue", position: "relative" }}>
-      <img src="your_banner_image_url" alt="Banner" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-      <h1 style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", fontSize: "50px", backgroundColor: "red", padding: "20px" }}>
-        Banner의 공간
-        <br />
-      </h1>
+    <div id="banner">
+      <div id="banner-letter">
+        <div id="banner-context">
+          온라인으로<br />
+          쉽게 골프를 배워보세요<br />
+          원하는 사람과 함께<br />
+          골프장에 가세요
+        </div>
+        
+      </div>
+      <div id="banner-image">
+        <img
+          src={golfImage}
+          alt="banner-golf-icon"
+        />
+      </div>
     </div>
   );
 }

@@ -4,9 +4,9 @@ import SplideGolf from "./SplideGolf";
 
 function Main() {
   return (
-    <div id="Home" style={{height:"800px"}}>
+    <div id="Home" style={{height:"580px"}}>
       <MainBanner />
-      {/* <SplideGolf /> */}
+      <SplideGolf />
       {/* <SplideLearning /> */}
       {/* <SplideAccompany /> */}
     
