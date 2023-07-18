@@ -1,5 +1,6 @@
-package com.ssafy.domain.member.controller;
+package com.ssafy.domain.solution.controller;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
 
 @Tag(name = "예제 Solution API", description = "Python 실행 테스트용 API")
 @RestController
