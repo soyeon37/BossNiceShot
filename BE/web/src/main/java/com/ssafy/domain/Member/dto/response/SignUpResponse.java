@@ -1,7 +1,7 @@
-package com.ssafy.domain.sign.dto.response;
+package com.ssafy.domain.Member.dto.response;
 
-import com.ssafy.domain.sign.entity.Member;
-import com.ssafy.domain.sign.entity.TeeBox;
+import com.ssafy.domain.Member.entity.Member;
+import com.ssafy.domain.Member.entity.TeeBox;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 public record SignUpResponse (

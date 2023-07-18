@@ -1,4 +1,4 @@
-package com.ssafy.domain.sign.entity;
+package com.ssafy.domain.Member.entity;
 
 public enum Role {
     ROLE_ADMIN,

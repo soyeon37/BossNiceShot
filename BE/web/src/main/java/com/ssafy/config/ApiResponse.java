@@ -1,6 +1,5 @@
 package com.ssafy.config;
 
-
 public record ApiResponse(
         ApiStatus status,
         String message,

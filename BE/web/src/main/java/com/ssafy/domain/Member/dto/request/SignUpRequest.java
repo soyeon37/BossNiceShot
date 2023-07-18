@@ -1,10 +1,7 @@
-package com.ssafy.domain.sign.dto.request;
+package com.ssafy.domain.Member.dto.request;
 
-import com.ssafy.domain.sign.entity.TeeBox;
+import com.ssafy.domain.Member.entity.TeeBox;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.util.Collections;
-import java.util.List;
 
 public record SignUpRequest (
     @Schema(description = "회원 아이디", example = "ssafy1234@ssafy.com")
