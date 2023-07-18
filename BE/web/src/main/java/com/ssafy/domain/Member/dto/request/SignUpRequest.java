@@ -8,7 +8,8 @@ public record SignUpRequest (
     String memberId,
     @Schema(description = "회원 비밀번호", example = "1234")
     String password,
-    @Schema(description = "회원 닉네임", example = "김싸피")
+    @Schema(description = "회원 닉" + "" +
+            "네임", example = "김싸피")
     String nickname,
     @Schema(description = "회원 티박스", example = "RED")
     TeeBox teeBox,
