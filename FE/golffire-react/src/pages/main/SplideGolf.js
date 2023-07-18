@@ -15,13 +15,20 @@ function Carousel({ props }) {
           alignItems: "center",
         }}
         options={{
-          height: "50%",
-          width: "100%",
           type: "loop",
-          perPage: 3,
+          perPage: 3.5,
           focus: "center",
         }}
       >
+        <SplideSlide>
+          <PartGolf />
+        </SplideSlide>
+        <SplideSlide>
+          <PartGolf />
+        </SplideSlide>
+        <SplideSlide>
+          <PartGolf />
+        </SplideSlide>
         <SplideSlide>
           <PartGolf />
         </SplideSlide>
