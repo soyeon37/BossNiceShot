@@ -43,6 +43,10 @@ public class SecurityConfig {
             "/members/login",
             "/members/sign-up",
             "/members/sign-in",
+            "/app/**",
+            "/app/chat.sendMessage",
+            "/app/chat.addUSer",
+            "/topic/public"
     };
 
     @Bean
