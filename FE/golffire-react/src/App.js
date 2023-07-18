@@ -9,8 +9,6 @@ import Golffield from './pages/golffield/Golffield';
 import Accompany from "./pages/accompany/Accompany";
 import Community from './pages/community/Community';
 import Signup from './pages/signup/Signup';
-
-
 import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {

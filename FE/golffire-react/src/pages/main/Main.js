@@ -1,14 +1,17 @@
 import React from "react";
-
+import MainBanner from "./MainBanner";
+import SplideGolf from "./SplideGolf";
 
 function Main() {
   return (
-    <div id="Home" style={{height:"800px"}}>
-      <h1 style={{fontSize:"50px",padding:"20%"}}>
-        Home
-      </h1>
+    <div id="Home" style={{height:"580px"}}>
+      <MainBanner />
+      <SplideGolf />
+      {/* <SplideLearning /> */}
+      {/* <SplideAccompany /> */}
+    
     </div>
   );
-};
+}
 
 export default Main;
