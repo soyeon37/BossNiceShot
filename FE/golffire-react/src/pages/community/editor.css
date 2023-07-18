@@ -3,10 +3,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .editor-input{
     height: 20rem;
     width: 40rem;
+    padding: 3rem;
 }
 
