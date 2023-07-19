@@ -1,6 +1,7 @@
 package com.ssafy.domain.Member.entity;
 
 import com.ssafy.domain.Member.dto.request.SignUpRequest;
+import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -64,6 +65,20 @@ public class Member implements UserDetails {
     public static Member from(SignUpRequest request, PasswordEncoder encoder){
         return Member.builder()
                 .memberId(request.memberId())
+                .password(encoder.encode(request.password()))
+                .nickname(request.nickname())
+                .teeBox(request.teeBox())
+                .topScore(request.topScore())
+                .averageScore(request.averageScore())
+                .level(request.level())
+                .image(request.image())
+                .introduction(request.introduction())
+                .build();
+    }
+
+    public static Member update(UpdateMemberRequest request, PasswordEncoder encoder, String memberId){
+        return Member.builder()
+                .memberId(memberId)
                 .password(encoder.encode(request.password()))
                 .nickname(request.nickname())
                 .teeBox(request.teeBox())
