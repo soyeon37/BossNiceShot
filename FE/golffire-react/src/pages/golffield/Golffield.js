@@ -1,5 +1,5 @@
 import React from "react";
-
+import Kakao from "./Kakao";
 
 function Golffield() {
   return (
@@ -7,6 +7,9 @@ function Golffield() {
       <h1 style={{fontSize:"50px",padding:"20%"}}>
         GolfField
       </h1>
+      
+      <Kakao />
+
     </div>
   );
 };
