@@ -6,6 +6,13 @@ import { Text } from '@chakra-ui/react'
 
 import { Button, ButtonGroup } from '@chakra-ui/react'
 
+import {
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
+} from '@chakra-ui/react'
+
 
 // const modules = {
 //     toolbar: [
@@ -23,14 +30,19 @@ function MyEditor() {
     return (
         <div className='editor-container'>
             <Text fontSize='3xl'>작성하기</Text>
-            <div style={{position:"relative"}}>
+            <div style={{ position: "relative" }}>
                 <ReactQuill
                     theme="snow"
                     value={value}
                     onChange={setValue}
                     className='editor-input'
                 />
-
+                <Button width='8rem' margin={5}>취소</Button>
+                <Button width='8rem' margin={5}>등록하기</Button>
+                <Alert status='error'>
+                    <AlertIcon />
+                    <AlertTitle>글 내용을 입력해주세요.</AlertTitle>
+                </Alert>
             </div>
         </div>
     )
