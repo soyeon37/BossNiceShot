@@ -65,7 +65,15 @@ function Navbar() {
                         <MenuButton as={IconButton} icon={<IoMdContact fontSize="30px" />} />
                         <MenuList>
                             <MenuGroup title='프로필'>
-                                <MenuItem>마이페이지</MenuItem>
+                                <MenuItem>
+                                    <NavLink to="/signup/" style={({ isActive, isPending }) => {
+                                        return {
+                                            fontWeight: isActive ? "bold" : "",
+                                        };
+                                    }}>
+                                        마이페이지
+                                    </NavLink>
+                                </MenuItem>
                                 <MenuItem>친구/채팅</MenuItem>
                             </MenuGroup>
                             <MenuDivider />
