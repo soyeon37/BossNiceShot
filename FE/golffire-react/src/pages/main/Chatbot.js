@@ -10,7 +10,7 @@ function Chatbot() {
     return (
         <div className="Chatbot">
             {/* <Notifications /> */}
-            <NotificationComponent />
+            {/* <NotificationComponent /> */}
             {/* <SimpleChatBox /> */}
             {/* <SimpleForm /> */}
         </div>
