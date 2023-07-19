@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 /**
  * 인증(authentication) 와 인가(authorization) 처리를 위한 스프링 시큐리티 설정 정의.
  */
@@ -40,9 +42,13 @@ public class SecurityConfig {
             "/members/**",
             "/swagger*/**",
             "/solution/detect",
-            "/members/login",
+    };
+    private static final String[] USER_LIST = {
             "/members/sign-up",
             "/members/sign-in",
+            "/members/update",
+            "/members/logout",
+            "/members/delete",
     };
 
     @Bean
@@ -56,13 +62,11 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .requestMatchers("/members/test").hasRole("USER")
-                        .requestMatchers("/members/sign-up").hasRole("USER")
-                        .requestMatchers("/members/sign-in").hasRole("USER")
+                        .requestMatchers(USER_LIST).hasRole("USER")
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
-//                .httpBasic(withDefaults()); // 권한이 없으면 로그인 페이지로 이동
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(withDefaults()); // 권한이 없으면 로그인 페이지로 이동
         return http.build();
     }
 
