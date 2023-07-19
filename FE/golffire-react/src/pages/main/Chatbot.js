@@ -1,11 +1,18 @@
 import React from "react";
 
-import ChatBot from 'react-simple-chatbot';
+// 챗봇
+import Notifications from "react-push-notification";
+import NotificationComponent from "./chatbot/NotificationComponent";
+import SimpleChatBox from "./chatbot/SimpleChatBox";
+import SimpleForm from "./chatbot/form/SimpleForm";
 
 function Chatbot() {
     return (
-        <div style={{ backgroundColor: "red" }}>
-
+        <div className="Chatbot">
+            {/* <Notifications /> */}
+            <NotificationComponent />
+            {/* <SimpleChatBox /> */}
+            {/* <SimpleForm /> */}
         </div>
     );
 }
