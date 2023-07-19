@@ -1,17 +1,20 @@
 package com.ssafy.config.security.jwt;
 
+import io.jsonwebtoken.Jwt;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -21,8 +24,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
+
+        logRequest(request);
+
         // 1. Request Header 에서 JWT 토큰 추출
         String token = resolveToken(request);
+        log.info("headerToken={}",token);
         // 2. validateToken 으로 토큰 유효성 검사
         if (token != null && jwtTokenProvider.validateToken(token)) {
             // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
@@ -35,6 +42,28 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         chain.doFilter(request, response);
     }
 
+    private void logRequest(HttpServletRequest request) {
+        log.info(String.format(
+                "[%s] %s %s",
+                request.getMethod(),
+                request.getRequestURI().toLowerCase(),
+                request.getQueryString() == null ? "" : request.getQueryString())
+        );
+    }
+
+//    private String getAccessToken(HttpServletRequest request) {
+//        if (request.getCookies() != null) {
+//            return Arrays.stream(request.getCookies())
+//                    .filter(cookie -> cookie.getName().equals(""))
+////                    .filter(cookie -> cookie.getName().equals(jwt.accessTokenProperties().header()))
+//                    .findFirst()
+//                    .map(Cookie::getValue)
+//                    .orElseThrow(() -> new JwtAccessTokenNotFoundException("AccessToken is not found"));
+//        } else {
+//            throw new JwtAccessTokenNotFoundException("AccessToken is not found.");
+//        }
+//    }
+
     // Request Header 에서 토큰 정보 추출
     private String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
@@ -42,5 +71,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return bearerToken.substring(7);
         }
         return null;
+    }
+
+    public void authenticate(){
+
     }
 }
