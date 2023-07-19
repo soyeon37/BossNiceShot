@@ -1,5 +1,4 @@
 import React from "react";
-import "./full-banner.css";
 import golfImage from "../../assets/source/icons/golf.png";
 
 function MainBanner() {
