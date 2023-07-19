@@ -1,6 +1,7 @@
 package com.ssafy.domain.chat.entity;
 
 import com.ssafy.audit.BaseTime;
+import com.ssafy.domain.Member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,8 +15,12 @@ public class ChatMessage extends BaseTime {
     @Column(name = "message_id", nullable = false)
     private Long id;
 
-    @Column(nullable = false)
-    private String sender; // 추후에 Member로 변경
+    @Enumerated(EnumType.STRING)
+    private MessageType type;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Column(nullable = false)
     private String message;
@@ -24,8 +29,9 @@ public class ChatMessage extends BaseTime {
     @JoinColumn(name = "room_id")
     private ChatRoom chatRoom;
 
-    public ChatMessage(String sender, String message, ChatRoom chatRoom) {
-        this.sender = sender;
+    public ChatMessage(MessageType type, Member member, String message, ChatRoom chatRoom) {
+        this.type = type;
+        this.member = member;
         this.message = message;
         this.chatRoom = chatRoom;
     }
