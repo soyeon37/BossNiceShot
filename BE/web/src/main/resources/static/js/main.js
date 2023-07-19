@@ -17,6 +17,7 @@ var colors = [
 ];
 
 function connect(event) {
+
     username = document.querySelector('#name').value.trim();
 
     if(username) {
