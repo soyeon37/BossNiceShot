@@ -4,6 +4,9 @@ import PartGolf from "./slide-part/PartGolf";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
+import { NavLink } from "react-router-dom"
+import { ArrowForwardIcon } from '@chakra-ui/icons';
+
 function Carousel({ props }) {
   return (
     <div id="splide-golf">
@@ -37,7 +40,21 @@ function Carousel({ props }) {
         </SplideSlide>
       </Splide>
 
-      <div></div>
+      <NavLink to="/golffield" style={({ isActive, isPending }) => {
+        return {
+          fontWeight: isActive ? "bold" : "",
+        };
+      }}>
+
+        <div className="text-and-icon">
+          <div className="text-and-icon-text">
+            더 많은 골프장 찾기
+          </div>
+          <div className="text-and-icon-icon">
+            <ArrowForwardIcon boxSize={10} />
+          </div>
+        </div>
+      </NavLink>
     </div>
   );
 }
