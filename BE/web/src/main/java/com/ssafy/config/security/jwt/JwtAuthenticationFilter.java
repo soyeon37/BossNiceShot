@@ -3,13 +3,16 @@ package com.ssafy.config.security.jwt;
 import io.jsonwebtoken.Jwt;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -27,9 +30,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         logRequest(request);
 
+        if(request.getRequestURI().equals("/members/sign-in") || request.getRequestURI().equals("/members/sign-up")){
+            chain.doFilter(request, response);
+            return;
+        }
         // 1. Request Header 에서 JWT 토큰 추출
-        String token = resolveToken(request);
-        log.info("headerToken={}",token);
+        String token = resolveAccessToken(request);
+        log.info("headerToken={}",token); // Access Token
         // 2. validateToken 으로 토큰 유효성 검사
         if (token != null && jwtTokenProvider.validateToken(token)) {
             // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
@@ -38,6 +45,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }else{
             log.error("유효하지 않은 토큰입니다.");
+            response.sendError(403, "Token Invalidate");
+            return;
         }
         chain.doFilter(request, response);
     }
@@ -64,16 +73,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 //        }
 //    }
 
-    // Request Header 에서 토큰 정보 추출
-    private String resolveToken(HttpServletRequest request) {
+    // Request Header 에서 Access Token 정보 추출
+    private String resolveAccessToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
+        log.info("authorization={}",request.getHeader("Authorization"));
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
             return bearerToken.substring(7);
         }
         return null;
     }
 
-    public void authenticate(){
-
+    // Request Header 에서 Refresh Token 정보 추출
+    private String resolveRefreshToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader("RefreshToken");
+        log.info("RefreshToken={}",request.getHeader("RefreshToken"));
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
+            return bearerToken.substring(7);
+        }
+        return null;
     }
+
+
 }

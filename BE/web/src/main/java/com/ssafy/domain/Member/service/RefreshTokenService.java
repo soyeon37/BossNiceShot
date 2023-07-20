@@ -1,5 +1,7 @@
 package com.ssafy.domain.Member.service;
 
+import com.ssafy.Exception.message.ExceptionMessage;
+import com.ssafy.Exception.model.TokenNotFoundException;
 import com.ssafy.config.security.jwt.RefreshToken;
 import com.ssafy.domain.Member.repository.RefreshTokenRepository;
 import jakarta.transaction.Transactional;
@@ -26,7 +28,11 @@ public class RefreshTokenService {
     // key로 value 가져오기
     public String getValues(String token){
         ValueOperations<String, String> values = redisTemplate.opsForValue();
-        return values.get(token);
+        try{
+            return values.get(token);
+        }catch (Exception e){
+            throw new IllegalArgumentException();
+        }
     }
 
     // key-value 삭제
@@ -43,4 +49,8 @@ public class RefreshTokenService {
 //        refreshTokenRepository.findByAccessToken(accessToken)
 //                .ifPresent(refreshToken -> refreshTokenRepository.delete(refreshToken));
 //    }
+
+    public RefreshToken findRefreshTokenById(String username) {
+        return refreshTokenRepository.findById(username).orElseThrow(() -> new TokenNotFoundException(ExceptionMessage.TOKEN_NOT_FOUND));
+    }
 }
