@@ -53,35 +53,37 @@ const Login = () => {
   };
 
   return (
-    <Box p={4}>
-      <Box maxW="md" mx="auto">
-        <Heading textAlign="center" mb={6}>로그인</Heading>
-        <FormControl>
-          <FormLabel>Email 주소</FormLabel>
-          <Input
-            type="email"
-            placeholder="이메일을 입력하세요."
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormControl>
-        <FormControl mt={4}>
-          <FormLabel>비밀번호</FormLabel>
-          <Input
-            type="password"
-            placeholder="비밀번호를 입력하세요."
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormControl>
-        <Stack mt={6} direction="row" justifyContent="center">
-          <Button colorScheme="blue" onClick={handleLogin}>로그인</Button>
-          <Button variant="link">회원가입</Button>
-        </Stack>
+    <div>
+      
+      <Box p={4}>
+        <Box maxW="md" mx="auto">
+          <Heading textAlign="center" mb={6}>로그인</Heading>
+          <FormControl>
+            <FormLabel>Email 주소</FormLabel>
+            <Input
+              type="email"
+              placeholder="이메일을 입력하세요."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </FormControl>
+          <FormControl mt={4}>
+            <FormLabel>비밀번호</FormLabel>
+            <Input
+              type="password"
+              placeholder="비밀번호를 입력하세요."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </FormControl>
+          <Stack mt={6} direction="row" justifyContent="center">
+            <Button colorScheme="blue" onClick={handleLogin}>로그인</Button>
+            <Button variant="link">회원가입</Button>
+          </Stack>
+        </Box>
       </Box>
 
-
-    </Box>
+    </div>
   );
 };
 
