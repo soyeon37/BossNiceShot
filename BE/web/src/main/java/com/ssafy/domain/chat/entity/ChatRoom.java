@@ -2,16 +2,17 @@ package com.ssafy.domain.chat.entity;
 
 import com.ssafy.audit.BaseTime;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ChatRoom extends BaseTime {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "room_id", nullable = false)
+    @Column(nullable = false)
     private Long id;
 
     @Column(nullable = false)
