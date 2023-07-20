@@ -1,0 +1,34 @@
+#Golffield {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Search CSS */
+#search-box {
+    margin: 1%;
+    width: 80%;
+
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search-box > div{
+    width: 50%;
+    margin: 1%;
+}
+
+#map-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
