@@ -11,6 +11,7 @@ import {
   Stack,
   Heading,
 } from '@chakra-ui/react';
+import golfImage from "../../assets/source/icons/golf.png";
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -53,35 +54,57 @@ const Login = () => {
   };
 
   return (
-    <div>
-      
-      <Box p={4}>
-        <Box maxW="md" mx="auto">
-          <Heading textAlign="center" mb={6}>로그인</Heading>
-          <FormControl>
-            <FormLabel>Email 주소</FormLabel>
-            <Input
-              type="email"
-              placeholder="이메일을 입력하세요."
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+    <div id='Login' style={{ height: "580px" }}>
+      <div>
+        {/* 그림 공간 */}
+        <div id='banner-context'>
+          <div id='banner-context'>
+            <div id='banner-letter'>
+              함께 골프 칠 동료를<br />
+              온라인으로 찾아보세요!
+            </div>
+          </div>
+          <div id='banner-image'>
+            <img
+              src={golfImage}
+              alt="banner-golf-icon"
             />
-          </FormControl>
-          <FormControl mt={4}>
-            <FormLabel>비밀번호</FormLabel>
-            <Input
-              type="password"
-              placeholder="비밀번호를 입력하세요."
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </FormControl>
-          <Stack mt={6} direction="row" justifyContent="center">
-            <Button colorScheme="blue" onClick={handleLogin}>로그인</Button>
-            <Button variant="link">회원가입</Button>
-          </Stack>
+          </div>
+        </div>
+      </div>
+
+
+      {/* 기능 공간 */}
+      <div id='login-func'>
+        <Box p={4}>
+          <Box maxW="md" mx="auto">
+            <Heading textAlign="center" mb={6}>로그인</Heading>
+            <FormControl>
+              <FormLabel>Email 주소</FormLabel>
+              <Input
+                type="email"
+                placeholder="이메일을 입력하세요."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>비밀번호</FormLabel>
+              <Input
+                type="password"
+                placeholder="비밀번호를 입력하세요."
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </FormControl>
+            <Stack mt={6} direction="row" justifyContent="center">
+              <Button colorScheme="blue" onClick={handleLogin}>로그인</Button>
+              <Button variant="link">회원가입</Button>
+            </Stack>
+          </Box>
         </Box>
-      </Box>
+
+      </div>
 
     </div>
   );

@@ -1,0 +1,10 @@
+/* Login CSS */
+#Login {
+    height: 100%;
+    width: 100%;
+  
+    /* 내부 요소가 가로로 나열되는 속성 */
+    display: flex;
+  
+    background-color: #eafcb3;
+  }
