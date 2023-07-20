@@ -78,7 +78,15 @@ function Navbar() {
                             </MenuGroup>
                             <MenuDivider />
                             <MenuGroup title='Help'>
-                                <MenuItem>로그인</MenuItem>
+                                <MenuItem>
+                                    <NavLink to="/login/" style={({ isActive, isPending }) => {
+                                        return {
+                                            fontWeight: isActive ? "bold" : "",
+                                        };
+                                    }}>
+                                        로그인
+                                    </NavLink>
+                                </MenuItem>
                                 <MenuItem>회원가입</MenuItem>
                             </MenuGroup>
                         </MenuList>
