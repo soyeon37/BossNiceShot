@@ -33,7 +33,7 @@ const Login = () => {
     axios.post(apiUrl, data)
       .then((response) => {
         // 서버로부터 받은 정보
-        const { access_token, refresh_token } = response.data;
+        const { grant_type, access_token, refresh_token } = response.data.token;
 
         // 쿠키에 정보 저장
         setCookie('user_email', data.email, { path: '/' });
