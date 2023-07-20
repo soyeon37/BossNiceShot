@@ -30,9 +30,9 @@ function App() {
   return (
     <ChakraProvider>
       <BrowserRouter>
-        <div className="App" >
+        <div className="App">
           <Navbar />
-          <div style={{ paddingTop: '4rem' }}>
+          <div style={{ flexGrow: 1, overflow: 'auto' }}>
             <Routes>
               {/* 항상 route 가능 */}
               <Route path="/" element={<Main />} />
