@@ -78,8 +78,8 @@ function Navbar() {
                             </MenuGroup>
                             <MenuDivider />
                             <MenuGroup title='Help'>
-                                <MenuItem>자주묻는질문</MenuItem>
-                                <MenuItem>문의사항</MenuItem>
+                                <MenuItem>로그인</MenuItem>
+                                <MenuItem>회원가입</MenuItem>
                             </MenuGroup>
                         </MenuList>
                     </Menu>
