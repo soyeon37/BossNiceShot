@@ -1,10 +1,36 @@
 /* Login CSS */
 #Login {
-    height: 100%;
-    width: 100%;
-  
-    /* 내부 요소가 가로로 나열되는 속성 */
-    display: flex;
-  
-    background-color: #eafcb3;
-  }
+  height: calc(100vh - 4rem);
+  display: flex;
+  background: linear-gradient(90deg, rgba(184, 245, 0, 0.3) 0%, rgba(184, 245, 0, 0) 100%);
+}
+
+#Login > div {
+  width: 50%;
+}
+
+/* Banner CSS */
+#login-banner {
+  /* width: 50%; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#login-banner-context {
+}
+
+#login-banner-letter {
+  color: #000;
+  font-family: Inter;
+  font-size: 64px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* 로그인 폼 CSS */
+#login-func {
+}
