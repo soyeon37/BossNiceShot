@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { Cookies, useCookies } from 'react-cookie';
 import axios from 'axios';
 import {
   Box,
@@ -21,7 +21,7 @@ const Login = () => {
   const handleLogin = () => {
     // 로그인 정보
     const data = {
-      email: email,
+      memberId: email,
       password: password,
     };
 
@@ -33,10 +33,15 @@ const Login = () => {
     axios.post(apiUrl, data)
       .then((response) => {
         // 서버로부터 받은 정보
-        const { grant_type, access_token, refresh_token } = response.data.token;
+        // const {access_token, refresh_token } = response.data.token;
+        const access_token = response.data.data.token.accessToken;
+        const refresh_token = response.data.data.token.refreshToken;
+
+        // header에 accesstoken 저장
+        axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
         // 쿠키에 정보 저장
-        setCookie('user_email', data.email, { path: '/' });
+        setCookie('user_email', data.memberId, { path: '/' });
         setCookie('access_token', access_token, { path: '/' });
         setCookie('refresh_token', refresh_token, { path: '/' });
 
@@ -51,6 +56,33 @@ const Login = () => {
         console.error('Error:', error); // Debug Code
       });
   };
+
+
+  const testPut = () => {
+    const data = {
+      password: "1234",
+      nickname: "함싸피",
+      teeBox: "RED",
+      topScore: 72,
+      averageScore: 88,
+      level: "보기 플레이어",
+      image: "apple.jpg",
+      introduction: "방가방가"
+    }
+    const apiUrl = 'http://localhost:8080/members/update';
+    console.log(cookies.access_token);
+    axios.put(apiUrl, data, {
+      headers: {'Authorization': 'Bearer '+ cookies.access_token}
+    })
+      .then((response) => {
+        
+        console.log(response.data);
+
+      })
+      .catch((error) => {
+        console.error('Error:', error); // Debug Code
+      });
+  }
 
   return (
     <Box p={4}>
@@ -76,7 +108,7 @@ const Login = () => {
         </FormControl>
         <Stack mt={6} direction="row" justifyContent="center">
           <Button colorScheme="blue" onClick={handleLogin}>로그인</Button>
-          <Button variant="link">회원가입</Button>
+          <Button variant="link" onClick={testPut}>회원가입</Button>
         </Stack>
       </Box>
 

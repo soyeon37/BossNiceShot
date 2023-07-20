@@ -18,6 +18,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Enumeration;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -75,6 +76,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     // Request Header 에서 Access Token 정보 추출
     private String resolveAccessToken(HttpServletRequest request) {
+        log.info("headers={}",request.getHeaderNames());
+        Enumeration eHeader = request.getHeaderNames();{
+            while(eHeader.hasMoreElements()){
+                String requestName = (String) eHeader.nextElement();
+                String requestValue = request.getHeader(requestName);
+                System.out.println("requestName : "+requestName+" | requestValue : "+requestValue);
+            }
+        }
         String bearerToken = request.getHeader("Authorization");
         log.info("authorization={}",request.getHeader("Authorization"));
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
