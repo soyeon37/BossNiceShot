@@ -1,7 +1,6 @@
 package com.ssafy.domain.chat.service;
 
 import com.ssafy.domain.chat.dto.request.ChatRoomRequest;
-import com.ssafy.domain.chat.dto.response.ChatRoomResponse;
 import com.ssafy.domain.chat.entity.ChatRoom;
 import com.ssafy.domain.chat.repository.ChatRoomRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,39 +10,35 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
+@Transactional(readOnly = true)
+@RequiredArgsConstructor
 public class ChatRoomService {
     private final ChatRoomRepository chatRoomRepository;
 
-    @Transactional
-    public ChatRoomResponse findById(Long roomId) {
-        ChatRoom chatRoom = chatRoomRepository.findById(roomId).orElseThrow(
-                () -> new IllegalArgumentException("해당 ChatRoom이 존재하지 않습니다. id = " + roomId)
-        );
+    public List<ChatRoom> findAll() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdTime");
+        return chatRoomRepository.findAll(sort);
+    }
 
-        return ChatRoomResponse.from(chatRoom);
+    public ChatRoom findById(Long roomId) {
+        ChatRoom chatRoom = chatRoomRepository.findById(roomId).orElseThrow(
+                () -> new IllegalArgumentException("해당 채팅방이 존재하지 않습니다. id = " + roomId)
+        );
+        return chatRoom;
     }
 
     @Transactional
-    public Long save(ChatRoomRequest chatRoomRequest) {
-        return chatRoomRepository.save(chatRoomRequest.toChatRoom()).getId();
+    public ChatRoom save(ChatRoomRequest chatRoomRequest) {
+        return chatRoomRepository.save(chatRoomRequest.toChatRoom());
     }
 
     @Transactional
     public void delete(Long roomId) {
         ChatRoom chatRoom = chatRoomRepository.findById(roomId).orElseThrow(
-                () -> new IllegalArgumentException("해당 ChatRoom이 존재하지 않습니다. id = " + roomId)
+                () -> new IllegalArgumentException("해당 채팅방이 존재하지 않습니다. id = " + roomId)
         );
 
         chatRoomRepository.delete(chatRoom);
-    }
-
-    // 최신순
-    @Transactional
-    public List<ChatRoomResponse> findAll() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "createdTime");
-
-        return chatRoomRepository.findAll(sort).stream().map(ChatRoomResponse::from).toList();
     }
 }
