@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import axios from 'axios';
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Stack,
-  Heading,
-} from '@chakra-ui/react';
+import React, { useState } from "react";
+
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { Box, Button, FormControl, FormLabel, Input, Stack, Heading } from "@chakra-ui/react";
+
+import "./Login.css";
 import golfImage from "../../assets/source/icons/golf.png";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [cookies, setCookie, removeCookie] = useCookies(['user']);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -28,57 +23,55 @@ const Login = () => {
 
     // 서버 API 엔드포인트 URL
     // 추후 실제 서버 URL로 대체 필요
-    const apiUrl = 'http://localhost:8080/members/sign-in';
+    const apiUrl = "http://localhost:8080/members/sign-in";
 
     // Axios를 사용하여 POST 요청 보내기
-    axios.post(apiUrl, data)
+    axios
+      .post(apiUrl, data)
       .then((response) => {
         // 서버로부터 받은 정보
         const { grant_type, access_token, refresh_token } = response.data.token;
 
         // 쿠키에 정보 저장
-        setCookie('user_email', data.email, { path: '/' });
-        setCookie('access_token', access_token, { path: '/' });
-        setCookie('refresh_token', refresh_token, { path: '/' });
+        setCookie("user_email", data.email, { path: "/" });
+        setCookie("access_token", access_token, { path: "/" });
+        setCookie("refresh_token", refresh_token, { path: "/" });
 
         // 로그인 성공 후 Main으로 복귀
-        navigate('/');
+        navigate("/");
 
         // console.log(response.data); // Debug Code
       })
       .catch((error) => {
         // 로그인 실패를 화면에 표시하는 코드 필요!
 
-        console.error('Error:', error); // Debug Code
+        console.error("Error:", error); // Debug Code
       });
   };
 
   return (
-    <div id='Login' style={{ height: "580px" }}>
-      <div>
+    <div id="Login">
+      <div id="login-banner">
         {/* 그림 공간 */}
-        <div id='banner-context'>
-          <div id='banner-context'>
-            <div id='banner-letter'>
-              함께 골프 칠 동료를<br />
-              온라인으로 찾아보세요!
-            </div>
+        <div id="login-banner-context">
+          <div id="banner-letter">
+            함께 골프 칠 동료를
+            <br />
+            온라인으로 찾아보세요!
           </div>
-          <div id='banner-image'>
-            <img
-              src={golfImage}
-              alt="banner-golf-icon"
-            />
-          </div>
+        </div>
+        <div id="login-banner-image">
+          <img src={golfImage} alt="banner-golf-icon" />
         </div>
       </div>
 
-
       {/* 기능 공간 */}
-      <div id='login-func'>
+      <div id="login-func">
         <Box p={4}>
           <Box maxW="md" mx="auto">
-            <Heading textAlign="center" mb={6}>로그인</Heading>
+            <Heading textAlign="center" mb={6}>
+              로그인
+            </Heading>
             <FormControl>
               <FormLabel>Email 주소</FormLabel>
               <Input
@@ -98,14 +91,14 @@ const Login = () => {
               />
             </FormControl>
             <Stack mt={6} direction="row" justifyContent="center">
-              <Button colorScheme="blue" onClick={handleLogin}>로그인</Button>
+              <Button colorScheme="blue" onClick={handleLogin}>
+                로그인
+              </Button>
               <Button variant="link">회원가입</Button>
             </Stack>
           </Box>
         </Box>
-
       </div>
-
     </div>
   );
 };
