@@ -1,7 +1,12 @@
 package com.ssafy.domain.Member.service;
 
+import com.ssafy.Exception.message.ExceptionMessage;
+import com.ssafy.Exception.model.TokenCheckFailException;
+import com.ssafy.Exception.model.UserAuthException;
 import com.ssafy.config.security.jwt.JwtTokenProvider;
+import com.ssafy.config.security.jwt.RefreshToken;
 import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
+import com.ssafy.domain.Member.dto.response.AuthorizeResponse;
 import com.ssafy.domain.Member.dto.response.UpdateMemberResponse;
 import com.ssafy.domain.Member.entity.Member;
 import com.ssafy.domain.Member.repository.MemberRepository;
@@ -88,4 +93,43 @@ public class MemberService {
         }
         return "회원 정보 삭제 수행";
     }
+
+    @Transactional
+    public Optional<Member> getMember(String memberId){
+        Optional<Member> member;
+        try {
+            member = memberRepository.findByMemberId(memberId);
+        }catch (DataIntegrityViolationException e){
+            throw new IllegalArgumentException("회원 정보를 가져오지 못했습니다.");
+        }
+        return member;
+    }
+
+    @Transactional
+    public AuthorizeResponse getAuthorize(String accessToken){
+
+        return AuthorizeResponse.from(accessToken);
+    }
+
+    @Transactional
+    public AuthorizeResponse reissue(String refreshToken, Authentication authentication) {
+        log.info("authentication.getName={}", authentication.getName());
+        if (authentication == null || authentication.getName() == null) {
+            throw new UserAuthException(ExceptionMessage.NOT_AUTHORIZED_ACCESS);
+        }
+        String id = refreshTokenService.getValues(refreshToken);
+        if(id == null || !id.equals(authentication.getName())){
+            throw new TokenCheckFailException(ExceptionMessage.MISMATCH_TOKEN);
+        }
+        return createRefreshToken(refreshToken, authentication);
+    }
+
+    private AuthorizeResponse createRefreshToken(String refreshToken, Authentication authentication){
+        if (jwtTokenProvider.checkExpiredToken(refreshToken)){
+            TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
+            return AuthorizeResponse.from(tokenInfo.getAccessToken());
+        }
+        return AuthorizeResponse.from(jwtTokenProvider.generateToken(authentication).getAccessToken());
+    }
+
 }

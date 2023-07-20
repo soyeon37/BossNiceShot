@@ -1,9 +1,12 @@
 package com.ssafy.domain.Member.controller;
 
+import com.ssafy.Exception.message.ExceptionMessage;
+import com.ssafy.Exception.model.UserAuthException;
 import com.ssafy.domain.Member.dto.request.SignInRequest;
 import com.ssafy.domain.Member.dto.request.SignUpRequest;
 import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
 import com.ssafy.domain.Member.dto.response.SignInResponse;
+import com.ssafy.domain.Member.repository.MemberRepository;
 import com.ssafy.domain.Member.service.MemberService;
 import com.ssafy.config.ApiResponse;
 import com.ssafy.domain.Member.service.RefreshTokenService;
@@ -15,7 +18,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseCookie;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
 
 @Slf4j
 @Tag(name = "Member API")
@@ -23,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/members")
 public class MemberController {
+    private final MemberRepository memberRepository;
     private final MemberService memberService;
     private final RefreshTokenService refreshTokenService;
 
@@ -48,37 +55,20 @@ public class MemberController {
     @PostMapping("/sign-in")
     public ApiResponse signIn(@RequestBody SignInRequest request, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
 
-        boolean flag = false;
-        // cookie에 refresh token 확인
-        Cookie[] list = servletRequest.getCookies();
-
-        if(list != null){
-            for (Cookie cookie:list) {
-                if (cookie.getName().equals("RefreshToken")) {
-                    // 있으면 redis에 저장된 member 정보 반환
-                    log.info("Cookie={}", cookie.getValue());
-                    flag = true;
-                    String memberId = refreshTokenService.getValues(cookie.getValue());
-                    log.info("memberId={}", memberId);
-                }
-            }
-        }
-
         SignInResponse signInResponse = memberService.signIn(request);
-        // 없으면 재발급
-        if(!flag){
-            log.info("new Cookie create");
-            Cookie newCookie = new Cookie("RefreshToken", signInResponse.token().getRefreshToken());
-            newCookie.setMaxAge(7*24*60*60); // 7 * 24 * 60 * 60 : 7일 후 만료
-            newCookie.setHttpOnly(true);
-            newCookie.setPath("/"); // 글로벌
-            servletResponse.addCookie(newCookie);
+        ResponseCookie cookie = ResponseCookie.from("RefreshToken", signInResponse.token().getRefreshToken())
+                .maxAge(7 * 24 * 60 * 60) // 유효 기간 7일 후 만료
+                .path("/")
+                .secure(true) // https 환경에서만 쿠키 발동
+                .sameSite("None") // 동일 및 크로스 사이트 쿠키 전송 가능
+                .httpOnly(true)
+                .build();
+        servletResponse.setHeader("Set-Cookie", cookie.toString());
+        // Redis에 저장
+        refreshTokenService.setValues(signInResponse.token().getRefreshToken(), request.memberId());
+        log.info("memberId={}",request.memberId());
+        log.info("refreshToken={}",signInResponse.token().getRefreshToken());
 
-            log.info("refreshToken={}",signInResponse.token().getRefreshToken());
-            log.info("refreshToken={}",request.memberId());
-            // Redis에 저장
-            refreshTokenService.setValues(signInResponse.token().getRefreshToken(), request.memberId());
-        }
         return ApiResponse.success(signInResponse);
     }
 
@@ -90,12 +80,12 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/logout")
-    public ApiResponse logout (HttpServletRequest servletRequest, String accessToken){
-        Cookie[] list = servletRequest.getCookies();
-        if(list != null){
-            for(Cookie cookie : list){
-                refreshTokenService.delValues(cookie.getValue());
-                log.info("cookie={}",cookie);
+                public ApiResponse logout (HttpServletRequest servletRequest, String accessToken){
+                    Cookie[] list = servletRequest.getCookies();
+                    if(list != null){
+                        for(Cookie cookie : list){
+                            refreshTokenService.delValues(cookie.getValue());
+                            log.info("cookie={}",cookie);
                 log.info("cookie={}",cookie.getValue());
                 cookie.setMaxAge(0);
             }
@@ -132,6 +122,27 @@ public class MemberController {
     public ApiResponse deleteMember (String memberId){
         return ApiResponse.success(memberService.deleteMember(memberId));
     }
+
+    @GetMapping("/info")
+    public ApiResponse info(Authentication authentication){
+        if (authentication == null || authentication.getName() == null){
+            throw new UserAuthException(ExceptionMessage.NOT_AUTHORIZED_ACCESS);
+        }
+        return ApiResponse.success(memberService.getMember(authentication.getName()));
+    }
+    @PostMapping("/authorize")
+    public ApiResponse authorize(@RequestHeader("Authorization") String accessToken, Authentication authentication){
+        if (authentication == null || authentication.getName() == null) {
+            throw new UserAuthException(ExceptionMessage.NOT_AUTHORIZED_ACCESS);
+        }
+        return ApiResponse.success(memberService.getAuthorize(accessToken));
+    }
+
+    @PostMapping("/reissue")
+    public ApiResponse reissue(@CookieValue("RefreshToken")String refreshToken, Authentication authentication){
+        return ApiResponse.success(memberService.reissue(refreshToken, authentication));
+    }
+
 
 }
 
