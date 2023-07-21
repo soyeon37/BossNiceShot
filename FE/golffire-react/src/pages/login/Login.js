@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import {
-  Box,
   Button,
   ButtonGroup,
   FormControl,
   FormLabel,
   Input,
-  Stack,
-  Heading
 } from "@chakra-ui/react";
 
 import "./Login.css";
@@ -135,7 +132,12 @@ const Login = () => {
           <div id="box-footer">
             비밀번호 찾기
             <br />
-            회원가입 하기
+            <NavLink to="/signup" style={({ isActive, isPending }) => {
+              return {
+                fontWeight: isActive ? "bold" : "",
+              };
+            }}>회원가입 하기</NavLink>
+
           </div>
 
         </div>
