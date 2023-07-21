@@ -24,13 +24,13 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder encoder;
-    private final RefreshTokenService refreshTokenService;
 
     @Transactional
     public SignUpResponse registMember(SignUpRequest request) {
@@ -43,7 +43,6 @@ public class MemberService {
         return SignUpResponse.from(member);
     }
 
-    @Transactional(readOnly = true)
     public SignInResponse signIn(SignInRequest request) {
 
         // 1. Login ID/PW 를 기반으로 Authentication 객체 생성
@@ -57,7 +56,7 @@ public class MemberService {
         log.info("authentication={}", authentication);
 
         // 2-1. 비밀번호 체크
-        Optional<Member> member = memberRepository.findByMemberId(request.memberId());
+        Optional<Member> member = memberRepository.findById(request.memberId());
         if(!encoder.matches(request.password(), member.get().getPassword())) {
             return null;
         }
@@ -87,5 +86,13 @@ public class MemberService {
             throw new IllegalArgumentException("회원 삭제에 실패했습니다.");
         }
         return "회원 정보 삭제 수행";
+    }
+
+    public Member findByMemberId(String memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new IllegalArgumentException("해당 회원이 존재하지 않습니다. id = " + memberId)
+        );
+
+        return member;
     }
 }

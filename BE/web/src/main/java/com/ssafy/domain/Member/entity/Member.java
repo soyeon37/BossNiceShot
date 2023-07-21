@@ -19,10 +19,9 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Member implements UserDetails {
-
     @Id
-    @Column(updatable = false, unique = true, nullable = false)
-    private String memberId;
+    @Column(name = "id", updatable = false, unique = true, nullable = false)
+    private String id;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -64,7 +63,7 @@ public class Member implements UserDetails {
 
     public static Member from(SignUpRequest request, PasswordEncoder encoder){
         return Member.builder()
-                .memberId(request.memberId())
+                .id(request.memberId())
                 .password(encoder.encode(request.password()))
                 .nickname(request.nickname())
                 .teeBox(request.teeBox())
@@ -78,7 +77,7 @@ public class Member implements UserDetails {
 
     public static Member update(UpdateMemberRequest request, PasswordEncoder encoder, String memberId){
         return Member.builder()
-                .memberId(memberId)
+                .id(memberId)
                 .password(encoder.encode(request.password()))
                 .nickname(request.nickname())
                 .teeBox(request.teeBox())
@@ -92,7 +91,7 @@ public class Member implements UserDetails {
 
     @Override
     public String getUsername() {
-        return memberId;
+        return id;
     }
 
     @Override
