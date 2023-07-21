@@ -6,6 +6,7 @@ import { useCookies } from "react-cookie";
 import {
   Box,
   Button,
+  ButtonGroup,
   FormControl,
   FormLabel,
   Input,
@@ -75,39 +76,71 @@ const Login = () => {
 
       {/* 기능 공간 */}
       <div id="login-func">
-        <Box p={4}>
-          <Box maxW="md" mx="auto">
-            <Heading textAlign="center" mb={6}>
-              로그인
-            </Heading>
-            <FormControl>
-              <FormLabel>Email 주소</FormLabel>
+        {/*   <Input placeholder='default placeholder' /> */}
+
+        <div id="login-box">
+          <div id="box-title">
+            로그인
+          </div>
+          <div id="box-content">
+            <FormControl maxW={'sm'}>
+              <FormLabel>이메일</FormLabel>
               <Input
                 type="email"
                 placeholder="이메일을 입력하세요."
+                bg={"white"}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </FormControl>
-            <FormControl mt={4}>
+            <FormControl maxW={'sm'} paddingTop={'2%'}>
               <FormLabel>비밀번호</FormLabel>
               <Input
                 type="password"
                 placeholder="비밀번호를 입력하세요."
+                bg={"white"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormControl>
-            <Stack mt={6} direction="row" justifyContent="center">
-              <Button colorScheme="blue" onClick={handleLogin}>
-                로그인
-              </Button>
-              <Button variant="link">회원가입</Button>
-            </Stack>
-          </Box>
-        </Box>
+          </div>
+          <div id="box-button">
+            <Button
+              style={{
+                height: "2.5rem",
+                width: "100%",
+
+                color: "black",
+                borderRadius: "30px",
+                background: "#B8F500",
+              }}
+              maxW={'sm'}
+              marginBottom={'2.5rem'}
+            > 로그인</Button>
+
+            <Button
+              style={{
+                height: "2.5rem",
+                width: "100%",
+
+                color: "black",
+                borderRadius: "30px",
+                background: "#FFF500",
+              }}
+              maxW={'sm'}
+              marginBottom={'2.5rem'}
+            > 카카오톡으로 로그인하기</Button>
+
+          </div>
+          <div id="box-footer">
+            비밀번호 찾기
+            <br />
+            회원가입 하기
+          </div>
+
+        </div>
       </div>
-    </div>
+    </div >
   );
 };
 
