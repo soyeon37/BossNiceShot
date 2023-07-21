@@ -10,6 +10,10 @@ import Learning from './pages/learning/Learning';
 import Golffield from './pages/golffield/Golffield';
 import Accompany from "./pages/accompany/Accompany";
 import Community from './pages/community/Community';
+import FreeBoardList from './pages/community/FreeBoardList';
+import InquiryList from './pages/community/InquiryList';
+import NoticeList from './pages/community/NoticeList';
+import MyEditor from './pages/community/MyEditor';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
 import { ChakraProvider } from '@chakra-ui/react'
@@ -57,12 +61,31 @@ function App() {
               <Route
                 path="/community/"
                 element={isLoggedIn ? <Community /> : <Navigate to="/Login" />}
-              /> */}
+              /> 
+              <Route
+                path="/freeboardlist/"
+                element={isLoggedIn ? <FreeBoardList /> : <Navigate to="/Login" />}
+              />
+              <Route
+                path="/inquirylist/"
+                element={isLoggedIn ? <InquiryList /> : <Navigate to="/Login" />}
+              />
+              <Route
+                path="/noticelist/"
+                element={isLoggedIn ? <NoticeList /> : <Navigate to="/Login" />}
+              /> */
+              }
 
               <Route path="/solution/" element={<Solution />} />
               <Route path="/learning/" element={<Learning />} />
               <Route path="/accompany/" element={<Accompany />} />
               <Route path="/community" element={<Community />} />
+              <Route path="/freeboardlist" element={<FreeBoardList />} />
+              <Route path="/inquirylist" element={<InquiryList />} />
+              <Route path="/noticelist" element={<NoticeList />} />
+              <Route path="/myeditor" element={<MyEditor />} />
+
+
 
             </Routes>
           </div>

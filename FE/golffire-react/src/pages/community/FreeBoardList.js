@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Button, Text } from '@chakra-ui/react';
 import {
     Table,
     Thead,
@@ -10,7 +10,7 @@ import {
     TableCaption,
     TableContainer,
 } from '@chakra-ui/react'
-
+import { Link } from 'react-router-dom';
 
 const Freeboard = () => {
     return (
@@ -32,24 +32,24 @@ const Freeboard = () => {
                     <Tbody>
                         <Tr>
                             <Td>1</Td>
-                            <Td>재아님 안녕하세요</Td>
-                            <Td>최현우</Td>
-                            <Td>2023.07.19</Td>
+                            <Td>힝잉잉</Td>
+                            <Td>요환</Td>
+                            <Td>2023.07.21</Td>
                             <Td isNumeric>1</Td>
                         </Tr>
                         
                         <Tr>
                             <Td>2</Td>
-                            <Td>잘 지내시죠?</Td>
-                            <Td>최현우</Td>
-                            <Td>2023.07.19</Td>
+                            <Td>시끄러우니까</Td>
+                            <Td>요환</Td>
+                            <Td>2023.07.21</Td>
                             <Td isNumeric>1</Td>
                         </Tr>
                         <Tr>
                             <Td>3</Td>
-                            <Td>감기에 걸리신 것 같아요</Td>
-                            <Td>최현우</Td>
-                            <Td>2023.07.19</Td>
+                            <Td>나가서울어</Td>
+                            <Td>요환</Td>
+                            <Td>2023.07.21</Td>
                             <Td isNumeric>1</Td>
                         </Tr>
                         <Tr>
@@ -67,8 +67,17 @@ const Freeboard = () => {
                     </Tfoot>
                 </Table>
             </TableContainer>
+            <Box display="flex" justifyContent="flex-end">
+                <Link to="/myeditor" style={{ textDecoration: "none" }}> 
+                    <Button width='8rem' margin={5}>
+                        작성하기
+                    </Button>
+                </Link>
+            </Box>
         </Box>
     );
+    
 };
+
 
 export default Freeboard;
