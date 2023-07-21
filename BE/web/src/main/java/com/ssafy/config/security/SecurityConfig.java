@@ -71,9 +71,9 @@ public class SecurityConfig {
                         .requestMatchers(USER_LIST).hasRole("USER")
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 //                .addFilterBefore(new JwtExceptionFilter(), JwtAuthenticationFilter.class)
-                .httpBasic(withDefaults()); // 권한이 없으면 로그인 페이지로 이동
+//                .httpBasic(withDefaults()); // 권한이 없으면 로그인 페이지로 이동
         return http.build();
     }
 
