@@ -1,6 +1,7 @@
 package com.ssafy.domain.Member.entity;
 
 import com.ssafy.domain.Member.dto.request.SignUpRequest;
+import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,10 +19,9 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Member implements UserDetails {
-
     @Id
-    @Column(updatable = false, unique = true, nullable = false)
-    private String memberId;
+    @Column(name = "id", updatable = false, unique = true, nullable = false)
+    private String id;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -63,7 +63,21 @@ public class Member implements UserDetails {
 
     public static Member from(SignUpRequest request, PasswordEncoder encoder){
         return Member.builder()
-                .memberId(request.memberId())
+                .id(request.memberId())
+                .password(encoder.encode(request.password()))
+                .nickname(request.nickname())
+                .teeBox(request.teeBox())
+                .topScore(request.topScore())
+                .averageScore(request.averageScore())
+                .level(request.level())
+                .image(request.image())
+                .introduction(request.introduction())
+                .build();
+    }
+
+    public static Member update(UpdateMemberRequest request, PasswordEncoder encoder, String memberId){
+        return Member.builder()
+                .id(memberId)
                 .password(encoder.encode(request.password()))
                 .nickname(request.nickname())
                 .teeBox(request.teeBox())
@@ -77,7 +91,7 @@ public class Member implements UserDetails {
 
     @Override
     public String getUsername() {
-        return memberId;
+        return id;
     }
 
     @Override

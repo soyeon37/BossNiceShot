@@ -1,12 +1,9 @@
-package com.ssafy.domain.Member.dto.response;
+package com.ssafy.domain.Member.dto.request;
 
-import com.ssafy.domain.Member.entity.Member;
 import com.ssafy.domain.Member.entity.TeeBox;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-public record SignUpResponse (
-        @Schema(description = "회원 아이디", example = "ssafy1234@ssafy.com")
-        String memberId,
+public record UpdateMemberRequest(
         @Schema(description = "회원 비밀번호", example = "1234")
         String password,
         @Schema(description = "회원 닉네임", example = "김싸피")
@@ -23,21 +20,4 @@ public record SignUpResponse (
         String image,
         @Schema(description = "회원 소개", example = "안녕하세요")
         String introduction
-
-
-){
-    public static SignUpResponse from(Member member){
-        return new SignUpResponse(
-                member.getId(),
-                member.getPassword(),
-                member.getNickname(),
-                member.getTeeBox(),
-                member.getTopScore(),
-                member.getAverageScore(),
-                member.getLevel(),
-                member.getImage(),
-                member.getIntroduction()
-        );
-    }
-}
-
+) {}
