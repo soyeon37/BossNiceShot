@@ -31,7 +31,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	compileOnly 'org.projectlombok:lombok'
@@ -78,6 +78,7 @@ dependencies {
 	implementation 'org.webjars:sockjs-client:1.1.2'
 	implementation 'org.webjars:stomp-websocket:2.3.3-1'
 	implementation 'org.webjars:webjars-locator-core'
+
 	implementation 'org.webjars:bootstrap:3.3.7'
 
 	//Kurento 미디어 서버 설정 관련 2개
@@ -86,6 +87,10 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.kurento/kurento-utils-js
 	implementation group: 'org.kurento', name: 'kurento-utils-js', version: '6.18.0'
+
+
+	// mongoDB 설정
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
 
 }
 
