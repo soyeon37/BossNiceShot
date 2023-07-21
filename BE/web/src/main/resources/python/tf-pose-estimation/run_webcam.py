@@ -3,7 +3,7 @@ import logging
 import time
 import os
 
-# 파이썬 log 출력 제어
+## 파이썬 log 출력 제어
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 #'0': Show all logs (default behavior)
 #'1': Hide INFO logs
