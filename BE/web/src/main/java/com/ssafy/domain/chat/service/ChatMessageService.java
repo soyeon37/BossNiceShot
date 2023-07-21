@@ -30,7 +30,7 @@ public class ChatMessageService {
 
     public List<ChatMessage> findAllByChatRoomIdAsc(Long chatRoomId) {
         Sort sort = Sort.by(Sort.Direction.ASC, "createdTime");
-        return chatMessageRepository.findAllByChatRoomId(chatRoomId, sort);
+        return chatMessageRepository.findByChatRoomId(chatRoomId, sort);
     }
 
     public void deleteByChatRoomId(Long chatRoomId) {
