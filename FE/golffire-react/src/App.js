@@ -24,6 +24,7 @@ function App() {
   useEffect(() => {
     // 로그인 정보가 있다면 true, 없다면 false로 만드는 코드
     setIsLoggedIn(!!cookies.user);
+    
     // 추후 서버로 token 정보를 보내 유효한지 확인한 뒤 true로 만들기
   }, [cookies]);
 
@@ -38,10 +39,10 @@ function App() {
               <Route path="/" element={<Main />} />
               <Route path="/Signup/" element={<Signup />} />
               <Route path="/Login/" element={<Login />} />
-              <Route path="/golffield" element={<Golffield />} />
+              <Route path="/golffield/" element={<Golffield />} />
 
               {/* 로그인 후 route 가능 */}
-              <Route
+              {/* <Route
                 path="/solution/"
                 element={isLoggedIn ? <Solution /> : <Navigate to="/Login" />}
               />
@@ -56,7 +57,13 @@ function App() {
               <Route
                 path="/community/"
                 element={isLoggedIn ? <Community /> : <Navigate to="/Login" />}
-              />
+              /> */}
+
+              <Route path="/solution/" element={<Solution />} />
+              <Route path="/learning/" element={<Learning />} />
+              <Route path="/accompany/" element={<Accompany />} />
+              <Route path="/community" element={<Community />} />
+
             </Routes>
           </div>
         </div>
