@@ -10,6 +10,10 @@ import Learning from './pages/learning/Learning';
 import Golffield from './pages/golffield/Golffield';
 import Accompany from "./pages/accompany/Accompany";
 import Community from './pages/community/Community';
+import FreeBoardList from './pages/community/FreeBoardList';
+import InquiryList from './pages/community/InquiryList';
+import NoticeList from './pages/community/NoticeList';
+import MyEditor from './pages/community/MyEditor';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
 
@@ -52,8 +56,32 @@ function App() {
                 path="/solution/"
                 element={isLoggedIn ? <Solution /> : <Navigate to="/Login" />}
               />
-              등등
-              */}
+              <Route
+                path="/learning/"
+                element={isLoggedIn ? <Learning /> : <Navigate to="/Login" />}
+              />
+              <Route
+                path="/accompany/"
+                element={isLoggedIn ? <Accompany /> : <Navigate to="/Login" />}
+              />
+              <Route
+                path="/community/"
+                element={isLoggedIn ? <Community /> : <Navigate to="/Login" />}
+              /> 
+              <Route
+                path="/freeboardlist/"
+                element={isLoggedIn ? <FreeBoardList /> : <Navigate to="/Login" />}
+              />
+              <Route
+                path="/inquirylist/"
+                element={isLoggedIn ? <InquiryList /> : <Navigate to="/Login" />}
+              />
+              <Route
+                path="/noticelist/"
+                element={isLoggedIn ? <NoticeList /> : <Navigate to="/Login" />}
+              /> */
+              }
+              
 
               <Route path="/solution/" element={<Solution />} />
               <Route path="/learning/" element={<Learning />} />
