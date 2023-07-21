@@ -2,6 +2,7 @@ package com.ssafy.domain.Member.controller;
 
 import com.ssafy.Exception.message.ExceptionMessage;
 import com.ssafy.Exception.model.UserAuthException;
+import com.ssafy.domain.Member.dto.request.SendEmailRequest;
 import com.ssafy.domain.Member.dto.request.SignInRequest;
 import com.ssafy.domain.Member.dto.request.SignUpRequest;
 import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
@@ -18,9 +19,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
 
 
 @Slf4j
@@ -40,6 +42,13 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "사용자 없음"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
+
+    @PostMapping("/sendEmailVerification")
+    public ApiResponse sendEmailVerification(@RequestBody SendEmailRequest request ){
+
+        return ApiResponse.success(memberService.sendEmail(request));
+    }
+
     @PostMapping("/sign-up")
     public ApiResponse signUp(@RequestBody SignUpRequest request) {
         return ApiResponse.success(memberService.registMember(request));
@@ -56,14 +65,14 @@ public class MemberController {
     public ApiResponse signIn(@RequestBody SignInRequest request, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
 
         SignInResponse signInResponse = memberService.signIn(request);
-        ResponseCookie cookie = ResponseCookie.from("RefreshToken", signInResponse.token().getRefreshToken())
-                .maxAge(7 * 24 * 60 * 60) // 유효 기간 7일 후 만료
-                .path("/")
-                .secure(true) // https 환경에서만 쿠키 발동
-                .sameSite("None") // 동일 및 크로스 사이트 쿠키 전송 가능
-                .httpOnly(true)
-                .build();
-        servletResponse.setHeader("Set-Cookie", cookie.toString());
+//        ResponseCookie cookie = ResponseCookie.from("RefreshToken", signInResponse.token().getRefreshToken())
+//                .maxAge(7 * 24 * 60 * 60) // 유효 기간 7일 후 만료
+//                .path("/")
+//                .secure(true) // https 환경에서만 쿠키 발동
+//                .sameSite("None") // 동일 및 크로스 사이트 쿠키 전송 가능
+//                .httpOnly(true)
+//                .build();
+//        servletResponse.setHeader("Set-Cookie", cookie.toString());
         // Redis에 저장
         refreshTokenService.setValues(signInResponse.token().getRefreshToken(), request.memberId());
         log.info("memberId={}",request.memberId());
@@ -80,7 +89,7 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/logout")
-                public ApiResponse logout (HttpServletRequest servletRequest, String accessToken){
+        public ApiResponse logout (HttpServletRequest servletRequest, String accessToken){
                     Cookie[] list = servletRequest.getCookies();
                     if(list != null){
                         for(Cookie cookie : list){
@@ -139,7 +148,11 @@ public class MemberController {
     }
 
     @PostMapping("/reissue")
-    public ApiResponse reissue(@CookieValue("RefreshToken")String refreshToken, Authentication authentication){
+    public ApiResponse reissue(@RequestBody String refreshToken){
+        log.info("ReIssue");
+        refreshToken = refreshToken.substring(0, refreshToken.length()-1);
+        log.info("ReIssue={}", refreshToken);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }
 
