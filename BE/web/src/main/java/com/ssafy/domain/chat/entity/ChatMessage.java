@@ -1,39 +1,37 @@
 package com.ssafy.domain.chat.entity;
 
 import com.ssafy.audit.BaseTime;
-import com.ssafy.domain.Member.entity.Member;
-import jakarta.persistence.*;
-import lombok.AccessLevel;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
 
 @Getter
-@Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Document(collation = "chat_message")
+@NoArgsConstructor
 public class ChatMessage extends BaseTime {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private Long id;
+    @Field(value="_id", targetType = FieldType.OBJECT_ID)
+    private String id;
 
-    @Enumerated(EnumType.STRING)
-    private MessageType type;
+    @Field("messageType")
+    private MessageType messageType;
 
-    @Column(nullable = false)
+    @Field("message")
     private String message;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @Field("member_id")
+    private String memberId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
-    private ChatRoom chatRoom;
+    @Field("chat_room_id")
+    private Long chatRoomId;
 
-    public ChatMessage(MessageType type, String message, Member member, ChatRoom chatRoom) {
-        this.type = type;
+    public ChatMessage(MessageType messageType, String message, String memberId, Long chatRoomId) {
+        this.messageType = messageType;
         this.message = message;
-        this.member = member;
-        this.chatRoom = chatRoom;
+        this.memberId = memberId;
+        this.chatRoomId = chatRoomId;
     }
 }

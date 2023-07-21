@@ -9,14 +9,14 @@ import java.time.format.DateTimeFormatter;
 public record ChatMessageResponse (@NotNull MessageType messageType,
                                    @NotNull String message,
                                    @NotNull String memberId,
-                                   @NotNull Long roomId,
+                                   @NotNull Long chatRoomId,
                                    @NotNull String createdTime){
     public static ChatMessageResponse from(ChatMessage chatMessage) {
         return new ChatMessageResponse(
-                chatMessage.getType(),
+                chatMessage.getMessageType(),
                 chatMessage.getMessage(),
-                chatMessage.getMember().getId(),
-                chatMessage.getChatRoom().getId(),
+                chatMessage.getMemberId(),
+                chatMessage.getChatRoomId(),
                 chatMessage.getCreatedTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"))
         );
     }
