@@ -7,10 +7,10 @@ import pandas as pd
 
 def video():
 
-    # 현재 경로
+    ## 현재 경로
     workingdirectory = os.getcwd()
 
-    # 각 파일 path
+    ## 각 파일 path
     protoFile = os.path.join(workingdirectory, "src", "main", "resources", "python", "model", "pose_deploy_linevec_faster_4_stages.prototxt")
     weightsFile = os.path.join(workingdirectory, "src", "main", "resources", "python", "model", "pose_iter_160000.caffemodel")
 
