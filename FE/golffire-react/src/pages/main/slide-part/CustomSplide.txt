@@ -1,0 +1,10 @@
+// import { Splide, SplideSlide } from "@splidejs/react-splide";
+// import "@splidejs/react-splide/css";
+
+// var splide = new Splide(".splide-golf", {
+//   type: "loop",
+//   perPage: 3,
+//   focus: "center",
+// });
+
+// customSplide.mount();
