@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { useCookies } from 'react-cookie';
 
 import "./styles.css"
-import { Icon } from '@chakra-ui/icons'
 import {
     Menu,
     MenuButton,
@@ -81,7 +80,7 @@ function Navbar() {
                             {/* test code - will delete */}
                             <MenuGroup title=''>
                                 <MenuItem>
-                                    <NavLink to="/signup/" style={({ isActive, isPending }) => {
+                                    <NavLink to="/mypage/" style={({ isActive, isPending }) => {
                                         return {
                                             fontWeight: isActive ? "bold" : "",
                                         };
@@ -97,7 +96,7 @@ function Navbar() {
                             {isLoggedIn ? (
                                 <MenuGroup title=''>
                                     <MenuItem>
-                                        <NavLink to="/signup/" style={({ isActive, isPending }) => {
+                                        <NavLink to="/mypage/" style={({ isActive, isPending }) => {
                                             return {
                                                 fontWeight: isActive ? "bold" : "",
                                             };
