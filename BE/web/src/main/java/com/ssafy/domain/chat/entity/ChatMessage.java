@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 
 @Getter
-@Document(collation = "chat_message")
+@Document(collection = "chat_message")
 @NoArgsConstructor
 public class ChatMessage extends BaseTime {
     @Id
