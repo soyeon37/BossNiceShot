@@ -16,6 +16,12 @@ import NoticeList from './pages/community/NoticeList';
 import MyEditor from './pages/community/MyEditor';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
+
+import Profile from "./pages/mypage/Profile";
+import EditProfile from "./pages/mypage/EditProfile";
+import EditPassword from './pages/mypage/EditPassword';
+import Signout from "./pages/mypage/Signout";
+
 import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {
@@ -28,7 +34,7 @@ function App() {
   useEffect(() => {
     // 로그인 정보가 있다면 true, 없다면 false로 만드는 코드
     setIsLoggedIn(!!cookies.user);
-    
+
     // 추후 서버로 token 정보를 보내 유효한지 확인한 뒤 true로 만들기
   }, [cookies]);
 
@@ -75,17 +81,17 @@ function App() {
                 element={isLoggedIn ? <NoticeList /> : <Navigate to="/Login" />}
               /> */
               }
+              
 
               <Route path="/solution/" element={<Solution />} />
               <Route path="/learning/" element={<Learning />} />
               <Route path="/accompany/" element={<Accompany />} />
-              <Route path="/community" element={<Community />} />
-              <Route path="/freeboardlist" element={<FreeBoardList />} />
-              <Route path="/inquirylist" element={<InquiryList />} />
-              <Route path="/noticelist" element={<NoticeList />} />
-              <Route path="/myeditor" element={<MyEditor />} />
+              <Route path="/community/" element={<Community />} />
 
-
+              <Route path="/mypage/" element={<Profile />} />
+              <Route path="/mypage/editprofile/" element={<EditProfile />} />
+              <Route path="/mypage/editpassword/" element={<EditPassword />} />
+              <Route path="/mypage/signout/" element={<Signout />} />
 
             </Routes>
           </div>
