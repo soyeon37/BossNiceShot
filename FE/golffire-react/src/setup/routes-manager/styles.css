@@ -1,25 +1,28 @@
-/* * {
-    box-sizing: border-box;
-    height: 5rem;
-} */
-
 body {
     margin: 0;
 }
 
 .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    flex-shrink: 0;
+
     height: 4rem;
     box-sizing: border-box;
-    background-color: #c2c2c2f9;
+    background-color: white;
     color: black;
     display: flex;
+
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
     padding: 0 1rem;
 }
 
-.site-title{
+.site-title {
     font-size: 2rem;
 }
 

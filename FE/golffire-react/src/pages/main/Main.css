@@ -9,7 +9,7 @@
   background-color: #eafcb3;
 }
 
-#banner-letter {
+#banner-context {
   height: 100%;
   width: 50%;
 
@@ -18,7 +18,7 @@
   align-items: center;
 }
 
-#banner-context {
+#banner-letter {
   text-align: left;
   color: #000;
   font-family: Inter;
