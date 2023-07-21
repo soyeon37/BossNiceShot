@@ -20,6 +20,8 @@ import { IoMdContact } from 'react-icons/io'
 import { NavLink } from "react-router-dom"
 
 function Navbar() {
+    const [isActive, setIsActive] = useState(false);
+    
     // cookie의 user 정보 확인
     const [cookies] = useCookies(['user']);
     // 로그인 여부를 나타내는 변수, false로 초기화
@@ -66,12 +68,42 @@ function Navbar() {
                         };
                     }}>동행</NavLink>
                 </li>
-                <li>
-                    <NavLink to="/community/" style={({ isActive, isPending }) => {
-                        return {
-                            fontWeight: isActive ? "bold" : "",
-                        };
-                    }}>커뮤니티</NavLink>
+                <li className="communitymenu">
+                    <Menu>
+                        <MenuButton as={Button} variant="unstyled" fontWeight={isActive ? "bold" : ""}>
+                            커뮤니티
+                        </MenuButton>
+                        <MenuList>
+                            <MenuItem>
+                                <NavLink to="/community/" style={({ isActive, isPending }) => {
+                                    return { 
+                                        fontWeight: isActive ? "bold" : "",
+                                    };
+                                }}>커뮤니티</NavLink>
+                            </MenuItem>
+                            <MenuItem>
+                                <NavLink to="/noticelist/" style={({ isActive, isPending }) => {
+                                    return {
+                                        fontWeight: isActive ? "bold" : "",
+                                    };
+                                }}>공지사항</NavLink>
+                            </MenuItem>
+                            <MenuItem>
+                                <NavLink to="/inquirylist/" style={({ isActive, isPending }) => {
+                                    return {
+                                    fontWeight: isActive ? "bold" : "",
+                                    };
+                                }}>문의사항</NavLink>
+                            </MenuItem>
+                            <MenuItem>
+                                <NavLink to="/freeboardlist/" style={({ isActive, isPending }) => {
+                                    return {
+                                        fontWeight: isActive ? "bold" : "",
+                                    };
+                                }}>자유게시판</NavLink>
+                            </MenuItem>
+                        </MenuList>
+                    </Menu>
                 </li>
                 <li className="mypagemenu">
                     <Menu>
