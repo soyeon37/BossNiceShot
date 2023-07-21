@@ -43,7 +43,8 @@ public class SecurityConfig {
             "/members/login",
             "/members/sign-up",
             "/members/sign-in",
-            "/chat/**"
+            "/chat/**",
+            "/mongodb/chat"
     };
 
     @Bean

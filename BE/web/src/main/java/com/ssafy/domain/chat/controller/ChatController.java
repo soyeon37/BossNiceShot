@@ -77,8 +77,8 @@ public class ChatController {
     @Operation(summary = "메세지 전송", description = "메세지 전송")
     @MessageMapping("/chat/message")
     public void sendMessage(ChatMessageRequest chatMessageRequest) {
-        ChatMessageResponse chatMessageResponse = ChatMessageResponse.from(chatMessageService.save(chatMessageRequest));
-        sendingOperations.convertAndSend("/topic/chat/room/" + chatMessageResponse.roomId(), chatMessageResponse);
+        ChatMessageResponse chatMessageResponse = ChatMessageResponse.from(chatMessageService.insert(chatMessageRequest));
+        sendingOperations.convertAndSend("/topic/chat/room/" + chatMessageResponse.chatRoomId(), chatMessageResponse);
     }
 
     @Operation(summary = "채팅 방 내 전체 메세지 조회", description = "특정 채팅 방 내 전체 메세지를 보낸 시간 오름차순으로 정렬")
