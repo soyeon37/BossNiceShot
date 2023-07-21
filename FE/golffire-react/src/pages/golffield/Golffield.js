@@ -18,17 +18,7 @@ function Golffield() {
       phoneNumber: '02-9999-9999',
     },
     {
-      name: '하이골프클럽',
-      address: '서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층',
-      phoneNumber: '02-9999-9999',
-    },
-    {
-      name: '하이골프클럽',
-      address: '서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층',
-      phoneNumber: '02-9999-9999',
-    },
-    {
-      name: '하이골프클럽',
+      name: '하이골프클럽23',
       address: '서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층',
       phoneNumber: '02-9999-9999',
     },
@@ -51,12 +41,12 @@ function Golffield() {
       </div>
 
 
-      <div id="map-box">
+      <div id="result-box">
         <div id="kakao-map">
           <Kakao />
-
         </div>
-        <div id="field-list">
+
+        <div id="result-list">
           {golfClubs.map((club, index) => (
             <GolfBox
               key={index}

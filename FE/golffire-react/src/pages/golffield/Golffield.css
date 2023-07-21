@@ -22,13 +22,37 @@
     justify-content: center;
 }
 
-#search-box > div{
+#search-box>div {
     width: 50%;
     margin: 1%;
 }
 
-#map-box {
+/* Result CSS */
+#result-box {
+    height: 100%;
+    width: 100%;
+
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#kakao-map {
+    height: 100%;
+    width: 100%;
+}
+
+#map {
+    /* height: 100%;
+    width: 50%; */
+    height: 900px;
+    width: 900px;
+}
+
+#result-list {
+    display: grid;
+    grid-template-columns: repeat(2, 200px); /* Two columns with 50px width each */
+    gap: 10px; /* Add some gap between images (optional) */
+    max-height: 100%; /* Adjust the maximum height as needed */
+    overflow-y: scroll;
 }
