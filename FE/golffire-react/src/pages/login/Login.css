@@ -5,7 +5,7 @@
   background: linear-gradient(90deg, rgba(184, 245, 0, 0.3) 0%, rgba(184, 245, 0, 0) 100%);
 }
 
-#Login > div {
+#Login>div {
   width: 50%;
 }
 
@@ -20,17 +20,20 @@
 }
 
 #login-banner-context {
+  margin: 5%;
 }
 
-#login-banner-letter {
-  color: #000;
-  font-family: Inter;
-  font-size: 64px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+#login-banner-letter {}
+
+#login-banner-image {
+  margin: 10%;
 }
 
 /* 로그인 폼 CSS */
 #login-func {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
 }

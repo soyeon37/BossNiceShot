@@ -3,7 +3,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { Box, Button, FormControl, FormLabel, Input, Stack, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  Heading
+} from "@chakra-ui/react";
 
 import "./Login.css";
 import golfImage from "../../assets/source/icons/golf.png";
@@ -55,9 +63,9 @@ const Login = () => {
         {/* 그림 공간 */}
         <div id="login-banner-context">
           <div id="banner-letter">
-            함께 골프 칠 동료를
+            동료들이 당신을
             <br />
-            온라인으로 찾아보세요!
+            기다리고 있어요!
           </div>
         </div>
         <div id="login-banner-image">

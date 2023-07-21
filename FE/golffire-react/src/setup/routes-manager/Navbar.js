@@ -76,7 +76,9 @@ function Navbar() {
                 <li className="mypagemenu">
                     <Menu>
                         <MenuButton as={IconButton} icon={<IoMdContact fontSize="30px" />} />
-                        <MenuList>{isLoggedIn ? (
+                        <MenuList>
+
+                            {/* test code - will delete */}
                             <MenuGroup title=''>
                                 <MenuItem>
                                     <NavLink to="/signup/" style={({ isActive, isPending }) => {
@@ -88,20 +90,37 @@ function Navbar() {
                                     </NavLink>
                                 </MenuItem>
                                 <MenuItem>친구/채팅</MenuItem>
+                                <MenuDivider />
+                                <MenuItem style={{ color: "gray" }}>로그아웃</MenuItem>
                             </MenuGroup>
 
-                        ) : (<MenuGroup title=''>
-                            <MenuItem>
-                                <NavLink to="/login/" style={({ isActive, isPending }) => {
-                                    return {
-                                        fontWeight: isActive ? "bold" : "",
-                                    };
-                                }}>
-                                    로그인
-                                </NavLink>
-                            </MenuItem>
-                            <MenuItem>회원가입</MenuItem>
-                        </MenuGroup>)}
+                            {isLoggedIn ? (
+                                <MenuGroup title=''>
+                                    <MenuItem>
+                                        <NavLink to="/signup/" style={({ isActive, isPending }) => {
+                                            return {
+                                                fontWeight: isActive ? "bold" : "",
+                                            };
+                                        }}>
+                                            마이페이지
+                                        </NavLink>
+                                    </MenuItem>
+                                    <MenuItem>친구/채팅</MenuItem>
+                                    <MenuDivider />
+                                    <MenuItem style={{ color: "gray" }}>로그아웃</MenuItem>
+                                </MenuGroup>
+                            ) : (<MenuGroup title=''>
+                                <MenuItem>
+                                    <NavLink to="/login/" style={({ isActive, isPending }) => {
+                                        return {
+                                            fontWeight: isActive ? "bold" : "",
+                                        };
+                                    }}>
+                                        로그인
+                                    </NavLink>
+                                </MenuItem>
+                                <MenuItem>회원가입</MenuItem>
+                            </MenuGroup>)}
                         </MenuList>
                     </Menu>
                 </li>
