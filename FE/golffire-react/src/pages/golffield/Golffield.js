@@ -2,9 +2,39 @@ import React from "react";
 import Kakao from "./Kakao";
 
 import { Select, Input } from '@chakra-ui/react'
+import GolfBox from "./GolfBox";
 import "./Golffield.css";
 
 function Golffield() {
+  const golfClubs = [
+    {
+      name: '하이골프클럽11',
+      address: '서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층',
+      phoneNumber: '02-9999-9999',
+    },
+    {
+      name: '하이골프클럽22',
+      address: '서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층',
+      phoneNumber: '02-9999-9999',
+    },
+    {
+      name: '하이골프클럽',
+      address: '서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층',
+      phoneNumber: '02-9999-9999',
+    },
+    {
+      name: '하이골프클럽',
+      address: '서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층',
+      phoneNumber: '02-9999-9999',
+    },
+    {
+      name: '하이골프클럽',
+      address: '서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층',
+      phoneNumber: '02-9999-9999',
+    },
+    // Add more golf club data objects here
+  ];
+
   return (
     <div id="Golffield">
       <div id="search-box">
@@ -27,11 +57,14 @@ function Golffield() {
 
         </div>
         <div id="field-list">
-          list <br />
-          list <br />
-          list <br />
-          list <br />
-          list <br />
+          {golfClubs.map((club, index) => (
+            <GolfBox
+              key={index}
+              name={club.name}
+              address={club.address}
+              phoneNumber={club.phoneNumber}
+            />
+          ))}
         </div>
       </div>
     </div>
