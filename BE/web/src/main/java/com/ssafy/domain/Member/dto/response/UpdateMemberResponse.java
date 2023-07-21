@@ -27,7 +27,7 @@ public record UpdateMemberResponse (
 ){
     public static UpdateMemberResponse from(Member member){
         return new UpdateMemberResponse(
-                    member.getMemberId(),
+                    member.getId(),
                     member.getPassword(),
                     member.getNickname(),
                     member.getTeeBox(),
