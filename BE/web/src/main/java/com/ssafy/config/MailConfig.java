@@ -9,29 +9,22 @@ import java.util.Properties;
 
 @Configuration
 public class MailConfig {
-    @Bean
-    public JavaMailSender javaMailService() {
-        JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 
-        javaMailSender.setHost("smtp.gmail.com");
-        javaMailSender.setUsername("soyeun37@gmail.com");
-        javaMailSender.setPassword("mkzzkrnztadldzls");
+    @Bean("javaMailSender")
+    public JavaMailSender javaMailSender() {
+        JavaMailSenderImpl sender = new JavaMailSenderImpl();
+        sender.setHost("smtp.gmail.com");
+        sender.setPort(587);
+        sender.setUsername("soyeun37@gmail.com");
+        sender.setPassword("mkzzkrnztadldzls");
 
-        javaMailSender.setPort(587);
+        Properties props = sender.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.debug", "true");
+        props.put("mail.smtp.starttls.required", Boolean.TRUE);
 
-        javaMailSender.setJavaMailProperties(getMailProperties());
-
-        return javaMailSender;
-    }
-
-    private Properties getMailProperties() {
-        Properties properties = new Properties();
-        properties.setProperty("mail.transport.protocol", "smtp");
-        properties.setProperty("mail.smtp.auth", "true");
-        properties.setProperty("mail.smtp.starttls.enable", "true");
-        properties.setProperty("mail.debug", "true");
-        properties.setProperty("mail.smtp.ssl.trust","smtp.gmail.com");
-        properties.setProperty("mail.smtp.ssl.enable","true");
-        return properties;
+        return sender;
     }
 }

@@ -157,6 +157,7 @@ const Login = () => {
         </FormControl>
         <Stack mt={6} direction="row" justifyContent="center">
           <Button colorScheme="blue" onClick={handleLogin}>로그인</Button>
+          <Button variant="link" onClick={testPut}>회원가입</Button>
           <Button variant="link" onClick={testSendEmail}>회원가입</Button>
         </Stack>
       </Box>
