@@ -1,5 +1,5 @@
 import React from "react";
-import golfImage from "../../assets/source/icons/golf.png";
+import golf from "../../assets/source/icons/golf.png";
 
 function MainBanner() {
   return (
@@ -11,11 +11,11 @@ function MainBanner() {
           원하는 사람과 함께<br />
           골프장에 가세요
         </div>
-        
+
       </div>
       <div id="banner-image">
         <img
-          src={golfImage}
+          src={golf}
           alt="banner-golf-icon"
         />
       </div>

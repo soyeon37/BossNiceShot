@@ -28,7 +28,7 @@ public record SignUpResponse (
 ){
     public static SignUpResponse from(Member member){
         return new SignUpResponse(
-                member.getMemberId(),
+                member.getId(),
                 member.getPassword(),
                 member.getNickname(),
                 member.getTeeBox(),
