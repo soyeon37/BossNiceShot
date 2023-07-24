@@ -48,12 +48,13 @@ public class SecurityConfig {
             "/swagger*/**",
             "/solution/detect",
             "/members/**",
+            "/chat/**"
     };
     private static final String[] USER_LIST = {
             "/members/sign-in",
             "/members/update",
             "/members/logout",
-            "/members/delete",
+            "/members/delete"
     };
 
     @Bean
@@ -76,12 +77,6 @@ public class SecurityConfig {
 //                .httpBasic(withDefaults()); // 권한이 없으면 로그인 페이지로 이동
         return http.build();
     }
-
-//    // prefix
-//    @Bean
-//    ForwardedHeaderFilter forwardedHeaderFilter() {
-//        return new ForwardedHeaderFilter();
-//    }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {

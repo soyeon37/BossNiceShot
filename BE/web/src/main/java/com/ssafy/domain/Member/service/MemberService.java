@@ -42,6 +42,7 @@ import java.util.Random;
 
 @Slf4j
 @Service
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService{
     private final MemberRepository memberRepository;
@@ -54,7 +55,6 @@ public class MemberService{
     private static final String FROM_EMAIL = "soyeun37@gmail.com"; // 발신자 이메일 주소
     private static final String FROM_PASSWORD = "mkzzkrnztadldzls"; // 발신자 이메일 비밀번호
 
-
     @Transactional
     public SignUpResponse registMember(SignUpRequest request) {
         Member member = memberRepository.save(Member.from(request, encoder));
@@ -66,7 +66,6 @@ public class MemberService{
         return SignUpResponse.from(member);
     }
 
-    @Transactional(readOnly = true)
     public SignInResponse signIn(SignInRequest request) {
 
         // 1. Login ID/PW 를 기반으로 Authentication 객체 생성
@@ -80,7 +79,7 @@ public class MemberService{
         log.info("authentication={}", authentication);
 
         // 2-1. 비밀번호 체크
-        Optional<Member> member = memberRepository.findByMemberId(request.memberId());
+        Optional<Member> member = memberRepository.findById(request.memberId());
         if(!encoder.matches(request.password(), member.get().getPassword())) {
             return null;
         }
@@ -110,17 +109,6 @@ public class MemberService{
             throw new IllegalArgumentException("회원 삭제에 실패했습니다.");
         }
         return "회원 정보 삭제 수행";
-    }
-
-    @Transactional
-    public Optional<Member> getMember(String memberId){
-        Optional<Member> member;
-        try {
-            member = memberRepository.findByMemberId(memberId);
-        }catch (DataIntegrityViolationException e){
-            throw new IllegalArgumentException("회원 정보를 가져오지 못했습니다.");
-        }
-        return member;
     }
 
     @Transactional
@@ -159,7 +147,6 @@ public class MemberService{
         return AuthorizeResponse.from(jwtTokenProvider.generateToken(authentication).getAccessToken(),"GENERAL_FAILURE");
     }
 
-
     public SendEmailResponse sendEmail(SendEmailRequest request) {
         // 111111 ~ 999999 6자리 랜덤 난수 생성
         int authNumber = makeAuthNum();
@@ -186,5 +173,13 @@ public class MemberService{
 
         log.info("인증번호={}", checkNum);
         return checkNum;
+    }
+
+    public Member findByMemberId(String memberId) {
+        Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new IllegalArgumentException("해당 회원이 존재하지 않습니다. id = " + memberId)
+        );
+
+        return member;
     }
 }
