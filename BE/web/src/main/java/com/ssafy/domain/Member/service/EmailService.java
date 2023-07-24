@@ -1,7 +1,10 @@
 package com.ssafy.domain.Member.service;
 
+import com.sun.mail.smtp.SMTPAddressFailedException;
+import com.sun.mail.smtp.SMTPSendFailedException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,6 +14,7 @@ import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
 
+@Slf4j
 @Service
 public class EmailService{
     private JavaMailSender mailSender;
@@ -37,10 +41,24 @@ public class EmailService{
             String html = templateEngine.process("WelcomeEmail", context);
             mimeMessageHelper.setText(html, true);
             mailSender.send(message);
-        }catch(MailException exception){
-            exception.printStackTrace();
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
+//        }catch(MailException exception){
+//            exception.printStackTrace();
+        }catch (MessagingException e) {
+            if (e instanceof SMTPSendFailedException) {
+                SMTPSendFailedException smtpSendFailedException = (SMTPSendFailedException) e;
+                if (isTimeoutException(e)) {
+                    // Handle the SMTP timeout issue here (e.g., log the error, retry, notify the user)
+                    log.error("SMTP timeout error: " + e.getMessage());
+                }
+            } else {
+                // Handle other MessagingException (e.g., authentication error, invalid email address, etc.)
+                log.error("SMTP error: " + e.getMessage());
+            }
         }
     }
+    private static boolean isTimeoutException(MessagingException e) {
+        // Check if the exception message or error code indicates a timeout
+        return e.getMessage().toLowerCase().contains("timeout") || e instanceof SMTPAddressFailedException;
+    }
+
 }

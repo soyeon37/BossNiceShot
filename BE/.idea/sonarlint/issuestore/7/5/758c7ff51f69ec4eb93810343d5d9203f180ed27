@@ -1,0 +1,13 @@
+
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¤¿ôåþÿÿÿÿ8™£Þ¯˜1
+m
+java:S18540"KRemove this useless assignment to local variable "smtpSendFailedException".(ñäÙþÿÿÿÿÿ8ùÕ…°˜1
+H
+java:S1172"+Remove this unused method parameter "text".(…â¾Ì8 £Þ¯˜1
+]	java:S125,"<This block of commented-out lines of code should be removed.(—ô÷ÿÿÿÿÿ8‰¿†°˜1
+]
+java:S1193/"@Replace the usage of the "instanceof" operator by a catch block.(ªËûÿ8ûÑì¯˜1
+…
+java:S6201/"hReplace this instanceof check and cast with 'instanceof SMTPSendFailedException smtpSendFailedException'(ªËûÿ8ýÕ…°˜1
+^
+java:S14810"<Remove this unused "smtpSendFailedException" local variable.(ñäÙþÿÿÿÿÿ8ýÕ…°˜1
