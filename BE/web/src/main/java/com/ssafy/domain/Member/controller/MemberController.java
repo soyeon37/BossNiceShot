@@ -137,7 +137,7 @@ public class MemberController {
         if (authentication == null || authentication.getName() == null){
             throw new UserAuthException(ExceptionMessage.NOT_AUTHORIZED_ACCESS);
         }
-        return ApiResponse.success(memberService.getMember(authentication.getName()));
+        return ApiResponse.success(memberService.findByMemberId(authentication.getName()));
     }
     @PostMapping("/authorize")
     public ApiResponse authorize(@RequestHeader("Authorization") String accessToken, Authentication authentication){
