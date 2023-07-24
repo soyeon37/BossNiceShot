@@ -7,7 +7,7 @@ import pandas as pd
 
 def video():
 
-    ### 현재 경로
+    #### 현재 경로
     workingdirectory = os.getcwd()
 
     ## 각 파일 path
