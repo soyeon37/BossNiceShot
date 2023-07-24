@@ -35,7 +35,7 @@ public class MemberController {
     private final MemberService memberService;
     private final RefreshTokenService refreshTokenService;
 
-    @Operation(summary = "회원 가입", description = "회원 가입")
+    @Operation(summary = "이메일 전송", description = "이메일을 전송하여 인증번호를 발급한다.")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 실패"),
@@ -49,8 +49,15 @@ public class MemberController {
         return ApiResponse.success(memberService.sendEmail(request));
     }
 
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 실패"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "사용자 없음"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @PostMapping("/sign-up")
     public ApiResponse signUp(@RequestBody SignUpRequest request) {
+        log.info("회원가입 시작");
         return ApiResponse.success(memberService.registMember(request));
     }
 

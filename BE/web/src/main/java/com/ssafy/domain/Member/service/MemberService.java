@@ -53,15 +53,19 @@ public class MemberService{
     private final EmailService emailService;
 
     private static final String FROM_EMAIL = "soyeun37@gmail.com"; // 발신자 이메일 주소
-    private static final String FROM_PASSWORD = "mkzzkrnztadldzls"; // 발신자 이메일 비밀번호
+ // 발신자 이메일 비밀번호
 
     @Transactional
     public SignUpResponse registMember(SignUpRequest request) {
+        log.info(request.toString());
+        if(findByMemberId(request.memberId())!= null){
+            throw new IllegalArgumentException("이미 사용중인 아이디입니다.");
+        }
         Member member = memberRepository.save(Member.from(request, encoder));
         try {
             memberRepository.flush();
         } catch (DataIntegrityViolationException e) {
-            throw new IllegalArgumentException("이미 사용중인 아이디입니다.");
+            throw new IllegalArgumentException("회원 정보 저장에 실패했습니다.");
         }
         return SignUpResponse.from(member);
     }
