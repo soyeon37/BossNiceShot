@@ -87,6 +87,12 @@ function App() {
               <Route path="/learning/" element={<Learning />} />
               <Route path="/accompany/" element={<Accompany />} />
               <Route path="/community/" element={<Community />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/freeboardlist" element={<FreeBoardList />} />
+              <Route path="/inquirylist" element={<InquiryList />} />
+              <Route path="/noticelist" element={<NoticeList />} />
+              <Route path="/myeditor" element={<MyEditor />} />
+
 
               <Route path="/mypage/" element={<Profile />} />
               <Route path="/mypage/editprofile/" element={<EditProfile />} />
