@@ -12,6 +12,7 @@ import Accompany from "./pages/accompany/Accompany";
 import Community from './pages/community/Community';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
+import Kakao from './pages/login/Kakao';
 import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {
@@ -38,7 +39,8 @@ function App() {
             <Route path="/Signup/" element={<Signup />} />
             <Route path="/Login/" element={<Login />} />
             <Route path="/golffield" element={<Golffield />} />
-
+           
+            <Route path="/Auth/Kakao/Callback" element={<Kakao />} />
             {/* 로그인 후 route 가능 */}
             <Route
               path="/solution/"
