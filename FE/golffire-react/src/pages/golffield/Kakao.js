@@ -21,7 +21,7 @@ function Kakao() {
     // const map = new kakao.maps.Map(container, options);
 
     return (
-        <div id="map" style={{ width: '500px', height: '500px' }}>
+        <div id="map" >
         </div>
 
     );
