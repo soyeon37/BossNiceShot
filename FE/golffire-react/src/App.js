@@ -19,9 +19,13 @@ import NoticeList from './pages/community/NoticeList';
 import MyEditor from './pages/community/MyEditor';
 import FreeBoardDetail from './pages/community/FreeBoardDetail';
 
-// Sign-up & Log-in
+// Sign-up & Log-in & Sign-out
 import Kakao from './pages/kakao/Kakao';
 import Signup from './pages/signup/Signup';
+import SignupEmail1 from './pages/signup/SignupEmail1';
+import SignupEmail2 from './pages/signup/SignupEmail2';
+import SignupInfo from './pages/signup/SignupInfo';
+import FindPassword from './pages/login/FindPassword';
 import Login from './pages/login/Login';
 import Signout from "./pages/mypage/Signout";
 
@@ -51,12 +55,19 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <Navbar />
-          
+
           <div style={{ flexGrow: 1, overflow: 'auto' }}>
             <Routes>
+              {/* Kakao Auth */}
+              <Route path="/Auth/Kakao/Callback" element={<Kakao />} />
+
               {/* 항상 route 가능 */}
               <Route path="/" element={<Main />} />
               <Route path="/Signup/" element={<Signup />} />
+              <Route path="/Signup/email1" element={<SignupEmail1 />} />
+              <Route path="/Signup/email2" element={<SignupEmail2 />} />
+              <Route path="/Signup/info" element={<SignupInfo />} />
+              <Route path="/FindPassword/" element={<FindPassword />} />
               <Route path="/Login/" element={<Login />} />
               <Route path="/golffield/" element={<Golffield />} />
 
@@ -66,14 +77,12 @@ function App() {
                 element={isLoggedIn ? <Solution /> : <Navigate to="/Login" />}
               /> */
               }
-              
+
               <Route path="/solution/" element={<Solution />} />
               <Route path="/learning/" element={<Learning />} />
               <Route path="/accompany/" element={<Accompany />} />
-              
-              <Route path="/Auth/Kakao/Callback" element={<Kakao />} />
 
-              <Route path="/community/" element={<Community />} />
+              {/* Community */}
               <Route path="/community" element={<Community />} />
               <Route path="/myeditor" element={<MyEditor />} />
               <Route path="/freeboardlist" element={<FreeBoardList />} />
@@ -81,7 +90,7 @@ function App() {
               <Route path="/noticelist" element={<NoticeList />} />
               <Route path="/freeboard/:idx" element={<FreeBoardDetail />} />
 
-
+              {/* Profile */}
               <Route path="/mypage/" element={<Profile />} />
               <Route path="/mypage/editprofile/" element={<EditProfile />} />
               <Route path="/mypage/editpassword/" element={<EditPassword />} />
