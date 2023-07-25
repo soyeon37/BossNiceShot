@@ -1,15 +1,10 @@
-<<<<<<< HEAD
+
 import React, { useState } from "react";
 
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-=======
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Cookies, useCookies } from 'react-cookie';
-import axios from 'axios';
->>>>>>> 0364be4372bdac3cd80b07a3e5ad6cba8a224404
+
 import {
   Button,
   ButtonGroup,
@@ -52,15 +47,9 @@ const Login = () => {
         axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
         // 쿠키에 정보 저장
-<<<<<<< HEAD
-        setCookie("user_email", data.email, { path: "/" });
-        setCookie("access_token", access_token, { path: "/" });
-        setCookie("refresh_token", refresh_token, { path: "/" });
-=======
         setCookie('user_email', data.memberId, { path: '/' });
         setCookie('access_token', access_token, { path: '/' });
         setCookie('refresh_token', refresh_token, { path: '/' });
->>>>>>> 0364be4372bdac3cd80b07a3e5ad6cba8a224404
 
         // 로그인 성공 후 Main으로 복귀
         navigate("/");
@@ -74,8 +63,8 @@ const Login = () => {
       });
   };
 
-  const testSendEmail=()=>{
-    const data = { Id: 'soyeun3377@naver.com'}
+  const testSendEmail = () => {
+    const data = { Id: 'soyeun3377@naver.com' }
     const apiUrl = 'http://localhost:8080/members/sendEmailVerification';
 
     axios.post(apiUrl, data)
@@ -105,7 +94,7 @@ const Login = () => {
     const apiUrl = 'http://localhost:8080/members/update';
     console.log(cookies.access_token);
     axios.put(apiUrl, data, {
-      headers: {'Authorization': 'Bearer ' + cookies.access_token}
+      headers: { 'Authorization': 'Bearer ' + cookies.access_token }
     })
       .then((response) => {
         console.log(response.data); // 서버에서 반환된 데이터
@@ -116,37 +105,37 @@ const Login = () => {
         console.error('Error:', error); // 오류 처리
         if (error.response) {
           console.log('HTTP status code:', error.response.status); // HTTP 상태 코드
-           // HTTP 상태 코드로 토큰 만료 여부 확인
-        if(error.response.status === 401){
-          console.log('Access Token has expired.');
+          // HTTP 상태 코드로 토큰 만료 여부 확인
+          if (error.response.status === 401) {
+            console.log('Access Token has expired.');
 
-           // 토큰 재발급 등의 로직 수행
-          reissueToken();
-        }
-        
+            // 토큰 재발급 등의 로직 수행
+            reissueToken();
+          }
+
         }
       });
   }
-  const reissueToken=()=>{
-    console.log('refrshToken:',cookies.refresh_token);
+  const reissueToken = () => {
+    console.log('refrshToken:', cookies.refresh_token);
     const apiUrl = 'http://localhost:8080/members/reissue';
-    axios.post(apiUrl, cookies.refresh_token, {headers: {'Authorization': 'Bearer ' + cookies.access_token}})
-    .then((response) => {
-      const message = response.data.data.message;
-      if(message === "SUCCESS"){
-        const newAccessToken = response.data.data.accessToken;
-        // console.log(newAccessToken);
-        removeCookie('access_token');
-        setCookie('access_token', newAccessToken, { path: '/' });
-      }else{
-        console.log('EXPIRED_TOKEN_MESSAGE: ',message);
-        // 로그아웃 시켜주는 func 실행
-        // ...
-      }
-    })
-    .catch((error) => {
-      console.error('Error:', error); // Debug Code
-    });
+    axios.post(apiUrl, cookies.refresh_token, { headers: { 'Authorization': 'Bearer ' + cookies.access_token } })
+      .then((response) => {
+        const message = response.data.data.message;
+        if (message === "SUCCESS") {
+          const newAccessToken = response.data.data.accessToken;
+          // console.log(newAccessToken);
+          removeCookie('access_token');
+          setCookie('access_token', newAccessToken, { path: '/' });
+        } else {
+          console.log('EXPIRED_TOKEN_MESSAGE: ', message);
+          // 로그아웃 시켜주는 func 실행
+          // ...
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error); // Debug Code
+      });
 
   }
 
@@ -155,7 +144,6 @@ const Login = () => {
 
 
   return (
-<<<<<<< HEAD
     <div id="Login">
       <div id="login-banner">
         {/* 그림 공간 */}
@@ -238,41 +226,15 @@ const Login = () => {
               };
             }}>회원가입 하기</NavLink>
 
+
+            <Button colorScheme="blue" onClick={handleLogin}>로그인</Button>
+            <Button variant="link" onClick={testPut}>토큰 만료 TEST</Button>
+            <Button variant="link" onClick={testSendEmail}>이메일 전송</Button>
           </div>
 
         </div>
       </div>
     </div >
-=======
-    <Box p={4}>
-      <Box maxW="md" mx="auto">
-        <Heading textAlign="center" mb={6}>로그인</Heading>
-        <FormControl>
-          <FormLabel>Email 주소</FormLabel>
-          <Input
-            type="email"
-            placeholder="이메일을 입력하세요."
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </FormControl>
-        <FormControl mt={4}>
-          <FormLabel>비밀번호</FormLabel>
-          <Input
-            type="password"
-            placeholder="비밀번호를 입력하세요."
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormControl>
-        <Stack mt={6} direction="row" justifyContent="center">
-          <Button colorScheme="blue" onClick={handleLogin}>로그인</Button>
-          <Button variant="link" onClick={testPut}>토큰 만료 TEST</Button>
-          <Button variant="link" onClick={testSendEmail}>이메일 전송</Button>
-        </Stack>
-      </Box>
-    </Box>
->>>>>>> 0364be4372bdac3cd80b07a3e5ad6cba8a224404
   );
 };
 
