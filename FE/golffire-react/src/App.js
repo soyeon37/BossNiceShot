@@ -10,10 +10,13 @@ import Learning from './pages/learning/Learning';
 import Golffield from './pages/golffield/Golffield';
 import Accompany from "./pages/accompany/Accompany";
 import Community from './pages/community/Community';
+
 import FreeBoardList from './pages/community/FreeBoardList';
 import InquiryList from './pages/community/InquiryList';
 import NoticeList from './pages/community/NoticeList';
 import MyEditor from './pages/community/MyEditor';
+import FreeBoardDetail from './pages/community/FreeBoardDetail';
+
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
 
@@ -86,7 +89,16 @@ function App() {
               <Route path="/solution/" element={<Solution />} />
               <Route path="/learning/" element={<Learning />} />
               <Route path="/accompany/" element={<Accompany />} />
+
+
               <Route path="/community/" element={<Community />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/myeditor" element={<MyEditor />} />
+              <Route path="/freeboardlist" element={<FreeBoardList />} />
+              <Route path="/inquirylist" element={<InquiryList />} />
+              <Route path="/noticelist" element={<NoticeList />} />
+              <Route path="/freeboard/:idx" element={<FreeBoardDetail />} />
+
 
               <Route path="/mypage/" element={<Profile />} />
               <Route path="/mypage/editprofile/" element={<EditProfile />} />
