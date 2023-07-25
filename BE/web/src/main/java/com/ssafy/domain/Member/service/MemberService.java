@@ -28,8 +28,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 import java.util.Random;
 
-//import jakarta.mail
-
 @Slf4j
 @Service
 @Transactional(readOnly = true)
@@ -50,6 +48,8 @@ public class MemberService{
         log.info(request.toString());
         if(findByMemberId(request.id())!= null){
             throw new IllegalArgumentException("이미 사용중인 아이디입니다.");
+        }else if(findByNickname(request.nickname())!=null){
+            throw new IllegalArgumentException("이미 사용중인 닉네임입니다.");
         }
         Member member = memberRepository.save(Member.from(request, encoder));
         try {
@@ -144,34 +144,49 @@ public class MemberService{
     private ReIssueResponse createAccessToken(String refreshToken, Authentication authentication){
         // 5. RefreshToken의 만료 기간 확인
         if (jwtTokenProvider.checkExpiredToken(refreshToken)){
-            TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
+            TokenInfo tokenInfo = jwtTokenProvider.generateAccessToken(authentication);
             // 6. RefreshToken으로 AccessToke 발급 성공
             return ReIssueResponse.from(tokenInfo.getAccessToken(), "SUCCESS");
         }
         // RefreshToken 발급 실패
-        return ReIssueResponse.from(jwtTokenProvider.generateToken(authentication).getAccessToken(),"GENERAL_FAILURE");
+        return ReIssueResponse.from(jwtTokenProvider.generateAccessToken(authentication).getAccessToken(),"GENERAL_FAILURE");
     }
 
     public SendEmailResponse sendEmail(SendEmailRequest request) {
         // 111111 ~ 999999 6자리 랜덤 난수 생성
-        int authNumber = makeAuthNum();
+        String authString = makeAuthString();
         try{
-            emailService.sendMail(FROM_EMAIL, (String) request.id(), "이메일 인증 메일");
+            emailService.sendMail(FROM_EMAIL, (String) request.id(), "이메일 인증 메일", authString);
         }catch (MailException e){
             throw new UserException(ExceptionMessage.FAIL_SEND_EMAIL);
         }
         log.info("이메일 전송 완료.");
-        return new SendEmailResponse(authNumber);
+        return new SendEmailResponse(authString);
     }
-    private int makeAuthNum(){
-        Random r = new Random();
-        int checkNum = r.nextInt(888888) + 111111;
-        log.info("인증번호={}", checkNum);
-        return checkNum;
+    private String makeAuthString(){
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                                .limit(targetStringLength)
+                                        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                                                .toString();
+        log.info("인증번호={}", generatedString);
+        return generatedString;
     }
 
     public Member findByMemberId(String memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(
+                () -> new UserAuthException(ExceptionMessage.USER_NOT_FOUND)
+        );
+        return member;
+    }
+
+    public Member findByNickname(String nickname) {
+        Member member = memberRepository.findByNickname(nickname).orElseThrow(
                 () -> new UserAuthException(ExceptionMessage.USER_NOT_FOUND)
         );
         return member;

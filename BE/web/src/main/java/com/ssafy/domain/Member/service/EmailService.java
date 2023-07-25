@@ -24,7 +24,7 @@ public class EmailService{
         this.mailSender = mailSender;
     }
 
-    public void sendMail(String from, String to, String subject) {
+    public void sendMail(String from, String to, String subject, String authString) {
         try {
 
             MimeMessage message = mailSender.createMimeMessage();
@@ -35,6 +35,7 @@ public class EmailService{
             // 템플릿에 전달할 데이터 설정
             Context context = new Context();
             context.setVariable("name","soyeon");
+            context.setVariable("authNum", authString);
 
             // 메일 내용 설정
             String html = templateEngine.process("WelcomeEmail", context);
