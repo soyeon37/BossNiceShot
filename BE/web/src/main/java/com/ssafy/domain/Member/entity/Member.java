@@ -63,7 +63,7 @@ public class Member implements UserDetails {
 
     public static Member from(SignUpRequest request, PasswordEncoder encoder){
         return Member.builder()
-                .id(request.memberId())
+                .id(request.id())
                 .password(encoder.encode(request.password()))
                 .nickname(request.nickname())
                 .teeBox(request.teeBox())
@@ -75,9 +75,9 @@ public class Member implements UserDetails {
                 .build();
     }
 
-    public static Member update(UpdateMemberRequest request, PasswordEncoder encoder, String memberId){
+    public static Member update(UpdateMemberRequest request, PasswordEncoder encoder, String id){
         return Member.builder()
-                .id(memberId)
+                .id(id)
                 .password(encoder.encode(request.password()))
                 .nickname(request.nickname())
                 .teeBox(request.teeBox())

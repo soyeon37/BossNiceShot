@@ -2,7 +2,7 @@ package com.ssafy.domain.Member.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 
-public record AuthorizeResponse (
+public record ReIssueResponse(
         @Schema(description = "토큰 권한 부여 유형",example = "Bearer")
         String grantType,
         @Schema(description = "AccessToken",example = "")
@@ -11,8 +11,8 @@ public record AuthorizeResponse (
         String message
         )
 {
-        public static AuthorizeResponse from(String accessToken, String message){
-                return new AuthorizeResponse(
+        public static ReIssueResponse from(String accessToken, String message){
+                return new ReIssueResponse(
                         "Bearer",
                         accessToken,
                         message

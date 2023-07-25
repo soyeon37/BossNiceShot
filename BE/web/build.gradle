@@ -45,11 +45,6 @@ dependencies {
 
 	annotationProcessor("com.google.guava:guava:29.0-jre")
 
-	// spring websocket
-//	implementation 'org.webjars:webjars-locator-core'
-//	implementation 'org.webjars:sockjs-client:1.0.2'
-//	implementation 'org.webjars:stomp-websocket:2.3.3'
-
 	// redis
 //	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
@@ -79,23 +74,8 @@ dependencies {
 	implementation 'org.webjars:stomp-websocket:2.3.3-1'
 	implementation 'org.webjars:webjars-locator-core'
 
-	implementation 'org.webjars:bootstrap:3.3.7'
-
-	//Kurento 미디어 서버 설정 관련 2개
-	// https://mvnrepository.com/artifact/org.kurento/kurento-client
-	implementation group: 'org.kurento', name: 'kurento-client', version: '6.18.0'
-
-	// https://mvnrepository.com/artifact/org.kurento/kurento-utils-js
-	implementation group: 'org.kurento', name: 'kurento-utils-js', version: '6.18.0'
-
-
 	// mongoDB 설정
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
-<<<<<<< HEAD
-
-}
-=======
->>>>>>> f9c786a782fd2baf41aba2bc9fb0ec9771f5b9a9
 
 	//이메일 인증 API 설정
 	implementation 'com.sun.mail:smtp:2.0.1'

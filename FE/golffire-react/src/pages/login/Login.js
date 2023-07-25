@@ -12,6 +12,7 @@ import {
   Heading,
 } from '@chakra-ui/react';
 
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -133,6 +134,10 @@ const Login = () => {
 
   }
 
+
+
+
+
   return (
     <Box p={4}>
       <Box maxW="md" mx="auto">
@@ -157,8 +162,8 @@ const Login = () => {
         </FormControl>
         <Stack mt={6} direction="row" justifyContent="center">
           <Button colorScheme="blue" onClick={handleLogin}>로그인</Button>
-          <Button variant="link" onClick={testPut}>회원가입</Button>
-          <Button variant="link" onClick={testSendEmail}>회원가입</Button>
+          <Button variant="link" onClick={testPut}>토큰 만료 TEST</Button>
+          <Button variant="link" onClick={testSendEmail}>이메일 전송</Button>
         </Stack>
       </Box>
     </Box>
