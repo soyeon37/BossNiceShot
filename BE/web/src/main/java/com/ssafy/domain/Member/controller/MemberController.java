@@ -14,7 +14,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -132,7 +134,8 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @GetMapping("/info")
-    public ApiResponse info(Authentication authentication){
+    public ApiResponse info(@AuthenticationPrincipal SecurityProperties.User authentication){
+        log.info("name={}",authentication.getName());
         if (authentication == null || authentication.getName() == null){
             throw new UserAuthException(ExceptionMessage.NOT_AUTHORIZED_ACCESS);
         }
