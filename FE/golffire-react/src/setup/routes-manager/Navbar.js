@@ -20,7 +20,7 @@ import { NavLink } from "react-router-dom"
 
 function Navbar() {
     const [isActive, setIsActive] = useState(false);
-    
+
     // cookie의 user 정보 확인
     const [cookies] = useCookies(['user']);
     // 로그인 여부를 나타내는 변수, false로 초기화
@@ -75,7 +75,7 @@ function Navbar() {
                         <MenuList>
                             <MenuItem>
                                 <NavLink to="/community/" style={({ isActive, isPending }) => {
-                                    return { 
+                                    return {
                                         fontWeight: isActive ? "bold" : "",
                                     };
                                 }}>커뮤니티</NavLink>
@@ -90,7 +90,7 @@ function Navbar() {
                             <MenuItem>
                                 <NavLink to="/inquirylist/" style={({ isActive, isPending }) => {
                                     return {
-                                    fontWeight: isActive ? "bold" : "",
+                                        fontWeight: isActive ? "bold" : "",
                                     };
                                 }}>문의사항</NavLink>
                             </MenuItem>
@@ -124,6 +124,7 @@ function Navbar() {
                                 <MenuDivider />
                                 <MenuItem style={{ color: "gray" }}>로그아웃</MenuItem>
                             </MenuGroup>
+                            {/* test code end */}
 
                             {isLoggedIn ? (
                                 <MenuGroup title=''>
@@ -150,7 +151,15 @@ function Navbar() {
                                         로그인
                                     </NavLink>
                                 </MenuItem>
-                                <MenuItem>회원가입</MenuItem>
+                                <MenuItem>
+                                    <NavLink to="/signup/" style={({ isActive, isPending }) => {
+                                        return {
+                                            fontWeight: isActive ? "bold" : "",
+                                        };
+                                    }}>
+                                        회원가입
+                                    </NavLink>
+                                </MenuItem>
                             </MenuGroup>)}
                         </MenuList>
                     </Menu>

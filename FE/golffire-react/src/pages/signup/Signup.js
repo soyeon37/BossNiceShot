@@ -4,7 +4,11 @@ import { NavLink } from "react-router-dom";
 function Signup() {
   return (
     <div id="Signup">
-      <div className="title"> 회원가입</div>
+      <div className="title">
+        <h1>
+          회원가입
+        </h1>
+      </div>
       <div>이메일로 가입하기</div>
       <div>카카오톡으로 가입하기</div>
       <hr />
