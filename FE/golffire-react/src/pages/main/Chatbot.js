@@ -14,8 +14,8 @@ function Chatbot() {
       {/* <div className="chat-widget"></div> */}
 
       {/* 챗봇 위젯 동그라미 버튼 */}
-      <div class="chatbot-widget">
-        <span class="chatbot-icon">
+      <div className="chatbot-widget">
+        <span className="chatbot-icon">
           <ChatIcon />
         </span>
       </div>
