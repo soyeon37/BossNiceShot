@@ -9,6 +9,7 @@ import SimpleForm from "./chatbot/form/SimpleForm";
 function Chatbot() {
     return (
         <div className="Chatbot">
+            <div className="chat-widget"></div>
             {/* <Notifications /> */}
             {/* <NotificationComponent /> */}
             {/* <SimpleChatBox /> */}
