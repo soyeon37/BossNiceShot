@@ -1,0 +1,12 @@
+
+c
+java:S11929"MDefine a constant instead of duplicating this literal "RefreshToken" 3 times.(©†ø¹
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ø¬ÄÜýÿÿÿÿ
+W
+java:S1710"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
+W
+java:S1710*"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
+W
+java:S1710V"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
+W
+java:S1710k"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
