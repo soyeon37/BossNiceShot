@@ -155,6 +155,7 @@ public class MemberController {
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }
 
+    //
 //    @PostMapping("/authorize")
 //    public ApiResponse authorize(@RequestHeader("Authorization") String accessToken, Authentication authentication){
 //        if (authentication == null || authentication.getName() == null) {
