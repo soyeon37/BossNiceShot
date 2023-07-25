@@ -25,6 +25,8 @@ import EditProfile from "./pages/mypage/EditProfile";
 import EditPassword from './pages/mypage/EditPassword';
 import Signout from "./pages/mypage/Signout";
 
+import Kakao from './pages/login/Kakao';
+
 import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {
@@ -46,6 +48,7 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <Navbar />
+          
           <div style={{ flexGrow: 1, overflow: 'auto' }}>
             <Routes>
               {/* 항상 route 가능 */}
@@ -58,38 +61,13 @@ function App() {
               {/* <Route
                 path="/solution/"
                 element={isLoggedIn ? <Solution /> : <Navigate to="/Login" />}
-              />
-              <Route
-                path="/learning/"
-                element={isLoggedIn ? <Learning /> : <Navigate to="/Login" />}
-              />
-              <Route
-                path="/accompany/"
-                element={isLoggedIn ? <Accompany /> : <Navigate to="/Login" />}
-              />
-              <Route
-                path="/community/"
-                element={isLoggedIn ? <Community /> : <Navigate to="/Login" />}
-              /> 
-              <Route
-                path="/freeboardlist/"
-                element={isLoggedIn ? <FreeBoardList /> : <Navigate to="/Login" />}
-              />
-              <Route
-                path="/inquirylist/"
-                element={isLoggedIn ? <InquiryList /> : <Navigate to="/Login" />}
-              />
-              <Route
-                path="/noticelist/"
-                element={isLoggedIn ? <NoticeList /> : <Navigate to="/Login" />}
               /> */
               }
               
-
               <Route path="/solution/" element={<Solution />} />
               <Route path="/learning/" element={<Learning />} />
               <Route path="/accompany/" element={<Accompany />} />
-
+              <Route path="/Auth/Kakao/Callback" element={<Kakao />} />
 
               <Route path="/community/" element={<Community />} />
               <Route path="/community" element={<Community />} />
@@ -107,6 +85,7 @@ function App() {
 
             </Routes>
           </div>
+
         </div>
       </BrowserRouter>
     </ChakraProvider>
