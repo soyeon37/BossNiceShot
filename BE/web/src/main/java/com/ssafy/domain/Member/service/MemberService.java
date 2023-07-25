@@ -2,7 +2,9 @@ package com.ssafy.domain.Member.service;
 
 import com.ssafy.Exception.message.ExceptionMessage;
 import com.ssafy.Exception.model.TokenCheckFailException;
+import com.ssafy.Exception.model.TokenNotFoundException;
 import com.ssafy.Exception.model.UserAuthException;
+import com.ssafy.Exception.model.UserException;
 import com.ssafy.config.security.jwt.JwtTokenProvider;
 import com.ssafy.domain.Member.dto.request.SendEmailRequest;
 import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
@@ -15,6 +17,7 @@ import com.ssafy.domain.Member.dto.request.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.mail.MailException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -52,7 +55,7 @@ public class MemberService{
         try {
             memberRepository.flush();
         } catch (DataIntegrityViolationException e) {
-            throw new IllegalArgumentException("회원 정보 저장에 실패했습니다.");
+            throw new UserAuthException(ExceptionMessage.FAIL_SAVE_DATA);
         }
         return SignUpResponse.from(member);
     }
@@ -71,8 +74,10 @@ public class MemberService{
 
         // 2-1. 비밀번호 체크
         Optional<Member> member = memberRepository.findById(request.id());
-        if(!encoder.matches(request.password(), member.get().getPassword())) {
-            return null;
+        if(member.isEmpty()){
+            throw new UserAuthException(ExceptionMessage.USER_NOT_FOUND);
+        } else if(!encoder.matches(request.password(), member.get().getPassword())) {
+           throw new UserAuthException(ExceptionMessage.MISMATCH_PASSWORD);
         }
 
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
@@ -87,7 +92,7 @@ public class MemberService{
         try {
             memberRepository.flush();
         } catch (DataIntegrityViolationException e) {
-            throw new IllegalArgumentException("회원 정보 수정에 실패했습니다.");
+            throw new UserAuthException(ExceptionMessage.FAIL_UPDATE_DATA);
         }
         return UpdateMemberResponse.from(member);
     }
@@ -97,14 +102,13 @@ public class MemberService{
         try {
             memberRepository.deleteById(memberId);
         }catch (DataIntegrityViolationException e){
-            throw new IllegalArgumentException("회원 삭제에 실패했습니다.");
+            throw new UserAuthException(ExceptionMessage.FAIL_DELETE_DATA);
         }
-        return "회원 정보 삭제 수행";
+        return "SUCCESS";
     }
 
     @Transactional
     public ReIssueResponse getAuthorize(String accessToken){
-
         return ReIssueResponse.from(accessToken, "GET_AUTHORIZE");
     }
 
@@ -112,7 +116,7 @@ public class MemberService{
     public ReIssueResponse reissue(String refreshToken, Authentication authentication) {
         // 1. 인가 이름 확인
         log.info("authentication.getName={}", authentication.getName());
-        if (authentication == null || authentication.getName() == null) {
+        if (authentication.getName() == null) {
             throw new UserAuthException(ExceptionMessage.NOT_AUTHORIZED_ACCESS);
         }
         log.info("refreshToken={}", refreshToken);
@@ -121,7 +125,8 @@ public class MemberService{
             // 2-1. refreshToken 만료 시, Redis에서 삭제
             // Front에서 Logout 실행
             refreshTokenService.delValues(refreshToken);
-            return ReIssueResponse.from(null, "INVALID_REFRESH_TOKEN");
+            throw new TokenNotFoundException(ExceptionMessage.TOKEN_VALID_TIME_EXPIRED);
+//            return ReIssueResponse.from(null, "INVALID_REFRESH_TOKEN");
         }
         // 3. Redis에서 refreshToken 가져오기
         String id = refreshTokenService.getValues(refreshToken);
@@ -150,19 +155,10 @@ public class MemberService{
     public SendEmailResponse sendEmail(SendEmailRequest request) {
         // 111111 ~ 999999 6자리 랜덤 난수 생성
         int authNumber = makeAuthNum();
-        log.info(request.id());
-        String content =
-                "홈페이지를 방문해주셔서 감사합니다." + 	//html 형식으로 작성 !
-                        "<br><br>" +
-                        "인증 번호는 " + authNumber + "입니다." +
-                        "<br>" +
-                        "해당 인증번호를 인증번호 확인란에 기입하여 주세요."; //이메일 내용 삽입
         try{
-            emailService.sendMail(FROM_EMAIL, (String) request.id(), "이메일 인증 메일", content);
-
-        }catch (Exception e){
-
-            e.printStackTrace();
+            emailService.sendMail(FROM_EMAIL, (String) request.id(), "이메일 인증 메일");
+        }catch (MailException e){
+            throw new UserException(ExceptionMessage.FAIL_SEND_EMAIL);
         }
         log.info("이메일 전송 완료.");
         return new SendEmailResponse(authNumber);
@@ -170,16 +166,14 @@ public class MemberService{
     private int makeAuthNum(){
         Random r = new Random();
         int checkNum = r.nextInt(888888) + 111111;
-
         log.info("인증번호={}", checkNum);
         return checkNum;
     }
 
     public Member findByMemberId(String memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(
-                () -> new IllegalArgumentException("해당 회원이 존재하지 않습니다. id = " + memberId)
+                () -> new UserAuthException(ExceptionMessage.USER_NOT_FOUND)
         );
-
         return member;
     }
 }

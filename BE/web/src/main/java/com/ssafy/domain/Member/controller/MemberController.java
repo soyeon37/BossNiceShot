@@ -5,7 +5,7 @@ import com.ssafy.Exception.model.UserAuthException;
 import com.ssafy.domain.Member.dto.request.*;
 import com.ssafy.domain.Member.dto.response.SignInResponse;
 import com.ssafy.domain.Member.service.MemberService;
-import com.ssafy.config.ApiResponse;
+import com.ssafy.common.api.ApiResponse;
 import com.ssafy.domain.Member.service.RefreshTokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
