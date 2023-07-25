@@ -1,18 +1,32 @@
 package com.ssafy.domain.Member.service;
 
+import com.ssafy.Exception.message.ExceptionMessage;
+import com.ssafy.Exception.model.TokenCheckFailException;
+import com.ssafy.Exception.model.UserAuthException;
 import com.ssafy.config.security.jwt.JwtTokenProvider;
+import com.ssafy.config.security.jwt.RefreshToken;
+import com.ssafy.domain.Member.dto.request.SendEmailRequest;
 import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
-import com.ssafy.domain.Member.dto.response.UpdateMemberResponse;
+import com.ssafy.domain.Member.dto.response.*;
 import com.ssafy.domain.Member.entity.Member;
 import com.ssafy.domain.Member.repository.MemberRepository;
 import com.ssafy.config.security.jwt.TokenInfo;
-import com.ssafy.domain.Member.dto.response.SignInResponse;
 import com.ssafy.domain.Member.dto.request.SignInRequest;
-import com.ssafy.domain.Member.dto.response.SignUpResponse;
 import com.ssafy.domain.Member.dto.request.SignUpRequest;
+import jakarta.mail.*;
+import jakarta.mail.internet.InternetAddress;
+import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.mail.MailAuthenticationException;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -21,16 +35,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+import java.util.Properties;
+import java.util.Random;
+
+//import jakarta.mail
 
 @Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class MemberService {
+public class MemberService{
     private final MemberRepository memberRepository;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final JwtTokenProvider jwtTokenProvider;
     private final PasswordEncoder encoder;
+    private final RefreshTokenService refreshTokenService;
+    private final EmailService emailService;
+
+    private static final String FROM_EMAIL = "soyeun37@gmail.com"; // 발신자 이메일 주소
+    private static final String FROM_PASSWORD = "mkzzkrnztadldzls"; // 발신자 이메일 비밀번호
 
     @Transactional
     public SignUpResponse registMember(SignUpRequest request) {
@@ -86,6 +109,70 @@ public class MemberService {
             throw new IllegalArgumentException("회원 삭제에 실패했습니다.");
         }
         return "회원 정보 삭제 수행";
+    }
+
+    @Transactional
+    public AuthorizeResponse getAuthorize(String accessToken){
+
+        return AuthorizeResponse.from(accessToken, "GET_AUTHORIZE");
+    }
+
+    @Transactional
+    public AuthorizeResponse reissue(String refreshToken, Authentication authentication) {
+        log.info("authentication.getName={}", authentication.getName());
+        if (authentication == null || authentication.getName() == null) {
+            throw new UserAuthException(ExceptionMessage.NOT_AUTHORIZED_ACCESS);
+        }
+        log.info("refreshToken={}", refreshToken);
+        // refreshToken 만료 검사
+        if(!jwtTokenProvider.validateToken(refreshToken)){
+            // RefreshToken 만료 시, Redis에서 삭제
+            refreshTokenService.delValues(refreshToken);
+            return AuthorizeResponse.from(null, "INVALID_REFRESH_TOKEN");
+        }
+        String id = refreshTokenService.getValues(refreshToken);
+        log.info("refreshToken Id={}", id);
+        if(id == null || !id.equals(authentication.getName())){
+            throw new TokenCheckFailException(ExceptionMessage.MISMATCH_TOKEN);
+        }
+        return createRefreshToken(refreshToken, authentication);
+    }
+
+    private AuthorizeResponse createRefreshToken(String refreshToken, Authentication authentication){
+        if (jwtTokenProvider.checkExpiredToken(refreshToken)){
+            TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
+            log.info(tokenInfo.getAccessToken());
+            return AuthorizeResponse.from(tokenInfo.getAccessToken(), "SUCCESS");
+        }
+        return AuthorizeResponse.from(jwtTokenProvider.generateToken(authentication).getAccessToken(),"GENERAL_FAILURE");
+    }
+
+    public SendEmailResponse sendEmail(SendEmailRequest request) {
+        // 111111 ~ 999999 6자리 랜덤 난수 생성
+        int authNumber = makeAuthNum();
+        log.info(request.Id());
+        String content =
+                "홈페이지를 방문해주셔서 감사합니다." + 	//html 형식으로 작성 !
+                        "<br><br>" +
+                        "인증 번호는 " + authNumber + "입니다." +
+                        "<br>" +
+                        "해당 인증번호를 인증번호 확인란에 기입하여 주세요."; //이메일 내용 삽입
+        try{
+            emailService.sendMail(FROM_EMAIL, (String) request.Id(), "이메일 인증 메일", content);
+
+        }catch (Exception e){
+
+            e.printStackTrace();
+        }
+        log.info("이메일 전송 완료.");
+        return new SendEmailResponse(authNumber);
+    }
+    private int makeAuthNum(){
+        Random r = new Random();
+        int checkNum = r.nextInt(888888) + 111111;
+
+        log.info("인증번호={}", checkNum);
+        return checkNum;
     }
 
     public Member findByMemberId(String memberId) {
