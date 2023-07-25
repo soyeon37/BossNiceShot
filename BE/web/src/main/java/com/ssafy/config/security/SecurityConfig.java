@@ -12,6 +12,14 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 /**
  * 인증(authentication) 와 인가(authorization) 처리를 위한 스프링 시큐리티 설정 정의.
@@ -37,14 +45,16 @@ public class SecurityConfig {
             "/actuator/*",
             "/swagger-ui/**",
             "/api-docs/**",
-            "/members/**",
             "/swagger*/**",
             "/solution/detect",
-            "/members/login",
-            "/members/sign-up",
+            "/members/**",
+            "/chat/**"
+    };
+    private static final String[] USER_LIST = {
             "/members/sign-in",
-            "/chat/**",
-            "/mongodb/chat"
+            "/members/update",
+            "/members/logout",
+            "/members/delete"
     };
 
     @Bean
@@ -56,26 +66,34 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable);
         http
+                .cors(withDefaults())
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers(AUTH_WHITELIST).permitAll()
-                        .requestMatchers("/members/test").hasRole("USER")
-                        .requestMatchers("/members/sign-up").hasRole("USER")
-                        .requestMatchers("/members/sign-in").hasRole("USER")
+                        .requestMatchers(USER_LIST).hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+//                .addFilterBefore(new JwtExceptionFilter(), JwtAuthenticationFilter.class)
 //                .httpBasic(withDefaults()); // 권한이 없으면 로그인 페이지로 이동
         return http.build();
     }
 
-//    // prefix
-//    @Bean
-//    ForwardedHeaderFilter forwardedHeaderFilter() {
-//        return new ForwardedHeaderFilter();
-//    }
-
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().requestMatchers("/v3/api-docs/**");
+    }
+
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setExposedHeaders(List.of("*"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
     }
 }
