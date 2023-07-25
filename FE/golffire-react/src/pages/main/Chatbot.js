@@ -3,10 +3,10 @@ import React from "react";
 import { ChatIcon } from "@chakra-ui/icons";
 
 // 챗봇
-import Notifications from "react-push-notification";
-import NotificationComponent from "./chatbot/NotificationComponent";
-import SimpleChatBox from "./chatbot/SimpleChatBox";
-import SimpleForm from "./chatbot/form/SimpleForm";
+// import Notifications from "react-push-notification";
+// import NotificationComponent from "./chatbot/NotificationComponent";
+// import SimpleChatBox from "./chatbot/SimpleChatBox";
+// import SimpleForm from "./chatbot/form/SimpleForm";
 
 function Chatbot() {
   return (
