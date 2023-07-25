@@ -10,6 +10,7 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 function SplideLearning({ props }) {
   const golfInfos = [
     {
+      id: 1,
       type: "코칭",
       title: "XX컵 메달리스트 꿀팁 방출",
       detail: "지난 달 열린 XX컵 메달리스트가 알려주는 꿀팁! 10시까지 합니다!",
@@ -17,6 +18,7 @@ function SplideLearning({ props }) {
       member: "8",
     },
     {
+      id: 2,
       type: "러닝",
       title: "알려줘요",
       detail: "스탠스 궁금해요!",
@@ -24,6 +26,7 @@ function SplideLearning({ props }) {
       member: "1",
     },
     {
+      id: 3,
       type: "코칭",
       title: "XX컵 메달리스트 꿀팁 방출2",
       detail: "지난 달 열린 XX컵 메달리스트가 알려주는 꿀팁! 10시까지 합니다!",
@@ -47,10 +50,9 @@ function SplideLearning({ props }) {
           focus: "center",
         }}
       >
-        {golfInfos.map((info, index) => (
-          <SplideSlide>
+        {golfInfos.map((info) => (
+          <SplideSlide key={info.id}>
             <PartLearning
-              key={index}
               type={info.type}
               title={info.title}
               detail={info.detial}

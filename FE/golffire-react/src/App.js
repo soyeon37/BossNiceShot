@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import { useCookies } from 'react-cookie';
 import { useState, useEffect } from 'react';
 
+// Navigation Bar
 import Navbar from './setup/routes-manager/Navbar';
 import Main from './pages/main/Main'
 import Solution from './pages/solution/Solution';
@@ -11,21 +12,23 @@ import Golffield from './pages/golffield/Golffield';
 import Accompany from "./pages/accompany/Accompany";
 import Community from './pages/community/Community';
 
+// Community
 import FreeBoardList from './pages/community/FreeBoardList';
 import InquiryList from './pages/community/InquiryList';
 import NoticeList from './pages/community/NoticeList';
 import MyEditor from './pages/community/MyEditor';
 import FreeBoardDetail from './pages/community/FreeBoardDetail';
 
+// Sign-up & Log-in
+import Kakao from './pages/kakao/Kakao';
 import Signup from './pages/signup/Signup';
 import Login from './pages/login/Login';
+import Signout from "./pages/mypage/Signout";
 
+// Profile
 import Profile from "./pages/mypage/Profile";
 import EditProfile from "./pages/mypage/EditProfile";
 import EditPassword from './pages/mypage/EditPassword';
-import Signout from "./pages/mypage/Signout";
-
-import Kakao from './pages/login/Kakao';
 
 import { ChakraProvider } from '@chakra-ui/react'
 
@@ -67,6 +70,7 @@ function App() {
               <Route path="/solution/" element={<Solution />} />
               <Route path="/learning/" element={<Learning />} />
               <Route path="/accompany/" element={<Accompany />} />
+              
               <Route path="/Auth/Kakao/Callback" element={<Kakao />} />
 
               <Route path="/community/" element={<Community />} />

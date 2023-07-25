@@ -10,22 +10,27 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 function SplideGolf({ props }) {
   const golfInfos = [
     {
+      id: 1,
       name: "하이골프클럽1",
       address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
     },
     {
+      id: 2,
       name: "하이골프클럽2",
       address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
     },
     {
+      id: 3,
       name: "하이골프클럽3",
       address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
     },
     {
+      id: 4,
       name: "하이골프클럽4",
       address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
     },
     {
+      id: 5,
       name: "하이골프클럽5",
       address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
     },
@@ -47,11 +52,13 @@ function SplideGolf({ props }) {
           focus: "center",
         }}
       >
-        {golfInfos.map((info, index) => (
-          <SplideSlide>
-            <PartGolf key={index} name={info.name} address={info.address} />
+        
+        {golfInfos.map((info) => (
+          <SplideSlide key={info.id}>
+            <PartGolf name={info.name} address={info.address} />
           </SplideSlide>
         ))}
+
       </Splide>
 
       <NavLink
