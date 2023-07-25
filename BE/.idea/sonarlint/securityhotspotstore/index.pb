@@ -55,17 +55,3 @@ m
 =web/src/main/java/com/ssafy/config/mongodb/MongoDBConfig.java,b\6\b62876e617c9366efe58dd52c291b465e9b3b303
 i
 9web/src/main/java/com/ssafy/config/redis/RedisConfig.java,c\6\c6f953c2561525211341bd61f9fafac5764b5422
-€
-Pweb/src/main/java/com/ssafy/domain/Companion/controller/CompanionController.java,9\2\9278089ce228b9cc1c8c81815732dacf7fe8f83d
-{
-Kweb/src/main/java/com/ssafy/domain/chat/dto/request/ChatMessageRequest.java,7\5\75bf43d044999889839801aa59888d025bc56f73
-x
-Hweb/src/main/java/com/ssafy/domain/Member/dto/request/SignInRequest.java,2\7\278c2283ef7aa9026e7a9c6b8b50659b0f2ef687
-z
-Jweb/src/main/java/com/ssafy/domain/Member/dto/response/SignInResponse.java,4\f\4fc91c8d7a3010d24fbc05ef45cd916730340e86
-{
-Kweb/src/main/java/com/ssafy/domain/Companion/dto/request/CompanyCreate.java,4\a\4a9dad7bc07c3b4459eae6eaf9f19228e8e458ee
-
-Oweb/src/main/java/com/ssafy/domain/chat/dto/request/ChatParticipantRequest.java,f\6\f6f1c763ed6543fff9d93ac32c444c212bdc86ee
-x
-Hweb/src/main/java/com/ssafy/domain/chat/dto/request/ChatRoomRequest.java,5\7\57d9b4b04ef80a2939feefe9c4a34973c2f43a25
