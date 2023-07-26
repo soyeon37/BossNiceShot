@@ -47,11 +47,11 @@ function Navbar() {
                     }}>솔루션</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/learning" style={({ isActive, isPending }) => {
+                    <NavLink to="/studylist" style={({ isActive, isPending }) => {
                         return {
                             fontWeight: isActive ? "bold" : "",
                         };
-                    }}>코칭/러닝</NavLink>
+                    }}>스터디</NavLink>
                 </li>
                 <li>
                     <NavLink to="/golffield" style={({ isActive, isPending }) => {
