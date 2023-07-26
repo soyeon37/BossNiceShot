@@ -1,16 +1,44 @@
 import React, { useState } from "react";
 
-import { NavLink, useNavigate } from "react-router-dom";
+import {
+  NavLink,
+  useNavigate,
+  useLocation
+} from "react-router-dom";
 
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input
+} from "@chakra-ui/react";
+import NoImg from "../../assets/source/icons/no-image.png";
 
-const SignupEmail2 = () => {
-  const [email, setEmail] = useState("");
+const SignupEmail2 = (props) => {
+  const { state } = useLocation();
+  const [email, setEmail] = useState(state.email);
   const [password, setPassword] = useState("");
+  const [passwordVer, setPasswordVer] = useState("");
 
   const navigate = useNavigate();
   const handleEmailSetPassword = () => {
-    navigate("/Signup/info");
+    // Debug Code !!!
+    console.log("email: ", email);
+    console.log("password: ", password);
+    console.log("passwordVer: ", passwordVer);
+
+    if (password === passwordVer) {
+      navigate("/signup/info", {
+        state: {
+          email: email,
+          password: password,
+          image: NoImg,
+          nickname: ""
+        }
+      });
+    } else {
+      alert("유효한 비밀번호를 입력해 주세요!");
+    }
   };
 
   return (
@@ -34,9 +62,21 @@ const SignupEmail2 = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <FormLabel>비밀번호 입력</FormLabel>
-            <Input type="password" placeholder="비밀번호를 입력하세요." bg={"white"} />
+            <Input
+              type="password"
+              placeholder="비밀번호를 입력하세요."
+              bg={"white"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <FormLabel>비밀번호 확인</FormLabel>
-            <Input type="password" placeholder="비밀번호를 다시 한 번 입력하세요." bg={"white"} />
+            <Input
+              type="password"
+              placeholder="비밀번호를 다시 한 번 입력하세요."
+              bg={"white"}
+              value={passwordVer}
+              onChange={(e) => setPasswordVer(e.target.value)}
+            />
             {/*
                 비밀번호 조건 명시
                 조건 미충족 시 진행 불가 코드 필요!
