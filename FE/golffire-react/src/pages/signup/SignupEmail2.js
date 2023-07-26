@@ -10,7 +10,7 @@ const SignupEmail2 = () => {
 
   const navigate = useNavigate();
   const handleEmailSetPassword = () => {
-    navigate("/Signup/info");
+    navigate("/signup/info");
   };
 
   return (

@@ -23,7 +23,7 @@ function Signup() {
         </h1>
       </div>
       <div>
-        <NavLink to="/Signup/email1" >
+        <NavLink to="/signup/email1" >
           <Button
             style={{
               height: "2.5rem",
