@@ -8,10 +8,11 @@ import "./Signup.css";
 
 function Signup() {
   const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
-  const REDIRECT_URI = 'http://localhost:3000/auth/kakao/callback'
+  const REDIRECT_URI = 'http://localhost:3000/auth/kakao/signup/callback'
   const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
 
-  const handleKakaoLogin = () => {
+  const handleKakaoSignup = () => {
+    // console.log("카카오 로그인"); // Debug !!
     window.location.href = kakaoUrl;
   }
 
@@ -40,7 +41,7 @@ function Signup() {
       </div>
       <div>
         <Button
-          onClick={handleKakaoLogin}
+          onClick={handleKakaoSignup}
           style={{
             height: "2.5rem",
             width: "100%",

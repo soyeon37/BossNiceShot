@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -8,11 +8,18 @@ import {
 
 const Kakao = (props) => {
   const navigate = useNavigate();
-  // const href = window.location.href; // current URL
+  const [email, setEmail] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [image, setImage] = useState("");
 
   let params = new URL(document.URL).searchParams; // get query string
   let CODE = params.get("code");
   console.log("CODE: ", CODE); // Debug !!
+
+  const data = {
+    code: CODE
+  }
+  const apiUrl = "http://localhost:8080/members/code";
 
   // KAKAO Token 발급
   const grant_type = 'authorization_code'
@@ -27,6 +34,7 @@ const Kakao = (props) => {
     },
   ).then((response) => {
     console.log('token: ', response);
+    // accessToken & refreshToken & 만료시간 모두 WAS로 전송
     const access_token = response.data.access_token;
     const expires_in = response.data.expires_in;
     const refresh_token = response.data.refresh_token;
@@ -50,22 +58,45 @@ const Kakao = (props) => {
     )
       .then((response) => {
         console.log('kakao info', response);
+        console.log(response.data.kakao_account.email);
         const email = response.data.kakao_account.email;
-        const image = response.data.kakao_account.profile.profile_image_url;
-        const nickname = response.data.kakao_account.profile.nickname;
-        
-        // sign-up 페이지로 회원정보를 가지고 돌아가기
-        navigate('/signup/', {
-          state: {
-            email: email,
-            image: image,
-            nickname: nickname
-          }
-        });
+
+        handleCheckEmail(email);
       })
       .catch((error) => {
         console.error('Error:', error); // Debug Code
       });
+    const handleCheckEmail = (email) => {
+      const data = {
+        id: email
+      }
+      const apiUrl = "http://localhost:8080/members/checkEmail";
+      console.log(email);
+      axios
+        .post(apiUrl, data)
+        .then((response) => {
+          if (response.data.data.resultMessage === "FAIL") {
+            console.log("이메일이 중복되었습니다.");
+            alert("이미 가입된 이메일입니다.");
+            navigate('/');
+          } else {
+            console.log("유효한 이메일입니다.");
+            
+            // SignupInfo 페이지로 회원정보를 가지고 돌아가기
+            navigate('/Signup/info', {
+              state: {
+                email: email,
+                password: "",
+                image: image,
+                nickname: nickname
+              }
+            });
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        })
+    };
   }
   useEffect(() => {
     console.log("Received props: ", props);
@@ -74,7 +105,7 @@ const Kakao = (props) => {
   return (
     <Box>
       <Box maxW="md" mx="auto">
-        <div>잠시만 기다려 주세요! 로그인 중입니다.</div>
+        <div>잠시만 기다려 주세요! 회원 가입 중입니다.</div>
       </Box>
     </Box>
   )
