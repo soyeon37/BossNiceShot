@@ -1,26 +1,26 @@
 import React from "react";
-import Kakao from "./Kakao";
+import KakaoMap from "./KakaoMap";
 
-import { Select, Input } from '@chakra-ui/react'
+import { Select, Input } from "@chakra-ui/react";
 import GolfBox from "./GolfBox";
 import "./Golffield.css";
 
 function Golffield() {
   const golfClubs = [
     {
-      name: '하이골프클럽11',
-      address: '서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층',
-      phoneNumber: '02-9999-9999',
+      name: "하이골프클럽11",
+      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
+      phoneNumber: "02-9999-9999",
     },
     {
-      name: '하이골프클럽22',
-      address: '서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층',
-      phoneNumber: '02-9999-9999',
+      name: "하이골프클럽22",
+      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
+      phoneNumber: "02-9999-9999",
     },
     {
-      name: '하이골프클럽23',
-      address: '서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층',
-      phoneNumber: '02-9999-9999',
+      name: "하이골프클럽33",
+      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
+      phoneNumber: "02-9999-9999",
     },
     // Add more golf club data objects here
   ];
@@ -29,21 +29,20 @@ function Golffield() {
     <div id="Golffield">
       <div id="search-box">
         <div>
-          <Select placeholder='Select option'>
-            <option value='option1'>지역을 선택하세요</option>
-            <option value='option2'>서울</option>
-            <option value='option3'>강릉</option>
+          <Select placeholder="Select option">
+            <option value="option1">지역을 선택하세요</option>
+            <option value="option2">서울</option>
+            <option value="option3">강릉</option>
           </Select>
         </div>
         <div>
-          <Input placeholder='검색어를 입력하세요' />
+          <Input placeholder="검색어를 입력하세요" />
         </div>
       </div>
 
-
       <div id="result-box">
         <div id="kakao-map">
-          <Kakao />
+          <KakaoMap />
         </div>
 
         <div id="result-list">
@@ -59,6 +58,6 @@ function Golffield() {
       </div>
     </div>
   );
-};
+}
 
 export default Golffield;
