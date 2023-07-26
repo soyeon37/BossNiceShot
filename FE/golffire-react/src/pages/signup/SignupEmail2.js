@@ -6,7 +6,13 @@ import {
   useLocation
 } from "react-router-dom";
 
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input
+} from "@chakra-ui/react";
+import NoImg from "../../assets/source/icons/no-image.png";
 
 const SignupEmail2 = (props) => {
   const { state } = useLocation();
@@ -24,7 +30,10 @@ const SignupEmail2 = (props) => {
     if (password === passwordVer) {
       navigate("/signup/info", {
         state: {
-          email: email
+          email: email,
+          password: password,
+          image: NoImg,
+          nickname: ""
         }
       });
     } else {
