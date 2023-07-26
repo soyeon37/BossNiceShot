@@ -1,20 +1,18 @@
-
 import React, { useState } from "react";
 
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
+// Style
 import {
   Button,
   FormControl,
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-
 import "./Login.css";
 import golfImage from "../../assets/source/icons/golf.png";
-
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -63,13 +61,20 @@ const Login = () => {
   };
 
   const handleKakaoLogin = () => {
-    console.log("카카오 로그인 시도");
+    console.log("카카오 로그인 시도"); // Debug Code !!
+    
+    const REST_API_KEY = 'cd0c9cf0cf49dae9a987aebb769ee0d6';
+    const REDIRECT_URI = 'http://localhost:3000/auth/kakao/login/callback'
+    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+    window.location.href=kakaoUrl;
+
   }
 
   return (
     <div id="Login">
+
+      {/* 그림 공간 */}
       <div id="login-banner">
-        {/* 그림 공간 */}
         <div id="login-banner-context">
           <div id="banner-letter">
             동료들이 당신을
@@ -84,8 +89,6 @@ const Login = () => {
 
       {/* 기능 공간 */}
       <div id="login-func">
-        {/*   <Input placeholder='default placeholder' /> */}
-
         <div id="login-box">
           <div id="box-title">
             로그인
@@ -143,7 +146,7 @@ const Login = () => {
 
           </div>
           <div id="box-footer">
-            <NavLink to="/FindPassword" >비밀번호 찾기</NavLink>
+            <NavLink to="/findpassword" >비밀번호 찾기</NavLink>
             <br />
             <NavLink to="/signup">회원가입 하기</NavLink>
           </div>

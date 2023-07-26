@@ -22,7 +22,8 @@ import MyEditor from './pages/community/MyEditor';
 import FreeBoardDetail from './pages/community/FreeBoardDetail';
 
 // Sign-up & Log-in & Sign-out
-import Kakao from './pages/kakao/Kakao';
+import KakaoLogin from "./setup/user-auth/KakaoLogin";
+import KakaoSignUp from "./setup/user-auth/KakaoSignUp";
 import Signup from './pages/signup/Signup';
 import SignupEmail1 from './pages/signup/SignupEmail1';
 import SignupEmail2 from './pages/signup/SignupEmail2';
@@ -61,16 +62,17 @@ function App() {
           <div style={{ flexGrow: 1, overflow: 'auto' }}>
             <Routes>
               {/* Kakao Auth */}
-              <Route path="/Auth/Kakao/Callback" element={<Kakao />} />
+              <Route path="/Auth/Kakao/Signup/Callback" element={<KakaoSignUp />} />
+              <Route path="/Auth/Kakao/Login/Callback" element={<KakaoLogin />} />
 
               {/* 항상 route 가능 */}
               <Route path="/" element={<Main />} />
-              <Route path="/Signup/" element={<Signup />} />
-              <Route path="/Signup/email1" element={<SignupEmail1 />} />
-              <Route path="/Signup/email2" element={<SignupEmail2 />} />
-              <Route path="/Signup/info" element={<SignupInfo />} />
-              <Route path="/FindPassword/" element={<FindPassword />} />
-              <Route path="/Login/" element={<Login />} />
+              <Route path="/signup/" element={<Signup />} />
+              <Route path="/signup/email1" element={<SignupEmail1 />} />
+              <Route path="/signup/email2" element={<SignupEmail2 />} />
+              <Route path="/signup/info" element={<SignupInfo />} />
+              <Route path="/findpassword/" element={<FindPassword />} />
+              <Route path="/login/" element={<Login />} />
               <Route path="/golffield/" element={<Golffield />} />
 
               {/* 로그인 후 route 가능 */}
