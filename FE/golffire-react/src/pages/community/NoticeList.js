@@ -16,7 +16,7 @@ const Freeboard = () => {
     return (
         <Box p={4}>
             <Text fontSize="xl" fontWeight="bold" mb={4}>
-                Welcome to InquiryList!
+                N O T I C E
             </Text>
             <TableContainer>
                 <Table size={'lg'} variant='simple'>

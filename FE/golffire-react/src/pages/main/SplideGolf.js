@@ -4,10 +4,39 @@ import PartGolf from "./slide-part/PartGolf";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 
-import { NavLink } from "react-router-dom"
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { NavLink } from "react-router-dom";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 
-function Carousel({ props }) {
+function SplideGolf({ props }) {
+  const golfInfos = [
+    {
+      id: 1,
+      name: "하이골프클럽1",
+      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
+    },
+    {
+      id: 2,
+      name: "하이골프클럽2",
+      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
+    },
+    {
+      id: 3,
+      name: "하이골프클럽3",
+      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
+    },
+    {
+      id: 4,
+      name: "하이골프클럽4",
+      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
+    },
+    {
+      id: 5,
+      name: "하이골프클럽5",
+      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
+    },
+    // DB로부터 10개 정도 받아오기
+  ];
+
   return (
     <div id="splide-golf">
       <Splide
@@ -23,33 +52,25 @@ function Carousel({ props }) {
           focus: "center",
         }}
       >
-        <SplideSlide>
-          <PartGolf />
-        </SplideSlide>
-        <SplideSlide>
-          <PartGolf />
-        </SplideSlide>
-        <SplideSlide>
-          <PartGolf />
-        </SplideSlide>
-        <SplideSlide>
-          <PartGolf />
-        </SplideSlide>
-        <SplideSlide>
-          <PartGolf />
-        </SplideSlide>
+        
+        {golfInfos.map((info) => (
+          <SplideSlide key={info.id}>
+            <PartGolf name={info.name} address={info.address} />
+          </SplideSlide>
+        ))}
+
       </Splide>
 
-      <NavLink to="/golffield" style={({ isActive, isPending }) => {
-        return {
-          fontWeight: isActive ? "bold" : "",
-        };
-      }}>
-
+      <NavLink
+        to="/golffield"
+        style={({ isActive, isPending }) => {
+          return {
+            fontWeight: isActive ? "bold" : "",
+          };
+        }}
+      >
         <div className="text-and-icon">
-          <div className="text-and-icon-text">
-            더 많은 골프장 찾기
-          </div>
+          <div className="text-and-icon-text">더 많은 골프장 찾기</div>
           <div className="text-and-icon-icon">
             <ArrowForwardIcon boxSize={10} />
           </div>
@@ -59,4 +80,4 @@ function Carousel({ props }) {
   );
 }
 
-export default Carousel;
+export default SplideGolf;
