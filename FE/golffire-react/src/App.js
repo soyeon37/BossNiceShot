@@ -7,12 +7,13 @@ import { useState, useEffect } from 'react';
 import Navbar from './setup/routes-manager/Navbar';
 import Main from './pages/main/Main'
 import Solution from './pages/solution/Solution';
-
 import StudyList from './pages/study/StudyList';
-
 import Golffield from './pages/golffield/Golffield';
 import Accompany from "./pages/accompany/Accompany";
 import Community from './pages/community/Community';
+
+// Study
+import CreateRoom from './pages/study/CreateRoom';
 
 // Community
 import FreeBoardList from './pages/community/FreeBoardList';
@@ -81,10 +82,11 @@ function App() {
               }
 
               <Route path="/solution/" element={<Solution />} />
-
-              <Route path="/studylist/" element={<StudyList />} />
-
               <Route path="/accompany/" element={<Accompany />} />
+
+              {/* Study */}
+              <Route path="/studylist/" element={<StudyList />} />
+              <Route path="/createroom/" element={<CreateRoom />} />
 
               {/* Community */}
               <Route path="/community" element={<Community />} />
