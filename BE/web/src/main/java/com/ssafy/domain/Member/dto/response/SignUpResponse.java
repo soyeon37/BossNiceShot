@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 public record SignUpResponse (
         @Schema(description = "회원 아이디", example = "ssafy1234@ssafy.com")
-        String memberId,
+        String id,
         @Schema(description = "회원 비밀번호", example = "1234")
         String password,
         @Schema(description = "회원 닉네임", example = "김싸피")
@@ -28,7 +28,7 @@ public record SignUpResponse (
 ){
     public static SignUpResponse from(Member member){
         return new SignUpResponse(
-                member.getMemberId(),
+                member.getId(),
                 member.getPassword(),
                 member.getNickname(),
                 member.getTeeBox(),

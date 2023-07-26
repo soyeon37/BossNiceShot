@@ -31,7 +31,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	compileOnly 'org.projectlombok:lombok'
@@ -73,10 +73,15 @@ dependencies {
 	implementation 'org.webjars:sockjs-client:1.1.2'
 	implementation 'org.webjars:stomp-websocket:2.3.3-1'
 	implementation 'org.webjars:webjars-locator-core'
-	implementation 'org.webjars:bootstrap:3.3.7'
-}
 
-tasks.named('test') {
+	// mongoDB 설정
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+	//이메일 인증 API 설정
+	implementation 'com.sun.mail:smtp:2.0.1'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+}
+test {
 	useJUnitPlatform()
 }
 

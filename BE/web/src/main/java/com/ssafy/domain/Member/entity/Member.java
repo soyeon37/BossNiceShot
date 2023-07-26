@@ -1,8 +1,11 @@
 package com.ssafy.domain.Member.entity;
 
 import com.ssafy.domain.Member.dto.request.SignUpRequest;
+import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,10 +21,9 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Member implements UserDetails {
-
     @Id
-    @Column(updatable = false, unique = true, nullable = false)
-    private String memberId;
+    @Column(name = "id", updatable = false, unique = true, nullable = false)
+    private String id;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -48,6 +50,10 @@ public class Member implements UserDetails {
     @Column(name = "introduction", columnDefinition = "TEXT")
     private String introduction;
 
+    @Column(name = "is_kakao") // Kakao 계정이면 true
+    @ColumnDefault("false")
+    private Boolean isKakao;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default // roles table 자동 생성
     @Enumerated(EnumType.STRING)
@@ -63,7 +69,21 @@ public class Member implements UserDetails {
 
     public static Member from(SignUpRequest request, PasswordEncoder encoder){
         return Member.builder()
-                .memberId(request.memberId())
+                .id(request.id())
+                .password(encoder.encode(request.password()))
+                .nickname(request.nickname())
+                .teeBox(request.teeBox())
+                .topScore(request.topScore())
+                .averageScore(request.averageScore())
+                .level(request.level())
+                .image(request.image())
+                .introduction(request.introduction())
+                .build();
+    }
+
+    public static Member update(UpdateMemberRequest request, PasswordEncoder encoder, String id){
+        return Member.builder()
+                .id(id)
                 .password(encoder.encode(request.password()))
                 .nickname(request.nickname())
                 .teeBox(request.teeBox())
@@ -77,7 +97,7 @@ public class Member implements UserDetails {
 
     @Override
     public String getUsername() {
-        return memberId;
+        return id;
     }
 
     @Override
