@@ -10,6 +10,7 @@ import { ArrowForwardIcon } from "@chakra-ui/icons";
 function SplideAccompany({ props }) {
   const AccInfos = [
     {
+      id: 1,
       user_name: "김싸피",
       title: "같이 골프 칠 분 구합니다!",
       address: "서울특별시 동작구",
@@ -17,6 +18,7 @@ function SplideAccompany({ props }) {
       deadline: "2023.08.31",
     },
     {
+      id: 2,
       user_name: "이싸피",
       title: "같이 골프 칠 분?",
       address: "서울특별시 강남구",
@@ -24,6 +26,7 @@ function SplideAccompany({ props }) {
       deadline: "2023.08.31",
     },
     {
+      id: 3,
       user_name: "이싸피2",
       title: "같이 골프 칠 분?",
       address: "서울특별시 강남구",
@@ -31,6 +34,7 @@ function SplideAccompany({ props }) {
       deadline: "2023.08.31",
     },
     {
+      id: 4,
       user_name: "이싸피3",
       title: "같이 골프 칠 분?",
       address: "서울특별시 강남구",
@@ -38,6 +42,7 @@ function SplideAccompany({ props }) {
       deadline: "2023.08.31",
     },
     {
+      id: 5,
       user_name: "이싸피4",
       title: "같이 골프 칠 분?",
       address: "서울특별시 강남구",
@@ -61,10 +66,9 @@ function SplideAccompany({ props }) {
           focus: "center",
         }}
       >
-        {AccInfos.map((info, index) => (
-          <SplideSlide>
+        {AccInfos.map((info) => (
+          <SplideSlide key={info.id}>
             <PartAccompany
-              key={index}
               user_name={info.user_name}
               title={info.title}
               address={info.address}
