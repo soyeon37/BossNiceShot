@@ -1,47 +1,48 @@
-import './App.css';
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
-import { useCookies } from 'react-cookie';
-import { useState, useEffect } from 'react';
+import "./App.css";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useState, useEffect } from "react";
 
 // Navigation Bar
-import Navbar from './setup/routes-manager/Navbar';
-import Main from './pages/main/Main'
-import Solution from './pages/solution/Solution';
-
-import StudyList from './pages/study/StudyList';
-
-import Golffield from './pages/golffield/Golffield';
+import Navbar from "./setup/routes-manager/Navbar";
+import Main from "./pages/main/Main";
+import Solution from "./pages/solution/Solution";
+import StudyList from "./pages/study/StudyList";
+import Golffield from "./pages/golffield/Golffield";
 import Accompany from "./pages/accompany/Accompany";
-import Community from './pages/community/Community';
+import Community from "./pages/community/Community";
 
 // Community
-import FreeBoardList from './pages/community/FreeBoardList';
-import InquiryList from './pages/community/InquiryList';
-import NoticeList from './pages/community/NoticeList';
-import MyEditor from './pages/community/MyEditor';
-import FreeBoardDetail from './pages/community/FreeBoardDetail';
+import FreeBoardList from "./pages/community/FreeBoardList";
+import InquiryList from "./pages/community/InquiryList";
+import NoticeList from "./pages/community/NoticeList";
+import MyEditor from "./pages/community/MyEditor";
+import FreeBoardDetail from "./pages/community/FreeBoardDetail";
 
 // Sign-up & Log-in & Sign-out
 import KakaoLogin from "./setup/user-auth/KakaoLogin";
 import KakaoSignUp from "./setup/user-auth/KakaoSignUp";
-import Signup from './pages/signup/Signup';
-import SignupEmail1 from './pages/signup/SignupEmail1';
-import SignupEmail2 from './pages/signup/SignupEmail2';
-import SignupInfo from './pages/signup/SignupInfo';
-import FindPassword from './pages/login/FindPassword';
-import Login from './pages/login/Login';
+import Signup from "./pages/signup/Signup";
+import SignupEmail1 from "./pages/signup/SignupEmail1";
+import SignupEmail2 from "./pages/signup/SignupEmail2";
+import SignupInfo from "./pages/signup/SignupInfo";
+import FindPassword from "./pages/login/FindPassword";
+import Login from "./pages/login/Login";
 import Signout from "./pages/mypage/Signout";
 
 // Profile
 import Profile from "./pages/mypage/Profile";
 import EditProfile from "./pages/mypage/EditProfile";
-import EditPassword from './pages/mypage/EditPassword';
+import EditPassword from "./pages/mypage/EditPassword";
 
-import { ChakraProvider } from '@chakra-ui/react'
+// Error
+import ErrorPage from "./setup/error-manager/ErrorPage";
+
+import { ChakraProvider } from "@chakra-ui/react";
 
 function App() {
   // cookie의 user 정보 확인
-  const [cookies] = useCookies(['user']);
+  const [cookies] = useCookies(["user"]);
   // 로그인 여부를 나타내는 변수, false로 초기화
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -59,7 +60,7 @@ function App() {
         <div className="App">
           <Navbar />
 
-          <div style={{ flexGrow: 1, overflow: 'auto' }}>
+          <div style={{ flexGrow: 1, overflow: "auto" }}>
             <Routes>
               {/* Kakao Auth */}
               <Route path="/Auth/Kakao/Signup/Callback" element={<KakaoSignUp />} />
@@ -79,8 +80,7 @@ function App() {
               {/* <Route
                 path="/solution/"
                 element={isLoggedIn ? <Solution /> : <Navigate to="/Login" />}
-              /> */
-              }
+              /> */}
 
               <Route path="/solution/" element={<Solution />} />
 
@@ -102,9 +102,10 @@ function App() {
               <Route path="/mypage/editpassword/" element={<EditPassword />} />
               <Route path="/mypage/signout/" element={<Signout />} />
 
+              {/* Error */}
+              <Route path="/error" element={<ErrorPage />} />
             </Routes>
           </div>
-
         </div>
       </BrowserRouter>
     </ChakraProvider>
