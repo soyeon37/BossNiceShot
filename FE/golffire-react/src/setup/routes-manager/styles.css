@@ -39,16 +39,3 @@ body {
     align-items: center;
     padding: .25rem;
 }
-
-/* 활성화된 페이지 nav bar에서 볼드채 혹은 배경 컬러 변경 */
-.nav li.active {
-    color: rgba(89, 255, 0, 0.516);
-}
-
-/* .nav li:hover {
-    color: #5d2badf9;
-} */
-
-.mypagemenu:hover {
-    color:black;
-}
