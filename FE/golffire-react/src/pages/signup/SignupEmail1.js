@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
-
+import axios from "axios";
+;
 const SignupEmail1 = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,6 +12,44 @@ const SignupEmail1 = () => {
   const navigate = useNavigate();
   const handleEmailVerify = () => {
     navigate("/Signup/email2");
+  };
+
+  const handleCheckEmail = () => {
+    const data = {
+      id: email
+    }
+    const apiUrl = "http://localhost:8080/members/checkEmail";
+
+    axios
+    .post(apiUrl, data)
+    .then((response) => {
+      if(response.data.data.resultMessage === "FAIL"){
+        console.log("이메일이 중복되었습니다.");
+        alert("이미 존재하는 이메일입니다.");
+      } else{
+        console.log("유효한 이메일입니다.");
+        handleSendEmail(email);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    })
+  };
+
+  const handleSendEmail = (email) => {
+    const data = {
+      id: email
+    }
+    const apiUrl = "http://localhost:8080/members/sendEmailVerification";
+
+    axios
+    .post(apiUrl, data)
+    .then((response) => {
+      const authNum = response.data.data.authNum; // 인증번호
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    })
   };
 
   return (
@@ -35,6 +74,7 @@ const SignupEmail1 = () => {
             />
           </FormControl>
           <Button
+            onClick={handleCheckEmail}
             style={{
               height: "2.5rem",
               width: "100%",
