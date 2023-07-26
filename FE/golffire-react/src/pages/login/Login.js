@@ -5,12 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 // Style
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-} from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import "./Login.css";
 import golfImage from "../../assets/source/icons/golf.png";
 
@@ -44,9 +39,9 @@ const Login = () => {
         axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
         // 쿠키에 정보 저장
-        setCookie('user_email', data.memberId, { path: '/' });
-        setCookie('access_token', access_token, { path: '/' });
-        setCookie('refresh_token', refresh_token, { path: '/' });
+        setCookie("user_email", data.memberId, { path: "/" });
+        setCookie("access_token", access_token, { path: "/" });
+        setCookie("refresh_token", refresh_token, { path: "/" });
 
         console.log(response.data); // Debug Code !!
 
@@ -57,22 +52,21 @@ const Login = () => {
         console.error("Error:", error); // Debug Code !!
 
         // 로그인 실패를 화면에 표시하는 코드 필요 !!
+        navigate("/error");
       });
   };
 
   const handleKakaoLogin = () => {
     console.log("카카오 로그인 시도"); // Debug Code !!
-    
-    const REST_API_KEY = 'cd0c9cf0cf49dae9a987aebb769ee0d6';
-    const REDIRECT_URI = 'http://localhost:3000/auth/kakao/login/callback'
-    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
-    window.location.href=kakaoUrl;
 
-  }
+    const REST_API_KEY = "cd0c9cf0cf49dae9a987aebb769ee0d6";
+    const REDIRECT_URI = "http://localhost:3000/auth/kakao/login/callback";
+    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    window.location.href = kakaoUrl;
+  };
 
   return (
     <div id="Login">
-
       {/* 그림 공간 */}
       <div id="login-banner">
         <div id="login-banner-context">
@@ -90,11 +84,9 @@ const Login = () => {
       {/* 기능 공간 */}
       <div id="login-func">
         <div id="login-box">
-          <div id="box-title">
-            로그인
-          </div>
+          <div id="box-title">로그인</div>
           <div id="box-content">
-            <FormControl maxW={'sm'}>
+            <FormControl maxW={"sm"}>
               <FormLabel>이메일</FormLabel>
               <Input
                 type="email"
@@ -104,7 +96,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </FormControl>
-            <FormControl maxW={'sm'} paddingTop={'2%'}>
+            <FormControl maxW={"sm"} paddingTop={"2%"}>
               <FormLabel>비밀번호</FormLabel>
               <Input
                 type="password"
@@ -126,9 +118,12 @@ const Login = () => {
                 borderRadius: "30px",
                 background: "#B8F500",
               }}
-              maxW={'sm'}
-              marginBottom={'2.5rem'}
-            > 로그인</Button>
+              maxW={"sm"}
+              marginBottom={"2.5rem"}
+            >
+              {" "}
+              로그인
+            </Button>
 
             <Button
               onClick={handleKakaoLogin}
@@ -140,20 +135,21 @@ const Login = () => {
                 borderRadius: "30px",
                 background: "#FFF500",
               }}
-              maxW={'sm'}
-              marginBottom={'2.5rem'}
-            > 카카오톡으로 로그인하기</Button>
-
+              maxW={"sm"}
+              marginBottom={"2.5rem"}
+            >
+              {" "}
+              카카오톡으로 로그인하기
+            </Button>
           </div>
           <div id="box-footer">
-            <NavLink to="/findpassword" >비밀번호 찾기</NavLink>
+            <NavLink to="/findpassword">비밀번호 찾기</NavLink>
             <br />
             <NavLink to="/signup">회원가입 하기</NavLink>
           </div>
         </div>
       </div>
-
-    </div >
+    </div>
   );
 };
 
