@@ -1,20 +1,21 @@
-
 import React, { useState } from "react";
 
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
+// Kakao
+// import Kakao from "../../setup/user-auth/Kakao";
+
+// Style
 import {
   Button,
   FormControl,
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-
 import "./Login.css";
 import golfImage from "../../assets/source/icons/golf.png";
-
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -63,13 +64,15 @@ const Login = () => {
   };
 
   const handleKakaoLogin = () => {
-    console.log("카카오 로그인 시도");
+    console.log("카카오 로그인 시도"); // Debug Code !!
+
   }
 
   return (
     <div id="Login">
+
+      {/* 그림 공간 */}
       <div id="login-banner">
-        {/* 그림 공간 */}
         <div id="login-banner-context">
           <div id="banner-letter">
             동료들이 당신을
@@ -84,8 +87,6 @@ const Login = () => {
 
       {/* 기능 공간 */}
       <div id="login-func">
-        {/*   <Input placeholder='default placeholder' /> */}
-
         <div id="login-box">
           <div id="box-title">
             로그인
