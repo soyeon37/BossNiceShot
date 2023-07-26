@@ -11,9 +11,23 @@ const SignupInfo = () => {
   };
 
   const navigate = useNavigate();
+  
   const handleEmailFinish = () => {
+    // const data = {
+    //   id: email,
+    //   password: password,
+    //   nickname: nickname,
+    //   information: information,
+    //   averageScore: averageScore,
+    //   topScore: topScore,
+    //   level: level,
+    //   teeBox: teeBox,
+    //   image: image,
+    //   isKakao: false,
+    // }
+    
     navigate("/");
-  };
+  }
 
   return (
     <div id="Signup">
