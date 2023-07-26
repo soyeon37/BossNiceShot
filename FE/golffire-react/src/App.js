@@ -63,12 +63,12 @@ function App() {
 
               {/* 항상 route 가능 */}
               <Route path="/" element={<Main />} />
-              <Route path="/Signup/" element={<Signup />} />
-              <Route path="/Signup/email1" element={<SignupEmail1 />} />
-              <Route path="/Signup/email2" element={<SignupEmail2 />} />
-              <Route path="/Signup/info" element={<SignupInfo />} />
-              <Route path="/FindPassword/" element={<FindPassword />} />
-              <Route path="/Login/" element={<Login />} />
+              <Route path="/signup/" element={<Signup />} />
+              <Route path="/signup/email1" element={<SignupEmail1 />} />
+              <Route path="/signup/email2" element={<SignupEmail2 />} />
+              <Route path="/signup/info" element={<SignupInfo />} />
+              <Route path="/findpassword/" element={<FindPassword />} />
+              <Route path="/login/" element={<Login />} />
               <Route path="/golffield/" element={<Golffield />} />
 
               {/* 로그인 후 route 가능 */}

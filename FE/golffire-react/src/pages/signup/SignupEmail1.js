@@ -11,7 +11,7 @@ const SignupEmail1 = () => {
 
   const navigate = useNavigate();
   const handleEmailVerify = () => {
-    navigate("/Signup/email2");
+    navigate("/signup/email2");
   };
 
   const handleCheckEmail = () => {

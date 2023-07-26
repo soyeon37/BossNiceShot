@@ -55,7 +55,7 @@ const Kakao = (props) => {
         const nickname = response.data.kakao_account.profile.nickname;
         
         // sign-up 페이지로 회원정보를 가지고 돌아가기
-        navigate('/signup', {
+        navigate('/signup/', {
           state: {
             email: email,
             image: image,

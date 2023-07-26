@@ -144,7 +144,7 @@ const Login = () => {
 
           </div>
           <div id="box-footer">
-            <NavLink to="/FindPassword" >비밀번호 찾기</NavLink>
+            <NavLink to="/findpassword" >비밀번호 찾기</NavLink>
             <br />
             <NavLink to="/signup">회원가입 하기</NavLink>
           </div>
