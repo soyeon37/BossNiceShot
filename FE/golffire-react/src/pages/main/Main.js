@@ -1,17 +1,23 @@
 import React from "react";
 import MainBanner from "./MainBanner";
 import SplideGolf from "./SplideGolf";
+import SplideAccompany from "./SplideAccompany";
+import SplideLearning from "./SplideLearning";
 import Chatbot from "./Chatbot";
 
 import "./Main.css";
 
 function Main() {
   return (
-    <div id="Home" style={{ height: "580px" }}>
+    <div id="Home">
       <MainBanner />
+
       <SplideGolf />
-      {/* <SplideLearning /> */}
-      {/* <SplideAccompany /> */}
+      <hr />
+      <SplideLearning />
+      <hr />
+      <SplideAccompany />
+
       <Chatbot />
     </div>
   );
