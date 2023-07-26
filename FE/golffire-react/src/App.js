@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import Navbar from "./setup/routes-manager/Navbar";
 import Main from "./pages/main/Main";
 import Solution from "./pages/solution/Solution";
-import Learning from "./pages/learning/Learning";
+import StudyList from "./pages/study/StudyList";
 import Golffield from "./pages/golffield/Golffield";
 import Accompany from "./pages/accompany/Accompany";
 import Community from "./pages/community/Community";
@@ -83,7 +83,9 @@ function App() {
               /> */}
 
               <Route path="/solution/" element={<Solution />} />
-              <Route path="/learning/" element={<Learning />} />
+
+              <Route path="/studylist/" element={<StudyList />} />
+
               <Route path="/accompany/" element={<Accompany />} />
 
               {/* Community */}
@@ -92,7 +94,7 @@ function App() {
               <Route path="/freeboardlist" element={<FreeBoardList />} />
               <Route path="/inquirylist" element={<InquiryList />} />
               <Route path="/noticelist" element={<NoticeList />} />
-              <Route path="/freeboard/:idx" element={<FreeBoardDetail />} />
+              {/* <Route path="/freeboard/:idx" element={<FreeBoardDetail />} /> */}
 
               {/* Profile */}
               <Route path="/mypage/" element={<Profile />} />
