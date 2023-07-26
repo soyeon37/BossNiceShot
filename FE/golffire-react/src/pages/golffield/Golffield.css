@@ -1,58 +1,59 @@
 #Golffield {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Search CSS */
 #search-box {
-    margin: 1%;
-    width: 80%;
+  margin: 1%;
+  width: 80%;
 
-    white-space: pre-wrap;
-    word-break: break-all;
-    overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow: auto;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#search-box>div {
-    width: 50%;
-    margin: 1%;
+#search-box > div {
+  width: 50%;
+  margin: 1%;
 }
 
 /* Result CSS */
 #result-box {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 100%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #kakao-map {
-    height: 100%;
-    width: 100%;
+  height: 100%;
+  width: 50%;
 }
 
 #map {
-    /* height: 100%;
-    width: 50%; */
-    height: 900px;
-    width: 900px;
+  height: 900px;
+  width: 100%;
 }
 
 #result-list {
-    display: grid;
-    grid-template-columns: repeat(2, 200px); /* Two columns with 50px width each */
-    gap: 10px; /* Add some gap between images (optional) */
-    max-height: 100%; /* Adjust the maximum height as needed */
-    overflow-y: scroll;
+  height: 100%;
+  width: 50%;
+
+  display: grid;
+  grid-template-columns: repeat(1, 100%); /* Two columns with 50px width each */
+  gap: 10px; /* Add some gap between images (optional) */
+  max-height: 100%; /* Adjust the maximum height as needed */
+  overflow-y: scroll;
 }
