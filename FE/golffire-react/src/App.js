@@ -20,7 +20,7 @@ import MyEditor from './pages/community/MyEditor';
 import FreeBoardDetail from './pages/community/FreeBoardDetail';
 
 // Sign-up & Log-in & Sign-out
-import Kakao from './pages/kakao/Kakao';
+import Kakao from './setup/user-auth/Kakao';
 import Signup from './pages/signup/Signup';
 import SignupEmail1 from './pages/signup/SignupEmail1';
 import SignupEmail2 from './pages/signup/SignupEmail2';
