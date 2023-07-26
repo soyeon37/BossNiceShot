@@ -6,6 +6,7 @@ import com.ssafy.domain.Member.dto.request.*;
 import com.ssafy.domain.Member.dto.response.SignInResponse;
 import com.ssafy.domain.Member.service.MemberService;
 import com.ssafy.common.api.ApiResponse;
+import com.ssafy.domain.Member.service.OAuthService;
 import com.ssafy.domain.Member.service.RefreshTokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -31,7 +32,21 @@ import java.security.Principal;
 public class MemberController {
     private final MemberService memberService;
     private final RefreshTokenService refreshTokenService;
+    private final OAuthService oAuthService;
 
+    @Operation(summary = "이메일 중복 확인", description = "이메일 중복을 확인한다.")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 실패"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "사용자 없음"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
+    })
+
+    @PostMapping("/checkEmail")
+    public ApiResponse checkEmail(@RequestBody CheckEmailRequest request ){
+        log.info("이메일 전송 시작");
+        return ApiResponse.success(memberService.checkEmail(request));
+    }
     @Operation(summary = "이메일 전송", description = "이메일을 전송하여 인증번호를 발급한다.")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
@@ -45,6 +60,8 @@ public class MemberController {
         log.info("이메일 전송 시작");
         return ApiResponse.success(memberService.sendEmail(request));
     }
+
+
 
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
@@ -158,6 +175,13 @@ public class MemberController {
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }
 
+    @PostMapping("/code")
+    public void kakaoCallBack(@RequestBody KakaoCallBackRequest request){
+        System.out.println(request.code());
+        String code = request.code();
+        log.info(code);
+        oAuthService.getKakaoAccessToken(code);
+    }
     //
 //    @PostMapping("/authorize")
 //    public ApiResponse authorize(@RequestHeader("Authorization") String accessToken, Authentication authentication){

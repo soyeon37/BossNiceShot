@@ -26,7 +26,7 @@ const Login = () => {
   const handleEmailLogin = () => {
     // 로그인 정보
     const data = {
-      memberId: email,
+      id: email,
       password: password,
     };
 
@@ -64,6 +64,11 @@ const Login = () => {
 
   const handleKakaoLogin = () => {
     console.log("카카오 로그인 시도");
+    const REST_API_KEY = 'cd0c9cf0cf49dae9a987aebb769ee0d6';
+    const REDIRECT_URI = 'http://localhost:3000/auth/kakao/login/callback'
+    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+    window.location.href=kakaoUrl;
+
   }
 
   return (

@@ -6,14 +6,11 @@ import com.ssafy.Exception.model.TokenNotFoundException;
 import com.ssafy.Exception.model.UserAuthException;
 import com.ssafy.Exception.model.UserException;
 import com.ssafy.config.security.jwt.JwtTokenProvider;
-import com.ssafy.domain.Member.dto.request.SendEmailRequest;
-import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
+import com.ssafy.domain.Member.dto.request.*;
 import com.ssafy.domain.Member.dto.response.*;
 import com.ssafy.domain.Member.entity.Member;
 import com.ssafy.domain.Member.repository.MemberRepository;
 import com.ssafy.config.security.jwt.TokenInfo;
-import com.ssafy.domain.Member.dto.request.SignInRequest;
-import com.ssafy.domain.Member.dto.request.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -46,9 +43,7 @@ public class MemberService{
     @Transactional
     public SignUpResponse registMember(SignUpRequest request) {
         log.info(request.toString());
-        if(findByMemberId(request.id())!= null){
-            throw new IllegalArgumentException("이미 사용중인 아이디입니다.");
-        }else if(findByNickname(request.nickname())!=null){
+        if(findByNickname(request.nickname())!=null){
             throw new IllegalArgumentException("이미 사용중인 닉네임입니다.");
         }
         Member member = memberRepository.save(Member.from(request, encoder));
@@ -60,6 +55,7 @@ public class MemberService{
         return SignUpResponse.from(member);
     }
 
+    @Transactional
     public SignInResponse signIn(SignInRequest request) {
 
         // 1. Login ID/PW 를 기반으로 Authentication 객체 생성
@@ -141,6 +137,7 @@ public class MemberService{
     /**
      * RefreshToken으로 AccessToken 재발급
      */
+
     private ReIssueResponse createAccessToken(String refreshToken, Authentication authentication){
         // 5. RefreshToken의 만료 기간 확인
         if (jwtTokenProvider.checkExpiredToken(refreshToken)){
@@ -152,6 +149,19 @@ public class MemberService{
         return ReIssueResponse.from(jwtTokenProvider.generateAccessToken(authentication).getAccessToken(),"GENERAL_FAILURE");
     }
 
+    @Transactional
+    public CheckEmailResponse checkEmail(CheckEmailRequest request){
+        String resultMessage = "SUCCESS";
+        log.info(request.id());
+        Optional<Member> member = memberRepository.findById(request.id());
+        if(member.isPresent()){
+            resultMessage = "FAIL";
+        }
+
+        return new CheckEmailResponse(resultMessage);
+    }
+
+    @Transactional
     public SendEmailResponse sendEmail(SendEmailRequest request) {
         // 111111 ~ 999999 6자리 랜덤 난수 생성
         String authString = makeAuthString();
@@ -178,13 +188,14 @@ public class MemberService{
         return generatedString;
     }
 
+    @Transactional
     public Member findByMemberId(String memberId) {
         Member member = memberRepository.findById(memberId).orElseThrow(
                 () -> new UserAuthException(ExceptionMessage.USER_NOT_FOUND)
         );
         return member;
     }
-
+    @Transactional
     public Member findByNickname(String nickname) {
         Member member = memberRepository.findByNickname(nickname).orElseThrow(
                 () -> new UserAuthException(ExceptionMessage.USER_NOT_FOUND)

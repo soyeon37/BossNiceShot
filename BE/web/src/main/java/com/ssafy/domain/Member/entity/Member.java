@@ -1,5 +1,6 @@
 package com.ssafy.domain.Member.entity;
 
+import com.ssafy.audit.BaseTime;
 import com.ssafy.domain.Member.dto.request.SignUpRequest;
 import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
 import jakarta.persistence.*;
@@ -19,7 +20,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Member implements UserDetails {
+public class Member extends BaseTime implements UserDetails{
     @Id
     @Column(name = "id", updatable = false, unique = true, nullable = false)
     private String id;
