@@ -5,10 +5,15 @@ import {
   Button,
 } from "@chakra-ui/react";
 import "./Signup.css";
+import axios from "axios";
 
 function Signup() {
-  const handleKakaoLogin = () => {
-    console.log("카카오 로그인 시도");
+  const REST_API_KEY = 'cd0c9cf0cf49dae9a987aebb769ee0d6';
+  const REDIRECT_URI = 'http://localhost:3000/auth/kakao/signup/callback'
+  const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+  const handleKakaoSignup = () => {
+    console.log("카카오 회원가입 시도");
+    window.location.href=kakaoUrl
   }
 
   return (
@@ -36,7 +41,7 @@ function Signup() {
       </div>
       <div>
         <Button
-          onClick={handleKakaoLogin}
+          onClick={handleKakaoSignup}
           style={{
             height: "2.5rem",
             width: "100%",

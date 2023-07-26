@@ -20,7 +20,8 @@ import MyEditor from './pages/community/MyEditor';
 import FreeBoardDetail from './pages/community/FreeBoardDetail';
 
 // Sign-up & Log-in & Sign-out
-import Kakao from './pages/kakao/Kakao';
+import KakaoSignUp from './pages/kakao/KakaoSignUp';
+import KakaoLogin from './pages/kakao/KakaoLogin';
 import Signup from './pages/signup/Signup';
 import SignupEmail1 from './pages/signup/SignupEmail1';
 import SignupEmail2 from './pages/signup/SignupEmail2';
@@ -59,7 +60,8 @@ function App() {
           <div style={{ flexGrow: 1, overflow: 'auto' }}>
             <Routes>
               {/* Kakao Auth */}
-              <Route path="/Auth/Kakao/Callback" element={<Kakao />} />
+              <Route path="/Auth/Kakao/Signup/Callback" element={<KakaoSignUp />} />
+              <Route path="/Auth/Kakao/Login/Callback" element={<KakaoLogin />} />
 
               {/* 항상 route 가능 */}
               <Route path="/" element={<Main />} />

@@ -1,18 +1,36 @@
 import { React, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
 import { Button, FormControl, FormLabel, Input, Radio, RadioGroup, VStack } from "@chakra-ui/react";
+import { EmailIcon } from "@chakra-ui/icons";
 
 const SignupInfo = () => {
+  const { state } = useLocation();
   const [selectedOption, setSelectedOption] = useState(null);
-
+  const [email, setEmail] = useState(state.email);
+  const [nickname, setNickname] = useState(state.nickname);
+  const [image, setImage] = useState(state.image);
   const handleOptionChange = (value) => {
     setSelectedOption(value);
   };
 
   const navigate = useNavigate();
   const handleEmailFinish = () => {
-    navigate("/");
+    console.log(email);
+    
+    // const data = {
+    //   id: email,
+    //   password: password,
+    //   nickname: nickname,
+    //   information: information,
+    //   averageScore: averageScore,
+    //   topScore: topScore,
+    //   level: level,
+    //   teeBox: teeBox,
+    //   image: image,
+    //   isKakao: false,
+    // }
+    // navigate("/");
   };
 
   return (

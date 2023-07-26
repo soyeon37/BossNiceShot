@@ -49,13 +49,15 @@ public class SecurityConfig {
             "/swagger-ui/index.html",
             "/solution/detect",
             "/members/**",
-            "/chat/**"
+            "/chat/**",
+
     };
     private static final String[] USER_LIST = {
             "/members/sign-in",
             "/members/update",
             "/members/logout",
-            "/members/delete"
+            "/members/delete",
+            "/oauth/code"
     };
 
     @Bean
