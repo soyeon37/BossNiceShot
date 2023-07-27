@@ -1,5 +1,8 @@
 package com.ssafy.config.security.jwt;
 
+import com.ssafy.Exception.message.ExceptionMessage;
+import com.ssafy.Exception.model.TokenCheckFailException;
+import com.ssafy.Exception.model.TokenNotFoundException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -78,7 +81,7 @@ public class JwtTokenProvider {
         Claims claims = parseClaims(accessToken);
 
         if (claims.get("auth") == null) {
-            throw new IllegalArgumentException("권한 정보가 없는 토큰입니다.");
+            throw new TokenNotFoundException(ExceptionMessage.AUTH_NOT_FOUND);
         }
         // 클레임에서 권한 정보 가져오기
         Collection<? extends GrantedAuthority> authorities =
@@ -98,14 +101,17 @@ public class JwtTokenProvider {
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) { // 잘못된 JWT 구조
             log.info("Invalid JWT Token", e);
+            throw new TokenCheckFailException(ExceptionMessage.FAIL_TOKEN_CHECK);
         } catch (ExpiredJwtException e) { // JWT의 유효기간이 초과
             log.info("Expired JWT Token", e);
+            throw new TokenCheckFailException(ExceptionMessage.TOKEN_VALID_TIME_EXPIRED);
         } catch (UnsupportedJwtException e) { // JWT가 예상하는 형식과 다른 형식이거나 구성
             log.info("Unsupported JWT Token", e);
+            throw new TokenCheckFailException(ExceptionMessage.FAIL_TOKEN_CHECK);
         } catch (IllegalArgumentException e) {
             log.info("JWT claims string is empty.", e);
+            throw new TokenCheckFailException(ExceptionMessage.TOKEN_NOT_FOUND);
         }
-        return false;
     }
 
     public boolean checkExpiredToken(String token){

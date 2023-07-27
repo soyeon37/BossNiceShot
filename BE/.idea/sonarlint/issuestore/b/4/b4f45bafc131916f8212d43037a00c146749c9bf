@@ -14,14 +14,25 @@ java:S1710k"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—ü
 =======
 t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ø¬ÄÜýÿÿÿÿ
 W
-java:S1710'"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
+java:S1710""<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
 W
-java:S17104"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
+java:S1710/"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
 W
-java:S1710A"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
+java:S1710<"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
 W
-java:S1710\"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
+java:S1710P"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ
 ^
+<<<<<<< HEAD
 java:S1710q"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ8“é´˜1
 V	java:S125Q"<This block of commented-out lines of code should be removed.(Â™†úÿÿÿÿ
 >>>>>>> 0364be4372bdac3cd80b07a3e5ad6cba8a224404
+=======
+java:S1710g"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ8“é´˜1
+^
+java:S1710t"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ8ÐýàØ˜1
+_
+java:S1710€"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ8ÐýàØ˜1
+_
+java:S1710"<Remove the 'ApiResponses' wrapper from this annotation group(Å¬†—üÿÿÿÿ8ÐýàØ˜1
+^	java:S125 "<This block of commented-out lines of code should be removed.(ËŠ¼¨ÿÿÿÿÿ8îþàØ˜1
+>>>>>>> ca2f3614c54a4c24b24f915f4c2325bc9bbd2912
