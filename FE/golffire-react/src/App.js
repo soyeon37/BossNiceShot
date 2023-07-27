@@ -14,6 +14,7 @@ import Community from './pages/community/Community';
 
 // Study
 import CreateRoom from './pages/study/CreateRoom';
+import CoachingRoom from './pages/study/CoachingRoom';
 
 // Community
 import FreeBoardList from './pages/community/FreeBoardList';
@@ -87,6 +88,8 @@ function App() {
               {/* Study */}
               <Route path="/studylist/" element={<StudyList />} />
               <Route path="/createroom/" element={<CreateRoom />} />
+              <Route path="/coachingroom/" element={<CoachingRoom />} />
+
 
               {/* Community */}
               <Route path="/community" element={<Community />} />
