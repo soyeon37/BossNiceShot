@@ -4,6 +4,8 @@ import com.ssafy.domain.Member.dto.request.SignUpRequest;
 import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,6 +49,10 @@ public class Member implements UserDetails {
 
     @Column(name = "introduction", columnDefinition = "TEXT")
     private String introduction;
+
+    @Column(name = "is_kakao") // Kakao 계정이면 true
+    @ColumnDefault("false")
+    private Boolean isKakao;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default // roles table 자동 생성

@@ -1,14 +1,0 @@
-
-<<<<<<< HEAD
-t
-java:S1488\"^Immediately return this expression instead of assigning it to the temporary variable "member".(ûŸ‹ß
-t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¤¿ôåþÿÿÿÿ
-=======
-|
-java:S1488·"^Immediately return this expression instead of assigning it to the temporary variable "member".(ûŸ‹ß8”¯Éµ˜1
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¤¿ôåþÿÿÿÿ8•¯Éµ˜1
-F
-java:S1905¥")Remove this unnecessary cast to "String".(£Œ8ª¯Éµ˜1
-<
-java:S2119¯"Save and re-use this "Random".(¡Å”¦8¬¯Éµ˜1
->>>>>>> 0364be4372bdac3cd80b07a3e5ad6cba8a224404
