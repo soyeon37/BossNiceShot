@@ -27,4 +27,10 @@ public class Coaching extends Study {
         this.reservedTime = reservedTime;
         this.capacity = capacity;
     }
+
+    public void update(String title, String description, Integer password, LocalDateTime reservedTime, int capacity) {
+        super.update(title, description, password);
+        this.reservedTime = reservedTime;
+        this.capacity = capacity;
+    }
 }

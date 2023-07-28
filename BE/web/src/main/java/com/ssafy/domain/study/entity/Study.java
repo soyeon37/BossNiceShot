@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -32,10 +35,19 @@ public class Study extends BaseTime {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "study", cascade = CascadeType.ALL)
+    private List<StudyUser> users = new ArrayList<>();
+
     public Study(String title, String description, Integer password, Member member) {
         this.title = title;
         this.description = description;
         this.password = password;
         this.member = member;
+    }
+
+    public void update(String title, String description, Integer password) {
+        this.title = title;
+        this.description = description;
+        this.password = password;
     }
 }
