@@ -37,7 +37,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if(request.getRequestURI().equals("/members/sign-in") || request.getRequestURI().equals("/members/sign-up")
                 || request.getRequestURI().equals("/members/sendEmailVerification")
                 || request.getRequestURI().equals("/members/checkEmail")
-                || request.getRequestURI().equals("/members/code")){
+                || request.getRequestURI().equals("/members/code")
+                || request.getRequestURI().equals("/members/checkNickname")){
             log.info("권한 허가");
             chain.doFilter(request, response);
             return;

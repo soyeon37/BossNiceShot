@@ -8,12 +8,14 @@ import "./Signup.css";
 import axios from "axios";
 
 function Signup() {
-  const REST_API_KEY = 'cd0c9cf0cf49dae9a987aebb769ee0d6';
+
+  const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
   const REDIRECT_URI = 'http://localhost:3000/auth/kakao/signup/callback'
   const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
+
   const handleKakaoSignup = () => {
-    console.log("카카오 회원가입 시도");
-    window.location.href=kakaoUrl
+    // console.log("카카오 로그인"); // Debug !!
+    window.location.href = kakaoUrl;
   }
 
   return (
@@ -24,7 +26,7 @@ function Signup() {
         </h1>
       </div>
       <div>
-        <NavLink to="/Signup/email1" >
+        <NavLink to="/signup/email1" >
           <Button
             style={{
               height: "2.5rem",

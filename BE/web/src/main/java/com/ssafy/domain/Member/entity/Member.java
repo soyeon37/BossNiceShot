@@ -25,7 +25,7 @@ public class Member extends BaseTime implements UserDetails{
     @Column(name = "id", updatable = false, unique = true, nullable = false)
     private String id;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @Column(name = "nickname")
@@ -68,17 +68,33 @@ public class Member extends BaseTime implements UserDetails{
     }
 
     public static Member from(SignUpRequest request, PasswordEncoder encoder){
-        return Member.builder()
-                .id(request.id())
-                .password(encoder.encode(request.password()))
-                .nickname(request.nickname())
-                .teeBox(request.teeBox())
-                .topScore(request.topScore())
-                .averageScore(request.averageScore())
-                .level(request.level())
-                .image(request.image())
-                .introduction(request.introduction())
-                .build();
+        if(request.isKakao()){
+            return Member.builder()
+                    .id(request.id())
+                    .password(request.password())
+                    .nickname(request.nickname())
+                    .teeBox(request.teeBox())
+                    .topScore(request.topScore())
+                    .averageScore(request.averageScore())
+                    .level(request.level())
+                    .image(request.image())
+                    .introduction(request.introduction())
+                    .isKakao(true)
+                    .build();
+        }else{
+            return Member.builder()
+                    .id(request.id())
+                    .password(encoder.encode(request.password()))
+                    .nickname(request.nickname())
+                    .teeBox(request.teeBox())
+                    .topScore(request.topScore())
+                    .averageScore(request.averageScore())
+                    .level(request.level())
+                    .image(request.image())
+                    .introduction(request.introduction())
+                    .isKakao(false)
+                    .build();
+        }
     }
 
     public static Member update(UpdateMemberRequest request, PasswordEncoder encoder, String id){

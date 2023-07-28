@@ -13,6 +13,7 @@ import com.ssafy.domain.Member.repository.MemberRepository;
 import com.ssafy.config.security.jwt.TokenInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.metamodel.model.domain.internal.MapMember;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.mail.MailException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,9 +44,6 @@ public class MemberService{
     @Transactional
     public SignUpResponse registMember(SignUpRequest request) {
         log.info(request.toString());
-        if(findByNickname(request.nickname())!=null){
-            throw new IllegalArgumentException("이미 사용중인 닉네임입니다.");
-        }
         Member member = memberRepository.save(Member.from(request, encoder));
         try {
             memberRepository.flush();
@@ -55,6 +53,17 @@ public class MemberService{
         return SignUpResponse.from(member);
     }
 
+//    @Transactional
+//    public SignInResponse kakaoSignIn(SignInRequest request){
+//        // 1. 유저 존재 유무 확인
+//        Optional<Member> member = memberRepository.findById(request.id());
+//        if(member.isEmpty()) {
+//            throw new UserAuthException(ExceptionMessage.USER_NOT_FOUND);
+//        }else {
+//
+//        }
+//        return new SignInResponse();
+//    }
     @Transactional
     public SignInResponse signIn(SignInRequest request) {
 
@@ -79,7 +88,7 @@ public class MemberService{
         // 3. 인증 정보를 기반으로 JWT 토큰 생성
         TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
 
-        return new SignInResponse(member.get().getPassword(), tokenInfo);
+        return new SignInResponse(member.get().getId(), tokenInfo);
     }
 
     @Transactional
@@ -157,8 +166,19 @@ public class MemberService{
         if(member.isPresent()){
             resultMessage = "FAIL";
         }
-
+        log.info("resultMessage={}", resultMessage);
         return new CheckEmailResponse(resultMessage);
+    }
+    @Transactional
+    public CheckNicknameResponse checkNickname(CheckNicknameRequest request) {
+        String resultMessage = "SUCCESS";
+        log.info(request.nickname());
+        Optional<Member> member = memberRepository.findByNickname(request.nickname());
+        if(member.isPresent()){
+            resultMessage = "FAIL";
+        }
+        log.info("resultMessage={}", resultMessage);
+        return new CheckNicknameResponse(resultMessage);
     }
 
     @Transactional
@@ -202,4 +222,6 @@ public class MemberService{
         );
         return member;
     }
+
+
 }
