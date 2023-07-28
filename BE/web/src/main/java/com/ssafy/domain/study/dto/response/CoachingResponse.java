@@ -11,6 +11,7 @@ public record CoachingResponse(@NotNull Long id,
                                Integer password,
                                @NotNull LocalDateTime reservedTime,
                                @NotNull Integer capacity,
+                               @NotNull Integer attendeeCount,
                                @NotNull String coachId,
                                @NotNull String coachNickname){
     public static CoachingResponse from(Coaching coaching) {
@@ -21,6 +22,7 @@ public record CoachingResponse(@NotNull Long id,
                 coaching.getPassword(),
                 coaching.getReservedTime(),
                 coaching.getCapacity(),
+                coaching.getUsers().size(),
                 coaching.getMember().getId(),
                 coaching.getMember().getNickname()
         );

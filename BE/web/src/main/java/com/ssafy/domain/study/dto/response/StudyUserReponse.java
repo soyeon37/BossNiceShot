@@ -8,9 +8,9 @@ public record StudyUserReponse(@NotNull Long studyId,
                                @NotNull String memberNickname) {
     public static StudyUserReponse from(StudyUser studyUser) {
         return new StudyUserReponse(
-                studyUser.getId().getStudy().getId(),
-                studyUser.getId().getMember().getId(),
-                studyUser.getId().getMember().getNickname()
+                studyUser.getStudy().getId(),
+                studyUser.getMember().getId(),
+                studyUser.getMember().getNickname()
         );
     }
 }
