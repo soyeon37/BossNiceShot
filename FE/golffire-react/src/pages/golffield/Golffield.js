@@ -9,16 +9,19 @@ function Golffield() {
   // 출력할 골프장 정보 변수
   const golfClubs = [
     {
+      id: 1,
       name: "하이골프클럽11",
       address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
       phoneNumber: "02-9999-9999",
     },
     {
+      id: 2,
       name: "하이골프클럽22",
       address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
       phoneNumber: "02-9999-9999",
     },
     {
+      id: 3,
       name: "하이골프클럽33",
       address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
       phoneNumber: "02-9999-9999",
@@ -45,7 +48,7 @@ function Golffield() {
   const handleSearchWord = (e) => {
     setSearchWord(e.target.value);
   }
-  
+
   // 엔터 키 눌림 감지
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -91,14 +94,9 @@ function Golffield() {
           </button>
         </div>
         <div id="result-box">
-          
-        </div>
-
-        {/* <div id="result-box">
           <div id="kakao-map">
             <KakaoMap />
           </div>
-
           <div id="result-list">
             {golfClubs.map((club, index) => (
               <GolfBox
@@ -108,8 +106,13 @@ function Golffield() {
                 phoneNumber={club.phoneNumber}
               />
             ))}
+            {/* <GolfBox key={club.id}>
+              name={club.name}
+              address={club.address}
+              phoneNumber={club.phoneNumber}
+            </GolfBox> */}
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
