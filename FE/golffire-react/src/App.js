@@ -7,7 +7,9 @@ import { useState, useEffect } from 'react';
 import Navbar from './setup/routes-manager/Navbar';
 import Main from './pages/main/Main'
 import Solution from './pages/solution/Solution';
-import Learning from './pages/learning/Learning';
+
+import StudyList from './pages/study/StudyList';
+
 import Golffield from './pages/golffield/Golffield';
 import Accompany from "./pages/accompany/Accompany";
 import Community from './pages/community/Community';
@@ -20,8 +22,9 @@ import MyEditor from './pages/community/MyEditor';
 import FreeBoardDetail from './pages/community/FreeBoardDetail';
 
 // Sign-up & Log-in & Sign-out
-import KakaoSignUp from './pages/kakao/KakaoSignUp';
-import KakaoLogin from './pages/kakao/KakaoLogin';
+
+import KakaoLogin from "./setup/user-auth/KakaoLogin";
+import KakaoSignUp from "./setup/user-auth/KakaoSignUp";
 import Signup from './pages/signup/Signup';
 import SignupEmail1 from './pages/signup/SignupEmail1';
 import SignupEmail2 from './pages/signup/SignupEmail2';
@@ -65,12 +68,12 @@ function App() {
 
               {/* 항상 route 가능 */}
               <Route path="/" element={<Main />} />
-              <Route path="/Signup/" element={<Signup />} />
-              <Route path="/Signup/email1" element={<SignupEmail1 />} />
-              <Route path="/Signup/email2" element={<SignupEmail2 />} />
-              <Route path="/Signup/info" element={<SignupInfo />} />
-              <Route path="/FindPassword/" element={<FindPassword />} />
-              <Route path="/Login/" element={<Login />} />
+              <Route path="/signup/" element={<Signup />} />
+              <Route path="/signup/email1" element={<SignupEmail1 />} />
+              <Route path="/signup/email2" element={<SignupEmail2 />} />
+              <Route path="/signup/info" element={<SignupInfo />} />
+              <Route path="/findpassword/" element={<FindPassword />} />
+              <Route path="/login/" element={<Login />} />
               <Route path="/golffield/" element={<Golffield />} />
 
               {/* 로그인 후 route 가능 */}
@@ -81,7 +84,9 @@ function App() {
               }
 
               <Route path="/solution/" element={<Solution />} />
-              <Route path="/learning/" element={<Learning />} />
+
+              <Route path="/studylist/" element={<StudyList />} />
+
               <Route path="/accompany/" element={<Accompany />} />
 
               {/* Community */}
@@ -90,7 +95,7 @@ function App() {
               <Route path="/freeboardlist" element={<FreeBoardList />} />
               <Route path="/inquirylist" element={<InquiryList />} />
               <Route path="/noticelist" element={<NoticeList />} />
-              <Route path="/freeboard/:idx" element={<FreeBoardDetail />} />
+              {/* <Route path="/freeboard/:idx" element={<FreeBoardDetail />} /> */}
 
               {/* Profile */}
               <Route path="/mypage/" element={<Profile />} />

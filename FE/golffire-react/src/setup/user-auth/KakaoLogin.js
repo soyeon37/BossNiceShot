@@ -83,13 +83,33 @@ const Kakao = (props) => {
         } else{
           console.log("유효한 이메일입니다.");
             // 카카로 로그인 하기
-          
+            handleKaKaoEmailLogin(email);
         }
       })
       .catch((error) => {
         console.error("Error:", error);
       })
     };
+
+    // 로그인
+    const handleKaKaoEmailLogin = (email) =>{
+      console.log(email);
+      // 로그인 정보
+      const data = {
+        id: email,
+        password: null,
+        isKakao: true
+      };
+      const apiUrl = "http://localhost:8080/members/sign-in"
+      axios
+      .post(apiUrl, data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      })
+    }
     }
     
     useEffect(() => {

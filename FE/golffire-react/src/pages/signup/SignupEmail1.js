@@ -6,13 +6,15 @@ import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import axios from "axios";
 
 const SignupEmail1 = () => {
+  // 이메일 및 인증번호
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userNum, setUserNum] = useState(""); // 사용자 입력 인증번호
+  const [verifyNum, setVerityNum] = useState("TEST"); // 서버로부터 받은 인증번호
+  const [verified, setVerified] = useState(false);
 
   const navigate = useNavigate();
-  const handleEmailVerify = () => {
-    navigate("/Signup/email2");
-  };
+
+  // 이메일 가입 여부 확인 함수
   const handleCheckEmail = () => {
     const data = {
       id: email
@@ -20,21 +22,22 @@ const SignupEmail1 = () => {
     const apiUrl = "http://localhost:8080/members/checkEmail";
 
     axios
-    .post(apiUrl, data)
-    .then((response) => {
-      if(response.data.data.resultMessage === "FAIL"){
-        console.log("이메일이 중복되었습니다.");
-        alert("이미 존재하는 이메일입니다.");
-      } else{
-        console.log("유효한 이메일입니다.");
-        handleSendEmail(email);
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    })
+      .post(apiUrl, data)
+      .then((response) => {
+        if (response.data.data.resultMessage === "FAIL") {
+          console.log("이메일이 중복되었습니다.");
+          alert("이미 존재하는 이메일입니다.");
+        } else {
+          console.log("유효한 이메일입니다.");
+          handleSendEmail(email);
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      })
   };
 
+  // 유효 이메일로 인증번호 송신하는 함수
   const handleSendEmail = (email) => {
     const data = {
       id: email
@@ -42,14 +45,40 @@ const SignupEmail1 = () => {
     const apiUrl = "http://localhost:8080/members/sendEmailVerification";
 
     axios
-    .post(apiUrl, data)
-    .then((response) => {
-      const authNum = response.data.data.authNum; // 인증번호
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    })
+      .post(apiUrl, data)
+      .then((response) => {
+        const authNum = response.data.data.authNum; // 인증번호
+        verifyNum = response.data.data.authNum;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      })
   };
+
+  const handleEmailVerify = () => {
+    if (userNum === verifyNum) {
+      setVerified(true);
+      alert("인증이 완료되었습니다.");
+    } else {
+      alert("인증번호를 다시 확인해 주세요.");
+    }
+  };
+
+  // '다음으로' 함수
+  const handleEmailNext = () => {
+    if (verified) {
+      navigate("/signup/email2", { state: { email: email } });
+    } else {
+      alert("이메일 인증을 먼저 마쳐주세요!");
+    }
+
+    // Debug Code !!!
+    console.log("email: ", email);
+    console.log("userNum: ", userNum);
+    console.log("verifyNum: ", verifyNum);
+    console.log("verified: ", verified);
+  };
+
  
 
   return (
@@ -96,11 +125,12 @@ const SignupEmail1 = () => {
               type="email"
               placeholder="인증번호를 입력하세요."
               bg={"white"}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={userNum}
+              onChange={(e) => setUserNum(e.target.value)}
             />
           </FormControl>
           <Button
+            onClick={handleEmailVerify}
             style={{
               height: "2.5rem",
               width: "100%",
@@ -115,7 +145,7 @@ const SignupEmail1 = () => {
             인증하기
           </Button>
           <Button
-            onClick={handleEmailVerify}
+            onClick={handleEmailNext}
             style={{
               height: "2.5rem",
               width: "100%",
