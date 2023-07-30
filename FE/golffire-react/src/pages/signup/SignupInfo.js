@@ -89,7 +89,7 @@ const SignupInfo = () => {
       topScore: topScore,
       level: level,
       teeBox: teeBox,
-      isKakao: isKakao,
+      isKakao: true,
     }
     const apiUrl = "http://localhost:8080/members/sign-up"
     axios

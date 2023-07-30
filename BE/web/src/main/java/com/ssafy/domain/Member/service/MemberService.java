@@ -39,7 +39,7 @@ public class MemberService{
     private final EmailService emailService;
 
     private static final String FROM_EMAIL = "soyeun37@gmail.com"; // 발신자 이메일 주소
- // 발신자 이메일 비밀번호
+    // 발신자 이메일 비밀번호
 
     @Transactional
     public SignUpResponse registMember(SignUpRequest request) {
@@ -53,7 +53,7 @@ public class MemberService{
         return SignUpResponse.from(member);
     }
 
-//    @Transactional
+    //    @Transactional
 //    public SignInResponse kakaoSignIn(SignInRequest request){
 //        // 1. 유저 존재 유무 확인
 //        Optional<Member> member = memberRepository.findById(request.id());
@@ -72,23 +72,36 @@ public class MemberService{
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(request.id(), request.password());
         log.info("authenticationToken={}", authenticationToken);
 
-        // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
-        // authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        log.info("authentication={}", authentication);
+        if(request.isKakao()){
+            log.info("Kakao Login");
+            // 사용자 정보 유무 확인
+            log.info(request.id());
+            Optional<Member> member = memberRepository.findById(request.id());
+            if(member.isEmpty()){
+                throw new UserAuthException(ExceptionMessage.USER_NOT_FOUND);
+            }
+            TokenInfo tokenInfo = jwtTokenProvider.generateToken(authenticationToken);
 
-        // 2-1. 비밀번호 체크
-        Optional<Member> member = memberRepository.findById(request.id());
-        if(member.isEmpty()){
-            throw new UserAuthException(ExceptionMessage.USER_NOT_FOUND);
-        } else if(!encoder.matches(request.password(), member.get().getPassword())) {
-           throw new UserAuthException(ExceptionMessage.MISMATCH_PASSWORD);
+            return new SignInResponse(request.id(), tokenInfo);
+
+        }else{
+            log.info("Email Login");
+            // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
+            // authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
+            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+            log.info("authentication={}", authentication);
+
+            // 2-1. 비밀번호 체크
+            Optional<Member> member = memberRepository.findById(request.id());
+            if(member.isEmpty()){
+                throw new UserAuthException(ExceptionMessage.USER_NOT_FOUND);
+            } else if(!encoder.matches(request.password(), member.get().getPassword())) {
+                throw new UserAuthException(ExceptionMessage.MISMATCH_PASSWORD);
+            }
+            // 3. 인증 정보를 기반으로 JWT 토큰 생성
+            TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
+            return new SignInResponse(request.id(), tokenInfo);
         }
-
-        // 3. 인증 정보를 기반으로 JWT 토큰 생성
-        TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
-
-        return new SignInResponse(member.get().getId(), tokenInfo);
     }
 
     @Transactional
@@ -200,10 +213,10 @@ public class MemberService{
         Random random = new Random();
 
         String generatedString = random.ints(leftLimit, rightLimit + 1)
-                        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-                                .limit(targetStringLength)
-                                        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                                                .toString();
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
         log.info("인증번호={}", generatedString);
         return generatedString;
     }

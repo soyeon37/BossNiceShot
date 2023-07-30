@@ -26,6 +26,7 @@ const Login = () => {
     const data = {
       id: email,
       password: password,
+      isKakao: false,
     };
 
     // 서버 API 엔드포인트 URL
@@ -44,9 +45,7 @@ const Login = () => {
         axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
         // 쿠키에 정보 저장
-        setCookie('user_email', data.memberId, { path: '/' });
-        setCookie('access_token', access_token, { path: '/' });
-        setCookie('refresh_token', refresh_token, { path: '/' });
+        setCookie('Set-Cookie', refresh_token, { path: '/' , maxAge: new Date().getDate() + 60 * 60 * 24 *14 });
 
         console.log(response.data); // Debug Code !!
 
