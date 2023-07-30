@@ -1,7 +1,6 @@
-import "./App.css";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { useState, useEffect } from "react";
 
 // Navigation Bar
 import Navbar from "./setup/routes-manager/Navbar";
@@ -39,6 +38,8 @@ import EditPassword from "./pages/mypage/EditPassword";
 import ErrorPage from "./setup/error-manager/ErrorPage";
 
 import { ChakraProvider } from "@chakra-ui/react";
+import "./App.css";
+import "../src/assets/css/common.css";
 
 function App() {
   // cookie의 user 정보 확인

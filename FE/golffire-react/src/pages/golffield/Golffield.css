@@ -20,10 +20,12 @@
 
   width: 1240px;
   height: 800px;
+  max-width: 90%;
+  max-height: 90%;
 
   border-radius: 50px;
   border: 1px solid #000;
-  background-color: #FFF;
+  background-color: #fff;
   box-shadow: 20px 20px 0px 0px #000;
 
   display: flex;
@@ -37,6 +39,8 @@
   width: 100%;
   height: 90px;
 
+  overflow-x: scroll;
+  overflow-y: hidden;
   overflow: hidden;
 
   display: flex;
@@ -47,33 +51,34 @@
 #areaSelector {
   padding: 5px;
 
-  width: 550px;
+  width: 590px;
   height: 50px;
 
   border-radius: 50px;
   border: 1px solid #000;
-  background: #FFF;
+  background: #fff;
 }
 
 #searchWord {
-  margin: 30px;
+  margin: 10px;
   padding: 5px;
 
-  width: 480px;
+  width: 520px;
   height: 50px;
 
   box-shadow: none;
   border-radius: 50px;
   border: 1px solid #000;
-  background: #FFF;
+  background: #fff;
 }
 
 .icon-div {
   width: 50px;
   height: 50px;
+  min-width: 50px;
 
   border-radius: 50px;
-  background-color: #72CE27;
+  background-color: #72ce27;
   border: 1px solid #000;
 
   display: flex;
@@ -94,32 +99,102 @@
 #kakao-map {
   width: 50%;
   height: 100%;
-  
-  padding: 20px;
+
+  padding-right: 10px;
   position: relative;
+
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #map {
   width: 100%;
   height: 100%;
-
   border-radius: 50px;
 }
 
-#result-list {
+#result {
   width: 50%;
   height: 100%;
+}
 
-  /* dd */
-  padding: 20px; 
-  background-color: aquamarine;
+#result-list {
+  width: 100%;
+  height: calc(100% - 50px);
+  overflow-y: scroll;
+}
 
-  /* display: grid; */
-  /* grid-template-columns: repeat(1, 100%); */
-  /* Two columns with 50px width each */
-  /* gap: 10px; */
-  /* Add some gap between images (optional) */
-  /* max-height: 100%; */
-  /* Adjust the maximum height as needed */
-  /* overflow-y: scroll; */
+/* Pagination CSS */
+#result-control {
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.control-arrow {
+  margin: 10px;
+  color: black;
+}
+
+.control-arrow:disabled {
+  margin: 10px;
+  color: gray;
+}
+
+#control-num {
+  display: flex;
+  align-items: center;
+
+  font-family: Inter;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* GolfBox CSS */
+.GolfBox {
+  width: calc(100% - 10px);
+
+  margin-right: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+
+  border-radius: 20px;
+  border: 1px solid #000;
+  background: #fff;
+
+  text-align: left;
+}
+
+.golfbox-name {
+  color: #000;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.golfbox-add {
+  color: #8d8f98;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.golfbox-call {
+  color: #8d8f98;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
