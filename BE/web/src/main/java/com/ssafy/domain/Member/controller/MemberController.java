@@ -13,9 +13,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -97,9 +99,11 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/sign-in")
-    public ApiResponse signIn(@RequestBody SignInRequest request) {
+    public ApiResponse signIn(@RequestBody SignInRequest request, HttpServletResponse httpServletResponse) {
         log.info("로그인 시작");
+
         SignInResponse signInResponse = memberService.signIn(request);
+
         // Redis에 저장
         refreshTokenService.setValues(signInResponse.token().getRefreshToken(), request.id());
         log.info("memberId={}, refreshToken={}",request.id(), signInResponse.token().getRefreshToken());

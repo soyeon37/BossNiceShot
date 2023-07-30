@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useLocation } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from "react-cookie";
 import {
     Box, Code,
   } from '@chakra-ui/react';
@@ -11,6 +12,7 @@ const Kakao = (props) => {
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
   const [image, setImage] = useState("");
+  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
 
   let params = new URL(document.URL).searchParams; // get query string
   let CODE = params.get("code");
@@ -105,6 +107,15 @@ const Kakao = (props) => {
       .post(apiUrl, data)
       .then((response) => {
         console.log(response);
+        // 사용자 정보를 작성하는 코드
+        // ...
+        // accessToken은 헤더로 설정
+        const access_token = response.data.data.token.accessToken;
+        const refresh_token = response.data.data.token.refreshToken;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+        setCookie('Set-Cookie', refresh_token, { path: '/' , maxAge: new Date().getDate() + 60 * 60 * 24 *14 });
+
+        navigate('/');
       })
       .catch((error) => {
         console.error("Error: ", error);
@@ -120,7 +131,7 @@ const Kakao = (props) => {
     
         <Box>
             <Box maxW="md" mx="auto">
-                <div>잠시만 기다려 주세요! 회원 가입 중입니다.</div>
+                <div>잠시만 기다려 주세요! 로그인 중입니다.</div>
             </Box>
         </Box> 
     )
