@@ -1,4 +1,4 @@
-package com.ssafy.domain.Member.entity;
+package com.ssafy.common;
 
 public enum TeeBox {
     WHITE, RED, BLACK

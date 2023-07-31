@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 
 @Getter
-@Builder
+@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class NotificationApplication extends BaseTime {
 
