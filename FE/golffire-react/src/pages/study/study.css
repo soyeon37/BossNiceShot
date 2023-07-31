@@ -1,7 +1,7 @@
 /* StudyList */
 
 
-#Learning {
+#Study {
   height: calc(100vh - 4rem);
 }
 
@@ -12,7 +12,7 @@
   margin-bottom: 20px;
 }
 
-.Learning-List {
+.Study-List {
   height: calc(100vh - 4rem);
   margin: 0 80px;
 }
