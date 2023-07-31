@@ -27,8 +27,8 @@ function Learning() {
 
   return (
     <ChakraProvider>
-      <div id="Learning">
-        <h1>코칭 / 러닝</h1>
+      <div id="Study">
+        <h1>스터디</h1>
         <h2>
           희망하는 코칭/러닝 방에 입장하세요.<br />
           새로운 방을 만들어도 됩니다.
@@ -66,7 +66,7 @@ function Learning() {
             onChange={(e) => setSearchText(e.target.value)}
           />
         </div>
-        <div className="Learning-List">
+        <div className="Study-List">
           <Flex flexWrap="wrap" justifyContent="flex-start">
             <Link to="/createroom">
               <Box
