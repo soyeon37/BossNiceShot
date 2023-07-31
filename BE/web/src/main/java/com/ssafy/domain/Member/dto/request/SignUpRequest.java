@@ -22,5 +22,7 @@ public record SignUpRequest (
     @Schema(description = "회원 프로필", example = "apple.jpg")
     String image,
     @Schema(description = "회원 소개", example = "안녕하세요")
-    String introduction
+    String introduction,
+    @Schema(description = "카카오 회원가입 여부", example = "true")
+    Boolean isKakao
     ){}

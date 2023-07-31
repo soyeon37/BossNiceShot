@@ -80,6 +80,12 @@ dependencies {
 	//이메일 인증 API 설정
 	implementation 'com.sun.mail:smtp:2.0.1'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// JSON 파싱
+	implementation 'com.google.code.gson:gson:2.8.7'
+
+	// OAuth2.0
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 test {
 	useJUnitPlatform()

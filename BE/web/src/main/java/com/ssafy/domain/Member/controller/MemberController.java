@@ -6,15 +6,20 @@ import com.ssafy.domain.Member.dto.request.*;
 import com.ssafy.domain.Member.dto.response.SignInResponse;
 import com.ssafy.domain.Member.service.MemberService;
 import com.ssafy.common.api.ApiResponse;
+import com.ssafy.domain.Member.service.OAuthService;
 import com.ssafy.domain.Member.service.RefreshTokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +34,34 @@ import java.security.Principal;
 public class MemberController {
     private final MemberService memberService;
     private final RefreshTokenService refreshTokenService;
+    private final OAuthService oAuthService;
+
+    @Operation(summary = "이메일 중복 확인", description = "이메일 중복을 확인한다.")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 실패"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "사용자 없음"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
+    })
+
+    @PostMapping("/checkEmail")
+    public ApiResponse checkEmail(@RequestBody CheckEmailRequest request ){
+        log.info("이메일 전송 시작");
+        return ApiResponse.success(memberService.checkEmail(request));
+    }
+    @Operation(summary = "닉네임 중복 확인", description = "닉네임 중복을 확인한다.")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 실패"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "사용자 없음"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
+    })
+
+    @PostMapping("/checkNickname")
+    public ApiResponse checkEmail(@RequestBody CheckNicknameRequest request ){
+        log.info("닉네임 전송 시작");
+        return ApiResponse.success(memberService.checkNickname(request));
+    }
 
     @Operation(summary = "이메일 전송", description = "이메일을 전송하여 인증번호를 발급한다.")
     @ApiResponses({
@@ -43,6 +76,8 @@ public class MemberController {
         log.info("이메일 전송 시작");
         return ApiResponse.success(memberService.sendEmail(request));
     }
+
+
 
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
@@ -64,9 +99,11 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/sign-in")
-    public ApiResponse signIn(@RequestBody SignInRequest request) {
+    public ApiResponse signIn(@RequestBody SignInRequest request, HttpServletResponse httpServletResponse) {
         log.info("로그인 시작");
+
         SignInResponse signInResponse = memberService.signIn(request);
+
         // Redis에 저장
         refreshTokenService.setValues(signInResponse.token().getRefreshToken(), request.id());
         log.info("memberId={}, refreshToken={}",request.id(), signInResponse.token().getRefreshToken());
@@ -132,7 +169,8 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @GetMapping("/info")
-    public ApiResponse info(Authentication authentication){
+    public ApiResponse info(@AuthenticationPrincipal SecurityProperties.User authentication){
+        log.info("name={}",authentication.getName());
         if (authentication == null || authentication.getName() == null){
             throw new UserAuthException(ExceptionMessage.NOT_AUTHORIZED_ACCESS);
         }
@@ -147,14 +185,30 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/reissue")
-    public ApiResponse reissue(@RequestBody ReIssueRequest request){
+    public ApiResponse reissue(@RequestBody ReIssueRequest request, HttpServletRequest servletRequest){
         log.info("토큰 재발급 시작");
+        Cookie[] list = servletRequest.getCookies();
+        Stinrg
+        for(Cookie cookie : list){
+            if(cookie.getName().equals("Set-Cookie")){
+                log.info("refreshToken={}",cookie.getValue());
+
+            }
+        }
+
         String token = request.refreshToken();
         String refreshToken = token.substring(0, token.length()-1);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }
 
+    @PostMapping("/code")
+    public void kakaoCallBack(@RequestBody KakaoCallBackRequest request){
+        System.out.println(request.code());
+        String code = request.code();
+        log.info(code);
+        oAuthService.getKakaoAccessToken(code);
+    }
     //
 //    @PostMapping("/authorize")
 //    public ApiResponse authorize(@RequestHeader("Authorization") String accessToken, Authentication authentication){
