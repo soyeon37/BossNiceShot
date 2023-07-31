@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-
 import { NavLink, useNavigate } from "react-router-dom";
+
+// Redux
+import { useSelector, useDispatch } from 'react-redux';
+import { setEmail2, setCurrentStep } from '../../features/signupSlice';
 
 import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import axios from "axios";
@@ -11,6 +14,20 @@ const SignupEmail1 = () => {
   const [userNum, setUserNum] = useState(""); // 사용자 입력 인증번호
   const [verifyNum, setVerityNum] = useState("TEST"); // 서버로부터 받은 인증번호
   const [verified, setVerified] = useState(false);
+  // Redux
+  const dispatch = useDispatch();
+  const emailRedux = useSelector((state) => state.signupFeature.email);
+  
+  const onNextStep = () => {
+    dispatch(setCurrentStep(2));
+  };
+  const handleEmailChange = (email) => {
+    dispatch(setEmail2(email));
+    // console.log(setEmail)
+    console.log("이메일 바꾸고 싶어! ", email)
+    // dispatch({type: 'string', payload: email})
+  };
+
 
   const navigate = useNavigate();
 
@@ -67,9 +84,9 @@ const SignupEmail1 = () => {
   // '다음으로' 함수
   const handleEmailNext = () => {
     if (verified) {
-      navigate("/signup/email2", { state: { email: email } });
+      // navigate("/signup/email2", { state: { email: email } });
     } else {
-      alert("이메일 인증을 먼저 마쳐주세요!");
+      // alert("이메일 인증을 먼저 마쳐주세요!");
     }
 
     // Debug Code !!!
@@ -77,9 +94,12 @@ const SignupEmail1 = () => {
     console.log("userNum: ", userNum);
     console.log("verifyNum: ", verifyNum);
     console.log("verified: ", verified);
+
+    // Redux
+    handleEmailChange(email);
+    // onNextStep();
   };
 
- 
 
   return (
     <div id="Signup">
