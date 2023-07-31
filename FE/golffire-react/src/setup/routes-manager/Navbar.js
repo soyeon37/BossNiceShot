@@ -37,8 +37,10 @@ function Navbar() {
     }, [cookies]);
 
     const handleLogout = () => {
-        axios.get('/api/users/logout')
+        const apiUrl = 'http://localhost:8080/members/logout'
+        axios.post(apiUrl)
         .then(response => {
+            console.log(response);
             if(response.data.success){
                 // 여기서 로그아웃
                 // 쿠키 그런거 다 지우기

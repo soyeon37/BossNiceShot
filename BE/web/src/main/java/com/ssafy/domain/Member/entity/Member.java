@@ -68,20 +68,20 @@ public class Member extends BaseTime implements UserDetails{
     }
 
     public static Member from(SignUpRequest request, PasswordEncoder encoder){
-        if(request.isKakao()){
-            return Member.builder()
-                    .id(request.id())
-                    .password(request.password())
-                    .nickname(request.nickname())
-                    .teeBox(request.teeBox())
-                    .topScore(request.topScore())
-                    .averageScore(request.averageScore())
-                    .level(request.level())
-                    .image(request.image())
-                    .introduction(request.introduction())
-                    .isKakao(true)
-                    .build();
-        }else{
+//        if(request.isKakao()){
+//            return Member.builder()
+//                    .id(request.id())
+//                    .password(request.password())
+//                    .nickname(request.nickname())
+//                    .teeBox(request.teeBox())
+//                    .topScore(request.topScore())
+//                    .averageScore(request.averageScore())
+//                    .level(request.level())
+//                    .image(request.image())
+//                    .introduction(request.introduction())
+//                    .isKakao(true)
+//                    .build();
+//        }else{
             return Member.builder()
                     .id(request.id())
                     .password(encoder.encode(request.password()))
@@ -94,7 +94,7 @@ public class Member extends BaseTime implements UserDetails{
                     .introduction(request.introduction())
                     .isKakao(false)
                     .build();
-        }
+//        }
     }
 
     public static Member update(UpdateMemberRequest request, PasswordEncoder encoder, String id){

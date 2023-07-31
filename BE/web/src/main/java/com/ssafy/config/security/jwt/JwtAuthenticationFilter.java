@@ -53,6 +53,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
             log.info("유효한 토큰입니다.");
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
+            log.info("authentication={}",authentication.toString());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }else{
             log.error("유효하지 않은 토큰입니다.");
