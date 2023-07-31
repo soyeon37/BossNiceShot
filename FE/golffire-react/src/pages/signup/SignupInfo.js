@@ -1,19 +1,58 @@
 import { React, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
-import { Button, FormControl, FormLabel, Input, Radio, RadioGroup, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Radio,
+  RadioGroup,
+  VStack
+} from "@chakra-ui/react";
+import {
+  EmailIcon
+} from "@chakra-ui/icons";
 
 const SignupInfo = () => {
+  const { state } = useLocation();
+
+  const [image, setImage] = useState(state.image);
+  const [email, setEmail] = useState(state.email);
+  const [password] = useState(state.password);
+  const [nickname, setNickname] = useState(state.nickname);
+  const [introduce, setIntroduce] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionChange = (value) => {
     setSelectedOption(value);
   };
 
+  // 닉네임 중복 검사
+  const handleCheckNickname = () => {
+    console.log("nickname: ", nickname); // Debug !!
+  }
+
   const navigate = useNavigate();
+
   const handleEmailFinish = () => {
-    navigate("/");
-  };
+    const data = {
+      id: email,
+      image: image,
+      password: password,
+      nickname: nickname,
+      introduce: introduce,
+      // averageScore: averageScore,
+      // topScore: topScore,
+      // level: level,
+      // teeBox: teeBox,
+      isKakao: false,
+    }
+
+
+    console.log("data: ", data);
+    // navigate("/");
+  }
 
   return (
     <div id="Signup">
@@ -28,14 +67,49 @@ const SignupInfo = () => {
         <div className="signup-pic">(사진 공간)</div>
         <div className="signup-info-body">
           <FormControl maxW={"sm"}>
-            <FormLabel>닉네임</FormLabel>
-            <Input placeholder="닉네임을 입력하세요." bg={"white"} />
+            <FormLabel>이메일</FormLabel>
+            <Input
+              type="email"
+              bg={"white"}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             {/* 사용 가능 여부를 나타내는 안내 문구 필요! */}
           </FormControl>
 
           <FormControl maxW={"sm"}>
+            <FormLabel>닉네임</FormLabel>
+            <Input
+              bg={"white"}
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+            />
+            {/* 사용 가능 여부를 나타내는 안내 문구 필요! */}
+          </FormControl>
+          <Button
+            onClick={handleCheckNickname}
+            style={{
+              height: "2.5rem",
+              width: "100%",
+
+              color: "black",
+              borderRadius: "30px",
+              background: "#B8F500",
+            }}
+            maxW={"sm"}
+            marginBottom={"2.5rem"}
+          >
+            검사
+          </Button>
+
+          <FormControl maxW={"sm"}>
             <FormLabel>자기소개</FormLabel>
-            <Input placeholder="자기소개를 입력하세요." bg={"white"} />
+            <Input
+              placeholder="자기소개를 입력하세요."
+              bg={"white"}
+              value={introduce}
+              onChange={(e) => setIntroduce(e.target.value)}
+            />
             {/* 입력 제한 안내 문구 필요! */}
           </FormControl>
 

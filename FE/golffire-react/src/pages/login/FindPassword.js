@@ -2,7 +2,12 @@ import React, { useState } from "react";
 
 import { NavLink } from "react-router-dom";
 
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { 
+  Button,
+  FormControl, 
+  FormLabel, 
+  Input 
+} from "@chakra-ui/react";
 
 function FindPassword() {
   const [email, setEmail] = useState("");
@@ -18,6 +23,7 @@ function FindPassword() {
 
   return (
     <div id="FindPassword">
+
       <div id="email1">
         <div className="title">
           <h1>
@@ -54,8 +60,9 @@ function FindPassword() {
           </Button>
         </div>
         <hr />
-        <NavLink to="/signup">돌아가기</NavLink>
+        <NavLink to="/login">돌아가기</NavLink>
       </div>
+
     </div>
   );
 }
