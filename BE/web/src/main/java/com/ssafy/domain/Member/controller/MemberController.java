@@ -185,8 +185,17 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/reissue")
-    public ApiResponse reissue(@RequestBody ReIssueRequest request){
+    public ApiResponse reissue(@RequestBody ReIssueRequest request, HttpServletRequest servletRequest){
         log.info("토큰 재발급 시작");
+        Cookie[] list = servletRequest.getCookies();
+        Stinrg
+        for(Cookie cookie : list){
+            if(cookie.getName().equals("Set-Cookie")){
+                log.info("refreshToken={}",cookie.getValue());
+
+            }
+        }
+
         String token = request.refreshToken();
         String refreshToken = token.substring(0, token.length()-1);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
