@@ -18,3 +18,4 @@ public class StudyUser {
         this.id = new StudyUserId(study, member);
     }
 }
+git 
