@@ -189,6 +189,7 @@ public class MemberController {
         log.info("토큰 재발급 시작");
         String refreshToken = "";
         Cookie[] list = servletRequest.getCookies();
+
         for(Cookie cookie : list){
             if(cookie.getName().equals("Set-Cookie")){
                 log.info("refreshToken={}",cookie.getValue());
