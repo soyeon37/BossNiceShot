@@ -5,8 +5,10 @@ import {
   Button,
 } from "@chakra-ui/react";
 import "./Signup.css";
+import axios from "axios";
 
 function Signup() {
+
   const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
   const REDIRECT_URI = 'http://localhost:3000/auth/kakao/signup/callback'
   const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`

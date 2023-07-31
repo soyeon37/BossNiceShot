@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import axios from "axios";
-;
+
 const SignupEmail1 = () => {
   // 이메일 및 인증번호
   const [email, setEmail] = useState("");
@@ -78,6 +78,8 @@ const SignupEmail1 = () => {
     console.log("verifyNum: ", verifyNum);
     console.log("verified: ", verified);
   };
+
+ 
 
   return (
     <div id="Signup">

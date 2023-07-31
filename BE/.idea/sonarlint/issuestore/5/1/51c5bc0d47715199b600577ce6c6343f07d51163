@@ -1,8 +1,10 @@
 
 |
-java:S1488·"^Immediately return this expression instead of assigning it to the temporary variable "member".(ûŸ‹ß8”¯Éµ˜1
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¤¿ôåşÿÿÿÿ8•¯Éµ˜1
-F
-java:S1905¥")Remove this unnecessary cast to "String".(£Œ8ª¯Éµ˜1
-<
-java:S2119¯"Save and re-use this "Random".(¡Å”¦8¬¯Éµ˜1
+java:S1488¶"^Immediately return this expression instead of assigning it to the temporary variable "member".(ûŸ‹ß8áíŞá˜1
+{
+java:S1488½"^Immediately return this expression instead of assigning it to the temporary variable "member".(Æ”®
+8âíŞá˜1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¤¿ôåşÿÿÿÿ8ãíŞá˜1
+Y	java:S125"<This block of commented-out lines of code should be removed.(·ÁÁ×8úíŞá˜1
+;
+java:S2119ª"Save and re-use this "Random".(¼İÅf8şíŞá˜1
