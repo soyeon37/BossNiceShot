@@ -89,8 +89,9 @@ const SignupInfo = () => {
       topScore: topScore,
       level: level,
       teeBox: teeBox,
-      isKakao: true,
+      isKakao: isKakao,
     }
+    console.log('isKakao: ',isKakao);
     const apiUrl = "http://localhost:8080/members/sign-up"
     axios
       .post(apiUrl, data)

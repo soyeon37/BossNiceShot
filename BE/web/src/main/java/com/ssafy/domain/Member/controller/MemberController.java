@@ -125,16 +125,16 @@ public class MemberController {
             Cookie[] list = servletRequest.getCookies();
             if(list != null){
                 for(Cookie cookie : list){
-                    if(cookie.getName().equals("refreshToken")){
+                    if(cookie.getName().equals("Set-Cookie")){
                         log.info("cookieValue={}", cookie.getValue());
                         refreshTokenService.delValues(cookie.getValue()); // Redis에 저장된 refreshToken 삭제
                         cookie.setMaxAge(0); // Cookie에 저장된 refreshToken 삭제
+                        break;
                     }
                 }
             }
         return ApiResponse.success("SUCCESS");
     }
-
 
     @Operation(summary = "회원 정보 수정", description = "회원 정보를 수정한다.")
     @ApiResponses({
@@ -187,16 +187,18 @@ public class MemberController {
     @PostMapping("/reissue")
     public ApiResponse reissue(@RequestBody ReIssueRequest request, HttpServletRequest servletRequest){
         log.info("토큰 재발급 시작");
+        String refreshToken = "";
         Cookie[] list = servletRequest.getCookies();
+
         for(Cookie cookie : list){
             if(cookie.getName().equals("Set-Cookie")){
                 log.info("refreshToken={}",cookie.getValue());
-
+                refreshToken = cookie.getValue();
+                break;
             }
         }
-
-        String token = request.refreshToken();
-        String refreshToken = token.substring(0, token.length()-1);
+//        String token = request.refreshToken();
+//        String refreshToken = token.substring(0, token.length()-1);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }
@@ -208,14 +210,6 @@ public class MemberController {
         log.info(code);
         oAuthService.getKakaoAccessToken(code);
     }
-    //
-//    @PostMapping("/authorize")
-//    public ApiResponse authorize(@RequestHeader("Authorization") String accessToken, Authentication authentication){
-//        if (authentication == null || authentication.getName() == null) {
-//            throw new UserAuthException(ExceptionMessage.NOT_AUTHORIZED_ACCESS);
-//        }
-//        return ApiResponse.success(memberService.getAuthorize(accessToken));
-//    }
 
 }
 
