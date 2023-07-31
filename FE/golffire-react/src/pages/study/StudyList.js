@@ -100,7 +100,7 @@ function Learning() {
             </Link>
 
             {/* 새로운 박스 2 */}
-            <Link to="/coachingroom">
+            <Link to="/createcroom">
               <Box
                 w="400px"
                 h="240px"
@@ -116,7 +116,7 @@ function Learning() {
             </Link>
 
             {/* 새로운 박스 3 */}
-            <Link to="/coachingroom">
+            <Link to="/createlroom">
               <Box
                 w="400px"
                 h="240px"

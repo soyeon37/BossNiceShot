@@ -13,6 +13,8 @@ import Community from "./pages/community/Community";
 
 // Study
 import CreateRoom from './pages/study/CreateRoom';
+import CreateCRoom from './pages/study/CreateCRoom';
+import CreateLRoom from './pages/study/CreateLRoom';
 import CoachingRoom from './pages/study/CoachingRoom';
 
 // Community
@@ -94,6 +96,8 @@ function App() {
               {/* Study */}
               <Route path="/studylist/" element={<StudyList />} />
               <Route path="/createroom/" element={<CreateRoom />} />
+              <Route path="/createcroom/" element={<CreateCRoom />} />
+              <Route path="/createlroom/" element={<CreateLRoom />} />
               <Route path="/coachingroom/" element={<CoachingRoom />} />
 
 
