@@ -40,7 +40,7 @@ const Login = () => {
         axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
         // 쿠키에 정보 저장
-        setCookie('Set-Cookie', refresh_token, { path: '/' , maxAge: new Date().getDate() + 60 * 60 * 24 *14 });
+        setCookie('Set-Cookie', refresh_token, { path: '/', maxAge: new Date().getDate() + 60 * 60 * 24 * 14 });
 
         console.log(response.data); // Debug Code !!
 
@@ -60,11 +60,6 @@ const Login = () => {
     const REST_API_KEY = 'cd0c9cf0cf49dae9a987aebb769ee0d6';
     const REDIRECT_URI = 'http://localhost:3000/auth/kakao/login/callback'
     const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
-    window.location.href=kakaoUrl;
-
-    const REST_API_KEY = "cd0c9cf0cf49dae9a987aebb769ee0d6";
-    const REDIRECT_URI = "http://localhost:3000/auth/kakao/login/callback";
-    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
     window.location.href = kakaoUrl;
   };
 
