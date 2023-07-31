@@ -1,0 +1,50 @@
+#Solution {
+    padding:40px;
+}
+
+#Solution canvas{
+    /* margin-top:50px; */
+    top:130px;
+    left:75px;
+}
+
+.live-video-wrapper {
+    height:550px;
+    border-radius: 30px;
+    border:2px solid black;
+    box-shadow: 15px 15px 0px 0px #3bd641;
+    margin: 0;
+    padding: 20px;
+}
+
+.live-video {
+    height:480px;
+    background: radial-gradient(circle, #268bff, black);
+    border-radius:30px;
+    border:2px solid black;
+}
+
+.recorded-video-wrapper {
+    width:700px;
+    border-radius: 30px;
+    border:2px solid black;
+    box-shadow: 15px 15px 0px 0px #3bd641;
+    margin: 0;
+    padding: 30px;
+}
+
+.recorded-video {
+    border-radius:30px;
+    border:2px solid black;
+}
+
+.recorded-video-placeholder-title {
+    margin-top:120px;
+    font-weight:bold;
+    font-size:40px;
+}
+
+.recorded-video-placeholder-content {
+    font-weight:bold;
+    font-size:20px;
+}
