@@ -101,7 +101,6 @@ public class MemberController {
     @PostMapping("/sign-in")
     public ApiResponse signIn(@RequestBody SignInRequest request, HttpServletResponse httpServletResponse) {
         log.info("로그인 시작");
-
         SignInResponse signInResponse = memberService.signIn(request);
 
         // Redis에 저장
@@ -121,10 +120,12 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/logout")
-        public ApiResponse logout (HttpServletRequest servletRequest){
-            Cookie[] list = servletRequest.getCookies();
+        public ApiResponse logout (HttpServletRequest request){
+//        log.info(cookie);
+            Cookie[] list = request.getCookies();
             if(list != null){
                 for(Cookie cookie : list){
+                    log.info(cookie.getName());
                     if(cookie.getName().equals("Set-Cookie")){
                         log.info("cookieValue={}", cookie.getValue());
                         refreshTokenService.delValues(cookie.getValue()); // Redis에 저장된 refreshToken 삭제

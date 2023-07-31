@@ -99,7 +99,7 @@ const Kakao = (props) => {
       // 로그인 정보
       const data = {
         id: email,
-        password: null,
+        password: "1234",
         isKakao: true
       };
       const apiUrl = "http://localhost:8080/members/sign-in"

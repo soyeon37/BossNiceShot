@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.metamodel.model.domain.internal.MapMember;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.mail.MailException;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -72,19 +73,22 @@ public class MemberService{
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(request.id(), request.password());
         log.info("authenticationToken={}", authenticationToken);
 
-        if(request.isKakao()){
-            log.info("Kakao Login");
-            // 사용자 정보 유무 확인
-            log.info(request.id());
-            Optional<Member> member = memberRepository.findById(request.id());
-            if(member.isEmpty()){
-                throw new UserAuthException(ExceptionMessage.USER_NOT_FOUND);
-            }
-            TokenInfo tokenInfo = jwtTokenProvider.generateToken(authenticationToken);
-
-            return new SignInResponse(request.id(), tokenInfo);
-
-        }else{
+//        if(request.isKakao()){
+//            log.info("Kakao Login");
+//            // 사용자 정보 유무 확인
+//            log.info(request.id());
+//            Optional<Member> member = memberRepository.findById(request.id());
+//
+////            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+////            log.info(String.valueOf(authentication));
+//            if(member.isEmpty()){
+//                throw new UserAuthException(ExceptionMessage.USER_NOT_FOUND);
+//            }
+//            TokenInfo tokenInfo = jwtTokenProvider.generateToken(authenticationToken);
+//
+//            return new SignInResponse(request.id(), tokenInfo);
+//
+//        }else{
             log.info("Email Login");
             // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
             // authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
@@ -101,7 +105,7 @@ public class MemberService{
             // 3. 인증 정보를 기반으로 JWT 토큰 생성
             TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
             return new SignInResponse(request.id(), tokenInfo);
-        }
+//        }
     }
 
     @Transactional

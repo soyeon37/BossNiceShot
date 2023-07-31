@@ -1,6 +1,7 @@
 package com.ssafy.domain.Notification.entity;
 
 import com.ssafy.domain.Member.entity.Member;
+import com.ssafy.domain.study.entity.Coaching;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,16 +17,23 @@ public class NotificationCoaching {
     private Long id;
 
     // 코칭글 알림 수신자 id
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "follower_id")
+    private Member follower;
 
     // 코칭글 알림 발신자 id
-    @Column(nullable = false)
-    private String followee;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "followee_id")
+    private Member followee;
+
     // 코칭글 id
-//    @ManyToOne
-//    @JoinColumn(name = "coaching_id")
-//    private Coaching coaching;
+    @ManyToOne
+    @JoinColumn(name = "coaching_id")
+    private Coaching coaching;
+
+    public NotificationCoaching(Member follower, Member followee){
+        this.follower = follower;
+        this.followee = followee;
+    }
 
 }

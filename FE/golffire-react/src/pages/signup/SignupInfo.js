@@ -92,6 +92,9 @@ const SignupInfo = () => {
       isKakao: isKakao,
     }
     console.log('isKakao: ',isKakao);
+    if(isKakao){
+      data.password = "1234";
+    }
     const apiUrl = "http://localhost:8080/members/sign-up"
     axios
       .post(apiUrl, data)
