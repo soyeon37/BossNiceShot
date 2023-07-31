@@ -188,6 +188,7 @@ public class MemberController {
     public ApiResponse reissue(@RequestBody ReIssueRequest request, HttpServletRequest servletRequest){
         log.info("토큰 재발급 시작");
         Cookie[] list = servletRequest.getCookies();
+
         for(Cookie cookie : list){
             if(cookie.getName().equals("Set-Cookie")){
                 log.info("refreshToken={}",cookie.getValue());
