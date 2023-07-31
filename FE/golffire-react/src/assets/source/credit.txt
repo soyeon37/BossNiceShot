@@ -1,6 +1,8 @@
 [icons]
 golf
 <a href="https://www.flaticon.com/free-icons/golf" title="golf icons">Golf icons created by Freepik - Flaticon</a>
+no-image
+<a href="https://www.flaticon.com/free-icons/no-photo" title="no-photo icons">No-photo icons created by Those Icons - Flaticon</a>
 
 [imgs]
 golfball
