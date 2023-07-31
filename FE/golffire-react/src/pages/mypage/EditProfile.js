@@ -1,8 +1,8 @@
 import React from "react";
-import MyPageNavbar from "./MyPageNavbar";
-
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import MyPageNavbar from "./MyPageNavbar";
+import "./MyPage.css";
 
 function EditProfile() {
 
