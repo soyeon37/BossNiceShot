@@ -191,7 +191,7 @@
                                 <td align="center" style="font-size:0px;padding:10px 25px;padding-bottom:40px;word-break:break-word;">
 
                                     <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:28px;font-weight:bold;line-height:1;text-align:center;color:#555;">
-                                        Welcome to <span th:text="${name}" th:remove="tag"></span>
+                                        환영합니다 <span th:text="${name}" th:remove="tag"></span>님!
                                     </div>
 
                                 </td>
@@ -201,8 +201,9 @@
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
 
                                     <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:22px;text-align:left;color:#555;">
-                                        Hello {<span th:text="${name}" th:remove="tag"></span>!<br></br>
-                                        Thank you for signing up for <span th:text="${name}" th:remove="tag"></span>. We're really happy to have you! Click the link below to login to your account:
+                                        안녕하세요, <span th:text="${name}" th:remove="tag"></span>님!<br></br>
+                                        사장님 나이스 샷에 회원가입을 진행하기 위해,<br>
+                                        발급한 인증번호를 입력해주세요.<br>
                                     </div>
 
                                 </td>
@@ -215,7 +216,7 @@
                                         <tr>
                                             <td align="center" bgcolor="#2F67F6" role="presentation" style="border:none;border-radius:3px;color:#ffffff;cursor:auto;padding:15px 25px;" valign="middle">
                                                 <p style="background:#2F67F6;color:#ffffff;font-family:'Helvetica Neue',Arial,sans-serif;font-size:15px;font-weight:normal;line-height:120%;Margin:0;text-decoration:none;text-transform:none;">
-                                                    Login to Your Account
+                                                    <span th:text="${authNum}" th:remove="tag"></span>
                                                 </p>
                                             </td>
                                         </tr>
@@ -228,7 +229,7 @@
                                 <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
 
                                     <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:14px;line-height:20px;text-align:left;color:#525252;">
-                                        Best regards,<br><br> Csaba Kissi<br>Elerion ltd., CEO and Founder<br>
+                                        발신인<br><br> 사장님 나이스 샷<br>관리자<br>
                                         <a href="https://www.htmlemailtemplates.net" style="color:#2F67F6">htmlemailtemplates.net</a>
                                     </div>
 
@@ -296,7 +297,7 @@
                                             <td align="center" style="font-size:0px;padding:0;word-break:break-word;">
 
                                                 <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:300;line-height:1;text-align:center;color:#575757;">
-                                                    Some Firm Ltd, 35 Avenue. City 10115, USA
+                                                    대한민국 서울특별시 강남구 역삼대로
                                                 </div>
 
                                             </td>

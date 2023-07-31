@@ -33,7 +33,8 @@ const SignupEmail2 = (props) => {
           email: email,
           password: password,
           image: NoImg,
-          nickname: ""
+          nickname: "",
+          isKakao: false
         }
       });
     } else {

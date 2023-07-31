@@ -1,5 +1,7 @@
 package com.ssafy.config.security.jwt;
 
+import com.ssafy.Exception.message.ExceptionMessage;
+import com.ssafy.Exception.model.TokenCheckFailException;
 import io.jsonwebtoken.Jwt;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -33,7 +35,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         logRequest(request);
 
         if(request.getRequestURI().equals("/members/sign-in") || request.getRequestURI().equals("/members/sign-up")
-                || request.getRequestURI().equals("/members/sendEmailVerification")){
+                || request.getRequestURI().equals("/members/sendEmailVerification")
+                || request.getRequestURI().equals("/members/checkEmail")
+                || request.getRequestURI().equals("/members/code")
+                || request.getRequestURI().equals("/members/checkNickname")){
+            log.info("권한 허가");
             chain.doFilter(request, response);
             return;
         }
@@ -50,8 +56,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }else{
             log.error("유효하지 않은 토큰입니다.");
-            response.sendError(HttpStatus.BAD_REQUEST.value(), "Token Invalidate");
-            return;
+            throw new TokenCheckFailException(ExceptionMessage.FAIL_TOKEN_CHECK);
         }
         chain.doFilter(request, response);
     }
@@ -68,13 +73,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     // Request Header 에서 Access Token 정보 추출
     private String resolveAccessToken(HttpServletRequest request) {
         log.info("headers={}",request.getHeaderNames());
-        Enumeration eHeader = request.getHeaderNames();{
-            while(eHeader.hasMoreElements()){
-                String requestName = (String) eHeader.nextElement();
-                String requestValue = request.getHeader(requestName);
-                System.out.println("requestName : "+requestName+" | requestValue : "+requestValue);
-            }
+        Enumeration eHeader = request.getHeaderNames();
+        while(eHeader.hasMoreElements()){
+            String requestName = (String) eHeader.nextElement();
+            String requestValue = request.getHeader(requestName);
+            System.out.println("requestName : "+requestName+" | requestValue : "+requestValue);
         }
+
         String bearerToken = request.getHeader("Authorization");
         log.info("authorization={}",request.getHeader("Authorization"));
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
@@ -82,16 +87,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         return null;
     }
-
     // Request Header 에서 Refresh Token 정보 추출
-    private String resolveRefreshToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader("RefreshToken");
-        log.info("RefreshToken={}",request.getHeader("RefreshToken"));
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
-
-
+//    private String resolveRefreshToken(HttpServletRequest request) {
+//        String bearerToken = request.getHeader("RefreshToken");
+//        log.info("RefreshToken={}",request.getHeader("RefreshToken"));
+//        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
+//            return bearerToken.substring(7);
+//        }
+//        return null;
+//    }
 }
