@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react"
 import { useCookies } from 'react-cookie';
 import { NavLink } from "react-router-dom"
 import { IoMdContact } from 'react-icons/io'
+import axios from 'axios';
+
 import AlertPage from "./alert/AlertPage";
+
 import "./styles.css"
 import {
     Menu,
@@ -33,6 +36,20 @@ function Navbar() {
         // 추후 서버로 token 정보를 보내 유효한지 확인한 뒤 true로 만들기
     }, [cookies]);
 
+    const handleLogout = () => {
+        axios.get('/api/users/logout')
+        .then(response => {
+            if(response.data.success){
+                // 여기서 로그아웃
+                // 쿠키 그런거 다 지우기
+                // main으로 돌아가기
+                
+            } else {
+                alert('Error')
+            }
+        })
+    };
+    
     return (
         <nav className="nav">
             <a href="/" className="site-title">
@@ -122,7 +139,9 @@ function Navbar() {
                                 </MenuItem>
                                 <MenuItem>친구/채팅</MenuItem>
                                 <MenuDivider />
-                                <MenuItem style={{ color: "gray" }}>로그아웃</MenuItem>
+                                <MenuItem style={{ color: "gray" }} onClick={handleLogout}>
+                                    로그아웃
+                                    </MenuItem>
                             </MenuGroup>
                             {/* test code end */}
 
