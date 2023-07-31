@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { useCookies } from 'react-cookie';
-
+import { NavLink } from "react-router-dom"
+import { IoMdContact } from 'react-icons/io'
+import AlertPage from "./alert/AlertPage";
 import "./styles.css"
 import {
     Menu,
@@ -15,8 +17,6 @@ import {
     forwardRef,
     IconButton
 } from '@chakra-ui/react'
-import { IoMdContact } from 'react-icons/io'
-import { NavLink } from "react-router-dom"
 
 function Navbar() {
     const [isActive, setIsActive] = useState(false);
@@ -163,6 +163,9 @@ function Navbar() {
                             </MenuGroup>)}
                         </MenuList>
                     </Menu>
+                </li>
+                <li>
+                    <AlertPage />
                 </li>
             </ul>
         </nav>

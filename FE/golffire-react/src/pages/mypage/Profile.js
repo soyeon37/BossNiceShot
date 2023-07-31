@@ -1,12 +1,16 @@
 import React from "react";
 import MyPageNavbar from "./MyPageNavbar";
+import "./MyPage.css";
 
 function Profile() {
     return (
-        <div id="Profile">
+        <div id="MyPage">
+
             <MyPageNavbar />
-            Profile
-            
+            <div id="Profile">
+                Profile
+            </div>
+
         </div >
     );
 }

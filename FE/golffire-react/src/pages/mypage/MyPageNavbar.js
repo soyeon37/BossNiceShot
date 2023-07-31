@@ -14,6 +14,14 @@ function MyPageNavbar() {
                         };
                     }}>나의 정보</NavLink>
                 </li>
+
+                <li>
+                    <NavLink to="/mypage/myaccompany" style={({ isActive, isPending }) => {
+                        return {
+                            fontWeight: isActive ? "bold" : "",
+                        };
+                    }}>나의 동행</NavLink>
+                </li>
                 
                 <li>
                     <NavLink to="/mypage/editprofile" style={({ isActive, isPending }) => {
@@ -22,7 +30,7 @@ function MyPageNavbar() {
                         };
                     }}>정보 수정</NavLink>
                 </li>
-                
+
                 <li>
                     <NavLink to="/mypage/editpassword" style={({ isActive, isPending }) => {
                         return {
@@ -30,7 +38,7 @@ function MyPageNavbar() {
                         };
                     }}>비밀번호 변경</NavLink>
                 </li>
-                
+
                 <li>
                     <NavLink to="/mypage/signout" style={({ isActive, isPending }) => {
                         return {
@@ -38,7 +46,7 @@ function MyPageNavbar() {
                         };
                     }}>탈퇴하기</NavLink>
                 </li>
-                
+
             </nav>
         </div>
     );
