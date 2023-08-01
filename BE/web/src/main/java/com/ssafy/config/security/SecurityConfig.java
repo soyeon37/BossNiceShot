@@ -50,7 +50,8 @@ public class SecurityConfig {
             "/solution/detect",
             "/members/**",
             "/chat/**",
-            "/auth/**"
+            "/auth/**",
+            "/ws/**"
 
     };
     private static final String[] USER_LIST = {

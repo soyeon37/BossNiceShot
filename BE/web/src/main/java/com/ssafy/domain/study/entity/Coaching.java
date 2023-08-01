@@ -23,13 +23,18 @@ public class Coaching extends Study {
     private Integer capacity;
 
     public Coaching(String title, String description, Integer password, Member member, LocalDateTime reservedTime, int capacity) {
-        super(title, description, password, member);
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setPassword(password);
+        this.setMember(member);
         this.reservedTime = reservedTime;
         this.capacity = capacity;
     }
 
     public void update(String title, String description, Integer password, LocalDateTime reservedTime, int capacity) {
-        super.update(title, description, password);
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setPassword(password);
         this.reservedTime = reservedTime;
         this.capacity = capacity;
     }

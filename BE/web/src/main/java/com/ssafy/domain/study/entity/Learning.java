@@ -11,6 +11,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Learning extends Study{
     public Learning(String title, String description, Integer password, Member member) {
-        super(title, description, password, member);
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setPassword(password);
+        this.setMember(member);
+    }
+
+    public void update(String title, String description, Integer password) {
+        this.setTitle(title);
+        this.setDescription(description);
+        this.setPassword(password);
     }
 }

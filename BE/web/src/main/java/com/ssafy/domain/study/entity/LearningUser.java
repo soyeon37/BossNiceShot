@@ -2,23 +2,27 @@ package com.ssafy.domain.study.entity;
 
 import com.ssafy.domain.Member.entity.Member;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-public class StudyUser {
+@NoArgsConstructor
+public class LearningUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "study_id", insertable = false, updatable = false)
-    private Study study;
+    @JoinColumn(name = "learning_id")
+    private Learning learning;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    public LearningUser(Learning learning, Member member) {
+        this.learning = learning;
+        this.member = member;
+    }
 }

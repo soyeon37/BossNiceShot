@@ -3,19 +3,13 @@ package com.ssafy.domain.study.entity;
 import com.ssafy.audit.BaseTime;
 import com.ssafy.domain.Member.entity.Member;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
-@Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn
+@Setter
+@MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public class Study extends BaseTime {
     @Id
@@ -34,20 +28,4 @@ public class Study extends BaseTime {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "study", cascade = CascadeType.ALL)
-    private List<StudyUser> users = new ArrayList<>();
-
-    public Study(String title, String description, Integer password, Member member) {
-        this.title = title;
-        this.description = description;
-        this.password = password;
-        this.member = member;
-    }
-
-    public void update(String title, String description, Integer password) {
-        this.title = title;
-        this.description = description;
-        this.password = password;
-    }
 }
