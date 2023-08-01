@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import MyPageNavbar from "./MyPageNavbar";
 import "./MyPage.css";
+import axios from "axios";
 
 function EditPassword() {
     const [passOrigin, setPassOrigin] = useState("");
     const [passNew, setPassNew] = useState("");
     const [passCheck, setPassCheck] = useState("");
+
+    // 카카오 계정이면 비밀번호 변경 불가 코드 작성 필요
 
     // 현재 비밀번호 입력 감지
     const handlePassOrigin = (e) => {
@@ -27,6 +30,23 @@ function EditPassword() {
         console.log("passOrigin: ", passOrigin);
         console.log("passNew: ", passNew);
         console.log("passCheck: ", passCheck);
+        const apiUrl = 'http://localhost:8080/members/updatePassword'
+        const data = {
+            passOrigin : passOrigin,
+            passNew : passNew
+        }
+        axios.put(apiUrl, data)
+        .then((response) => {
+            console.log(response);
+            if(response.data.data.resultMessage === "SUCCESS"){
+                alert('비밀번호 변경에 성공했습니다.');
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+             alert('비밀번호 변경에 실패했습니다.');
+        })
+
     };
 
     return (

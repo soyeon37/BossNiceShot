@@ -87,7 +87,8 @@ const Kakao = (props) => {
             state:{
                 email: email,
                 image: image,
-                nickname: nickname
+                nickname: nickname,
+                isKakao: true
             }
         });
         }
