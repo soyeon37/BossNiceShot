@@ -22,6 +22,8 @@ public interface CompanionRepository extends JpaRepository<Companion, Long> {
     //티박스로 검색
     List<Companion> findByTeeBox(TeeBox teeBox);
 
+    void deleteById(Long id);
+
     //팔로잉한 사람들이 동행 모집을 올렸는지 검색
 //    List<Companion> findCompanionByFollowerId(String followerId);
 
