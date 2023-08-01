@@ -23,7 +23,7 @@ public class CompanionUser {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "companion_Id")
+    @JoinColumn(name = "companion_id")
     private Companion companion;
 
     @Builder
