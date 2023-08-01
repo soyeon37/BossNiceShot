@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { useCookies } from 'react-cookie';
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { IoMdContact } from 'react-icons/io'
 import axios from 'axios';
 
@@ -23,9 +23,9 @@ import {
 
 function Navbar() {
     const [isActive, setIsActive] = useState(false);
-
+    const navigate = useNavigate();
     // cookie의 user 정보 확인
-    const [cookies] = useCookies(['user']);
+    const [cookies, setCookie] = useCookies(['refreshToken']);
     // 로그인 여부를 나타내는 변수, false로 초기화
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -37,15 +37,18 @@ function Navbar() {
     }, [cookies]);
 
     const handleLogout = () => {
+        console.log('cookies.refreshToken:',cookies.refreshToken);
+      
         const apiUrl = 'http://localhost:8080/members/logout'
-        axios.post(apiUrl)
+        const data = {
+            refreshToken : cookies.refreshToken
+        }
+        axios.post(apiUrl, data)
         .then(response => {
             console.log(response);
-            if(response.data.success){
-                // 여기서 로그아웃
-                // 쿠키 그런거 다 지우기
-                // main으로 돌아가기
-                
+            if(response.data.data === "SUCCESS"){
+                setCookie('refreshToken', cookies.refreshToken, {path: '/', maxAge: 0});
+                navigate('/');
             } else {
                 alert('Error')
             }

@@ -12,7 +12,7 @@ const Kakao = (props) => {
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
   const [image, setImage] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(["user"]);
+  const [cookies, setCookie] = useCookies(['refreshToken']);
 
   let params = new URL(document.URL).searchParams; // get query string
   let CODE = params.get("code");
@@ -113,7 +113,7 @@ const Kakao = (props) => {
         const access_token = response.data.data.token.accessToken;
         const refresh_token = response.data.data.token.refreshToken;
         axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-        setCookie('Set-Cookie', refresh_token, { path: '/' , maxAge: new Date().getDate() + 60 * 60 * 24 *14 });
+        setCookie('refreshToken', refresh_token, { path: '/' , maxAge: new Date().getDate() + 60 * 60 * 24 *14 });
 
         navigate('/');
       })
