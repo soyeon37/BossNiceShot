@@ -8,14 +8,14 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public record CompanyCreate(@NotNull String title,
-                            String contents,
-                            @NotNull Integer field,
-                            @NotNull TeeBox teeBox,
-                            @NotNull Integer aimPeople,
-                            @NotNull Integer currentPeople,
-                            @NotNull String teeupDate,
-                            @NotNull String endDate) {
+public record CompanionCreate(@NotNull String title,
+                              String contents,
+                              @NotNull Integer field,
+                              @NotNull TeeBox teeBox,
+                              @NotNull Integer aimPeople,
+                              @NotNull Integer currentPeople,
+                              @NotNull String teeupDate,
+                              @NotNull String endDate) {
     public Companion toCompanion(Member member) {
         return Companion.builder()
                 .title(title)
