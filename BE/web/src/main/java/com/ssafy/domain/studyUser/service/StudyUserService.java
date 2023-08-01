@@ -1,9 +1,10 @@
-package com.ssafy.domain.study.service;
+package com.ssafy.domain.studyUser.service;
 
 import com.ssafy.domain.Member.service.MemberService;
-import com.ssafy.domain.study.dto.request.StudyUserRequest;
-import com.ssafy.domain.study.entity.StudyUser;
-import com.ssafy.domain.study.repository.StudyUserRepository;
+import com.ssafy.domain.study.service.StudyService;
+import com.ssafy.domain.studyUser.dto.request.StudyUserRequest;
+import com.ssafy.domain.studyUser.entity.StudyUser;
+import com.ssafy.domain.studyUser.repository.StudyUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

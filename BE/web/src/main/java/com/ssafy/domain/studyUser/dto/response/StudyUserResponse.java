@@ -1,6 +1,6 @@
-package com.ssafy.domain.study.dto.response;
+package com.ssafy.domain.studyUser.dto.response;
 
-import com.ssafy.domain.study.entity.StudyUser;
+import com.ssafy.domain.studyUser.entity.StudyUser;
 import jakarta.validation.constraints.NotNull;
 
 public record StudyUserResponse(@NotNull Long studyId,
