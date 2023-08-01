@@ -44,16 +44,12 @@ public class Study extends BaseTime {
 
     private Integer password;
 
-<<<<<<< HEAD
-    //
-=======
     @Enumerated(EnumType.STRING)
     private Status status;
 
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     private List<StudyUser> studyUsers = new ArrayList<>();
 
->>>>>>> 2cc68f06b9f0b279e4882d454cb49900723b166a
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;

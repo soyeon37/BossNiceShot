@@ -1,7 +1,7 @@
 package com.ssafy.domain.Notification.entity;
 
 import com.ssafy.domain.Member.entity.Member;
-import com.ssafy.domain.study.entity.Coaching;
+import com.ssafy.domain.study.entity.Study;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -29,7 +29,7 @@ public class NotificationCoaching {
     // 코칭글 id
     @ManyToOne
     @JoinColumn(name = "coaching_id")
-    private Coaching coaching;
+    private Study coaching;
 
     public NotificationCoaching(Member follower, Member followee){
         this.follower = follower;

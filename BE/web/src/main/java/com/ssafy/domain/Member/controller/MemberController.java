@@ -134,7 +134,7 @@ public class MemberController {
         return ApiResponse.success(memberService.updateMember(request, memberId));
     }
 
-    @Operation(summary = "회원 정보 수정", description = "회원 정보를 수정한다.")
+    @Operation(summary = "회원 비밀번호 수정", description = "회원 비밀번호를 수정한다.")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 실패"),
