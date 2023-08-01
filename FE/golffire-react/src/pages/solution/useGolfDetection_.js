@@ -1,23 +1,21 @@
 // useGolfDetection.js
 import { useEffect } from 'react';
 
-export default function useGolfDetection_(videoRef, canvasRef, setIsRecordingDone, setVideoURL, golfStanceSatisfied, golfStanceCount) {
+export default function useGolfDetection_(videoRef, canvasRef, setIsRecordingDone, setVideoURL, golfStanceSatisfied, golfStanceCount, setScore, setIsReady, setIsAnalyzing, setAnalysisVideoURL) {
     // Define your state variables
     let color = "white";
     let mediaRecorder;
     let recordedChunks = [];
     let isReady = false;
-    let initialShoulderMiddlePointX = 0;
-    let initialShoulderMiddlePointY = 0;
-    let initialWristMiddlePointX = 0;
-    let initialWristMiddlePointY = 0;
+    let isAnalyzing = false;
     let a = 1; // 타원 공식 a값
     let b = 1; // 타원 공식 b값
+    let a2 = 1;
+    let b2 = 1;
+    let myEllipseScore = 1;
 
     useEffect(() => {
         let count_time = null;
-
-
         navigator.mediaDevices.getUserMedia({video: true, audio: false}).then(function (stream) {
             const video = videoRef.current;
             const canvas = canvasRef.current;
@@ -55,18 +53,23 @@ export default function useGolfDetection_(videoRef, canvasRef, setIsRecordingDon
                         canvas.height = video.height;
 
                         // 키포인트와 스켈레톤 그리기
-                        drawKeypoints(pose.keypoints, 0.6, context);
-                        drawSkeleton(pose.keypoints, 0.6, context);
-
-                        // const isReady = golfStanceSatisfied.current && golfStanceCount.current >= 5;
+                        if(!isReady && !isAnalyzing) {
+                            drawKeypoints(pose.keypoints, 0.6, context);
+                            drawSkeleton(pose.keypoints, 0.6, context);
+                        }
+                        
                         const isPull = checkIsPull(pose);
                         const isPush = checkIsPush(pose);
                         
-                        if (isReady) {
-                            context.beginPath();
-                            context.arc(50, 50, 20, 0, 2 * Math.PI, false);
-                            context.fillStyle = 'red';
-                            context.fill();
+                        if (isReady && !isAnalyzing) {
+                            // context.beginPath();
+                            // context.arc(320, 240, 60, 0, 2 * Math.PI, false);
+                            // context.fillStyle = 'green';
+                            // context.fill();
+
+                            // context.font = "bold 50px Rancho";
+                            // context.fillStyle = "#3bd641";
+                            // context.fillText("READY", 260, 240 + 10);
 
                             if (b == 1) {
                                 const leftShoulder = pose.keypoints[5].position;
@@ -76,35 +79,41 @@ export default function useGolfDetection_(videoRef, canvasRef, setIsRecordingDon
                                 const currentShoulderMiddlePointY = (leftShoulder.y + rightShoulder.y) / 2;
                                 const currentWristMiddlePointY = (leftWrist.y + rightWrist.y) / 2;
 
-                                b = Math.abs(currentWristMiddlePointY - currentShoulderMiddlePointY); // 타원 공식 b값
+                                // b = Math.abs(currentWristMiddlePointY - currentShoulderMiddlePointY); // 타원 공식 b값
+                                b = Math.abs(rightWrist.y - currentShoulderMiddlePointY);
                             }
                         }
 
                         // 녹화 시작 조건
-                        if (isReady && isPull && mediaRecorder.state !== "recording") {
+                        if (isReady && isPull && mediaRecorder.state !== "recording" && !isAnalyzing) {
                             mediaRecorder.start();
 
                             const leftShoulder = pose.keypoints[5].position;
                             const rightShoulder = pose.keypoints[6].position;
                             const leftWrist = pose.keypoints[9].position;
                             const rightWrist = pose.keypoints[10].position;
-                            
-                            initialShoulderMiddlePointX = (leftShoulder.x + rightShoulder.x) / 2;
-                            initialShoulderMiddlePointY = (leftShoulder.y + rightShoulder.y) / 2;
-                            initialWristMiddlePointX = (leftWrist.x + rightWrist.x) / 2;
-                            initialWristMiddlePointY = (leftWrist.y + rightWrist.y) / 2;
+                            const currentShoulderMiddlePointX = (leftShoulder.x + rightShoulder.x) / 2;
+                            const currentShoulderMiddlePointY = (leftShoulder.y + rightShoulder.y) / 2;
+                            const currentWristMiddlePointX = (leftWrist.x + rightWrist.x) / 2;
+                            const currentWristMiddlePointY = (leftWrist.y + rightWrist.y) / 2;
 
-                            a = Math.abs(initialWristMiddlePointX - initialShoulderMiddlePointX); // 타원공식의 a값
+                            a = Math.abs(rightWrist.x - currentShoulderMiddlePointX); // 타원공식의 a값
                         }
 
                         // 녹화 종료 조건
-                        if (isReady && isPush && mediaRecorder.state === "recording") {
+                        if (isReady && isPush && mediaRecorder.state === "recording" && !isAnalyzing) {
+                            
                             mediaRecorder.stop();
                             golfStanceSatisfied.current = false;
                             golfStanceCount.current = 0;
                             isReady = false;
-                            // b = 1;
-                            // a = 1;
+                            isAnalyzing = true;
+                            setIsReady(false);
+                            setIsAnalyzing(true);
+                            a2 = a;
+                            b2 = b;
+                            b = 1;
+                            a = 1;
                         }
 
                         // 스탠스자세검사 함수 호출
@@ -119,7 +128,7 @@ export default function useGolfDetection_(videoRef, canvasRef, setIsRecordingDon
                 if (golfStanceSatisfied.current) {
                     golfStanceCount.current += 1;
             
-                    if (golfStanceCount.current >= 5 && isReady === false) {
+                    if (golfStanceCount.current >= 4 && !isReady && !isAnalyzing) {
 
                         // Initialize the MediaRecorder
                         const stream = videoRef.current.srcObject;
@@ -131,6 +140,7 @@ export default function useGolfDetection_(videoRef, canvasRef, setIsRecordingDon
                         };
 
                         isReady = true;
+                        setIsReady(true);
                     }
                 }
             }, 1000);
@@ -172,11 +182,9 @@ export default function useGolfDetection_(videoRef, canvasRef, setIsRecordingDon
 
         setIsRecordingDone(true); // Set the state to true when the recording stops
     }
-    
-    
+
+    // 스탠스 자세 인식
     function check_GolfStance(pose) {
-    
-        // point 추출
         let nose = pose.keypoints[0].position;
         let leftEye = pose.keypoints[1].position;
         let rightEye = pose.keypoints[2].position;
@@ -214,17 +222,14 @@ export default function useGolfDetection_(videoRef, canvasRef, setIsRecordingDon
     
         // 오른쪽 어깨가 왼쪽 어깨 밑에 존재
         let rightShoulderBelowlLeftShoulder = (rightShoulder.y >= leftShoulder.y);
-                                    
     
         // 모든 조건을 만족할 때 선 색상을 연두색으로 변경
         if(elbowsInsideShoulders && wristsInsideElbows && headInsideShoulders  && rightShoulderBelowlLeftShoulder) {
-            // console.log("골프 스탠스 자세 완료");
-            color = "#4dff94";
+            color = "#22ff05";
             golfStanceSatisfied.current = true;
     
         } else {
-            // console.log("스탠스 자세를 취해주세요");
-            color = "white";
+            color = "#ffe000";
             golfStanceSatisfied.current = false;
             golfStanceCount.current = 0;
         }
@@ -235,11 +240,9 @@ export default function useGolfDetection_(videoRef, canvasRef, setIsRecordingDon
         const rightWrist = pose.keypoints[10].position;
         const rightShoulder = pose.keypoints[6].position;
         const leftShoulder = pose.keypoints[5].position;
-
         const wristMiddlePointX = (leftWrist.x + rightWrist.x) / 2;
         const wristMiddlePointY = (leftWrist.y + rightWrist.y) / 2;
-
-        // return rightWrist.x < rightShoulder.x;
+        // return rightWrist.x <= rightShoulder.x; // 쪽팔림 방지용 오른손만 인식
         return wristMiddlePointX <= rightShoulder.x && wristMiddlePointY <= leftShoulder.y;
     }
 
@@ -248,103 +251,98 @@ export default function useGolfDetection_(videoRef, canvasRef, setIsRecordingDon
         const rightWrist = pose.keypoints[10].position;
         const rightShoulder = pose.keypoints[6].position;
         const leftShoulder = pose.keypoints[5].position;
-
         const wristMiddlePointX = (leftWrist.x + rightWrist.x) / 2;
         const wristMiddlePointY = (leftWrist.y + rightWrist.y) / 2;
-
-        // return rightWrist.x > leftShoulder.x;
+        // return rightWrist.x > leftShoulder.x;  // 쪽팔림 방지용 오른손만 인식
         return wristMiddlePointX >= leftShoulder.x && wristMiddlePointY <= rightShoulder.y;
     }
 
     function loadRecordedVideoForAnalysis(videoURL) {
         const recordedVideo = document.createElement('video');
         recordedVideo.src = videoURL;
-        recordedVideo.preload = 'auto'; // Preload the video
-        recordedVideo.width = 640; // Adjust the width to match your video
-        recordedVideo.height = 480; // Adjust the height to match your video
-    
-        // Wait for the video to be ready to play
-        recordedVideo.addEventListener('canplay', () => {
+        recordedVideo.preload = 'auto';
+        recordedVideo.width = 640;
+        recordedVideo.height = 480;
+        recordedVideo.playbackRate = 0.1; // Play at half speed
+        let totalCnt = 1;
+        let onEllipseCnt = 1;
+
+        const analysisCanvas = document.createElement('canvas');
+        analysisCanvas.width = 640;
+        analysisCanvas.height = 480;
+        const analysisContext = analysisCanvas.getContext('2d');
+
+        const analysisStream = analysisCanvas.captureStream();
+        const analysisMediaRecorder = new MediaRecorder(analysisStream);
+        const analysisChunks = [];
+
+        analysisMediaRecorder.ondataavailable = (e) => {
+            if (e.data.size > 0) {
+                analysisChunks.push(e.data);
+            }
+        };
+
+        analysisMediaRecorder.onstop = () => {
+            const analysisBlob = new Blob(analysisChunks, { type: 'video/webm; codecs=vp9' });
+            const analysisVideoURL = URL.createObjectURL(analysisBlob);
+            setAnalysisVideoURL(analysisVideoURL);
+            console.log(analysisVideoURL);
+        };
+
+        recordedVideo.addEventListener('canplaythrough', () => {
             window.posenet.load().then((model) => {
-                recordedVideo.play();
-                function analyzeFrame() {
+                analysisMediaRecorder.start(); // Start recording the analysis canvas
+                recordedVideo.play(); // Start playing the video
+                recordedVideo.addEventListener('timeupdate', () => {
+                    if (recordedVideo.paused || recordedVideo.ended) return; // Ignore if paused or ended
                     model.estimateSinglePose(recordedVideo).then((pose) => {
-                        analyzePose(pose);
-                        
-                        if (!recordedVideo.paused && !recordedVideo.ended) {
-                            requestAnimationFrame(analyzeFrame); // Continue analyzing next frame
-                        }
+                        totalCnt++;
+                        onEllipseCnt += analyzePose(pose);
+                        // Draw keypoints and skeleton on the analysis canvas
+                        drawKeypoints(pose.keypoints, 0.6, analysisContext);
+                        drawSkeleton(pose.keypoints, 0.6, analysisContext);
                     });
-                }
-                analyzeFrame(); // Start analyzing frames
+                });
+                recordedVideo.addEventListener('ended', () => {
+                    analysisMediaRecorder.stop(); // Stop recording the analysis canvas
+
+                    myEllipseScore = Math.round(onEllipseCnt / totalCnt * 100);
+                    console.log(myEllipseScore);
+                    setScore(myEllipseScore);
+                    setIsAnalyzing(false);
+                    isAnalyzing = false;
+
+                    
+
+                });
             });
         });
-
-        a = 1;
-        b = 1;
     }
-        
-    //     // recordedVideo.onloadeddata = () => {
-    //     //     window.posenet.load().then((model) => {
-    //     //         recordedVideo.play();
-    //     //         function analyzeFrame() {
-    //     //             model.estimateSinglePose(recordedVideo).then((pose) => {
-    //     //                 analyzePose(pose);
-    //     //                 // console.log(analyzePose(pose));
-    //     //                 // console.log(a, b);
-    //     //                 // const analysisResult = analyzePose(pose);
-    //     //                 // console.log(analysisResult.isLeftWristOnEllipse);
-    //     //                 // console.log('Left wrist on ellipse:', analysisResult.isLeftWristOnEllipse);
-    //     //                 // console.log('Right wrist on ellipse:', analysisResult.isRightWristOnEllipse);
-    
-    //     //                 if (!recordedVideo.paused && !recordedVideo.ended) {
-    //     //                     requestAnimationFrame(analyzeFrame); // Continue analyzing next frame
-    //     //                 }
-    //     //             });
-    //     //         }
-    //     //         analyzeFrame(); // Start analyzing frames
-    //     //     });
-    //     // };
-
-    //     a = 1;
-    //     b = 1;
-    // }
 
     // New function to analyze the pose
     function analyzePose(recordedPose) {
-        console.log(recordedPose);
         const leftShoulder = recordedPose.keypoints[5].position;
         const rightShoulder = recordedPose.keypoints[6].position;
         const leftWrist = recordedPose.keypoints[9].position;
         const rightWrist = recordedPose.keypoints[10].position;
-
         const shoulderMiddlePointX = (leftShoulder.x + rightShoulder.x) / 2;
         const shoulderMiddlePointY = (leftShoulder.y + rightShoulder.y) / 2;
         const wristMiddlePointX = (leftWrist.x + rightWrist.x) / 2;
         const wristMiddlePointY = (leftWrist.y + rightWrist.y) / 2;
-
-        // const a = 1; // Semi-major axis (you can adjust this)
-        // const b = 1; // Semi-minor axis (you can adjust this)
-
-        const ellipseFactor = checkPointOnEllipse(wristMiddlePointX, wristMiddlePointY, shoulderMiddlePointX, shoulderMiddlePointY, a, b)
-        // const isLeftWristOnEllipse = checkPointOnEllipse(leftWrist.x, leftWrist.y, shoulderMiddlePointX, shoulderMiddlePointY, a, b);
-        // const isRightWristOnEllipse = checkPointOnEllipse(rightWrist.x, rightWrist.y, shoulderMiddlePointX, shoulderMiddlePointY, a, b);
-        
-        return ellipseFactor;
+        const ellipseFactor = checkPointOnEllipse(rightWrist.x, rightWrist.y, shoulderMiddlePointX, shoulderMiddlePointY, a2, b2);
+        console.log(ellipseFactor, a2, b2);
+        if (0.8 <= ellipseFactor && ellipseFactor <= 1.2) return 1;
+        return 0;
     }
 
     // New function to check if a point is on the ellipse line
-    function checkPointOnEllipse(x, y, h, k, a, b) {
-        const value = ((x - h) ** 2 / (a ** 2)) + ((y - k) ** 2 / (b ** 2));
-        // console.log(x,y,h,k,a,b);
-        // console.log(value);
-        return value;
-        // return Math.abs(value - 1) < 0.01; // You can adjust the tolerance value as needed
+    function checkPointOnEllipse(x, y, h, k, a2, b2) {
+        return ((x - h) ** 2 / (a2** 2)) + ((y - k) ** 2 / (b2 ** 2));
     }
 
     // tensorflow에서 제공하는 js 파트
     const boundingBoxColor = "white";
-    const lineWidth = 6;
+    const lineWidth = 3;
     function toTuple({y, x}) {
         return [y, x];
     }
@@ -379,7 +377,7 @@ export default function useGolfDetection_(videoRef, canvasRef, setIsRecordingDon
                 continue;
             }
             const {y, x} = keypoint.position;
-            drawPoint(ctx, y * scale, x * scale, 7, color);
+            drawPoint(ctx, y * scale, x * scale, 3, color);
         }
     }
     
