@@ -1,41 +1,46 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    signupStep: 1,
-    email: '',
-    password: '',
-    nickname: '',
-    // 다른 정보들
-}
+  step: 1,
+  email: "",
+  password: "",
+  profile: "", // delete
+  nickname: "",
+  is_kakao: false,
+};
 
 const signupSlice = createSlice({
-    name: 'signup',
-    initialState: initialState,
-    reducers: {
-        setEmail2: (state, action) => {
-            console.log("뭐니??", action.payload)
-            state.email = action.payload;
-            console.log("state: ", state);
-            console.log("action: ", action);
-            console.log("email: ", initialState.email);
-        },
-        setPassword: (state, action) => {
-            state.password = action.payload;
-        },
-        setNickname: (state, action) => {
-            state.nickname = action.payload;
-        },
-        setCurrentStep: (state, action) => {
-            state.currentStep = action.payload;
-        },
+  name: "signup",
+  initialState: initialState,
+  reducers: {
+    setStateStep: (state, action) => {
+      state.step = action.payload;
     },
+    setStateEmail: (state, action) => {
+      state.email = action.payload;
+      console.log("action.payload: ", action.payload);
+      console.log("state: ", state);
+      console.log("action: ", action);
+      console.log("changed email: ", state.email);
+    },
+    setStatePassword: (state, action) => {
+      state.password = action.payload;
+    },
+    setStateNickname: (state, action) => {
+      state.nickname = action.payload;
+    },
+    setStateIsKakao: (state, action) => {
+      state.is_kakao = action.payload;
+    },
+  },
 });
 
 export const {
-    setEmail2,
-    setPassword,
-    setNickname,
-    setCurrentStep
+  setStateStep,
+  setStateEmail,
+  setStatePassword,
+  setStateNickname,
+  setStateIsKakao,
 } = signupSlice.actions;
 
 export default signupSlice.reducer;
