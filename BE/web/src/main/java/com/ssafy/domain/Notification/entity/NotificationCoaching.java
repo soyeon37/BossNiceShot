@@ -1,16 +1,16 @@
 package com.ssafy.domain.Notification.entity;
 
+import com.ssafy.audit.BaseTime;
 import com.ssafy.domain.Member.entity.Member;
-import com.ssafy.domain.study.entity.Study;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @Entity
+@Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class NotificationCoaching {
+@AllArgsConstructor
+public class NotificationCoaching extends BaseTime {
     // 코칭글 알림 id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +27,23 @@ public class NotificationCoaching {
     private Member followee;
 
     // 코칭글 id
-    @ManyToOne
-    @JoinColumn(name = "coaching_id")
-    private Study coaching;
+    @Column(name = "coaching_id")
+    private Long coaching;
 
-    public NotificationCoaching(Member follower, Member followee){
-        this.follower = follower;
-        this.followee = followee;
+//    public NotificationCoaching(Member follower, Member followee, int id){
+//        this.follower = follower;
+//        this.followee = followee;
+//        this.coaching = id;
+//    }
+
+    public static NotificationCoaching from(Member follower, Member followee, Long id){
+        return NotificationCoaching.builder()
+                .follower(follower)
+                .followee(followee)
+                .coaching(id)
+                .build();
     }
+
+
 
 }

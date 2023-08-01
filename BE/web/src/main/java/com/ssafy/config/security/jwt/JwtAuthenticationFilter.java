@@ -39,7 +39,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/members/checkEmail")
                 || request.getRequestURI().equals("/members/code")
                 || request.getRequestURI().equals("/members/checkNickname")
-                || request.getRequestURI().equals("/notification/**")
                 || request.getRequestURI().equals("/ws/**")){
             log.info("권한 허가");
             chain.doFilter(request, response);
@@ -91,13 +90,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         return null;
     }
-    // Request Header 에서 Refresh Token 정보 추출
-//    private String resolveRefreshToken(HttpServletRequest request) {
-//        String bearerToken = request.getHeader("RefreshToken");
-//        log.info("RefreshToken={}",request.getHeader("RefreshToken"));
-//        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
-//            return bearerToken.substring(7);
-//        }
-//        return null;
-//    }
 }

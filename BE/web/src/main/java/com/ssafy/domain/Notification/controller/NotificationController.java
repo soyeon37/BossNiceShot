@@ -2,7 +2,6 @@ package com.ssafy.domain.Notification.controller;
 
 import com.ssafy.common.api.ApiResponse;
 import com.ssafy.domain.Notification.dto.request.CreateCoachingNotificationRequest;
-import com.ssafy.domain.Notification.dto.response.CreateCoachingNotificationResponse;
 import com.ssafy.domain.Notification.service.NotificationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +23,9 @@ public class NotificationController {
     // 알림 읽기
     // 알림 업데이트
     // 알림 생성
-    @PostMapping("/createCoaching")
+    @PostMapping("/create/coaching")
     public ApiResponse createCoachingNotification (@RequestBody CreateCoachingNotificationRequest request){
+        log.info("코칭 알림 생성 시작");
         return ApiResponse.success(notificationService.createCoachingNotification(request));
     }
 }
