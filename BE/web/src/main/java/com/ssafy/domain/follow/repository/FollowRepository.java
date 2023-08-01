@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface FollowRepository extends JpaRepository<Follow, Long> {
     List<Follow> findByFollowerId(String followerId);
+    List<Follow> findByFolloweeId(String followeeId);
     Boolean existsByFollowerIdAndFolloweeId(String followerId, String followeeId);
     void deleteByFollowerIdAndFolloweeId(String followerId, String followeeId);
 }
