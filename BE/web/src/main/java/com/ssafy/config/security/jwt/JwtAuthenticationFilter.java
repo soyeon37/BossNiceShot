@@ -59,6 +59,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             log.error("유효하지 않은 토큰입니다.");
             throw new TokenCheckFailException(ExceptionMessage.FAIL_TOKEN_CHECK);
         }
+        log.info("권한 확인 완료.");
         chain.doFilter(request, response);
     }
 

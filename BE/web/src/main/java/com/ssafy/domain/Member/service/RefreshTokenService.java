@@ -40,9 +40,8 @@ public class RefreshTokenService {
 
     // key-value 삭제
     public void delValues(String token) throws TokenNotFoundException{
-        ValueOperations<String, String> values = redisTemplate.opsForValue();
         try{
-            values.getAndDelete(token);
+            redisTemplate.delete(token);
         }catch (RuntimeException e){
             log.info("Redis delete error");
             throw new TokenNotFoundException(ExceptionMessage.TOKEN_NOT_FOUND);
