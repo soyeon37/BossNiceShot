@@ -1,14 +1,13 @@
 package com.ssafy.domain.study.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssafy.audit.BaseTime;
 import com.ssafy.domain.Member.entity.Member;
+import com.ssafy.domain.studyUser.entity.StudyUser;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class Study extends BaseTime {
 
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     private List<StudyUser> studyUsers = new ArrayList<>();
-
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
