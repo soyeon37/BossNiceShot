@@ -1,5 +1,6 @@
 package com.ssafy.domain.Notification.entity;
 
+import com.ssafy.audit.BaseTime;
 import com.ssafy.domain.Member.entity.Member;
 import com.ssafy.domain.study.entity.Study;
 import jakarta.persistence.*;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class NotificationLearning {
+public class NotificationLearning extends BaseTime {
     // 러닝글 알림 id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
