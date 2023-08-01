@@ -2,10 +2,8 @@ package com.ssafy.domain.study.service;
 
 import com.ssafy.domain.Member.service.MemberService;
 import com.ssafy.domain.study.dto.request.StudyUserRequest;
-import com.ssafy.domain.study.entity.CoachingUser;
-import com.ssafy.domain.study.entity.LearningUser;
-import com.ssafy.domain.study.repository.CoachingUserRepository;
-import com.ssafy.domain.study.repository.LearningUserRepository;
+import com.ssafy.domain.study.entity.StudyUser;
+import com.ssafy.domain.study.repository.StudyUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,37 +14,25 @@ import java.util.List;
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class StudyUserService {
+    private final StudyUserRepository studyUserRepository;
+    private final StudyService studyService;
     private final MemberService memberService;
-    private final CoachingService coachingService;
-    private final LearningService learningService;
-    private final CoachingUserRepository coachingUserRepository;
-    private final LearningUserRepository learningUserRepository;
 
-    @Transactional
-    public CoachingUser createCoachingUser(StudyUserRequest studyUserRequest, String memberId) {
-        return coachingUserRepository.save(new CoachingUser(coachingService.findById(studyUserRequest.studyId()), memberService.findByMemberId(memberId)));
+    public List<StudyUser> findByStudyId(Long studyId) {
+        return studyUserRepository.findByStudyId(studyId);
     }
 
     @Transactional
-    public LearningUser createLearningUser(StudyUserRequest studyUserRequest, String memberId) {
-        return learningUserRepository.save(new LearningUser(learningService.findById(studyUserRequest.studyId()), memberService.findByMemberId(memberId)));
+    public StudyUser save(StudyUserRequest studyUserRequest, String memberId) {
+        StudyUser studyUser = studyUserRepository.findByStudyIdAndMemberId(studyUserRequest.studyId(), memberId)
+                .orElseGet(() -> studyUserRepository.save(new StudyUser(studyService.findById(studyUserRequest.studyId()), memberService.findByMemberId(memberId))));
+
+        studyService.findById(studyUserRequest.studyId()).getStudyUsers().add(studyUser);
+        return studyUser;
     }
 
     @Transactional
-    public void deleteCoachingUser(Long coachingId, String memberId) {
-        coachingUserRepository.deleteByCoachingIdAndMemberId(coachingId, memberId);
-    }
-
-    @Transactional
-    public void deleteLearningUser(Long learningId, String memberId) {
-        learningUserRepository.deleteByLearningIdAndMemberId(learningId, memberId);
-    }
-
-    public List<CoachingUser> findCoachingUserByCoachingId(Long coachingId) {
-        return coachingUserRepository.findByCoachingId(coachingId);
-    }
-
-    public List<LearningUser> findLeaningUserByLearningId(Long learningId) {
-        return learningUserRepository.findByLearningId(learningId);
+    public void delteByStudyIdAndMemberId(Long studyId, String memberId) {
+        studyUserRepository.deleteByStudyIdAndMemberId(studyId, memberId);
     }
 }

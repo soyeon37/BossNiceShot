@@ -1,8 +1,7 @@
 package com.ssafy.domain.study.controller;
 
 import com.ssafy.domain.study.dto.request.StudyUserRequest;
-import com.ssafy.domain.study.dto.response.CoachingUserResponse;
-import com.ssafy.domain.study.dto.response.LearningUserResponse;
+import com.ssafy.domain.study.dto.response.StudyUserResponse;
 import com.ssafy.domain.study.service.StudyUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -11,26 +10,34 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @Tag(name = "StudyUser API")
 @RestController
+@RequestMapping("/study/user")
 @RequiredArgsConstructor
 public class StudyUserController {
     private final StudyUserService studyUserService;
 
-    @Operation(summary = "코칭룸에 유저 입장", description = "코칭룸에 유저가 입장한다.")
-    @PostMapping("/study/coaching/user")
-    public ResponseEntity<CoachingUserResponse> coachingRoomEnter(@RequestBody StudyUserRequest studyUserRequest, @AuthenticationPrincipal UserDetails userDetails) {
-        return ResponseEntity.ok(CoachingUserResponse.from(studyUserService.createCoachingUser(studyUserRequest, userDetails.getUsername())));
+    @Operation(summary = "스터디 사용자 조회", description = "스터디룸에 있는 전체 사용자를 조회한다.")
+    @GetMapping("/{studyId}")
+    public ResponseEntity<List<StudyUserResponse>> userList(@PathVariable Long studyId) {
+        return ResponseEntity.ok(studyUserService.findByStudyId(studyId).stream().map(StudyUserResponse::from).toList());
     }
 
-    @Operation(summary = "러닝룸에 유저 입장", description = "러닝룸에 유저가 입장한다.")
-    @PostMapping("/study/learning/user")
-    public ResponseEntity<LearningUserResponse> learningRoomEnter(@RequestBody StudyUserRequest studyUserRequest, @AuthenticationPrincipal UserDetails userDetails) {
-        return ResponseEntity.ok(LearningUserResponse.from(studyUserService.createLearningUser(studyUserRequest, userDetails.getUsername())));
+    @Operation(summary = "스터디룸에 유저 입장", description = "스터디룸에 유저가 입장한다.")
+    @PostMapping
+    public ResponseEntity<StudyUserResponse> enter(@RequestBody StudyUserRequest studyUserRequest, @AuthenticationPrincipal UserDetails userDetails) {
+        return ResponseEntity.ok(StudyUserResponse.from(studyUserService.save(studyUserRequest, userDetails.getUsername())));
+    }
+
+    @Operation(summary = "스터디룸에서 유저 퇴장", description = "스터디룸에서 유저가 퇴장한다.")
+    @DeleteMapping("/{studyId}")
+    public ResponseEntity<Object> exit(@PathVariable Long studyId, @AuthenticationPrincipal UserDetails userDetails) {
+        studyUserService.delteByStudyIdAndMemberId(studyId, userDetails.getUsername());
+        return ResponseEntity.ok().build();
     }
 }
