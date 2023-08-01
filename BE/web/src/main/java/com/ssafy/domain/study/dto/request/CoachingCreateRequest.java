@@ -10,7 +10,7 @@ public record CoachingCreateRequest(@NotNull String title,
                                     @NotNull String description,
                                     @NotNull Integer password,
                                     @NotNull LocalDateTime reservedTime,
-                                    int capacity) {
+                                    @NotNull Integer capacity) {
     public Coaching toCoaching(Member member) {
         return new Coaching(title, description, password, member, reservedTime, capacity);
     }

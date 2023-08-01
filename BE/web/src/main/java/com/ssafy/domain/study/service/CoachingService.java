@@ -7,6 +7,8 @@ import com.ssafy.domain.study.entity.Coaching;
 import com.ssafy.domain.study.repository.CoachingRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,19 +49,11 @@ public class CoachingService {
         return coachingRepository.findAll(Sort.by(Sort.Direction.DESC, "createdTime"));
     }
 
-    public List<Coaching> findEnableCoaching() {
-        return coachingRepository.findEnableCoaching(Sort.by(Sort.Direction.DESC, "reservedTime"));
+    public Page<Coaching> findPaging(Pageable pageable) {
+        return coachingRepository.findPaging(pageable);
     }
 
-    public List<Coaching> findByTitleContaining(String keword) {
-        return coachingRepository.findByTitleContaining(keword, Sort.by(Sort.Direction.DESC, "createdTime"));
-    }
-
-    public List<Coaching> findByMemberIdContaining(String keword) {
-        return coachingRepository.findByMemberIdContaining(keword, Sort.by(Sort.Direction.DESC, "createdTime"));
-    }
-
-    public List<Coaching> findByTitleContainingOrDescriptionContaining(String keyword) {
-        return coachingRepository.findByTitleContainingOrDescriptionContaining(keyword, Sort.by(Sort.Direction.DESC, "createdTime"));
-    }
+//    public List<Coaching> findEnableCoaching() {
+//        return coachingRepository.findEnableCoaching(Sort.by(Sort.Direction.DESC, "reservedTime"));
+//    }
 }
