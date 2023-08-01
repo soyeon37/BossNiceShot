@@ -1,8 +1,7 @@
 package com.ssafy.domain.study.entity;
 
 import com.ssafy.domain.Member.entity.Member;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,10 +10,20 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StudyUser {
-    @EmbeddedId
-    private StudyUserId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "study_id")
+    private Study study;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     public StudyUser(Study study, Member member) {
-        this.id = new StudyUserId(study, member);
+        this.study = study;
+        this.member = member;
     }
 }
