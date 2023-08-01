@@ -4,7 +4,6 @@ import com.ssafy.audit.BaseTime;
 import com.ssafy.domain.Member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,9 +19,9 @@ public class NotificationApplication extends BaseTime {
     private Long id; //
 
     // 동행 모집 글 작성자 id
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
-    private Member member;
+    private Member memberId;
 
     // 동행 모집 글 id
 //    @ManyToOne
@@ -30,7 +29,14 @@ public class NotificationApplication extends BaseTime {
 //    private Companion companion;
 
     // 신청한 사람
-    @Column(nullable = false)
-    private String applicantId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "applicant_id")
+    private Member applicantId;
+
+    public NotificationApplication(Member memberId, Member applicantId){
+        this.memberId = memberId;
+        this.applicantId = applicantId;
+    }
+
 
 }

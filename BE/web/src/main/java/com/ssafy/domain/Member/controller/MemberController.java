@@ -6,18 +6,14 @@ import com.ssafy.domain.Member.dto.request.*;
 import com.ssafy.domain.Member.dto.response.SignInResponse;
 import com.ssafy.domain.Member.service.MemberService;
 import com.ssafy.common.api.ApiResponse;
-import com.ssafy.domain.Member.service.OAuthService;
 import com.ssafy.domain.Member.service.RefreshTokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,7 +30,6 @@ import java.security.Principal;
 public class MemberController {
     private final MemberService memberService;
     private final RefreshTokenService refreshTokenService;
-    private final OAuthService oAuthService;
 
     @Operation(summary = "이메일 중복 확인", description = "이메일 중복을 확인한다.")
     @ApiResponses({
@@ -78,7 +73,6 @@ public class MemberController {
     }
 
 
-
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 실패"),
@@ -101,7 +95,6 @@ public class MemberController {
     @PostMapping("/sign-in")
     public ApiResponse signIn(@RequestBody SignInRequest request, HttpServletResponse httpServletResponse) {
         log.info("로그인 시작");
-
         SignInResponse signInResponse = memberService.signIn(request);
 
         // Redis에 저장
@@ -121,18 +114,10 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/logout")
-        public ApiResponse logout (HttpServletRequest servletRequest){
-            Cookie[] list = servletRequest.getCookies();
-            if(list != null){
-                for(Cookie cookie : list){
-                    if(cookie.getName().equals("Set-Cookie")){
-                        log.info("cookieValue={}", cookie.getValue());
-                        refreshTokenService.delValues(cookie.getValue()); // Redis에 저장된 refreshToken 삭제
-                        cookie.setMaxAge(0); // Cookie에 저장된 refreshToken 삭제
-                        break;
-                    }
-                }
-            }
+        public ApiResponse logout (@RequestBody LogoutRequest reqeust){
+        log.info("로그아웃 시작");
+        log.info("refreshToken={}", reqeust.refreshToken());
+        refreshTokenService.delValues(reqeust.refreshToken()); // Redis에 저장된 refreshToken 삭제
         return ApiResponse.success("SUCCESS");
     }
 
@@ -149,6 +134,20 @@ public class MemberController {
         return ApiResponse.success(memberService.updateMember(request, memberId));
     }
 
+    @Operation(summary = "회원 비밀번호 수정", description = "회원 비밀번호를 수정한다.")
+    @ApiResponses({
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 실패"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "사용자 없음"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
+    })
+    @PutMapping("/updatePassword")
+    public ApiResponse updatePasswod (@RequestBody UpdatePasswordRequest request, Principal principal){
+        String memberId =  principal.getName();
+        log.info(request.toString());
+        return ApiResponse.success(memberService.updatePassword(request, memberId));
+    }
+
     @Operation(summary = "회원 정보 삭제", description = "회원 정보를 삭제한다.")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
@@ -157,7 +156,8 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @DeleteMapping("/delete")
-    public ApiResponse deleteMember (String memberId){
+    public ApiResponse deleteMember (Principal principal){
+        String memberId =  principal.getName();
         return ApiResponse.success(memberService.deleteMember(memberId));
     }
 
@@ -185,31 +185,11 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/reissue")
-    public ApiResponse reissue(@RequestBody ReIssueRequest request, HttpServletRequest servletRequest){
+    public ApiResponse reissue(@RequestBody ReIssueRequest request){
         log.info("토큰 재발급 시작");
-        String refreshToken = "";
-        Cookie[] list = servletRequest.getCookies();
-
-        for(Cookie cookie : list){
-            if(cookie.getName().equals("Set-Cookie")){
-                log.info("refreshToken={}",cookie.getValue());
-                refreshToken = cookie.getValue();
-                break;
-            }
-        }
-//        String token = request.refreshToken();
-//        String refreshToken = token.substring(0, token.length()-1);
+        String refreshToken = request.refreshToken();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }
-
-    @PostMapping("/code")
-    public void kakaoCallBack(@RequestBody KakaoCallBackRequest request){
-        System.out.println(request.code());
-        String code = request.code();
-        log.info(code);
-        oAuthService.getKakaoAccessToken(code);
-    }
-
 }
 

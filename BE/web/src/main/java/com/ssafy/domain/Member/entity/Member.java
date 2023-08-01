@@ -4,9 +4,11 @@ import com.ssafy.audit.BaseTime;
 import com.ssafy.common.TeeBox;
 import com.ssafy.domain.Member.dto.request.SignUpRequest;
 import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
+import com.ssafy.domain.Member.dto.request.UpdatePasswordRequest;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -69,20 +71,6 @@ public class Member extends BaseTime implements UserDetails{
     }
 
     public static Member from(SignUpRequest request, PasswordEncoder encoder){
-        if(request.isKakao()){
-            return Member.builder()
-                    .id(request.id())
-                    .password(request.password())
-                    .nickname(request.nickname())
-                    .teeBox(request.teeBox())
-                    .topScore(request.topScore())
-                    .averageScore(request.averageScore())
-                    .level(request.level())
-                    .image(request.image())
-                    .introduction(request.introduction())
-                    .isKakao(true)
-                    .build();
-        }else{
             return Member.builder()
                     .id(request.id())
                     .password(encoder.encode(request.password()))
@@ -93,23 +81,22 @@ public class Member extends BaseTime implements UserDetails{
                     .level(request.level())
                     .image(request.image())
                     .introduction(request.introduction())
-                    .isKakao(false)
+                    .isKakao(request.isKakao())
                     .build();
-        }
     }
 
-    public static Member update(UpdateMemberRequest request, PasswordEncoder encoder, String id){
-        return Member.builder()
-                .id(id)
-                .password(encoder.encode(request.password()))
-                .nickname(request.nickname())
-                .teeBox(request.teeBox())
-                .topScore(request.topScore())
-                .averageScore(request.averageScore())
-                .level(request.level())
-                .image(request.image())
-                .introduction(request.introduction())
-                .build();
+    public void update(UpdateMemberRequest request){
+        this.nickname = request.nickname();
+        this.averageScore = request.averageScore();
+        this.topScore = request.topScore();
+        this.level = request.level();
+        this.image = request.image();
+        this.introduction = request.introduction();
+        this.teeBox = request.teeBox();
+    }
+
+    public void updatePassword(UpdatePasswordRequest request, PasswordEncoder encoder ){
+        this.password = encoder.encode(request.passNew());
     }
 
     @Override

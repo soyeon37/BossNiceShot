@@ -17,17 +17,22 @@ public class NotificationCompanion extends BaseTime  {
     private Long id;
 
     // 동행 모집 글 알림 수신자 id
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "follower_id")
+    private Member follower;
 
     // 동행 모집 글 알림 발신자 id
-    @Column(nullable = false)
-    private String followee;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "followee_id")
+    private Member followee;
 
     // 동행 모집 글 id
 //    @ManyToOne
 //    @JoinColumn(name = "companion_id")
 //    private Companion companion;
 
+    public NotificationCompanion(Member follower, Member followee){
+        this.follower = follower;
+        this.followee = followee;
+    }
 }
