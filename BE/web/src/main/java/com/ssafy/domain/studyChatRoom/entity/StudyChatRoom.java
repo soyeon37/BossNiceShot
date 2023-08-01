@@ -1,4 +1,4 @@
-package com.ssafy.domain.study.entity;
+package com.ssafy.domain.studyChatRoom.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -8,5 +8,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Learning extends Study{
+public class StudyChatRoom {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 }
