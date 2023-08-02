@@ -23,7 +23,6 @@ import MyEditor from "./pages/community/MyEditor";
 import FreeBoardDetail from "./pages/community/FreeBoardDetail";
 
 // Sign-up & Log-in & Sign-out
-
 import KakaoLogin from "./setup/user-auth/KakaoLogin";
 import KakaoSignUp from "./setup/user-auth/KakaoSignUp";
 import Signup from "./pages/signup/Signup";
@@ -32,12 +31,15 @@ import SignupEmail2 from "./pages/signup/SignupEmail2";
 import SignupInfo from "./pages/signup/SignupInfo";
 import FindPassword from "./pages/login/FindPassword";
 import Login from "./pages/login/Login";
-import Signout from "./pages/mypage/Signout";
 
 // Profile
 import Profile from "./pages/mypage/Profile";
 import EditProfile from "./pages/mypage/EditProfile";
 import EditPassword from "./pages/mypage/EditPassword";
+import MyAccompany from "./pages/mypage/MyAccompany";
+import MyChat from "./pages/mypage/MyChat";
+import MyFollow from "./pages/mypage/MyFollow";
+import Signout from "./pages/mypage/Signout";
 
 // Error
 import ErrorPage from "./setup/error-manager/ErrorPage";
@@ -109,6 +111,9 @@ function App() {
               <Route path="/mypage/" element={<Profile />} />
               <Route path="/mypage/editprofile/" element={<EditProfile />} />
               <Route path="/mypage/editpassword/" element={<EditPassword />} />
+              <Route path="/mypage/myaccompany" element={<MyAccompany />} />
+              <Route path="/mypage/mychat" element={<MyChat />} />
+              <Route path="/mypage/myfollow" element={<MyFollow />} />
               <Route path="/mypage/signout/" element={<Signout />} />
 
               {/* Error */}
