@@ -1,10 +1,9 @@
 package com.ssafy.domain.Notification.repository;
 
-import com.ssafy.domain.Notification.entity.NotificationCoaching;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.ssafy.domain.Notification.entity.Notification;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface NotificationRepository extends JpaRepository<NotificationCoaching, Long> {
-
+@Repository
+public interface NotificationRepository extends MongoRepository<Notification, Long> {
 }
