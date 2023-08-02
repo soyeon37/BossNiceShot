@@ -105,7 +105,7 @@ function Golffield() {
             onKeyDown={handleKeyDown}
             placeholder="검색어를 입력하세요"
           />
-          <button className="icon-div" onClick={doSearchWord}>
+          <button id="search-icon" onClick={doSearchWord}>
             <SearchIcon boxSize={6} />
           </button>
         </div>
