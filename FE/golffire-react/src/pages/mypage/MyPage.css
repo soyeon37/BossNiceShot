@@ -23,6 +23,13 @@
   justify-content: center;
 }
 
+.mypage-area {
+  width: 80%;
+  height: 100%;
+
+  display: flex;
+}
+
 /* MyPageNavbar CSS */
 #MyPageNavbar {
   height: 100%;
@@ -126,13 +133,6 @@
 }
 
 /* MyChat CSS */
-#MyChat {
-  width: 80%;
-  height: 100%;
-
-  display: flex;
-}
-
 #chat-bar {
   width: 30%;
   height: 100%;
@@ -283,6 +283,25 @@
 }
 
 /* MyFollow CSS */
+#MyFollow {
+  display: flex;
+  flex-direction: column;
+}
+
+#myfollow-title {
+  margin: 10px;
+
+  color: #000;
+  font-family: Inter;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+#myfollow-list {
+  padding: 10px;
+}
 
 /* Signout CSS */
 #Signout {
