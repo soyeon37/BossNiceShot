@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 
-import {
-  NavLink,
-  useNavigate,
-  useLocation
-} from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input
-} from "@chakra-ui/react";
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+import { setStateStep, setStatePassword } from "../../features/signupSlice";
+
+import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import NoImg from "../../assets/source/icons/no-image.png";
 
-const SignupEmail2 = (props) => {
+const SignupEmail2 = () => {
+  // Redux
+  const dispatch = useDispatch();
+  const stateEmail = useSelector((state) => state.signupFeature.email);
+
   const { state } = useLocation();
-  const [email, setEmail] = useState(state.email);
+  const [email, setEmail] = useState(stateEmail);
   const [password, setPassword] = useState("");
   const [passwordVer, setPasswordVer] = useState("");
 
@@ -28,15 +27,17 @@ const SignupEmail2 = (props) => {
     console.log("passwordVer: ", passwordVer);
 
     if (password === passwordVer) {
-      navigate("/signup/info", {
-        state: {
-          email: email,
-          password: password,
-          image: NoImg,
-          nickname: "",
-          isKakao: false
-        }
-      });
+      // navigate("/signup/info", {
+      //   state: {
+      //     email: email,
+      //     password: password,
+      //     image: NoImg,
+      //     nickname: "",
+      //     isKakao: false,
+      //   },
+      // });
+      dispatch(setStatePassword(password));
+      dispatch(setStateStep(4));
     } else {
       alert("유효한 비밀번호를 입력해 주세요!");
     }
