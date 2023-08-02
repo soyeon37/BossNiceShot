@@ -2,15 +2,18 @@ package com.ssafy.domain.Companion.controller;
 
 public class CompanionController {
 
-    //동행 게시글 작성
+    //동행 게시글 작성 (Postmapping)
 
-    //동행 게시글 조회
+    // 동행 게시글 수정(Putmapping)
+    // 동행 게시글 삭제(deletemapping)
+
+    //전체 동행 게시글 조회 (최신 등록순 - getmapping)
+
+    //전체 동행 게시글 조회 (최신 등록순 / teebox 별로)
 
     //동행 게시글 상세 조회
 
-    // 동행 게시글 수정
 
-    // 동행 게시글 삭제
 
     /* Companion
 동행 모집글을 작성

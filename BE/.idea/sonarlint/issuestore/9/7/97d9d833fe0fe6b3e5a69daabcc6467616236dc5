@@ -1,7 +1,0 @@
-
-v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ŞÖÎ‘8• ¶Õš1
-]	java:S107="AConstructor has 9 parameters, which is greater than 7 authorized.(ÄÆß8üÀÛÖš1
-n
-java:S1128"LRemove this unused import 'org.springframework.data.annotation.CreatedDate'.(Éå¥°ÿÿÿÿÿ8Çûä×š1
-H
-java:S1128"+Remove this unused import 'java.util.Date'.(¸…¼ü8Çûä×š1

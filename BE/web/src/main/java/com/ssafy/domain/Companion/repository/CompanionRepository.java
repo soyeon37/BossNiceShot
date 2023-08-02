@@ -1,30 +1,44 @@
 package com.ssafy.domain.Companion.repository;
 
-import com.ssafy.common.TeeBox;
 import com.ssafy.domain.Companion.entity.Companion;
-import com.ssafy.domain.chat.entity.ChatParticipant;
-import com.ssafy.domain.follow.entity.Follow;
+import com.ssafy.common.TeeBox;
+import com.ssafy.domain.Member.entity.Member;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.List;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface CompanionRepository extends JpaRepository<Companion, Long> {
+    // 신청 가능한 동행
 
-    //제목으로 검색
-    List<Companion> findByTitle(String title);
+    @Query(value = "select c from Companion c where c.currentPeople < c.aimPeople and c.endDate < now() order by c.createdTime desc",
+            countQuery = "select count(c) from Companion c")
+    Page<Companion> findPagingEnable(Pageable pageable);
 
-    //작성자로 검색
-    List<Companion> findByMemberId(String memberId);
+    // 제목 키워드 검색
+    @Query(value = "select c from Companion c where c.currentPeople < c.aimPeople and c.endDate < now() and c.title like concat('%', :keyword, '%') order by c.createdTime desc",
+            countQuery = "select count(c) from Companion c")
+    Page<Companion> findPagingByTitleContaining(Pageable pageable, @Param("keyword") String keyword);
 
-    //제목 + 내용으로 검색
-    List<Companion> findByTitleAndContents(String title, String contents);
+    // 작성자 키워드 검색
+    @Query(value = "select c from Companion c join fetch c.member where c.currentPeople < c.aimPeople and c.endDate < now() and c.member.nickname like concat('%', :keyword, '%') order by c.createdTime desc",
+            countQuery = "select count(c) from Companion c")
+    Page<Companion> findPagingByNicknameContaining(Pageable pageable, @Param("keyword") String keyword);
 
-    //티박스로 검색
-    List<Companion> findByTeeBox(TeeBox teeBox);
+    // 제목 또는 내용 키워드 검색
+    @Query(value = "select c from Companion c where c.currentPeople < c.aimPeople and c.endDate < now() and (c.title like concat('%', :keyword, '%') or c.contents like concat('%', :keyword, '%')) order by c.createdTime desc",
+            countQuery = "select count(c) from Companion c")
+    Page<Companion> findPagingByTitleContainingOrContentsContaining(Pageable pageable, @Param("keyword") String keyword);
 
-    void deleteById(Long id);
+    // 티박스 검색
+    @Query(value = "select c from Companion c where c.currentPeople < c.aimPeople and c.endDate < now() and c.teeBox = :teeBox order by c.createdTime desc",
+            countQuery = "select count(c) from Companion c")
+    Page<Companion> findPagingByTeeBox(Pageable pageable, @Param("teeBox") TeeBox teeBox);
 
-    //팔로잉한 사람들이 동행 모집을 올렸는지 검색
-//    List<Companion> findCompanionByFollowerId(String followerId);
-
+    // 멤버 검색
+    @Query(value = "select * from companion where member_id in (select followee_id from follow where follower_id = :followerId) order by c.createdTime desc",
+            countQuery = "select count(*) from Companion",
+            nativeQuery = true)
+    Page<Companion> findPagingByFollowerId(Pageable pageable, @Param("member")String followerId);
 }
