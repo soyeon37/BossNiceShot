@@ -34,9 +34,11 @@ import Login from "./pages/login/Login";
 
 // Profile
 import Profile from "./pages/mypage/Profile";
-import MyAccompany from "./pages/mypage/MyAccompany";
 import EditProfile from "./pages/mypage/EditProfile";
 import EditPassword from "./pages/mypage/EditPassword";
+import MyAccompany from "./pages/mypage/MyAccompany";
+import MyChat from "./pages/mypage/MyChat";
+import MyFollow from "./pages/mypage/MyFollow";
 import Signout from "./pages/mypage/Signout";
 
 // Error
@@ -107,9 +109,11 @@ function App() {
 
               {/* Profile */}
               <Route path="/mypage/" element={<Profile />} />
-              <Route path="/mypage/myaccompany" element={<MyAccompany />} />
               <Route path="/mypage/editprofile/" element={<EditProfile />} />
               <Route path="/mypage/editpassword/" element={<EditPassword />} />
+              <Route path="/mypage/myaccompany" element={<MyAccompany />} />
+              <Route path="/mypage/mychat" element={<MyChat />} />
+              <Route path="/mypage/myfollow" element={<MyFollow />} />
               <Route path="/mypage/signout/" element={<Signout />} />
 
               {/* Error */}

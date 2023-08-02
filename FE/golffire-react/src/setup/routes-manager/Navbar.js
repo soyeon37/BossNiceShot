@@ -142,12 +142,11 @@ function Navbar() {
                                         마이페이지
                                     </NavLink>
                                 </MenuItem>
-                                <MenuItem>친구/채팅</MenuItem>
-                                <MenuDivider />
                                 <MenuItem style={{ color: "gray" }} onClick={handleLogout}>
                                     로그아웃
                                     </MenuItem>
                             </MenuGroup>
+                                <MenuDivider />
                             {/* test code end */}
 
                             {isLoggedIn ? (
