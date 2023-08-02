@@ -1,7 +1,0 @@
-
-v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¬™ÿá8›þùõš1
-]	java:S125"<This block of commented-out lines of code should be removed.(ƒÕ­Åøÿÿÿÿ8Ÿþùõš1
-k
-java:S1128"IRemove this unused import 'com.ssafy.domain.chat.entity.ChatParticipant'.(ëí°ôýÿÿÿÿ8 þùõš1
-d
-java:S1128"BRemove this unused import 'com.ssafy.domain.follow.entity.Follow'.(ÓîŽÍûÿÿÿÿ8 þùõš1

@@ -4,6 +4,7 @@ import com.ssafy.audit.BaseTime;
 import com.ssafy.common.TeeBox;
 import com.ssafy.domain.Member.entity.Member;
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -12,7 +13,9 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -56,6 +59,9 @@ public class Companion extends BaseTime {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @OneToMany(mappedBy = "companion", cascade = CascadeType.ALL)
+    private List<CompanionUser> companionUsers = new ArrayList<>();
+
     //생성자에 @Builder 적용
     @Builder
     public Companion(@NotNull String title, String contents, int field, TeeBox teeBox, int aimPeople, int currentPeople, LocalDateTime teeupDate, LocalDateTime endDate, Member member) {
@@ -68,5 +74,16 @@ public class Companion extends BaseTime {
         this.teeupDate = teeupDate;
         this.endDate = endDate;
         this.member = member;
+    }
+
+    public void update(String title, String contents, Integer field, TeeBox teeBox, Integer aimPeople, Integer currentPeople, LocalDateTime teeupDate, LocalDateTime endDate){
+        this.title = title;
+        this.contents = contents;
+        this.field = field;
+        this.teeBox = teeBox;
+        this.aimPeople = aimPeople;
+        this.currentPeople = currentPeople;
+        this.teeupDate = teeupDate;
+        this.endDate = endDate;
     }
 }
