@@ -4,10 +4,29 @@
   display: flex;
 }
 
+/* MyPageBox CSS */
+#MyPageBox {
+  margin: 10px auto 20px;
+
+  width: 1820px;
+  height: 800px;
+  max-width: 95%;
+  max-height: 95%;
+
+  border-radius: 50px;
+  border: 1px solid #000;
+  background-color: #fff;
+  box-shadow: 20px 20px 0px 0px #000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* MyPageNavbar CSS */
 #MyPageNavbar {
   height: 100%;
-  width: 30%;
+  width: 20%;
 
   display: flex;
   flex-direction: column;
@@ -33,15 +52,6 @@
 
 /* Profile CSS */
 #Profile {
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* MyAccompany CSS */
-#MyAccompany {
   width: 100%;
 
   display: flex;
@@ -104,6 +114,118 @@
   border: 1px solid #000;
   background: #3BD641;
 }
+
+/* MyAccompany CSS */
+#MyAccompany {
+  width: 20%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* MyChat CSS */
+#MyChat {
+  width: 80%;
+  height: 100%;
+
+  display: flex;
+}
+
+#chat-bar {
+  width: 30%;
+  height: 100%;
+
+  border: 2px solid #000;
+  background: #FFF;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#chat-search {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+}
+
+#chat-list {
+  width: 100%;
+  height: calc(100% - 50px);
+  margin-right: 10px;
+  margin-bottom: 50px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: scroll;
+}
+
+/* ChatRoom (Component) CSS */
+.ChatRoom {
+  width: 100%;
+  height: 200px;
+  margin-bottom: 10px;
+  padding: 20px;
+
+  border-radius: 50px;
+  border: 1px solid #000;
+  background: #FFF;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.chatroom-header {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatroom-title {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.chatroom-tee {
+  width: 40px;
+  height: 40px;
+}
+
+.chatroom-data>div {
+
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+#chat-room {
+  width: 70%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* MyFollow CSS */
 
 /* Signout CSS */
 #Signout {
