@@ -13,7 +13,6 @@ import com.ssafy.domain.Member.repository.MemberRepository;
 import com.ssafy.config.security.jwt.TokenInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.metamodel.model.domain.internal.MapMember;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.mail.MailException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -53,17 +52,6 @@ public class MemberService{
         return SignUpResponse.from(member);
     }
 
-    //    @Transactional
-//    public SignInResponse kakaoSignIn(SignInRequest request){
-//        // 1. 유저 존재 유무 확인
-//        Optional<Member> member = memberRepository.findById(request.id());
-//        if(member.isEmpty()) {
-//            throw new UserAuthException(ExceptionMessage.USER_NOT_FOUND);
-//        }else {
-//
-//        }
-//        return new SignInResponse();
-//    }
     @Transactional
     public SignInResponse signIn(SignInRequest request) {
 
@@ -72,19 +60,6 @@ public class MemberService{
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(request.id(), request.password());
         log.info("authenticationToken={}", authenticationToken);
 
-        if(request.isKakao()){
-            log.info("Kakao Login");
-            // 사용자 정보 유무 확인
-            log.info(request.id());
-            Optional<Member> member = memberRepository.findById(request.id());
-            if(member.isEmpty()){
-                throw new UserAuthException(ExceptionMessage.USER_NOT_FOUND);
-            }
-            TokenInfo tokenInfo = jwtTokenProvider.generateToken(authenticationToken);
-
-            return new SignInResponse(request.id(), tokenInfo);
-
-        }else{
             log.info("Email Login");
             // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
             // authenticate 매서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드가 실행
@@ -101,18 +76,33 @@ public class MemberService{
             // 3. 인증 정보를 기반으로 JWT 토큰 생성
             TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
             return new SignInResponse(request.id(), tokenInfo);
-        }
     }
 
     @Transactional
     public UpdateMemberResponse updateMember(UpdateMemberRequest request, String memberId){
-        Member member = memberRepository.save(Member.update(request, encoder, memberId));
         try {
-            memberRepository.flush();
+            Member member = memberRepository.findById(memberId).orElseThrow(IllegalArgumentException::new);
+            member.update(request);
+            return UpdateMemberResponse.from(member);
         } catch (DataIntegrityViolationException e) {
             throw new UserAuthException(ExceptionMessage.FAIL_UPDATE_DATA);
         }
-        return UpdateMemberResponse.from(member);
+    }
+    public UpdatePasswordResponse updatePassword(UpdatePasswordRequest request, String memberId){
+        try {
+            Member member = memberRepository.findById(memberId).orElseThrow(IllegalArgumentException::new);
+            log.info("origin password={}",member.getPassword());
+            if(!encoder.matches(request.passOrigin(), member.getPassword())){
+                log.error("password is different!!");
+                throw new UserAuthException(ExceptionMessage.MISMATCH_PASSWORD);
+            }
+            member.updatePassword(request, encoder);
+            log.info("new password={}", member.getPassword());
+            memberRepository.saveAndFlush(member);
+            return new UpdatePasswordResponse("SUCCESS");
+        } catch (DataIntegrityViolationException e) {
+            throw new UserAuthException(ExceptionMessage.FAIL_UPDATE_DATA);
+        }
     }
 
     @Transactional
