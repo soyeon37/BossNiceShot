@@ -2,7 +2,18 @@ import React from "react";
 import MyPageNavbar from "./MyPageNavbar";
 import "./MyPage.css";
 
+import { NavLink, useNavigate } from "react-router-dom";
+
 function Profile() {
+    const navigate = useNavigate();
+
+    const moveEditProfile = () => {
+        navigate("/mypage/editprofile/");
+    }
+    const moveEditPassword = () => {
+        navigate("/mypage/editpassword");
+    }
+
     return (
         <div id="MyPage">
             <MyPageNavbar />
@@ -29,6 +40,10 @@ function Profile() {
                                 선호 티박스
                             </div>
                         </div>
+                    </div>
+                    <div id="info-edit">
+                        <button onClick={moveEditProfile}>정보 수정</button>
+                        <button onClick={moveEditPassword}>비밀번호 변경</button>
                     </div>
                 </div>
                 <div id="profile-history">
