@@ -165,8 +165,18 @@
   overflow-y: scroll;
 }
 
-/* ChatRoom (Component) CSS */
-.ChatRoom {
+#chat-room {
+  width: 70%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-content: center;
+}
+
+/* ListRoom (Component) CSS */
+.ListRoom {
   width: 100%;
   height: 200px;
   margin-bottom: 10px;
@@ -180,7 +190,7 @@
   flex-direction: column;
 }
 
-.chatroom-header {
+.listroom-header {
   width: 100%;
 
   display: flex;
@@ -189,7 +199,7 @@
   justify-content: center;
 }
 
-.chatroom-title {
+.listroom-title {
   color: #000;
   text-align: center;
   font-family: Inter;
@@ -199,12 +209,12 @@
   line-height: normal;
 }
 
-.chatroom-tee {
+.listroom-tee {
   width: 40px;
   height: 40px;
 }
 
-.chatroom-data>div {
+.listroom-data>div {
 
   color: #000;
   text-align: center;
@@ -215,14 +225,61 @@
   line-height: normal;
 }
 
-#chat-room {
-  width: 70%;
+/* ChatRoom (Component) CSS */
+.ChatRoom {
+  width: 100%;
   height: 100%;
+}
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+#room-header {
+  width: 100%;
+  height: 100px;
+
+  border-radius: 0px 50px 0px 0px;
+  border: 1px solid #000;
+  background: #FFF;
+}
+
+#room-title {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+#room-text {
+  width: 100%;
+  height: calc(100% - 200px);
+}
+
+#room-footer {
+  width: 100%;
+  height: 100px;
+
+  border-radius: 0px 0px 50px 0px;
+  border: 1px solid #000;
+  background: #FFF;
+}
+
+/* MyChatBox (Component) CSS */
+.MyChatBox>div {
+  float: right;
+}
+
+/* OtherChatBox (Component) CSS */
+.OtherChatBox>div {
+  float: left;
+}
+
+/* ChatBox Common CSS */
+.chatbox {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  border: 1px solid #000;
 }
 
 /* MyFollow CSS */
