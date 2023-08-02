@@ -38,7 +38,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/members/sendEmailVerification")
                 || request.getRequestURI().equals("/members/checkEmail")
                 || request.getRequestURI().equals("/members/code")
-                || request.getRequestURI().equals("/members/checkNickname")){
+                || request.getRequestURI().equals("/members/checkNickname")
+                || request.getRequestURI().equals("/notification/**")
+                || request.getRequestURI().equals("/ws/**")){
             log.info("권한 허가");
             chain.doFilter(request, response);
             return;
@@ -53,11 +55,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
             log.info("유효한 토큰입니다.");
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
+            log.info("authentication={}",authentication.toString());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }else{
             log.error("유효하지 않은 토큰입니다.");
             throw new TokenCheckFailException(ExceptionMessage.FAIL_TOKEN_CHECK);
         }
+        log.info("권한 확인 완료.");
         chain.doFilter(request, response);
     }
 

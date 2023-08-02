@@ -5,6 +5,7 @@ import com.ssafy.config.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -50,7 +51,8 @@ public class SecurityConfig {
             "/solution/detect",
             "/members/**",
             "/chat/**",
-            "/auth/**"
+            "/auth/**",
+            "/ws/**"
 
     };
     private static final String[] USER_LIST = {
@@ -101,4 +103,5 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
+
 }
