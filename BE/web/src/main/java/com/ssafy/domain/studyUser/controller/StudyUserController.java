@@ -1,8 +1,8 @@
-package com.ssafy.domain.study.controller;
+package com.ssafy.domain.studyUser.controller;
 
-import com.ssafy.domain.study.dto.request.StudyUserRequest;
-import com.ssafy.domain.study.dto.response.StudyUserResponse;
-import com.ssafy.domain.study.service.StudyUserService;
+import com.ssafy.domain.studyUser.dto.request.StudyUserRequest;
+import com.ssafy.domain.studyUser.dto.response.StudyUserResponse;
+import com.ssafy.domain.studyUser.service.StudyUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

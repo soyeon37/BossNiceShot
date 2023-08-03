@@ -1,6 +1,6 @@
-package com.ssafy.domain.study.repository;
+package com.ssafy.domain.studyUser.repository;
 
-import com.ssafy.domain.study.entity.StudyUser;
+import com.ssafy.domain.studyUser.entity.StudyUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

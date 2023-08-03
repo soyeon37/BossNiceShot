@@ -32,20 +32,20 @@ function EditPassword() {
         console.log("passCheck: ", passCheck);
         const apiUrl = 'http://localhost:8080/members/updatePassword'
         const data = {
-            passOrigin : passOrigin,
-            passNew : passNew
+            passOrigin: passOrigin,
+            passNew: passNew
         }
         axios.put(apiUrl, data)
-        .then((response) => {
-            console.log(response);
-            if(response.data.data.resultMessage === "SUCCESS"){
-                alert('비밀번호 변경에 성공했습니다.');
-            }
-        })
-        .catch((error) => {
-            console.error(error);
-             alert('비밀번호 변경에 실패했습니다.');
-        })
+            .then((response) => {
+                console.log(response);
+                if (response.data.data.resultMessage === "SUCCESS") {
+                    alert('비밀번호 변경에 성공했습니다.');
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                alert('비밀번호 변경에 실패했습니다.');
+            })
 
     };
 
