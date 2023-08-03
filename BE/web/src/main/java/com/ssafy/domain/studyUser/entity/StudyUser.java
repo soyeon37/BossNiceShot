@@ -1,6 +1,7 @@
-package com.ssafy.domain.study.entity;
+package com.ssafy.domain.studyUser.entity;
 
 import com.ssafy.domain.Member.entity.Member;
+import com.ssafy.domain.study.entity.Study;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
