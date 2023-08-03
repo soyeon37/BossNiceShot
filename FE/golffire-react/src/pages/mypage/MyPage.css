@@ -2,6 +2,8 @@
 #MyPage {
   height: calc(100vh - 4rem);
   display: flex;
+
+  position: relative;
 }
 
 /* MyPageBox CSS */
@@ -21,6 +23,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  position: relative;
 }
 
 .mypage-area {
@@ -182,8 +186,9 @@
 /* ListRoom (Component) CSS */
 .ListRoom {
   width: 100%;
-  height: 200px;
+  min-height: 200px;
   margin-bottom: 10px;
+  
   padding: 20px;
 
   border-radius: 50px;
@@ -323,8 +328,8 @@
 
 .myfollow-box {
   width: 695px;
-  height: 230px;
   max-width: 90%;
+  min-height: 230px;
   margin: 5px;
 }
 
@@ -344,7 +349,8 @@
 }
 
 .followbox-header {
-  min-width: 150px;
+  max-width: 150px;
+  margin-right: 10px;
 }
 
 .followbox-pic {

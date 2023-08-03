@@ -3,11 +3,11 @@ import React from "react";
 import ProfilePic from "../../../assets/source/imgs/favicon.png";
 
 function FollowBox({ id, pic, name, level, tee }) {
-    console.log("id: ", id);
-    console.log("pic: ", pic);
-    console.log("name: ", name);
-    console.log("level: ", level);
-    console.log("tee: ", tee);
+    // console.log("id: ", id);
+    // console.log("pic: ", pic);
+    // console.log("name: ", name);
+    // console.log("level: ", level);
+    // console.log("tee: ", tee);
 
     // const teeName = {
     //     red: "레드 티 박스",
@@ -29,7 +29,7 @@ function FollowBox({ id, pic, name, level, tee }) {
         <div className="FollowBox">
             <div className="followbox-header">
                 <div className="followbox-pic">
-                    <img className="pic-circle" src={ProfilePic} alt={name + `님의 프로필`} />
+                    <img className="pic-circle" src={pic} alt={name + `님의 프로필`} />
                 </div>
             </div>
             <div className="followbox-body">
