@@ -64,26 +64,33 @@ public class Companion extends BaseTime {
 
     //생성자에 @Builder 적용
     @Builder
-    public Companion(@NotNull String title, String contents, int field, TeeBox teeBox, int aimPeople, int currentPeople, LocalDateTime teeupDate, LocalDateTime endDate, Member member) {
+    public Companion(@NotNull String title, String contents, int field, TeeBox teeBox, int aimPeople, LocalDateTime teeupDate, LocalDateTime endDate, Member member) {
         this.title = title;
         this.contents = contents;
         this.field = field;
         this.teeBox = teeBox;
         this.aimPeople = aimPeople;
-        this.currentPeople = currentPeople;
+        currentPeople = 0;
         this.teeupDate = teeupDate;
         this.endDate = endDate;
         this.member = member;
     }
 
-    public void update(String title, String contents, Integer field, TeeBox teeBox, Integer aimPeople, Integer currentPeople, LocalDateTime teeupDate, LocalDateTime endDate){
+    public void update(String title, String contents, Integer field, TeeBox teeBox, Integer aimPeople, LocalDateTime teeupDate, LocalDateTime endDate){
         this.title = title;
         this.contents = contents;
         this.field = field;
         this.teeBox = teeBox;
         this.aimPeople = aimPeople;
-        this.currentPeople = currentPeople;
         this.teeupDate = teeupDate;
         this.endDate = endDate;
+    }
+
+    public void addUser() {
+        currentPeople++;
+    }
+
+    public void subUser() {
+        currentPeople--;
     }
 }
