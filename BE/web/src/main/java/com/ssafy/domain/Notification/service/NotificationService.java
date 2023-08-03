@@ -1,5 +1,6 @@
 package com.ssafy.domain.Notification.service;
 
+import com.ssafy.domain.Notification.dto.request.DeleteNotificationRequest;
 import com.ssafy.domain.Notification.dto.request.NotificationRequest;
 import com.ssafy.domain.Notification.dto.request.UpdateNotificationRequest;
 import com.ssafy.domain.Notification.dto.response.NotificationListRespones;
@@ -27,21 +28,35 @@ public class NotificationService {
     private final FollowRepository followRepository;
     private final MongoTemplate mongoTemplate;
 
-    public NotificationListRespones read(NotificationRequest request){
-        List<Notification>notifications = mongoTemplate.find(new Query(Criteria.where("recipient").is(request.recipient())), Notification.class);
+    public NotificationListRespones read(String recipient){
+        List<Notification>notifications = mongoTemplate.find(new Query(Criteria.where("recipient").is(recipient)), Notification.class);
+//        log.info("notification List = {}", notifications.get(0).getSender());
         return new NotificationListRespones(notifications);
+    }
+    public Boolean check(String recipient){
+        Criteria criteria = new Criteria();
+        criteria.andOperator(
+                Criteria.where("recipient").is(recipient),
+                Criteria.where("read").is(false)
+        );
+        List<Notification>notifications = mongoTemplate.find(new Query(criteria), Notification.class);
+        if(notifications.size() == 0){
+            return false;
+        }else{
+            return true;
+        }
     }
     public NotificationResponse create(NotificationRequest request){
         if(request.type().equals("apply") || request.type().equals("result")){
             // 신청자 || 신청 결과 알려주기
-            Notification notification = Notification.from(request, request.recipient());
+            Notification notification = Notification.from(request, request.recipient(), request.recipientNickname());
             mongoTemplate.insert(notification);
         }else{
             // 팔로우 조회 insert
             List<Follow> list = followRepository.findByFolloweeId(request.sender());
             List<Notification> notifications = new ArrayList<>();
             for(int i = 0; i < list.size(); i++){
-                Notification notification = Notification.from(request, list.get(i).getFollower().getId());
+                Notification notification = Notification.from(request, list.get(i).getFollower().getId(), list.get(i).getFollower().getNickname());
                 notifications.add(notification);
             }
             mongoTemplate.insertAll(notifications);
@@ -49,15 +64,14 @@ public class NotificationService {
         return new NotificationResponse("SUCCESS");
     }
 
-    public NotificationResponse delete(NotificationRequest request){
+    public NotificationResponse delete(DeleteNotificationRequest request){
         mongoTemplate.remove(new Query(Criteria.where("_id").is(request.id())), Notification.class);
         return new NotificationResponse("SUCCESS");
     }
-    public NotificationResponse deleteAll(NotificationRequest request){
-        log.info("recipient={}", request.recipient());
+    public NotificationResponse deleteAll(String recipient){
         Criteria criteria = new Criteria();
         criteria.andOperator(
-            Criteria.where("recipient").is(request.recipient()),
+            Criteria.where("recipient").is(recipient),
             new Criteria().orOperator(
                     Criteria.where("type").is("coaching"),
                     Criteria.where("type").is("learning"),
@@ -72,8 +86,8 @@ public class NotificationService {
         return new NotificationResponse("SUCCESS");
     }
 
-    public NotificationResponse update(UpdateNotificationRequest request){
-        Query query = new Query(Criteria.where("recipient").is(request.recipient()));
+    public NotificationResponse update(String recipient){
+        Query query = new Query(Criteria.where("recipient").is(recipient));
         Update update = new Update()
                 .set("read", true);
         mongoTemplate.updateMulti(query, update, Notification.class);
