@@ -1,5 +1,12 @@
 import React from "react";
 import MyPageNavbar from "./MyPageNavbar";
+
+import TeeRed from "../../assets/source/icons/flag-red.png";
+import TeeWhite from "../../assets/source/icons/flag-white.png";
+import TeeBlack from "../../assets/source/icons/flag-black.png";
+import TeeAll from "../../assets/source/icons/flag-all.png";
+
+import FollowBox from "./components/FollowBox";
 import "./MyPage.css";
 
 function MyFollow() {
@@ -26,6 +33,17 @@ function MyFollow() {
         },
     ]
 
+    const teeMap = {
+        red: TeeRed,
+        white: TeeWhite,
+        black: TeeBlack,
+        all: TeeAll,
+    }
+
+    const handleFolloweeClick = (e) => {
+
+    }
+
     return (
         <div id="MyPage">
             <div id="MyPageBox">
@@ -35,7 +53,20 @@ function MyFollow() {
                         친구 목록
                     </div>
                     <div id="myfollow-list">
-                        친구 친구 친구힝
+                        {followees.map((followee) => (
+                            <div
+                                className="myfollow-box"
+                                key={followee.id}
+                                onClick={() => handleFolloweeClick(followee.id)}>
+                                <FollowBox
+                                    id={followee.id}
+                                    pic={followee.pic}
+                                    name={followee.name}
+                                    level={followee.level}
+                                    tee={teeMap[followee.tee]}
+                                />
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
