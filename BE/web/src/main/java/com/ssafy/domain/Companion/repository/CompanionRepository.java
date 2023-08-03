@@ -37,8 +37,7 @@ public interface CompanionRepository extends JpaRepository<Companion, Long> {
     Page<Companion> findPagingByTeeBox(Pageable pageable, @Param("teeBox") TeeBox teeBox);
 
     // 멤버 검색
-    @Query(value = "select * from companion where member_id in (select followee_id from follow where follower_id = :followerId) order by c.createdTime desc",
-            countQuery = "select count(*) from Companion",
-            nativeQuery = true)
-    Page<Companion> findPagingByFollowerId(Pageable pageable, @Param("member")String followerId);
+    @Query(value = "select c from Companion c, Follow f where c.member.id = f.followee.id and f.follower.id = :followerId and c.currentPeople < c.aimPeople and c.endDate < now() order by c.createdTime desc",
+            countQuery = "select count(c) from Companion c")
+    Page<Companion> findPagingByFollowerId(Pageable pageable, @Param("followerId")String followerId);
 }

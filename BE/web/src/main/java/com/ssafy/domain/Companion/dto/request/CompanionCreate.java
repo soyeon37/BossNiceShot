@@ -13,7 +13,6 @@ public record CompanionCreate(@NotNull String title,
                               @NotNull Integer field,
                               @NotNull TeeBox teeBox,
                               @NotNull Integer aimPeople,
-                              @NotNull Integer currentPeople,
                               @NotNull String teeupDate,
                               @NotNull String endDate) {
     public Companion toCompanion(Member member) {
@@ -23,9 +22,6 @@ public record CompanionCreate(@NotNull String title,
                 .field(field)
                 .teeBox(teeBox)
                 .aimPeople(aimPeople)
-                .currentPeople(currentPeople)
-                .teeupDate(LocalDateTime.parse(teeupDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-                .endDate(LocalDateTime.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .teeupDate(LocalDateTime.parse(teeupDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .endDate(LocalDateTime.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .member(member)

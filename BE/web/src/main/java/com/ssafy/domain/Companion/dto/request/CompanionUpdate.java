@@ -8,7 +8,6 @@ public record CompanionUpdate(@NotNull String title,
 							  @NotNull Integer field,
 							  @NotNull TeeBox teeBox,
 							  @NotNull Integer aimPeople,
-							  @NotNull Integer currentPeople,
 							  @NotNull String teeupDate,
 							  @NotNull String endDate) {
 }

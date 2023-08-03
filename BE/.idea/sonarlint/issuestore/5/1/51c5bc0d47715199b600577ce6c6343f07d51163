@@ -1,17 +1,0 @@
-
-j
-java:S1192}"HDefine a constant instead of duplicating this literal "SUCCESS" 4 times.(ßŠ‚ùÿÿÿÿ8èÈáûš1
-|
-java:S1488â"^Immediately return this expression instead of assigning it to the temporary variable "member".(ûŸ‹ß8áíŞá˜1
-{
-java:S1488é"^Immediately return this expression instead of assigning it to the temporary variable "member".(Æ”®
-8âíŞá˜1
-J
-java:S5411K"(Use a primitive boolean expression here.(Ã±‡ùÿÿÿÿ8ìÈáûš1
-{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¤¿ôåşÿÿÿÿ8ãíŞá˜1
-]	java:S1259"<This block of commented-out lines of code should be removed.(šìÜøÿÿÿÿ8¬Éáûš1
-Y	java:S125“"<This block of commented-out lines of code should be removed.(·ÁÁ×8úíŞá˜1
-L
-java:S1905Ê")Remove this unnecessary cast to "String".(˜İ’úÿÿÿÿ8ÈÉáûš1
-;
-java:S2119Õ"Save and re-use this "Random".(¼İÅf8şíŞá˜1
