@@ -108,3 +108,46 @@ img {
 .text-and-icon-icon {
   margin-left: 1%;
 }
+
+/* ChatBot CSS */
+.chat-widget {
+}
+
+.chatbot-widget {
+  height: 60px;
+  width: 60px;
+
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+
+  border-radius: 50%;
+
+  background-color: #95e214;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+
+  cursor: pointer;
+  z-index: 999;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chatbot-icon {
+  height: 40px;
+  width: 40px;
+
+  display: block;
+
+  background-color: #95e214;
+  border-radius: 50%;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-size: 34px;
+}
