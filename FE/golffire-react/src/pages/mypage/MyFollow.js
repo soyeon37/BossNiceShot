@@ -1,15 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import MyPageNavbar from "./MyPageNavbar";
+
+import FollowBox from "./components/FollowBox";
+import ProfileModal from "./components/ProfileModal";
 
 import TeeRed from "../../assets/source/icons/flag-red.png";
 import TeeWhite from "../../assets/source/icons/flag-white.png";
 import TeeBlack from "../../assets/source/icons/flag-black.png";
 import TeeAll from "../../assets/source/icons/flag-all.png";
+import ProfilePic from "../../assets/source/imgs/favicon.png";
 
-import FollowBox from "./components/FollowBox";
 import "./MyPage.css";
+import "./components/ProfileModal.css";
 
 function MyFollow() {
+    const [personId, setPersonId] = useState(0);
+
     // 친구 목록 데이터
     const followees = [
         {
@@ -40,8 +46,17 @@ function MyFollow() {
         all: TeeAll,
     }
 
-    const handleFolloweeClick = (e) => {
+    const picMap = {
+        tiger: ProfilePic,
+    }
 
+    const handleSelect = (e) => {
+        setPersonId(e);
+        console.log("저는 ", e, "라는 사람을 선택했어요.")
+    }
+
+    const handleUnselect = () => {
+        setPersonId(0);
     }
 
     return (
@@ -57,10 +72,10 @@ function MyFollow() {
                             <div
                                 className="myfollow-box"
                                 key={followee.id}
-                                onClick={() => handleFolloweeClick(followee.id)}>
+                                onClick={() => handleSelect(followee.id)}>
                                 <FollowBox
                                     id={followee.id}
-                                    pic={followee.pic}
+                                    pic={picMap[followee.pic]}
                                     name={followee.name}
                                     level={followee.level}
                                     tee={teeMap[followee.tee]}
@@ -70,6 +85,14 @@ function MyFollow() {
                     </div>
                 </div>
             </div>
+            {personId === 0 ? (
+                <> </>
+            ) : (
+                <ProfileModal
+                    id={personId}
+                    pic={picMap[followees.find((followee) => followee.id === personId).pic]}
+                    handleUnselect={handleUnselect} />
+            )}
         </div >
     );
 }
