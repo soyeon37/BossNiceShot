@@ -17,18 +17,24 @@ public class Notification extends BaseTime {
     private String id;
     private String type;
     private String recipient;
+    private String recipientNickname;
     private String sender;
+    private String senderNickname;
     private Long articleId;
+    private String title;
     private String status;
     private Boolean read;
 
 
-    public static Notification from(NotificationRequest request, String recipient){
+    public static Notification from(NotificationRequest request, String recipient, String recipientNickname){
         return Notification.builder()
                 .type(request.type())
                 .recipient(recipient)
+                .recipientNickname(recipientNickname)
                 .sender(request.sender())
+                .senderNickname(request.senderNickname())
                 .articleId(request.articleId())
+                .title(request.title())
                 .status(request.status())
                 .read(request.read())
                 .build();
