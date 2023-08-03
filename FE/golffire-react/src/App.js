@@ -26,9 +26,6 @@ import FreeBoardDetail from "./pages/community/FreeBoardDetail";
 import KakaoLogin from "./setup/user-auth/KakaoLogin";
 import KakaoSignUp from "./setup/user-auth/KakaoSignUp";
 import Signup from "./pages/signup/Signup";
-// import SignupEmail1 from "./pages/signup/SignupEmail1";
-// import SignupEmail2 from "./pages/signup/SignupEmail2";
-// import SignupInfo from "./pages/signup/SignupInfo";
 import FindPassword from "./pages/login/FindPassword";
 import Login from "./pages/login/Login";
 
@@ -77,9 +74,6 @@ function App() {
               {/* 항상 route 가능 */}
               <Route path="/" element={<Main />} />
               <Route path="/signup/" element={<Signup />} />
-              {/* <Route path="/signup/email1" element={<SignupEmail1 />} /> */}
-              {/* <Route path="/signup/email2" element={<SignupEmail2 />} /> */}
-              {/* <Route path="/signup/info" element={<SignupInfo />} /> */}
               <Route path="/findpassword/" element={<FindPassword />} />
               <Route path="/login/" element={<Login />} />
               <Route path="/golffield/" element={<Golffield />} />
@@ -113,6 +107,7 @@ function App() {
               <Route path="/mypage/myaccompany" element={<MyAccompany />} />
               <Route path="/mypage/mychat" element={<MyChat />} />
               <Route path="/mypage/myfollow" element={<MyFollow />} />
+
               <Route path="/mypage/signout/" element={<Signout />} />
 
               {/* Error */}

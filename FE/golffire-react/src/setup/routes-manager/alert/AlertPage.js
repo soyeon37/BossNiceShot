@@ -13,10 +13,18 @@ import {
     DrawerContent,
     DrawerCloseButton,
     Icon,
+    Flex,
+    Text,
 } from '@chakra-ui/react'
 
 // bell icon 삽입
-import { GoBell } from "react-icons/go";
+// import { GoBell } from "react-icons/go";
+
+import AlertList from './AlertList';
+
+
+import { CloseButton } from '@chakra-ui/react'
+import { Avatar } from '@chakra-ui/react';
 
 function AlertPage() {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -39,18 +47,21 @@ function AlertPage() {
                     <DrawerHeader>알림내역</DrawerHeader>
 
                     <DrawerBody>
-                        <Stack spacing='24px'>
-
-                        </Stack>
+                        {/* 이렇게 하면 되는데, 왜 AlertList를 받아오면 안되는걸까요? */}
+                        <Flex>
+                            <box>
+                                <Avatar />
+                                <Text fontSize='xs'>
+                                    윤싸피님이 [동행] 모집을 개설했습니다.
+                                </Text>
+                                <CloseButton />
+                            </box>
+                        </Flex>
                         {/* 여기에 알람 내역 들어가는 내용들 들어와야 함 */}
-                        <Input placeholder='Type here...' />
                     </DrawerBody>
 
                     <DrawerFooter>
-                        <Button variant='outline' mr={3} onClick={onClose}>
-                            닫기
-                        </Button>
-                        <Button colorScheme='blue'>Save</Button>
+
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>

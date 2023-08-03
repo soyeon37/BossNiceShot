@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react"
-import { useCookies } from 'react-cookie';
 import { NavLink, useNavigate } from "react-router-dom"
-import { IoMdContact } from 'react-icons/io'
+import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 import AlertPage from "./alert/AlertPage";
+
+import { IoMdContact } from 'react-icons/io'
+import { Avatar, AvatarBadge, AvatarGroup, Hide } from '@chakra-ui/react'
 
 import "./styles.css"
 import {
@@ -23,9 +25,12 @@ import {
 
 function Navbar() {
     const [isActive, setIsActive] = useState(false);
+
     const navigate = useNavigate();
+
     // cookie의 user 정보 확인
     const [cookies, setCookie] = useCookies(['refreshToken']);
+
     // 로그인 여부를 나타내는 변수, false로 초기화
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -37,24 +42,24 @@ function Navbar() {
     }, [cookies]);
 
     const handleLogout = () => {
-        console.log('cookies.refreshToken:',cookies.refreshToken);
-      
+        console.log('cookies.refreshToken:', cookies.refreshToken);
+
         const apiUrl = 'http://localhost:8080/members/logout'
         const data = {
-            refreshToken : cookies.refreshToken
+            refreshToken: cookies.refreshToken
         }
         axios.post(apiUrl, data)
-        .then(response => {
-            console.log(response);
-            if(response.data.data === "SUCCESS"){
-                setCookie('refreshToken', cookies.refreshToken, {path: '/', maxAge: 0});
-                navigate('/');
-            } else {
-                alert('Error')
-            }
-        })
+            .then(response => {
+                console.log(response);
+                if (response.data.data === "SUCCESS") {
+                    setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
+                    navigate('/');
+                } else {
+                    alert('Error')
+                }
+            })
     };
-    
+
     return (
         <nav className="nav">
             <a href="/" className="site-title">
@@ -128,7 +133,16 @@ function Navbar() {
                 </li>
                 <li className="mypagemenu">
                     <Menu>
-                        <MenuButton as={IconButton} icon={<IoMdContact fontSize="30px" />} />
+
+                        {/* 마이페이지 버튼 아바타로 수정했습니다. */}
+                        <MenuButton>
+                            <Avatar size={"sm"}>
+                                {/* 여기서 bg 값을 알람이 있을때는 빨간색, 없을때는 초록색으로 변경해야 할듯, 그런데 badge클릭시 알림창 뜨게 하는게 생각보다 쉽지 않음  */}
+                                <AvatarBadge boxSize={'1.25rem'} bg={'red'}>
+                                    {/* <AlertPage></AlertPage> */}
+                                </AvatarBadge>
+                            </Avatar>
+                        </MenuButton>
                         <MenuList>
 
                             {/* test code - will delete */}
@@ -144,9 +158,9 @@ function Navbar() {
                                 </MenuItem>
                                 <MenuItem style={{ color: "gray" }} onClick={handleLogout}>
                                     로그아웃
-                                    </MenuItem>
+                                </MenuItem>
                             </MenuGroup>
-                                <MenuDivider />
+                            <MenuDivider />
                             {/* test code end */}
 
                             {isLoggedIn ? (
@@ -191,7 +205,7 @@ function Navbar() {
                     <AlertPage />
                 </li>
             </ul>
-        </nav>
+        </nav >
     );
 };
 
