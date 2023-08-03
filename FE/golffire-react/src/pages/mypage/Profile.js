@@ -1,5 +1,6 @@
 import React from "react";
 import MyPageNavbar from "./MyPageNavbar";
+
 import "./MyPage.css";
 
 import { NavLink, useNavigate } from "react-router-dom";
@@ -51,6 +52,7 @@ function Profile() {
                     <div id="history-list">스코어 리스트(component 사용 예정)</div>
                 </div>
             </div>
+
         </div >
     );
 }

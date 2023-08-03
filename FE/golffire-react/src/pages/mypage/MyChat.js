@@ -72,7 +72,7 @@ function MyChat() {
         <div id="MyPage">
             <div id="MyPageBox">
                 <MyPageNavbar />
-                <div id="MyChat">
+                <div id="MyChat" className="mypage-area">
                     <div id="chat-bar">
                         <div id="chat-search">
                             <input

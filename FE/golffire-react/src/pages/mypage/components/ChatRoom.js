@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { IoSendSharp } from "react-icons/io5";
+
 import MyChatBox from "./MyChatBox";
 import OtherChatBox from "./OtherChatBox";
 
@@ -120,7 +122,9 @@ function ChatRoom({ props }) {
                     placeholder="메시지를 입력하세요."
                 />
                 <button id="icon-div" onClick={sendMessage}>
-                    전송
+                    <h1>
+                        <IoSendSharp />
+                    </h1>
                 </button>
             </div>
         </div>
