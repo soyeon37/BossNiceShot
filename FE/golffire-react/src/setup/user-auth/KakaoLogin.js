@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useLocation } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from "react-cookie";
 import {
     Box, Code,
   } from '@chakra-ui/react';
@@ -11,17 +12,11 @@ const Kakao = (props) => {
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
   const [image, setImage] = useState("");
+  const [cookies, setCookie] = useCookies(['refreshToken']);
 
   let params = new URL(document.URL).searchParams; // get query string
   let CODE = params.get("code");
   console.log("CODE: ", CODE); // Debug !!
-
-      const data = {
-       code: CODE
-     }
-      const apiUrl = "http://localhost:8080/members/code";
-
-
     // KAKAO Token 발급
     const grant_type = 'authorization_code'
         const client_id = 'cd0c9cf0cf49dae9a987aebb769ee0d6' // REST-API-TOKEN
@@ -83,13 +78,42 @@ const Kakao = (props) => {
         } else{
           console.log("유효한 이메일입니다.");
             // 카카로 로그인 하기
-          
+            handleKaKaoEmailLogin(email);
         }
       })
       .catch((error) => {
         console.error("Error:", error);
       })
     };
+
+    // 로그인
+    const handleKaKaoEmailLogin = (email) =>{
+      console.log(email);
+      // 로그인 정보
+      const data = {
+        id: email,
+        password: "1234",
+        isKakao: true
+      };
+      const apiUrl = "http://localhost:8080/members/sign-in"
+      axios
+      .post(apiUrl, data)
+      .then((response) => {
+        console.log(response);
+        // 사용자 정보를 작성하는 코드
+        // ...
+        // accessToken은 헤더로 설정
+        const access_token = response.data.data.token.accessToken;
+        const refresh_token = response.data.data.token.refreshToken;
+        axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+        setCookie('refreshToken', refresh_token, { path: '/' , maxAge: new Date().getDate() + 60 * 60 * 24 *14 });
+
+        navigate('/');
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      })
+    }
     }
     
     useEffect(() => {
@@ -100,7 +124,7 @@ const Kakao = (props) => {
     
         <Box>
             <Box maxW="md" mx="auto">
-                <div>잠시만 기다려 주세요! 회원 가입 중입니다.</div>
+                <div>잠시만 기다려 주세요! 로그인 중입니다.</div>
             </Box>
         </Box> 
     )
