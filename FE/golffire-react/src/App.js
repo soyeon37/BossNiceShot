@@ -12,14 +12,9 @@ import Accompany from "./pages/accompany/Accompany";
 import Community from "./pages/community/Community";
 
 // Study
-<<<<<<< HEAD
-import CreateRoom from "./pages/study/CreateRoom";
-import CoachingRoom from "./pages/study/CoachingRoom";
-=======
 import CreateCRoom from './pages/study/CreateCRoom';
 import CreateLRoom from './pages/study/CreateLRoom';
 import CoachingRoom from './pages/study/CoachingRoom';
->>>>>>> 325e310baded273b17703e12df0418cb41c3c438
 
 // Community
 import FreeBoardList from "./pages/community/FreeBoardList";
