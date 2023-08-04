@@ -2,6 +2,8 @@
 #MyPage {
   height: calc(100vh - 4rem);
   display: flex;
+
+  position: relative;
 }
 
 /* MyPageBox CSS */
@@ -21,6 +23,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  position: relative;
 }
 
 .mypage-area {
@@ -38,8 +42,11 @@
   display: flex;
   flex-direction: column;
 
-  background: rgba(200, 253, 38, 0.30);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  border-width: 0px 1px 0px 0px;
+  border-color: #000;
+
+  border-radius: 50px 0px 0px 50px;
+  background: #3BD641;
 }
 
 .my-nav ul {
@@ -137,7 +144,8 @@
   width: 30%;
   height: 100%;
 
-  border: 2px solid #000;
+  border-width: 0px 1px 0px 0px;
+  border-color: #000;
   background: #FFF;
 
   display: flex;
@@ -178,8 +186,9 @@
 /* ListRoom (Component) CSS */
 .ListRoom {
   width: 100%;
-  height: 200px;
+  min-height: 200px;
   margin-bottom: 10px;
+  
   padding: 20px;
 
   border-radius: 50px;
@@ -289,6 +298,7 @@
 }
 
 #myfollow-title {
+  width: 100%;
   margin: 10px;
 
   color: #000;
@@ -299,8 +309,122 @@
   line-height: normal;
 }
 
+
 #myfollow-list {
+  width: calc(100% - 10px);
+  height: 100%;
+
+  margin-bottom: 10px;
   padding: 10px;
+
+  overflow-y: scroll;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.myfollow-box {
+  width: 695px;
+  max-width: 90%;
+  min-height: 230px;
+  margin: 5px;
+}
+
+/* FollowBox CSS */
+.FollowBox {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 10px;
+
+  padding: 40px;
+  border-radius: 50px;
+  border: 1px solid #000;
+  background: #FFF;
+
+  flex: 1 1 40%;
+  display: flex;
+}
+
+.followbox-header {
+  max-width: 150px;
+  margin-right: 10px;
+}
+
+.followbox-pic {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+  overflow: hidden;
+
+  border: 2px solid #000;
+  background-color: #FF7272;
+}
+
+.pic-circle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.followbox-body {
+  width: 545px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  text-align: left;
+}
+
+.followbox-name {
+  margin: 10px 0px;
+  color: #000;
+  font-family: Inter;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.followbox-info {
+  display: flex;
+  color: #000;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.level {
+  width: 40px;
+  height: 40px;
+
+  text-align: center;
+  padding: 100% auto;
+
+  border-radius: 50%;
+  background-color: skyblue;
+
+  color: #FFF;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.tee {
+  width: 40px;
+  height: 40px;
+}
+
+.badge {
+  margin-right: 10px;
 }
 
 /* Signout CSS */
