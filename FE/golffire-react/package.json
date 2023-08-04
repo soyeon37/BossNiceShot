@@ -8,7 +8,10 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.2",
+<<<<<<< HEAD
     "@react-icons/all-files": "^4.1.0",
+=======
+>>>>>>> 325e310baded273b17703e12df0418cb41c3c438
     "@reduxjs/toolkit": "^1.9.5",
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",
@@ -20,6 +23,7 @@
     "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-cookie": "^4.1.1",
+    "react-datepicker": "^4.16.0",
     "react-dom": "^18.2.0",
     "react-focus-lock": "^2.9.5",
     "react-icons": "^4.10.1",
@@ -32,7 +36,8 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "redux-devtools-extension": "^2.13.9"
   },
   "scripts": {
     "start": "react-scripts start",
