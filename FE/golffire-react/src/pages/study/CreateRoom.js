@@ -38,6 +38,8 @@ function CreateRoom() {
         // 등록 또는 제출 로직을 여기에 작성합니다.
         // 예를 들어, 서버로 데이터를 전송하거나 원하는 다른 작업을 수행할 수 있습니다.
 
+        // 나의 팔로워들에게 알림을 보내는 함수
+        handleCreateNotification();
         
         console.log("Content submitted:", value);
         navigate('/studylist');
@@ -47,6 +49,8 @@ function CreateRoom() {
 // 알림 설정 함수
 const handleCreateNotification = () => {
   const apiUrl = 'http://localhost:8080/notification/create';
+  
+  // data useState 추가 예정
   const data = {
     id:"",
     type: "learning",

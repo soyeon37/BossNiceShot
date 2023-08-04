@@ -1,0 +1,23 @@
+
+.accept:hover {
+    color: #72CE27;
+}
+.refuse:hover {
+    color: #E53E3E;
+}
+.delete-all-button{
+    margin-left: auto;
+    width:100px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: #E53E3E; /* You can change the background color here */
+    color: white;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid black;  /* Optional: Remove the border */
+}
+.delete-all-button:hover{
+    background-color: aliceblue;
+    color: #E53E3E;
+}
