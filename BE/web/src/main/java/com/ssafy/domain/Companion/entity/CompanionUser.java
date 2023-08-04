@@ -15,8 +15,9 @@ public class CompanionUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING) // Enum 타입으로 지정
     @Column(nullable = false)
-    private boolean status;
+    private CompanionStatus companionStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -28,9 +29,13 @@ public class CompanionUser {
 
     @Builder
     public CompanionUser(Member member, Companion companion) {
-        status = false;
+        companionStatus = CompanionStatus.INACTIVE; // 기본 상태를 INACTIVE로 설정
         this.member = member;
         this.companion = companion;
+    }
+
+    public void active() {
+        this.companionStatus = CompanionStatus.ACTIVE;
     }
 
 }

@@ -22,8 +22,6 @@ public class CompanionController {
 
 - 동행 완료된 동행 모집은 비활성화 표시
 
-동행 신청 오면 수락
-동행 신청 오면 거절
 
 CompanionUser
 동행 모집글 보고 동행 신청

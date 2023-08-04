@@ -1,21 +1,0 @@
-
-t
-<<<<<<< HEAD
-java:S2293$"YReplace the type specification in this constructor call with the diamond operator ("<>").(çÜ²ƒıÿÿÿÿ
-t
-java:S2293,"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÖËñúÿÿÿÿ
-2
-java:S1643"Use a StringBuilder instead.(Ö˜ùÆ
-7
-java:S1643!"Use a StringBuilder instead.(¿òêÜşÿÿÿÿ
-g
-java:S1128"QRemove this unused import 'io.swagger.v3.oas.annotations.parameters.RequestBody'.(…åá
-=======
-java:S2293#"YReplace the type specification in this constructor call with the diamond operator ("<>").(çÜ²ƒıÿÿÿÿ
-t
-java:S2293+"YReplace the type specification in this constructor call with the diamond operator ("<>").(ÖËñúÿÿÿÿ
-2
-java:S1643"Use a StringBuilder instead.(Ö˜ùÆ
-7
-java:S1643 "Use a StringBuilder instead.(¿òêÜşÿÿÿÿ
->>>>>>> 7f72e4bc34b6bd551da9dd3ab557c717ea7bfdd3
