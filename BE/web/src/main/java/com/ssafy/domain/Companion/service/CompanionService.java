@@ -10,6 +10,8 @@ import com.ssafy.domain.Companion.repository.CompanionRepository;
 import com.ssafy.domain.Member.service.MemberService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +39,7 @@ public class CompanionService {
                 .orElseThrow(EntityNotFoundException::new);
 
         companion.update(
-                companionUpdate.title(),   // 이 부분을 companionUpdate.getTitle()에서 companionUpdate.title()로 수정
+                companionUpdate.title(),
                 companionUpdate.contents(),
                 companionUpdate.field(),
                 companionUpdate.teeBox(),
@@ -49,13 +51,27 @@ public class CompanionService {
     }
 
     //companion 삭제
+    @Transactional
+    public void deleteCompanion(Long companionId){
+        companionRepository.deleteById(companionId);
+    }
 
-    //companion 을 프런트 단에 보내는 것
-    // 컴패니언 전체 다 보여주는
-    // 컴패니언 상세 내용 하나씩 보여주는
+    //companion 을 프런트 단에 보내는 것 - 컴패니언 전체 다 보여주는
+    @Transactional(readOnly = true)
+    public Companion findByCompanionId(Long companionId) {
+        return companionRepository.findById(companionId).orElseThrow(EntityNotFoundException::new);
+    }
+
+
+
+//    public Page<Companion> findPagingByKeyword(Pageable pageable, )
+
+
+
+    // 컴패니언 눌러서 나오는 상세 내용 하나씩 보여주는
     // current people == aimpeople 같아 지면 (전체 보내고 프런트에서 비교해서 )
 
-    //CompanionUser status가 + ture 가 되면 currentPeople 이 1 증가해야함
+    //CompanionUser status가 엑티브가 되면 currentPeople 이 1 증가해야함
     // 컴패니언 유저 정보가 다시 사라지면 다시 줄어들고
 
 
