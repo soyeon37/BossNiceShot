@@ -8,10 +8,6 @@
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.2",
-<<<<<<< HEAD
-    "@react-icons/all-files": "^4.1.0",
-=======
->>>>>>> 325e310baded273b17703e12df0418cb41c3c438
     "@reduxjs/toolkit": "^1.9.5",
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",
