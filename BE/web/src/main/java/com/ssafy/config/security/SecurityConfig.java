@@ -5,6 +5,7 @@ import com.ssafy.config.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -49,13 +50,20 @@ public class SecurityConfig {
             "/swagger-ui/index.html",
             "/solution/detect",
             "/members/**",
-            "/chat/**"
+            "/chat/**",
+            "/auth/**",
+            "/ws/**",
+            "/study/sessions",
+            "/api/sessions",
+            "/api/sessions/**",
+            "api/sessions/SessionA/connections"
     };
     private static final String[] USER_LIST = {
             "/members/sign-in",
             "/members/update",
             "/members/logout",
-            "/members/delete"
+            "/members/delete",
+            "/oauth/code"
     };
 
     @Bean
@@ -73,6 +81,7 @@ public class SecurityConfig {
                         .requestMatchers(USER_LIST).hasRole("USER")
                         .anyRequest().authenticated()
                 )
+//                .oauth2Login(withDefaults())
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 //                .addFilterBefore(new JwtExceptionFilter(), JwtAuthenticationFilter.class)
 //                .httpBasic(withDefaults()); // 권한이 없으면 로그인 페이지로 이동
@@ -92,9 +101,10 @@ public class SecurityConfig {
         config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setExposedHeaders(List.of("*"));
+        config.setExposedHeaders(List.of("*", "Set-Cookie"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
     }
+
 }

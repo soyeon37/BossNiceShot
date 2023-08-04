@@ -1,5 +1,6 @@
 package com.ssafy.domain.Member.service;
 
+import com.ssafy.Exception.message.ExceptionMessage;
 import com.ssafy.Exception.model.TokenNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,20 +32,19 @@ public class RefreshTokenService {
         ValueOperations<String, String> values = redisTemplate.opsForValue();
         try{
             return values.get(token);
-        }catch (Exception e){
+        }catch (RuntimeException e){
             log.info("Redis get error");
-            throw new IllegalArgumentException();
+            throw new TokenNotFoundException(ExceptionMessage.TOKEN_NOT_FOUND);
         }
     }
 
     // key-value 삭제
     public void delValues(String token) throws TokenNotFoundException{
-        ValueOperations<String, String> values = redisTemplate.opsForValue();
         try{
-            values.getAndDelete(token);
-        }catch (Exception e){
+            redisTemplate.delete(token);
+        }catch (RuntimeException e){
             log.info("Redis delete error");
-            throw new IllegalArgumentException();
+            throw new TokenNotFoundException(ExceptionMessage.TOKEN_NOT_FOUND);
         }
     }
 }
