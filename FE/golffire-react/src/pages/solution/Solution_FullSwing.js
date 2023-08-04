@@ -75,7 +75,7 @@ function Solution_FullSwing() {
           <video
             ref={videoRef}
             id="video"
-            className="live-video"
+            className="live-video-fullswing"
             width="640"
             height="480"
             autoPlay

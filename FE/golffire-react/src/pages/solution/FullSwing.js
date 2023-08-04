@@ -170,7 +170,7 @@ export default function FullSwing(
           if (golfStanceSatisfied.current) {
             golfStanceCount.current += 1;
 
-            if (golfStanceCount.current >= 4 && !isReady && !isAnalyzing) {
+            if (golfStanceCount.current >= 2 && !isReady && !isAnalyzing) {
               // Initialize the MediaRecorder
               const stream = videoRef.current.srcObject;
               mediaRecorder = new MediaRecorder(stream);
@@ -436,7 +436,7 @@ export default function FullSwing(
   }
   function checkHead(HeadX, HeadY) {
     const dist = Math.sqrt((HeadX - initialHeadX)**2 + (HeadY - initialHeadY)**2);
-    if (dist <= 20) return 1;
+    if (dist <= 30) return 1;
     return 0;
   }
   function checkShoulder(ShoulderX, ShoulderY) {
@@ -446,7 +446,7 @@ export default function FullSwing(
   }
   function checkKnee(rightKneeX, rightKneeY) {
     const dist = Math.sqrt((rightKneeX - initialLeftKneeX)**2 + (rightKneeY - initialLeftKneeY)**2);
-    if (Math.abs(initialKneeDist - dist) <= 20) return 1;
+    if (Math.abs(initialKneeDist - dist) <= 30) return 1;
     return 0;
   }
 

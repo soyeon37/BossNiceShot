@@ -1,4 +1,3 @@
-// useGolfDetection.js
 import { useEffect } from "react";
 
 export default function HalfSwing(
@@ -16,7 +15,8 @@ export default function HalfSwing(
   setIsReady,
   setIsAnalyzing,
   setAnalysisVideoURL,
-  setAnalysisData
+  setAnalysisData,
+  setCoordinateData
 ) {
   // Define your state variables
   let color = "white";
@@ -170,7 +170,7 @@ export default function HalfSwing(
           if (golfStanceSatisfied.current) {
             golfStanceCount.current += 1;
 
-            if (golfStanceCount.current >= 4 && !isReady && !isAnalyzing) {
+            if (golfStanceCount.current >= 2 && !isReady && !isAnalyzing) {
               // Initialize the MediaRecorder
               const stream = videoRef.current.srcObject;
               mediaRecorder = new MediaRecorder(stream);
@@ -328,6 +328,7 @@ export default function HalfSwing(
     let totalKneeCnt = 1;
     let onKneeCnt = 1;
     let analysisResults = [];
+    let coordinateDatas = [];
 
     const analysisCanvas = document.createElement("canvas");
     analysisCanvas.width = 640;
@@ -363,6 +364,7 @@ export default function HalfSwing(
             totalEllipseCnt++;
             const resultArray = analyzePose(pose);
             analysisResults.push(resultArray);
+            coordinateDatas.push(pose.keypoints);
             onEllipseCnt += resultArray[0];
             onHipCnt += resultArray[1];
             onHeadCnt += resultArray[2];
@@ -389,6 +391,7 @@ export default function HalfSwing(
           setKneeScore(myKneeScore);
           setIsAnalyzing(false);
           setAnalysisData(analysisResults);
+          setCoordinateData(coordinateDatas);
           isAnalyzing = false;
         });
       });
@@ -448,6 +451,8 @@ export default function HalfSwing(
     if (Math.abs(initialKneeDist - dist) <= 20) return 1;
     return 0;
   }
+
+
 
   // tensorflow에서 제공하는 js 파트
   const boundingBoxColor = "white";
