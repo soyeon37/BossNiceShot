@@ -73,11 +73,6 @@ function Golffield() {
     setCurrentPage(1);
   }
 
-  // 네이버 검색창 연결 함수
-  const searchOnNaver = () => {
-
-  }
-
   return (
     <div id="Golffield">
       <div id="golf-title">골프장 검색</div>
@@ -100,9 +95,11 @@ function Golffield() {
           </div>
           <div id="result">
             <div id="result-list">
+              <div style={{textAlign: "left", color: "gray"}}>
+                골프장을 선택 시, 네이버 검색 결과로 연결됩니다.
+              </div>
               {getCurrentPageItems(golfClub).map((club) => (
                 <GolfBox
-                  onClick={searchOnNaver}
                   key={club[dataKeys[arrayIndex[0]]]}
                   name={club[dataKeys[arrayIndex[1]]]}
                   address={club[dataKeys[arrayIndex[2]]]}
