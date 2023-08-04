@@ -62,6 +62,10 @@ const Login = () => {
 
   const handleKakaoLogin = () => {
     console.log("카카오 로그인 시도"); // Debug Code !!
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 325e310baded273b17703e12df0418cb41c3c438
     const REST_API_KEY = "cd0c9cf0cf49dae9a987aebb769ee0d6";
     const REDIRECT_URI = "http://localhost:3000/auth/kakao/login/callback";
     const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
