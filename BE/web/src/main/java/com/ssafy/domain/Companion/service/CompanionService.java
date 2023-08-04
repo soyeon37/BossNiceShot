@@ -24,20 +24,11 @@ public class CompanionService {
     private final CompanionRepository companionRepository;
     private final MemberService memberService;
 
-    //컴패니언 생성
+    //companion 생성
     @Transactional
     public Companion createComapnion(CompanionCreate companionCreate, String memberId){
         return companionRepository.save(companionCreate.toCompanion(memberService.findByMemberId(memberId)));
     }
-
-//    @Transactional
-//    public Companion updateCompanion(CompanionUpdate companionUpdate, Long CompanionId){
-//        companionRepository.findById(CompanionId)
-//                .ifPresentOrElse(companion -> companion.update(companionUpdate.title(), companionUpdate.contents(), companionUpdate.field(), companionUpdate.teeBox(), companionUpdate.aimPeople(), companionUpdate.teeupDate(), companionUpdate.endDate()),
-//                        () -> {throw new EntityNotFoundException();});
-//
-//        return findById(companionId);
-//    }
 
     //companion 수정
     @Transactional
@@ -57,11 +48,19 @@ public class CompanionService {
         return companionRepository.save(companion);
     }
 
+    //companion 삭제
 
+    //companion 을 프런트 단에 보내는 것
+    // 컴패니언 전체 다 보여주는
+    // 컴패니언 상세 내용 하나씩 보여주는
+    // current people == aimpeople 같아 지면 (전체 보내고 프런트에서 비교해서 )
 
     //CompanionUser status가 + ture 가 되면 currentPeople 이 1 증가해야함
+    // 컴패니언 유저 정보가 다시 사라지면 다시 줄어들고
 
 
+    //검색 필터 해야하고
+    //검색 키워드로 해서 받아오는 것 (검색 필터는 전체 조회할떄)
 
 
 }

@@ -93,19 +93,15 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PostMapping("/sign-in")
-    public ApiResponse signIn(@RequestBody SignInRequest request, HttpServletResponse httpServletResponse) {
+    public ApiResponse signIn(@RequestBody SignInRequest request) {
         log.info("로그인 시작");
         SignInResponse signInResponse = memberService.signIn(request);
-
         // Redis에 저장
         refreshTokenService.setValues(signInResponse.token().getRefreshToken(), request.id());
         log.info("memberId={}, refreshToken={}",request.id(), signInResponse.token().getRefreshToken());
         return ApiResponse.success(signInResponse);
     }
 
-    /**
-     * 로그아웃 시, FrontEnd에서 AccessToken 삭제
-     */
     @Operation(summary = "로그아웃", description = "로그아웃")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),

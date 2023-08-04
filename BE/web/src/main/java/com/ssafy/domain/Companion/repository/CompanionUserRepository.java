@@ -12,7 +12,7 @@ public interface CompanionUserRepository extends JpaRepository<CompanionUser, Lo
     List<CompanionUser> findByCompanionId(Long companyId);
 
     // 유저 기반으로 불러오는 것
-    //List<CompanionUser> findByCompanionIdAndStatusIsTrue(Long CompanionId, Status status);
+    List<CompanionUser> findByCompanionIdAndStatusIsTrue(Long CompanionId, Status status);
     void deleteByCompanionIdAndMemberId(Long companionId, String memberId);
 
 

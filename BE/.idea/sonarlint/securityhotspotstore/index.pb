@@ -63,8 +63,6 @@ Kweb/src/main/java/com/ssafy/domain/chat/dto/request/ChatMessageRequest.java,7\
 web/build.gradle,7/2/7213827b9958fd9a000cc61fcfe1d4c126227da1
 >
 web/.gitignore,1/b/1bbcfa8f537f26a9c4ca62265dc63f2e06edb771
-z
-Jweb/src/main/java/com/ssafy/domain/Member/repository/MemberRepository.java,9/5/95302422fe6efedc38202a3cfccc4efcc7321c5b
 |
 Lweb/src/main/java/com/ssafy/config/security/jwt/JwtAuthenticationFilter.java,3/9/393075134e3e099d1088fa2f27933a86249ddc9b
 z
@@ -125,3 +123,11 @@ j
 Lweb/src/main/java/com/ssafy/domain/study/dto/request/StudySearchRequest.java,c\2\c27ef623b1a4ef6096fdb77783c244d8177eb57f
 x
 Hweb/src/main/java/com/ssafy/domain/study/controller/StudyController.java,9\d\9dcf161f011ffcad584517b06d2556543bcba685
+€
+Pweb/src/main/java/com/ssafy/domain/studyUser/repository/StudyUserRepository.java,5\b\5b837e0cd8d2235fae7c5d05f03c8a629b1d5947
+x
+Hweb/src/main/java/com/ssafy/domain/study/repository/StudyRepository.java,c\9\c93b3a18758847c21bded4ccc87a569b226dda22
+t
+Dweb/src/main/java/com/ssafy/domain/Member/service/MemberService.java,5\1\51c5bc0d47715199b600577ce6c6343f07d51163
+r
+Bweb/src/main/java/com/ssafy/domain/study/service/StudyService.java,4\3\43557bcc312ed90b2ee692b60b6743722aa85b21

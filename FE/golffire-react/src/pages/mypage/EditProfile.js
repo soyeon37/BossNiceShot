@@ -6,34 +6,35 @@ import MyPageNavbar from "./MyPageNavbar";
 import "./MyPage.css";
 
 import {
-  Button,
+    Button,
 } from "@chakra-ui/react";
 
 function EditProfile() {
     const { state } = useLocation();
     const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-     const [nickname, setNickname] = useState("");
-     // 닉네임 중복 검사
-  const handleCheckNickname = () => {
-    console.log("nickname: ", nickname); // Debug !!
-    const data = {
-      nickname: nickname
+    const [nickname, setNickname] = useState("");
+    // 닉네임 중복 검사
+    const handleCheckNickname = () => {
+        console.log("nickname: ", nickname); // Debug !!
+        const data = {
+            nickname: nickname
+        }
+        const apiUrl = "http://localhost:8080/members/checkNickname"
+        axios
+            .post(apiUrl, data)
+            .then((response) => {
+                if (response.data.data.resultMessage === "FAIL") {
+                    console.log("닉네임이 중복되었습니다.");
+                    alert("이미 존재하는 닉네임입니다.");
+                } else {
+                    console.log("유효한 닉네임입니다.");
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            })
     }
-    const apiUrl = "http://localhost:8080/members/checkNickname"
-    axios
-    .post(apiUrl, data)
-    .then((response) => {
-      if (response.data.data.resultMessage === "FAIL") {
-        console.log("닉네임이 중복되었습니다.");
-        alert("이미 존재하는 닉네임입니다.");
-      } else {
-        console.log("유효한 닉네임입니다.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    })
-  }
+
 
     // 사용자 정보 수정 테스트용 코드 - 함소연
     const testPut = () => {
@@ -45,6 +46,7 @@ function EditProfile() {
             level: "더블 플레이어",
             image: "banana.jpg",
             introduction: "하이욤"
+
         }
 
         const apiUrl = 'http://localhost:8080/members/update';
@@ -114,20 +116,20 @@ function EditProfile() {
                     <div id="edit-nickname">
                         닉네임, 검사 필요
                         <Button
-            onClick={handleCheckNickname}
-            style={{
-              height: "2.5rem",
-              width: "100%",
+                            onClick={handleCheckNickname}
+                            style={{
+                                height: "2.5rem",
+                                width: "100%",
 
-              color: "black",
-              borderRadius: "30px",
-              background: "#B8F500",
-            }}
-            maxW={"sm"}
-            marginBottom={"2.5rem"}
-          >
-            검사
-          </Button>
+                                color: "black",
+                                borderRadius: "30px",
+                                background: "#B8F500",
+                            }}
+                            maxW={"sm"}
+                            marginBottom={"2.5rem"}
+                        >
+                            검사
+                        </Button>
                     </div>
                     <div id="edit-introduction">
                         자기소개 수정 가능
@@ -144,6 +146,7 @@ function EditProfile() {
                     </div>
                 </div>
             </div>
+
         </div >
     );
 }

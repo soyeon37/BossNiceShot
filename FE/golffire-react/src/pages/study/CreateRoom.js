@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios";
 import {
   Box,
   Flex,
@@ -36,10 +37,36 @@ function CreateRoom() {
     } else {
         // 등록 또는 제출 로직을 여기에 작성합니다.
         // 예를 들어, 서버로 데이터를 전송하거나 원하는 다른 작업을 수행할 수 있습니다.
+
+        
         console.log("Content submitted:", value);
         navigate('/studylist');
     }
 };
+
+// 알림 설정 함수
+const handleCreateNotification = () => {
+  const apiUrl = 'http://localhost:8080/notification/create';
+  const data = {
+    id:"",
+    type: "learning",
+    recipient: "",
+    recipientNickname : "",
+    sender : "soyeun3377@naver.com",
+    senderNickname : "함싸피",
+    title : "동행 같이 가실 분",
+    articleId: 1,
+    status : "None",
+    read : false
+  }
+  axios.post(apiUrl, data)
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((error) => {
+    navigate('/')
+  })
+}
 
 
   return (

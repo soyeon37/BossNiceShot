@@ -36,7 +36,7 @@ public interface CompanionRepository extends JpaRepository<Companion, Long> {
             countQuery = "select count(c) from Companion c")
     Page<Companion> findPagingByTeeBox(Pageable pageable, @Param("teeBox") TeeBox teeBox);
 
-    // 멤버 검색
+    // 팔로워검색
     @Query(value = "select c from Companion c, Follow f where c.member.id = f.followee.id and f.follower.id = :followerId and c.currentPeople < c.aimPeople and c.endDate < now() order by c.createdTime desc",
             countQuery = "select count(c) from Companion c")
     Page<Companion> findPagingByFollowerId(Pageable pageable, @Param("followerId")String followerId);
