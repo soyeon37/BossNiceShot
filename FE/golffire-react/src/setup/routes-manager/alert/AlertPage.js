@@ -138,25 +138,25 @@ function AlertPage() {
                     {notifications && notifications.map((notification, index) => (
                     // 반복문 실행
                     <Flex key={index}>
-                     <box>
+                     <div>
                       <Avatar />
                      <Text fontSize='xs'>
                         {notification.senderNickname}님이 {notification.title}을 개설했습니다.
                       </Text>
                        <CloseButton />
-                       </box>
+                       </div>
                      </Flex>
                     ))}
                         
                         {/* 이렇게 하면 되는데, 왜 AlertList를 받아오면 안되는걸까요? */}
                         <Flex>
-                            <box>
+                            <div>
                                 <Avatar />
                                 <Text fontSize='xs'>
                                     윤싸피님이 [동행] 모집을 개설했습니다.
                                 </Text>
                                 <CloseButton />
-                            </box>
+                            </div>
                         </Flex>
                         {/* 여기에 알람 내역 들어가는 내용들 들어와야 함 */}
                     </DrawerBody>
