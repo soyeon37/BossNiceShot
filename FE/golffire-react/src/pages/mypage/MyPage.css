@@ -2,18 +2,51 @@
 #MyPage {
   height: calc(100vh - 4rem);
   display: flex;
+
+  position: relative;
+}
+
+/* MyPageBox CSS */
+#MyPageBox {
+  margin: 10px auto 20px;
+
+  width: 1820px;
+  height: 800px;
+  max-width: 95%;
+  max-height: 95%;
+
+  border-radius: 50px;
+  border: 1px solid #000;
+  background-color: #fff;
+  box-shadow: 20px 20px 0px 0px #000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  position: relative;
+}
+
+.mypage-area {
+  width: 80%;
+  height: 100%;
+
+  display: flex;
 }
 
 /* MyPageNavbar CSS */
 #MyPageNavbar {
   height: 100%;
-  width: 30%;
+  width: 20%;
 
   display: flex;
   flex-direction: column;
 
-  background: rgba(200, 253, 38, 0.30);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  border-width: 0px 1px 0px 0px;
+  border-color: #000;
+
+  border-radius: 50px 0px 0px 50px;
+  background: #3BD641;
 }
 
 .my-nav ul {
@@ -33,15 +66,6 @@
 
 /* Profile CSS */
 #Profile {
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* MyAccompany CSS */
-#MyAccompany {
   width: 100%;
 
   display: flex;
@@ -103,6 +127,304 @@
   border-radius: 60px;
   border: 1px solid #000;
   background: #3BD641;
+}
+
+/* MyAccompany CSS */
+#MyAccompany {
+  width: 20%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* MyChat CSS */
+#chat-bar {
+  width: 30%;
+  height: 100%;
+
+  border-width: 0px 1px 0px 0px;
+  border-color: #000;
+  background: #FFF;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#chat-search {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+}
+
+#chat-list {
+  width: 100%;
+  height: calc(100% - 50px);
+  margin-right: 10px;
+  margin-bottom: 50px;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: scroll;
+}
+
+#chat-room {
+  width: 70%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-content: center;
+}
+
+/* ListRoom (Component) CSS */
+.ListRoom {
+  width: 100%;
+  min-height: 200px;
+  margin-bottom: 10px;
+  
+  padding: 20px;
+
+  border-radius: 50px;
+  border: 1px solid #000;
+  background: #FFF;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.listroom-header {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
+}
+
+.listroom-title {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.listroom-tee {
+  width: 40px;
+  height: 40px;
+}
+
+.listroom-data>div {
+
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* ChatRoom (Component) CSS */
+.ChatRoom {
+  width: 100%;
+  height: 100%;
+}
+
+#room-header {
+  width: 100%;
+  height: 100px;
+
+  border-radius: 0px 50px 0px 0px;
+  border: 1px solid #000;
+  background: #FFF;
+}
+
+#room-title {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+#room-text {
+  width: 100%;
+  height: calc(100% - 200px);
+}
+
+#room-footer {
+  width: 100%;
+  height: 100px;
+
+  border-radius: 0px 0px 50px 0px;
+  border: 1px solid #000;
+  background: #FFF;
+}
+
+/* MyChatBox (Component) CSS */
+.MyChatBox>div {
+  float: right;
+}
+
+/* OtherChatBox (Component) CSS */
+.OtherChatBox>div {
+  float: left;
+}
+
+/* ChatBox Common CSS */
+.chatbox {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  border: 1px solid #000;
+}
+
+/* MyFollow CSS */
+#MyFollow {
+  display: flex;
+  flex-direction: column;
+}
+
+#myfollow-title {
+  width: 100%;
+  margin: 10px;
+
+  color: #000;
+  font-family: Inter;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+
+#myfollow-list {
+  width: calc(100% - 10px);
+  height: 100%;
+
+  margin-bottom: 10px;
+  padding: 10px;
+
+  overflow-y: scroll;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.myfollow-box {
+  width: 695px;
+  max-width: 90%;
+  min-height: 230px;
+  margin: 5px;
+}
+
+/* FollowBox CSS */
+.FollowBox {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 10px;
+
+  padding: 40px;
+  border-radius: 50px;
+  border: 1px solid #000;
+  background: #FFF;
+
+  flex: 1 1 40%;
+  display: flex;
+}
+
+.followbox-header {
+  max-width: 150px;
+  margin-right: 10px;
+}
+
+.followbox-pic {
+  width: 100%;
+  height: 100%;
+
+  border-radius: 50%;
+  overflow: hidden;
+
+  border: 2px solid #000;
+  background-color: #FF7272;
+}
+
+.pic-circle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.followbox-body {
+  width: 545px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  text-align: left;
+}
+
+.followbox-name {
+  margin: 10px 0px;
+  color: #000;
+  font-family: Inter;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.followbox-info {
+  display: flex;
+  color: #000;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.level {
+  width: 40px;
+  height: 40px;
+
+  text-align: center;
+  padding: 100% auto;
+
+  border-radius: 50%;
+  background-color: skyblue;
+
+  color: #FFF;
+  font-family: Inter;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.tee {
+  width: 40px;
+  height: 40px;
+}
+
+.badge {
+  margin-right: 10px;
 }
 
 /* Signout CSS */

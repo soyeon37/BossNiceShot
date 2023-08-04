@@ -17,7 +17,7 @@ import golfImage from "../../assets/source/icons/golf.png";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [setCookie] = useCookies(["refreshToken"]);
+  const [cookies, setCookie] = useCookies(['refreshToken']);
   const navigate = useNavigate();
 
   // 이메일 로그인 함수
@@ -45,7 +45,7 @@ const Login = () => {
         axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
         // 쿠키에 정보 저장
-        setCookie('refreshToken', refresh_token, { path: '/' , maxAge: new Date().getDate() + 60 * 60 * 24 *14 });
+        setCookie('refreshToken', refresh_token, { path: '/', maxAge: new Date().getDate() + 60 * 60 * 24 * 14 });
 
         console.log(response.data); // Debug Code !!
 
@@ -56,21 +56,21 @@ const Login = () => {
         console.error("Error:", error); // Debug Code !!
 
         // 로그인 실패를 화면에 표시하는 코드 필요 !!
+        navigate("/error");
       });
   };
 
   const handleKakaoLogin = () => {
     console.log("카카오 로그인 시도"); // Debug Code !!
-    const REST_API_KEY = 'cd0c9cf0cf49dae9a987aebb769ee0d6';
-    const REDIRECT_URI = 'http://localhost:3000/auth/kakao/login/callback'
-    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`
-    window.location.href=kakaoUrl;
-
-  }
+    
+    const REST_API_KEY = "cd0c9cf0cf49dae9a987aebb769ee0d6";
+    const REDIRECT_URI = "http://localhost:3000/auth/kakao/login/callback";
+    const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    window.location.href = kakaoUrl;
+  };
 
   return (
     <div id="Login">
-
       {/* 그림 공간 */}
       <div id="login-banner">
         <div id="login-banner-context">
@@ -103,6 +103,7 @@ const Login = () => {
               />
             </FormControl>
             <FormControl maxW={'sm'} paddingTop={'2%'}>
+
               <FormLabel>비밀번호</FormLabel>
               <Input
                 type="password"
@@ -127,7 +128,6 @@ const Login = () => {
               maxW={'sm'}
               marginBottom={'2.5rem'}
             > 로그인</Button>
-
             <Button
               onClick={handleKakaoLogin}
               style={{
@@ -149,7 +149,7 @@ const Login = () => {
             <NavLink to="/signup">회원가입 하기</NavLink>
           </div>
         </div>
-      </div>
+      </div >
 
     </div >
   );

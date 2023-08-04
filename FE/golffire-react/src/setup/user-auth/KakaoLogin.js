@@ -17,13 +17,6 @@ const Kakao = (props) => {
   let params = new URL(document.URL).searchParams; // get query string
   let CODE = params.get("code");
   console.log("CODE: ", CODE); // Debug !!
-
-      const data = {
-       code: CODE
-     }
-      const apiUrl = "http://localhost:8080/members/code";
-
-
     // KAKAO Token 발급
     const grant_type = 'authorization_code'
         const client_id = 'cd0c9cf0cf49dae9a987aebb769ee0d6' // REST-API-TOKEN

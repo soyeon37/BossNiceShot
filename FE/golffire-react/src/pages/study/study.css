@@ -1,30 +1,153 @@
 /* StudyList */
 
-
-#Study {
-  height: calc(100vh - 4rem);
+.list-container {
+  height: 100%;
+  width: 100%
+}
+.list-head {
+  height: 15%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-#Search {
+.list-body {
+  height: 80%;
+  width: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 20px;
-  margin-bottom: 20px;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
-.Study-List {
-  height: calc(100vh - 4rem);
-  margin: 0 80px;
+/* CoachingList */
+
+/* LearningList */
+
+.learninglist-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
-/* CreateRoom */
+.learninglist {
+  height: 90%;
+  width: 45%;
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: #FFF;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.learninglist-head {
+  height: 10%;
+  width : 90%;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.learning-create {
+  height: 80%;
+  width: 10%;
+  border-radius: 20px;
+  margin-left: 10px;
+  border: 1px solid #000;
+  color: #000;
+  font-family: Inter;
+  font-size: 5px;
+  font-style: normal;
+  line-height: normal;
+}
+
+.learning-search {
+  width: 80%;
+  height: 80%;
+}
+
+.learninglist-body {
+  height: 75%;
+  width : 90%;
+  border: 1px solid #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.learning-room {
+  width : 45%;
+  height: 35%;
+  border: 1px solid #000;
+  margin: 10px;
+  border-radius: 15px;
+}
+
+.learninglist-footer {
+  width : 90%;
+  height: 10%;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.joining-room {
+  height: 90%;
+  width: 33%;
+  border: 1px solid #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.joining-title {
+  text-align: left;
+}
+
+.joining-author {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.joining-author-box{
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.joining-description {
+  text-align: center;
+  border: 1px solid #000;
+}
+
+.joining-button {
+  background-color: yellow;
+}
 
 
 .Create-Room-Container {
   /* 배경화면 이미지 적용 */
   background-image: url("../../assets/source/imgs/studybg.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center1;
   background-repeat: no-repeat;
   /* 원하는 스타일링을 추가하세요 */
 }
@@ -35,6 +158,102 @@
   flex-wrap: wrap; /* 줄 바꿈 설정 추가 */
   /* 원하는 스타일링을 추가하세요 */
 }
+
+
+
+/* CreateLRoom */
+.editor-container{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.editor-mainbox {
+  width: 700px;
+  height: 580px;
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: #FFF;
+  padding : 3rem;
+  display: flex; /* 가운데 정렬을 위해 flex로 설정 */
+  flex-direction: column; /* 세로 방향으로 정렬되도록 설정 */
+  align-items: center; /* 수평 가운데 정렬 */
+  box-shadow: 10px 10px 0px 0px #000;
+}
+
+.editor-title {
+  height: 40px;
+  width: 640px;
+  border: 1px solid #000;
+  padding: 10px 48px; /* 텍스트 입력과 테두리 사이의 간격을 주기 위한 padding 추가 */
+  box-sizing: border-box;
+}
+
+.editor-content {
+  width: 640px;
+  height: 540px;
+  border: 1px solid #000;
+  padding: 10px 48px; /* 텍스트 입력과 테두리 사이의 간격을 주기 위한 padding 추가 */
+  box-sizing: border-box; /* 요소의 크기에 padding과 border를 포함시킴 */
+}
+
+.editor-password {
+  width: 640px;
+  height: 40px;
+  border: 1px solid #000;
+  padding: 5px 48px 5px 48px;
+  display: flex; /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+  justify-content: space-between; /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+  align-items: center; /* 수평 가운데 정렬 */
+}
+
+.editor-password input {
+  height: 30px;
+  text-align: center;
+  padding: 5px;
+}
+
+.editor-num {
+  width: 640px;
+  height: 40px;
+  border: 1px solid #000;
+  padding: 5px 48px 5px 48px;
+  display: flex; /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+  justify-content: space-between; /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+  align-items: center; /* 수평 가운데 정렬 */
+}
+
+.editor-num input {
+
+  height: 30px;
+  text-align: center;
+  padding: 5px;
+}
+
+
+.editor-date {
+  width: 640px;
+  height: 40px;
+  border: 1px solid #000;
+  padding: 5px 48px 5px 48px;
+  display: flex; /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+  justify-content: space-between; /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+  align-items: center; /* 수평 가운데 정렬 */
+}
+
+
+.editor-buttons {
+  display: flex; /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+  justify-content: space-between; /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+  width: 640px; /* 부모 요소의 너비와 동일하게 설정 */
+  margin: 20px 0; /* 버튼들 위아래에 20px 간격 주기 */
+}
+
+
 
 /* CoachingRoom */
 .coachingroom-container {
@@ -91,6 +310,19 @@
   color: white;
   cursor: pointer;
   margin-left: auto;
+}
+
+.go-back {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  color: white;
+  cursor: pointer;
   margin-right: 30px; /* 제일 오른쪽에 위치하도록 설정 */
 }
 
@@ -144,7 +376,7 @@
 
 .item2 {
   background-color: #33FF57;
-  padding: 10px;
+  padding: 3px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -154,14 +386,18 @@
   background-color: yellowgreen;
   width: 95%;
   height: 15%;
-  margin-bottom: 10px
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .box-mainrtc {
   background-color: yellowgreen;
   width: 95%;
-  height: 60%;
+  height: 70%;
   margin-bottom: 10px;
+  position:relative;
 }
 
 .box-art {
@@ -190,4 +426,31 @@
   width: 95%;
   height: 15%;
   margin-bottom: 10px;
+}
+
+.canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1; /* 적절한 값으로 설정합니다. */
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.drawing-tools {
+  border: 1px solid #000;
+  border-radius: 5px;
+  width: 95%;
+  height: 9%;
+  display:flex;
+  justify-content: space-between;
+  padding: 0 30px;
 }

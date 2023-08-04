@@ -70,6 +70,7 @@ dependencies {
 
 	//WebSocket 설정
 	//STOMP 관련 프론트 라이브러리
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.webjars.bower:jquery:3.3.1'
 	implementation 'org.webjars:sockjs-client:1.1.2'
 	implementation 'org.webjars:stomp-websocket:2.3.3-1'
@@ -87,6 +88,9 @@ dependencies {
 
 	// OAuth2.0
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+	// Openvidu 의존성
+	implementation 'io.openvidu:openvidu-java-client:2.25.0'
 }
 test {
 	useJUnitPlatform()
