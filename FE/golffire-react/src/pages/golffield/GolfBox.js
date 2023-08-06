@@ -1,7 +1,9 @@
 import React from "react";
 
 import NaverLogo from "../../assets/source/icons/naver_icon.png"
-function GolfBox({ id, name, address, callNumber, setCenter }) {
+function GolfBox({ id, name, address1, address2, callNumber, setCenter }) {
+  let address = address1 ? address1 : address2;
+
   // 네이버 검색창 연결 함수
   const searchOnNaver = () => {
     const naverSearchUrl = `https://search.naver.com/search.naver?query=` + name;
