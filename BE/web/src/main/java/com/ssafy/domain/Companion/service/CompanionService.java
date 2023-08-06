@@ -3,7 +3,9 @@ package com.ssafy.domain.Companion.service;
 
 
 
+import com.ssafy.common.TeeBox;
 import com.ssafy.domain.Companion.dto.request.CompanionCreate;
+import com.ssafy.domain.Companion.dto.request.CompanionSearch;
 import com.ssafy.domain.Companion.dto.request.CompanionUpdate;
 import com.ssafy.domain.Companion.entity.Companion;
 import com.ssafy.domain.Companion.repository.CompanionRepository;
@@ -28,7 +30,7 @@ public class CompanionService {
 
     //companion 생성
     @Transactional
-    public Companion createComapnion(CompanionCreate companionCreate, String memberId){
+    public Companion createCompanion(CompanionCreate companionCreate, String memberId){
         return companionRepository.save(companionCreate.toCompanion(memberService.findByMemberId(memberId)));
     }
 
@@ -62,21 +64,39 @@ public class CompanionService {
         return companionRepository.findById(companionId).orElseThrow(EntityNotFoundException::new);
     }
 
+    //페이징 된 애들 다 보여줘
+    public Page<Companion> findPaging(Pageable pageable){
+        return companionRepository.findPagingEnable(pageable);
+    }
 
+    public Page<Companion> findByKeyword(Pageable pageable, CompanionSearch companionSearch){
+        if(companionSearch.category().equals("title")){
+            return companionRepository.findPagingByTitleContaining(pageable, companionSearch.keyword());
+        }
+        if(companionSearch.category().equals("nickname")){
+            return companionRepository.findPagingByNicknameContaining(pageable, companionSearch.keyword());
+        }
+        if(companionSearch.category().equals("titleAndDescription")){
+            return companionRepository.findPagingByTitleContainingOrContentsContaining(pageable, companionSearch.keyword());
+        }
 
-//    public Page<Companion> findPagingByKeyword(Pageable pageable, )
+        throw new EntityNotFoundException();
+    }
 
+    public Page<Companion> findByTeeBox(Pageable pageable, String teebox){
+        return companionRepository.findPagingByTeeBox(pageable, TeeBox.valueOf(teebox));
+    }
+
+    public Page<Companion> findByFollowerId(Pageable pageable, String followerId){
+        return companionRepository.findPagingByFollowerId(pageable, followerId);
+
+    }
 
 
     // 컴패니언 눌러서 나오는 상세 내용 하나씩 보여주는
-    // current people == aimpeople 같아 지면 (전체 보내고 프런트에서 비교해서 )
 
     //CompanionUser status가 엑티브가 되면 currentPeople 이 1 증가해야함
-    // 컴패니언 유저 정보가 다시 사라지면 다시 줄어들고
-
-
-    //검색 필터 해야하고
-    //검색 키워드로 해서 받아오는 것 (검색 필터는 전체 조회할떄)
+    // 컴패니언 유저 정보가 사라지면 다시 줄어들고
 
 
 }

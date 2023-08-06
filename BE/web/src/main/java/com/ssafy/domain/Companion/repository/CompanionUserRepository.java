@@ -17,6 +17,5 @@ public interface CompanionUserRepository extends JpaRepository<CompanionUser, Lo
 
     void deleteByCompanionIdAndMemberId(Long companionId, String memberId);
 
-
 }
 
