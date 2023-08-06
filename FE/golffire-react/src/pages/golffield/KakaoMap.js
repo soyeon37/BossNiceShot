@@ -97,12 +97,12 @@ function KakaoMap({ centerId, getId, getAddress, getLatLng }) {
     //   marker.setMap(map);
     // }
 
-    // let markerPosition = new kakao.maps.LatLng(33.450701, 126.570667);
-    // const marker1 = new kakao.maps.Marker({
-    //   map: map,
-    //   position: markerPosition,
-    // });
-    // marker1.setMap(map);
+    let markerPosition = new kakao.maps.LatLng(centerPosition[0], centerPosition[1]);
+    const marker1 = new kakao.maps.Marker({
+      map: map,
+      position: markerPosition,
+    });
+    marker1.setMap(map);
 
     //
     // console.log("지도 다시 그리기");
