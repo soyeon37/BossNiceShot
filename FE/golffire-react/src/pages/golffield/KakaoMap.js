@@ -64,9 +64,11 @@ function KakaoMap({ centerId, getId, getAddress, getLatLng }) {
         const parsedLatLng = parseLatLng(curAdd);
         console.log("위경도가 없어서 주소 파싱한 결과: ", parsedLatLng);
         centerLatLng = parsedLatLng;
-        return [37.1324673675995, 127.522027682876]
+        return centerLatLng;
+        // return [37.1324673675995, 127.522027682876]
       } else {
         console.log("주소까지 없는 곳,,, 뭐냐 여긴");
+        return [37.1324673675995, 127.522027682876]
       }
     }
 
