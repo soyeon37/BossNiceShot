@@ -12,7 +12,7 @@ function Golffield() {
   const dataSize = file.length;
 
   let dataKeys;
-  let arrayText = ["번호", "사업장명", "소재지전체주소", "소재지전화", "좌표정보(x)", "좌표정보(y)"]
+  let arrayText = ["번호", "사업장명", "소재지전체주소", "도로명전체주소", "소재지전화", "좌표정보(x)", "좌표정보(y)"]
   let arrayIndex = [];
   if (dataSize > 0) {
     dataKeys = Object.keys(data[0]);
@@ -23,8 +23,6 @@ function Golffield() {
 
   const [golfClub, setGolfClub] = useState(data); // 검색 필터링된 골프장 리스트
   const [searchWord, setSearchWord] = useState(""); // 검색어
-  const [clubs, setClubs] = useState(); // 현재 페이지에 보이는 골프장 리스트
-  const [centerId, setCenterId] = useState(); // 지도의 중심 좌표가 되는 골프장 번호
 
   // 검색창 내 문자 변화 감지
   const handleSearchWord = (e) => {
@@ -63,7 +61,6 @@ function Golffield() {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     return golfClub.slice(startIndex, endIndex);
-    
   };
 
   // 페이징 컨트롤 인식
@@ -71,26 +68,36 @@ function Golffield() {
     setCurrentPage(pageNumber);
   };
 
-  // KakaoMap에 전달되는 함수들
-  const getLocations = () => {
-    const loc = []; // 현재 페이지에 보여지는 리스트 속 골프장의 좌표들
+  // KakaoMap에 전달되는 변수와 함수
+  const [centerId, setCenterId] = useState(1); // 지도의 중심 좌표가 되는 골프장 번호
+
+  const getId = () => {
+    const id = [];
     const cur = getCurrentPageItems(golfClub);
     for (var i = 0; i < cur.length; i++) {
-      loc.push(cur[i][dataKeys[arrayIndex[4]]], cur[i][dataKeys[arrayIndex[5]]])
+      id.push(cur[i][dataKeys[arrayIndex[0]]])
     }
-    console.log("지금 보이는 애들 중 첫번째id? ", centerId);
-    // 주소 없으면 찐 주소 parsing 해보기..
-    
-    // const dd = cur[0][dataKeys[arrayIndex[0]]];
-    // setCenterId(dd);
-    // setCenterId(cur[0][dataKeys[arrayIndex[0]]]) // 첫 골프장을 중심 좌표로 설정
-    return loc;
+    // console.log("저장된 id: ", id);
+    return id;
   }
 
-  const getCenterId = () => {
-    // setCenterId(clubs[0]);
-    console.log("getCenterId 호출...", centerId);
-    return centerId;
+  const getAddress = () => {
+    const add = [];
+    const cur = getCurrentPageItems(golfClub);
+    for (var i = 0; i < cur.length; i++) {
+      add.push(cur[i][dataKeys[arrayIndex[2]]], cur[i][dataKeys[arrayIndex[3]]])
+    }
+    // console.log("저장된 add: ", add);
+    return add;
+  }
+  const getLatLng = () => {
+    const latlng = [];
+    const cur = getCurrentPageItems(golfClub);
+    for (var i = 0; i < cur.length; i++) {
+      latlng.push(cur[i][dataKeys[arrayIndex[5]]], cur[i][dataKeys[arrayIndex[6]]])
+    }
+    // console.log("저장된 latlng: ", latlng);
+    return latlng;
   }
 
   return (
@@ -112,22 +119,22 @@ function Golffield() {
         <div id="result-box">
           <div id="kakao-map">
             <KakaoMap
-              getLocations={getLocations()}
-              getCenterId={getCenterId()}
+              centerId={centerId}
+              getId={getId()}
+              getAddress={getAddress()}
+              getLatLng={getLatLng()}
             />
           </div>
           <div id="result">
             <div id="result-list">
-              <div style={{ textAlign: "left", color: "gray" }}>
-                골프장을 선택 시, 네이버 검색 결과로 연결됩니다.
-              </div>
               {getCurrentPageItems(golfClub).map((club) => (
                 <GolfBox
                   key={club[dataKeys[arrayIndex[0]]]}
                   id={club[dataKeys[arrayIndex[0]]]}
                   name={club[dataKeys[arrayIndex[1]]]}
-                  address={club[dataKeys[arrayIndex[2]]]}
-                  callNumber={club[dataKeys[arrayIndex[3]]]}
+                  address1={club[dataKeys[arrayIndex[2]]]}
+                  address2={club[dataKeys[arrayIndex[3]]]}
+                  callNumber={club[dataKeys[arrayIndex[4]]]}
                   setCenter={setCenterId}
                 />
               ))}
