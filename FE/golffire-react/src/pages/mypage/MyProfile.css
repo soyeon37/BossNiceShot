@@ -23,7 +23,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
+  
   position: relative;
 }
 
@@ -64,7 +64,15 @@
   line-height: normal;
 }
 
+/* Profile CSS */
+#Profile {
+  width: 80%;
+  height: 100%;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 /* EditProfile CSS */
 #EditProfile {
@@ -183,7 +191,7 @@
   width: 100%;
   min-height: 200px;
   margin-bottom: 10px;
-
+  
   padding: 20px;
 
   border-radius: 50px;
@@ -448,13 +456,13 @@
 
 
 .nav-title {
-  margin: 30px 10px 10px 10px;
-  font-weight: 600;
-  font-size: 22px;
-  color: white;
+ margin: 30px 10px 10px 10px;
+ font-weight: 600;
+ font-size: 22px;
+ color: white;
 }
 
-.user-photo {
+.user-photo{
   margin: 15px 10px 20px 10px;
 }
 
@@ -462,47 +470,40 @@
   display: flex;
   justify-content: center;
 }
-
 .user-level {
   margin-right: 10px;
 }
-
 .user-name {
   font-size: 20px;
   font-weight: 600;
 }
 
-.nav-mypage {
+.nav-mypage{
   background-color: #E81212;
   height: 35px;
   font-size: 10px;
 }
-
-.nav-list {
-  list-style: none;
+.nav-list{
+  list-style:none;
 }
-
-.nav-list-text {
+.nav-list-text{
   font-size: 17px;
   display: flex;
   align-items: center;
   color: white;
 }
-
-.nav-list-text-signout {
+.nav-list-text-signout{
   font-size: 17px;
   display: flex;
   align-items: center;
   color: red;
 }
-
 .active-link {
   font-weight: 600;
   font-size: 17px;
   display: flex;
   align-items: center;
 }
-
 .active-link-signout {
   font-weight: 600;
   font-size: 17px;
@@ -510,94 +511,26 @@
   display: flex;
   align-items: center;
 }
-
-li:has(.active-link) {
+li:has(.active-link){
   background-color: white;
   border: 1px solid black;
   border-radius: 12px 0 0 12px;
   border-right: none;
 }
-
-li:has(.active-link-signout) {
+li:has(.active-link-signout){
   background-color: white;
   border: 1px solid black;
   border-radius: 12px 0 0 12px;
   border-right: none;
 }
-
-li {
+li{
   height: 40px;
   display: flex;
   align-items: center;
 }
-
-.active-li {
+.active-li{
   background-color: yellow;
 }
-
 .nav-icon {
   padding: 10px 15px 10px 20px;
-}
-
-/* Profile CSS */
-#Profile {
-  width: 80%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  /*align-items: center; /* 가운데 정렬 */
-  /*justify-content: center; /* 가운데 정렬*/
-}
-
-#profile-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid black;
-  border-radius: 30px;
-  margin: 15px 10px 15px 30px;
-  height: 95%;
-  background-color: red;
-}
-
-#profile-history {
-  flex: 1;
-  border: 1px solid black;
-  border-radius: 30px;
-  margin: 15px 30px 15px 10px;
-  height: 95%;
-  background-color: blue;
-}
-
-#profile-title {
-  padding-top: 20px;
-  width: 100%;
-  height: 15%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #FF7272;
-  font-weight: 600;
-  font-size: 25px;
-}
-
-#profile-text {
-  display: flex;;
-  height: 100%;
-  flex-direction: row;
-}
-
-#info-pic {
-  width: 250px;
-  height: 250px;
-  
-  margin: 30px;
-  border-radius: 50%;
-  background-color: gray;
-}
-
-#info-text {
-  background-color: white;
 }
