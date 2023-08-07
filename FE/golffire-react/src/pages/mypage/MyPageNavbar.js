@@ -1,3 +1,5 @@
+import { color } from "framer-motion";
+
 import React from "react";
 
 import { NavLink, Navigate } from "react-router-dom"
@@ -12,7 +14,7 @@ function MyPageNavbar() {
                 <div className="nav-user">
 
                     <div className="user-photo">
-                        (사진 공간)
+                        <div style={{ width: "100px", height: "100px", borderRadius: "50px", backgroundColor: "red" }}></div>
                     </div>
                     <div className="user-name">
                         <div className="user-level">B 배찌</div>
@@ -20,19 +22,19 @@ function MyPageNavbar() {
                     </div>
                 </div>
                 <li>
-                    <NavLink to="/mypage">나의 정보</NavLink>
+                    <NavLink to="/mypage">내 정보</NavLink>
                 </li>
 
                 <li>
-                    <NavLink to="/mypage/myaccompany">나의 동행</NavLink>
+                    <NavLink to="/mypage/myaccompany">동행</NavLink>
                 </li>
 
                 <li>
-                    <NavLink to="/mypage/editprofile">정보 수정</NavLink>
+                    <NavLink to="/mypage/mychat">채팅</NavLink>
                 </li>
 
                 <li>
-                    <NavLink to="/mypage/editpassword">비밀번호 변경</NavLink>
+                    <NavLink to="/mypage/myfollow">팔로우</NavLink>
                 </li>
 
                 <li>
