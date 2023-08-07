@@ -275,7 +275,7 @@ function AlertPage() {
               <div className="alert-text">
                 <div style={{ fontSize: "12px" }}>
                   <span className="bold">{notifications[i].senderNickname}님</span>이
-                  <span className="bold">{notifications[i].title}</span>을 신청했습니다.
+                  <span className="bold">[{notifications[i].title}]</span>을 신청했습니다.
                 </div>
               </div>
             </div>
