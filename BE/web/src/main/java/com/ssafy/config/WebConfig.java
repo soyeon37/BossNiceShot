@@ -12,6 +12,6 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:3000") // 올바른 도메인 포트 추가
-                .allowedMethods("GET", "POST", "PUT", "DELETE"); // 허용할 HTTP 메서드 추가
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS"); // 허용할 HTTP 메서드 추가
     }
 }
