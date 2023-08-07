@@ -180,10 +180,11 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "사용자 없음"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    @PostMapping("/reissue")
-    public ApiResponse reissue(@RequestBody ReIssueRequest request){
+    @GetMapping("/reissue")
+    public ApiResponse reissue(@RequestHeader("refreshToken") String refreshToken){
         log.info("토큰 재발급 시작");
-        String refreshToken = request.refreshToken();
+        
+//        String refreshToken = request.refreshToken();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }

@@ -38,6 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/members/sendEmailVerification")
                 || request.getRequestURI().equals("/members/checkEmail")
                 || request.getRequestURI().equals("/members/code")
+                || request.getRequestURI().equals("/members/reissue")
                 || request.getRequestURI().equals("/members/checkNickname")
                 || request.getRequestURI().equals("/notification/**")
                 || request.getRequestURI().equals("/ws/**")

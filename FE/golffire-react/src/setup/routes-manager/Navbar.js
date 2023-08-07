@@ -33,6 +33,7 @@ function Navbar() {
     // 사용자 정보(userId)로 로그인 여부 판단
     const userId = useSelector((state) => state.userInfoFeatrue.userId);
     const userNickname = useSelector((state) => state.userInfoFeatrue.userNickname);
+    console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname);
 
     const navigate = useNavigate();
 
