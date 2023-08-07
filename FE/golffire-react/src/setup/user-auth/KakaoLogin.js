@@ -96,6 +96,7 @@ const Kakao = (props) => {
         isKakao: true
       };
       const apiUrl = "http://localhost:8080/members/sign-in"
+      console.log("kakao login 시도중:", data);
       axios
       .post(apiUrl, data)
       .then((response) => {
@@ -112,6 +113,7 @@ const Kakao = (props) => {
       })
       .catch((error) => {
         console.error("Error: ", error);
+        navigate('/error')
       })
     }
     }
