@@ -1,4 +1,4 @@
-package com.ssafy.domain.follow.dto.reponse;
+package com.ssafy.domain.follow.dto.response;
 
 import com.ssafy.domain.Member.entity.TeeBox;
 import com.ssafy.domain.follow.entity.Follow;

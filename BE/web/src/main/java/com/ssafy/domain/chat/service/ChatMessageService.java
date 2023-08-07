@@ -2,8 +2,11 @@ package com.ssafy.domain.chat.service;
 
 import com.ssafy.domain.chat.dto.request.ChatMessageRequest;
 import com.ssafy.domain.chat.entity.ChatMessage;
+import com.ssafy.domain.chat.entity.MessageType;
 import com.ssafy.domain.chat.repository.ChatMessageRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,19 +21,22 @@ public class ChatMessageService {
 
     @Transactional
     public ChatMessage insert(ChatMessageRequest chatMessageRequest) {
+        if (chatMessageRequest.type().equals(MessageType.ENTER)) {
+            chatMessageRequest = new ChatMessageRequest(chatMessageRequest.type(), chatMessageRequest.memberNickname() + "님이 입장했습니다.", chatMessageRequest.memberId(), chatMessageRequest.memberNickname(), chatMessageRequest.chatRoomId());
+        }
+        if (chatMessageRequest.type().equals(MessageType.EXIT)) {
+            chatMessageRequest = new ChatMessageRequest(chatMessageRequest.type(), chatMessageRequest.memberNickname() + "님이 퇴장했습니다.", chatMessageRequest.memberId(), chatMessageRequest.memberNickname(), chatMessageRequest.chatRoomId());
+        }
+
         return chatMessageRepository.insert(chatMessageRequest.toChatMessage());
     }
 
     public ChatMessage findById(String chatMessageId) {
-        ChatMessage chatMessage = chatMessageRepository.findById(chatMessageId).orElseThrow(
-                () -> new IllegalArgumentException("해당 채팅 메세지가 존재하지 않습니다. id = " + chatMessageId)
-        );
-        return chatMessage;
+        return chatMessageRepository.findById(chatMessageId).orElseThrow(EntityNotFoundException::new);
     }
 
-    public List<ChatMessage> findAllByChatRoomIdAsc(Long chatRoomId) {
-        Sort sort = Sort.by(Sort.Direction.ASC, "createdTime");
-        return chatMessageRepository.findByChatRoomId(chatRoomId, sort);
+    public List<ChatMessage> findByChatRoomIdAsc(Long chatRoomId) {
+        return chatMessageRepository.findByChatRoomId(chatRoomId);
     }
 
     public void deleteByChatRoomId(Long chatRoomId) {
