@@ -60,6 +60,21 @@ function Navbar() {
             })
     };
 
+    const handleCheckNotification = () => {
+        const apiUrl = 'http://localhost:8080/notification/check';
+        axios.get(apiUrl)
+        .then((response) => {
+            if(response.data.data === false){
+                // 새로운 알림 존재
+            }else{
+                // 이미 읽은 알림들
+            }
+        })
+        .catch((error) => {
+            navigate('/');
+        })
+    }
+
     return (
         <nav className="nav">
             <a href="/" className="site-title">
@@ -202,7 +217,8 @@ function Navbar() {
                     </Menu>
                 </li>
                 <li>
-                    <AlertPage />
+                    <AlertPage onClick={handleCheckNotification}>
+                    </AlertPage>
                 </li>
             </ul>
         </nav >
