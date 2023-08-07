@@ -96,57 +96,58 @@ function EditProfile() {
 
     return (
         <div id="MyPage">
-            <MyPageNavbar />
-            <div id="EditProfile">
-                <div id="edit-pic">
-                    <div id="pic-circle">
-                        큰 사진 들어가는 곳
+            <div id="MyPageBox">
+                <MyPageNavbar />
+                <div id="EditProfile">
+                    <div id="edit-pic">
+                        <div id="pic-circle">
+                            큰 사진 들어가는 곳
+                        </div>
+                        <div id="pic-button">
+                            <button>사진 변경</button>
+                        </div>
                     </div>
-                    <div id="pic-button">
-                        <button>사진 변경</button>
-                    </div>
-                </div>
-                <div id="edit-info">
-                    <div id="edit-title">
-                        정보 수정
-                    </div>
-                    <div id="edit-email">
-                        이메일 변경은 불가하게 지정
-                    </div>
-                    <div id="edit-nickname">
-                        닉네임, 검사 필요
-                        <Button
-                            onClick={handleCheckNickname}
-                            style={{
-                                height: "2.5rem",
-                                width: "100%",
+                    <div id="edit-info">
+                        <div id="edit-title">
+                            정보 수정
+                        </div>
+                        <div id="edit-email">
+                            이메일 변경은 불가하게 지정
+                        </div>
+                        <div id="edit-nickname">
+                            닉네임, 검사 필요
+                            <Button
+                                onClick={handleCheckNickname}
+                                style={{
+                                    height: "2.5rem",
+                                    width: "100%",
 
-                                color: "black",
-                                borderRadius: "30px",
-                                background: "#B8F500",
-                            }}
-                            maxW={"sm"}
-                            marginBottom={"2.5rem"}
-                        >
-                            검사
-                        </Button>
-                    </div>
-                    <div id="edit-introduction">
-                        자기소개 수정 가능
-                    </div>
-                    <div id="edit-golf-info1">
-                        <div id="edit-golf-info1-1">최고타수</div>
-                        <div id="edit-golf-info1-2">평균타수</div>
-                    </div>
-                    <div id="edit-golf-info2">
-                        선호 티박스 수정
-                    </div>
-                    <div id="edit-button" onClick={testPut}>
-                        <button>저장하기</button>
+                                    color: "black",
+                                    borderRadius: "30px",
+                                    background: "#B8F500",
+                                }}
+                                maxW={"sm"}
+                                marginBottom={"2.5rem"}
+                            >
+                                검사
+                            </Button>
+                        </div>
+                        <div id="edit-introduction">
+                            자기소개 수정 가능
+                        </div>
+                        <div id="edit-golf-info1">
+                            <div id="edit-golf-info1-1">최고타수</div>
+                            <div id="edit-golf-info1-2">평균타수</div>
+                        </div>
+                        <div id="edit-golf-info2">
+                            선호 티박스 수정
+                        </div>
+                        <div id="edit-button" onClick={testPut}>
+                            <button>저장하기</button>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div >
     );
 }
