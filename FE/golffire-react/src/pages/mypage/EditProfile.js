@@ -71,6 +71,10 @@ function EditProfile() {
                         console.log('Access Token has expired.');
 
                         // 토큰 재발급 등의 로직 수행
+                        // callReissueToken();
+                    } else if (error.response.status === 403) {
+                        console.log("안됨")
+                        // 토큰 재발급 등의 로직 수행
                         callReissueToken();
                     }
 
@@ -78,20 +82,23 @@ function EditProfile() {
             });
     }
 
-    const callReissueToken = async () => {
-        console.log("EditProfile - callReissueToken");
-        const isSuccess = await reissueToken(
-            cookies = { cookies },
-            setCookie = { setCookie },
-            removeCookie = { removeCookie },
-            navigate = {navigate},
-            );
+    const callReissueToken = () => {
+        console.log("EditProfile에서의 토큰 값: ", cookies.refreshToken);
+
+        let isSuccess = reissueToken({
+            refreshToken: cookies.refreshToken,
+            setCookie,
+            removeCookie,
+            navigate,
+        })
+
         if (isSuccess) {
             console.log("토큰 재발급 및 로그인 연장 성공");
         } else {
             console.log("실패 후 로그아웃 진행됨");
         }
-    };
+    }
+
 
     return (
         <div id="MyPage">

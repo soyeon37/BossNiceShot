@@ -1,44 +1,54 @@
 import axios from "axios";
 
 // 토큰 재발급 함수
-export function reissueToken({ cookies, setCookie, removeCookie, navigate }) {
-    console.log('refrshToken:', cookies.refresh_token);
+export function reissueToken({ refreshToken, setCookie, removeCookie, navigate }) {
+    console.log('전달받은 refrshToken:', refreshToken);
     const apiUrl = 'http://localhost:8080/members/reissue';
-    axios.post(apiUrl, cookies.refresh_token, { headers: { 'Authorization': 'Bearer ' + cookies.access_token } })
+
+    axios.get(apiUrl, refreshToken, {
+        headers: { "Content-Type": `application/json`,
+    "refreshToken" : refreshToken}
+        })
         .then((response) => {
             const message = response.data.data.message;
             if (message === "SUCCESS") {
                 const newAccessToken = response.data.data.accessToken;
-                console.log("UserAuth - reissueToken; ", newAccessToken);
+                // console.log(newAccessToken);
                 removeCookie('access_token');
                 setCookie('access_token', newAccessToken, { path: '/' });
+                console.log("엑세스 토큰 연장 성공");
                 return true;
             } else {
                 console.log('EXPIRED_TOKEN_MESSAGE: ', message);
-                handleLogout(cookies = { cookies }, setCookie = { setCookie }, navigate = { navigate });
+                // 로그아웃 시켜주는 func 실행
+                console.log("리프레시 토큰 만료됨 -> 로그아웃");
                 return false;
             }
         })
         .catch((error) => {
-            console.error('Error:', error); // Debug Code
+            console.error('토큰 재발급 중 Error:', error); // Debug Code
             return false;
         });
+    return false;
 }
 
-export function handleLogout(cookies, setCookie, navigate) {
-    console.log('cookies.refreshToken:', cookies.refreshToken);
+// 로그아웃 처리 함수
+export function handleLogout(refreshToken, setCookie, navigate) {
+    console.log('로그아웃에서의 refreshToken:', refreshToken);
     const apiUrl = 'http://localhost:8080/members/logout'
     const data = {
-        refreshToken: cookies.refreshToken
+        refreshToken: refreshToken
     }
     axios.post(apiUrl, data)
         .then(response => {
             console.log(response);
             if (response.data.data === "SUCCESS") {
-                setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
+                setCookie('refreshToken', refreshToken, { path: '/', maxAge: 0 });
+                console.log("로그아웃 처리 성공");
                 navigate('/');
             } else {
                 alert('Error');
+                console.log("로그아웃 처리 실패");
                 navigate("/error");
             }
         })
