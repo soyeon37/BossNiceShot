@@ -387,8 +387,6 @@ function AlertPage() {
                 <button className="refuse">거절</button>
               </div>
             </div>
-
-            {/* 컴포넌트 CSS 적용 끝*/}
           </DrawerBody>
 
           <DrawerFooter></DrawerFooter>

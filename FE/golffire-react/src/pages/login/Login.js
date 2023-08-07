@@ -62,7 +62,6 @@ const Login = () => {
 
   const handleKakaoLogin = () => {
     console.log("카카오 로그인 시도"); // Debug Code !!
-
     
     const REST_API_KEY = "cd0c9cf0cf49dae9a987aebb769ee0d6";
     const REDIRECT_URI = "http://localhost:3000/auth/kakao/login/callback";

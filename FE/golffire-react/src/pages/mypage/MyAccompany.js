@@ -17,7 +17,7 @@ function MyAccompany() {
                     여기에 리스트 형식으로 보임
                 </div>
             </div>
-        </div >
+            </div>
     );
 }
 
