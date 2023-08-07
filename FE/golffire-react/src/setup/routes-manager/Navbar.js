@@ -30,22 +30,14 @@ function Navbar() {
     const [isActive, setIsActive] = useState(false);
 
     // Redux
-    const step = useSelector((state) => state.signupFeature.step);
+    // 사용자 정보(userId)로 로그인 여부 판단
+    const userId = useSelector((state) => state.userInfoFeatrue.userId);
+    const userNickname = useSelector((state) => state.userInfoFeatrue.userNickname);
 
     const navigate = useNavigate();
 
     // cookie의 user 정보 확인
     const [cookies, setCookie] = useCookies(['refreshToken']);
-
-    // 로그인 여부를 나타내는 변수, false로 초기화
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    // 로그인 여부를 확인하여 true로 바꾸는 함수
-    useEffect(() => {
-        // 로그인 정보가 있다면 true, 없다면 false로 만드는 코드
-        setIsLoggedIn(!!cookies.user);
-        // 추후 서버로 token 정보를 보내 유효한지 확인한 뒤 true로 만들기
-    }, [cookies]);
 
     const handleLogout = () => {
         console.log('cookies.refreshToken:', cookies.refreshToken);
@@ -184,7 +176,7 @@ function Navbar() {
                             <MenuDivider />
                             {/* test code end */}
 
-                            {isLoggedIn ? (
+                            {userId ? (
                                 <MenuGroup title=''>
                                     <MenuItem>
                                         <NavLink to="/mypage/" style={({ isActive, isPending }) => {
@@ -195,7 +187,6 @@ function Navbar() {
                                             마이페이지
                                         </NavLink>
                                     </MenuItem>
-                                    <MenuItem>친구/채팅</MenuItem>
                                     <MenuDivider />
                                     <MenuItem style={{ color: "gray" }}>로그아웃</MenuItem>
                                 </MenuGroup>
