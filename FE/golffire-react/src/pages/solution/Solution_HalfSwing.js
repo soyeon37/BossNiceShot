@@ -24,11 +24,13 @@ function Solution_HalfSwing() {
   const [analysisData, setAnalysisData] = useState([]);
   const [coordinateData, setCoordinateData] = useState([]);
   const canvasCoordinatesRef = useRef(null);
+  const [equationData, setEquationData] = useState([]);
+  const equationContainerRef = useRef(null);
 
   // Function to change the current page
   const changePage = (direction) => {
     setCurrentPage((prevPage) => {
-      if (direction === "next" && prevPage < 4) return prevPage + 1;
+      if (direction === "next" && prevPage < 5) return prevPage + 1;
       if (direction === "prev" && prevPage > 0) return prevPage - 1;
       return prevPage;
     });
@@ -37,8 +39,26 @@ function Solution_HalfSwing() {
   useEffect(() => {
     if (coordinateData.length > 0 && currentPage === 3) {
       drawCoordinates(coordinateData);
+      renderEllipseEquation();
     }
   }, [coordinateData, currentPage]);
+
+  useEffect(() => {
+    if (currentPage === 5) {
+      // const ctx = document.getElementById('humanFigureCanvas').getContext('2d');
+      const bodyLengths = {
+        head: 60,
+        neck: 20,
+        torso: 120,
+        upperArm: 70,
+        lowerArm: 60,
+        upperLeg: 100,
+        lowerLeg: 90
+      };
+      drawHumanFigure(bodyLengths);
+    }
+  }, [currentPage]);
+  
 
   const liveWrapperClass =
   myEllipseScore !== null && isReady === false && isAnalyzing === false
@@ -74,7 +94,8 @@ function Solution_HalfSwing() {
     setIsAnalyzing,
     setAnalysisVideoURL,
     setAnalysisData,
-    setCoordinateData
+    setCoordinateData,
+    setEquationData
   );
 
   return (
@@ -132,24 +153,14 @@ function Solution_HalfSwing() {
               )}
               {currentPage === 2 && (
                 <>
-                  <div className="evaluation" style={{fontSize:"20px", color:"#99a1a8", marginTop:"10px", marginBottom:"15px"}}>올바른 자세 및 경로에 있는 비율을 명시합니다</div>
-                  <div className="evaluation">SWING &nbsp;{myEllipseScore}%</div>
-                  <div className="evaluation">HEAD &nbsp;{myHeadScore}%</div>
-                  <div className="evaluation">SHOULDER &nbsp;{myShoulderScore}%</div>
-                  <div className="evaluation">HIP &nbsp;{myHipScore}%</div>
-                  <div className="evaluation">KNEE &nbsp;{myKneeScore}%</div>
-                  <div className="evaluationAvg">AVG &nbsp;{(myEllipseScore + myHeadScore + myShoulderScore + myHipScore + myKneeScore) / 5}%</div>
-                </>
-              )}
-              {currentPage === 3 && (
-                <>
+                  <div className="evaluation" style={{fontSize:"20px", color:"#99a1a8", marginTop:"10px", marginBottom:"20px"}}>올바른 자세 및 경로에 있는 비율을 명시합니다</div>
                   <div className="analysis-container">
                     <div className="analysis-row">
                       <label className="analysis-label">Swing</label>
                       {analysisData.map((result, index) => (
                         <div
                           key={index}
-                          className={`analysis-block ${result[0] === 1 ? 'green' : 'red'}`}
+                          className={`analysis-block ${result[0] === 1 ? 'good' : 'bad'}`}
                         ></div>
                       ))}
                     </div>
@@ -158,7 +169,7 @@ function Solution_HalfSwing() {
                       {analysisData.map((result, index) => (
                         <div
                           key={index}
-                          className={`analysis-block ${result[2] === 1 ? 'green' : 'red'}`}
+                          className={`analysis-block ${result[2] === 1 ? 'good' : 'bad'}`}
                         ></div>
                       ))}
                     </div>
@@ -167,7 +178,7 @@ function Solution_HalfSwing() {
                       {analysisData.map((result, index) => (
                         <div
                           key={index}
-                          className={`analysis-block ${result[3] === 1 ? 'green' : 'red'}`}
+                          className={`analysis-block ${result[3] === 1 ? 'good' : 'bad'}`}
                         ></div>
                       ))}
                     </div>
@@ -176,7 +187,7 @@ function Solution_HalfSwing() {
                       {analysisData.map((result, index) => (
                         <div
                           key={index}
-                          className={`analysis-block ${result[1] === 1 ? 'green' : 'red'}`}
+                          className={`analysis-block ${result[1] === 1 ? 'good' : 'bad'}`}
                         ></div>
                       ))}
                     </div>
@@ -185,12 +196,24 @@ function Solution_HalfSwing() {
                       {analysisData.map((result, index) => (
                         <div
                           key={index}
-                          className={`analysis-block ${result[4] === 1 ? 'green' : 'red'}`}
+                          className={`analysis-block ${result[4] === 1 ? 'good' : 'bad'}`}
                         ></div>
                       ))}
                     </div>
                   </div>
+                  <div className="evaluation">SWING &nbsp;{myEllipseScore}%</div>
+                  <div className="evaluation">HEAD &nbsp;{myHeadScore}%</div>
+                  <div className="evaluation">SHOULDER &nbsp;{myShoulderScore}%</div>
+                  <div className="evaluation">HIP &nbsp;{myHipScore}%</div>
+                  <div className="evaluation">KNEE &nbsp;{myKneeScore}%</div>
+                  <div className="evaluationAvg">AVG &nbsp;{(myEllipseScore + myHeadScore + myShoulderScore + myHipScore + myKneeScore) / 5}%</div>
+                  
+                </>
+              )}
+              {currentPage === 3 && (
+                <>
                   <canvas className="coordinatesDiv" id="coordinatesCanvas" width="476" height="357"></canvas>
+                  <div ref={equationContainerRef}></div>
                 </>
               )}
               {currentPage === 4 && (
@@ -221,11 +244,19 @@ function Solution_HalfSwing() {
                   </div>
                 </div>
               )}
+              {currentPage === 5 && (
+                <>
+                  <div className="humanFigureDiv">
+                    <canvas className="humanFigureDiv2" id="humanFigureCanvas" width="450" height="500"></canvas>
+                    <div className="Dcontent">체형정보</div>
+                  </div>
+                </>
+              )}
               <div className="pagination-buttons">
                 <button disabled={currentPage === 0} onClick={() => changePage("prev")}>
                   PREV
                 </button>
-                <button disabled={currentPage === 4} onClick={() => changePage("next")}>
+                <button disabled={currentPage === 5} onClick={() => changePage("next")}>
                   NEXT
                 </button>
               </div>
@@ -325,10 +356,120 @@ function Solution_HalfSwing() {
         }
       });
     });
+
+    // Draw the ellipse
+    const ellipseCenterX = equationData[2];  // Example center x-value
+    const ellipseCenterY = equationData[3]; // Example center y-value
+    const ellipseRadiusX = equationData[0];  // Example x-radius
+    const ellipseRadiusY = equationData[1];  // Example y-radius
+
+    ctx.beginPath();
+    ctx.ellipse(ellipseCenterX, ellipseCenterY, ellipseRadiusX, ellipseRadiusY, 0, 0, 2 * Math.PI);
+    ctx.strokeStyle = 'rgba(46, 126, 255, 0.4)';  // Color of the ellipse
+    ctx.lineWidth = 40;  // Line width
+    ctx.stroke();
+
+    // Draw vertical line through the center of the ellipse
+    ctx.beginPath();
+    ctx.moveTo(ellipseCenterX, 0 - (canvas.height * 0.3 / scaleY)); // Adjusted starting point
+    ctx.lineTo(ellipseCenterX, (canvas.height / scaleY) + (canvas.height * 0.3 / scaleY)); // Adjusted ending point
+    ctx.strokeStyle = 'gold';  // Red color for the line
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Draw horizontal line through the center of the ellipse
+    ctx.beginPath();
+    ctx.moveTo(0 - (canvas.width * 0.3 / scaleX), ellipseCenterY); // Adjusted starting point
+    ctx.lineTo((canvas.width / scaleX) + (canvas.width * 0.3 / scaleX), ellipseCenterY); // Adjusted ending point
+    ctx.strokeStyle = 'gold';  // Green color for the line
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+
   
     // Reset the scaling after drawing
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
+
+  function renderEllipseEquation() {
+    equationContainerRef.current.innerHTML = '';
+    
+
+    const centerX = Math.round(equationData[2]);
+    const centerY = Math.round(equationData[3]);
+    const a = Math.round(equationData[0]);
+    const b = Math.round(equationData[1]);
+    
+    const equation = `\\boldsymbol{\\displaystyle \\left(\\frac{x - ${centerX}}{${a}}\\right)^2 + \\left(\\frac{y - ${centerY}}{${b}}\\right)^2 = 1}`;
+
+    if (window.katex && equationContainerRef.current) {
+      equationContainerRef.current.style.fontWeight = "bolder";
+      equationContainerRef.current.style.fontSize = "24px";
+      window.katex.render(equation, equationContainerRef.current);
+    }
+  }
+
+  function drawHumanFigure(bodyLengths) {
+    const canvas = document.getElementById('humanFigureCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Calculate center based on canvas dimensions
+    const centerX = 170;
+    const centerY = 0;
+
+    // Adjust the starting position of the figure based on center
+    const startY = 0;
+
+    // Constants (You can adjust as needed)
+    const headRadius = bodyLengths.head / 2;
+    const torsoWidth = 60;
+
+    // Helper function to draw rounded rectangles
+    function roundedRect(ctx, x, y, width, height, radius) {
+        ctx.beginPath();
+        ctx.moveTo(x, y + radius);
+        ctx.lineTo(x, y + height - radius);
+        ctx.quadraticCurveTo(x, y + height, x + radius, y + height);
+        ctx.lineTo(x + width - radius, y + height);
+        ctx.quadraticCurveTo(x + width, y + height, x + width, y + height - radius);
+        ctx.lineTo(x + width, y + radius);
+        ctx.quadraticCurveTo(x + width, y, x + width - radius, y);
+        ctx.lineTo(x + radius, y);
+        ctx.quadraticCurveTo(x, y, x, y + radius);
+        ctx.fill();
+    }
+
+    // Head
+    ctx.beginPath();
+    ctx.arc(centerX, startY + headRadius, headRadius, 0, 2 * Math.PI);
+    ctx.fill();
+
+    // Neck
+    // ctx.fillRect(centerX - torsoWidth/4, startY + 2 * headRadius, torsoWidth/2, bodyLengths.neck);
+    roundedRect(ctx, centerX - torsoWidth/4, startY + 2 * headRadius, torsoWidth/2, bodyLengths.neck, 5);
+
+    // Torso
+    roundedRect(ctx, centerX - torsoWidth/2, startY + 2 * headRadius + bodyLengths.neck, torsoWidth, bodyLengths.torso, 20);
+
+    // Arms
+    // Upper Arms
+    ctx.fillRect(centerX - torsoWidth + 15 - bodyLengths.upperArm, startY + 2 * headRadius + bodyLengths.neck + (bodyLengths.torso / 4), bodyLengths.upperArm, 20);
+    ctx.fillRect(centerX + torsoWidth - 15, startY + 2 * headRadius + bodyLengths.neck + (bodyLengths.torso / 4), bodyLengths.upperArm, 20);
+
+    // Lower Arms (using roundedRect for a softer look)
+    ctx.fillRect(centerX - torsoWidth + 10 - 2 * bodyLengths.upperArm, startY + 2 * headRadius + bodyLengths.neck + (bodyLengths.torso / 4), bodyLengths.lowerArm, 20, 5);
+    ctx.fillRect(centerX + torsoWidth + bodyLengths.upperArm, startY + 2 * headRadius + bodyLengths.neck + (bodyLengths.torso / 4), bodyLengths.lowerArm, 20, 5);
+
+    // Legs
+    // Upper Legs
+    roundedRect(ctx, centerX - torsoWidth/4 - 10, startY + 2 * headRadius + bodyLengths.neck + bodyLengths.torso, 20, bodyLengths.upperLeg, 10);
+    roundedRect(ctx, centerX + torsoWidth/4 - 10, startY + 2 * headRadius + bodyLengths.neck + bodyLengths.torso, 20, bodyLengths.upperLeg, 10);
+
+    // Lower Legs (using roundedRect for a softer look)
+    roundedRect(ctx, centerX - torsoWidth/4 - 10, startY + 2 * headRadius + bodyLengths.neck + bodyLengths.torso + bodyLengths.upperLeg, 20, bodyLengths.lowerLeg, 10);
+    roundedRect(ctx, centerX + torsoWidth/4 - 10, startY + 2 * headRadius + bodyLengths.neck + bodyLengths.torso + bodyLengths.upperLeg, 20, bodyLengths.lowerLeg, 10);
+  }
+
 }
 
 export default Solution_HalfSwing;

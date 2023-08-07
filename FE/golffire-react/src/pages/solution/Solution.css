@@ -181,11 +181,11 @@ canvas {
 
 .evaluation {
     font-weight: bold;
-    font-size:45px;
+    font-size:30px;
 }
 .evaluationAvg {
   font-weight: bold;
-  font-size:45px;
+  font-size:30px;
   color:#268bff;
 }
 
@@ -243,6 +243,7 @@ canvas {
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  margin-bottom:20px;
 }
 
 .analysis-row {
@@ -267,11 +268,11 @@ canvas {
   margin: 1px;
 }
 
-.analysis-block.green {
+.analysis-block.good {
   background-color: #00a2ff;
 }
 
-.analysis-block.red {
+.analysis-block.bad {
   background-color: black;
 }
 
@@ -364,4 +365,24 @@ th, td {
   border: 1px solid black;
   padding: 5px;
   text-align: center;
+}
+
+.katex .katex-html {
+  display: none;
+}
+
+/* .humanFigureDiv {
+  background-color: silver;
+  padding-top: -100px;
+} */
+
+.humanFigureDiv2 {
+  /* background-color: silver; */
+  margin-top:-100px;
+}
+
+.Dcontent {
+  position: absolute;
+  margin-top:200px;
+  margin-left:100px;
 }

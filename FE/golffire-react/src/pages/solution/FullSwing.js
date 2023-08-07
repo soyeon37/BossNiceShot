@@ -244,7 +244,7 @@ export default function FullSwing(
 
     // 왼쪽 팔꿈치가 왼쪽 어깨 안에 존재
     let elbowsInsideShoulders =
-      leftElbow.x < leftShoulder.x + 10 && rightElbow.x + 20 > rightShoulder.x;
+      leftElbow.x < leftShoulder.x + 20 && rightElbow.x + 30 > rightShoulder.x;
 
     // 두 손목이 두 팔꿈치 사이에 존재
     let wristsInsideElbows =
