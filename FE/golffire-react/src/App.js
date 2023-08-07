@@ -109,7 +109,7 @@ function App() {
               {/* <Route path="/freeboard/:idx" element={<FreeBoardDetail />} /> */}
 
               {/* Profile */}
-              <Route path="/mypage/" element={<Profile />} />
+              <Route path="/mypage/info" element={<Profile />} />
               <Route path="/mypage/editprofile/" element={<EditProfile />} />
               <Route path="/mypage/editpassword/" element={<EditPassword />} />
               <Route path="/mypage/myaccompany" element={<MyAccompany />} />

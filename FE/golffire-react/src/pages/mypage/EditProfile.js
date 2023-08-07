@@ -112,7 +112,14 @@ function EditProfile() {
                             정보 수정
                         </div>
                         <div id="edit-email">
-                            이메일 변경은 불가하게 지정
+                            이메일은 수정 불가
+                            {/* <label htmlFor="userEmail">이메일</label>
+                            <input
+                                id="userEmail"
+                                defaultValue={userEmail}
+                                onChange={handleUserEmail}
+                                placeholder="이메일"
+                            /> */}
                         </div>
                         <div id="edit-nickname">
                             닉네임, 검사 필요

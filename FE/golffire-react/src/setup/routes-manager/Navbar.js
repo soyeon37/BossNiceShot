@@ -163,7 +163,7 @@ function Navbar() {
 							{/* test code - will delete */}
 							<MenuGroup title=''>
 								<MenuItem>
-									<NavLink to="/mypage/" style={({ isActive, isPending }) => {
+									<NavLink to="/mypage/info" style={({ isActive, isPending }) => {
 										return {
 											fontWeight: isActive ? "bold" : "",
 										};
