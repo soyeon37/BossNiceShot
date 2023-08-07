@@ -13,7 +13,7 @@ import "./MyPage.css";
 
 function MyChat() {
     const [searchWord, setSearchWord] = useState("");
-    const [roomId, setRoomId] = useState("0");
+    const [roomId, setRoomId] = useState(0);
 
     const teeMap = {
         red: TeeRed,
@@ -97,7 +97,7 @@ function MyChat() {
                         </div>
                     </div>
                     <div id="chat-room">
-                        {roomId === "0" ? (
+                        {roomId === 0 ? (
                             <>
                                 <div id="room-title">채팅창을 선택하세요.</div>
                             </>
