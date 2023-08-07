@@ -46,16 +46,20 @@ public class StudyController {
         this.openvidu = new OpenVidu(OPENVIDU_URL, OPENVIDU_SECRET);
     }
 
-    @PostMapping("/api/sessions")
+    @PostMapping("/study/sessions")
     public ResponseEntity<String> initializeSession(@RequestBody(required = false) Map<String, Object> params)
             throws OpenViduJavaClientException, OpenViduHttpException {
+
+
         SessionProperties properties = SessionProperties.fromJson(params).build();
         Session session = openvidu.createSession(properties);
+
+        log.info("params: {}", params.toString());
 
         return new ResponseEntity<>(session.getSessionId(), HttpStatus.OK);
     }
 
-    @PostMapping("/api/sessions/{sessionId}/connections")
+    @PostMapping("/study/sessions/{sessionId}/connections")
     public ResponseEntity<String> createConnection(@PathVariable("sessionId") String sessionId,
                                                    @RequestBody(required = false) Map<String, Object> params)
             throws OpenViduJavaClientException, OpenViduHttpException {
