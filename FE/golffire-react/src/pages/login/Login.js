@@ -17,7 +17,7 @@ import golfImage from "../../assets/source/icons/golf.png";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [setCookie] = useCookies(["refreshToken"]);
+  const [cookies, setCookie] = useCookies(['refreshToken']);
   const navigate = useNavigate();
 
   // 이메일 로그인 함수
