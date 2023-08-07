@@ -8,7 +8,9 @@ import com.ssafy.domain.Companion.dto.request.CompanionCreate;
 import com.ssafy.domain.Companion.dto.request.CompanionSearch;
 import com.ssafy.domain.Companion.dto.request.CompanionUpdate;
 import com.ssafy.domain.Companion.entity.Companion;
+import com.ssafy.domain.Companion.entity.CompanionUser;
 import com.ssafy.domain.Companion.repository.CompanionRepository;
+import com.ssafy.domain.Companion.repository.CompanionUserRepository;
 import com.ssafy.domain.Member.service.MemberService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ import java.time.format.DateTimeFormatter;
 public class CompanionService {
 
     private final CompanionRepository companionRepository;
+    private final CompanionUserRepository companionUserRepository;
     private final MemberService memberService;
 
     //companion 생성
@@ -92,11 +95,36 @@ public class CompanionService {
 
     }
 
+    //currentPeople 증가
+    @Transactional
+    public Companion acceptCompanionUser(Long companionId, Long companionUserId) {
+        // 동행글에 참가자를 추가하고 상태를 ACTIVE로 변경
+        Companion companion = companionRepository.findById(companionId)
+                .orElseThrow(EntityNotFoundException::new);
 
-    // 컴패니언 눌러서 나오는 상세 내용 하나씩 보여주는
+        CompanionUser companionUser = companionUserRepository.findById(companionUserId)
+                .orElseThrow(EntityNotFoundException::new);
 
-    //CompanionUser status가 엑티브가 되면 currentPeople 이 1 증가해야함
-    // 컴패니언 유저 정보가 사라지면 다시 줄어들고
+        companionUser.active();
+        companion.addUser();
 
+        return companionRepository.increaseCurrentPeople(companionId);
+    }
+
+
+    //currentPeople 감소
+    @Transactional
+    public Companion cancelCompanionUser(Long companionId, Long companionUserId) {
+        Companion companion = companionRepository.findById(companionId)
+                .orElseThrow(EntityNotFoundException::new);
+
+        companion.subUser();
+
+        CompanionUser companionUser = companionUserRepository.findById(companionUserId)
+                .orElseThrow(EntityNotFoundException::new);
+        companionUserRepository.delete(companionUser);
+
+        return companionRepository.decreaseCurrentPeople(companionId);
+    }
 
 }
