@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface ChatMessageRepository extends MongoRepository<ChatMessage, String> {
-    List<ChatMessage> findByChatRoomId(Long roomId, Sort sort);
+    List<ChatMessage> findByChatRoomId(Long roomId);
     void deleteByChatRoomId(Long roomId);
 }

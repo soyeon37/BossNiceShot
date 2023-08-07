@@ -1,97 +1,74 @@
-import React, { useState } from "react";
+import React, {  useEffect, useState } from "react";
 
 import MyChatBox from "./MyChatBox";
 import OtherChatBox from "./OtherChatBox";
 
-function ChatRoom({ props }) {
-    const { id, title, tee, field, date } = props;
-    const [message, setMessage] = useState("");
+import axios from "axios";
 
-    // 채팅 내역 (id를 통해 받아오는 정보)
-    const chatContents = [
-        {
-            pic: "1",
-            userId: "1234",
-            nickname: "함싸피",
-            message: "야 뭐해?",
-            time: "2023-08-02 13시 11분",
-        },
-        {
-            pic: "2",
-            userId: "1237",
-            nickname: "사용자1237",
-            message: "오늘 날씨가 좋네요.",
-            time: "2023-08-02 13시 15분",
-        },
-        {
-            pic: "3",
-            userId: "9999",
-            nickname: "봇봇봇",
-            message: "안녕하세요!",
-            time: "2023-08-02 13시 20분",
-        },
-        {
-            pic: "1",
-            userId: "1234",
-            nickname: "함싸피",
-            message: "뭐하고 놀까요?",
-            time: "2023-08-02 13시 25분",
-        },
-        {
-            pic: "2",
-            userId: "1237",
-            nickname: "사용자1237",
-            message: "식사는 하셨나요?",
-            time: "2023-08-02 13시 30분",
-        },
-        {
-            pic: "3",
-            userId: "9999",
-            nickname: "봇봇봇",
-            message: "네, 식사는 했습니다.",
-            time: "2023-08-02 13시 35분",
-        },
-        {
-            pic: "1",
-            userId: "1234",
-            nickname: "함싸피",
-            message: "무엇을 도와드릴까요?",
-            time: "2023-08-02 13시 40분",
-        },
-        {
-            pic: "2",
-            userId: "1237",
-            nickname: "사용자1237",
-            message: "오늘은 무슨 계획이 있나요?",
-            time: "2023-08-02 13시 45분",
-        },
-        {
-            pic: "3",
-            userId: "9999",
-            nickname: "봇봇봇",
-            message: "저는 항상 여러분과 대화를 즐기고 있어요.",
-            time: "2023-08-02 13시 50분",
-        },
-        {
-            pic: "1",
-            userId: "1234",
-            nickname: "함싸피",
-            message: "좋아요! 그럼 이제 무엇을 할까요?",
-            time: "2023-08-02 13시 55분",
-        },
-    ];
+
+import SockJS from "sockjs-client";
+import { Stomp } from '@stomp/stompjs';
+
+function ChatRoom({ props }) {
+    const { id, title, teeBox, field, teeUpTime } = props;
+    const [chatMessages, setChatMessages] = useState([]);
+    const [messageInput, setMessageInput] = useState("");
+    const [stompClient, setStompClient] = useState(null);
 
     // 사용자(지금 로그인 한 사람)의 ID
-    const currentUserId = "1234";
+    const currentUserId = "kim@ssafy.com";
+    const currentUserNickname = "킴";
 
-    // 메시지 입력 감지
-    const handleMessage = (e) => {
-        setMessage(e.target.value);
-    }
+    const accessToken = axios.defaults.headers.common["Authorization"];
 
-    // 메시지 전송
-    const sendMessage = () => {
-        console.log("전송할 메시지: ", message);
+    useEffect(() => {
+        const socket = new SockJS('http://localhost:8080/ws');
+        const stompClient = Stomp.over(socket);
+
+        stompClient.connect( {Authorization: `${accessToken}`} , (frame) => {
+            setStompClient(stompClient);
+
+            axios.get(`http://localhost:8080/chat/message/${id}`)
+              .then(response => {
+                setChatMessages(response.data);
+            });
+        });
+
+        return () => {
+            if (stompClient) {
+                stompClient.disconnect();
+            }
+        };
+    }, [id]);
+
+    useEffect(() => {
+        if (stompClient) {
+            const subscription = stompClient.subscribe(`/sub/chat/message/` + id, response => {
+                const message = JSON.parse(response.body);
+                setChatMessages((prevChatMessages) => [...prevChatMessages, message]);
+            });
+
+            return () => {
+                subscription.unsubscribe();
+            };
+        }
+    }, [stompClient]);
+
+    const handleSendMessage = () => {
+        if (!stompClient || !messageInput) {
+            return;
+        }
+
+        const newMessage = {
+            type: 'CHAT',
+            content: messageInput,
+            memberId: currentUserId,
+            memberNickname: currentUserNickname,
+            chatRoomId: id
+        };
+
+        stompClient.send('/pub/chat/message', {Authorization: `${accessToken}`}, JSON.stringify(newMessage));
+        setMessageInput('');
     }
 
     return (
@@ -99,27 +76,27 @@ function ChatRoom({ props }) {
             <div id="room-header">
                 {/* 티박스 이미지 출력 문제 해결 필요 */}
                 <div id="room-title">{title} 방 </div>
-                <div id="room-tee">{tee}</div>
+                <div id="room-tee">{teeBox}</div>
                 <div id="room-field">{field}</div>
-                <div id="room-date">{date}</div>
+                <div id="room-date">{teeUpTime}</div>
             </div>
             <div id="room-text">
-                {chatContents.map((chatContent, index) => (
-                    chatContent.userId === currentUserId ? (
-                        <MyChatBox key={index} props={chatContent} />
+                {chatMessages.map((chatMessage, index) => (
+                    chatMessage.memberId === currentUserId ? (
+                        <MyChatBox key={index} props={chatMessage} />
                     ) : (
-                        <OtherChatBox key={index} props={chatContent} />
+                        <OtherChatBox key={index} props={chatMessage} />
                     )
                 ))}
             </div>
             <div id="room-footer">
                 <input
                     id="message"
-                    defaultValue={message}
-                    onChange={handleMessage}
+                    value={messageInput}
+                    onChange={e => setMessageInput(e.target.value)}
                     placeholder="메시지를 입력하세요."
                 />
-                <button id="icon-div" onClick={sendMessage}>
+                <button id="icon-div" onClick={handleSendMessage}>
                     전송
                 </button>
             </div>

@@ -6,18 +6,21 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.format.DateTimeFormatter;
 
-public record ChatMessageResponse (@NotNull MessageType messageType,
-                                   @NotNull String message,
+public record ChatMessageResponse (@NotNull MessageType type,
+                                   @NotNull String content,
                                    @NotNull String memberId,
-                                   @NotNull Long chatRoomId,
-                                   @NotNull String createdTime){
+                                   @NotNull String memberNickname,
+                                   @NotNull Long chatRoomId){
+                                   //@NotNull String createdTime){
+
     public static ChatMessageResponse from(ChatMessage chatMessage) {
         return new ChatMessageResponse(
-                chatMessage.getMessageType(),
-                chatMessage.getMessage(),
+                chatMessage.getType(),
+                chatMessage.getContent(),
                 chatMessage.getMemberId(),
-                chatMessage.getChatRoomId(),
-                chatMessage.getCreatedTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"))
+                chatMessage.getMemberNickname(),
+                chatMessage.getChatRoomId()
+                //chatMessage.getCreatedTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"))
         );
     }
 }

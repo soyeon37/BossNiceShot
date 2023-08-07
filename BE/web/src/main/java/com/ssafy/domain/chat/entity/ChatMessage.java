@@ -16,22 +16,38 @@ public class ChatMessage extends BaseTime {
     @Field(value="_id", targetType = FieldType.OBJECT_ID)
     private String id;
 
-    @Field("messageType")
-    private MessageType messageType;
+    @Field("type")
+    private MessageType type;
 
-    @Field("message")
-    private String message;
+    @Field("content")
+    private String content;
 
     @Field("member_id")
     private String memberId;
 
+    @Field("member_nickname")
+    private String memberNickname;
+
     @Field("chat_room_id")
     private Long chatRoomId;
 
-    public ChatMessage(MessageType messageType, String message, String memberId, Long chatRoomId) {
-        this.messageType = messageType;
-        this.message = message;
+    public ChatMessage(MessageType type, String content, String memberId, String memberNickname, Long chatRoomId) {
+        this.type = type;
+        this.content = content;
         this.memberId = memberId;
+        this.memberNickname = memberNickname;
         this.chatRoomId = chatRoomId;
+    }
+
+    @Override
+    public String toString() {
+        return "ChatMessage{" +
+                "id='" + id + '\'' +
+                ", type=" + type +
+                ", content='" + content + '\'' +
+                ", memberId='" + memberId + '\'' +
+                ", memberNickname='" + memberNickname + '\'' +
+                ", chatRoomId=" + chatRoomId +
+                '}';
     }
 }
