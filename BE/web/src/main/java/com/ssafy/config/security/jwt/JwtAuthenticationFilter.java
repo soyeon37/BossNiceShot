@@ -38,9 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/members/sendEmailVerification")
                 || request.getRequestURI().equals("/members/checkEmail")
                 || request.getRequestURI().equals("/members/code")
-                || request.getRequestURI().equals("/members/reissue")
                 || request.getRequestURI().equals("/members/checkNickname")
-                || request.getRequestURI().equals("/notification/**")
                 || request.getRequestURI().equals("/ws/**")
                 || request.getRequestURI().equals("/api/sessions")
                 || request.getRequestURI().equals("/api/sessions/**")
@@ -57,7 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         log.info("headerToken={}",token); // Access Token
 
         // 2. validateToken 으로 토큰 유효성 검사
-        if (token != null && jwtTokenProvider.validateToken(token) || request.getRequestURI().equals("/members/reissue")) {
+        if (request.getRequestURI().equals("/members/reissue") || (token != null && jwtTokenProvider.validateToken(token))) {
             // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
             log.info("유효한 토큰입니다.");
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
