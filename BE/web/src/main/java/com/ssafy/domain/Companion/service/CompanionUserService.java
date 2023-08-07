@@ -6,7 +6,11 @@ import com.ssafy.domain.Companion.entity.CompanionUser;
 import com.ssafy.domain.Companion.repository.CompanionUserRepository;
 import com.ssafy.domain.Member.service.MemberService;
 import com.ssafy.domain.studyUser.entity.StudyUser;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,10 +30,22 @@ public class CompanionUserService {
     public List<CompanionUser> findByCompanionId(Long companionId){
         return companionUserRepository.findByCompanionId(companionId);
     }
-    //신청한 동행 취소하고
+
+
     @Transactional
-    public void deleteCompanionUser(Long companionId, String memberId){
-        companionUserRepository.deleteByCompanionIdAndMemberId(companionId, memberId);
+    public void deleteCompanionUser(Long companionId, String memberId) {
+        // 현재 인증된 사용자의 이름(username 또는 memberId)을 가져옴
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+
+        if (currentUsername.equals(memberId)) {
+            // 현재 인증된 사용자와 memberId가 일치하는 경우에만 삭제 작업 수행
+            companionUserRepository.deleteByCompanionIdAndMemberId(companionId, memberId);
+            companionService.subCompanionUser(companionId);
+        } else {
+            // 다른 사용자가 요청한 경우에는 예외 처리 또는 에러 반환
+            throw new AccessDeniedException("You are not authorized to delete this companion.");
+        }
     }
 
     // 동행글 신청 기능
@@ -42,6 +58,7 @@ public class CompanionUserService {
         return companionUser;
     }
 
+
 //    @Transactional
 //    public void cancelCompanionUser(Long companionId, String memberId) {
 //        CompanionUser companionUser = companionUserRepository.findByCompanionIdAndMemberId(companionId, memberId)
@@ -53,8 +70,14 @@ public class CompanionUserService {
 //
 //        // companionUsers에서 해당 사용자를 삭제
 //        companion.getCompanionUsers().remove(companionUser);
-
+//
 //        companionUserRepository.save(companionUser);
+//    }
+
+    //신청한 동행 취소하고
+//    @Transactional
+//    public void deleteCompanionUser(Long companionId, String memberId){
+//        companionUserRepository.deleteByCompanionIdAndMemberId(companionId, memberId);
 //    }
 
 
