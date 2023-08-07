@@ -4,6 +4,7 @@ import com.ssafy.Exception.message.ExceptionMessage;
 import com.ssafy.Exception.model.UserAuthException;
 import com.ssafy.domain.Member.dto.request.*;
 import com.ssafy.domain.Member.dto.response.SignInResponse;
+import com.ssafy.domain.Member.entity.Member;
 import com.ssafy.domain.Member.service.MemberService;
 import com.ssafy.common.api.ApiResponse;
 import com.ssafy.domain.Member.service.RefreshTokenService;
@@ -183,10 +184,10 @@ public class MemberController {
     @GetMapping("/reissue")
     public ApiResponse reissue(@RequestHeader("refreshToken") String refreshToken){
         log.info("토큰 재발급 시작");
-        
-//        String refreshToken = request.refreshToken();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info(authentication.getName());
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }
+
 }
 
