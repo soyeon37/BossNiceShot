@@ -114,17 +114,11 @@ public class CompanionService {
 
     //currentPeople 감소
     @Transactional
-    public Companion cancelCompanionUser(Long companionId, Long companionUserId) {
+    public void subCompanionUser(Long companionId) {
         Companion companion = companionRepository.findById(companionId)
                 .orElseThrow(EntityNotFoundException::new);
 
         companion.subUser();
-
-        CompanionUser companionUser = companionUserRepository.findById(companionUserId)
-                .orElseThrow(EntityNotFoundException::new);
-        companionUserRepository.delete(companionUser);
-
-        return companionRepository.decreaseCurrentPeople(companionId);
     }
 
 }
