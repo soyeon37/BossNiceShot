@@ -1,0 +1,6 @@
+
+v	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¬™ÿá8Ïˆ‰ü›1
+j
+java:S1128"HRemove this unused import 'com.ssafy.domain.Companion.entity.Companion'.(œìÿ°þÿÿÿÿ8Ñˆ‰ü›1
+c
+java:S1128"ARemove this unused import 'com.ssafy.domain.study.entity.Status'.(ˆ—¾§ÿÿÿÿÿ8Ñˆ‰ü›1
