@@ -94,14 +94,7 @@ const Kakao = (props) => {
             navigate("/");
           } else {
             console.log("유효한 이메일입니다.");
-            // SignupInfo 페이지로 회원정보를 가지고 돌아가기
-            // navigate("/signup/info", {
-            //   state: {
-            //     email: email,
-            //     image: image,
-            //     nickname: nickname,
-            //   },
-            // });
+            // Redux
             dispatch(setStateEmail(email));
             dispatch(setStateNickname(nickname));
             dispatch(setStateIsKakao(true));
