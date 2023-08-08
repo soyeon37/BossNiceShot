@@ -10,8 +10,8 @@ public record ChatMessageResponse (@NotNull MessageType type,
                                    @NotNull String content,
                                    @NotNull String memberId,
                                    @NotNull String memberNickname,
-                                   @NotNull Long chatRoomId){
-                                   //@NotNull String createdTime){
+                                   @NotNull Long chatRoomId,
+                                   @NotNull String createdTime){
 
     public static ChatMessageResponse from(ChatMessage chatMessage) {
         return new ChatMessageResponse(
@@ -19,8 +19,8 @@ public record ChatMessageResponse (@NotNull MessageType type,
                 chatMessage.getContent(),
                 chatMessage.getMemberId(),
                 chatMessage.getMemberNickname(),
-                chatMessage.getChatRoomId()
-                //chatMessage.getCreatedTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"))
+                chatMessage.getChatRoomId(),
+                chatMessage.getCreatedTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"))
         );
     }
 }

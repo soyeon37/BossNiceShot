@@ -1,6 +1,6 @@
 package com.ssafy.domain.Member.dto.request;
 
-import com.ssafy.domain.Member.entity.TeeBox;
+import com.ssafy.common.TeeBox;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 public record UpdateMemberRequest(

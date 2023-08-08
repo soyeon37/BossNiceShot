@@ -1,6 +1,6 @@
 package com.ssafy.domain.follow.dto.response;
 
-import com.ssafy.domain.Member.entity.TeeBox;
+import com.ssafy.common.TeeBox;
 import com.ssafy.domain.follow.entity.Follow;
 
 public record FollowResponse (String followeeId,

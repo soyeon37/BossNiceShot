@@ -1,7 +1,7 @@
 package com.ssafy.domain.chat.dto.request;
 
+import com.ssafy.common.TeeBox;
 import com.ssafy.domain.Member.entity.Member;
-import com.ssafy.domain.Member.entity.TeeBox;
 import com.ssafy.domain.chat.entity.ChatRoom;
 import jakarta.validation.constraints.NotNull;
 

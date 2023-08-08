@@ -38,16 +38,4 @@ public class ChatMessage extends BaseTime {
         this.memberNickname = memberNickname;
         this.chatRoomId = chatRoomId;
     }
-
-    @Override
-    public String toString() {
-        return "ChatMessage{" +
-                "id='" + id + '\'' +
-                ", type=" + type +
-                ", content='" + content + '\'' +
-                ", memberId='" + memberId + '\'' +
-                ", memberNickname='" + memberNickname + '\'' +
-                ", chatRoomId=" + chatRoomId +
-                '}';
-    }
 }
