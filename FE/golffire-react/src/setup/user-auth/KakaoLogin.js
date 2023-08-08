@@ -21,7 +21,7 @@ const Kakao = (props) => {
       const data = {
        code: CODE
      }
-      const apiUrl = "http://localhost:8080/members/code";
+      const apiUrl = process.env.REACT_APP_SERVER_URL + "members/code";
 
 
     // KAKAO Token 발급
@@ -73,7 +73,7 @@ const Kakao = (props) => {
       const data = {
         id: email
       }
-      const apiUrl = "http://localhost:8080/members/checkEmail";
+      const apiUrl = process.env.REACT_APP_SERVER_URL + "members/checkEmail";
       console.log(email);
       axios
       .post(apiUrl, data)
@@ -102,7 +102,7 @@ const Kakao = (props) => {
         password: "1234",
         isKakao: true
       };
-      const apiUrl = "http://localhost:8080/members/sign-in"
+      const apiUrl = process.env.REACT_APP_SERVER_URL + "members/sign-in"
       axios
       .post(apiUrl, data)
       .then((response) => {

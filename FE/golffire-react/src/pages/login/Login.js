@@ -29,13 +29,15 @@ const Login = () => {
       isKakao: false
     };
 
+    console.log("data:", data);
+
     // 서버 API 엔드포인트 URL
     // 추후 실제 서버 URL로 대체 필요 !!
-    const apiUrl = "http://localhost:8080/members/sign-in";
+    const apiUrl = "http://i9a309.p.ssafy.io:8080/members/sign-in";
 
     // Axios를 사용하여 POST 요청 보내기
     axios
-      .post(apiUrl, data)
+      .post(apiUrl, { withCredentials: true }, data)
       .then((response) => {
         // 서버로부터 받은 정보
         const access_token = response.data.data.token.accessToken;
@@ -47,9 +49,8 @@ const Login = () => {
         // 쿠키에 정보 저장
         setCookie('refreshToken', refresh_token, { path: '/' , maxAge: new Date().getDate() + 60 * 60 * 24 *14 });
 
-
-        console.log(response.data); // Debug Code !!
-
+        console.log(response.data);
+        
         // 로그인 성공 후 Main으로 복귀
         navigate("/");
       })

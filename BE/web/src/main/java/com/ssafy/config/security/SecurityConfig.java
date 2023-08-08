@@ -52,7 +52,7 @@ public class SecurityConfig {
             "/study/sessions",
             "/api/sessions",
             "/api/sessions/**",
-            "api/sessions/SessionA/connections",
+            "/api/sessions/SessionA/connections",
             "/ws/**"
     };
     private static final String[] USER_LIST = {
@@ -95,11 +95,9 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-//        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
-//        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
-//        config.setAllowedHeaders(List.of("*"));
-        config.setAllowedOrigins(List.of("*"));
-        config.setAllowedMethods(List.of("*"));
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setExposedHeaders(List.of("*", "Set-Cookie"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

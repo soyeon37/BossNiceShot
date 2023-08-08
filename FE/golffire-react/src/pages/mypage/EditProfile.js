@@ -19,7 +19,7 @@ function EditProfile() {
     const data = {
       nickname: nickname
     }
-    const apiUrl = "http://localhost:8080/members/checkNickname"
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "members/checkNickname"
     axios
     .post(apiUrl, data)
     .then((response) => {
@@ -47,7 +47,7 @@ function EditProfile() {
             introduction: "하이욤"
         }
 
-        const apiUrl = 'http://localhost:8080/members/update';
+        const apiUrl = process.env.REACT_APP_SERVER_URL + 'members/update';
         console.log(cookies.access_token);
         axios.put(apiUrl, data)
             .then((response) => {
@@ -73,7 +73,7 @@ function EditProfile() {
     // 토큰 재발급 함수 export 시켜야 함
     const reissueToken = () => {
         console.log('refrshToken:', cookies.refresh_token);
-        const apiUrl = 'http://localhost:8080/members/reissue';
+        const apiUrl = process.env.REACT_APP_SERVER_URL + 'members/reissue';
         axios.post(apiUrl, cookies.refresh_token, { headers: { 'Authorization': 'Bearer ' + cookies.access_token } })
             .then((response) => {
                 const message = response.data.data.message;
