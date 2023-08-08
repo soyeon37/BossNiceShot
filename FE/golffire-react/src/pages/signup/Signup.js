@@ -1,7 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setStateEmail,
+  setStatePassword,
+  setStateNickname,
+  setStateIsKakao,
+  setStateStep,
+} from "../../features/signupSlice";
 
 // Signup Components
 import SignupChoice from "./SignupChoice";
@@ -15,6 +22,15 @@ import "./Signup.css";
 function Signup() {
   // Redux
   const step = useSelector((state) => state.signupFeature.step);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setStateStep(1));
+    dispatch(setStateEmail());
+    dispatch(setStatePassword());
+    dispatch(setStateNickname());
+    dispatch(setStateIsKakao(false));
+  }, []);
 
   return (
     <div id="Signup">
