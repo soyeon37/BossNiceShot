@@ -87,13 +87,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         return null;
     }
-    // Request Header 에서 Refresh Token 정보 추출
-//    private String resolveRefreshToken(HttpServletRequest request) {
-//        String bearerToken = request.getHeader("RefreshToken");
-//        log.info("RefreshToken={}",request.getHeader("RefreshToken"));
-//        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
-//            return bearerToken.substring(7);
-//        }
-//        return null;
-//    }
 }

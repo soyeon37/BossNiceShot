@@ -1,10 +1,11 @@
 import React, {  useEffect, useState } from "react";
 
+import { IoSendSharp } from "react-icons/io5";
+
 import MyChatBox from "./MyChatBox";
 import OtherChatBox from "./OtherChatBox";
 
 import axios from "axios";
-
 
 import SockJS from "sockjs-client";
 import { Stomp } from '@stomp/stompjs';
@@ -15,20 +16,20 @@ function ChatRoom({ props }) {
     const [messageInput, setMessageInput] = useState("");
     const [stompClient, setStompClient] = useState(null);
 
-    // 사용자(지금 로그인 한 사람)의 ID
+    // 사용자(지금 로그인 한 사람)의 ID와 닉네임으로 변경
     const currentUserId = "kim@ssafy.com";
     const currentUserNickname = "킴";
 
     const accessToken = axios.defaults.headers.common["Authorization"];
 
     useEffect(() => {
-        const socket = new SockJS(process.env.REACT_APP_SERVER_URL + 'ws');
+        const socket = new SockJS(process.env.REACT_APP_SERVER_URL + '/ws');
         const stompClient = Stomp.over(socket);
 
         stompClient.connect( {Authorization: `${accessToken}`} , (frame) => {
             setStompClient(stompClient);
 
-            axios.get(process.env.REACT_APP_SERVER_URL + `chat/message/${id}`)
+            axios.get(process.env.REACT_APP_SERVER_URL + `/chat/message/${id}`)
               .then(response => {
                 setChatMessages(response.data);
             });
@@ -97,7 +98,9 @@ function ChatRoom({ props }) {
                     placeholder="메시지를 입력하세요."
                 />
                 <button id="icon-div" onClick={handleSendMessage}>
-                    전송
+                    <h1>
+                        <IoSendSharp />
+                    </h1>
                 </button>
             </div>
         </div>

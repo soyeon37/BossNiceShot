@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaAuditing
 @EnableJpaRepositories(
         basePackages = "com.ssafy.domain",
-        excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = { com.ssafy.domain.chat.repository.ChatMessageRepository.class, com.ssafy.domain.Member.repository.RefreshTokenRepository.class})
+        excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = { com.ssafy.domain.chat.repository.ChatMessageRepository.class, com.ssafy.domain.Member.repository.RefreshTokenRepository.class, com.ssafy.domain.Notification.repository.NotificationRepository.class})
 )
 public class JpaConfig {
 }

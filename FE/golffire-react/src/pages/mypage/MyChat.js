@@ -14,7 +14,7 @@ import axios from "axios";
 
 function MyChat() {
     const [searchWord, setSearchWord] = useState("");
-    const [roomId, setRoomId] = useState("0");
+    const [roomId, setRoomId] = useState(0);
 
     const teeMap = {
         red: TeeRed,
@@ -26,7 +26,7 @@ function MyChat() {
     // 사용자의 채팅방 목록
     const [chatRooms, setChatRooms] = useState([]);
     useEffect(() => {
-        axios.get(process.env.REACT_APP_SERVER_URL + 'chat/room')
+        axios.get(process.env.REACT_APP_SERVER_URL + '/chat/room')
             .then(response => {
                 console.log(response);
                 setChatRooms(response.data);
@@ -51,7 +51,7 @@ function MyChat() {
         <div id="MyPage">
             <div id="MyPageBox">
                 <MyPageNavbar />
-                <div id="MyChat">
+                <div id="MyChat" className="mypage-area">
                     <div id="chat-bar">
                         <div id="chat-search">
                             <input
@@ -76,7 +76,7 @@ function MyChat() {
                         </div>
                     </div>
                     <div id="chat-room">
-                        {roomId === "0" ? (
+                        {roomId === 0 ? (
                             <>
                                 <div id="room-title">채팅창을 선택하세요.</div>
                             </>

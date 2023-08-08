@@ -29,7 +29,7 @@ const Kakao = (props) => {
   const data = {
     code: CODE,
   };
-  const apiUrl = process.env.REACT_APP_SERVER_URL + "members/code";
+  const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/code";
 
   // KAKAO Token 발급
   const grant_type = "authorization_code";
@@ -83,7 +83,7 @@ const Kakao = (props) => {
       const data = {
         id: email,
       };
-      const apiUrl = process.env.REACT_APP_SERVER_URL + "members/checkEmail";
+      const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/checkEmail";
       console.log(email);
       axios
         .post(apiUrl, data)

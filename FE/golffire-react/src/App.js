@@ -12,8 +12,12 @@ import Accompany from "./pages/accompany/Accompany";
 import Community from "./pages/community/Community";
 
 // Study
-import CreateRoom from "./pages/study/CreateRoom";
-import CoachingRoom from "./pages/study/CoachingRoom";
+import CreateCRoom from './pages/study/CreateCRoom';
+import CreateLRoom from './pages/study/CreateLRoom';
+import CoachingRoom from './pages/study/CoachingRoom';
+
+//accompany
+import CreateAccompany from "./pages/accompany/CreateAccompany";
 
 // Community
 import FreeBoardList from "./pages/community/FreeBoardList";
@@ -26,9 +30,6 @@ import FreeBoardDetail from "./pages/community/FreeBoardDetail";
 import KakaoLogin from "./setup/user-auth/KakaoLogin";
 import KakaoSignUp from "./setup/user-auth/KakaoSignUp";
 import Signup from "./pages/signup/Signup";
-// import SignupEmail1 from "./pages/signup/SignupEmail1";
-// import SignupEmail2 from "./pages/signup/SignupEmail2";
-// import SignupInfo from "./pages/signup/SignupInfo";
 import FindPassword from "./pages/login/FindPassword";
 import Login from "./pages/login/Login";
 
@@ -77,9 +78,6 @@ function App() {
               {/* 항상 route 가능 */}
               <Route path="/" element={<Main />} />
               <Route path="/signup/" element={<Signup />} />
-              {/* <Route path="/signup/email1" element={<SignupEmail1 />} /> */}
-              {/* <Route path="/signup/email2" element={<SignupEmail2 />} /> */}
-              {/* <Route path="/signup/info" element={<SignupInfo />} /> */}
               <Route path="/findpassword/" element={<FindPassword />} />
               <Route path="/login/" element={<Login />} />
               <Route path="/golffield/" element={<Golffield />} />
@@ -91,12 +89,16 @@ function App() {
               /> */}
 
               <Route path="/solution/" element={<Solution />} />
-              <Route path="/accompany/" element={<Accompany />} />
 
               {/* Study */}
               <Route path="/studylist/" element={<StudyList />} />
-              <Route path="/createroom/" element={<CreateRoom />} />
+              <Route path="/createcroom/" element={<CreateCRoom />} />
+              <Route path="/createlroom/" element={<CreateLRoom />} />
               <Route path="/coachingroom/" element={<CoachingRoom />} />
+
+              {/* Accompany */}
+              <Route path="/accompany/" element={<Accompany />} />
+              <Route path="/createaccompany" element={<CreateAccompany />} />
 
               {/* Community */}
               <Route path="/community" element={<Community />} />
@@ -113,6 +115,7 @@ function App() {
               <Route path="/mypage/myaccompany" element={<MyAccompany />} />
               <Route path="/mypage/mychat" element={<MyChat />} />
               <Route path="/mypage/myfollow" element={<MyFollow />} />
+
               <Route path="/mypage/signout/" element={<Signout />} />
 
               {/* Error */}

@@ -2,38 +2,43 @@ import { React, useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+
+import { reissueToken } from "../../setup/user-auth/UserAuth";
 import MyPageNavbar from "./MyPageNavbar";
 import "./MyPage.css";
 
 import {
-  Button,
+    Button,
 } from "@chakra-ui/react";
 
 function EditProfile() {
     const { state } = useLocation();
     const [cookies, setCookie, removeCookie] = useCookies(["user"]);
-     const [nickname, setNickname] = useState("");
-     // 닉네임 중복 검사
-  const handleCheckNickname = () => {
-    console.log("nickname: ", nickname); // Debug !!
-    const data = {
-      nickname: nickname
+    const [nickname, setNickname] = useState("");
+
+    const navigate = useNavigate();
+
+    // 닉네임 중복 검사
+    const handleCheckNickname = () => {
+        console.log("nickname: ", nickname); // Debug !!
+        const data = {
+            nickname: nickname
+        }
+        const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/checkNickname"
+        axios
+            .post(apiUrl, data)
+            .then((response) => {
+                if (response.data.data.resultMessage === "FAIL") {
+                    console.log("닉네임이 중복되었습니다.");
+                    alert("이미 존재하는 닉네임입니다.");
+                } else {
+                    console.log("유효한 닉네임입니다.");
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            })
     }
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "members/checkNickname"
-    axios
-    .post(apiUrl, data)
-    .then((response) => {
-      if (response.data.data.resultMessage === "FAIL") {
-        console.log("닉네임이 중복되었습니다.");
-        alert("이미 존재하는 닉네임입니다.");
-      } else {
-        console.log("유효한 닉네임입니다.");
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    })
-  }
 
     // 사용자 정보 수정 테스트용 코드 - 함소연
     const testPut = () => {
@@ -45,9 +50,10 @@ function EditProfile() {
             level: "더블 플레이어",
             image: "banana.jpg",
             introduction: "하이욤"
+
         }
 
-        const apiUrl = process.env.REACT_APP_SERVER_URL + 'members/update';
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/update';
         console.log(cookies.access_token);
         axios.put(apiUrl, data)
             .then((response) => {
@@ -64,33 +70,27 @@ function EditProfile() {
                         console.log('Access Token has expired.');
 
                         // 토큰 재발급 등의 로직 수행
-                        reissueToken();
+                        callReissueToken();
                     }
 
                 }
             });
     }
-    // 토큰 재발급 함수 export 시켜야 함
-    const reissueToken = () => {
-        console.log('refrshToken:', cookies.refresh_token);
-        const apiUrl = process.env.REACT_APP_SERVER_URL + 'members/reissue';
-        axios.post(apiUrl, cookies.refresh_token, { headers: { 'Authorization': 'Bearer ' + cookies.access_token } })
-            .then((response) => {
-                const message = response.data.data.message;
-                if (message === "SUCCESS") {
-                    const newAccessToken = response.data.data.accessToken;
-                    // console.log(newAccessToken);
-                    removeCookie('access_token');
-                    setCookie('access_token', newAccessToken, { path: '/' });
-                } else {
-                    console.log('EXPIRED_TOKEN_MESSAGE: ', message);
-                    // 로그아웃 시켜주는 func 실행
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error); // Debug Code
-            });
-    }
+
+    const callReissueToken = async () => {
+        console.log("EditProfile - callReissueToken");
+        const isSuccess = await reissueToken(
+            cookies = { cookies },
+            setCookie = { setCookie },
+            removeCookie = { removeCookie },
+            navigate = {navigate},
+            );
+        if (isSuccess) {
+            console.log("토큰 재발급 및 로그인 연장 성공");
+        } else {
+            console.log("실패 후 로그아웃 진행됨");
+        }
+    };
 
     return (
         <div id="MyPage">
@@ -114,20 +114,20 @@ function EditProfile() {
                     <div id="edit-nickname">
                         닉네임, 검사 필요
                         <Button
-            onClick={handleCheckNickname}
-            style={{
-              height: "2.5rem",
-              width: "100%",
+                            onClick={handleCheckNickname}
+                            style={{
+                                height: "2.5rem",
+                                width: "100%",
 
-              color: "black",
-              borderRadius: "30px",
-              background: "#B8F500",
-            }}
-            maxW={"sm"}
-            marginBottom={"2.5rem"}
-          >
-            검사
-          </Button>
+                                color: "black",
+                                borderRadius: "30px",
+                                background: "#B8F500",
+                            }}
+                            maxW={"sm"}
+                            marginBottom={"2.5rem"}
+                        >
+                            검사
+                        </Button>
                     </div>
                     <div id="edit-introduction">
                         자기소개 수정 가능
@@ -144,6 +144,7 @@ function EditProfile() {
                     </div>
                 </div>
             </div>
+
         </div >
     );
 }
