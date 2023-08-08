@@ -8,11 +8,16 @@
   border-radius: 10px;
 }
 
+/* favicon image */
+.favicon-img {
+  height: 80%;
+}
+
 /* badge */
 .badge-coach {
   border-radius: 50px;
-  background: #72CE27;
-  color: #FFF;
+  background: #72ce27;
+  color: #fff;
   text-align: center;
   font-family: Inter;
   font-size: 16px;
@@ -21,14 +26,15 @@
 
 .badge-learn {
   border-radius: 50px;
-  background: #FFE000;
-  color: #FFF;
+  background: #ffe000;
+  color: #fff;
   text-align: center;
   font-family: Inter;
   font-size: 16px;
   font-weight: 400;
 }
 
-.Footer{
+/* Footer */
+.Footer {
   background-color: dodgerblue;
 }
