@@ -1,8 +1,8 @@
 package com.ssafy.domain.chat.entity;
 
 import com.ssafy.audit.BaseTime;
+import com.ssafy.common.TeeBox;
 import com.ssafy.domain.Member.entity.Member;
-import com.ssafy.domain.Member.entity.TeeBox;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
