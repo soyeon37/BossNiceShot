@@ -21,7 +21,7 @@ function MyPageNavbar() {
                 <div className="nav-user">
 
                     <div className="user-photo">
-                        <div style={{ width: "100px", height: "100px", borderRadius: "50%", backgroundColor: "#FFE000", margin: "0 auto", border: "2px solid black" }}>
+                        <div style={{ width: "150px", height: "150px", borderRadius: "50%", backgroundColor: "#FFE000", margin: "0 auto", border: "2px solid black" }}>
                         <img src={profileIMGn}></img>
                         </div>
                     </div>

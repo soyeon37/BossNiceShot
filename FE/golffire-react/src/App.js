@@ -110,8 +110,8 @@ function App() {
 
               {/* Profile */}
               <Route path="/mypage/info" element={<Profile />} />
-              <Route path="/mypage/editprofile/" element={<EditProfile />} />
-              <Route path="/mypage/editpassword/" element={<EditPassword />} />
+              <Route path="/mypage/info/editprofile/" element={<EditProfile />} />
+              <Route path="/mypage/info/editpassword/" element={<EditPassword />} />
               <Route path="/mypage/myaccompany" element={<MyAccompany />} />
               <Route path="/mypage/mychat" element={<MyChat />} />
               <Route path="/mypage/myfollow" element={<MyFollow />} />

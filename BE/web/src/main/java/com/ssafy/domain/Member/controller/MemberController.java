@@ -10,7 +10,6 @@ import com.ssafy.domain.Member.service.RefreshTokenService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
@@ -180,12 +179,13 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "사용자 없음"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    @PostMapping("/reissue")
-    public ApiResponse reissue(@RequestBody ReIssueRequest request){
+    @GetMapping("/reissue")
+    public ApiResponse reissue(@RequestHeader("refreshToken") String refreshToken){
         log.info("토큰 재발급 시작");
-        String refreshToken = request.refreshToken();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info(authentication.getName());
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }
+
 }
 
