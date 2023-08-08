@@ -4,13 +4,16 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 
 // Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import AlertPage from "./alert/AlertPage";
 import Favicon from "../../assets/source/imgs/favicon.png";
 
 import { IoMdContact } from "react-icons/io";
 import { Avatar, AvatarBadge, AvatarGroup, Hide } from "@chakra-ui/react";
+
+// Redux
+import { setUserId, setUserNickname } from "../../features/userInfoSlice";
 
 import "./styles.css";
 import {
@@ -31,9 +34,11 @@ function Navbar() {
   const [isActive, setIsActive] = useState(false);
 
   // Redux
+  const dispatch = useDispatch();
   // 사용자 정보(userId)로 로그인 여부 판단
   const userId = useSelector((state) => state.userInfoFeatrue.userId);
   const userNickname = useSelector((state) => state.userInfoFeatrue.userNickname);
+  console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname);
 
   const navigate = useNavigate();
 
@@ -51,6 +56,9 @@ function Navbar() {
       console.log(response);
       if (response.data.data === "SUCCESS") {
         setCookie("refreshToken", cookies.refreshToken, { path: "/", maxAge: 0 });
+        console.log("로그아웃하여 redux 정보 삭제");
+        dispatch(setUserId());
+        dispatch(setUserNickname());
         navigate("/");
       } else {
         alert("Error");
