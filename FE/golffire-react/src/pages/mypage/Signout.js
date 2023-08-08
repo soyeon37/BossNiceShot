@@ -1,5 +1,6 @@
 import React from "react";
 import MyPageNavbar from "./MyPageNavbar";
+
 import "./MyPage.css";
 import CryImg from "../../assets/source/mascot/mascot-cry-2.png";
 import axios from "axios";
@@ -12,32 +13,32 @@ function Signout() {
     const handleLogout = () => {
         console.log('cookies.refreshToken:',cookies.refreshToken);
       
-        const apiUrl = process.env.REACT_APP_SERVER_URL + 'members/logout'
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout'
         const data = {
-            refreshToken : cookies.refreshToken
+            refreshToken: cookies.refreshToken
         }
         axios.post(apiUrl, data)
-        .then(response => {
-            console.log(response);
-            if(response.data.data === "SUCCESS"){
-                setCookie('refreshToken', cookies.refreshToken, {path: '/', maxAge: 0});
-                handleSignout();
-            } else {
-                alert('Error')
-            }
-        })
+            .then(response => {
+                console.log(response);
+                if (response.data.data === "SUCCESS") {
+                    setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
+                    handleSignout();
+                } else {
+                    alert('Error')
+                }
+            })
     };
     const handleSignout = (e) => {
         console.log("탈퇴하기");
-        const apiUrl = process.env.REACT_APP_SERVER_URL + 'members/delete'
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/delete'
         axios.delete(apiUrl)
-        .then((response) => {
-            console.log(response);
-            navigate('/');
-        })
-        .catch((error)=>{
-            console.error(error);
-        })
+            .then((response) => {
+                console.log(response);
+                navigate('/');
+            })
+            .catch((error) => {
+                console.error(error);
+            })
     };
 
 
@@ -65,6 +66,7 @@ function Signout() {
                     </button>
                 </div>
             </div>
+
         </div >
     );
 }

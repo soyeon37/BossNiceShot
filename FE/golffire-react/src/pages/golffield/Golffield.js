@@ -1,54 +1,28 @@
 import React, { useState, useEffect } from "react";
 import KakaoMap from "./KakaoMap";
-import GolfBox from "./GolfBox";
 
+import GolfBox from "./GolfBox";
+import file from "../../assets/golffield.json";
 import { SearchIcon, ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import "./Golffield.css";
 
 function Golffield() {
   // 출력할 골프장 정보 변수
-  const golfClubs = [
-    {
-      id: 1,
-      name: "하이골프클럽11",
-      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
-      callNumber: "02-9999-9999",
-    },
-    {
-      id: 2,
-      name: "하이골프클럽22",
-      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
-      callNumber: "02-9999-9999",
-    },
-    {
-      id: 3,
-      name: "하이골프클럽33",
-      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
-      callNumber: "02-9999-9999",
-    },
-    {
-      id: 4,
-      name: "하이골프클럽44",
-      address: "서울특별시 서초구 잠원동 신반포로47길 77 두원빌딩 1층",
-      callNumber: "02-9999-9999",
-    },
-    // Add more golf club data objects here
-  ];
+  const data = file;
+  const dataSize = file.length;
 
-  // 지역 검색 필터 변수
-  const areas = [
-    { id: "0", area: "전국" },
-    { id: "1", area: "서울" },
-    { id: "2", area: "경기" },
-    { id: "3", area: "강원" },
-  ];
+  let dataKeys;
+  let arrayText = ["번호", "사업장명", "소재지전체주소", "도로명전체주소", "소재지전화", "좌표정보(x)", "좌표정보(y)"]
+  let arrayIndex = [];
+  if (dataSize > 0) {
+    dataKeys = Object.keys(data[0]);
+    for (var i = 0; i < arrayText.length; i++) {
+      arrayIndex.push(dataKeys.indexOf(arrayText[i]));
+    }
+  }
 
-  const [area, setArea] = useState(areas[0].id);
-  const [searchWord, setSearchWord] = useState("");
-
-  const handleSelectArea = (e) => {
-    setArea(e.target.value);
-  };
+  const [golfClub, setGolfClub] = useState(data); // 검색 필터링된 골프장 리스트
+  const [searchWord, setSearchWord] = useState(""); // 검색어
 
   // 검색창 내 문자 변화 감지
   const handleSearchWord = (e) => {
@@ -64,18 +38,29 @@ function Golffield() {
 
   // 검색
   const doSearchWord = () => {
-    console.log(searchWord);
+    let searchResult = [];
+    for (var i = 0; i < dataSize; i++) {
+      const d = data[i];
+      if (d[dataKeys[arrayIndex[1]]].includes(searchWord)) {
+        searchResult.push(data[i]);
+      }
+    }
+    setGolfClub(searchResult);
+    setCurrentPage(1);
   };
 
   // Result Pagination
   const itemsPerPage = 10; // 페이지 당 아이템 수
   const [currentPage, setCurrentPage] = useState(1);
 
+  let isFirstPage = currentPage === 1;
+  let isLastPage = currentPage === Math.ceil(golfClub.length / itemsPerPage);
+
   // 페이지 변환에 따른 아이템 출력
   const getCurrentPageItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return golfClubs.slice(startIndex, endIndex);
+    return golfClub.slice(startIndex, endIndex);
   };
 
   // 페이징 컨트롤 인식
@@ -83,21 +68,43 @@ function Golffield() {
     setCurrentPage(pageNumber);
   };
 
-  const isFirstPage = currentPage === 1;
-  const isLastPage = currentPage === Math.ceil(golfClubs.length / itemsPerPage);
+  // KakaoMap에 전달되는 변수와 함수
+  const [centerId, setCenterId] = useState(1); // 지도의 중심 좌표가 되는 골프장 번호
+
+  const getId = () => {
+    const id = [];
+    const cur = getCurrentPageItems(golfClub);
+    for (var i = 0; i < cur.length; i++) {
+      id.push(cur[i][dataKeys[arrayIndex[0]]])
+    }
+    // console.log("저장된 id: ", id);
+    return id;
+  }
+
+  const getAddress = () => {
+    const add = [];
+    const cur = getCurrentPageItems(golfClub);
+    for (var i = 0; i < cur.length; i++) {
+      add.push(cur[i][dataKeys[arrayIndex[2]]], cur[i][dataKeys[arrayIndex[3]]])
+    }
+    // console.log("저장된 add: ", add);
+    return add;
+  }
+  const getLatLng = () => {
+    const latlng = [];
+    const cur = getCurrentPageItems(golfClub);
+    for (var i = 0; i < cur.length; i++) {
+      latlng.push(cur[i][dataKeys[arrayIndex[5]]], cur[i][dataKeys[arrayIndex[6]]])
+    }
+    // console.log("저장된 latlng: ", latlng);
+    return latlng;
+  }
 
   return (
     <div id="Golffield">
       <div id="golf-title">골프장 검색</div>
       <div id="golf-search">
         <div id="search-box">
-          <select value={area} id="areaSelector" onChange={handleSelectArea}>
-            {areas.map((item) => (
-              <option key={item.id} value={item.area}>
-                {item.area}
-              </option>
-            ))}
-          </select>
           <input
             id="searchWord"
             defaultValue={searchWord}
@@ -111,16 +118,24 @@ function Golffield() {
         </div>
         <div id="result-box">
           <div id="kakao-map">
-            <KakaoMap />
+            <KakaoMap
+              centerId={centerId}
+              getId={getId()}
+              getAddress={getAddress()}
+              getLatLng={getLatLng()}
+            />
           </div>
           <div id="result">
             <div id="result-list">
-              {getCurrentPageItems().map((club) => (
+              {getCurrentPageItems(golfClub).map((club) => (
                 <GolfBox
-                  key={club.id}
-                  name={club.name}
-                  address={club.address}
-                  callNumber={club.callNumber}
+                  key={club[dataKeys[arrayIndex[0]]]}
+                  id={club[dataKeys[arrayIndex[0]]]}
+                  name={club[dataKeys[arrayIndex[1]]]}
+                  address1={club[dataKeys[arrayIndex[2]]]}
+                  address2={club[dataKeys[arrayIndex[3]]]}
+                  callNumber={club[dataKeys[arrayIndex[4]]]}
+                  setCenter={setCenterId}
                 />
               ))}
             </div>
