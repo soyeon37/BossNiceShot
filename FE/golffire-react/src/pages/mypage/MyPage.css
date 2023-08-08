@@ -77,6 +77,8 @@
 }
 
 #edit-pic {
+  background-color: #3498db;
+
   width: 40%;
   height: 100%;
   position: relative;
@@ -85,6 +87,27 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+#pic-button {
+  /* height: px; */
+  background: white;
+  border: 2px solid black;
+  border-radius: 50px;
+  padding: 4px 35px;
+  color: rgba(59, 214, 65, 1);
+  transition: background-color 0.3s ease;
+}
+
+#pic-button-edit {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 3px;
+}
+
+#pic-button:hover {
+  color: white;
+  background: rgba(59, 214, 65, 1);
 }
 
 #pic-circle {
@@ -97,6 +120,22 @@
   background-color: gray;
 }
 
+#edit-info{
+  background-color: #FF7272;
+  width: 57%;
+  height: 90%;
+  border: 2px solid black;
+  border-radius: 50px;
+  margin: 30px 40px;
+}
+#edit-title{
+  font-size: 25px;
+  font-weight: bold;
+  margin: 30px 0px 20px 0px;
+}
+#edit-header{
+  font-size: 15px;
+}
 /* EditPassword CSS */
 #EditPassword {
   width: 80%;
@@ -461,6 +500,7 @@
 .user-title {
   display: flex;
   justify-content: center;
+  margin-bottom: 15px;
 }
 
 .user-level {
@@ -520,7 +560,7 @@ li:has(.active-link) {
 
 li:has(.active-link-signout) {
   background-color: white;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 12px 0 0 12px;
   border-right: none;
 }
@@ -550,54 +590,159 @@ li {
 }
 
 #profile-info {
-  flex: 1;
+  flex: 0.8;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 30px;
-  margin: 15px 10px 15px 30px;
+  margin: 10px 10px 15px 60px;
   height: 95%;
-  background-color: red;
 }
 
 #profile-history {
   flex: 1;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 30px;
-  margin: 15px 30px 15px 10px;
+  margin: 10px 60px 15px 10px;
+  padding: 50px 44px;
   height: 95%;
-  background-color: blue;
 }
 
 #profile-title {
   padding-top: 20px;
   width: 100%;
-  height: 15%;
+  height: 13%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #FF7272;
+  /* background-color: #FF7272; */
   font-weight: 600;
-  font-size: 25px;
+  font-size: 27px;
 }
 
 #profile-text {
-  display: flex;;
-  height: 100%;
+  display: flex;
+  height: 87%;
   flex-direction: row;
 }
 
-#info-pic {
-  width: 250px;
-  height: 250px;
-  
-  margin: 30px;
+#info-pic-wrapper {
+  width: 150px;
+  height: 150px;
+  background-color: #3498db;
+  border: 2px solid black;
   border-radius: 50%;
-  background-color: gray;
+  /* 50%로 설정하여 원 모양으로 만듭니다. */
+  margin: 20px auto 15px auto;
 }
 
 #info-text {
-  background-color: white;
+  width: 100%;
+}
+
+#info-header {
+  font-size: 13px;
+  text-align: left;
+  margin: 7px 55px 0px 55px;
+}
+
+#info-email,
+#info-nickname,
+#info-golf-info1-1,
+#info-golf-info1-2,
+#info-golf-info2-1,
+#info-golf-info2-2 {
+  border: 2px solid black;
+  border-radius: 50px;
+  padding: 10px 30px;
+  height: 30px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+
+}
+
+#info-email,
+#info-nickname {
+  margin: 2px 50px;
+}
+
+#info-golf-info1-1,
+#info-golf-info2-1 {
+  margin-left: 50px;
+  margin-right: 10px;
+}
+
+#info-golf-info1-2,
+#info-golf-info2-2 {
+  margin-left: 10px;
+  margin-right: 50px;
+}
+
+#info-introduction {
+  border: 2px solid black;
+  border-radius: 50px;
+  margin: 2px 50px;
+  display: flex;
+  align-items: center;
+  padding: 2px 0px 2px 30px;
+  /* justify-content: center; */
+}
+
+#info-golf-info-header {
+  font-size: 13px;
+  text-align: left;
+  margin: 7px 0px 0px 18px;
+}
+
+#info-golf-info1,
+#info-golf-info2 {
+  display: flex;
+  justify-content: center;
+}
+
+#info-golf-info1-1-div,
+#info-golf-info2-1-div {
+  width: 50%;
+}
+
+#info-golf-info1-2-div,
+#info-golf-info2-2-div {
+  width: 50%;
+}
+
+#info-edit {
+  height: 65px;
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 20px; */
+}
+
+#info-edit-profile,
+#info-edit-password {
+  height: 35px;
+  background: rgba(59, 214, 65, 1);
+  border: 2px solid black;
+  border-radius: 50px;
+  padding: 3px 12px;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+#info-edit-profile {
+  margin-right: 50px;
+}
+
+#info-edit-profile:hover,
+#info-edit-password:hover {
+  background: white;
+  color: rgba(59, 214, 65, 1);
+}
+
+#info-edit-button {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 3px;
 }

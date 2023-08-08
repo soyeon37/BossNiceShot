@@ -9,6 +9,7 @@ import com.ssafy.config.security.jwt.JwtTokenProvider;
 import com.ssafy.domain.Member.dto.request.*;
 import com.ssafy.domain.Member.dto.response.*;
 import com.ssafy.domain.Member.entity.Member;
+import com.ssafy.domain.Member.entity.TeeBox;
 import com.ssafy.domain.Member.repository.MemberRepository;
 import com.ssafy.config.security.jwt.TokenInfo;
 import lombok.RequiredArgsConstructor;
@@ -68,6 +69,7 @@ public class MemberService{
 
             // 2-1. 비밀번호 체크
             Optional<Member> member = memberRepository.findById(request.id());
+            log.info("member={}", member.get().getId());
             if(member.isEmpty()){
                 throw new UserAuthException(ExceptionMessage.USER_NOT_FOUND);
             } else if(!encoder.matches(request.password(), member.get().getPassword())) {
@@ -75,7 +77,12 @@ public class MemberService{
             }
             // 3. 인증 정보를 기반으로 JWT 토큰 생성
             TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
-            return new SignInResponse(request.id(), tokenInfo);
+
+            String nickname = member.get().getNickname();
+            String level = member.get().getLevel();
+            TeeBox teeBox = member.get().getTeeBox();
+
+            return new SignInResponse(request.id(), nickname, level, teeBox, tokenInfo);
     }
 
     @Transactional
