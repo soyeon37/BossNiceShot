@@ -22,13 +22,13 @@ function ChatRoom({ props }) {
     const accessToken = axios.defaults.headers.common["Authorization"];
 
     useEffect(() => {
-        const socket = new SockJS('http://localhost:8080/ws');
+        const socket = new SockJS(process.env.REACT_APP_SERVER_URL + 'ws');
         const stompClient = Stomp.over(socket);
 
         stompClient.connect( {Authorization: `${accessToken}`} , (frame) => {
             setStompClient(stompClient);
 
-            axios.get(`http://localhost:8080/chat/message/${id}`)
+            axios.get(process.env.REACT_APP_SERVER_URL + `chat/message/${id}`)
               .then(response => {
                 setChatMessages(response.data);
             });

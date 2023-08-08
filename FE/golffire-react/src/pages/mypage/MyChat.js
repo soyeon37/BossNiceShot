@@ -26,7 +26,7 @@ function MyChat() {
     // 사용자의 채팅방 목록
     const [chatRooms, setChatRooms] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:8080/chat/room')
+        axios.get(process.env.REACT_APP_SERVER_URL + 'chat/room')
             .then(response => {
                 console.log(response);
                 setChatRooms(response.data);

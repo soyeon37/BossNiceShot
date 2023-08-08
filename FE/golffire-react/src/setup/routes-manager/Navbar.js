@@ -39,7 +39,7 @@ function Navbar() {
     const handleLogout = () => {
         console.log('cookies.refreshToken:',cookies.refreshToken);
       
-        const apiUrl = 'http://localhost:8080/members/logout'
+        const apiUrl = process.env.REACT_APP_SERVER_URL + 'members/logout'
         const data = {
             refreshToken : cookies.refreshToken
         }
