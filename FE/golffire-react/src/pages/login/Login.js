@@ -5,8 +5,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 // Redux
-import { useSelector, useDispatch } from "react-redux";
-// import { setUserId, setUserNickname } from "../../features/userInfoSlice";
+import { useDispatch } from "react-redux";
+import { setUserId, setUserNickname } from "../../features/userInfoSlice";
 
 // Style
 import {
@@ -55,6 +55,10 @@ const Login = () => {
         setCookie('refreshToken', refresh_token, { path: '/', maxAge: new Date().getDate() + 60 * 60 * 24 * 14 });
 
         console.log(response.data); // Debug Code !!
+        
+        // NavBar에 사용자 정보 저장
+        dispatch(setUserId("logined@ssafy.com"));
+        dispatch(setUserNickname("로그인 됨"));
 
         // 로그인 성공 후 Main으로 복귀
         navigate("/");

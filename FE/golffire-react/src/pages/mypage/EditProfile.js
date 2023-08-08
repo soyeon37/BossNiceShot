@@ -44,18 +44,18 @@ function EditProfile() {
     // 사용자 정보 수정 테스트용 코드 - 함소연
     const testPut = () => {
         const data = {
-            nickname: "햄햄햄",
+            nickname: "햄햄",
             teeBox: "RED",
             topScore: 80,
             averageScore: 90,
             level: "더블 플레이어",
             image: "banana.jpg",
-            introduction: "하이욤"
+            introduction: "만료테스트"
 
         }
 
         const apiUrl = 'http://localhost:8080/members/update';
-        console.log(cookies.access_token);
+        
         axios.put(apiUrl, data)
             .then((response) => {
                 console.log(response.data); // 서버에서 반환된 데이터
@@ -84,7 +84,6 @@ function EditProfile() {
 
     const callReissueToken = () => {
         console.log("EditProfile에서의 토큰 값: ", cookies.refreshToken);
-
         let isSuccess = reissueToken({
             refreshToken: cookies.refreshToken,
             setCookie,

@@ -8,6 +8,7 @@ export function reissueToken({ refreshToken, setCookie, removeCookie, navigate }
     "Content-Type": `application/json`,
     refreshToken: refreshToken,
   };
+
   axios
     .get(apiUrl, {
       headers: headers,
@@ -16,9 +17,10 @@ export function reissueToken({ refreshToken, setCookie, removeCookie, navigate }
       const message = response.data.data.message;
       if (message === "SUCCESS") {
         const newAccessToken = response.data.data.accessToken;
-        // console.log(newAccessToken);
+        console.log("새 access 토큰: ", newAccessToken);
+        
+        axios.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
         removeCookie("access_token");
-        setCookie("access_token", newAccessToken, { path: "/" });
         console.log("엑세스 토큰 연장 성공");
         return true;
       } else {
