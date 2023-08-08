@@ -11,6 +11,10 @@ import AlertPage from "./alert/AlertPage";
 import { IoMdContact } from 'react-icons/io'
 import { Avatar, AvatarBadge, AvatarGroup, Hide } from '@chakra-ui/react'
 
+// Redux
+import { useDispatch } from "react-redux";
+import { setUserId, setUserNickname } from "../../features/userInfoSlice";
+
 import "./styles.css"
 import {
     Menu,
@@ -27,6 +31,9 @@ import {
 } from '@chakra-ui/react'
 
 function Navbar() {
+    // Redux
+    const dispatch = useDispatch();
+
     const [isActive, setIsActive] = useState(false);
 
     // Redux
@@ -52,6 +59,9 @@ function Navbar() {
                 console.log(response);
                 if (response.data.data === "SUCCESS") {
                     setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
+                    console.log("로그아웃하여 redux 정보 삭제");
+                    dispatch(setUserId());
+                    dispatch(setUserNickname());
                     navigate('/');
                 } else {
                     alert('Error')
@@ -189,7 +199,7 @@ function Navbar() {
                                         </NavLink>
                                     </MenuItem>
                                     <MenuDivider />
-                                    <MenuItem style={{ color: "gray" }}>로그아웃</MenuItem>
+                                    <MenuItem style={{ color: "gray" }} onClick={handleLogout}>로그아웃</MenuItem>
                                 </MenuGroup>
                             ) : (<MenuGroup title=''>
                                 <MenuItem>
