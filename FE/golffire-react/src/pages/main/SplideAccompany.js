@@ -1,13 +1,21 @@
-import React from "react";
-import PartAccompany from "./slide-part/PartAccompany";
+import React, { useEffectF } from "react";
+import { NavLink } from "react-router-dom";
 
+import file from "../../assets/golffield.json";
+import PartAccompany from "./slide-part/PartAccompany";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import "@splidejs/react-splide/css";
 
-import { NavLink } from "react-router-dom";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-
 function SplideAccompany({ props }) {
+  const dataArray = file;
+  const dataGolffield = dataArray.map(item => ({
+    번호: item["번호"],
+    사업장명: item["사업장명"]
+  }));
+
+  // 서버로부터 받은 동행 모집 관련 정보
   const AccInfos = [
     {
       id: 1,
@@ -41,6 +49,15 @@ function SplideAccompany({ props }) {
     },
   ];
 
+  const parseGolffield = (golfId) => {
+    for(const item of dataGolffield) {
+      if(item.번호 === golfId) {
+        console.log(golfId, "에 맞는 골프장? ", item.사업장명)
+        return item.사업자명
+      }
+    }
+  }
+
   return (
     <div id="splide-accompany">
       <Splide
@@ -61,7 +78,7 @@ function SplideAccompany({ props }) {
           <SplideSlide key={info.id}>
             <PartAccompany
               title={info.title}
-              golf_num={info.golf_num}
+              golf_place={parseGolffield(info.golf_num)}
               date={info.date}
             />
           </SplideSlide>
