@@ -160,7 +160,7 @@ function Navbar() {
                         <MenuList>
 
                             {/* test code - will delete */}
-                            <MenuGroup title=''>
+                            {/* <MenuGroup title=''>
                                 <MenuItem>
                                     <NavLink to="/mypage/" style={({ isActive, isPending }) => {
                                         return {
@@ -174,7 +174,7 @@ function Navbar() {
                                     로그아웃
                                 </MenuItem>
                             </MenuGroup>
-                            <MenuDivider />
+                            <MenuDivider /> */}
                             {/* test code end */}
 
                             {userId ? (
