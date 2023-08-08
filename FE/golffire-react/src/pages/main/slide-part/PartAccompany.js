@@ -1,12 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
+import parseGolfId from "../../golffield/ParseGolfId";
 
-function PartAccompany({ title, golf_place, date }) {
-  console.log("내가 받은 정보? ", title, golf_place, date);
-  
+function PartAccompany({ title, golf, date }) {
   return (
     <div className="acc-info">
       <div className="acc-title">{title}</div>
-      <div className="acc-place">{golf_place}</div>
+      <div className="acc-place">{parseGolfId(golf)}</div>
       <div className="acc-date">{date}</div>
     </div>
   );
