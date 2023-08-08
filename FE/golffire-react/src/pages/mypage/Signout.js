@@ -1,13 +1,21 @@
 import React from "react";
 import MyPageNavbar from "./MyPageNavbar";
 
-import "./MyPage.css";
-import CryImg from "../../assets/source/mascot/mascot-cry-2.png";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from "react-cookie";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { setUserId, setUserNickname } from "../../features/userInfoSlice";
+
+import CryImg from "../../assets/source/mascot/mascot-cry-2.png";
+import "./MyPage.css";
+
 function Signout() {
+    // Redux
+    const dispatch = useDispatch();
+    
     const navigate = useNavigate();
     const [cookies, setCookie] = useCookies(['refreshToken']);
     const handleLogout = () => {
@@ -34,6 +42,8 @@ function Signout() {
         axios.delete(apiUrl)
             .then((response) => {
                 console.log(response);
+                dispatch(setUserId());
+                dispatch(setUserNickname());
                 navigate('/');
             })
             .catch((error) => {
