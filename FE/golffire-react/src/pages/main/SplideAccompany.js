@@ -11,43 +11,33 @@ function SplideAccompany({ props }) {
   const AccInfos = [
     {
       id: 1,
-      user_name: "김싸피",
       title: "같이 골프 칠 분 구합니다!",
-      address: "서울특별시 동작구",
-      member_num: "1/6",
-      deadline: "2023.08.31",
+      golf_num: 1,
+      date: "2023.08.31",
     },
     {
       id: 2,
-      user_name: "이싸피",
       title: "같이 골프 칠 분?",
-      address: "서울특별시 강남구",
-      member_num: "2/7",
-      deadline: "2023.08.31",
+      golf_num: 2,
+      date: "2023.08.31",
     },
     {
       id: 3,
-      user_name: "이싸피2",
-      title: "같이 골프 칠 분?",
-      address: "서울특별시 강남구",
-      member_num: "2/7",
-      deadline: "2023.08.31",
+      title: "골프짱 3인방",
+      golf_num: 3,
+      date: "2023.08.31",
     },
     {
       id: 4,
-      user_name: "이싸피3",
-      title: "같이 골프 칠 분?",
-      address: "서울특별시 강남구",
-      member_num: "2/7",
-      deadline: "2023.08.31",
+      title: "레드 고? 4명 찾음",
+      golf_num: 4,
+      date: "2023.08.31",
     },
     {
       id: 5,
-      user_name: "이싸피4",
-      title: "같이 골프 칠 분?",
-      address: "서울특별시 강남구",
-      member_num: "2/7",
-      deadline: "2023.08.31",
+      title: "딱 5번만 해볼라구요",
+      golf_num: 5,
+      date: "2023.08.31",
     },
   ];
 
@@ -64,16 +54,15 @@ function SplideAccompany({ props }) {
           type: "loop",
           perPage: 3.5,
           focus: "center",
+          pagination: false,
         }}
       >
         {AccInfos.map((info) => (
           <SplideSlide key={info.id}>
             <PartAccompany
-              user_name={info.user_name}
               title={info.title}
-              address={info.address}
-              member_num={info.member_num}
-              deadline={info.deadline}
+              golf_num={info.golf_num}
+              date={info.date}
             />
           </SplideSlide>
         ))}
