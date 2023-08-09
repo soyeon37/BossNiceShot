@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 @Tag(name = "Companion API")
 @RestController
-@RequestMapping("/companion")
+@RequestMapping("/api/companion")
 @RequiredArgsConstructor
 public class CompanionController {
 	private final CompanionService companionService;
