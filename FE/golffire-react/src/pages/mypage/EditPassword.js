@@ -30,7 +30,7 @@ function EditPassword() {
         console.log("passOrigin: ", passOrigin);
         console.log("passNew: ", passNew);
         console.log("passCheck: ", passCheck);
-        const apiUrl = 'http://localhost:8080/members/updatePassword'
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/updatePassword'
         const data = {
             passOrigin: passOrigin,
             passNew: passNew

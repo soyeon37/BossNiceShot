@@ -24,7 +24,7 @@ const SignupEmail1 = () => {
     const data = {
       id: email,
     };
-    const apiUrl = "http://localhost:8080/members/checkEmail";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/checkEmail";
 
     axios
       .post(apiUrl, data)
@@ -47,7 +47,7 @@ const SignupEmail1 = () => {
     const data = {
       id: email,
     };
-    const apiUrl = "http://localhost:8080/members/sendEmailVerification";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/sendEmailVerification";
 
     axios
       .post(apiUrl, data)

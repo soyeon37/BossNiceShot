@@ -1,6 +1,6 @@
 package com.ssafy.domain.follow.service;
 
-import com.ssafy.domain.Member.service.MemberService;
+import com.ssafy.domain.member.service.MemberService;
 import com.ssafy.domain.follow.dto.request.FollowRequest;
 import com.ssafy.domain.follow.entity.Follow;
 import com.ssafy.domain.follow.repository.FollowRepository;
