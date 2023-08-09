@@ -3,10 +3,15 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
+import { InfoOutlineIcon } from '@chakra-ui/icons'
 import { reissueToken } from "../../setup/user-auth/UserAuth";
 import MyPageNavbar from "./MyPageNavbar";
 import "./MyPage.css";
 
+import RedTeeImg from "../../assets/source/icons/flag-red.png";
+import WhiteTeeImg from "../../assets/source/icons/flag-white.png";
+import BlackTeeImg from "../../assets/source/icons/flag-black.png";
+import AllTeeImg from "../../assets/source/icons/flag-all.png";
 import {
     Button,
 } from "@chakra-ui/react";
@@ -109,57 +114,109 @@ function EditProfile() {
                         <div id="pic-circle">
                             큰 사진 들어가는 곳
                         </div>
-                        <div id="pic-button">
-                            <button id="pic-button-edit">사진 변경</button>
+                        <div id="pic-button-dic">
+                            <button id="pic-button">사진 변경</button>
                         </div>
                     </div>
                     <div id="edit-info">
                         <div id="edit-title">
                             정보 수정
                         </div>
-                        <div id="edit-header">
-                            이메일
-                        </div>
-                        <div id="edit-email">
-                            이메일은 수정 불가
-                            {/* <label htmlFor="userEmail">이메일</label>
+                        <div id="edit-info-text">
+
+
+                            <div id="edit-header-start">
+                                이메일
+                            </div>
+                            <div id="edit-email">
+                                이메일은 수정 불가
+                                {/* <label htmlFor="userEmail">이메일</label>
                             <input
                                 id="userEmail"
                                 defaultValue={userEmail}
                                 onChange={handleUserEmail}
                                 placeholder="이메일"
                             /> */}
-                        </div>
-                        <div id="edit-nickname">
-                            닉네임, 검사 필요
-                            <Button
-                                onClick={handleCheckNickname}
-                                style={{
-                                    height: "2.5rem",
-                                    width: "100%",
+                            </div>
+                            <div id="edit-header">닉네임<span id="edit-header-importance"> *</span></div>
+                            <div id="edit-nickname-div">
+                                <input id="edit-nickname" placeholder="닉네임">
+                                </input>
+                                <div id="edit-check">
+                                    <button id="edit-check-button" onClick={handleCheckNickname}>검사</button>
+                                </div>
+                            </div>
+                            <div id="edit-intro">
 
-                                    color: "black",
-                                    borderRadius: "30px",
-                                    background: "#B8F500",
-                                }}
-                                maxW={"sm"}
-                                marginBottom={"2.5rem"}
-                            >
-                                검사
-                            </Button>
-                        </div>
-                        <div id="edit-introduction">
-                            자기소개 수정 가능
-                        </div>
-                        <div id="edit-golf-info1">
-                            <div id="edit-golf-info1-1">최고타수</div>
-                            <div id="edit-golf-info1-2">평균타수</div>
-                        </div>
-                        <div id="edit-golf-info2">
-                            선호 티박스 수정
-                        </div>
-                        <div id="edit-button" onClick={testPut}>
-                            <button>저장하기</button>
+                                <div id="edit-header">자기소개</div>
+                                <input id="edit-introduction" placeholder="자기소개"></input>
+                            </div>
+                            <div id="edit-golf-info1-div">
+                                <div id="edit-golf-info1-1-div">
+                                    <div id="edit-golf-info1-header">
+                                        최고 타수
+                                    </div>
+                                    <input id="edit-golf-info1-1" type="number" placeholder="72"></input>
+                                </div>
+                                <div id="edit-golf-info1-2-div">
+                                    <div id="edit-golf-info1-header">
+                                        평균 타수
+                                    </div>
+                                    <input id="edit-golf-info1-2" type="number" placeholder="72"></input>
+                                </div>
+                            </div>
+                            <div id="edit-golf-info2-div">
+                                <div id="edit-header">
+                                    선호 티박스
+                                    <button id="edit-teebox-icon"><InfoOutlineIcon/></button>
+                                </div>
+                                <div id="edit-golf-info2">
+                                    <label id="teebox">
+                                        <input
+                                            id="RED"
+                                            value="RED"
+                                            name="teebox"
+                                            type="radio"
+                                        />
+                                        레드티
+                                        <img id="teebox-img" src={RedTeeImg}></img>
+                                    </label>
+                                    <label id="teebox">
+                                        <input
+                                            id="WHITE"
+                                            value="WHITE"
+                                            name="teebox"
+                                            type="radio"
+                                        />
+                                        화이트티
+                                        <img id="teebox-img" src={WhiteTeeImg}></img>
+                                    </label>
+                                    <label id="teebox">
+                                        <input
+                                            id="BLACK"
+                                            value="BLACK"
+                                            name="teebox"
+                                            type="radio"
+                                        />
+                                        블랙티
+                                        <img id="teebox-img" src={BlackTeeImg}></img>
+                                    </label>
+                                    <label id="teebox">
+                                        <input
+                                            id="NONE"
+                                            value="NONE"
+                                            name="teebox"
+                                            type="radio"
+                                        />
+                                        상관없음
+                                        <img id="teebox-img" src={AllTeeImg}></img>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="edit-button-div">
+                                <button id="edit-button" onClick={testPut}>
+                                    저장하기</button>
+                            </div>
                         </div>
                     </div>
                 </div>
