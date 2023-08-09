@@ -14,7 +14,7 @@ import java.security.Principal;
 @Slf4j
 @Tag(name = "Notification API")
 @RestController
-@RequestMapping("/notification")
+@RequestMapping("/api/notification")
 @RequiredArgsConstructor
 public class NotificationController {
     private final NotificationService notificationService;

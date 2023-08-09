@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @Tag(name = "CompanionUser API")
 @RestController
-@RequestMapping("/companion/user")
+@RequestMapping("/api/companion/user")
 @RequiredArgsConstructor
 public class CompanionUserController {
 	private final CompanionUserService companionUserService;

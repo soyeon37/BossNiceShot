@@ -3,8 +3,6 @@ k
 ;src/main/java/com/ssafy/domain/studyChat/dto/StudyChat.java,e\9\e935abd08da693227a86b6b97ba80b6a2367c12b
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
-v
-Fsrc/main/java/com/ssafy/domain/follow/controller/FollowController.java,0\f\0fbc6a8130677f75c885727ac403282f298b7e90
 m
 =src/main/java/com/ssafy/config/security/jwt/RefreshToken.java,6\6\6620627bc3cee1cbbc4c896bb42768e6a6296895
 h
@@ -59,8 +57,6 @@ Dsrc/main/java/com/ssafy/domain/study/dto/response/StudyResponse.java,0\8\08827
 Rsrc/main/java/com/ssafy/domain/Companion/dto/response/SimpleCompanionResponse.java,d\d\dd44261228d68474006fd9d560a1e582a8bc0442
 t
 Dsrc/main/java/com/ssafy/domain/study/repository/StudyRepository.java,f\f\ffd5eda7da47f8bc509eb39628834960fc6fb0dc
-t
-Dsrc/main/java/com/ssafy/domain/study/controller/StudyController.java,8\f\8fd6ec9e322e5c05d3c3abf11e8d26dc5ca89fc9
 k
 ;src/main/java/com/ssafy/config/Querydsl/QuerydslConfig.java,e\d\ed75ef8c0df33a5b8337b2b3dfafa09792f41fec
 :
@@ -92,8 +88,6 @@ Jsrc/main/java/com/ssafy/domain/companion/service/CompanionChatService.java,d\0
 Psrc/main/java/com/ssafy/domain/companion/repository/CompanionChatRepository.java,7\4\7446feb614b01190cc512270b743b6ac591a71a9
 7
 gradlew,5\b\5bbfa66edb4db3c7c33c5181f43510990d3307f9
-€
-Psrc/main/java/com/ssafy/domain/companion/controller/CompanionChatController.java,7\2\728557dc8d4cf7018b279700e1c592a7b80c80dd
 a
 1src/main/java/com/ssafy/config/jpa/JpaConfig.java,e\d\ed70528acd1453b2327cb0d304d01bf659bc2857
 v
