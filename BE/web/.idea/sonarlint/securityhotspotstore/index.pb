@@ -29,10 +29,6 @@ Msrc/main/java/com/ssafy/domain/Member/dto/response/CheckNicknameResponse.java,
 +src/main/java/com/ssafy/WebApplication.java,0\f\0f9bbfd495ae9c564561852817173cc458a0e7ef
 m
 =src/main/java/com/ssafy/config/websocket/WebSocketConfig.java,7\8\78a33feca7eadf6a9fa333715dd9158c15562dd3
-k
-;src/main/java/com/ssafy/config/security/SecurityConfig.java,0\f\0fb2165841132340adfa5dd54986ce849ed01895
-x
-Hsrc/main/java/com/ssafy/config/security/jwt/JwtAuthenticationFilter.java,d\e\deafe3d09d1e9f1781ea0ea32e0fbe74ff66e7c3
 v
 Fsrc/main/java/com/ssafy/domain/Member/controller/MemberController.java,5\6\564f42bfa4474922fd95073418e143c11cff706c
 v
@@ -48,11 +44,7 @@ f
 x
 Hsrc/main/java/com/ssafy/domain/study/dto/request/StudySearchRequest.java,3\a\3a6908bb5209d625095638d3f991ceb5d2397418
 x
-Hsrc/main/java/com/ssafy/domain/study/dto/request/StudyCreateRequest.java,d\e\de9f8f0a247e04f97807249c44844252ef488561
-x
 Hsrc/main/java/com/ssafy/domain/study/dto/request/StudyUpdateRequest.java,7\7\77dd5f57b476a8cc852940a7c8c8ce420b208836
-t
-Dsrc/main/java/com/ssafy/domain/study/dto/response/StudyResponse.java,0\8\088276d242ad1e1839000db53c756426dfab6e96
 t
 Dsrc/main/java/com/ssafy/domain/study/repository/StudyRepository.java,f\f\ffd5eda7da47f8bc509eb39628834960fc6fb0dc
 ‚
