@@ -40,6 +40,7 @@ export default function HalfSwing(
   let initialKneeDist = 1;
   let a2 = 1;
   let b2 = 1;
+  let ellipseFactorHistory = [];
 
   useEffect(() => {
     let count_time = null;
@@ -317,7 +318,8 @@ export default function HalfSwing(
     recordedVideo.preload = "auto";
     recordedVideo.width = 640;
     recordedVideo.height = 480;
-    recordedVideo.playbackRate = 0.1; // Play at half speed
+    // recordedVideo.pause(); // Explicitly pause the video
+
     let totalEllipseCnt = 1;
     let onEllipseCnt = 1;
     let totalHipCnt = 1;
@@ -340,65 +342,254 @@ export default function HalfSwing(
     const analysisMediaRecorder = new MediaRecorder(analysisStream);
     const analysisChunks = [];
 
+    let hasStartedAnalysis = false;
+
     analysisMediaRecorder.ondataavailable = e => {
-      if (e.data.size > 0) {
-        analysisChunks.push(e.data);
-      }
+        if (e.data.size > 0) {
+            analysisChunks.push(e.data);
+        }
     };
 
     analysisMediaRecorder.onstop = () => {
-      const analysisBlob = new Blob(analysisChunks, {
-        type: "video/webm; codecs=vp9"
-      });
-      const analysisVideoURL = URL.createObjectURL(analysisBlob);
-      setAnalysisVideoURL(analysisVideoURL);
-      console.log(analysisVideoURL);
+        const analysisBlob = new Blob(analysisChunks, { type: "video/webm; codecs=vp9" });
+        const analysisVideoURL = URL.createObjectURL(analysisBlob);
+        setAnalysisVideoURL(analysisVideoURL);
     };
 
-    recordedVideo.addEventListener("canplaythrough", () => {
-      window.posenet.load().then(model => {
-        analysisMediaRecorder.start(); // Start recording the analysis canvas
-        recordedVideo.play(); // Start playing the videos
-        recordedVideo.addEventListener("timeupdate", () => {
-          if (recordedVideo.paused || recordedVideo.ended) return; // Ignore if paused or ended
-          model.estimateSinglePose(recordedVideo).then(pose => {
-            totalEllipseCnt++;
-            const resultArray = analyzePose(pose);
-            analysisResults.push(resultArray);
-            coordinateDatas.push(pose.keypoints);
-            onEllipseCnt += resultArray[0];
-            onHipCnt += resultArray[1];
-            onHeadCnt += resultArray[2];
-            onShoulderCnt += resultArray[3];
-            onKneeCnt += resultArray[4];
-            // Draw keypoints and skeleton on the analysis canvas
-            drawKeypoints(pose.keypoints, 0.1, analysisContext);
-            drawSkeleton(pose.keypoints, 0.1, analysisContext);
-          });
+    recordedVideo.addEventListener("loadedmetadata", () => {
+        window.posenet.load().then(model => {
+            if (!hasStartedAnalysis && analysisMediaRecorder.state !== 'recording') {
+              hasStartedAnalysis = true; // Set the flag to true
+              analysisMediaRecorder.start();
+              analyzeFrame(model);
+            }
         });
-        recordedVideo.addEventListener("ended", () => {
-          analysisMediaRecorder.stop(); // Stop recording the analysis canvas
-
-          const myEllipseScore = Math.round((onEllipseCnt / totalEllipseCnt) * 100);
-          const myHipScore = Math.round((onHipCnt / totalEllipseCnt) * 100);
-          const myHeadScore = Math.round((onHeadCnt / totalEllipseCnt) * 100);
-          const myShoulderScore = Math.round((onShoulderCnt / totalEllipseCnt) * 100);
-          const myKneeScore = Math.round((onKneeCnt / totalEllipseCnt) * 100);
-          // console.log(myEllipseScore, myHipScore, myHeadScore, myShoulderScore, myKneeScore);
-          setEllipseScore(myEllipseScore);
-          setHipScore(myHipScore);
-          setHeadScore(myHeadScore);
-          setShoulderScore(myShoulderScore);
-          setKneeScore(myKneeScore);
-          setIsAnalyzing(false);
-          setAnalysisData(analysisResults);
-          setCoordinateData(coordinateDatas);
-          setEquationData([a2, b2, centerX, centerY]);
-          isAnalyzing = false;
-        });
-      });
     });
+
+    recordedVideo.addEventListener("timeupdate", () => {
+        window.posenet.load().then(model => {
+            analyzeFrame(model);
+        });
+    });
+
+    function analyzeFrame(model) {
+        if (recordedVideo.currentTime >= recordedVideo.duration) {
+            analysisMediaRecorder.stop();
+            completeAnalysis();
+            return;
+        }
+
+        // Draw the current video frame on the canvas
+        analysisContext.drawImage(recordedVideo, 0, 0, 640, 480);
+
+        model.estimateSinglePose(analysisCanvas).then(pose => {
+            
+
+            // check if pose.keypoints' wrist points are noise data.
+            // let isNoiseData = checkNoiseData(pose.keypoints);
+            // if isNoiseData is true, do not count it to analysisResults. 
+            // do not count it in coordinateDatas.
+            // do not count it in Cnts.
+            // do draw this point and skeleton in Red color.
+            // check the ellipseFactor pattern of the last index data of coordinatesDatas 
+            // and check if current ellipseFactor differs from it much.
+            // if difference larger than the threshold, return isNoiseData = true.
+
+            // console.log(ellipseFactorHistory);
+            // console.log(!checkNoiseData(pose.keypoints[9].position, pose.keypoints[10].position));
+            if(!checkNoiseData(pose.keypoints[9].position, pose.keypoints[10].position)) {
+              totalEllipseCnt++;
+              const resultArray = analyzePose(pose);
+              analysisResults.push(resultArray);
+              coordinateDatas.push(pose.keypoints);
+              onEllipseCnt += resultArray[0];
+              onHipCnt += resultArray[1];
+              onHeadCnt += resultArray[2];
+              onShoulderCnt += resultArray[3];
+              onKneeCnt += resultArray[4];
+              drawKeypoints(pose.keypoints, 0.1, analysisContext);
+              drawSkeleton(pose.keypoints, 0.1, analysisContext);
+            }
+
+            // if(isNoiseData) draw Points and Skeleton in Red color.
+            else {
+              drawNoiseKeypoints(pose.keypoints, 0.1, analysisContext);
+              drawNoiseSkeleton(pose.keypoints, 0.1, analysisContext);
+            }
+
+            // Move to the next frame
+            recordedVideo.currentTime += 1/30;
+        });
+    }
+
+    function completeAnalysis() {
+        const myEllipseScore = Math.round((onEllipseCnt / totalEllipseCnt) * 100);
+        const myHipScore = Math.round((onHipCnt / totalEllipseCnt) * 100);
+        const myHeadScore = Math.round((onHeadCnt / totalEllipseCnt) * 100);
+        const myShoulderScore = Math.round((onShoulderCnt / totalEllipseCnt) * 100);
+        const myKneeScore = Math.round((onKneeCnt / totalEllipseCnt) * 100);
+
+        setEllipseScore(myEllipseScore);
+        setHipScore(myHipScore);
+        setHeadScore(myHeadScore);
+        setShoulderScore(myShoulderScore);
+        setKneeScore(myKneeScore);
+        setIsAnalyzing(false);
+        setAnalysisData(analysisResults);
+        setCoordinateData(coordinateDatas);
+        setEquationData([a2, b2, centerX, centerY]);
+        isAnalyzing = false;
+        ellipseFactorHistory = [];
+    }
   }
+
+
+  // function loadRecordedVideoForAnalysis(videoURL) {
+  //   const recordedVideo = document.createElement("video");
+  //   recordedVideo.src = videoURL;
+  //   recordedVideo.preload = "auto";
+  //   recordedVideo.width = 640;
+  //   recordedVideo.height = 480;
+  //   recordedVideo.playbackRate = 0.1; // Play at half speed
+  //   let totalEllipseCnt = 1;
+  //   let onEllipseCnt = 1;
+  //   let totalHipCnt = 1;
+  //   let onHipCnt = 1;
+  //   let totalHeadCnt = 1;
+  //   let onHeadCnt = 1;
+  //   let totalShoulderCnt = 1;
+  //   let onShoulderCnt = 1;
+  //   let totalKneeCnt = 1;
+  //   let onKneeCnt = 1;
+  //   let analysisResults = [];
+  //   let coordinateDatas = [];
+
+  //   const analysisCanvas = document.createElement("canvas");
+  //   analysisCanvas.width = 640;
+  //   analysisCanvas.height = 480;
+  //   const analysisContext = analysisCanvas.getContext("2d");
+
+  //   const analysisStream = analysisCanvas.captureStream();
+  //   const analysisMediaRecorder = new MediaRecorder(analysisStream);
+  //   const analysisChunks = [];
+
+  //   analysisMediaRecorder.ondataavailable = e => {
+  //     if (e.data.size > 0) {
+  //       analysisChunks.push(e.data);
+  //     }
+  //   };
+
+  //   analysisMediaRecorder.onstop = () => {
+  //     const analysisBlob = new Blob(analysisChunks, { type: "video/webm; codecs=vp9" });
+  //     const analysisVideoURL = URL.createObjectURL(analysisBlob);
+  //     setAnalysisVideoURL(analysisVideoURL);
+  //   };
+
+  //   recordedVideo.addEventListener("canplaythrough", () => {
+  //     window.posenet.load().then(model => {
+  //       if (analysisMediaRecorder.state !== 'recording') {
+  //         analysisMediaRecorder.start();
+  //         recordedVideo.play();
+  //         analyzeNextFrame(model);
+  //       }
+  //     });
+  //   });
+
+  //   function analyzeNextFrame(model) {
+  //     if (recordedVideo.ended) {
+  //         analysisMediaRecorder.stop();
+  //         completeAnalysis();
+  //         return;
+  //     }
+
+  //     model.estimateSinglePose(recordedVideo).then(pose => {
+  //         totalEllipseCnt++;
+  //         const resultArray = analyzePose(pose);
+  //         analysisResults.push(resultArray);
+  //         coordinateDatas.push(pose.keypoints);
+  //         onEllipseCnt += resultArray[0];
+  //         onHipCnt += resultArray[1];
+  //         onHeadCnt += resultArray[2];
+  //         onShoulderCnt += resultArray[3];
+  //         onKneeCnt += resultArray[4];
+
+  //         drawKeypoints(pose.keypoints, 0.1, analysisContext);
+  //         drawSkeleton(pose.keypoints, 0.1, analysisContext);
+
+  //         recordedVideo.currentTime += 1 / recordedVideo.playbackRate; // Advance to next frame
+  //         recordedVideo.play();
+
+  //         // Play just enough to progress one frame, then pause and analyze
+  //         setTimeout(() => {
+  //             recordedVideo.pause();
+  //             requestAnimationFrame(() => analyzeNextFrame(model));
+  //         }, (1 / recordedVideo.playbackRate) * 1000);
+  //     });
+  //   }
+
+  //   function completeAnalysis() {
+  //       const myEllipseScore = Math.round((onEllipseCnt / totalEllipseCnt) * 100);
+  //       const myHipScore = Math.round((onHipCnt / totalEllipseCnt) * 100);
+  //       const myHeadScore = Math.round((onHeadCnt / totalEllipseCnt) * 100);
+  //       const myShoulderScore = Math.round((onShoulderCnt / totalEllipseCnt) * 100);
+  //       const myKneeScore = Math.round((onKneeCnt / totalEllipseCnt) * 100);
+
+  //       setEllipseScore(myEllipseScore);
+  //       setHipScore(myHipScore);
+  //       setHeadScore(myHeadScore);
+  //       setShoulderScore(myShoulderScore);
+  //       setKneeScore(myKneeScore);
+  //       setIsAnalyzing(false);
+  //       setAnalysisData(analysisResults);
+  //       setCoordinateData(coordinateDatas);
+  //       setEquationData([a2, b2, centerX, centerY]);
+  //       isAnalyzing = false;
+  //   }
+
+  //   // recordedVideo.addEventListener("canplaythrough", () => {
+  //   //   window.posenet.load().then(model => {
+  //   //     analysisMediaRecorder.start(); // Start recording the analysis canvas
+  //   //     recordedVideo.play(); // Start playing the videos
+  //   //     recordedVideo.addEventListener("timeupdate", () => {
+  //   //       if (recordedVideo.paused || recordedVideo.ended) return; // Ignore if paused or ended
+  //   //       model.estimateSinglePose(recordedVideo).then(pose => {
+  //   //         totalEllipseCnt++;
+  //   //         const resultArray = analyzePose(pose);
+  //   //         analysisResults.push(resultArray);
+  //   //         coordinateDatas.push(pose.keypoints);
+  //   //         onEllipseCnt += resultArray[0];
+  //   //         onHipCnt += resultArray[1];
+  //   //         onHeadCnt += resultArray[2];
+  //   //         onShoulderCnt += resultArray[3];
+  //   //         onKneeCnt += resultArray[4];
+  //   //         // Draw keypoints and skeleton on the analysis canvas
+  //   //         drawKeypoints(pose.keypoints, 0.1, analysisContext);
+  //   //         drawSkeleton(pose.keypoints, 0.1, analysisContext);
+  //   //       });
+  //   //     });
+  //   //     recordedVideo.addEventListener("ended", () => {
+  //   //       analysisMediaRecorder.stop(); // Stop recording the analysis canvas
+
+  //   //       const myEllipseScore = Math.round((onEllipseCnt / totalEllipseCnt) * 100);
+  //   //       const myHipScore = Math.round((onHipCnt / totalEllipseCnt) * 100);
+  //   //       const myHeadScore = Math.round((onHeadCnt / totalEllipseCnt) * 100);
+  //   //       const myShoulderScore = Math.round((onShoulderCnt / totalEllipseCnt) * 100);
+  //   //       const myKneeScore = Math.round((onKneeCnt / totalEllipseCnt) * 100);
+  //   //       // console.log(myEllipseScore, myHipScore, myHeadScore, myShoulderScore, myKneeScore);
+  //   //       setEllipseScore(myEllipseScore);
+  //   //       setHipScore(myHipScore);
+  //   //       setHeadScore(myHeadScore);
+  //   //       setShoulderScore(myShoulderScore);
+  //   //       setKneeScore(myKneeScore);
+  //   //       setIsAnalyzing(false);
+  //   //       setAnalysisData(analysisResults);
+  //   //       setCoordinateData(coordinateDatas);
+  //   //       setEquationData([a2, b2, centerX, centerY]);
+  //   //       isAnalyzing = false;
+  //   //     });
+  //   //   });
+  //   // });
+  // }
 
   // New function to analyze the pose
   function analyzePose(recordedPose) {
@@ -418,7 +609,7 @@ export default function HalfSwing(
     const ShoulderY = (leftShoulder.y + rightShoulder.y) / 2;
     
     return [
-      checkPointOnEllipse(rightWrist.x, rightWrist.y, centerX, centerY, a2, b2),
+      checkPointOnEllipse((rightWrist.x + leftWrist.x) / 2, (rightWrist.y + leftWrist.y) / 2, centerX, centerY, a2, b2),
       checkHip(HipX, HipY),
       checkHead(HeadX, HeadY),
       checkShoulder(ShoulderX, ShoulderY),
@@ -429,6 +620,9 @@ export default function HalfSwing(
   // New function to check if a point is on the ellipse line
   function checkPointOnEllipse(x, y, h, k, a2, b2) {
     const ellipseFactor = (x - h) ** 2 / a2 ** 2 + (y - k) ** 2 / b2 ** 2;
+    if(!checkNoiseData(x, y)) {
+      ellipseFactorHistory.push(ellipseFactor);
+    }
     if (0.8 <= ellipseFactor && ellipseFactor <= 1.2) return 1;
     return 0;
   }
@@ -452,6 +646,21 @@ export default function HalfSwing(
     const dist = Math.sqrt((rightKneeX - initialLeftKneeX)**2 + (rightKneeY - initialLeftKneeY)**2);
     if (Math.abs(initialKneeDist - dist) <= 20) return 1;
     return 0;
+  }
+  function checkNoiseData(wristX, wristY) {
+    const ellipseFactor = (wristX - centerX) ** 2 / a2 ** 2 + (wristY - centerY) ** 2 / b2 ** 2;
+    
+    const n = ellipseFactorHistory.length;
+    if (n > 5) {
+      const sumOfLastNValues = ellipseFactorHistory.slice(-n).reduce((sum, value) => sum + value, 0);
+      const averageOfLastNValues = sumOfLastNValues / n;
+      const threshold = 0.01; // Adjust this value based on your requirements
+      console.log(ellipseFactor, averageOfLastNValues);
+      if (Math.abs(ellipseFactor - averageOfLastNValues) > threshold) return true;
+      else return false;
+    }
+
+    return false;
   }
 
 
@@ -516,5 +725,32 @@ export default function HalfSwing(
     );
     ctx.strokeStyle = boundingBoxColor;
     ctx.stroke();
+  }
+
+  function drawNoiseSkeleton(keypoints, minConfidence, ctx, scale = 1) {
+    const adjacentKeyPoints = window.posenet.getAdjacentKeyPoints(
+      keypoints,
+      minConfidence
+    );
+    adjacentKeyPoints.forEach(keypoints => {
+      drawSegment(
+        toTuple(keypoints[0].position),
+        toTuple(keypoints[1].position),
+        "red",
+        scale,
+        ctx
+      );
+    });
+  }
+
+  function drawNoiseKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+    for (let i = 0; i < keypoints.length; i++) {
+      const keypoint = keypoints[i];
+      if (keypoint.score < minConfidence) {
+        continue;
+      }
+      const { y, x } = keypoint.position;
+      drawPoint(ctx, y * scale, x * scale, 3, "red");
+    }
   }
 }

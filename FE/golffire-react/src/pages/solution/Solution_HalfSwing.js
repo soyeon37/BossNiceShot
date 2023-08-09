@@ -3,6 +3,7 @@ import HalfSwing from "./HalfSwing";
 import "./Solution.css";
 import loadingImage from "./swing_1.gif";
 import { color } from "framer-motion";
+import { width } from "@mui/system";
 
 function Solution_HalfSwing() {
   const videoRef = useRef(null);
@@ -26,11 +27,16 @@ function Solution_HalfSwing() {
   const canvasCoordinatesRef = useRef(null);
   const [equationData, setEquationData] = useState([]);
   const equationContainerRef = useRef(null);
+  const bodyparts = ['코','왼쪽 눈','오른쪽 눈','왼쪽 귀','오른쪽 귀','왼쪽 어깨','오른쪽 어깨',
+    '왼쪽 팔꿈치','오른쪽 팔꿈치','왼쪽 손목','오른쪽 손목','왼쪽 골반','오른쪽 골반',
+    '왼쪽 무릎','오른쪽 무릎','왼쪽 발목','오른쪽 발목'];
+  const [wristSpeeds, setWristSpeeds] = useState([]);
+
 
   // Function to change the current page
   const changePage = (direction) => {
     setCurrentPage((prevPage) => {
-      if (direction === "next" && prevPage < 5) return prevPage + 1;
+      if (direction === "next" && prevPage < 6) return prevPage + 1;
       if (direction === "prev" && prevPage > 0) return prevPage - 1;
       return prevPage;
     });
@@ -44,20 +50,18 @@ function Solution_HalfSwing() {
   }, [coordinateData, currentPage]);
 
   useEffect(() => {
-    if (currentPage === 5) {
-      // const ctx = document.getElementById('humanFigureCanvas').getContext('2d');
-      const bodyLengths = {
-        head: 60,
-        neck: 20,
-        torso: 120,
-        upperArm: 70,
-        lowerArm: 60,
-        upperLeg: 100,
-        lowerLeg: 90
-      };
-      drawHumanFigure(bodyLengths);
+    if (coordinateData.length > 0) {
+        const speeds = calculateWristSpeeds(coordinateData);
+        setWristSpeeds(speeds);
     }
-  }, [currentPage]);
+  }, [coordinateData]);
+
+  useEffect(() => {
+      if (currentPage === 4 && wristSpeeds.length > 0) {
+          drawSpeedGraph(wristSpeeds);
+      }
+  }, [currentPage, wristSpeeds]);
+
   
 
   const liveWrapperClass =
@@ -128,32 +132,40 @@ function Solution_HalfSwing() {
           {myEllipseScore !== null && isReady === false && isAnalyzing === false ? (
             <>
               {currentPage === 0 && (
-                <video
-                  src={videoURL}
-                  className="recorded-video"
-                  width="500"
-                  height="375"
-                  autoPlay
-                  muted
-                  playsInline
-                  controls
-                />
+                <>
+                  <div className="pageTitle">녹화 영상</div>
+                  <video
+                    src={videoURL}
+                    className="recorded-video"
+                    width="500"
+                    height="375"
+                    autoPlay
+                    muted
+                    playsInline
+                    controls
+                  />
+                </>                
               )}
               {currentPage === 1 && (
-                <video
-                  src={analysisVideoURL}
-                  className="recorded-video"
-                  width="500"
-                  height="375"
-                  autoPlay
-                  muted
-                  playsInline
-                  controls
-                />
+                <>
+                  <div className="pageTitle">인식된 관절의 타임랩스</div>
+                  <video
+                    src={analysisVideoURL}
+                    className="recorded-video"
+                    width="500"
+                    height="375"
+                    autoPlay
+                    muted
+                    playsInline
+                    controls
+                  />
+                </>
               )}
               {currentPage === 2 && (
                 <>
-                  <div className="evaluation" style={{fontSize:"20px", color:"#99a1a8", marginTop:"10px", marginBottom:"20px"}}>올바른 자세 및 경로에 있는 비율을 명시합니다</div>
+                  <div className="pageTitle">스윙 자세 평가</div>
+                  <div className="evaluation" style={{fontSize:"15px", color:"black", marginTop:"5px", marginBottom:"15px"}}>올바른 자세 및 경로에 있는 프레임은 푸른색으로 표시됩니다</div>
+                  
                   <div className="analysis-container">
                     <div className="analysis-row">
                       <label className="analysis-label">Swing</label>
@@ -201,69 +213,81 @@ function Solution_HalfSwing() {
                       ))}
                     </div>
                   </div>
-                  <div className="evaluation">SWING &nbsp;{myEllipseScore}%</div>
-                  <div className="evaluation">HEAD &nbsp;{myHeadScore}%</div>
-                  <div className="evaluation">SHOULDER &nbsp;{myShoulderScore}%</div>
-                  <div className="evaluation">HIP &nbsp;{myHipScore}%</div>
-                  <div className="evaluation">KNEE &nbsp;{myKneeScore}%</div>
-                  <div className="evaluationAvg">AVG &nbsp;{(myEllipseScore + myHeadScore + myShoulderScore + myHipScore + myKneeScore) / 5}%</div>
-                  
+                  <div className="evaluationWrapper">
+                    <div className="evaluation">Swing &nbsp;&nbsp;{myEllipseScore}%</div>
+                    <div className="evaluation">Head &nbsp;&nbsp;{myHeadScore}%</div>
+                    <div className="evaluation">Shoulder &nbsp;&nbsp;{myShoulderScore}%</div>
+                    <div className="evaluation">Hip &nbsp;&nbsp;{myHipScore}%</div>
+                    <div className="evaluation">Knee &nbsp;&nbsp;{myKneeScore}%</div>
+                    <div className="evaluationAvg">Avg &nbsp;&nbsp;{(myEllipseScore + myHeadScore + myShoulderScore + myHipScore + myKneeScore) / 5}%</div>
+                  </div>
                 </>
               )}
               {currentPage === 3 && (
                 <>
-                  <canvas className="coordinatesDiv" id="coordinatesCanvas" width="476" height="357"></canvas>
-                  <div ref={equationContainerRef}></div>
+                <div className="pageTitle">인식된 관절의 히트맵 및 타원방정식</div>
+                  <canvas className="coordinatesDiv" id="coordinatesCanvas" width="487" height="350"></canvas>
+                  <div className="equationDiv" ref={equationContainerRef}></div>
                 </>
               )}
               {currentPage === 4 && (
-                <div className="coordinatesRawDiv">
-                  <div className="coordinatesContainer">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Frame</th>
-                          <th>Point</th>
-                          <th>X</th>
-                          <th>Y</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {coordinateData.map((frame, frameIndex) =>
-                          frame.map((keypoint, pointIndex) => (
-                            <tr key={`${frameIndex}-${pointIndex}`}>
-                              <td>{frameIndex}</td>
-                              <td>{pointIndex}</td>
-                              <td>{keypoint.position.x}</td>
-                              <td>{keypoint.position.y}</td>
-                            </tr>
-                          ))
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+                <>
+                  <div className="pageTitle">스윙 속도 그래프</div>
+                  <canvas className="speedDiv" id="speedCanvas" width="487" height="350"></canvas>
+                  <div className="swingInfo">타구 지점에서 속도가 최대가 되는 그래프가 올바른 그래프입니다.</div>
+                </>
               )}
               {currentPage === 5 && (
                 <>
-                  <div className="humanFigureDiv">
-                    <canvas className="humanFigureDiv2" id="humanFigureCanvas" width="450" height="500"></canvas>
-                    <div className="Dcontent">체형정보</div>
+                  <div className="pageTitle">관절 좌표 데이터</div>
+                  <div className="coordinatesRawDiv">
+                    <div className="coordinatesContainer">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Frame</th>
+                            <th>Point</th>
+                            <th>X</th>
+                            <th>Y</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        {Array.from({ length: (coordinateData[0] || []).length }).map((_, pointIndex) => 
+                          coordinateData.map((frame, frameIndex) => {
+                            const keypoint = frame[pointIndex];
+                            return (
+                              <tr key={`${pointIndex}-${frameIndex}`}>
+                                <td>{frameIndex}</td>
+                                <td>{bodyparts[pointIndex]}</td>
+                                <td style={{width: "150px"}}>{Math.round(keypoint.position.x)}</td>
+                                <td style={{width: "150px"}}>{Math.round(keypoint.position.y)}</td>
+                              </tr>
+                            );
+                          })
+                        )}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
+                </>
+              )}
+              {currentPage === 6 && (
+                <>
+                  <div className="pageTitle">Personalized Recommendation</div>
                 </>
               )}
               <div className="pagination-buttons">
                 <button disabled={currentPage === 0} onClick={() => changePage("prev")}>
-                  PREV
+                ◀
                 </button>
-                <button disabled={currentPage === 5} onClick={() => changePage("next")}>
-                  NEXT
+                <button disabled={currentPage === 6} onClick={() => changePage("next")}>
+                ▶
                 </button>
               </div>
               
             </>
           ) : isAnalyzing === true ? (
-            <div className="analysis-loading-wrapper">
+            <div className="analysis-loading-wrapper">  
               <div className="recorded-video-placeholder-title">
                 분석중입니다.
                 <br />
@@ -341,7 +365,7 @@ function Solution_HalfSwing() {
         // Draw the point
         ctx.beginPath();
         ctx.arc(x, y, 10, 0, 2 * Math.PI);
-        ctx.fillStyle = 'rgba(52, 235, 58, 0.2)';
+        ctx.fillStyle = 'rgba(52, 235, 58, 0.4)';
         ctx.fill();
   
         // Draw a line to the next point if it's not the first frame and the point is a wrist
@@ -350,7 +374,7 @@ function Solution_HalfSwing() {
           ctx.beginPath();
           ctx.moveTo(prevPoint.x, prevPoint.y);
           ctx.lineTo(x, y);
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
           ctx.lineWidth = 5;
           ctx.stroke();
         }
@@ -365,7 +389,7 @@ function Solution_HalfSwing() {
 
     ctx.beginPath();
     ctx.ellipse(ellipseCenterX, ellipseCenterY, ellipseRadiusX, ellipseRadiusY, 0, 0, 2 * Math.PI);
-    ctx.strokeStyle = 'rgba(46, 126, 255, 0.4)';  // Color of the ellipse
+    ctx.strokeStyle = 'rgba(255, 241, 46, 0.25)';  // Color of the ellipse
     ctx.lineWidth = 40;  // Line width
     ctx.stroke();
 
@@ -373,7 +397,7 @@ function Solution_HalfSwing() {
     ctx.beginPath();
     ctx.moveTo(ellipseCenterX, 0 - (canvas.height * 0.3 / scaleY)); // Adjusted starting point
     ctx.lineTo(ellipseCenterX, (canvas.height / scaleY) + (canvas.height * 0.3 / scaleY)); // Adjusted ending point
-    ctx.strokeStyle = 'gold';  // Red color for the line
+    ctx.strokeStyle = 'white';  // Red color for the line
     ctx.lineWidth = 1;
     ctx.stroke();
 
@@ -381,12 +405,10 @@ function Solution_HalfSwing() {
     ctx.beginPath();
     ctx.moveTo(0 - (canvas.width * 0.3 / scaleX), ellipseCenterY); // Adjusted starting point
     ctx.lineTo((canvas.width / scaleX) + (canvas.width * 0.3 / scaleX), ellipseCenterY); // Adjusted ending point
-    ctx.strokeStyle = 'gold';  // Green color for the line
+    ctx.strokeStyle = 'white';  // Green color for the line
     ctx.lineWidth = 1;
     ctx.stroke();
 
-
-  
     // Reset the scaling after drawing
     ctx.setTransform(1, 0, 0, 1, 0, 0);
   }
@@ -400,14 +422,112 @@ function Solution_HalfSwing() {
     const a = Math.round(equationData[0]);
     const b = Math.round(equationData[1]);
     
-    const equation = `\\boldsymbol{\\displaystyle \\left(\\frac{x - ${centerX}}{${a}}\\right)^2 + \\left(\\frac{y - ${centerY}}{${b}}\\right)^2 = 1}`;
+
+    const equation = `f(x,y) : \\boldsymbol{\\displaystyle \\left(\\frac{x - ${centerX}}{${a}}\\right)^2 + \\left(\\frac{y - ${centerY}}{${b}}\\right)^2 = 1}`;
 
     if (window.katex && equationContainerRef.current) {
       equationContainerRef.current.style.fontWeight = "bolder";
-      equationContainerRef.current.style.fontSize = "24px";
+      equationContainerRef.current.style.fontSize = "15px";
+      equationContainerRef.current.style.color = "blue";
       window.katex.render(equation, equationContainerRef.current);
     }
   }
+
+  function calculateWristSpeeds(coordinateData) {
+    const speeds = [];
+    const timePerFrame = 1/30; // assuming 30fps, adjust if different
+    for (let i = 1; i < coordinateData.length; i++) {
+        const prevWrist = coordinateData[i - 1][10].position; // using left wrist as an example
+        const currentWrist = coordinateData[i][10].position;
+        const distance = Math.sqrt(
+            Math.pow(currentWrist.x - prevWrist.x, 2) +
+            Math.pow(currentWrist.y - prevWrist.y, 2)
+        );
+        const speed = distance / timePerFrame;
+        speeds.push(speed);
+    }
+    return speeds;
+  }
+
+  function drawSpeedGraph(wristSpeeds) {
+    const canvas = document.getElementById('speedCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Set background color to black
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Filter out 0 speed values
+    const filteredSpeeds = wristSpeeds.filter(speed => speed !== 0);
+
+    // Determine scaling factors
+    const xScale = canvas.width / filteredSpeeds.length;
+    const maxSpeed = Math.max(...filteredSpeeds);
+    const yScale = canvas.height / maxSpeed;
+
+    // Draw grid and axis
+    const gridSpacingX = canvas.width / 10;  // 10 vertical grid lines
+    const gridSpacingY = canvas.height / 10; // 10 horizontal grid lines
+
+    ctx.strokeStyle = 'white'; // White color for the grid
+    ctx.lineWidth = 0.5;
+
+    // Draw vertical grid lines
+    for (let i = 0; i <= canvas.width; i += gridSpacingX) {
+        ctx.beginPath();
+        ctx.moveTo(i, 0);
+        ctx.lineTo(i, canvas.height);
+        ctx.stroke();
+    }
+
+    // Draw horizontal grid lines
+    for (let i = 0; i <= canvas.height; i += gridSpacingY) {
+        ctx.beginPath();
+        ctx.moveTo(0, i);
+        ctx.lineTo(canvas.width, i);
+        ctx.stroke();
+    }
+
+    // Draw x and y axis
+    ctx.strokeStyle = 'white'; // White color for the axis
+    ctx.lineWidth = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height);
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.moveTo(0, canvas.height);
+    ctx.lineTo(0, 0);
+    ctx.stroke();
+
+    // Label the x and y axis
+    ctx.fillStyle = 'white'; // White color for the text
+    ctx.font = '12px Arial';
+
+    for (let i = 1; i < 10; i++) {
+        ctx.fillText((maxSpeed * (10 - i) / 10).toFixed(2), 5, i * gridSpacingY);
+    }
+
+    for (let i = 0; i < filteredSpeeds.length; i += Math.round(filteredSpeeds.length / 10)) {
+        ctx.fillText(i.toString(), i * xScale, canvas.height - 5);
+    }
+
+    // Plot the data
+    ctx.beginPath();
+    ctx.moveTo(0, canvas.height - filteredSpeeds[0] * yScale);
+
+    for (let i = 1; i < filteredSpeeds.length; i++) {
+        ctx.lineTo(i * xScale, canvas.height - filteredSpeeds[i] * yScale);
+    }
+
+    // Style and stroke the path
+    ctx.strokeStyle = '#00FF00';  // Green color for the speed line
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+
+
+
+
+
 
   function drawHumanFigure(bodyLengths) {
     const canvas = document.getElementById('humanFigureCanvas');
