@@ -17,6 +17,7 @@ const Kakao = (props) => {
   let params = new URL(document.URL).searchParams; // get query string
   let CODE = params.get("code");
   console.log("CODE: ", CODE); // Debug !!
+
     // KAKAO Token 발급
     const grant_type = 'authorization_code'
         const client_id = 'cd0c9cf0cf49dae9a987aebb769ee0d6' // REST-API-TOKEN
@@ -66,7 +67,7 @@ const Kakao = (props) => {
       const data = {
         id: email
       }
-      const apiUrl = "http://localhost:8080/members/checkEmail";
+      const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/checkEmail";
       console.log(email);
       axios
       .post(apiUrl, data)
@@ -95,7 +96,7 @@ const Kakao = (props) => {
         password: "1234",
         isKakao: true
       };
-      const apiUrl = "http://localhost:8080/members/sign-in"
+      const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/sign-in"
       console.log("kakao login 시도중:", data);
       axios
       .post(apiUrl, data)

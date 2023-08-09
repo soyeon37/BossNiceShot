@@ -29,7 +29,7 @@ function EditProfile() {
         const data = {
             nickname: nickname
         }
-        const apiUrl = "http://localhost:8080/members/checkNickname"
+        const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/checkNickname"
         axios
             .post(apiUrl, data)
             .then((response) => {
@@ -45,7 +45,6 @@ function EditProfile() {
             })
     }
 
-
     // 사용자 정보 수정 테스트용 코드 - 함소연
     const testPut = () => {
         const data = {
@@ -59,7 +58,7 @@ function EditProfile() {
 
         }
 
-        const apiUrl = 'http://localhost:8080/members/update';
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/update';
         console.log(cookies.access_token);
         axios.put(apiUrl, data)
             .then((response) => {
