@@ -1,7 +1,7 @@
 package com.ssafy.domain.Member.dto.response;
 
+import com.ssafy.common.TeeBox;
 import com.ssafy.config.security.jwt.TokenInfo;
-import com.ssafy.domain.Member.entity.TeeBox;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 public record SignInResponse(

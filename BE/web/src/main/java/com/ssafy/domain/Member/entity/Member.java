@@ -1,6 +1,7 @@
 package com.ssafy.domain.Member.entity;
 
 import com.ssafy.audit.BaseTime;
+import com.ssafy.common.TeeBox;
 import com.ssafy.domain.Member.dto.request.SignUpRequest;
 import com.ssafy.domain.Member.dto.request.UpdateMemberRequest;
 import com.ssafy.domain.Member.dto.request.UpdatePasswordRequest;
