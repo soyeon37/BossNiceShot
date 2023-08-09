@@ -1,45 +1,58 @@
 /* Accompany.js */
-
 .accompany-container {
-    height: 100%;
-    width: 100%
+  width: 100%;
+  height: calc(100vh - 4rem);
 }
 
 .accompany-head {
-    height: 15%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+  width: 100%;
+  height: 200px;
+  padding: 20px 0px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.accompany-title {
+  color: #000;
+  font-family: Inter;
+  font-size: 40px;
+  font-weight: 400;
+}
+
+.accompany-description {
+  color: #8d8f98;
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 400;
 }
 
 .accompany-body {
-    height: 80%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+  width: 100%;
+  height: calc(100% - 200px);
 }
 
 /* AccompanyList.js */
-
 .accompanylist-container {
+  width: 100%;
+  height: 100%;
+
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100%;
-  width: 100%;
 }
 
 .accompanylist {
-  height: 90%;
-  width: 45%;
+  width: 80%;
+  height: 650px;
+  max-width: 1000px;
+
+  padding: 20px;
   border-radius: 50px;
   border: 2px solid #000;
-  background: #FFF;
+
+  background: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -47,46 +60,53 @@
 }
 
 .accompanylist-head {
-  height: 10%;
-  width : 90%;
-  border: 1px solid #000;
+  width: 100%;
+  height: 80px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
+
+  background-color: skyblue;
 }
 
-.accompany-create {
-  height: 80%;
-  width: 10%;
+.head-create-button {
+  width: 150px;
+  height: 30px;
+
   border-radius: 20px;
-  margin-left: 10px;
   border: 1px solid #000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   color: #000;
   font-family: Inter;
-  font-size: 5px;
-  font-style: normal;
-  line-height: normal;
+  font-size: 16px;
 }
 
 .accompany-search {
   width: 80%;
   height: 80%;
+
+  display: flex;
 }
 
 .accompanylist-body {
-  height: 75%;
-  width : 90%;
-  border: 1px solid #000;
+  width: 100%;
+  height: 480px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 15px;
+
+  background-color: yellowgreen;
 }
 
 .accompany-room {
-  width : 45%;
+  width: 45%;
   height: 35%;
   border: 1px solid #000;
   margin: 10px;
@@ -94,12 +114,11 @@
 }
 
 .accompanylist-footer {
-  width : 90%;
-  height: 10%;
-  margin: 10px;
+  width: 100%;
+  height: 50px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  background-color: antiquewhite;
 }
 
 .joining-room {
@@ -121,7 +140,7 @@
   justify-content: flex-end;
 }
 
-.joining-author-box{
+.joining-author-box {
   border: 1px solid #000;
   border-radius: 5px;
   padding: 5px 10px;
@@ -136,8 +155,26 @@
   background-color: yellow;
 }
 
+.selected-box {
+}
+
+.unselected-box {
+  position: fixed;
+  top: 284px;
+  left: calc(50% + 20px);
+  transform: translateX(-50%);
+
+  width: 80%;
+  height: 650px;
+  max-width: 1000px;
+
+  border-radius: 50px;
+  background-color: black;
+  z-index: -1;
+}
+
 /* CreateAccompony */
-.createA-container{
+.createA-container {
   width: 100%;
   height: 100%;
   display: flex;
@@ -152,8 +189,8 @@
   height: 580px;
   border-radius: 50px;
   border: 2px solid #000;
-  background: #FFF;
-  padding : 3rem;
+  background: #fff;
+  padding: 3rem;
   display: flex; /* 가운데 정렬을 위해 flex로 설정 */
   flex-direction: column; /* 세로 방향으로 정렬되도록 설정 */
   align-items: center; /* 수평 가운데 정렬 */
@@ -203,12 +240,10 @@
 }
 
 .createA-num input {
-
   height: 30px;
   text-align: center;
   padding: 5px;
 }
-
 
 .createA-accompanydate {
   width: 640px;
