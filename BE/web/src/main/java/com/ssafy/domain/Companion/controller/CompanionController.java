@@ -32,7 +32,7 @@ public class CompanionController {
 
 	//동행 모집 생성
 	@Operation(summary = "동행 모집글 생성", description = "동행 모집을 위해 글을 작성한다.")
-	@PostMapping("/article")
+	@PostMapping("/companion")
 	public ResponseEntity<CompanionResponse> create(@RequestBody CompanionCreate companionCreate, @AuthenticationPrincipal UserDetails userDetails){
 		return ResponseEntity.ok(CompanionResponse.from(companionService.createCompanion(companionCreate, userDetails.getUsername())));
 	}
