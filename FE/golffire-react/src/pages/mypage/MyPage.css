@@ -71,14 +71,14 @@
   width: 80%;
   height: 100%;
 
+
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 #edit-pic {
-  background-color: #3498db;
-
   width: 40%;
   height: 100%;
   position: relative;
@@ -90,17 +90,17 @@
 }
 
 #pic-button {
-  /* height: px; */
   background: white;
   border: 2px solid black;
+  width: 200px;
+  height: 45px;
   border-radius: 50px;
   padding: 4px 35px;
   color: rgba(59, 214, 65, 1);
   transition: background-color 0.3s ease;
-}
-
-#pic-button-edit {
-  font-size: 18px;
+  margin-top: 30px;
+  margin-bottom: 60px;
+  font-size: 20px;
   font-weight: bold;
   padding: 3px;
 }
@@ -111,31 +111,206 @@
 }
 
 #pic-circle {
-  width: 80%;
-  padding-bottom: 80%;
+  width: 60%;
+  padding-bottom: 55%;
 
   margin: 10px;
 
   border-radius: 50%;
-  background-color: gray;
+
+  border: 2px solid black;
+  background-color: #3498db;
 }
 
-#edit-info{
-  background-color: #FF7272;
+#edit-info {
   width: 57%;
   height: 90%;
   border: 2px solid black;
   border-radius: 50px;
-  margin: 30px 40px;
+  margin: 0px 40px 0px 0px;
 }
-#edit-title{
+
+#edit-info-text {
+  height: 92%;
+}
+
+#edit-title {
   font-size: 25px;
   font-weight: bold;
   margin: 30px 0px 20px 0px;
+  height: 8%;
 }
-#edit-header{
-  font-size: 15px;
+
+#edit-header-start {
+  margin: 10px 0px 2px 0px;
+  font-size: 14px;
+  text-align: left;
+  padding-left: 115px;
 }
+
+#edit-header {
+  margin: 18px 0px 2px 0px;
+  font-size: 14px;
+  text-align: left;
+  padding-left: 115px;
+}
+
+#edit-header-importance {
+  color: #E81212;
+}
+
+#edit-email,
+#edit-nickname,
+#edit-introduction,
+#edit-golf-info1-1,
+#edit-golf-info1-2 {
+  display: flex;
+  align-items: center;
+  padding: 0px 30px 0px 30px;
+  font-size: 16px;
+  border: 2px solid black;
+  border-radius: 50px;
+  height: 35px;
+}
+
+#edit-golf-info1-1,
+#edit-golf-info1-2,
+#edit-nickname,
+#edit-introduction {
+  box-shadow: none;
+}
+
+#edit-email,
+#edit-introduction {
+  margin: 0px 80px 0px 80px;
+}
+
+#edit-introduction{
+  width: 503.19px;
+}
+
+#edit-nickname {
+  width: 100%;
+  margin: 0px 20px 0px 80px;
+}
+
+#edit-nickname-div {
+  display: flex;
+}
+
+#edit-check-button {
+  background-color: rgba(59, 214, 65, 1);
+  color: white;
+  border: 2px solid black;
+  border-radius: 50px;
+  width: 140px;
+  height: 35px;
+  margin-right: 80px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+#edit-check-button {
+  font-weight: bold;
+}
+
+#edit-check-button:hover {
+  color: rgba(59, 214, 65, 1);
+  background-color: white;
+}
+
+
+#edit-golf-info1-div {
+  display: flex;
+  width: 503.19px;
+  margin-left: 80px;
+}
+
+#edit-golf-info1-1-div {
+  margin-right: 10px;
+  width: 90%;
+}
+
+#edit-golf-info1-2-div {
+  margin-left: 10px;
+  width: 90%;
+}
+#edit-golf-info1-1{
+  width: 100%;
+}
+#edit-golf-info1-2{
+  width: 100%;
+}
+
+dedit-title
+#edit-golf-info1-header {
+  margin: 23px 0px 2px 0px;
+  font-size: 14px;
+  text-align: left;
+  padding-left: 34px;
+}
+
+
+#edit-golf-info2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 15px;
+  padding: 0px 5px;
+}
+
+#teebox {
+  background-color: #FFF;
+  display: flex;
+  margin-right: 15px;
+  font-size: 16px;
+}
+
+#teebox-end {
+  display: flex;
+}
+
+#teebox-img {
+  width: 25px;
+  height: 25px;
+}
+
+#edit-teebox-icon{
+ font-size: 16px;
+  margin-left: 10px;
+  margin-bottom: 5px;
+}
+
+#edit-button-div {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#edit-button {
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: #3BD641;
+  width: 480px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#edit-button:hover {
+  color: rgba(59, 214, 65, 1);
+  background: white;
+}
+
 /* EditPassword CSS */
 #EditPassword {
   width: 80%;
@@ -155,12 +330,6 @@
   align-items: center;
   justify-content: center;
 
-}
-
-#edit-button {
-  border-radius: 60px;
-  border: 1px solid #000;
-  background: #3BD641;
 }
 
 /* MyAccompany CSS */
@@ -720,13 +889,13 @@ li {
   /* margin-bottom: 20px; */
 }
 
-#info-edit-profile,
-#info-edit-password {
+
+#info-edit-button {
   height: 35px;
   background: rgba(59, 214, 65, 1);
   border: 2px solid black;
   border-radius: 50px;
-  padding: 3px 12px;
+  padding: 0px 20px 0px 20px;
   color: white;
   transition: background-color 0.3s ease;
 }
@@ -735,8 +904,7 @@ li {
   margin-right: 50px;
 }
 
-#info-edit-profile:hover,
-#info-edit-password:hover {
+#info-edit-button:hover {
   background: white;
   color: rgba(59, 214, 65, 1);
 }
@@ -744,5 +912,4 @@ li {
 #info-edit-button {
   font-size: 15px;
   font-weight: bold;
-  padding: 3px;
 }
