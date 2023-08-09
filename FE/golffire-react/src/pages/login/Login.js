@@ -4,6 +4,10 @@ import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+// import { setUserId, setUserNickname } from "../../features/userInfoSlice";
+
 // Style
 import {
   Button,
@@ -15,6 +19,9 @@ import "./Login.css";
 import golfImage from "../../assets/source/icons/golf.png";
 
 const Login = () => {
+  // Redux
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cookies, setCookie] = useCookies(['refreshToken']);
@@ -29,9 +36,11 @@ const Login = () => {
       isKakao: false
     };
 
+    console.log("data:", data);
+
     // 서버 API 엔드포인트 URL
     // 추후 실제 서버 URL로 대체 필요 !!
-    const apiUrl = "http://localhost:8080/members/sign-in";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/sign-in";
 
     // Axios를 사용하여 POST 요청 보내기
     axios
@@ -62,7 +71,7 @@ const Login = () => {
 
   const handleKakaoLogin = () => {
     console.log("카카오 로그인 시도"); // Debug Code !!
-    
+
     const REST_API_KEY = "cd0c9cf0cf49dae9a987aebb769ee0d6";
     const REDIRECT_URI = "http://localhost:3000/auth/kakao/login/callback";
     const kakaoUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;

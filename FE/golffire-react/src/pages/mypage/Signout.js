@@ -11,9 +11,9 @@ function Signout() {
     const navigate = useNavigate();
     const [cookies, setCookie] = useCookies(['refreshToken']);
     const handleLogout = () => {
-        console.log('cookies.refreshToken:', cookies.refreshToken);
-
-        const apiUrl = 'http://localhost:8080/members/logout'
+        console.log('cookies.refreshToken:',cookies.refreshToken);
+      
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout'
         const data = {
             refreshToken: cookies.refreshToken
         }
@@ -30,7 +30,7 @@ function Signout() {
     };
     const handleSignout = (e) => {
         console.log("탈퇴하기");
-        const apiUrl = 'http://localhost:8080/members/delete'
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/delete'
         axios.delete(apiUrl)
             .then((response) => {
                 console.log(response);

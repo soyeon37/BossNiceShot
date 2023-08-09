@@ -16,6 +16,9 @@ import CreateCRoom from './pages/study/CreateCRoom';
 import CreateLRoom from './pages/study/CreateLRoom';
 import CoachingRoom from './pages/study/CoachingRoom';
 
+//accompany
+import CreateAccompany from "./pages/accompany/CreateAccompany";
+
 // Community
 import FreeBoardList from "./pages/community/FreeBoardList";
 import InquiryList from "./pages/community/InquiryList";
@@ -86,13 +89,16 @@ function App() {
               /> */}
 
               <Route path="/solution/" element={<Solution />} />
-              <Route path="/accompany/" element={<Accompany />} />
 
               {/* Study */}
               <Route path="/studylist/" element={<StudyList />} />
               <Route path="/createcroom/" element={<CreateCRoom />} />
               <Route path="/createlroom/" element={<CreateLRoom />} />
               <Route path="/coachingroom/" element={<CoachingRoom />} />
+
+              {/* Accompany */}
+              <Route path="/accompany/" element={<Accompany />} />
+              <Route path="/createaccompany" element={<CreateAccompany />} />
 
               {/* Community */}
               <Route path="/community" element={<Community />} />
