@@ -86,8 +86,6 @@ z
 Jsrc/main/java/com/ssafy/domain/companion/service/CompanionUserService.java,f\7\f7b6695cd1e5aebb17d1d9892864e5e58b4dadd9
 v
 Fsrc/main/java/com/ssafy/domain/companion/service/CompanionService.java,6\c\6cdf3f11bfe55a6923229945e0db9521f7904161
-n
->src/main/java/com/ssafy/domain/companion/entity/Companion.java,4\a\4a02930c0e58118ea258c9bf0d10a4c7d6db302d
 [
 +src/main/java/com/ssafy/audit/BaseTime.java,8\6\86de5ce15e2887197e5a6d642374a0f47db2e014
 €

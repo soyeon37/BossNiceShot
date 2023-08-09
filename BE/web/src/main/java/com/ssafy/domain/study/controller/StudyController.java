@@ -34,9 +34,9 @@ import java.util.Map;
 public class StudyController {
     private final StudyService studyService;
 
-    @Value("https://localhost:4443/")
+    @Value("http://localhost:5443/")
     private String OPENVIDU_URL;
-    @Value("MY_SECRET")
+    @Value("ssafy")
     private String OPENVIDU_SECRET;
 
     private OpenVidu openvidu;
