@@ -27,5 +27,10 @@
         <module name="BOSSNICESHOT.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="web" target="17" />
+      <module name="web.main" target="17" />
+      <module name="web.test" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>

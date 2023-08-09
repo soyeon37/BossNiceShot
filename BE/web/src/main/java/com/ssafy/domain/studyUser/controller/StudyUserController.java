@@ -28,6 +28,7 @@ public class StudyUserController {
         return ResponseEntity.ok(studyUserService.findByStudyId(studyId).stream().map(StudyUserResponse::from).toList());
     }
 
+
     @Operation(summary = "스터디룸에 유저 입장", description = "스터디룸에 유저가 입장한다.")
     @PostMapping
     public ResponseEntity<StudyUserResponse> enter(@RequestBody StudyUserRequest studyUserRequest, @AuthenticationPrincipal UserDetails userDetails) {
