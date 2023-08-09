@@ -26,16 +26,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         logRequest(request);
 
-        if(request.getRequestURI().equals("/members/sign-in") || request.getRequestURI().equals("/members/sign-up")
-                || request.getRequestURI().equals("/members/sendEmailVerification")
-                || request.getRequestURI().equals("/members/checkEmail")
-                || request.getRequestURI().equals("/members/code")
-                || request.getRequestURI().equals("/members/checkNickname")
-                || request.getRequestURI().equals("/notification/**")
-                || request.getRequestURI().startsWith("/ws")
-                || request.getRequestURI().equals("/api/sessions")
+        if(request.getRequestURI().equals("/api/members/sign-in") || request.getRequestURI().equals("/api/members/sign-up")
+                || request.getRequestURI().equals("/api/members/sendEmailVerification")
+                || request.getRequestURI().equals("/api/members/checkEmail")
+                || request.getRequestURI().equals("/api/members/code")
+                || request.getRequestURI().equals("/api/members/checkNickname")
+                || request.getRequestURI().equals("/api/notification/**")
+                || request.getRequestURI().startsWith("/api/ws")
+                || request.getRequestURI().equals("/api/api/sessions")
                 || request.getRequestURI().equals("/api/sessions/**")
-                || request.getRequestURI().equals("/study/sessions")
+                || request.getRequestURI().equals("/api/study/sessions")
                 || request.getRequestURI().equals("/api/sessions/SessionA/connections")){
             log.info("권한 허가");
             chain.doFilter(request, response);
