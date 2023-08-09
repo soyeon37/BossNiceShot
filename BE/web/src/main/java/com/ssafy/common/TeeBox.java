@@ -1,5 +1,5 @@
 package com.ssafy.common;
 
 public enum TeeBox {
-    WHITE, RED, BLACK
+    WHITE, RED, BLACK, NONE
 }
