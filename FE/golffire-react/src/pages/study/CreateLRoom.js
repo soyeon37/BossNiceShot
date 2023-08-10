@@ -25,7 +25,7 @@ function MyEditor() {
             // 예를 들어, 서버로 데이터를 전송하거나 원하는 다른 작업을 수행할 수 있습니다.
             console.log("Title:", title);
             console.log("Content:", value);
-            navigate('/studylist');
+            navigate('/LearningRoom');
         }
     };
 
