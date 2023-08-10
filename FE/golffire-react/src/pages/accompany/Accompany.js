@@ -1,24 +1,23 @@
-import React, { useState } from 'react'
-import AccompanyList from './AccompanyList';
-import "./accompany.css";
+import React from "react";
+import AccompanyList from "./AccompanyList";
+import "./Accompany.css";
 
 function Accompany() {
-
-
   return (
-    <div className='accompany-container'>
-      <div className='accompany-head'>
-        <h1>Accompany</h1>
-        <h2>
-          함께 골프치러가용 '-'
-        </h2>
-        
-      <div className='accompany-body'>
+    <div className="accompany-container">
+      <div className="accompany-head">
+        <div className="accompany-title">동행</div>
+        <div className="accompany-description">
+          함께 골프 치러 갈 동행을 모집하세요.
+          <br />
+          모집 중인 동행에 참여 신청을 해도 좋습니다.
+        </div>
+      </div>
+      <div className="accompany-body">
         <AccompanyList />
       </div>
-      </div>
     </div>
-  )
+  );
 }
 
-export default Accompany
+export default Accompany;

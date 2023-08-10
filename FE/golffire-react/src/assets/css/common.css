@@ -34,6 +34,15 @@
   font-weight: 400;
 }
 
+/* Common CSS */
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.cursor-able {
+  cursor: pointer;
+}
+
 /* Footer */
 .Footer {
   background-color: dodgerblue;
