@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import KakaoMap from "../golffield/KakaoMap";
 import GolfBox from "../golffield/GolfBox";
 import file from "../../assets/golffield.json";
 import { SearchIcon, ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
@@ -21,7 +22,7 @@ function GolffieldModal({ toggleModal, setAccompanyPlace }) {
     }))
     const dataSize = dataGolffield.length;
 
-    const [temporaryPlace, setTemporaryPlace] = useState(0)
+    const [temporaryPlace, setTemporaryPlace] = useState(0) // 임시 선택할 골프장 정보(Id)
     const [golfClub, setGolfClub] = useState(dataGolffield); // 검색 필터링된 골프장 리스트
     const [searchWord, setSearchWord] = useState(""); // 검색어
 
@@ -103,7 +104,6 @@ function GolffieldModal({ toggleModal, setAccompanyPlace }) {
         return latlng;
     }
 
-
     // Confirm Button
     const setAndToggleModal = () => {
         setAccompanyPlace(temporaryPlace);
@@ -132,10 +132,50 @@ function GolffieldModal({ toggleModal, setAccompanyPlace }) {
                             <SearchIcon boxSize={6} />
                         </button>
                     </div>
-
-                    <div id='result-box'></div>
+                    <div id='result-box'>
+                        <div id="kakao-map">
+                            <KakaoMap
+                                centerId={centerId}
+                                getId={getId()}
+                                getAddress={getAddress()}
+                                getLatLng={getLatLng()}
+                            />
+                        </div>
+                        <div id="result">
+                            <div id="result-list">
+                                {getCurrentPageItems(dataGolffield).map((club) => (
+                                    <GolfBox
+                                        key={club.번호}
+                                        id={club.번호}
+                                        name={club.사업장명}
+                                        address1={club.소재지전체주소}
+                                        address2={club.도로명전체주소}
+                                        callNumber={club.소재지전화}
+                                        setCenter={setCenterId}
+                                    />
+                                ))}
+                            </div>
+                            <div id="result-control">
+                                <button
+                                    className="control-arrow"
+                                    disabled={isFirstPage}
+                                    onClick={() => handlePageChange(currentPage - 1)}
+                                >
+                                    <ArrowLeftIcon boxSize={6} />
+                                </button>
+                                <div id="control-num">{currentPage}</div>
+                                <button
+                                    className="control-arrow"
+                                    disabled={isLastPage}
+                                    onClick={() => handlePageChange(currentPage + 1)}
+                                >
+                                    <ArrowRightIcon boxSize={6} />
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id='modal-footer'>
+                <div id='modal-footer' className="margin-top-20">
                     <button
                         className='modal-button cancel'
                         onClick={toggleModal}>
