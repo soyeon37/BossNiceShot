@@ -15,6 +15,7 @@ import Community from "./pages/community/Community";
 import CreateCRoom from './pages/study/CreateCRoom';
 import CreateLRoom from './pages/study/CreateLRoom';
 import CoachingRoom from './pages/study/CoachingRoom';
+import LearningRoom from './pages/study/LearningRoom';
 
 //accompany
 import CreateAccompany from "./pages/accompany/CreateAccompany";
@@ -95,6 +96,8 @@ function App() {
               <Route path="/createcroom/" element={<CreateCRoom />} />
               <Route path="/createlroom/" element={<CreateLRoom />} />
               <Route path="/coachingroom/" element={<CoachingRoom />} />
+              <Route path="/learningroom/" element={<LearningRoom />} />
+
 
               {/* Accompany */}
               <Route path="/accompany/" element={<Accompany />} />
