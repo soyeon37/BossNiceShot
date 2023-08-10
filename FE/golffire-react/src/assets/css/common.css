@@ -35,8 +35,12 @@
 }
 
 /* Common CSS */
-.margin-top-20{
+.margin-top-20 {
   margin-top: 20px;
+}
+
+.cursor-able {
+  cursor: pointer;
 }
 
 /* Footer */

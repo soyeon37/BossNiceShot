@@ -4,6 +4,7 @@ import Datetime from 'react-datetime';
 import moment from 'moment';
 
 import GolffieldModal from './GolffieldModal';
+import parseGolfId from "../golffield/ParseGolfId";
 
 import 'react-datetime/css/react-datetime.css';
 import "./CreateAccompany.css";
@@ -115,7 +116,13 @@ function CreateAccompany() {
                     <div className='createA-map'>
                         <h2>동행 장소</h2>
                         <button
-                            onClick={toggleModal}>골프장 선택하기</button>
+                            onClick={toggleModal}>
+                            {accompanyPlace === 0 ? (
+                                <div>골프장 선택하기</div>
+                            ) : (
+                                <div>{parseGolfId(accompanyPlace)} 선택 됨, 변경하기</div>
+                            )}
+                        </button>
                     </div>
                     <div className='createA-num'>
                         <h2>동행 인원</h2>

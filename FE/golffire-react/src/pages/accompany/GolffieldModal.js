@@ -22,7 +22,6 @@ function GolffieldModal({ toggleModal, setAccompanyPlace }) {
     }))
     const dataSize = dataGolffield.length;
 
-    const [temporaryPlace, setTemporaryPlace] = useState(0) // 임시 선택할 골프장 정보(Id)
     const [golfClub, setGolfClub] = useState(dataGolffield); // 검색 필터링된 골프장 리스트
     const [searchWord, setSearchWord] = useState(""); // 검색어
 
@@ -51,7 +50,6 @@ function GolffieldModal({ toggleModal, setAccompanyPlace }) {
         setCurrentPage(1);
     };
 
-
     // Result Pagination
     const itemsPerPage = 10; // 페이지 당 아이템 수
     const [currentPage, setCurrentPage] = useState(1);
@@ -72,7 +70,8 @@ function GolffieldModal({ toggleModal, setAccompanyPlace }) {
     };
 
     // KakaoMap에 전달되는 변수와 함수
-    const [centerId, setCenterId] = useState(1); // 지도의 중심 좌표가 되는 골프장 번호
+    // 지도의 중심 좌표가 되는 골프장 번호 + 임시 선택할 골프장 정보(Id)
+    const [centerId, setCenterId] = useState(1);
 
     const getId = () => {
         const id = [];
@@ -106,7 +105,7 @@ function GolffieldModal({ toggleModal, setAccompanyPlace }) {
 
     // Confirm Button
     const setAndToggleModal = () => {
-        setAccompanyPlace(temporaryPlace);
+        setAccompanyPlace(centerId);
         toggleModal();
     }
 
@@ -117,7 +116,9 @@ function GolffieldModal({ toggleModal, setAccompanyPlace }) {
                     <div id="modal-title">
                         골프장 선택
                     </div>
-                    <h1><GrClose size={30} onClick={toggleModal} /></h1>
+                    <h1 className="cursor-able">
+                        <GrClose size={30} onClick={toggleModal} />
+                    </h1>
                 </div>
                 <div id='select-modal-body'>
                     <div id='search-box'>
