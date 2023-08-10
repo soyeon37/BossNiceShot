@@ -85,7 +85,7 @@ function Navbar() {
   return (
     <nav className="nav">
       <a href="/" className="site-title">
-        <img className="favicon-img" src={Favicon} alt="favicon" />
+        {/* <img className="favicon-img" src={Favicon} alt="favicon" /> */}
         사장님, 나이스 샷
       </a>
       <ul>

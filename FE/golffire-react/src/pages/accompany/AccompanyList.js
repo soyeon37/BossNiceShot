@@ -1,50 +1,61 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
-import AccompanySearch from './AccompanySearch'; 
-import FollowFilter from './FollowFilter';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+import AccompanySearch from "./AccompanySearch";
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import "./accompany.css";
+import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
 
 function AccompanyList() {
-  
-  const mockRectangles = [
-    { id: 1, title: '제목 1', author: '작성자 1' },
-    { id: 2, title: '제목 2', author: '작성자 2' },
-    { id: 3, title: '제목 3', author: '작성자 3' },
-    { id: 4, title: '제목 4', author: '작성자 4' },
-    { id: 5, title: '제목 5', author: '작성자 5' },
+  const [accompanyList, setAccompanyList] = useState([{}, {}, {}, {}, {}, {}]);
+
+  // 동행 모집 리스트
+  const accompanyData = [
+    { id: 1, title: "제목 1", tee: "red", placeId: 1, date: "2023.09.30 13:00" },
+    { id: 2, title: "제목 2", author: "작성자 2" },
+    { id: 3, title: "제목 3", author: "작성자 3" },
+    { id: 4, title: "제목 4", author: "작성자 4" },
+    { id: 5, title: "제목 5", author: "작성자 5" },
+    { id: 6, title: "제목 6", author: "작성자 6" },
   ];
 
-  const [rectangles, setRectangles] = useState(mockRectangles);
+  // 처음 화면이 로딩 될 때 동행 리스트 정보 호출
+  useEffect(() => {
+    setAccompanyList(accompanyData);
+  }, []);
+
+  // accompanyData의 tee 값에 따라 티박스 이미지 변경 함수
+
+  // accompanyData의 placeId 값에 따라 골프장 이름 반환 함수
+  // 외부 component 사용
 
   const handleCreateRectangle = (title, author) => {
     const newRectangle = {
-      id: rectangles.length + 1,
+      id: accompanyList.length + 1,
       title: title,
       author: author,
     };
-    setRectangles([...rectangles, newRectangle]);
+    setAccompanyList([...accompanyList, newRectangle]);
   };
 
   // Result Pagination
-  const itemsPerPage = 4; // 페이지 당 아이템 수
+  const itemsPerPage = 6; // 페이지 당 아이템 수
   const [currentPage, setCurrentPage] = useState(1);
 
   // 페이지 변환에 따른 아이템 출력
   const getCurrentPageItems = () => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    return rectangles.slice(startIndex, endIndex);
+    return accompanyData.slice(startIndex, endIndex);
   };
-  
-   // 페이징 컨트롤 인식
+
+  // 페이징 컨트롤 인식
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
   const isFirstPage = currentPage === 1;
-  const isLastPage = currentPage === Math.ceil(rectangles.length / itemsPerPage);
+  const isLastPage = currentPage === Math.ceil(accompanyList.length / itemsPerPage);
 
   // 참여하기 버튼
   const [isJoining, setIsJoining] = useState(false);
@@ -60,31 +71,41 @@ function AccompanyList() {
       setIsJoining(true);
     }
   };
+  const [switchValue, setSwitchValue] = useState(false);
+
+  const handleSwitchChange = () => {
+    setSwitchValue(!switchValue);
+    // 필터 기능을 추가하고 원하는 작업을 수행할 수 있습니다.
+  };
 
   return (
-    <div className='accompanylist-container'>
-      <div className='accompanylist'>
-        <div className='accompanylist-head'>
-          <div className='accompany-create'>
-            <Link to="/createaccompany">
-              +동행모집하기
-            </Link>
-          </div>
-          <div className='accompany-search'>
-            <AccompanySearch />
-            <FollowFilter />
-          </div>
+    <div className="accompanylist-container">
+      <div className="accompanylist">
+        <div className="accompanylist-head">
+          <Link to="/createaccompany">
+            <div className="head-create-button">새 동행 모집하기</div>
+          </Link>
+          <AccompanySearch />
+          <Checkbox colorScheme="green">팔로잉</Checkbox>
         </div>
-        <div className='accompany-body'>
-          {getCurrentPageItems().map(rectangle => (
-            <div key={rectangle.id} className='accompany-room'>
-              <h3>{rectangle.title}</h3>
-              <p>작성자: {rectangle.author}</p>
-              <button onClick={() => handleJoinButtonClick(rectangle)}>참여하기</button>
+
+        <div className="accompanylist-body">
+          {getCurrentPageItems().map((accompanyRoom) => (
+            <div className="accompany-room" key={accompanyRoom.id}>
+              <div className="accroom-title">
+                <div className="accroom-title-text">{accompanyRoom.title}</div>
+                <img src="" alt={accompanyRoom.tee} />
+              </div>
+              <div className="accroom-body">
+                <div className="accroom-place">{accompanyRoom.palce}</div>
+                <div className="accroom-date">{accompanyRoom.date}</div>
+              </div>
+              <button className="accroom-button" onClick={() => handleJoinButtonClick(accompanyRoom)}>자세히 보기</button>
             </div>
           ))}
         </div>
-        <div className='accompany-footer'>
+
+        <div className="accompanylist-footer">
           <button
             className="control-arrow"
             disabled={isFirstPage}
@@ -99,29 +120,36 @@ function AccompanyList() {
             onClick={() => handlePageChange(currentPage + 1)}
           >
             <ArrowRightIcon boxSize={6} />
-          </button>    
+          </button>
         </div>
       </div>
       {isJoining && selectedRectangle && (
-        <div className='joining-room'>
-          <div className='joining-title'>{selectedRectangle.title}</div>
-          <div className='joining-author'>
-            <div className='joining-author-box'>
-              작성자: {selectedRectangle.author}
-            </div>
+        <div className="joining-room">
+          <div className="joining-title">{selectedRectangle.title}</div>
+          <div className="joining-author">
+            <div className="joining-author-box">작성자: {selectedRectangle.author}</div>
           </div>
-          <div className='joining-description'>
+          <div className="joining-description">
             방설명{selectedRectangle.description} {/* 설명이 여기에 들어감 */}
           </div>
-          <div className='joining-button'>
+          <div className="joining-button">
             <Link to={`/accompanyroom/${selectedRectangle.id}`}>
               <button>참여하기</button>
             </Link>
           </div>
         </div>
       )}
+
+      {/* 배경 div */}
+      {isJoining ? (
+        // 방 선택 시
+        <div className="selected-box"></div>
+      ) : (
+        // 방 미선택 시
+        <div className="unselected-box"></div>
+      )}
     </div>
-  )
+  );
 }
 
-export default AccompanyList
+export default AccompanyList;
