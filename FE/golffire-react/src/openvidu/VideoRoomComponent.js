@@ -16,8 +16,20 @@ import ToolbarComponent from './toolbar/ToolbarComponent';
 var localUser = new UserModel();
 
 // 애플리케이션 서버 URL
-const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'https://i9a309.p.ssafy.io';
+const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8080';
+// https://i9a309.p.ssafy.io
 
+// 기타 함수
+const CopyUrl = () => {
+	const url = window.location.href;
+	navigator.clipboard.writeText(url).then(() => {
+		alert("URL이 복사되었습니다")
+	});
+};
+
+const goBack = () => {
+	window.location.href = '/studylist';
+}
 
 class VideoRoomComponent extends Component {
 	constructor(props) {
@@ -57,6 +69,7 @@ class VideoRoomComponent extends Component {
 		this.enteredChanged = this.enteredChanged.bind(this);
 	}
 
+	
 	componentDidMount() {
 		const openViduLayoutOptions = {
 			maxRatio: 3 / 2, // The narrowest ratio that will be used (default 2x3)
@@ -558,7 +571,6 @@ class VideoRoomComponent extends Component {
 	// 		this.hasBeenUpdated = false;
 	// 	}
 	// }
-
 	async enteredChanged() {
 	this.remotes = [];
 		const { sessionName } = this.props;
@@ -600,6 +612,14 @@ class VideoRoomComponent extends Component {
 						(isEntered ? (
 							<div>
 								<hr className="hr" />
+								<div className="enterbox-head">
+									<div className="roomtype">
+										<span className="typename">코칭</span>
+									</div>
+									방 제목
+									<div className="copy-url" onClick={CopyUrl}></div>
+									<div className="go-back" onClick={goBack}></div>
+								</div>
 								<div className="divnext">
 									{localUser !== undefined &&
 										localUser.getStreamManager() !== undefined && (
@@ -629,17 +649,29 @@ class VideoRoomComponent extends Component {
 							</div>
 						) : (
 							<div className="div">
-								<StreamComponent user={localUser} isMe={"check"} />
-								<div className="alert">
-									<div>
-										<p className="title">
-											✅ 상담방에 입장하기 전 오디오와 비디오를 체크해주세요.
-										</p>
+								<div className="enterbox-head">
+									<div className="roomtype">
+										<span className="typename">코칭</span>
 									</div>
-									<div onClick={this.enteredChanged} className="enter">
-										<button variant="contained" size="large">
-											입장하기
-										</button>
+									방 제목
+									<div className="copy-url" onClick={CopyUrl}></div>
+									<div className="go-back" onClick={goBack}></div>
+								</div>
+								<div className="enterbox-body">
+									<div className="alert">
+										<div>
+											<p className="title">
+												방에 입장하기 전 <br/>오디오와 비디오를 <br/>✅체크✅ 해주세요.
+											</p>
+										</div>
+										<div onClick={this.enteredChanged} className="enter">
+											<button className="enter-button">
+												입장하기
+											</button>
+										</div>
+									</div>
+									<div className="check-me">
+										<StreamComponent user={localUser} isMe={"check"} />
 									</div>
 								</div>
 							</div>
@@ -652,7 +684,7 @@ class VideoRoomComponent extends Component {
 						messageReceived={this.checkNotification}
 					/>
 				</div> */}
-				<div className="toolbar">
+				<div className="toolbar-box">
 					<ToolbarComponent
 						sessionId={mySessionId}
 						user={localUser}
