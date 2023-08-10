@@ -27,7 +27,7 @@ export default class ToolbarComponent extends Component {
 		this.screenShare = this.screenShare.bind(this);
 		this.stopScreenShare = this.stopScreenShare.bind(this);
 		// this.toggleFullscreen = this.toggleFullscreen.bind(this);
-		this.leaveSession = this.leaveSession.bind(this);
+		// this.leaveSession = this.leaveSession.bind(this);
 		this.toggleChat = this.toggleChat.bind(this);
 	}
 
@@ -53,10 +53,10 @@ export default class ToolbarComponent extends Component {
 	// 	this.props.toggleFullscreen();
 	// }
 
-	leaveSession() {
-		this.props.leaveSession();
-		window.location.href = '/studylist';
-	}
+	// leaveSession() {
+	// 	this.props.leaveSession();
+	// 	window.location.href = '/studylist';
+	// }
 
 	toggleChat() {
 		this.props.toggleChat();
@@ -69,11 +69,11 @@ export default class ToolbarComponent extends Component {
 			<AppBar className="toolbar" id="header">
 				<Toolbar className="toolbar">
 					{/* 방 제목 */ }
-					<div id="navSessionInfo">
+					{/* <div id="navSessionInfo">
 						{this.props.sessionId && <div id="titleContent">
 							<span id="session-title">{mySessionId}</span>
 						</div>}
-					</div>
+					</div> */}
 
 					{/* 툴바 버튼 */}
 					<div className="buttonsContent">
@@ -128,14 +128,14 @@ export default class ToolbarComponent extends Component {
 						>
 							{localUser !== undefined && this.state.fullscreen ? <FullscreenExit /> : <Fullscreen />}
 						</IconButton> */}
-						<IconButton 
+						{/* <IconButton 
 							color="secondary" 
 							className="navButton" 
 							onClick={this.leaveSession} 
 							id="navLeaveButton"
 						>
 							<PowerSettingsNew />
-						</IconButton>
+						</IconButton> */}
 						<IconButton 
 							color="inherit" 
 							onClick={this.toggleChat} 
