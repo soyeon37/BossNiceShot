@@ -17,7 +17,6 @@ function Golffield() {
     소재지전화: item["소재지전화"],
     x: item["좌표정보(x)"],
     y: item["좌표정보(y)"],
-    
   }))
   const dataSize = dataGolffield.length;
 
