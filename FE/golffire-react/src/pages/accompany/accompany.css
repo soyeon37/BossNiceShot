@@ -46,7 +46,7 @@
 .accompanylist {
   width: 80%;
   height: 650px;
-  max-width: 1000px;
+  max-width: 1820px;
 
   padding: 20px;
   border-radius: 50px;
@@ -66,8 +66,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  background-color: skyblue;
 }
 
 .head-create-button {
@@ -98,19 +96,21 @@
   height: 480px;
 
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-content: flex-start;
   flex-wrap: wrap;
 
-  background-color: yellowgreen;
+  overflow: auto;
+  background-color: yellow;
 }
 
 .accompany-room {
-  width: 45%;
-  height: 35%;
+  width: 480px;
+  height: 220px;
+  max-width: 100%;
+
   border: 1px solid #000;
-  margin: 10px;
-  border-radius: 15px;
+  margin: 10px 5px;
+  border-radius: 20px;
 }
 
 .accompanylist-footer {
@@ -118,7 +118,7 @@
   height: 50px;
   display: flex;
   justify-content: center;
-  background-color: antiquewhite;
+  background-color: red;
 }
 
 .joining-room {
@@ -155,9 +155,7 @@
   background-color: yellow;
 }
 
-.selected-box {
-}
-
+/* 배경 div - 방 미선택 시 */
 .unselected-box {
   position: fixed;
   top: 284px;
@@ -166,12 +164,15 @@
 
   width: 80%;
   height: 650px;
-  max-width: 1000px;
+  max-width: 1820px;
 
   border-radius: 50px;
   background-color: black;
   z-index: -1;
 }
+
+/* 배경 div - 방 선택 시 */
+.selected-box {}
 
 /* CreateAccompony */
 .createA-container {
@@ -191,9 +192,12 @@
   border: 2px solid #000;
   background: #fff;
   padding: 3rem;
-  display: flex; /* 가운데 정렬을 위해 flex로 설정 */
-  flex-direction: column; /* 세로 방향으로 정렬되도록 설정 */
-  align-items: center; /* 수평 가운데 정렬 */
+  display: flex;
+  /* 가운데 정렬을 위해 flex로 설정 */
+  flex-direction: column;
+  /* 세로 방향으로 정렬되도록 설정 */
+  align-items: center;
+  /* 수평 가운데 정렬 */
   box-shadow: 10px 10px 0px 0px #000;
 }
 
@@ -201,7 +205,8 @@
   height: 40px;
   width: 640px;
   border: 1px solid #000;
-  padding: 10px 48px; /* 텍스트 입력과 테두리 사이의 간격을 주기 위한 padding 추가 */
+  padding: 10px 48px;
+  /* 텍스트 입력과 테두리 사이의 간격을 주기 위한 padding 추가 */
   box-sizing: border-box;
 }
 
@@ -209,8 +214,10 @@
   width: 640px;
   height: 540px;
   border: 1px solid #000;
-  padding: 10px 48px; /* 텍스트 입력과 테두리 사이의 간격을 주기 위한 padding 추가 */
-  box-sizing: border-box; /* 요소의 크기에 padding과 border를 포함시킴 */
+  padding: 10px 48px;
+  /* 텍스트 입력과 테두리 사이의 간격을 주기 위한 padding 추가 */
+  box-sizing: border-box;
+  /* 요소의 크기에 padding과 border를 포함시킴 */
 }
 
 .createA-password {
@@ -218,9 +225,12 @@
   height: 40px;
   border: 1px solid #000;
   padding: 5px 48px 5px 48px;
-  display: flex; /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between; /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center; /* 수평 가운데 정렬 */
+  display: flex;
+  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+  justify-content: space-between;
+  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+  align-items: center;
+  /* 수평 가운데 정렬 */
 }
 
 .createA-password input {
@@ -234,9 +244,12 @@
   height: 40px;
   border: 1px solid #000;
   padding: 5px 48px 5px 48px;
-  display: flex; /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between; /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center; /* 수평 가운데 정렬 */
+  display: flex;
+  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+  justify-content: space-between;
+  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+  align-items: center;
+  /* 수평 가운데 정렬 */
 }
 
 .createA-num input {
@@ -250,9 +263,12 @@
   height: 40px;
   border: 1px solid #000;
   padding: 5px 48px 5px 48px;
-  display: flex; /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between; /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center; /* 수평 가운데 정렬 */
+  display: flex;
+  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+  justify-content: space-between;
+  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+  align-items: center;
+  /* 수평 가운데 정렬 */
 }
 
 .createA-enddate {
@@ -260,9 +276,12 @@
   height: 40px;
   border: 1px solid #000;
   padding: 5px 48px 5px 48px;
-  display: flex; /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between; /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center; /* 수평 가운데 정렬 */
+  display: flex;
+  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+  justify-content: space-between;
+  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+  align-items: center;
+  /* 수평 가운데 정렬 */
 }
 
 .createA-map {
@@ -270,9 +289,12 @@
   height: 40px;
   border: 1px solid #000;
   padding: 5px 48px 5px 48px;
-  display: flex; /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between; /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center; /* 수평 가운데 정렬 */
+  display: flex;
+  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+  justify-content: space-between;
+  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+  align-items: center;
+  /* 수평 가운데 정렬 */
 }
 
 .createA-datetime-input {
@@ -287,9 +309,12 @@
   height: 40px;
   border: 1px solid #000;
   padding: 5px 48px 5px 48px;
-  display: flex; /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between; /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center; /* 수평 가운데 정렬 */
+  display: flex;
+  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+  justify-content: space-between;
+  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+  align-items: center;
+  /* 수평 가운데 정렬 */
 }
 
 .icon-list {
@@ -314,8 +339,12 @@
 }
 
 .createA-buttons {
-  display: flex; /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between; /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  width: 640px; /* 부모 요소의 너비와 동일하게 설정 */
-  margin: 20px 0; /* 버튼들 위아래에 20px 간격 주기 */
+  display: flex;
+  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+  justify-content: space-between;
+  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+  width: 640px;
+  /* 부모 요소의 너비와 동일하게 설정 */
+  margin: 20px 0;
+  /* 버튼들 위아래에 20px 간격 주기 */
 }

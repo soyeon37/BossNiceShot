@@ -12,7 +12,7 @@ function AccompanyList() {
 
   // 동행 모집 리스트
   const accompanyData = [
-    { id: 1, title: "제목 1", author: "작성자 1" },
+    { id: 1, title: "제목 1", tee: "red", placeId: 1, date: "2023.09.30 13:00" },
     { id: 2, title: "제목 2", author: "작성자 2" },
     { id: 3, title: "제목 3", author: "작성자 3" },
     { id: 4, title: "제목 4", author: "작성자 4" },
@@ -25,6 +25,11 @@ function AccompanyList() {
     setAccompanyList(accompanyData);
   }, []);
 
+  // accompanyData의 tee 값에 따라 티박스 이미지 변경 함수
+
+  // accompanyData의 placeId 값에 따라 골프장 이름 반환 함수
+  // 외부 component 사용
+
   const handleCreateRectangle = (title, author) => {
     const newRectangle = {
       id: accompanyList.length + 1,
@@ -35,7 +40,7 @@ function AccompanyList() {
   };
 
   // Result Pagination
-  const itemsPerPage = 4; // 페이지 당 아이템 수
+  const itemsPerPage = 6; // 페이지 당 아이템 수
   const [currentPage, setCurrentPage] = useState(1);
 
   // 페이지 변환에 따른 아이템 출력
@@ -86,11 +91,17 @@ function AccompanyList() {
         </div>
 
         <div className="accompanylist-body">
-          {getCurrentPageItems().map((rectangle) => (
-            <div key={rectangle.id} className="accompany-room">
-              <h3>{rectangle.title}</h3>
-              <p>작성자: {rectangle.author}</p>
-              <button onClick={() => handleJoinButtonClick(rectangle)}>참여하기</button>
+          {getCurrentPageItems().map((accompanyRoom) => (
+            <div className="accompany-room" key={accompanyRoom.id}>
+              <div className="accroom-title">
+                <div className="accroom-title-text">{accompanyRoom.title}</div>
+                <img src="" alt={accompanyRoom.tee} />
+              </div>
+              <div className="accroom-body">
+                <div className="accroom-place">{accompanyRoom.palce}</div>
+                <div className="accroom-date">{accompanyRoom.date}</div>
+              </div>
+              <button className="accroom-button" onClick={() => handleJoinButtonClick(accompanyRoom)}>자세히 보기</button>
             </div>
           ))}
         </div>
