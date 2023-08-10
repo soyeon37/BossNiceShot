@@ -60,3 +60,10 @@ label {
   opacity: 0.7;
   cursor: not-allowed;
 }
+
+
+/* checkbox */
+[type="checkbox"] {
+  cursor: pointer;
+  box-shadow: none;
+}

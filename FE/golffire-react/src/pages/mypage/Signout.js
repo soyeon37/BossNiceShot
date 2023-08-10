@@ -2,7 +2,7 @@ import React from "react";
 import MyPageNavbar from "./MyPageNavbar";
 
 import "./MyPage.css";
-import CryImg from "../../assets/source/mascot/mascot-cry-2.png";
+import CryImg from "../../assets/source/mascot/crying.png";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from "react-cookie";
@@ -11,8 +11,8 @@ function Signout() {
     const navigate = useNavigate();
     const [cookies, setCookie] = useCookies(['refreshToken']);
     const handleLogout = () => {
-        console.log('cookies.refreshToken:',cookies.refreshToken);
-      
+        console.log('cookies.refreshToken:', cookies.refreshToken);
+
         const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout'
         const data = {
             refreshToken: cookies.refreshToken
@@ -51,20 +51,84 @@ function Signout() {
                         <div id="signout-title">
                             탈퇴하기
                         </div>
-                        <div id="signout-reason">
-                            <div id="reason-radio">
-                                탈퇴 사유를 알려주세요.
+                        <div id="signout-top">
+                            <div id="signout-reason">
+                                <div id="reason-radio">
+                                    <div id="reason-title">
+                                        탈퇴 사유를 알려주세요.
+                                    </div>
+                                    <div id="signout-reason-div">
+                                        <div id="signout-reason-text">
+                                            <label id="reason">
+                                                <input
+                                                    id="reason-text"
+                                                    value="reason1"
+                                                    name="reason"
+                                                    type="radio"
+                                                />
+                                                사용감 불편
+                                            </label>
+                                        </div>
+                                        <div id="signout-reason-text">
+                                            <label id="reason">
+                                                <input
+                                                    id="reason-text"
+                                                    value="reason2"
+                                                    name="reason"
+                                                    type="radio"
+                                                />
+                                                타 사용자 불편
+                                            </label>
+                                        </div>
+                                        <div id="signout-reason-text">
+
+                                            <label id="reason">
+                                                <input
+                                                    id="reason-text"
+                                                    value="reason3"
+                                                    name="reason"
+                                                    type="radio"
+                                                />
+                                                잘 사용하지 않게 됨
+                                            </label>
+                                        </div>
+                                        <div id="signout-reason-text">
+
+                                            <label id="reason">
+                                                <input
+                                                    id="reason-text"
+                                                    value="reason4"
+                                                    name="reason"
+                                                    type="radio"
+                                                />
+                                                기타 사항
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div id="reason-pic">
                                 <img src={CryImg} />
                             </div>
                         </div>
-                        <div id="signout-notice">
-                            탈퇴하시면 다시 가입 못해요 ~~ 안내문
+                        <div id="reason-ect">
+                            <textarea id="reason-ect-input" type="text"></textarea>
                         </div>
-                        <button id="signout-button" onClick={handleLogout}>
-                            탈퇴하기
-                        </button>
+                        <div id="signout-notice">
+                            탈퇴하시면 기존 사용자 정보가 모두 삭제됩니다.<br />
+                            동의하시면 아래에 체크 후 ‘탈퇴하기’ 버튼을 눌러주세요.
+                        </div>
+                        <div id="signout-notice-checkbox">
+                            <label id="signout-checkbox-label">
+                                <input id="signout-checkbox" type="checkbox"></input>
+                                동의합니다.
+                            </label>
+                        </div>
+                        <div id="signout-button-div">
+                            <button id="signout-button" onClick={handleLogout}>
+                                탈퇴하기
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
