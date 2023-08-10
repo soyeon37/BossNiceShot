@@ -2,8 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import HalfSwing from "./HalfSwing";
 import "./Solution.css";
 import loadingImage from "./swing_1.gif";
-import { color } from "framer-motion";
-import { width } from "@mui/system";
 
 function Solution_HalfSwing() {
   const videoRef = useRef(null);
@@ -31,7 +29,20 @@ function Solution_HalfSwing() {
     '왼쪽 팔꿈치','오른쪽 팔꿈치','왼쪽 손목','오른쪽 손목','왼쪽 골반','오른쪽 골반',
     '왼쪽 무릎','오른쪽 무릎','왼쪽 발목','오른쪽 발목'];
   const [wristSpeeds, setWristSpeeds] = useState([]);
-
+  const [trustFactor, setTrustFactor] = useState(null);
+  const [Feedback, setFeedback] = useState(null);
+  const feedbackList = [
+    "G✅ 스윙의 경로가 체형 기준 타원의 궤도에 있습니다.",
+    "G✅ 골반이 잘 고정되어 있습니다.",
+    "G✅ 머리가 잘 고정되어 있습니다.",
+    "G✅ 어깨가 흐트러지지 않았습니다.",
+    "G✅ 무릎이 흔들리지 않았습니다.",
+    "B⛔ 스윙의 경로가 체형 기준 타원의 궤도에 있지 않습니다.",
+    "B⛔ 골반이 고정되지 않았습니다.",
+    "B⛔ 머리가 고정되지 않았습니다.",
+    "B⛔ 어깨가 흐트러졌습니다.",
+    "B⛔ 무릎이 흔들렸습니다."
+  ]
 
   // Function to change the current page
   const changePage = (direction) => {
@@ -99,7 +110,9 @@ function Solution_HalfSwing() {
     setAnalysisVideoURL,
     setAnalysisData,
     setCoordinateData,
-    setEquationData
+    setEquationData,
+    setTrustFactor,
+    setFeedback
   );
 
   return (
@@ -214,6 +227,7 @@ function Solution_HalfSwing() {
                     </div>
                   </div>
                   <div className="evaluationWrapper">
+                    <div className="trustfactor">신뢰도 &nbsp;&nbsp;{ Math.round(trustFactor * 100) / 100 }%</div>
                     <div className="evaluation">Swing &nbsp;&nbsp;{myEllipseScore}%</div>
                     <div className="evaluation">Head &nbsp;&nbsp;{myHeadScore}%</div>
                     <div className="evaluation">Shoulder &nbsp;&nbsp;{myShoulderScore}%</div>
@@ -274,6 +288,19 @@ function Solution_HalfSwing() {
               {currentPage === 6 && (
                 <>
                   <div className="pageTitle">Personalized Recommendation</div>
+                  
+                  <div className="feedbackWrapper">
+                    {Feedback.map((item, index) => {
+                      const feedbackMessage = feedbackList[item];
+                      const className = feedbackMessage.startsWith("G") ? "feedbackGood" : "feedbackBad";
+
+                      return (
+                        <div key={index} className={`feedbackItem ${className}`}>
+                          {feedbackMessage.substring(1)}  {/* Skip the first letter */}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </>
               )}
               <div className="pagination-buttons">
