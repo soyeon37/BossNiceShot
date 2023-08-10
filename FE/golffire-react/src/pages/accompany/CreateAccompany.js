@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import Datetime from 'react-datetime';
 import moment from 'moment';
 
+import GolffieldModal from './GolffieldModal';
+
 import 'react-datetime/css/react-datetime.css';
 import "./CreateAccompany.css";
-import { GrClose } from "react-icons/gr";
 
 import flagred from '../../assets/source/icons/flag-red.png';
 import flagwhite from '../../assets/source/icons/flag-white.png';
@@ -18,7 +19,6 @@ function CreateAccompany() {
     const [value, setValue] = useState('');
     const [accompanyDate, setAccompanyDate] = useState(null);
     const [accompanyPlace, setAccompanyPlace] = useState(0);
-    const [temporaryPlace, setTemporaryPlace] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [endDate, setEndDate] = useState(null);
     const [maxParticipants, setMaxParticipants] = useState('');
@@ -27,11 +27,6 @@ function CreateAccompany() {
 
     const toggleModal = () => {
         setIsVisible(!isVisible);
-    }
-
-    const setAndToggleModal = () => {
-        setAccompanyPlace(temporaryPlace);
-        toggleModal();
     }
 
     // "등록하기" 버튼 클릭 이벤트를 처리하는 함수
@@ -172,28 +167,10 @@ function CreateAccompany() {
 
             {/* 골프장 선택 Modal */}
             {isVisible &&
-                <div id='SelectGolffield'>
-                    <div id='golffield-modal'>
-                        <div id='modal-header'>
-                            <div id="modal-title">
-                                골프장 선택
-                            </div>
-                            <h1><GrClose size={30} onClick={toggleModal} /></h1>
-                        </div>
-                        <div id='modal-body'></div>
-                        <div id='modal-footer'>
-                            <button
-                                className='modal-button cancel'
-                                onClick={toggleModal}>
-                                취소
-                            </button><button
-                                className='modal-button confirm'
-                                onClick={setAndToggleModal}>
-                                적용
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <GolffieldModal
+                    toggleModal={toggleModal}
+                    setAccompanyPlace={setAccompanyPlace}
+                />
             }
         </div>
 
