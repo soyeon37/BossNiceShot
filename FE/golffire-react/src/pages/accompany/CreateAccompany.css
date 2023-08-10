@@ -1,0 +1,243 @@
+/* CreateAccompany */
+#CreateAccompany {
+    height: calc(100vh - 4rem);
+    display: flex;
+
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.createA-container {
+    width: 100%;
+    height: 100%;
+}
+
+.createA-head {
+    width: 100%;
+    height: 100px;
+    padding: 20px 0px;
+
+    color: #000;
+    font-family: Inter;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.createA-body {
+    width: 100%;
+    height: calc(100% - 100px);
+
+    display: flex;
+    justify-content: center;
+}
+
+.createA-mainbox {
+    width: 700px;
+    height: 750px;
+
+    border-radius: 50px;
+    border: 2px solid #000;
+    box-shadow: 20px 20px 0px 0px #000;
+    background: #fff;
+
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.createA-title {
+    height: 40px;
+    width: 640px;
+    border: 1px solid #000;
+    padding: 10px 48px;
+    /* 텍스트 입력과 테두리 사이의 간격을 주기 위한 padding 추가 */
+    box-sizing: border-box;
+}
+
+.createA-content {
+    width: 640px;
+    height: 540px;
+    border: 1px solid #000;
+    padding: 10px 48px;
+    /* 텍스트 입력과 테두리 사이의 간격을 주기 위한 padding 추가 */
+    box-sizing: border-box;
+    /* 요소의 크기에 padding과 border를 포함시킴 */
+}
+
+.createA-password {
+    width: 640px;
+    height: 40px;
+    border: 1px solid #000;
+    padding: 5px 48px 5px 48px;
+    display: flex;
+    /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+    justify-content: space-between;
+    /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+    align-items: center;
+    /* 수평 가운데 정렬 */
+}
+
+.createA-password input {
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+}
+
+.createA-num {
+    width: 640px;
+    height: 40px;
+    border: 1px solid #000;
+    padding: 5px 48px 5px 48px;
+    display: flex;
+    /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+    justify-content: space-between;
+    /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+    align-items: center;
+    /* 수평 가운데 정렬 */
+}
+
+.createA-num input {
+    height: 30px;
+    text-align: center;
+    padding: 5px;
+}
+
+.createA-accompanydate {
+    width: 640px;
+    height: 40px;
+    border: 1px solid #000;
+    padding: 5px 48px 5px 48px;
+    display: flex;
+    /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+    justify-content: space-between;
+    /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+    align-items: center;
+    /* 수평 가운데 정렬 */
+}
+
+.createA-enddate {
+    width: 640px;
+    height: 40px;
+    border: 1px solid #000;
+    padding: 5px 48px 5px 48px;
+    display: flex;
+    /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+    justify-content: space-between;
+    /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+    align-items: center;
+    /* 수평 가운데 정렬 */
+}
+
+.createA-map {
+    width: 640px;
+    height: 40px;
+    border: 1px solid #000;
+    padding: 5px 48px 5px 48px;
+    display: flex;
+    /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+    justify-content: space-between;
+    /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+    align-items: center;
+    /* 수평 가운데 정렬 */
+}
+
+.createA-datetime-input {
+    width: 300px;
+    border: 1px solid #000;
+    justify-content: center;
+    align-items: center;
+}
+
+.createA-icon {
+    width: 640px;
+    height: 40px;
+    border: 1px solid #000;
+    padding: 5px 48px 5px 48px;
+    display: flex;
+    /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+    justify-content: space-between;
+    /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+    align-items: center;
+    /* 수평 가운데 정렬 */
+}
+
+.icon-list {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.icon img {
+    width: 30px;
+    height: 30px;
+    border: 3px solid #ccc;
+    padding: 2px;
+}
+
+.icon {
+    cursor: pointer;
+}
+
+.selected-icon {
+    border: 3px solid green;
+}
+
+.createA-buttons {
+    display: flex;
+    /* 버튼들을 가로로 나열하는 flex 컨테이너 */
+    justify-content: space-between;
+    /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
+    width: 640px;
+    /* 부모 요소의 너비와 동일하게 설정 */
+    margin: 20px 0;
+    /* 버튼들 위아래에 20px 간격 주기 */
+}
+
+/* 골프장 선택 Modal CSS */
+#SelectGolffield {
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(122, 122, 122, 0.70);
+    z-index: 1;
+
+    position: absolute;
+}
+
+#golffield-modal {
+    width: 1240px;
+    height: 800px;
+    max-width: 90%;
+    max-height: 90%;
+
+    padding: 30px;
+
+    border-radius: 50px;
+    border: 1px solid #000;
+    background: #FFF;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+}
+
+.modal-button {
+    width: 200px;
+    border-radius: 50px;
+    border: 2px solid #000;
+    background: #FFF;
+}
+
+.cancel {
+    background-color: #F24141;
+    color: #FFF;
+}
+
+.confirm {
+    background-color: #3BD641;
+    color: #FFF;
+    margin-left: 10px;
+}
