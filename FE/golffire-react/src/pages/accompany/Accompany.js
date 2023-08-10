@@ -1,6 +1,6 @@
 import React from "react";
 import AccompanyList from "./AccompanyList";
-import "./accompany.css";
+import "./Accompany.css";
 
 function Accompany() {
   return (

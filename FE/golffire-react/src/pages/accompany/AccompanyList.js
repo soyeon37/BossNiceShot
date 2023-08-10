@@ -5,7 +5,6 @@ import AccompanySearch from "./AccompanySearch";
 
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
-import "./accompany.css";
 
 function AccompanyList() {
   const [accompanyList, setAccompanyList] = useState([{}, {}, {}, {}, {}, {}]);
