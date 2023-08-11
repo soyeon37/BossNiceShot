@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/api/members/checkNickname")
                 || request.getRequestURI().equals("/api/notification/**")
                 || request.getRequestURI().startsWith("/api/ws")
-                || request.getRequestURI().equals("/api/api/sessions")
+                || request.getRequestURI().equals("/api/sessions")
                 || request.getRequestURI().equals("/api/sessions/**")
                 || request.getRequestURI().equals("/api/study/sessions")
                 || request.getRequestURI().equals("/api/sessions/SessionA/connections")){
