@@ -1,16 +1,17 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
+import { Splide, SplideSlide } from "@splidejs/react-splide";
 import React, { Component } from 'react';
-import ChatComponent from './chat/ChatComponent';
 import DialogExtensionComponent from './dialog-extension/DialogExtension';
 import StreamComponent from './stream/StreamComponent';
-import './VideoRoomComponent.css';
-import Button from "@mui/material/Button";
-import Skeleton from "@mui/material/Skeleton";
-
 import OpenViduLayout from './layout/openvidu-layout';
 import UserModel from './models/user-model';
 import ToolbarComponent from './toolbar/ToolbarComponent';
+import "@splidejs/react-splide/css";
+import './VideoRoomComponent.css';
+// import ChatComponent from './chat/ChatComponent';
+// import Button from "@mui/material/Button";
+// import Skeleton from "@mui/material/Skeleton";
 
 // 유저 생성
 var localUser = new UserModel();
@@ -611,7 +612,6 @@ class VideoRoomComponent extends Component {
 					localUser.getStreamManager() !== undefined && 
 						(isEntered ? (
 							<div>
-								<hr className="hr" />
 								<div className="enterbox-head">
 									<div className="roomtype">
 										<span className="typename">코칭</span>
@@ -620,11 +620,52 @@ class VideoRoomComponent extends Component {
 									<div className="copy-url" onClick={CopyUrl}></div>
 									<div className="go-back" onClick={goBack}></div>
 								</div>
-								<div className="divnext">
+								<div className="roombox-body">
+									<div className="grid-room room1">
+										<div className="me">
+											<StreamComponent
+												user={localUser}
+												handleNickname={this.nicknameChanged}
+												isMe={true}
+											/>
+										</div>
+									</div>
 									{localUser !== undefined &&
 										localUser.getStreamManager() !== undefined && (
-											<div className="me">
-												{this.state.subscribers.map((sub, i) => (
+											<div className="grid-room room2">
+												<div className="box-splide">
+													<Splide
+														style={{
+															display: "flex",
+															justifyContent: "center",
+															alignItems: "center",
+														}}
+														options={{
+															type: 'slide',
+															rewind: true, // 무한 루프 활성화
+															perPage: 3,
+															arrows: true,
+															autoplay: false, // 자동 슬라이드 비활성화
+															gap: '3px', // 슬라이드 사이 간격 없음
+															focus: 'center',
+															pagination: false,
+														}}
+													>
+														{this.state.subscribers.map((sub, i) => (
+															<SplideSlide key={i} className="other">
+																<StreamComponent 
+																	user={sub}
+																	streamId={sub.streamManager.stream.streaId}
+																	isMe={false}
+																/>
+															</SplideSlide>
+														))}
+													</Splide>
+												</div>
+												<div className="box-mainrtc">
+													나는 화면공유
+												</div>
+												{/* {this.state.subscribers.map((sub, i) => (
 													<div key={i} className="other">
 														<StreamComponent 
 															user={sub}
@@ -632,19 +673,12 @@ class VideoRoomComponent extends Component {
 															isMe={false}
 														/>
 													</div>
-												))}
-												{/* {this.state.subscribers.length === 0 ? (
-							<Skeleton variant="rounded" width={640} height={486} />
-												) : null} */}
-												<div className="right">
-													<StreamComponent
-														user={localUser}
-														handleNickname={this.nicknameChanged}
-														isMe={true}
-													/>
-												</div>
+												))} */}
 											</div>
 										)}
+										<div className="grid-room room3">
+												
+										</div>
 								</div>
 							</div>
 						) : (

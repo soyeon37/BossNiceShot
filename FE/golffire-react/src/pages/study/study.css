@@ -382,7 +382,7 @@
   align-items: center;
 }
 
-.box-splide {
+/* .box-splide {
   background-color: yellowgreen;
   width: 95%;
   height: 15%;
@@ -412,7 +412,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
 .box-chatview {
   background-color: yellowgreen;
