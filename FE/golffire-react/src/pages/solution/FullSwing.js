@@ -45,6 +45,7 @@ export default function FullSwing(
   let ellipseFactorHistory = [];
   let noiseCnt = 0;
   let Feedback = [];
+  let lastWristX = 0;
 
   useEffect(() => {
     let count_time = null;
@@ -361,22 +362,58 @@ export default function FullSwing(
         setAnalysisVideoURL(analysisVideoURL);
     };
 
+    let poseNetModel = null;
+    let hasLoadedModel = false;
+    let hasLoadedVideoMetadata = false;
+
+    window.posenet.load({
+      architecture: 'ResNet50'
+      // outputStride: 32, // Adjust based on your needs
+      // inputResolution: { width: 257, height: 200 },
+      // quantBytes: 2
+    }).then((model) => {
+      poseNetModel = model;
+      hasLoadedModel = true;
+      checkStartAnalysis();
+    });
+
     recordedVideo.addEventListener("loadedmetadata", () => {
-        window.posenet.load().then(model => {
-            if (!hasStartedAnalysis && analysisMediaRecorder.state !== 'recording') {
-              hasStartedAnalysis = true; // Set the flag to true
-              analysisMediaRecorder.start();
-              analyzeFrame(model);
-            }
-        });
+      hasLoadedVideoMetadata = true;
+      checkStartAnalysis();
     });
-
+    
+    let isAnalyzingCurrentFrame = false;
     recordedVideo.addEventListener("timeupdate", () => {
-        window.posenet.load().then(model => {
-            analyzeFrame(model);
-        });
+      if (poseNetModel && !isAnalyzingCurrentFrame) {
+        isAnalyzingCurrentFrame = true;
+        analyzeFrame(poseNetModel);
+      }
     });
 
+    function checkStartAnalysis() {
+      if (hasLoadedModel && hasLoadedVideoMetadata && !hasStartedAnalysis && analysisMediaRecorder.state !== 'recording') {
+        hasStartedAnalysis = true; // Set the flag to true
+        analysisMediaRecorder.start();
+        analyzeFrame(poseNetModel);
+      }
+    }
+
+    // recordedVideo.addEventListener("loadedmetadata", () => {
+    //   console.log(poseNetModel);
+    //   if (poseNetModel && !hasStartedAnalysis && analysisMediaRecorder.state !== 'recording') {
+    //     hasStartedAnalysis = true; // Set the flag to true
+    //     analysisMediaRecorder.start();
+    //     analyzeFrame(poseNetModel);
+    //   }
+    // });
+
+    // recordedVideo.addEventListener("timeupdate", () => {
+    //   if (poseNetModel) {
+    //     analyzeFrame(poseNetModel);
+    //   }
+    // });
+
+    let UniqueSet = new Set();
     function analyzeFrame(model) {
         if (recordedVideo.currentTime >= recordedVideo.duration) {
             analysisMediaRecorder.stop();
@@ -384,50 +421,64 @@ export default function FullSwing(
             return;
         }
 
+        analysisContext.clearRect(0, 0, 640, 480);
+
         // Draw the current video frame on the canvas
         analysisContext.drawImage(recordedVideo, 0, 0, 640, 480);
 
         model.estimateSinglePose(analysisCanvas).then(pose => {
+
+            const uniqueCoord = Math.round(pose.keypoints[9].position.y);
             
+            if(!checkTeleport(uniqueCoord) || lastWristX === 0) {
+              console.log(uniqueCoord);
+              // check if pose.keypoints' wrist points are noise data.
+              // let isNoiseData = checkNoiseData(pose.keypoints);
+              // if isNoiseData is true, do not count it to analysisResults. 
+              // do not count it in coordinateDatas.
+              // do not count it in Cnts.
+              // do draw this point and skeleton in Red color.
+              // check the ellipseFactor pattern of the last index data of coordinatesDatas 
+              // and check if current ellipseFactor differs from it much.
+              // if difference larger than the threshold, return isNoiseData = true.
 
-            // check if pose.keypoints' wrist points are noise data.
-            // let isNoiseData = checkNoiseData(pose.keypoints);
-            // if isNoiseData is true, do not count it to analysisResults. 
-            // do not count it in coordinateDatas.
-            // do not count it in Cnts.
-            // do draw this point and skeleton in Red color.
-            // check the ellipseFactor pattern of the last index data of coordinatesDatas 
-            // and check if current ellipseFactor differs from it much.
-            // if difference larger than the threshold, return isNoiseData = true.
+              // console.log(ellipseFactorHistory);
+              // console.log(!checkNoiseData(pose.keypoints[9].position, pose.keypoints[10].position));
+              if(
+                !checkNoiseData(
+                  (pose.keypoints[9].position.x + pose.keypoints[10].position.x) / 2, 
+                  (pose.keypoints[9].position.y + pose.keypoints[10].position.y) / 2)) {
+                totalEllipseCnt++;
+                const resultArray = analyzePose(pose);
+                analysisResults.push(resultArray);
+                coordinateDatas.push(pose.keypoints);
+                onEllipseCnt += resultArray[0];
+                onHipCnt += resultArray[1];
+                onHeadCnt += resultArray[2];
+                onShoulderCnt += resultArray[3];
+                onKneeCnt += resultArray[4];
 
-            // console.log(ellipseFactorHistory);
-            // console.log(!checkNoiseData(pose.keypoints[9].position, pose.keypoints[10].position));
-            if(
-              !checkNoiseData(
-                (pose.keypoints[9].position.x + pose.keypoints[10].position.x) / 2, 
-                (pose.keypoints[9].position.y + pose.keypoints[10].position.y) / 2)) {
-              totalEllipseCnt++;
-              const resultArray = analyzePose(pose);
-              analysisResults.push(resultArray);
-              coordinateDatas.push(pose.keypoints);
-              onEllipseCnt += resultArray[0];
-              onHipCnt += resultArray[1];
-              onHeadCnt += resultArray[2];
-              onShoulderCnt += resultArray[3];
-              onKneeCnt += resultArray[4];
-              drawKeypoints(pose.keypoints, 0.1, analysisContext);
-              drawSkeleton(pose.keypoints, 0.1, analysisContext);
+                if(resultArray[0] === 1) {
+                  drawKeypointsColor(pose.keypoints, 0.1, analysisContext, "#3bd641");
+                  drawSkeletonColor(pose.keypoints, 0.1, analysisContext, "#3bd641");
+                }
+                else {
+                  drawKeypointsColor(pose.keypoints, 0.1, analysisContext, "red");
+                  drawSkeletonColor(pose.keypoints, 0.1, analysisContext, "red");
+                }
+                
+              }
+
+              // if(isNoiseData) draw Points and Skeleton in Red color.
+              else {
+                noiseCnt++;
+                drawKeypointsColor(pose.keypoints, 0.1, analysisContext, "silver");
+                drawSkeletonColor(pose.keypoints, 0.1, analysisContext, "silver");
+              }
             }
-
-            // if(isNoiseData) draw Points and Skeleton in Red color.
-            else {
-              noiseCnt++;
-              drawNoiseKeypoints(pose.keypoints, 0.1, analysisContext);
-              drawNoiseSkeleton(pose.keypoints, 0.1, analysisContext);
-            }
-
             // Move to the next frame
-            recordedVideo.currentTime += 1/30;
+            isAnalyzingCurrentFrame = false;
+            recordedVideo.currentTime += 1/40;
         });
     }
 
@@ -465,6 +516,7 @@ export default function FullSwing(
         ellipseFactorHistory = [];
         noiseCnt = 0;
         Feedback = [];
+        lastWristX = 0;
     }
   }
 
@@ -502,7 +554,6 @@ export default function FullSwing(
   }
   function checkHip(HipX, HipY) {
     const dist = Math.sqrt((HipX - initialHipX)**2 + (HipY - initialHipY)**2);
-    console.log(dist);
     if (dist <= 20) return 1;
     return 0;
   }
@@ -527,31 +578,25 @@ export default function FullSwing(
     const n = Math.min(ellipseFactorHistory.length, 5);
     const sumOfLastNValues = ellipseFactorHistory.slice(-n).reduce((sum, value) => sum + value, 0);
     const averageOfLastNValues = sumOfLastNValues / n;
-    const threshold = 0.75; // Adjust this value based on your requirements
+    const threshold = 0.5; // Adjust this value based on your requirements
 
     if (Math.abs(ellipseFactor - averageOfLastNValues) / averageOfLastNValues > threshold) return true;
     else {
       ellipseFactorHistory.push(ellipseFactor);
       return false;
     }
-    // if (n > 5) {
-    //   const sumOfLastNValues = ellipseFactorHistory.slice(-n).reduce((sum, value) => sum + value, 0);
-    //   const averageOfLastNValues = sumOfLastNValues / n;
-    //   const threshold = 0.5; // Adjust this value based on your requirements
-
-    //   if (Math.abs(ellipseFactor - averageOfLastNValues) / averageOfLastNValues > threshold) return true;
-    //   else {
-    //     ellipseFactorHistory.push(ellipseFactor);
-    //     return false;
-    //   }
-    // }
-    // ellipseFactorHistory.push(ellipseFactor);
-    // return false;
+  }
+  function checkTeleport(WristX) {
+    if(Math.abs(WristX - lastWristX) >= 30) {
+      return true;
+    }
+    lastWristX = WristX;
+    return false;
   }
 
   // tensorflow에서 제공하는 js 파트
   const boundingBoxColor = "white";
-  const lineWidth = 3;
+  const lineWidth = 5;
   function toTuple({ y, x }) {
     return [y, x];
   }
@@ -611,7 +656,7 @@ export default function FullSwing(
     ctx.stroke();
   }
 
-  function drawNoiseSkeleton(keypoints, minConfidence, ctx, scale = 1) {
+  function drawSkeletonColor(keypoints, minConfidence, ctx, inputColor, scale = 1) {
     const adjacentKeyPoints = window.posenet.getAdjacentKeyPoints(
       keypoints,
       minConfidence
@@ -620,21 +665,21 @@ export default function FullSwing(
       drawSegment(
         toTuple(keypoints[0].position),
         toTuple(keypoints[1].position),
-        "red",
+        inputColor,
         scale,
         ctx
       );
     });
   }
 
-  function drawNoiseKeypoints(keypoints, minConfidence, ctx, scale = 1) {
+  function drawKeypointsColor(keypoints, minConfidence, ctx, inputColor, scale = 1) {
     for (let i = 0; i < keypoints.length; i++) {
       const keypoint = keypoints[i];
       if (keypoint.score < minConfidence) {
         continue;
       }
       const { y, x } = keypoint.position;
-      drawPoint(ctx, y * scale, x * scale, 3, "red");
+      drawPoint(ctx, y * scale, x * scale, 5, inputColor);
     }
   }
 }
