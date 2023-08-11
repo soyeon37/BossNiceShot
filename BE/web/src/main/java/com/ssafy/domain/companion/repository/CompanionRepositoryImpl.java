@@ -28,14 +28,14 @@ public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
     public Page<Companion> searchAll(CompanionSearchRequest companionSearchRequest, Pageable pageable) {
         List<Companion> result = queryFactory
                 .selectFrom(companion)
-                .leftJoin(companion.member, member).on(companion.member.nickname.eq(companionSearchRequest.memberNickname()))
-                .leftJoin(follow)
+                .leftJoin(companion.member, member)
                 .fetchJoin()
                 .where(
                         eqTitle(companionSearchRequest.title()),
                         eqMemberNickname(companionSearchRequest.memberNickname()),
                         eqDescription(companionSearchRequest.description()),
-                        eqTeeBox(companionSearchRequest.teeBox())
+                        eqTeeBox(companionSearchRequest.teeBox()),
+                        companion.member.id.in(getFolloweeList(companionSearchRequest.followerId()))
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
@@ -49,7 +49,8 @@ public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
                         eqTitle(companionSearchRequest.title()),
                         eqMemberNickname(companionSearchRequest.memberNickname()),
                         eqDescription(companionSearchRequest.description()),
-                        eqTeeBox(companionSearchRequest.teeBox())
+                        eqTeeBox(companionSearchRequest.teeBox()),
+                        companion.member.id.in(getFolloweeList(companionSearchRequest.followerId()))
                 );
 
         return PageableExecutionUtils.getPage(result, pageable, countQuery::fetchOne);
@@ -73,6 +74,21 @@ public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
 
     private BooleanExpression eqFollowerId(String followerId) {
         return followerId == null ? null : follow.follower.id.eq(followerId);
+    }
+
+    private List<String> getFolloweeList(String followerId){
+        if (followerId == null)
+            return null;
+
+        List<String> followeeList = queryFactory
+                .select(follow.followee.id)
+                .from(follow)
+                .where(
+                        eqFollowerId(followerId)
+                )
+                .fetch();
+
+        return followeeList;
     }
 }
 
