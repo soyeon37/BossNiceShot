@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.ssafy.domain.companion.entity.QCompanion.companion;
@@ -35,7 +36,9 @@ public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
                         eqMemberNickname(companionSearchRequest.memberNickname()),
                         eqDescription(companionSearchRequest.description()),
                         eqTeeBox(companionSearchRequest.teeBox()),
-                        companion.member.id.in(getFolloweeList(companionSearchRequest.followerId()))
+                        companion.member.id.in(getFolloweeList(companionSearchRequest.followerId())),
+                        companion.teeUpTime.gt(LocalDateTime.now()),
+                        companion.capacity.gt(companion.companionUsers.size())
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())

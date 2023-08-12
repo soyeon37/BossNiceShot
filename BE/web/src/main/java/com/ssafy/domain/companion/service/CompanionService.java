@@ -38,8 +38,7 @@ public class CompanionService {
                         companionUpdateRequest.field(),
                         companionUpdateRequest.teeBox(),
                         companionUpdateRequest.capacity(),
-                        LocalDateTime.parse(companionUpdateRequest.teeUpTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-                        LocalDateTime.parse(companionUpdateRequest.applicationDeadline(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))),
+                        LocalDateTime.parse(companionUpdateRequest.teeUpTime(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))),
                         () -> { throw new EntityNotFoundException(); });
 
         return findById(companionId);

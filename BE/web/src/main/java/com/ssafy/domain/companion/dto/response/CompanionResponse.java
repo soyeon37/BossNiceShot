@@ -15,7 +15,6 @@ public record CompanionResponse(
 		@NotNull Integer capacity,
 		@NotNull Integer companionUerCount,
 		@NotNull String teeUpTime,
-		@NotNull String applicationDeadline,
 		@NotNull String memberId,
 		@NotNull String memberNickname
 ) {
@@ -29,7 +28,6 @@ public record CompanionResponse(
 				companion.getCapacity(),
 				companion.getCompanionUsers().size(),
 				companion.getTeeUpTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-				companion.getApplicationDeadline().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
 				companion.getMember().getId(),
 				companion.getMember().getNickname()
 		);
