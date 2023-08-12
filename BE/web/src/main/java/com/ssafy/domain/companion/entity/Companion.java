@@ -41,9 +41,6 @@ public class Companion extends BaseTime {
     @Column(columnDefinition = "datetime", nullable = false)
     private LocalDateTime teeUpTime;
 
-    @Column(columnDefinition = "datetime", nullable = false)
-    private LocalDateTime applicationDeadline;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
@@ -52,24 +49,22 @@ public class Companion extends BaseTime {
     private List<CompanionUser> companionUsers = new ArrayList<>();
 
     @Builder
-    public Companion(String title, String description, Integer field, TeeBox teeBox, Integer capacity, LocalDateTime teeUpTime, LocalDateTime applicationDeadline, Member member) {
+    public Companion(String title, String description, Integer field, TeeBox teeBox, Integer capacity, LocalDateTime teeUpTime, Member member) {
         this.title = title;
         this.description = description;
         this.field = field;
         this.teeBox = teeBox;
         this.capacity = capacity;
         this.teeUpTime = teeUpTime;
-        this.applicationDeadline = applicationDeadline;
         this.member = member;
     }
 
-    public void update(String title, String description, Integer field, TeeBox teeBox, Integer capacity, LocalDateTime teeUpTime, LocalDateTime applicationDeadline){
+    public void update(String title, String description, Integer field, TeeBox teeBox, Integer capacity, LocalDateTime teeUpTime){
         this.title = title;
         this.description = description;
         this.field = field;
         this.teeBox = teeBox;
         this.capacity = capacity;
         this.teeUpTime = teeUpTime;
-        this.applicationDeadline = applicationDeadline;
     }
 }

@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface CompanionRepository extends JpaRepository<Companion, Long>, CompanionRepositoryCustom {
-    @Query(value = "select c from Companion c where c.applicationDeadline > now() and c.capacity > size(c.companionUsers) order by c.createdTime desc",
+    @Query(value = "select c from Companion c where c.teeUpTime > now() and c.capacity > size(c.companionUsers) order by c.createdTime desc",
             countQuery = "select count(c) from Companion c")
     Page<Companion> findPaging(Pageable pageable);
 
