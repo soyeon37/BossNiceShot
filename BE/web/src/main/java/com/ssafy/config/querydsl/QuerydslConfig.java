@@ -1,4 +1,4 @@
-package com.ssafy.config.Querydsl;
+package com.ssafy.config.querydsl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;

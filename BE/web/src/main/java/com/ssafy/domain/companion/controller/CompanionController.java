@@ -82,4 +82,10 @@ public class CompanionController {
 	public ResponseEntity<List<SimpleCompanionResponse>> pastList(@PathVariable String memberId) {
 		return ResponseEntity.ok(companionService.findPastByCompanionUserMemberId(memberId).stream().map(SimpleCompanionResponse::from).toList());
 	}
+
+	@Operation(summary = "동행 모집 인기 골프장 5개 조회", description = "동행 모집이 가장 많이 수행된 골프장 5개를 인기순으로 정렬한다.")
+	@GetMapping("/field")
+	public ResponseEntity<List<Integer>> fieldList() {
+		return ResponseEntity.ok(companionService.findFieldOrderByCountDesc());
+	}
 }
