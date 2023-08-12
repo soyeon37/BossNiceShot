@@ -22,16 +22,92 @@
   background: #FFF;
 }
 
-.accompany-room {
+/* AccompanyBox CSS */
+.accompany-box {
   width: 480px;
   height: 220px;
-  max-width: 100%;
+  max-width: 48%;
 
-  border: 1px solid #000;
   margin: 10px 5px;
+  padding: 20px;
   border-radius: 20px;
+  border: 1px solid #000;
+
+  display: flex;
+  flex-direction: column;
 }
 
+.accompany-box-title {
+  color: #000;
+  font-family: Inter;
+  font-size: 25px;
+  font-weight: 600;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.accompany-box-author-position {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.accompany-box-author {
+  width: auto;
+  height: 30px;
+  padding: 10px;
+
+  border-radius: 20px;
+  background-color: #EBEBEB;
+
+  display: flex;
+  align-items: center;
+
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+}
+
+.accompany-box-date {
+  display: flex;
+  align-items: center;
+}
+
+.accompany-box-place {
+  display: flex;
+  align-items: center;
+}
+
+.accompany-box-button-position {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.accompany-box-button {
+  width: 200px;
+  height: 40px;
+  max-width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 5px;
+  cursor: pointer;
+  background-color: #FFF;
+  border-radius: 50px;
+  border: 2px solid #3CADFF;
+
+  color: #3CADFF;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* joining-room */
 .joining-room {
   height: 90%;
   width: 33%;

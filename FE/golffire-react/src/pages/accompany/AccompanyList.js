@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import AccompanyBox from "./AccompanyBox";
+import TeeRed from "../../assets/source/icons/flag-red.png";
+import TeeWhite from "../../assets/source/icons/flag-white.png";
+import TeeBlack from "../../assets/source/icons/flag-black.png";
+import TeeAll from "../../assets/source/icons/flag-all.png";
+
 import { SearchIcon, ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 
 function AccompanyList() {
-
+  // 검색을 위한 변수
   const [searchValue, setSearchValue] = useState("");
   const [searchFilter, setSearchFilter] = useState("title");
   const [selectedFollow, setSelectedFollow] = useState(false);
@@ -42,13 +48,20 @@ function AccompanyList() {
 
   // 동행 모집 리스트
   const accompanyData = [
-    { id: 1, title: "제목 1", tee: "red", placeId: 1, date: "2023.09.30 13:00" },
-    { id: 2, title: "제목 2", author: "작성자 2" },
-    { id: 3, title: "제목 3", author: "작성자 3" },
-    { id: 4, title: "제목 4", author: "작성자 4" },
-    { id: 5, title: "제목 5", author: "작성자 5" },
-    { id: 6, title: "제목 6", author: "작성자 6" },
+    { id: 1, title: "제목 1", authorId: "123456", authorNickname: "김싸피가 먹는 고구마", tee: "red", placeId: 1, date: "2023.09.30 13:00" },
+    { id: 2, title: "제목 2", authorId: "456789", authorNickname: "황싸피", tee: "white", placeId: 4, date: "2023.09.30 13:00" },
+    { id: 3, title: "제목 3", authorId: "789777", authorNickname: "한싸피", tee: "all", placeId: 5, date: "2023.09.30 13:00" },
+    { id: 4, title: "제목 4", authorId: "123123", authorNickname: "함싸피", tee: "black", placeId: 89, date: "2024.09.30 13:00" },
+    { id: 5, title: "제목 5", authorId: "999999", authorNickname: "문싸피", tee: "white", placeId: 210, date: "2023.09.30 18:00" },
+    { id: 6, title: "제목 6", authorId: "333333", authorNickname: "최싸피", tee: "red", placeId: 61, date: "2023.09.30 10:00" },
   ];
+
+  const teeMap = {
+    red: TeeRed,
+    white: TeeWhite,
+    black: TeeBlack,
+    all: TeeAll,
+  }
 
   // 처음 화면이 로딩 될 때 동행 리스트 정보 호출
   useEffect(() => {
@@ -116,7 +129,6 @@ function AccompanyList() {
           <Link to="/createaccompany">
             <div className="head-create-button bg-accompany">+ 모집하기</div>
           </Link>
-
           <div className="search-container">
             {/* 검색창 */}
             <input
@@ -154,22 +166,20 @@ function AccompanyList() {
               팔로잉
             </label>
           </div>
-
         </div>
 
         <div className="list-body">
           {getCurrentPageItems().map((accompanyRoom) => (
-            <div className="accompany-room" key={accompanyRoom.id}>
-              <div className="accroom-title">
-                <div className="accroom-title-text">{accompanyRoom.title}</div>
-                <img src="" alt={accompanyRoom.tee} />
-              </div>
-              <div className="accroom-body">
-                <div className="accroom-place">{accompanyRoom.palce}</div>
-                <div className="accroom-date">{accompanyRoom.date}</div>
-              </div>
-              <button className="accroom-button" onClick={() => handleJoinButtonClick(accompanyRoom)}>자세히 보기</button>
-            </div>
+            <AccompanyBox
+              key={accompanyRoom.id}
+              id={accompanyRoom.id}
+              title={accompanyRoom.title}
+              tee={teeMap[accompanyRoom.tee]}
+              author={accompanyRoom.authorNickname}
+              placeId={accompanyRoom.placeId}
+              date={accompanyRoom.date}
+              handleJoinButtonClick={handleJoinButtonClick}
+            />
           ))}
         </div>
 
