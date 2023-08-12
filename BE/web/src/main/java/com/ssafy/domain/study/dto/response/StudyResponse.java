@@ -16,7 +16,8 @@ public record StudyResponse(@NotNull Long id,
                             Integer password,
                             @NotNull Status status,
                             @NotNull String memberId,
-                            @NotNull String memberNickname) {
+                            @NotNull String memberNickname,
+                            @NotNull String memberImage) {
     public static StudyResponse from(Study study) {
         return new StudyResponse(
                 study.getId(),
@@ -29,7 +30,8 @@ public record StudyResponse(@NotNull Long id,
                 study.getPassword(),
                 study.getStatus(),
                 study.getMember().getId(),
-                study.getMember().getNickname()
+                study.getMember().getNickname(),
+                study.getMember().getImage()
         );
     }
 }

@@ -72,4 +72,8 @@ public class CompanionService {
     public List<Companion> findPastByCompanionUserMemberId(String memberId) {
         return companionRepository.findPastByCompanionUserMemberId(memberId);
     }
+
+    public List<Integer> findFieldOrderByCountDesc() {
+        return companionRepository.findFieldOrderByCountDesc();
+    }
 }

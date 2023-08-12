@@ -38,15 +38,15 @@ public class Companion extends BaseTime {
     @Column(nullable = false)
     private Integer capacity;
 
+    @Column(nullable = false)
+    private Integer companionUserCount;
+
     @Column(columnDefinition = "datetime", nullable = false)
     private LocalDateTime teeUpTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
-
-    @OneToMany(mappedBy = "companion", cascade = CascadeType.ALL)
-    private List<CompanionUser> companionUsers = new ArrayList<>();
 
     @Builder
     public Companion(String title, String description, Integer field, TeeBox teeBox, Integer capacity, LocalDateTime teeUpTime, Member member) {
@@ -55,6 +55,7 @@ public class Companion extends BaseTime {
         this.field = field;
         this.teeBox = teeBox;
         this.capacity = capacity;
+        companionUserCount = 0;
         this.teeUpTime = teeUpTime;
         this.member = member;
     }
@@ -66,5 +67,13 @@ public class Companion extends BaseTime {
         this.teeBox = teeBox;
         this.capacity = capacity;
         this.teeUpTime = teeUpTime;
+    }
+
+    public void acceptUser() {
+        companionUserCount++;
+    }
+
+    public void leaveUser() {
+        companionUserCount--;
     }
 }
