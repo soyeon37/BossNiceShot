@@ -34,6 +34,222 @@
   font-weight: 400;
 }
 
+/* Interactive Pagination CSS */
+/* 골프장, 스터디, 동행 모집 CSS  */
+.container {
+  width: 100%;
+  height: calc(100vh - 4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.container-head {
+  width: 700px;
+  min-height: 150px;
+  max-width: 36%;
+
+  margin-bottom: 20px;
+  padding: 20px;
+
+  border-radius: 30px;
+  border: 2px solid #000;
+  background: #FFF;
+}
+
+.container-head-title {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 36px;
+  font-weight: 600;
+}
+
+.container-head-desc {
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.container-body {
+  width: 100%;
+  height: calc(100% - 200px);
+}
+
+.list-container {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+}
+
+/* 리스트 본체 */
+/* 미선택 시 */
+.list-container-list-unselected {
+  width: 90%;
+  height: 650px;
+  max-width: 1820px;
+
+  padding: 20px;
+  border-radius: 50px;
+  border: 2px solid #000;
+
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 선택 시 */
+.list-container-list-selected {
+  width: 60%;
+  height: 650px;
+  max-width: 1050px;
+
+  padding: 20px;
+  border-radius: 50px;
+  border: 2px solid #000;
+
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-head {
+  width: 100%;
+  height: 50px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head-create-button {
+  width: 120px;
+  height: 50px;
+
+  border-radius: 50px;
+  border: 1px solid #000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.search-container {
+  width: 68%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-input-box {
+  width: 500px;
+  height: 50px;
+  min-width: 200px;
+
+  margin-right: 10px;
+  padding: 10px;
+
+  box-shadow: none;
+  border-radius: 10px;
+  background: #F7F7F7;
+}
+
+.list-body {
+  width: 100%;
+  height: 510px;
+
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+
+  overflow: auto;
+}
+
+.list-footer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 리스트 선택 시 등장하는 내용 */
+.selected-container {
+  width: 33%;
+  height: 650px;
+  max-width: 700px;
+
+  margin-left: 2%;
+
+  padding: 20px;
+  border-radius: 50px;
+  background-color: #FFF;
+  border: 2px solid #000;
+}
+
+/* Color CSS */
+.bg-accompany {
+  background-color: #80CAFF;
+}
+
+.bg-golffield {
+  background-color: #FF8A8A;
+}
+
+.bg-coach {
+  background-color: #78CB50;
+}
+
+.bg-learn {
+  background-color: #FFE000;
+}
+
+/* Shadow CSS */
+.shadow-accompany {
+  box-shadow: 10px 10px 0px 0px #80CAFF;
+}
+
+.shadow-golffield {
+  box-shadow: 10px 10px 0px 0px #FF8A8A;
+}
+
+.shadow-coach {
+  box-shadow: 10px 10px 0px 0px #78CB50;
+}
+
+.shadow-learn {
+  box-shadow: 10px 10px 0px 0px #FFE000;
+}
+
+.list-background-div {
+  position: fixed;
+  top: 274px;
+  left: calc(50% + 20px);
+  transform: translateX(-50%);
+  
+  width: 90%;
+  height: 650px;
+  max-width: 1820px;
+  border: 2px solid #000;
+  
+  border-radius: 50px;
+  z-index: -1;
+}
+
 /* Common CSS */
 .margin-top-20 {
   margin-top: 20px;
@@ -41,6 +257,15 @@
 
 .cursor-able {
   cursor: pointer;
+}
+
+.checkbox-div {
+  white-space: nowrap;
+}
+
+.checkbox {
+  box-shadow: none;
+  margin: 0px 5px 0px 10px;
 }
 
 /* Footer */
