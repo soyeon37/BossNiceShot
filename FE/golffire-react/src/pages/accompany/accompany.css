@@ -6,8 +6,8 @@
 
 /* AccompanyList.js */
 .search-filter {
-  height: 50px;
-  min-width: 100px;
+  height: 45px;
+  min-width: 150px;
   margin-left: 10px;
 
   border-radius: 50px;
@@ -19,19 +19,20 @@
 }
 
 .search-filter option {
+  text-align: center;
   background: #FFF;
 }
 
 /* AccompanyBox CSS */
 .accompany-box {
   width: 480px;
-  height: 220px;
-  max-width: 48%;
+  min-height: 210px;
 
-  margin: 10px 5px;
-  padding: 20px;
-  border-radius: 20px;
-  border: 1px solid #000;
+  margin: 10px 10px;
+  padding: 10px 30px;
+  
+  border-radius: 30px;
+  border: 2px solid #000;
 
   display: flex;
   flex-direction: column;
@@ -42,32 +43,12 @@
   font-family: Inter;
   font-size: 25px;
   font-weight: 600;
+  
+  margin-bottom: 5px;
 
   display: flex;
   justify-content: space-between;
-}
-
-.accompany-box-author-position {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.accompany-box-author {
-  width: auto;
-  height: 30px;
-  padding: 10px;
-
-  border-radius: 20px;
-  background-color: #EBEBEB;
-
-  display: flex;
   align-items: center;
-
-  color: #000;
-  text-align: center;
-  font-family: Inter;
-  font-size: 16px;
 }
 
 .accompany-box-date {
@@ -82,6 +63,7 @@
 
 .accompany-box-button-position {
   width: 100%;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
 }
