@@ -12,7 +12,7 @@ function parseGolfId(golfId) {
       return item.사업장명;
     }
   }
-  return "";
+  return "정보 없음";
 }
 
 export default parseGolfId;
