@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
-import parseGolfId from "../golffield/ParseGolfId";
 import ProfileImg from "../../assets/source/imgs/favicon.png";
 import { MdSportsGolf } from "react-icons/md";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-function AccompanyBox({ title, id, tee, author, placeId, date, handleJoinButtonClick }) {
+function AccompanyBox({ title, id, tee, author, place, date, handleSelectButtonClick }) {
 
 
     return (
@@ -14,8 +13,8 @@ function AccompanyBox({ title, id, tee, author, placeId, date, handleJoinButtonC
                 {title}
                 <img className="tee-icon" src={tee} alt="tee-image" />
             </div>
-            <div className="accompany-box-author-position">
-                <div className="accompany-box-author">
+            <div className="box-author-position">
+                <div className="box-author">
                     <img className="profile-icon" src={ProfileImg} alt={`$author님`} />
                     {author}
                 </div>
@@ -25,11 +24,11 @@ function AccompanyBox({ title, id, tee, author, placeId, date, handleJoinButtonC
                 {date}
             </div>
             <div className="accompany-box-place">
-                <FaMapMarkerAlt className="react-icon" />
-                {parseGolfId(placeId)}
+                <FaMapMarkerAlt className="react-icon" color="red" />
+                {place}
             </div>
             <div className="accompany-box-button-position">
-                <div className="accompany-box-button" onClick={() => handleJoinButtonClick(id)}>
+                <div className="accompany-box-button" onClick={() => handleSelectButtonClick(id)}>
                     자세히 보기
                 </div></div>
         </div >
