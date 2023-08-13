@@ -13,6 +13,7 @@ import flagred from '../../assets/source/icons/flag-red.png';
 import flagwhite from '../../assets/source/icons/flag-white.png';
 import flagblack from '../../assets/source/icons/flag-black.png';
 import flagall from '../../assets/source/icons/flag-all.png';
+import PinImg from "../../assets/source/icons/pin.png";
 
 function CreateAccompany() {
 
@@ -64,11 +65,19 @@ function CreateAccompany() {
     };
 
     return (
-        <div id="CreateAccompany">
-            <div className='createA-head'>
-                동행 모집하기
+        <div id="CreateAccompany" className='create-container'>
+            <div className="container-head shadow-accompany">
+                <div className="container-head-title">
+                    동행 모집하기
+                    </div>
+                <div className="container-head-desc">
+                    원하는 날짜와 장소에 같이 갈 동행을 구해보아요.
+                </div>
             </div>
-            <div className='createA-body'>
+            <img className="list-head-pin" src={PinImg} alt="pin" />
+            <div className="list-head-shadow bg-accompany"></div>
+
+            <div className='create-body'>
                 <div className='createA-mainbox'>
                     <input
                         type="text"
@@ -170,7 +179,7 @@ function CreateAccompany() {
                     </div>
                 </div>
             </div>
-
+            <div className='create-body-shadow bg-shadow'></div>
 
             {/* 골프장 선택 Modal */}
             {isVisible &&

@@ -1,5 +1,7 @@
 import React from "react";
 import AccompanyList from "./AccompanyList";
+
+import PinImg from "../../assets/source/icons/pin.png";
 import "./Accompany.css";
 
 function Accompany() {
@@ -11,6 +13,9 @@ function Accompany() {
           원하는 날짜와 장소에 같이 갈 동행을 구해보아요.
         </div>
       </div>
+      <img className="list-head-pin" src={PinImg} alt="pin" />
+      <div className="list-head-shadow bg-accompany"></div>
+
       <div className="container-body">
         <AccompanyList />
       </div>

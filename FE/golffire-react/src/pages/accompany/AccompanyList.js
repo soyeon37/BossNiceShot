@@ -9,7 +9,6 @@ import TeeRed from "../../assets/source/icons/flag-red.png";
 import TeeWhite from "../../assets/source/icons/flag-white.png";
 import TeeBlack from "../../assets/source/icons/flag-black.png";
 import TeeAll from "../../assets/source/icons/flag-all.png";
-import PinImg from "../../assets/source/icons/pin.png";
 
 import { MdSportsGolf } from "react-icons/md";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -157,8 +156,6 @@ function AccompanyList() {
     <div className="list-container">
       <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
         <div className="list-head">
-          <img className="list-head-pin" src={PinImg} alt="pin" />
-
           <Link to="/createaccompany">
             <div className="head-create-button bg-accompany">+ 모집하기</div>
           </Link>
@@ -211,8 +208,6 @@ function AccompanyList() {
           </div>
 
         </div>
-        <div className="list-head-shadow bg-accompany"></div>
-
         <div className={isSelected ? 'list-body-selected' : 'list-body-unselected'}>
           {getCurrentPageItems().map((accompanyRoom) => (
             <AccompanyBox
@@ -287,26 +282,11 @@ function AccompanyList() {
             </div>
           </div>
           <div className="selected-container-footer">
-            <button className="button bg-accompany"> 참여하기</button>
+            <Link to={`/accompanyroom/${selectedContent.id}`}>
+              <button className="button bg-accompany"> 참여하기</button>
+            </Link>
           </div>
         </div>
-
-        // <div className="joining-room">
-        //   <div onClick={() => setIsJoining(false)}>닫기</div>
-        //   <div className="joining-title">{selectedRectangle.title}</div>
-        //   <div className="joining-author">
-        //     <div className="joining-author-box">작성자: {selectedRectangle.author}</div>
-        //   </div>
-        //   <div className="joining-description">
-        //     방설명{selectedRectangle.description} {/* 설명이 여기에 들어감 */}
-        //   </div>
-        //   <div className="joining-button">
-        //     <Link to={`/accompanyroom/${selectedRectangle.id}`}>
-        //       <button>참여하기</button>
-        //     </Link>
-        //   </div>
-
-        // </div>
       )}
 
       {/* 배경 div */}
