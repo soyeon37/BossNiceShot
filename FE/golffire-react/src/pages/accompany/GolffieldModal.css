@@ -179,7 +179,7 @@
     background-color: rgba(122, 122, 122, 0.70);
     z-index: 1;
 
-    position: absolute;
+    position: fixed;
 }
 
 #golffield-modal {

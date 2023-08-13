@@ -4,17 +4,35 @@ import Datetime from 'react-datetime';
 import moment from 'moment';
 
 import GolffieldModal from './GolffieldModal';
-import parseGolfId from "../golffield/ParseGolfId";
+import { getNameById, getAddressById, getCallById } from "../golffield/ParseGolfId";
 
 import 'react-datetime/css/react-datetime.css';
+import './GolffieldModal.css';
 
 import flagred from '../../assets/source/icons/flag-red.png';
 import flagwhite from '../../assets/source/icons/flag-white.png';
 import flagblack from '../../assets/source/icons/flag-black.png';
 import flagall from '../../assets/source/icons/flag-all.png';
 import PinImg from "../../assets/source/icons/pin.png";
+import NaverLogo from "../../assets/source/icons/naver_icon.png";
+
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { BiTimeFive } from "react-icons/bi";
+import { BsArrowLeftCircle, BsArrowRightCircle, BsPeopleFill } from "react-icons/bs";
+import { IoGolf, IoCall } from "react-icons/io5";
+import { MdSportsGolf } from "react-icons/md";
 
 function CreateAccompany() {
+    // 옵션 관련 pagination 변수
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(1);
+    const isFirstPage = page === 1;
+    const isLastPage = page === 5;
+
+    const handlePageChange = (pageNum) => {
+        // if (pageNum <= limit)
+        setPage(pageNum);
+    }
 
     const [title, setTitle] = useState('');
     const [value, setValue] = useState('');
@@ -28,6 +46,12 @@ function CreateAccompany() {
 
     const toggleModal = () => {
         setIsVisible(!isVisible);
+    }
+
+    // 네이버 검색창 연결 함수
+    const searchOnNaver = () => {
+        const naverSearchUrl = `https://search.naver.com/search.naver?query=` + getNameById(accompanyPlace);
+        window.open(naverSearchUrl, '_blank');
     }
 
     // "등록하기" 버튼 클릭 이벤트를 처리하는 함수
@@ -84,16 +108,125 @@ function CreateAccompany() {
                                 <input
                                     className='create-title-input'
                                     type='text'
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
                                     placeholder='제목을 입력하세요' />
                             </div>
                             <div className='create-body-text-content'>
                                 <textarea
                                     className='create-content-textarea'
+                                    value={value}
+                                    onChange={(e) => setValue(e.target.value)}
                                     placeholder='내용을 입력하세요' />
                             </div>
                         </div>
                         <div className='create-body-option'>
+                            <div className='option-head'>
+                                {(() => {
+                                    switch (page) {
+                                        case 1:
+                                            return (
+                                                <div className='option-title'>
+                                                    <FaMapMarkerAlt className="option-title-icon" color="red" />필드
+                                                </div>
+                                            )
+                                        case 2:
+                                            return (
+                                                <div className='option-title'>
+                                                    <BiTimeFive className='option-title-icon' />티업
+                                                </div>
+                                            )
+                                        case 3:
+                                            return (
+                                                <div className='option-title'>
+                                                    <BsPeopleFill className='option-title-icon' />인원수
+                                                </div>
+                                            )
+                                        case 4:
+                                            return (
+                                                <div className='option-title'>
+                                                    <IoGolf className='option-title-icon' />티 박스
+                                                </div>
+                                            )
+                                        default: // 5
+                                            return (
+                                                <div></div>
+                                            )
 
+                                    }
+                                })()}
+                            </div>
+                            <div className='option-body'>
+                                <div className='option-left'>
+                                    <button
+                                        className='option-arrow'
+                                        disabled={isFirstPage}
+                                        onClick={() => handlePageChange(page - 1)}>
+                                        <BsArrowLeftCircle />
+                                    </button>
+                                </div>
+                                <div className='option-content'>
+                                    {(() => {
+                                        switch (page) {
+                                            case 1:
+                                                return (
+                                                    <div className='option-golf-box cursor-able' onClick={toggleModal}>
+                                                        {accompanyPlace === 0 ?
+                                                            (
+                                                                <div className='giant-plus'>+</div>
+                                                            ) : (
+                                                                <div className='option-golf-content'>
+                                                                    <div className='option-golf-title'>
+                                                                        <MdSportsGolf className="option-title-icon" />
+                                                                        {getNameById(accompanyPlace)}
+                                                                    </div>
+                                                                    <div className='option-golf-place'>
+                                                                        <FaMapMarkerAlt className='option-content-icon' color="red" />
+                                                                        {getAddressById(accompanyPlace)}
+                                                                    </div>
+                                                                    <div className='option-golf-call'>
+                                                                        <IoCall className='option-content-icon' />
+                                                                        {getCallById(accompanyPlace)}
+                                                                    </div>
+                                                                    <button className='button golf' onClick={() => searchOnNaver()}>자세히 보기</button>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </div>
+                                                )
+                                            case 2:
+                                                return (
+                                                    <div>2번임</div>
+                                                )
+                                            case 3:
+                                                return (
+                                                    <div>3번임</div>
+                                                )
+                                            case 4:
+                                                return (
+                                                    <div>4번임</div>
+                                                )
+                                            case 5:
+                                                return (
+                                                    <div>5번임</div>
+                                                )
+                                            default:
+                                                return (
+                                                    <div>디폴트</div>
+                                                )
+
+                                        }
+                                    })()}
+                                </div>
+                                <div className='option-right'>
+                                    <button
+                                        className='option-arrow'
+                                        disabled={isLastPage}
+                                        onClick={() => handlePageChange(page + 1)}>
+                                        <BsArrowRightCircle />
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className='create-main-footer'>
@@ -110,19 +243,7 @@ function CreateAccompany() {
             </div>
 
             {/* <div className='createA-mainbox'>
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        placeholder="제목"
-                        className='createA-title'
-                    />
-                    <textarea
-                        value={value}
-                        onChange={(e) => setValue(e.target.value)}
-                        placeholder="내용"
-                        className='createA-content'
-                    />
+                    
                     <div className='createA-accompanydate'>
                         <h2>동행일</h2>
                         <Datetime
@@ -160,7 +281,7 @@ function CreateAccompany() {
                             {accompanyPlace === 0 ? (
                                 <div>골프장 선택하기</div>
                             ) : (
-                                <div>{parseGolfId(accompanyPlace)} 선택 됨, 변경하기</div>
+                                <div>{getNameById(accompanyPlace)} 선택 됨, 변경하기</div>
                             )}
                         </button>
                     </div>
@@ -217,6 +338,7 @@ function CreateAccompany() {
                     setAccompanyPlace={setAccompanyPlace}
                 />
             }
+
         </div>
 
     )
