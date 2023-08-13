@@ -1,23 +1,4 @@
 /* CreateAccompany */
-#CreateAccompany {
-    width: 100%;
-    height: calc(100vh - 4rem);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-}
-
-.create-container {
-    width: 100%;
-    height: 100%;
-
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative; */
-}
 
 .createA-body {
     width: 100%;
