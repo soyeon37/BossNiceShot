@@ -8,17 +8,9 @@
 
 /* MyPageBox CSS */
 #MyPageBox {
-  margin: 10px auto 20px;
-
-  width: 1820px;
-  height: 800px;
-  max-width: 95%;
-  max-height: 95%;
-
-  border-radius: 50px;
-  border: 1px solid #000;
+  width: 100vw;
+  height: 100hw;
   background-color: #fff;
-  box-shadow: 20px 20px 0px 0px #000;
 
   display: flex;
   align-items: center;
@@ -45,7 +37,7 @@
   border-width: 0px 1px 0px 0px;
   border-color: #000;
 
-  border-radius: 50px 0px 0px 50px;
+  /* border-radius: 50px 0px 0px 50px; */
   background: #3BD641;
 }
 
@@ -138,7 +130,7 @@
   font-size: 25px;
   font-weight: bold;
   margin: 30px 0px 20px 0px;
-  height: 8%;
+  height: 40px;
 }
 
 #edit-header-start {
@@ -185,7 +177,7 @@
   margin: 0px 80px 0px 80px;
 }
 
-#edit-introduction{
+#edit-introduction {
   width: 503.19px;
 }
 
@@ -238,14 +230,15 @@
   margin-left: 10px;
   width: 90%;
 }
-#edit-golf-info1-1{
-  width: 100%;
-}
-#edit-golf-info1-2{
+
+#edit-golf-info1-1 {
   width: 100%;
 }
 
-dedit-title
+#edit-golf-info1-2 {
+  width: 100%;
+}
+
 #edit-golf-info1-header {
   margin: 23px 0px 2px 0px;
   font-size: 14px;
@@ -278,14 +271,14 @@ dedit-title
   height: 25px;
 }
 
-#edit-teebox-icon{
- font-size: 16px;
+#edit-teebox-icon {
+  font-size: 16px;
   margin-left: 10px;
   margin-bottom: 5px;
 }
 
 #edit-button-div {
-  margin-top: 15px;
+  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -322,24 +315,171 @@ dedit-title
 }
 
 #edit-pass {
-  width: 60%;
-  height: 100%;
+  width: 57%;
+  height: 90%;
+  border: 2px solid black;
+  border-radius: 50px;
+  margin: 0px 40px 0px 0px;
+}
 
+#edit-pass-text {
+  margin-top: 60px;
+}
+
+#edit-pass-header {
+  margin: 18px 0px 2px 0px;
+  font-size: 14px;
+  text-align: left;
+  padding-left: 115px;
+}
+
+#edit-pass-new,
+#edit-pass-check,
+#edit-pass-origin {
+  margin-top: 40px;
+}
+
+#input-origin,
+#input-new,
+#input-check {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-
+  padding: 0px 30px 0px 30px;
+  font-size: 16px;
+  border: 2px solid black;
+  border-radius: 50px;
+  height: 45px;
+  width: 503.19px;
+  box-shadow: none;
+  margin-left: 80px;
 }
+
+#edit-pass-button-div {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  height: 120px;
+}
+
+
 
 /* MyAccompany CSS */
 #MyAccompany {
   width: 80%;
   height: 100%;
 
+  /* background-color: #3498db; */
+  /* display: flex;
+  align-items: center; 
+  justify-content: center; */
+}
+
+#myacc-title {
+  width: auto;
+  height: 100px;
+  font-size: 25px;
+  font-weight: bold;
+  /* background-color: #E81212; */
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#myacc-toggle {
+  /* background-color: #FF7272; */
+  height: 60px;
+}
+
+#myacc-list {
+  /* background-color: blueviolet; */
+  height: calc(100% - 180px);
+  overflow: scroll;
+  margin: 0px 20px 0px 20px;
+}
+
+#myacc-body {
+  margin: 20px 40px 90px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  /* background-color: #3BD641; */
+  /* padding: 10px 20px 10px 20px; */
+}
+
+#myacc-list-div {
+  border: 2px solid black;
+  border-radius: 30px;
+  background-color: #FFF;
+  width: calc(33.3% - 40px);
+  height: 200px;
+  margin: 10px 20px 10px 20px;
+  
+  white-space: normal; /* 내용이 범위를 벗어나면 자동으로 줄바꿈 */
+}
+
+/* #myacc-list-div:hover{
+ background-color: #f3f3f3;
+ transition: background-color 0.3s ease;
+} */
+#myacc-list-div:hover{
+  border: 2px solid rgba(59, 214, 65, 1);
+  transition: background-color 0.3s ease;
+ }
+#myacc-list-top-div {
+  display: flex;
+  align-items: center;
+}
+
+#myacc-list-title {
+  font-weight: bold;
+  font-size: 25px;
+  padding: 10px 0px 0px 25px;
+  width: 100%;
+  text-align: left;
+}
+
+#myacc-list-teebox {
+  /* background-color: #3BD641; */
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding: 5px 18px 0px 0px;
+}
+
+#teebox-img {
+  width: 50px;
+  height: 50px;
+}
+
+#myacc-list-field {
+  font-weight: bold;
+  font-size: 18px;
+  display: flex;
+  padding-left: 25px;
+  padding-top: 10px;
+}
+
+#myacc-list-day {
+  font-size: 15px;
+  display: flex;
+  padding-left: 25px;
+}
+
+#myacc-list-button {
+  border: 2px solid black;
+  border-radius: 50px;
+  margin-top: 28px;
+  padding: 5px 80px;
+  background-color: #3BD641;
+  color: #FFF;
+  font-size: 15px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+#myacc-list-button:hover{
+  background-color: #FFF;
+  border-color: #3BD641;
+  color: rgba(59, 214, 65, 1);
 }
 
 /* MyChat CSS */
@@ -640,21 +780,126 @@ dedit-title
   justify-content: center;
 }
 
+#signout-box {
+  height: 90%;
+  width: 60%;
+
+
+  border: 2px solid black;
+  border-radius: 50px;
+}
+
+#signout-title {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 40px 0px 20px 0px;
+  height: 40px;
+}
+
+#reason-radio {
+  height: 100%;
+}
+
+#signout-reason-div {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+
+#signout-top {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 2px;
+}
+
+#signout-reason {
+  margin-right: 50px;
+}
+
+#reason {
+  font-size: 16px;
+}
+
+#reason-title {
+  padding-top: 43px;
+  padding-left: 10px;
+  font-size: 17px;
+}
+
+#signout-reason-text {
+  margin-top: 5px;
+}
+
+#reason-pic {
+  width: 38%;
+}
+
+#reason-ect-input {
+  border: 2px solid black;
+  box-shadow: none;
+  border-radius: 50px;
+  padding: 3px 15px 3px 15px;
+  width: 66%;
+  height: 30px;
+  margin-top: 3px;
+}
+
+#signout-button-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 17px;
+}
+
 #signout-button {
   border-radius: 50px;
-  border: 1px solid #000;
+  border: 2px solid #000;
   background: #E81212;
-
-  color: #FFF;
-  font-family: Inter;
+  width: 480px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 28px;
-  /* 140% */
+}
+
+#signout-button:hover {
+  color: #E81212;
+  background-color: #FFF;
 }
 
 
+#signout-notice {
+  text-align: left;
+  padding-left: 120px;
+  margin-top: 30px;
+  font-size: 15px;
+}
+
+#signout-notice-checkbox {
+  text-align: left;
+  padding-left: 113px;
+}
+
+#signout-checkbox-label {
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+#signout-checkbox {
+  vertical-align: middle;
+  margin-right: 3px;
+  width: 17px;
+  height: 17px;
+  background-color: #3BD641;
+}
+
+/* MyPageNavbar */
 .nav-title {
   margin: 30px 10px 10px 10px;
   font-weight: 600;
@@ -782,11 +1027,10 @@ li {
 #profile-title {
   padding-top: 20px;
   width: 100%;
-  height: 13%;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: #FF7272; */
   font-weight: 600;
   font-size: 27px;
 }

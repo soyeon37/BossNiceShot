@@ -1,8 +1,8 @@
 package com.ssafy.domain.study.entity;
 
 import com.ssafy.audit.BaseTime;
-import com.ssafy.domain.Member.entity.Member;
-import com.ssafy.domain.studyUser.entity.StudyUser;
+import com.ssafy.common.Status;
+import com.ssafy.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -46,12 +46,12 @@ public class Study extends BaseTime {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
-    private List<StudyUser> studyUsers = new ArrayList<>();
-    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    private List<StudyUser> studyUsers = new ArrayList<>();
 
     public Study(StudyType type, String title, String description, LocalDateTime reservedTime, Integer capacity, Boolean locked, Integer password, Member member) {
         this.type = type;

@@ -67,7 +67,7 @@ function SplideAccompany({ props }) {
         }}
       >
         {AccInfos.map((info) => (
-          <SplideSlide key={info.id}>
+          <SplideSlide key={info.id} style={{ height: "500px" }}>
             <PartAccompany
               user_name={info.user_name}
               title={info.title}

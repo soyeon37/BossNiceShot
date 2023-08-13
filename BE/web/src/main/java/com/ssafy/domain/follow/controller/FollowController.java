@@ -1,7 +1,6 @@
 package com.ssafy.domain.follow.controller;
 
-import com.ssafy.domain.Member.entity.Member;
-import com.ssafy.domain.follow.dto.reponse.FollowResponse;
+import com.ssafy.domain.follow.dto.response.FollowResponse;
 import com.ssafy.domain.follow.dto.request.FollowRequest;
 import com.ssafy.domain.follow.service.FollowService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,7 +12,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.Comparator;
 import java.util.List;
 

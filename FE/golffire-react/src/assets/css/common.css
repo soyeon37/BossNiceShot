@@ -8,6 +8,7 @@
   border-radius: 10px;
 }
 
+
 /* radio button */
 label {
   font-size: 18px;
@@ -59,4 +60,11 @@ label {
 [type="radio"]:disabled + span {
   opacity: 0.7;
   cursor: not-allowed;
+}
+
+
+/* checkbox */
+[type="checkbox"] {
+  cursor: pointer;
+  box-shadow: none;
 }

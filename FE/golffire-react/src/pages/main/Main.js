@@ -1,25 +1,33 @@
-import React from "react";
+import React, { useRef } from "react";
 import MainBanner from "./MainBanner";
 import SplideGolf from "./SplideGolf";
 import SplideAccompany from "./SplideAccompany";
 import SplideLearning from "./SplideLearning";
+import MainSolution from "./MainSolution";
+import MainStudy from "./MainStudy";
+import MainCompanion from "./MainCompanion";
 import Chatbot from "./Chatbot";
-
+import RefContext from "./RefContext";
 import "./Main.css";
 
 function Main() {
+  const goToSolution = useRef();
+  const goToStudy = useRef();
+  const goToCompanion = useRef();
   return (
-    <div id="Home">
-      <MainBanner />
+    <RefContext.Provider value={{ goToSolution, goToStudy, goToCompanion }}>
+      <div id="Home">
+        <MainBanner />
+        <MainSolution />
+        {/* <hr /> */}
+        <MainStudy />
+        {/* <hr /> */}
+        <MainCompanion />
+        {/* <SplideAccompany /> */}
 
-      <SplideGolf />
-      <hr />
-      <SplideLearning />
-      <hr />
-      <SplideAccompany />
-
-      <Chatbot />
-    </div>
+        <Chatbot />
+      </div>
+    </RefContext.Provider>
   );
 }
 

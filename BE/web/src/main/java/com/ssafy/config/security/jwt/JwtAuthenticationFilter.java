@@ -2,25 +2,18 @@ package com.ssafy.config.security.jwt;
 
 import com.ssafy.Exception.message.ExceptionMessage;
 import com.ssafy.Exception.model.TokenCheckFailException;
-import io.jsonwebtoken.Jwt;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Enumeration;
 
 @Slf4j
@@ -31,7 +24,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         logRequest(request);
 
         if(request.getRequestURI().equals("/members/sign-in") || request.getRequestURI().equals("/members/sign-up")
@@ -39,12 +31,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/members/checkEmail")
                 || request.getRequestURI().equals("/members/code")
                 || request.getRequestURI().equals("/members/checkNickname")
-                || request.getRequestURI().equals("/ws/**")
+                || request.getRequestURI().equals("/notification/**")
                 || request.getRequestURI().equals("/api/sessions")
                 || request.getRequestURI().equals("/api/sessions/**")
                 || request.getRequestURI().equals("/study/sessions")
-                || request.getRequestURI().equals("/api/sessions/SessionA/connections")
-                || request.getRequestURI().equals("/study/sessions/**")){
+                || request.getRequestURI().equals("/api/sessions/SessionA/connections")){
             log.info("권한 허가");
             chain.doFilter(request, response);
             return;

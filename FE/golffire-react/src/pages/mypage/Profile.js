@@ -145,7 +145,7 @@ function Profile() {
                                    <div className="history-place">{history.place}</div>
                                    <div className="history-date">{history.date}</div>
                                </div>
-                               <div className="history-score" onClick={()=>handleSaveScore(index)}>{history.score} 타</div>
+                               <button className="history-score" onClick={()=>handleSaveScore(index)}>{history.score} 타</button>
                            </div >
                             ))}
                         </div>

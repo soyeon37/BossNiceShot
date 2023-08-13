@@ -100,14 +100,14 @@ public class StudyController {
         return ResponseEntity.ok(paging.stream().map(StudyResponse::from).toList());
     }
 
-    @Operation(summary = "검색 기반 스터디 조회 - 최신 등록 순", description = "타입 별로 검색 결과를 최신 등록 순으로 정렬한다.")
+    @Operation(summary = "검색 기반 스터디 조회", description = "타입 별로 검색 결과를 최신 등록 순으로 정렬한다.")
     @PostMapping("/study/{type}")
     public ResponseEntity<List<StudyResponse>> searchList(@RequestBody StudySearchRequest studySearchRequest, @PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Study> paging = studyService.findByKeyword(pageable, type, studySearchRequest);
         return ResponseEntity.ok(paging.stream().map(StudyResponse::from).toList());
     }
 
-    @Operation(summary = "참여 가능한 코칭 조회 - 최신 등록 순", description = "활성화된 코칭 중, 참가 인원이 코칭의 최대 인원보다 작은 코칭을 최신 등록 순으로 정렬한다.")
+    @Operation(summary = "참여 가능한 코칭 조회", description = "활성화된 코칭 중, 참가 인원이 코칭의 최대 인원보다 작은 코칭을 최신 등록 순으로 정렬한다.")
     @GetMapping("/study/{type}/attandable")
     public ResponseEntity<List<StudyResponse>> attandableList(@PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
         log.info("참여 가능한 코칭 조회");
