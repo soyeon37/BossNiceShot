@@ -53,7 +53,7 @@ function AlertPage() {
     // 알림 삭제 함수
     // id값 가져와야 함
     const handleDeleteNotification = (id) => {
-        const apiUrl =  'http://localhost:8080/notification/delete';
+        const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/notification/delete";
         const data = {
             id : id
         };
@@ -80,7 +80,8 @@ function AlertPage() {
     
     // 알림 수락/거절 전송 함수
     const handleSendResultNotification = (message, articleId, sender, recipient, type) => {
-        const apiUrl = 'http://localhost:8080/notification/create';
+        const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/notification/create"
+        
         const data = {
             id : "", 
 	        type : type,

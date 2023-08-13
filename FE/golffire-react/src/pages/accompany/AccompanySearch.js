@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function AccompanySearch() {
-  const [searchValue, setSearchValue] = useState('');
-  const [searchFilter, setSearchFilter] = useState('title');
+  const [searchValue, setSearchValue] = useState("");
+  const [searchFilter, setSearchFilter] = useState("title");
 
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
@@ -15,14 +15,14 @@ function AccompanySearch() {
 
   const handleSearchClick = () => {
     // 검색 버튼을 클릭할 때 서버로 검색 필터와 검색 값 전송하는 로직을 추가합니다.
-    if (searchValue.trim() !== '') {
+    if (searchValue.trim() !== "") {
       const searchData = {
         filter: searchFilter,
-        value: searchValue
+        value: searchValue,
       };
 
       // 여기서 searchData를 서버로 전송하는 API 호출 등의 작업을 수행할 수 있습니다.
-      console.log('Sending searchData to server:', searchData);
+      console.log("Sending searchData to server:", searchData);
     }
   };
 
@@ -36,6 +36,7 @@ function AccompanySearch() {
           <option value="titleAndContent">제목+내용</option>
         </select>
       </div>
+      티박스 선택 드롭다운 추가
       <div className="input-container">
         <input
           type="text"

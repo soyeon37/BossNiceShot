@@ -31,6 +31,7 @@ public class CompanionController {
 	@Operation(summary = "동행 모집 생성", description = "동행 모집을 등록한다.")
 	@PostMapping
 	public ResponseEntity<CompanionResponse> create(@RequestBody CompanionCreateRequest companionCreateRequest, @AuthenticationPrincipal UserDetails userDetails){
+		log.info("동행 모집 생성 request: {}", companionCreateRequest);
 		return ResponseEntity.ok(CompanionResponse.from(companionService.createCompanion(companionCreateRequest, userDetails.getUsername())));
 	}
 
