@@ -7,7 +7,6 @@ import GolffieldModal from './GolffieldModal';
 import parseGolfId from "../golffield/ParseGolfId";
 
 import 'react-datetime/css/react-datetime.css';
-import "./CreateAccompany.css";
 
 import flagred from '../../assets/source/icons/flag-red.png';
 import flagwhite from '../../assets/source/icons/flag-white.png';
@@ -66,10 +65,10 @@ function CreateAccompany() {
 
     return (
         <div id="CreateAccompany" className='create-container'>
-            <div className="container-head shadow-accompany">
+            <div className="container-head">
                 <div className="container-head-title">
                     동행 모집하기
-                    </div>
+                </div>
                 <div className="container-head-desc">
                     원하는 날짜와 장소에 같이 갈 동행을 구해보아요.
                 </div>
@@ -77,8 +76,40 @@ function CreateAccompany() {
             <img className="list-head-pin" src={PinImg} alt="pin" />
             <div className="list-head-shadow bg-accompany"></div>
 
-            <div className='create-body'>
-                <div className='createA-mainbox'>
+            <div className='container-body'>
+                <div className='create-main bg-accompany'>
+                    <div className='create-main-body'>
+                        <div className='create-body-text'>
+                            <div className='create-body-text-title'>
+                                <input
+                                    className='create-title-input'
+                                    type='text'
+                                    placeholder='제목을 입력하세요' />
+                            </div>
+                            <div className='create-body-text-content'>
+                                <textarea
+                                    className='create-content-textarea'
+                                    placeholder='내용을 입력하세요' />
+                            </div>
+                        </div>
+                        <div className='create-body-option'>
+
+                        </div>
+                    </div>
+                    <div className='create-main-footer'>
+                        <Link to="/accompany">
+                            <button className='button cancel'>취소하기</button>
+                        </Link>
+                        <button
+                            className='button confirm'
+                            onClick={handleRegisterClick}
+                        >등록하기</button>
+                    </div>
+                </div>
+                <div className='create-body-shadow bg-shadow'></div>
+            </div>
+
+            {/* <div className='createA-mainbox'>
                     <input
                         type="text"
                         value={title}
@@ -177,9 +208,7 @@ function CreateAccompany() {
                         </Link>
                         <button style={{ color: 'green' }} onClick={handleRegisterClick}>등록하기</button>
                     </div>
-                </div>
-            </div>
-            <div className='create-body-shadow bg-shadow'></div>
+                </div> */}
 
             {/* 골프장 선택 Modal */}
             {isVisible &&

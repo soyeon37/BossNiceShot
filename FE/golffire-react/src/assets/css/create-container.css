@@ -1,19 +1,109 @@
 /* create container CSS */
+.create-container {
+    width: 100%;
+    height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
 
+.create-main {
+    width: 90%;
+    height: 650px;
+    max-width: 1820px;
 
+    padding: 40px 40px 20px 40px;
+    border-radius: 50px;
+    border: 2px solid #000;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-main-body {
+    width: 100%;
+    height: 540px;
+    display: flex;
+}
+
+/* 글 제목 및 내용 작성 */
+.create-body-text {
+    width: 1000px;
+    height: 100%;
+    max-width: 60%;
+
+    border-radius: 50px;
+    border: 2px solid #000;
+    background-color: #FFF;
+
+    overflow: hidden;
+}
+
+.create-body-text-title {
+    width: 100%;
+    height: 60px;
+    padding: 10px 20px;
+    border-bottom: 2px solid #000;
+}
+
+.create-title-input {
+    width: 100%;
+    height: 100%;
+
+    color: #000;
+    font-size: 35px;
+    box-shadow: none;
+}
+
+.create-body-text-content {
+    width: 100%;
+    height: calc(100% - 60px);
+    padding: 10px 20px;
+}
+
+.create-content-textarea {
+    width: 100%;
+    height: 100%;
+
+    color: #000;
+    font-size: 28px;
+    box-shadow: none;
+}
+
+/* 글 설정 */
+.create-body-option {
+    width: 800px;
+    height: 100%;
+    max-width: 40%;
+
+    margin-left: 40px;
+    padding: 20px;
+    border-radius: 50px;
+    border: 2px solid #000;
+    background-color: #FFF;
+}
+
+.create-main-footer {
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+}
 
 /* Shadow CSS */
-.create-body-shadow{
+.create-body-shadow {
     position: fixed;
     top: 364px;
     left: calc(50% + 20px);
     transform: translateX(-50%);
-  
+
     width: 90%;
     height: 650px;
     max-width: 1820px;
     border: 2px solid #000;
-  
+
     border-radius: 50px;
     z-index: -1;
-  }
+}
