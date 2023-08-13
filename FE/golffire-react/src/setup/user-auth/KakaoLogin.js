@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useLocation } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from "react-cookie";
-import {
-    Box, Code,
-  } from '@chakra-ui/react';
+
 import axios from 'axios';
 
+// Redux
+import { useDispatch } from "react-redux";
+import { setUserId, setUserNickname } from "../../features/userInfoSlice";
+
+import {
+  Box, Code,
+} from '@chakra-ui/react';
 
 const Kakao = (props) => {
+  // Redux
+  const dispatch = useDispatch();
+  
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [nickname, setNickname] = useState("");
@@ -109,6 +117,10 @@ const Kakao = (props) => {
         const refresh_token = response.data.data.token.refreshToken;
         axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
         setCookie('refreshToken', refresh_token, { path: '/' , maxAge: new Date().getDate() + 60 * 60 * 24 *14 });
+
+        // NavBar에 사용자 정보 저장
+        dispatch(setUserId("logined@ssafy.com"));
+        dispatch(setUserNickname("로그인 됨"));
 
         navigate('/');
       })

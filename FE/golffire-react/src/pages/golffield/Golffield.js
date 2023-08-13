@@ -8,20 +8,19 @@ import "./Golffield.css";
 
 function Golffield() {
   // 출력할 골프장 정보 변수
-  const data = file;
-  const dataSize = file.length;
+  const dataArray = file;
+  const dataGolffield = dataArray.map((item) => ({
+    번호: item["번호"],
+    사업장명: item["사업장명"],
+    소재지전체주소: item["소재지전체주소"],
+    도로명전체주소: item["도로명전체주소"],
+    소재지전화: item["소재지전화"],
+    x: item["좌표정보(x)"],
+    y: item["좌표정보(y)"],
+  }))
+  const dataSize = dataGolffield.length;
 
-  let dataKeys;
-  let arrayText = ["번호", "사업장명", "소재지전체주소", "도로명전체주소", "소재지전화", "좌표정보(x)", "좌표정보(y)"]
-  let arrayIndex = [];
-  if (dataSize > 0) {
-    dataKeys = Object.keys(data[0]);
-    for (var i = 0; i < arrayText.length; i++) {
-      arrayIndex.push(dataKeys.indexOf(arrayText[i]));
-    }
-  }
-
-  const [golfClub, setGolfClub] = useState(data); // 검색 필터링된 골프장 리스트
+  const [golfClub, setGolfClub] = useState(dataGolffield); // 검색 필터링된 골프장 리스트
   const [searchWord, setSearchWord] = useState(""); // 검색어
 
   // 검색창 내 문자 변화 감지
@@ -40,9 +39,9 @@ function Golffield() {
   const doSearchWord = () => {
     let searchResult = [];
     for (var i = 0; i < dataSize; i++) {
-      const d = data[i];
-      if (d[dataKeys[arrayIndex[1]]].includes(searchWord)) {
-        searchResult.push(data[i]);
+      const d = dataGolffield[i];
+      if (d.사업장명.includes(searchWord)) {
+        searchResult.push(dataGolffield[i]);
       }
     }
     setGolfClub(searchResult);
@@ -75,7 +74,7 @@ function Golffield() {
     const id = [];
     const cur = getCurrentPageItems(golfClub);
     for (var i = 0; i < cur.length; i++) {
-      id.push(cur[i][dataKeys[arrayIndex[0]]])
+      id.push(cur[i].번호)
     }
     // console.log("저장된 id: ", id);
     return id;
@@ -85,16 +84,17 @@ function Golffield() {
     const add = [];
     const cur = getCurrentPageItems(golfClub);
     for (var i = 0; i < cur.length; i++) {
-      add.push(cur[i][dataKeys[arrayIndex[2]]], cur[i][dataKeys[arrayIndex[3]]])
+      add.push(cur[i].소재지전체주소, cur[i].도로명전체주소)
     }
     // console.log("저장된 add: ", add);
     return add;
   }
+
   const getLatLng = () => {
     const latlng = [];
     const cur = getCurrentPageItems(golfClub);
     for (var i = 0; i < cur.length; i++) {
-      latlng.push(cur[i][dataKeys[arrayIndex[5]]], cur[i][dataKeys[arrayIndex[6]]])
+      latlng.push(cur[i].x, cur[i].y)
     }
     // console.log("저장된 latlng: ", latlng);
     return latlng;
@@ -127,14 +127,14 @@ function Golffield() {
           </div>
           <div id="result">
             <div id="result-list">
-              {getCurrentPageItems(golfClub).map((club) => (
+              {getCurrentPageItems(dataGolffield).map((club) => (
                 <GolfBox
-                  key={club[dataKeys[arrayIndex[0]]]}
-                  id={club[dataKeys[arrayIndex[0]]]}
-                  name={club[dataKeys[arrayIndex[1]]]}
-                  address1={club[dataKeys[arrayIndex[2]]]}
-                  address2={club[dataKeys[arrayIndex[3]]]}
-                  callNumber={club[dataKeys[arrayIndex[4]]]}
+                  key={club.번호}
+                  id={club.번호}
+                  name={club.사업장명}
+                  address1={club.소재지전체주소}
+                  address2={club.도로명전체주소}
+                  callNumber={club.소재지전화}
                   setCenter={setCenterId}
                 />
               ))}
