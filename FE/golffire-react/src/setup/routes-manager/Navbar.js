@@ -41,9 +41,9 @@ function Navbar() {
     const [cookies, setCookie] = useCookies(['refreshToken']);
 
     const handleLogout = () => {
-        console.log('cookies.refreshToken:', cookies.refreshToken);
-
-        const apiUrl = 'http://localhost:8080/members/logout'
+        console.log('cookies.refreshToken:',cookies.refreshToken);
+      
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout'
         const data = {
             refreshToken: cookies.refreshToken
         }
@@ -60,7 +60,7 @@ function Navbar() {
     };
 
     const handleCheckNotification = () => {
-        const apiUrl = 'http://localhost:8080/notification/check';
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/notification/check';
         axios.get(apiUrl)
             .then((response) => {
                 if (response.data.data === false) {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MyPageNavbar from "./MyPageNavbar";
 
 import ListRoom from "./components/ListRoom";
@@ -10,6 +10,7 @@ import TeeBlack from "../../assets/source/icons/flag-black.png";
 import TeeAll from "../../assets/source/icons/flag-all.png";
 
 import "./MyPage.css";
+import axios from "axios";
 
 function MyChat() {
     const [searchWord, setSearchWord] = useState("");
@@ -22,37 +23,15 @@ function MyChat() {
         all: TeeAll,
     }
 
-    // 채팅방(참여하고 있는 동행 그룹) 리스트 정보
-    const chatRoomsData = [
-        {
-            id: 1,
-            title: "Chat Room 1",
-            tee: "red",
-            field: "Field 1",
-            date: "2023-08-02",
-        },
-        {
-            id: 2,
-            title: "Chat Room 2",
-            tee: "white",
-            field: "Field 2",
-            date: "2023-08-03",
-        },
-        {
-            id: 3,
-            title: "Chat Room 3",
-            tee: "black",
-            field: "Field 3",
-            date: "2023-08-04",
-        },
-        {
-            id: 4,
-            title: "Chat Room 4",
-            tee: "all",
-            field: "Field 4",
-            date: "2023-08-05",
-        },
-    ];
+    // 사용자의 채팅방 목록
+    const [chatRooms, setChatRooms] = useState([]);
+    useEffect(() => {
+        axios.get(process.env.REACT_APP_SERVER_URL + '/chat/room')
+            .then(response => {
+                console.log(response);
+                setChatRooms(response.data);
+            });
+    }, []);
 
     // 검색창 내 문자 변화 감지
     const handleSearchWord = (e) => {
@@ -63,10 +42,10 @@ function MyChat() {
     // 리스트에서 선택된 방의 채팅방 보이기
     const handleRoomClick = (roomId) => {
         setRoomId(roomId);
-        console.log("data: ", chatRoomsData);
+        console.log("data: ", chatRooms);
     };
 
-    const selectedoomData = chatRoomsData.find((chatRoomsData) => chatRoomsData.id === roomId);
+    const selectedoomData = chatRooms.find((chatRooms) => chatRooms.id === roomId);
 
     return (
         <div id="MyPage">
@@ -84,13 +63,13 @@ function MyChat() {
                             />
                         </div>
                         <div id="chat-list">
-                            {chatRoomsData.map((chatRoomData) => (
+                            {chatRooms.map((chatRoomData) => (
                                 <div key={chatRoomData.id} onClick={() => handleRoomClick(chatRoomData.id)}>
                                     <ListRoom
                                         title={chatRoomData.title}
-                                        tee={teeMap[chatRoomData.tee]}
+                                        teeBox={teeMap[chatRoomData.teeBox]}
                                         field={chatRoomData.field}
-                                        date={chatRoomData.date}
+                                        teeUpTime={chatRoomData.teeUpTime}
                                     />
                                 </div>
                             ))}

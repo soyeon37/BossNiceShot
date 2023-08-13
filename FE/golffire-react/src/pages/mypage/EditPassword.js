@@ -30,7 +30,7 @@ function EditPassword() {
         console.log("passOrigin: ", passOrigin);
         console.log("passNew: ", passNew);
         console.log("passCheck: ", passCheck);
-        const apiUrl = 'http://localhost:8080/members/updatePassword'
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/updatePassword'
         const data = {
             passOrigin: passOrigin,
             passNew: passNew
@@ -64,36 +64,49 @@ function EditPassword() {
                         <div id="edit-title">
                             비밀번호 변경하기
                         </div>
-                        <div id="edit-pass-origin">
-                            현재 비밀번호
-                            <input
-                                id="input-origin"
-                                defaultValue={passOrigin}
-                                onChange={handlePassOrigin}
-                                placeholder="현재 비밀번호를 입력하세요"
-                            />
+                        <div id="edit-pass-text">
+                            <div id="edit-pass-origin">
+                                <div id="edit-pass-header">
+                                    현재 비밀번호
+                                </div>
+                                <input
+                                    id="input-origin"
+                                    type="password"
+                                    defaultValue={passOrigin}
+                                    onChange={handlePassOrigin}
+                                    placeholder="현재 비밀번호를 입력하세요"
+                                />
+                            </div>
+                            <div id="edit-pass-new">
+                                <div id="edit-pass-header">
+                                    새 비밀번호
+                                </div>
+                                <input
+                                    id="input-new"
+                                    type="password"
+                                    defaultValue={passNew}
+                                    onChange={handlePassNew}
+                                    placeholder="새 비밀번호를 입력하세요"
+                                />
+                            </div>
+                            <div id="edit-pass-check">
+                                <div id="edit-pass-header">
+                                    비밀번호 확인
+                                </div>
+                                <input
+                                    id="input-check"
+                                    type="password"
+                                    defaultValue={passCheck}
+                                    onChange={handlePassCheck}
+                                    placeholder="새 비밀번호를 한 번 더 입력해 주세요"
+                                />
+                            </div>
+                            <div id="edit-pass-button-div">
+                                <button id="edit-button" onClick={handleChangePass}>
+                                    저장하기
+                                </button>
+                            </div>
                         </div>
-                        <div id="edit-pass-new">
-                            새 비밀번호
-                            <input
-                                id="input-new"
-                                defaultValue={passNew}
-                                onChange={handlePassNew}
-                                placeholder="새 비밀번호를 입력하세요"
-                            />
-                        </div>
-                        <div id="edit-pass-check">
-                            비밀번호 확인
-                            <input
-                                id="input-check"
-                                defaultValue={passCheck}
-                                onChange={handlePassCheck}
-                                placeholder="새 비밀번호를 한 번 더 입력해 주세요"
-                            />
-                        </div>
-                        <button id="edit-button" onClick={handleChangePass}>
-                            저장하기
-                        </button>
                     </div>
                 </div>
             </div>
