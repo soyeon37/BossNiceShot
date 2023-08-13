@@ -8,17 +8,9 @@
 
 /* MyPageBox CSS */
 #MyPageBox {
-  margin: 10px auto 20px;
-
-  width: 1820px;
-  height: 800px;
-  max-width: 95%;
-  max-height: 95%;
-
-  border-radius: 50px;
-  border: 1px solid #000;
+  width: 100vw;
+  height: 100hw;
   background-color: #fff;
-  box-shadow: 20px 20px 0px 0px #000;
 
   display: flex;
   align-items: center;
@@ -45,7 +37,7 @@
   border-width: 0px 1px 0px 0px;
   border-color: #000;
 
-  border-radius: 50px 0px 0px 50px;
+  /* border-radius: 50px 0px 0px 50px; */
   background: #3BD641;
 }
 
@@ -401,27 +393,38 @@
 
 #myacc-list {
   /* background-color: blueviolet; */
-  height: calc(100% - 160px);
+  height: calc(100% - 180px);
+  overflow: scroll;
+  margin: 0px 20px 0px 20px;
 }
 
 #myacc-body {
-  margin: 20px 45px 20px 45px;
+  margin: 20px 40px 90px 40px;
   display: flex;
   flex-wrap: wrap;
   /* background-color: #3BD641; */
+  /* padding: 10px 20px 10px 20px; */
 }
 
 #myacc-list-div {
   border: 2px solid black;
   border-radius: 30px;
   background-color: #FFF;
-  width: 300px;
+  width: calc(33.3% - 40px);
   height: 200px;
-  margin: 10px;
+  margin: 10px 20px 10px 20px;
   
   white-space: normal; /* 내용이 범위를 벗어나면 자동으로 줄바꿈 */
 }
 
+/* #myacc-list-div:hover{
+ background-color: #f3f3f3;
+ transition: background-color 0.3s ease;
+} */
+#myacc-list-div:hover{
+  border: 2px solid rgba(59, 214, 65, 1);
+  transition: background-color 0.3s ease;
+ }
 #myacc-list-top-div {
   display: flex;
   align-items: center;
@@ -475,6 +478,7 @@
 }
 #myacc-list-button:hover{
   background-color: #FFF;
+  border-color: #3BD641;
   color: rgba(59, 214, 65, 1);
 }
 
