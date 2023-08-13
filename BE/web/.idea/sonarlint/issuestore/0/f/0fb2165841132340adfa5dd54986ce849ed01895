@@ -1,5 +1,15 @@
 
 T
+<<<<<<< HEAD
 java:S1611L"7Remove the parentheses around the "authorize" parameter(–²ÇÁ8…ì¼É1
 S
 java:S1611Z"1Remove the parentheses around the "web" parameter(ç©Ê¨ùÿÿÿÿ8‡ì¼É1
+=======
+java:S1611L"7Remove the parentheses around the "authorize" parameter(–²ÇÁ8ó’¼š1
+N
+java:S1611Z"1Remove the parentheses around the "web" parameter(Íû®½8÷’¼š1
+€
+java:S1128"^Remove this unused import 'org.springframework.security.authentication.AuthenticationManager'.(ðŽþ–þÿÿÿÿ8ñéì†›1
+O
+java:S1128"-Remove this unused import 'java.util.Arrays'.(î–˜Éüÿÿÿÿ8ý’¼š1
+>>>>>>> 759bf6f2007edba7b9481eefed0a5e555c5086d0
