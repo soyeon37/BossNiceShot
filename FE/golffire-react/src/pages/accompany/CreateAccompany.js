@@ -14,7 +14,6 @@ import flagwhite from '../../assets/source/icons/flag-white.png';
 import flagblack from '../../assets/source/icons/flag-black.png';
 import flagall from '../../assets/source/icons/flag-all.png';
 import PinImg from "../../assets/source/icons/pin.png";
-import NaverLogo from "../../assets/source/icons/naver_icon.png";
 
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { BiTimeFive } from "react-icons/bi";
@@ -37,6 +36,7 @@ function CreateAccompany() {
     const [title, setTitle] = useState('');
     const [value, setValue] = useState('');
     const [accompanyDate, setAccompanyDate] = useState(null);
+    const [accompanyTime, setAccompanyTime] = useState(null);
     const [accompanyPlace, setAccompanyPlace] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [endDate, setEndDate] = useState(null);
@@ -44,6 +44,7 @@ function CreateAccompany() {
     const [selectedIcon, setSelectedIcon] = useState(null);
     const navigate = useNavigate();
 
+    // 골프장 모달을 열고 닫는 함수
     const toggleModal = () => {
         setIsVisible(!isVisible);
     }
@@ -53,6 +54,14 @@ function CreateAccompany() {
         const naverSearchUrl = `https://search.naver.com/search.naver?query=` + getNameById(accompanyPlace);
         window.open(naverSearchUrl, '_blank');
     }
+
+    // 티업 날짜 및 시간 입력 함수
+    const handleDateChange = (event) => {
+        setAccompanyDate(event.target.value);
+    };
+    const handleTimeChange = (event) => {
+        setAccompanyTime(event.target.value);
+    };
 
     // "등록하기" 버튼 클릭 이벤트를 처리하는 함수
     const handleRegisterClick = () => {
@@ -196,7 +205,10 @@ function CreateAccompany() {
                                                 )
                                             case 2:
                                                 return (
-                                                    <div>2번임</div>
+                                                    <div>
+                                                        <input type="date" value={accompanyDate} onChange={handleDateChange} />
+                                                        <input type="time" value={accompanyTime} onChange={handleTimeChange} />
+                                                    </div>
                                                 )
                                             case 3:
                                                 return (
