@@ -95,11 +95,21 @@
   line-height: normal;
 }
 
-/* Common CSS */
-.margin-top-20 {
-  margin-top: 20px;
+.golf {
+  background-color: #fff;
+  border: 2px solid #FF8A8A;
+  margin-left: 10px;
+
+  color: #FF8A8A;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
 }
 
+/* Common CSS */
 .cursor-able {
   cursor: pointer;
 }
@@ -154,6 +164,17 @@
 ::placeholder {
   color: #D7D7D7;
 }
+
+/* CSS only used once */
+.giant-plus {
+  color: #FFF;
+  font-size: 120px;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
 /* Footer */
 .Footer {
   background-color: dodgerblue;

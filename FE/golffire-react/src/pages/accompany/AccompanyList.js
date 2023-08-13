@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import parseGolfId from "../golffield/ParseGolfId";
+import { getNameById } from "../golffield/ParseGolfId";
 import AccompanyBox from "./AccompanyBox";
 
 import ProfileImg from "../../assets/source/imgs/favicon.png";
@@ -216,7 +216,7 @@ function AccompanyList() {
               title={accompanyRoom.title}
               tee={teeMap[accompanyRoom.tee]}
               author={accompanyRoom.authorNickname}
-              place={parseGolfId(accompanyRoom.placeId)}
+              place={getNameById(accompanyRoom.placeId)}
               date={accompanyRoom.date}
               handleSelectButtonClick={handleSelectButtonClick}
             />
@@ -264,7 +264,7 @@ function AccompanyList() {
             <div className="selected-container-info">
               <FaMapMarkerAlt className="react-icon" color="red" />
               <div className="info-text-left">
-                {parseGolfId(selectedContent.golfId)}
+                {getNameById(selectedContent.golfId)}
               </div>
               <div className="info-text-right">
                 <img className="profile-icon" src={teeMap[selectedContent.tee]}></img>
