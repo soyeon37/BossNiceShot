@@ -57,7 +57,7 @@ public class NotificationService {
             List<Notification> notifications = new ArrayList<>();
             for(int i = 0; i < list.size(); i++){
                 Notification notification = Notification.from(request, list.get(i).getFollower().getId(), list.get(i).getFollower().getNickname());
-                notifications.add(notification);
+                nnpmotifications.add(notification);
             }
             mongoTemplate.insertAll(notifications);
         }
