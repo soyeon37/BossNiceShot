@@ -35,6 +35,30 @@ function MyAccompany() {
             teebox: "RED",
             aimpeople: 4,
             currentpeople: 2,
+        },
+        {
+            title: "골프러버들",
+            day: "2023-09-10 11:20",
+            filed: "포천힐스",
+            teebox: "RED",
+            aimpeople: 4,
+            currentpeople: 2,
+        },
+        {
+            title: "골프러버들",
+            day: "2023-09-10 11:20",
+            filed: "포천힐스",
+            teebox: "RED",
+            aimpeople: 4,
+            currentpeople: 2,
+        },
+        {
+            title: "골프러버들",
+            day: "2023-09-10 11:20",
+            filed: "포천힐스",
+            teebox: "RED",
+            aimpeople: 4,
+            currentpeople: 2,
         }
     ]
     return (
