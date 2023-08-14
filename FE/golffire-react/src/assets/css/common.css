@@ -114,6 +114,11 @@
   cursor: pointer;
 }
 
+.clickable{
+cursor: pointer;
+text-decoration: underline;
+}
+
 .checkbox-div {
   white-space: nowrap;
 }

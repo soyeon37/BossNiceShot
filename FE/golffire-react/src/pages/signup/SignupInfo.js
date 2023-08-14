@@ -11,24 +11,19 @@ import flagwhite from '../../assets/source/icons/flag-white.png';
 import flagblack from '../../assets/source/icons/flag-black.png';
 import flagall from '../../assets/source/icons/flag-all.png';
 
-import { Button, FormControl, FormLabel, Input, Radio, RadioGroup, VStack } from "@chakra-ui/react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 
 const SignupInfo = () => {
   // Redux
-  const dispatch = useDispatch();
   const state = useSelector((state) => state.signupFeature);
-
-  // const { state } = useLocation();
-  const [image, setImage] = useState("../../assets/source/icons/no-image.png");
-  const [password] = useState(state.password);
-  const [introduce, setIntroduce] = useState("");
+  
   const [email, setEmail] = useState(state.email);
+  const [password] = useState(state.password);
   const [nickname, setNickname] = useState(state.nickname);
+  const [introduce, setIntroduce] = useState("");
   const [averageScore, setAverageScore] = useState(state.averageScore);
   const [topScore, setTopScore] = useState(state.topScore);
   const [teeBox, setTeeBox] = useState(state.teeBox);
-  const [isKakao, setIsKakao] = useState(state.isKakao);
 
   // 닉네임 중복 검사
   const handleCheckNickname = () => {
@@ -68,63 +63,6 @@ const SignupInfo = () => {
     }
   }
 
-  // 이미지 파일 경로를 객체로 관리
-  const iconPaths = {
-    flagred: flagred,
-    flagwhite: flagwhite,
-    flagblack: flagblack,
-    flagall: flagall,
-  };
-
-  const navigate = useNavigate();
-
-  const handleEmailFinish = () => {
-    var referrer = document.referrer;
-
-    console.log("이전 페이지 URL: " + referrer);
-    setIsKakao(isKakao);
-    console.log(isKakao);
-    let level = "";
-    if (averageScore <= 60) {
-      level = "이글 플레이어";
-    } else if (averageScore <= 70) {
-      level = "버디 플레이어";
-    } else if (averageScore <= 80) {
-      level = "파 플레이어";
-    } else if (averageScore <= 90) {
-      level = "보기 플레이어";
-    } else {
-      level = "더블 플레이어";
-    }
-    const data = {
-      id: email,
-      image: image,
-      password: password,
-      nickname: nickname,
-      introduction: introduce,
-      averageScore: averageScore,
-      topScore: topScore,
-      level: level,
-      teeBox: teeBox,
-      isKakao: isKakao,
-    };
-    console.log("isKakao: ", isKakao);
-    const apiUrl = "http://localhost:8080/members/sign-up";
-    axios
-      .post(apiUrl, data)
-      .then((response) => {
-        console.log(response);
-        console.log(response.data.data.id);
-        navigate("/Login");
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
-
-    console.log("data: ", data);
-    // navigate("/");
-  };
-
   return (
     <div id="SignupInfo">
       <div className="user-func-context">
@@ -161,6 +99,7 @@ const SignupInfo = () => {
             type="number"
             value={topScore}
             className="user-func-half-input"
+            placeholder="0~144"
             onChange={handleTopScoreChange} />
         </div>
         <div className="user-func-half">
@@ -169,6 +108,7 @@ const SignupInfo = () => {
             type="number"
             value={averageScore}
             className="user-func-half-input"
+            placeholder="0~144"
             onChange={handleAverageScoreChange} />
         </div>
       </div>
@@ -176,14 +116,15 @@ const SignupInfo = () => {
       <div className="user-func-radio">
         <div className="user-func-label">
           선호 티 박스
-          <AiOutlineInfoCircle
-            className="user-func-radio-info" />
-          
+
           <div className="tee-tooltip">
-            레이디 티 (레드티) : 여성이나 어린이를 위한 티 박스로 홀 과의 거리가 가장 짧은 티 박스
-            레귤러 티 (화이트티) : 일반 남성, 여성 상급자, 여성 프로, 청소년 선수 들을 위한 티 박스로 레이디 티보다 홀 과의 거리가 멀다.
-            블랙 티 : 몇몇 골프장은 블루티 보다 거리가 먼 블랙티 박스가 있음. 상급자 남성, 프로 선수들이 플레이 함.
-            출처 : 고라이프코리아(http://www.golifekorea.com)
+            <AiOutlineInfoCircle className="tee-tooltip-icon" />
+            <span className="tee-tooltip-text">
+              레이디 티(레드 티): 여성이나 어린이를 위한 티 박스로 홀 과의 거리가 가장 짧은 티 박스입니다.<br />
+              레귤러 티(화이트 티): 일반 남성, 여성 상급자, 여성 프로, 청소년 선수 들을 위한 티 박스로 레드 티보다 홀 과의 거리가 멉니다.<br />
+              블랙 티: 몇몇 골프장은 블루 티보다 거리가 먼 블랙 티 박스가 있습니다. 상급자 남성, 프로 선수들이 플레이 합니다.<br />
+              출처: <a className="clickable" href="http://www.golifekorea.com" target="_blank">고라이프코리아</a>
+            </span>
           </div>
 
         </div>
@@ -202,22 +143,6 @@ const SignupInfo = () => {
             className={`option-tee-img${teeBox === 'flagall' ? '-selected' : ''}`} />
         </div>
       </div>
-
-      <Button
-        onClick={handleEmailFinish}
-        style={{
-          height: "2.5rem",
-          width: "100%",
-
-          color: "black",
-          borderRadius: "30px",
-          background: "#B8F500",
-        }}
-        maxW={"sm"}
-        marginBottom={"2.5rem"}
-      >
-        회원가입 완료하기
-      </Button>
 
     </div>
   );
