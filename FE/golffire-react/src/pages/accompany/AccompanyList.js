@@ -1,33 +1,87 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import AccompanySearch from "./AccompanySearch";
+import { getNameById } from "../golffield/ParseGolfId";
+import AccompanyBox from "./AccompanyBox";
 
-import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
+import ProfileImg from "../../assets/source/imgs/favicon.png";
+import flagred from "../../assets/source/icons/flag-red.png";
+import flagwhite from "../../assets/source/icons/flag-white.png";
+import flagblack from "../../assets/source/icons/flag-black.png";
+import flagall from "../../assets/source/icons/flag-all.png";
+
+import { MdSportsGolf } from "react-icons/md";
+import { FaMapMarkerAlt } from "react-icons/fa";
+import { GrClose } from "react-icons/gr";
+import { BsFillPersonFill } from 'react-icons/bs';
+import { SearchIcon, ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 
 function AccompanyList() {
+  // 검색을 위한 변수
+  const [searchValue, setSearchValue] = useState("");
+  const [searchFilter, setSearchFilter] = useState("title");
+  const [flagFilter, setFlagFilter] = useState("flagall");
+  const [selectedFollow, setSelectedFollow] = useState(false);
+
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
+    // 검색 기능을 추가하고 원하는 작업을 수행할 수 있습니다.
+  };
+
+  const handleFilterChange = (event) => {
+    setSearchFilter(event.target.value);
+  };
+
+  const handleSearchClick = () => {
+    // 검색 버튼을 클릭할 때 서버로 검색 필터와 검색 값 전송하는 로직을 추가합니다.
+    if (searchValue.trim() !== "") {
+      const searchData = {
+        filter: searchFilter,
+        value: searchValue,
+      };
+
+      // 여기서 searchData를 서버로 전송하는 API 호출 등의 작업을 수행할 수 있습니다.
+      console.log("Sending searchData to server:", searchData);
+    }
+  };
+  const [switchValue, setSwitchValue] = useState(false);
+
+  const handleSwitchChange = () => {
+    setSwitchValue(!switchValue);
+    // 필터 기능을 추가하고 원하는 작업을 수행할 수 있습니다.
+  };
+
+  // 팔로잉 라디오 버튼 함수
+  const handleFollowChange = () => {
+    setSelectedFollow(!selectedFollow);
+  }
+
+  // 이 위는 검색 필터 기능들
+  // 이 아래는 리스트 관련 기능들
   const [accompanyList, setAccompanyList] = useState([{}, {}, {}, {}, {}, {}]);
 
   // 동행 모집 리스트
   const accompanyData = [
-    { id: 1, title: "제목 1", tee: "red", placeId: 1, date: "2023.09.30 13:00" },
-    { id: 2, title: "제목 2", author: "작성자 2" },
-    { id: 3, title: "제목 3", author: "작성자 3" },
-    { id: 4, title: "제목 4", author: "작성자 4" },
-    { id: 5, title: "제목 5", author: "작성자 5" },
-    { id: 6, title: "제목 6", author: "작성자 6" },
+    { id: 1, title: "제목 1", authorId: "123456", authorNickname: "김싸피가 먹는 고구마", tee: "red", placeId: 1, date: "2023-09-30 13:00" },
+    { id: 2, title: "제목 2", authorId: "456789", authorNickname: "황싸피", tee: "white", placeId: 4, date: "2023.09.30 13:00" },
+    { id: 3, title: "제목 3", authorId: "789777", authorNickname: "한싸피", tee: "all", placeId: 5, date: "2023.09.30 13:00" },
+    { id: 4, title: "제목 4", authorId: "123123", authorNickname: "함싸피", tee: "black", placeId: 89, date: "2024.09.30 13:00" },
+    { id: 5, title: "제목 5", authorId: "999999", authorNickname: "문싸피", tee: "white", placeId: 210, date: "2023.09.30 18:00" },
+    { id: 6, title: "제목 6", authorId: "333333", authorNickname: "최싸피", tee: "red", placeId: 61, date: "2023.09.30 10:00" },
   ];
+
+  // 이미지 파일 경로를 객체로 관리
+  const teeMap = {
+    red: flagred,
+    white: flagwhite,
+    black: flagblack,
+    all: flagall,
+};
 
   // 처음 화면이 로딩 될 때 동행 리스트 정보 호출
   useEffect(() => {
     setAccompanyList(accompanyData);
   }, []);
-
-  // accompanyData의 tee 값에 따라 티박스 이미지 변경 함수
-
-  // accompanyData의 placeId 값에 따라 골프장 이름 반환 함수
-  // 외부 component 사용
 
   const handleCreateRectangle = (title, author) => {
     const newRectangle = {
@@ -57,55 +111,135 @@ function AccompanyList() {
   const isFirstPage = currentPage === 1;
   const isLastPage = currentPage === Math.ceil(accompanyList.length / itemsPerPage);
 
-  // 참여하기 버튼
-  const [isJoining, setIsJoining] = useState(false);
-  const [selectedRectangle, setSelectedRectangle] = useState(null);
+  const [isSelected, setIsSelected] = useState(false); // 글 선택 여부
+  const [selectedId, setSelectedId] = useState(null); // 선택된 글 번호
+  const [selectedContent, setSelectedContent] = useState(null); // 선택된 글 내용
 
-  const handleJoinButtonClick = (rectangle) => {
-    // 같은 id의 러닝룸 설명 div가 이미 나타나있는 경우, 눌렀을 때 해당 div 사라지도록 처리
-    if (isJoining && selectedRectangle && selectedRectangle.id === rectangle.id) {
-      setIsJoining(false);
-      setSelectedRectangle(null);
+  const handleSelectButtonClick = (id) => {
+    if (isSelected && selectedId && selectedId === id) {
+      setIsSelected(false);
+      setSelectedId(null);
     } else {
-      setSelectedRectangle(rectangle);
-      setIsJoining(true);
+      setIsSelected(true);
+      setSelectedId(id);
+      getSelectedContent();
     }
   };
-  const [switchValue, setSwitchValue] = useState(false);
 
-  const handleSwitchChange = () => {
-    setSwitchValue(!switchValue);
-    // 필터 기능을 추가하고 원하는 작업을 수행할 수 있습니다.
-  };
+  const getSelectedContent = () => {
+    // axios로 selectedId라는 id를 갖는 동행 모집 글에 대한 정보를 가져옴
+    // 성공 시 가져온 데이터를 setSelectedContent에 넣음
+    // 실패 시 alert 등의 알림 후 setSelected(false); setIsSelected(false); 처리
+
+    // 테스트 데이터
+    const dataContent = {
+      id: 123,
+      title: "글 제목, 가자자자자",
+      authorId: "123456@naver.com",
+      authorNickname: "닉네임임이잉ㅇ",
+      authorPic: "tiger red hat red",
+      content: "내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용내요내용내용",
+      date: "2027년 08월 12일 14:00",
+      golfId: 1,
+      person: 2,
+      personlimit: 4,
+      tee: "red"
+    }
+    setSelectedContent(dataContent);
+    console.log(selectedContent)
+  }
 
   return (
-    <div className="accompanylist-container">
-      <div className="accompanylist">
-        <div className="accompanylist-head">
+    <div className="list-container">
+      <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
+        <div className="list-head">
           <Link to="/createaccompany">
-            <div className="head-create-button">새 동행 모집하기</div>
+            <div className="head-create-button bg-accompany">+ 모집하기</div>
           </Link>
-          <AccompanySearch />
-          <Checkbox colorScheme="green">팔로잉</Checkbox>
-        </div>
+          <div className="search-container">
+            {/* 검색창 */}
+            {searchFilter === "tee" ? (
+              <div className="search-input-container">
+                <div className="search-tee-item">
+                  <img src={flagred} alt="레드 티 박스"
+                  onClick={() => setFlagFilter('flagred')}
+                  className={`search-tee-img${flagFilter === 'flagred' ? '-selected' : ''}`} />
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagwhite} alt="화이트 티 박스"
+                  onClick={() => setFlagFilter('flagwhite')}
+                  className={`search-tee-img${flagFilter === 'flagwhite' ? '-selected' : ''}`} />
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagblack} alt="블랙 티 박스"
+                  onClick={() => setFlagFilter('flagblack')}
+                  className={`search-tee-img${flagFilter === 'flagblack' ? '-selected' : ''}`} />
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagall} alt="모든 티 박스"
+                  onClick={() => setFlagFilter('flagall')}
+                  className={`search-tee-img${flagFilter === 'flagall' ? '-selected' : ''}`} />
+                </div>
+              </div>
+            ) : (
+              <div className="search-input-container">
+                <input
+                  className="search-input-box"
+                  type="text"
+                  value={searchValue}
+                  onChange={handleInputChange}
+                  placeholder="검색어를 입력하세요"
+                />
+                <button id="search-input-icon" onClick={handleSearchClick}>
+                  <SearchIcon boxSize={6} color="#8D8F98" />
+                </button>
+              </div>
+            )}
 
-        <div className="accompanylist-body">
+
+            {/* 검색 필터 */}
+            <select
+              id="searchFilter"
+              className="search-filter"
+              value={searchFilter}
+              onChange={handleFilterChange}
+            >
+              <option value="title">제목</option>
+              <option value="author">작성자</option>
+              <option value="titleContent">제목 및 내용</option>
+              <option value="tee">티박스</option>
+            </select>
+
+          </div>
+          <div className="checkbox-div">
+            <label>
+              <input
+                className="checkbox"
+                type="checkbox"
+                checked={selectedFollow}
+                onChange={handleFollowChange}
+              />
+              팔로잉
+            </label>
+          </div>
+
+        </div>
+        <div className={isSelected ? 'list-body-selected' : 'list-body-unselected'}>
           {getCurrentPageItems().map((accompanyRoom) => (
-            <div className="accompany-room" key={accompanyRoom.id}>
-              <div className="accroom-title">
-                <div className="accroom-title-text">{accompanyRoom.title}</div>
-                <img src="" alt={accompanyRoom.tee} />
-              </div>
-              <div className="accroom-body">
-                <div className="accroom-place">{accompanyRoom.palce}</div>
-                <div className="accroom-date">{accompanyRoom.date}</div>
-              </div>
-              <button className="accroom-button" onClick={() => handleJoinButtonClick(accompanyRoom)}>자세히 보기</button>
-            </div>
+            <AccompanyBox
+              key={accompanyRoom.id}
+              id={accompanyRoom.id}
+              title={accompanyRoom.title}
+              tee={teeMap[accompanyRoom.tee]}
+              author={accompanyRoom.authorNickname}
+              place={getNameById(accompanyRoom.placeId)}
+              date={accompanyRoom.date}
+              handleSelectButtonClick={handleSelectButtonClick}
+            />
           ))}
         </div>
 
-        <div className="accompanylist-footer">
+        <div className="list-footer">
           <button
             className="control-arrow"
             disabled={isFirstPage}
@@ -123,31 +257,56 @@ function AccompanyList() {
           </button>
         </div>
       </div>
-      {isJoining && selectedRectangle && (
-        <div className="joining-room">
-          <div className="joining-title">{selectedRectangle.title}</div>
-          <div className="joining-author">
-            <div className="joining-author-box">작성자: {selectedRectangle.author}</div>
+
+      {/* 선택 시 나타나는 정보 */}
+      {isSelected && selectedId && (
+        <div className="selected-container">
+          <div className="selected-container-head">
+            <div className="selected-container-title">
+              <div className="title-text">
+                {selectedContent.title}
+              </div>
+              <h1 className="cursor-able"><GrClose size={30} onClick={() => setIsSelected(false)} /></h1>
+            </div>
+            <div className="box-author-position">
+              <div className="box-author">
+                <img className="profile-icon" src={ProfileImg} alt={`$author님`} />
+                {selectedContent.authorNickname}
+              </div>
+            </div>
           </div>
-          <div className="joining-description">
-            방설명{selectedRectangle.description} {/* 설명이 여기에 들어감 */}
+          <div className="selected-container-body">
+            <div className="accompany-textarea">{selectedContent.content}</div>
+            <div className="selected-container-info">
+              <FaMapMarkerAlt className="react-icon" color="red" />
+              <div className="info-text-left">
+                {getNameById(selectedContent.golfId)}
+              </div>
+              <div className="info-text-right">
+                <img className="profile-icon" src={teeMap[selectedContent.tee]}></img>
+              </div>
+            </div>
+            <div className="selected-container-info">
+              <MdSportsGolf className="react-icon" />
+              <div className="info-text-left">
+                {selectedContent.date}
+              </div>
+              <div className="info-text-right">
+                <BsFillPersonFill className="react-icon" />
+                {selectedContent.person} / {selectedContent.personlimit}
+              </div>
+            </div>
           </div>
-          <div className="joining-button">
-            <Link to={`/accompanyroom/${selectedRectangle.id}`}>
-              <button>참여하기</button>
+          <div className="selected-container-footer">
+            <Link to={`/accompanyroom/${selectedContent.id}`}>
+              <button className="button bg-accompany"> 참여하기</button>
             </Link>
           </div>
         </div>
       )}
 
       {/* 배경 div */}
-      {isJoining ? (
-        // 방 선택 시
-        <div className="selected-box"></div>
-      ) : (
-        // 방 미선택 시
-        <div className="unselected-box"></div>
-      )}
+      <div className="list-background-div bg-accompany"></div>
     </div>
   );
 }
