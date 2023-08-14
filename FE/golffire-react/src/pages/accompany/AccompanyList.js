@@ -16,7 +16,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { GrClose } from "react-icons/gr";
 import { BsFillPersonFill } from 'react-icons/bs';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import { SearchIcon} from "@chakra-ui/icons";
+import { SearchIcon } from "@chakra-ui/icons";
 
 // Redux
 import { useSelector } from "react-redux";
@@ -27,7 +27,7 @@ function AccompanyList() {
   // 사용자 정보(userId)로 로그인 여부 판단
   const userId = useSelector((state) => state.userInfoFeatrue.userId);
 
-  const pageSize = 6; 
+  const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -53,26 +53,26 @@ function AccompanyList() {
       title: searchFilter == 'title' && searchValue.trim() != "" ? searchValue : null,
       memberNickname: searchFilter == 'author' && searchValue.trim() != "" ? searchValue : null,
       description: searchFilter == 'titleContent' && searchValue.trim() != "" ? searchValue : null,
-      teeBox: "NONE",
+      teeBox: searchTeeBox,
       followerId: selectedFollow ? userId : null
     };
-    
+
     console.log("검색:");
     console.log(companionSearchRequest);
 
     axios.post(apiUrl, companionSearchRequest)
-    .then((response) => {
-      console.log(response);
+      .then((response) => {
+        console.log(response);
 
-      setCompanionList(response.data.companionList);
-      setTotalPages(response.data.totalPages);
-    });
+        setCompanionList(response.data.companionList);
+        setTotalPages(response.data.totalPages);
+      });
   };
 
   // 검색을 위한 변수
   const [searchValue, setSearchValue] = useState("");
   const [searchFilter, setSearchFilter] = useState("title");
-  const [flagFilter, setFlagFilter] = useState("flagall");
+  const [searchTeeBox, setSearchTeeBox] = useState("NONE");
   const [selectedFollow, setSelectedFollow] = useState(false);
 
   useEffect(() => {
@@ -84,12 +84,21 @@ function AccompanyList() {
     getCompanionList("", 1);
   }, [selectedFollow]);
 
+  useEffect(() => {
+    setSearchFilter("title");
+    getCompanionList("", 1);
+  }, [searchTeeBox]);
+
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
   };
 
   const handleFilterChange = (event) => {
     setSearchFilter(event.target.value);
+  };
+
+  const handleTeeBoxChange = (searchTeeBox) => {
+    setSearchTeeBox(searchTeeBox);
   };
 
   const handleSearchClick = () => {
@@ -136,7 +145,7 @@ function AccompanyList() {
 
       setIsSelected(true);
       setSelectedId(id);
-    }); 
+    });
   };
 
   const dateFormat = (input) => {
@@ -157,47 +166,48 @@ function AccompanyList() {
           <Link to="/createaccompany">
             <div className="head-create-button bg-accompany">+ 모집하기</div>
           </Link>
+
+          
           <div className="search-container">
-            {/* 검색창 */}
-            {searchFilter === "tee" ? (
-              <div className="search-input-container">
-                <div className="search-tee-item">
-                  <img src={flagred} alt="레드 티 박스"
-                  onClick={() => setFlagFilter('flagred')}
-                  className={`search-tee-img${flagFilter === 'flagred' ? '-selected' : ''}`} />
-                </div>
-                <div className="search-tee-item">
-                  <img src={flagwhite} alt="화이트 티 박스"
-                  onClick={() => setFlagFilter('flagwhite')}
-                  className={`search-tee-img${flagFilter === 'flagwhite' ? '-selected' : ''}`} />
-                </div>
-                <div className="search-tee-item">
-                  <img src={flagblack} alt="블랙 티 박스"
-                  onClick={() => setFlagFilter('flagblack')}
-                  className={`search-tee-img${flagFilter === 'flagblack' ? '-selected' : ''}`} />
-                </div>
-                <div className="search-tee-item">
-                  <img src={flagall} alt="모든 티 박스"
-                  onClick={() => setFlagFilter('flagall')}
-                  className={`search-tee-img${flagFilter === 'flagall' ? '-selected' : ''}`} />
+          {searchFilter === "tee" ? (
+              <div className = "search-tee-box-container">
+                <div className = "search-tee-items">
+                  <div className="search-tee-item">
+                    <img src={flagred} alt="레드 티 박스"
+                      onClick={() => handleTeeBoxChange('RED')}
+                      className={`search-tee-img${teeMap[searchTeeBox] === 'flagred' ? '-selected' : ''}`} />
+                  </div>
+                  <div className="search-tee-item">
+                    <img src={flagwhite} alt="화이트 티 박스"
+                      onClick={() => handleTeeBoxChange('WHITE')}
+                      className={`search-tee-img${teeMap[searchTeeBox] === 'flagwhite' ? '-selected' : ''}`} />
+                  </div>
+                  <div className="search-tee-item">
+                    <img src={flagblack} alt="블랙 티 박스"
+                      onClick={() => handleTeeBoxChange('BLACK')}
+                      className={`search-tee-img${teeMap[searchTeeBox] === 'flagblack' ? '-selected' : ''}`} />
+                  </div>
+                  <div className="search-tee-item">
+                    <img src={flagall} alt="모든 티 박스"
+                      onClick={() => handleTeeBoxChange('NONE')}
+                      className={`search-tee-img${teeMap[searchTeeBox] === 'flagall' ? '-selected' : ''}`} />
+                  </div>  
                 </div>
               </div>
             ) : (
-              <div className="search-input-container">
-                <input
-                  className="search-input-box"
-                  type="text"
-                  value={searchValue}
-                  onChange={handleInputChange}
-                  placeholder="검색어를 입력하세요"
-                />
-                <button id="search-input-icon" onClick={handleSearchClick}>
-                  <SearchIcon boxSize={6} color="#8D8F98" />
-                </button>
-              </div>
+            <div className="search-input-container">
+              <input
+                className="search-input-box"
+                type="text"
+                value={searchValue}
+                onChange={handleInputChange}
+                placeholder="검색어를 입력하세요"
+              />
+              <button id="search-input-icon" onClick={handleSearchClick}>
+                <SearchIcon boxSize={6} color="#8D8F98" />
+              </button>
+            </div>
             )}
-
-
             {/* 검색 필터 */}
             <select
               id="searchFilter"
@@ -208,14 +218,14 @@ function AccompanyList() {
               <option value="title">제목</option>
               <option value="author">작성자</option>
               <option value="titleContent">제목 및 내용</option>
-              <option value="tee">티박스</option>
+              <option value="tee">티 박스</option>
             </select>
 
           </div>
           <div className="checkbox-div">
-            <label class = "switch" value={selectedFollow} onChange={handleFollowChange}>
-              <input type = "checkbox"/>
-              <span class = "slider round"></span>
+            <label class="switch" value={selectedFollow} onChange={handleFollowChange}>
+              <input type="checkbox" />
+              <span class="slider round"></span>
             </label>
             <div>
               팔로잉
@@ -234,8 +244,8 @@ function AccompanyList() {
               place={getNameById(accompanyRoom.field)}
               date={accompanyRoom.teeUptime}
               handleSelectButtonClick={handleSelectButtonClick}
-              dateFormat = {dateFormat}
-              />
+              dateFormat={dateFormat}
+            />
           ))}
         </div>
 
@@ -245,7 +255,7 @@ function AccompanyList() {
             disabled={currentPage == 1}
             onClick={() => handlePageChange(currentPage - 1)}
           >
-            <IoIosArrowBack className="option-title-icon"/>
+            <IoIosArrowBack className="option-title-icon" />
           </button>
           <div id="control-num">{currentPage}</div>
           <button
@@ -256,10 +266,10 @@ function AccompanyList() {
             <IoIosArrowForward className="option-title-icon" />
           </button>
         </div>
-        
+
+      </div>
       {/* 배경 div */}
       <div className="list-background-div bg-accompany"></div>
-      </div>
 
       {/* 선택 시 나타나는 정보 */}
       {isSelected && selectedId && (

@@ -73,7 +73,7 @@ function CreateAccompany() {
     // 모집자를 수락
     const acceptCompanionUser = (companionUserId) => {
         const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/user/" + companionUserId;
-        
+
         console.log("동행 모집 참여자 수락");
         axios.put(apiUrl).then((response) => {
             console.log(response);
@@ -169,11 +169,11 @@ function CreateAccompany() {
                 capacity: capacity,
                 teeUptime: moment(teeUpTime).format('YYYY-MM-DD HH:mm:ss')
             }
-    
+
             console.log(companionCreateRequest);
-    
+
             createCompanion(companionCreateRequest);
-    
+
             navigate('/accompany', { replace: true });
         }
     };
@@ -194,9 +194,9 @@ function CreateAccompany() {
                 <div className="container-head-desc">
                     원하는 날짜와 장소에 같이 갈 동행을 구해보아요.
                 </div>
+                <img className="list-head-pin" src={PinImg} alt="pin" />
+                <div className="list-head-shadow bg-accompany"></div>
             </div>
-            <img className="list-head-pin" src={PinImg} alt="pin" />
-            <div className="list-head-shadow bg-accompany"></div>
 
             <div className='container-body'>
                 <div className='create-main bg-accompany'>

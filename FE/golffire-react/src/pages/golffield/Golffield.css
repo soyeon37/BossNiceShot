@@ -125,11 +125,15 @@
 }
 
 .control-arrow {
+  width: 32px;
+  height: 32px;
   margin: 10px;
   color: black;
 }
 
 .control-arrow:disabled {
+  width: 32px;
+  height: 32px;
   margin: 10px;
   color: gray;
   cursor: default;
@@ -173,7 +177,7 @@
   line-height: normal;
 }
 
-.golfbox-naver{
+.golfbox-naver {
   max-width: 30px;
   max-height: 30px;
   min-width: 30px;
