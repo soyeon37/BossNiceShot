@@ -6,6 +6,7 @@
   position: relative;
 }
 
+
 /* MyPageBox CSS */
 #MyPageBox {
   width: 100vw;
@@ -34,7 +35,7 @@
   display: flex;
   flex-direction: column;
 
-  border-width: 0px 1px 0px 0px;
+  border-width: 0px 2px 0px 0px;
   border-color: #000;
 
   /* border-radius: 50px 0px 0px 50px; */
@@ -49,7 +50,6 @@
 
 .my-nav li {
   color: #000;
-  font-family: Inter;
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
@@ -123,14 +123,23 @@
 }
 
 #edit-info-text {
-  height: 92%;
+  height: calc(90% - 50px);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 수평 정렬 */
+  justify-content: center; /* 수직 정렬 */
 }
 
 #edit-title {
   font-size: 25px;
   font-weight: bold;
-  margin: 30px 0px 20px 0px;
-  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0px 0px 0px;
+  height: 10%;
 }
 
 #edit-header-start {
@@ -138,6 +147,7 @@
   font-size: 14px;
   text-align: left;
   padding-left: 115px;
+  width: 100%;
 }
 
 #edit-header {
@@ -145,6 +155,7 @@
   font-size: 14px;
   text-align: left;
   padding-left: 115px;
+  width: 100%;
 }
 
 #edit-header-importance {
@@ -163,6 +174,7 @@
   border: 2px solid black;
   border-radius: 50px;
   height: 35px;
+  width: 80%;
 }
 
 #edit-golf-info1-1,
@@ -175,10 +187,7 @@
 #edit-email,
 #edit-introduction {
   margin: 0px 80px 0px 80px;
-}
-
-#edit-introduction {
-  width: 503.19px;
+  width: calc(100% - 160px);
 }
 
 #edit-nickname {
@@ -188,8 +197,11 @@
 
 #edit-nickname-div {
   display: flex;
+  width: 100%;
 }
-
+#edit-intro{
+  width: 100%;
+}
 #edit-check-button {
   background-color: rgba(59, 214, 65, 1);
   color: white;
@@ -217,18 +229,19 @@
 
 #edit-golf-info1-div {
   display: flex;
-  width: 503.19px;
-  margin-left: 80px;
+  width: 100%;
 }
 
 #edit-golf-info1-1-div {
   margin-right: 10px;
-  width: 90%;
+  margin-left: 80px;
+  width: 50%;
 }
 
 #edit-golf-info1-2-div {
   margin-left: 10px;
-  width: 90%;
+  margin-right: 80px;
+  width: 50%;
 }
 
 #edit-golf-info1-1 {
@@ -254,7 +267,9 @@
   margin-left: 15px;
   padding: 0px 5px;
 }
-
+#edit-golf-info2-div{
+  width: 100%;
+}
 #teebox {
   background-color: #FFF;
   display: flex;
@@ -282,6 +297,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 20%;
 }
 
 #edit-button {
@@ -323,43 +339,52 @@
 }
 
 #edit-pass-text {
-  margin-top: 60px;
+  height: calc(90% - 30px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 수평 정렬 */
+  justify-content: center; /* 수직 정렬 */
 }
 
 #edit-pass-header {
   margin: 18px 0px 2px 0px;
   font-size: 14px;
-  text-align: left;
+  width: 100%;
   padding-left: 115px;
+  text-align: start;
 }
 
 #edit-pass-new,
 #edit-pass-check,
 #edit-pass-origin {
   margin-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #input-origin,
 #input-new,
 #input-check {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  
   padding: 0px 30px 0px 30px;
   font-size: 16px;
   border: 2px solid black;
   border-radius: 50px;
   height: 45px;
-  width: 503.19px;
+  width: 80%;
   box-shadow: none;
-  margin-left: 80px;
 }
 
 #edit-pass-button-div {
   display: flex;
   justify-content: center;
-  align-items: end;
-  height: 120px;
+  align-items: center;
+  height: 20%;
+  margin-top: 20px;
 }
 
 
@@ -387,23 +412,18 @@
 }
 
 #myacc-toggle {
-  /* background-color: #FF7272; */
   height: 60px;
 }
 
 #myacc-list {
-  /* background-color: blueviolet; */
-  height: calc(100% - 180px);
-  overflow: scroll;
-  margin: 0px 20px 0px 20px;
+  height: calc(100% - 160px);
+  overflow-y: scroll;
 }
 
 #myacc-body {
   margin: 20px 40px 90px 40px;
   display: flex;
   flex-wrap: wrap;
-  /* background-color: #3BD641; */
-  /* padding: 10px 20px 10px 20px; */
 }
 
 #myacc-list-div {
@@ -417,10 +437,6 @@
   white-space: normal; /* 내용이 범위를 벗어나면 자동으로 줄바꿈 */
 }
 
-/* #myacc-list-div:hover{
- background-color: #f3f3f3;
- transition: background-color 0.3s ease;
-} */
 #myacc-list-div:hover{
   border: 2px solid rgba(59, 214, 65, 1);
   transition: background-color 0.3s ease;
@@ -641,26 +657,28 @@
 }
 
 #myfollow-title {
+  padding-top: 20px;
   width: 100%;
-  margin: 10px;
-
-  color: #000;
-  font-family: Inter;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 27px;
 }
 
-
+#myfollow-list-wrap{
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 #myfollow-list {
-  width: calc(100% - 10px);
+  width: 100%;
   height: 100%;
 
   margin-bottom: 10px;
-  padding: 10px;
-
-  overflow-y: scroll;
 
   display: flex;
   flex-wrap: wrap;
@@ -670,10 +688,11 @@
 }
 
 .myfollow-box {
-  width: 695px;
-  max-width: 90%;
+  width: calc(50% - 40px);
+  /* max-width: 90%; */
   min-height: 230px;
-  margin: 5px;
+  margin: 20px;
+  cursor: pointer;
 }
 
 /* FollowBox CSS */
@@ -684,7 +703,7 @@
 
   padding: 40px;
   border-radius: 50px;
-  border: 1px solid #000;
+  border: 2px solid #000;
   background: #FFF;
 
   flex: 1 1 40%;
@@ -714,33 +733,34 @@
 }
 
 .followbox-body {
-  width: 545px;
+  width: 80%;
 
   display: flex;
   flex-direction: column;
   justify-content: start;
+  align-items: center;
 
-  text-align: left;
 }
 
 .followbox-name {
   margin: 10px 0px;
-  color: #000;
-  font-family: Inter;
-  font-size: 36px;
+  font-size: 25px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  width: 80%;
+  text-align: left;
 }
 
 .followbox-info {
   display: flex;
-  color: #000;
-  font-family: Inter;
-  font-size: 24px;
+  font-size: 19px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  align-items: center;
+  width: 80%;
+
 }
 
 .level {
@@ -793,7 +813,7 @@
   font-size: 25px;
   font-weight: bold;
   margin: 40px 0px 20px 0px;
-  height: 40px;
+  height: 10%;
 }
 
 #reason-radio {
@@ -812,6 +832,7 @@
   justify-content: center;
   padding-top: 10px;
   padding-bottom: 2px;
+  height: 40%
 }
 
 #signout-reason {
@@ -850,7 +871,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 17px;
+  margin: 17px;
+  height: 10%;
 }
 
 #signout-button {
@@ -935,7 +957,11 @@
 .nav-list {
   list-style: none;
 }
-
+#nav-list-click{
+  display: block; /*블록 레벨 요소로 설정 */
+  cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+  padding-top: 4px;
+}
 .nav-list-text {
   font-size: 17px;
   display: flex;
@@ -967,8 +993,9 @@
 
 li:has(.active-link) {
   background-color: white;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 12px 0 0 12px;
+  width: 100%;
   border-right: none;
 }
 
@@ -980,7 +1007,7 @@ li:has(.active-link-signout) {
 }
 
 li {
-  height: 40px;
+  height: 50px;
   display: flex;
   align-items: center;
 }
@@ -1127,10 +1154,10 @@ li {
 }
 
 #info-edit {
-  height: 65px;
+  height: 100px;
   display: flex;
   align-items: center;
-  /* margin-bottom: 20px; */
+  justify-items: center;
 }
 
 

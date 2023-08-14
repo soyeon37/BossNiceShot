@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import AlertPage from "./alert/AlertPage";
 
 import { IoMdContact } from 'react-icons/io'
-import { Avatar, AvatarBadge, AvatarGroup, Hide } from '@chakra-ui/react'
+import { Avatar, AvatarBadge, AvatarGroup, Hide, background } from '@chakra-ui/react'
 
 import "./styles.css"
 import {
@@ -79,73 +79,73 @@ function Navbar() {
             <a href="/" className="site-title">
                 골프파이어
             </a>
-            <ul>
-                <li>
-                    <NavLink to="/solution" style={({ isActive, isPending }) => {
+            <ul id="nav-list">
+                <li id="nav-list-li">
+                    <NavLink to="/solution"  id="nav-list-link" style={({ isActive, isPending }) => {
                         return {
                             fontWeight: isActive ? "bold" : "",
+                            borderTop: isActive ? '2px solid Black': "",
+                            borderLeft: isActive ? '2px solid Black': "",
+                            borderRight: isActive ? '2px solid Black': "",
+                            borderBottom: isActive ? '2px solid White': "",
+                            borderRadius: isActive ? '20px 20px 0px 0px' : '',
+                            height: isActive ? ' 54px':'',
+                            marginTop: isActive ? '12px':'',
+                            paddingBottom: isActive ? '13px':'',
+                            width: '100px'
                         };
                     }}>솔루션</NavLink>
                 </li>
-                <li>
-                    <NavLink to="/studylist" style={({ isActive, isPending }) => {
+                <li id="nav-list-li">
+                    <NavLink to="/studylist" id="nav-list-link" style={({ isActive, isPending }) => {
                         return {
                             fontWeight: isActive ? "bold" : "",
+                            borderTop: isActive ? '2px solid Black': "",
+                            borderLeft: isActive ? '2px solid Black': "",
+                            borderRight: isActive ? '2px solid Black': "",
+                            borderBottom: isActive ? '2px solid White': "",
+                            borderRadius: isActive ? '20px 20px 0px 0px' : '',
+                            height: isActive ? ' 54px':'',
+                            marginTop: isActive ? '12px':'',
+                            paddingBottom: isActive ? '13px':'',
+                            width: '100px'
                         };
                     }}>스터디</NavLink>
                 </li>
-                <li>
-                    <NavLink to="/golffield" style={({ isActive, isPending }) => {
+                <li id="nav-list-li">
+                    <NavLink to="/golffield"  id="nav-list-link" style={({ isActive, isPending }) => {
                         return {
                             fontWeight: isActive ? "bold" : "",
+                            borderTop: isActive ? '2px solid Black': "",
+                            borderLeft: isActive ? '2px solid Black': "",
+                            borderRight: isActive ? '2px solid Black': "",
+                            borderBottom: isActive ? '2px solid White': "",
+                            borderRadius: isActive ? '20px 20px 0px 0px' : '',
+                            height: isActive ? ' 54px':'',
+                            marginTop: isActive ? '12px':'',
+                            paddingBottom: isActive ? '13px':'',
+                            width: '100px'
                         };
                     }}>골프장</NavLink>
                 </li>
-                <li>
-                    <NavLink to="/accompany/" style={({ isActive, isPending }) => {
+                <li id="nav-list-li">
+                    <NavLink to="/accompany/"  id="nav-list-link" style={({ isActive, isPending }) => {
                         return {
                             fontWeight: isActive ? "bold" : "",
+                            borderTop: isActive ? '2px solid Black': "",
+                            borderLeft: isActive ? '2px solid Black': "",
+                            borderRight: isActive ? '2px solid Black': "",
+                            borderBottom: isActive ? '2px solid White': "",
+                            borderRadius: isActive ? '20px 20px 0px 0px' : '',
+                            height: isActive ? ' 54px':'',
+                            marginTop: isActive ? '12px':'',
+                            paddingBottom: isActive ? '13px':'',
+                            width: '100px'
                         };
                     }}>동행</NavLink>
                 </li>
-                <li className="communitymenu">
-                    <Menu>
-                        <MenuButton as={Button} variant="unstyled" fontWeight={isActive ? "bold" : ""}>
-                            커뮤니티
-                        </MenuButton>
-                        <MenuList>
-                            <MenuItem>
-                                <NavLink to="/community/" style={({ isActive, isPending }) => {
-                                    return {
-                                        fontWeight: isActive ? "bold" : "",
-                                    };
-                                }}>커뮤니티</NavLink>
-                            </MenuItem>
-                            <MenuItem>
-                                <NavLink to="/noticelist/" style={({ isActive, isPending }) => {
-                                    return {
-                                        fontWeight: isActive ? "bold" : "",
-                                    };
-                                }}>공지사항</NavLink>
-                            </MenuItem>
-                            <MenuItem>
-                                <NavLink to="/inquirylist/" style={({ isActive, isPending }) => {
-                                    return {
-                                        fontWeight: isActive ? "bold" : "",
-                                    };
-                                }}>문의사항</NavLink>
-                            </MenuItem>
-                            <MenuItem>
-                                <NavLink to="/freeboardlist/" style={({ isActive, isPending }) => {
-                                    return {
-                                        fontWeight: isActive ? "bold" : "",
-                                    };
-                                }}>자유게시판</NavLink>
-                            </MenuItem>
-                        </MenuList>
-                    </Menu>
-                </li>
-                <li className="mypagemenu">
+                
+                <li className="mypagemenu" id="nav-list-li">
                     <Menu>
 
                         {/* 마이페이지 버튼 아바타로 수정했습니다. */}
@@ -214,7 +214,7 @@ function Navbar() {
                         </MenuList>
                     </Menu>
                 </li>
-                <li>
+                <li id="nav-list-li">
                     <AlertPage onClick={handleCheckNotification}>
                     </AlertPage>
                 </li>

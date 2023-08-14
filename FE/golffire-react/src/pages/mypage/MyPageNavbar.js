@@ -32,7 +32,7 @@ function MyPageNavbar() {
                 </div>
                 <div className="nav-list">
 
-                    <li>
+                    <li id="nav-list-click">
                         <NavLink to="/mypage/info"
                             className={({ isActive }) => (isActive ? "active-link" : "nav-list-text")}
                         >
@@ -41,7 +41,7 @@ function MyPageNavbar() {
                         </NavLink>
                     </li>
 
-                    <li>
+                    <li id="nav-list-click">
                         <NavLink to="/mypage/myaccompany"
                             className={({ isActive }) => (isActive ? "active-link" : "nav-list-text")}
                         >
@@ -50,17 +50,17 @@ function MyPageNavbar() {
                         </NavLink>
                     </li>
 
-                    <li>
+                    <li id="nav-list-click">
                         <NavLink to="/mypage/mychat" className={({ isActive }) => (isActive ? "active-link" : "nav-list-text")}><div  className="nav-icon"><BsChatDots/></div>
                             <div>채팅</div></NavLink>
                     </li>
 
-                    <li>
+                    <li id="nav-list-click">
                         <NavLink to="/mypage/myfollow" className={({ isActive }) => (isActive ? "active-link" : "nav-list-text")}><div  className="nav-icon"><MdPeopleOutline/></div>
                             <div>팔로우</div></NavLink>
                     </li>
 
-                    <li >
+                    <li id="nav-list-click">
                         <NavLink to="/mypage/signout" className={({ isActive }) => (isActive ? "active-link-signout" : "nav-list-text-signout")}><div  className="nav-icon"><BsFillTrashFill/></div>
                             <div>탈퇴하기</div></NavLink>
                     </li>
