@@ -600,17 +600,22 @@ class VideoRoomComponent extends Component {
 		const mySessionId = this.state.mySessionId;
 		const localUser = this.state.localUser;
 		const isEntered = this.state.entered;
+		const { type, title } = this.props;
 		var chatDisplay = { display: this.state.chatDisplay };
 
 		return (
 			<div className="container" id="container">
 
 				<DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} />
-				<div className="enterbox-head">
-					<div className="roomtype">
+				<div className={`enterbox-head ${type === 'LEARNING' ? 'learning-bg' : 'coaching-bg'}`}>
+					{/* <div className="roomtype">
 						<span className="typename">코칭</span>
 					</div>
-					{ mySessionId }
+					{ mySessionId } */}
+					<div className="roomtype">
+						<span className="typename">{type === 'LEARNING' ? '러닝' : '코칭'}</span>
+					</div>
+					{ title }
 					<div className="copy-url" onClick={CopyUrl}>
 						<ImShare2/>
 					</div>
