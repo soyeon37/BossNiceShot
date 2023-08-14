@@ -117,7 +117,7 @@ function Solution_FullSwing() {
 
   return (
     <div id="Solution">
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <div className={`live-video-wrapper ${liveWrapperClass}`}>
           <video
             ref={videoRef}
@@ -129,7 +129,6 @@ function Solution_FullSwing() {
             muted
             playsInline
           />
-          <canvas ref={canvasRef} id="canvas"></canvas>
           <div className="live-video-buttons">
             
             <div className={myEllipseScore === null && !isReady && !isAnalyzing ? "live-button-red" : "live-button-gray"}>READY</div>
@@ -139,6 +138,8 @@ function Solution_FullSwing() {
 
 
           </div>
+          <canvas ref={canvasRef} id="canvas_live"></canvas>
+          
         </div>
 
         <div className={`recorded-video-wrapper ${recordedWrapperClass}`}>

@@ -11,10 +11,15 @@
   margin: 10px;
 }
 
+#canvas_live {
+  margin-left:50px;
+  margin-top:-380px;
+}
+
 canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
+  /* position: absolute; */
+  /* top: 0;
+  left: 0; */
 }
 
 #Solution {
@@ -79,9 +84,9 @@ canvas {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  left: 50%; /* Adjust as needed */
-  top: 35.5%;
+  /* position: absolute; */
+  margin-top:-415px;
+  margin-left:738px;
 }
 
 .live-button-green {
@@ -141,6 +146,7 @@ canvas {
     margin: 0;
     padding: 30px;
     position: relative;
+    margin-left:50px;
 }
 
 .recorded-video-wrapper-yellow {
@@ -151,6 +157,7 @@ canvas {
     margin: 0;
     padding: 30px;
     position: relative;
+    margin-left:50px;
 }
 
 .recorded-video-wrapper-red {
@@ -161,6 +168,7 @@ canvas {
     margin: 0;
     padding: 30px;
     position: relative;
+    margin-left:50px;
 }
 
 .recorded-video {
@@ -343,8 +351,8 @@ canvas {
 }
 
 .coordinatesDiv {
-  margin-left:-70px;
-  margin-top: -60px;
+  /* margin-left:-70px; */
+  /* margin-top: -60px; */
   background-color: black;
   border-radius: 8px;
   /* border:8px solid #d9d9d9; */
@@ -360,7 +368,7 @@ canvas {
 }
 
 .equationDiv {
-  margin-top:381px;
+  margin-top:13px;
   margin-left:0px;  
   background-color: #f1f1f1;
   border: 1px solid #e7e7e7;
@@ -406,8 +414,8 @@ th, td {
 }
 
 .speedDiv {
-  margin-top:-60px;
-  margin-left:-70px;
+  /* margin-top:-60px;
+  margin-left:-70px; */
   border-radius: 8px;
 }
 
@@ -424,7 +432,7 @@ th, td {
 .swingInfo {
   font-weight:bold;
   font-size:15px;
-  margin-top: 390px;
+  margin-top: 25px;
 }
 
 .trustfactor {

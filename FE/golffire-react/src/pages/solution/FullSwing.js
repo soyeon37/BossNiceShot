@@ -45,7 +45,9 @@ export default function FullSwing(
   let ellipseFactorHistory = [];
   let noiseCnt = 0;
   let Feedback = [];
-  let lastWristX = 0;
+  let shoulderY = 1;
+  let moveDimension = false;
+  let moveDimensionS = false;
 
   useEffect(() => {
     let count_time = null;
@@ -76,12 +78,17 @@ export default function FullSwing(
             console.log("hi");
           };
           // If the video is already loaded, call predict immediately
-          if (video.readyState >= 2) {
-            console.log("hi");
+          // if (video.readyState >= 2) {
+          //   console.log("hi");
+          //   predict();
+          // }
+
+          if (video.srcObject && video.srcObject.active) {
             predict();
           }
 
           function predict() {
+            console.log("go");
             //frame이 들어올 때마다 estimate를 하므로 함수화
             model.estimateSinglePose(video).then(pose => {
               canvas.width = video.width; //캔버스와 비디오의 크기를 일치시킴
@@ -111,6 +118,7 @@ export default function FullSwing(
           
                   centerX = (leftShoulder.x + rightShoulder.x + leftElbow.x + rightElbow.x) / 4;
                   centerY = (leftShoulder.y + rightShoulder.y + leftElbow.y + rightElbow.y) / 4;
+                  shoulderY = leftShoulder.y;
         
                   const currentWristMiddlePointX = (leftWrist.x + rightWrist.x) / 2;
                   const currentWristMiddlePointY = (leftWrist.y + rightWrist.y) / 2;
@@ -168,7 +176,7 @@ export default function FullSwing(
 
               // 스탠스자세검사 함수 호출
               check_GolfStance(pose);
-            });
+            })
             requestAnimationFrame(predict); //frame이 들어올 때마다 재귀호출
           }
         });
@@ -312,10 +320,20 @@ export default function FullSwing(
     const wristMiddlePointX = (leftWrist.x + rightWrist.x) / 2;
     const wristMiddlePointY = (leftWrist.y + rightWrist.y) / 2;
     // return rightWrist.x > leftShoulder.x;  // 쪽팔림 방지용 오른손만 인식
-    return (
-      wristMiddlePointX >= leftShoulder.x &&
-      wristMiddlePointY <= nose.y
-    );
+
+    if(wristMiddlePointX >= centerX) {
+      return (
+        rightShoulder.x >= leftShoulder.x
+        // wristMiddlePointX >= leftShoulder.x &&
+        // wristMiddlePointY <= nose.y
+      );
+    }
+    return false;
+
+    // return (
+    //   wristMiddlePointX >= leftShoulder.x &&
+    //   wristMiddlePointY <= nose.y
+    // );
   }
 
   function loadRecordedVideoForAnalysis(videoURL) {
@@ -413,7 +431,13 @@ export default function FullSwing(
     //   }
     // });
 
-    let UniqueSet = new Set();
+
+    // Create an off-screen canvas
+    const offScreenCanvas = document.createElement('canvas');
+    offScreenCanvas.width = 640;
+    offScreenCanvas.height = 480;
+    const offScreenContext = offScreenCanvas.getContext('2d');
+
     function analyzeFrame(model) {
         if (recordedVideo.currentTime >= recordedVideo.duration) {
             analysisMediaRecorder.stop();
@@ -421,29 +445,19 @@ export default function FullSwing(
             return;
         }
 
-        analysisContext.clearRect(0, 0, 640, 480);
+        // analysisContext.clearRect(0, 0, 640, 480);
 
         // Draw the current video frame on the canvas
-        analysisContext.drawImage(recordedVideo, 0, 0, 640, 480);
+        offScreenContext.drawImage(recordedVideo, 0, 0, 640, 480);
+        // analysisContext.drawImage(recordedVideo, 0, 0, 640, 480);
 
-        model.estimateSinglePose(analysisCanvas).then(pose => {
+        model.estimateSinglePose(offScreenCanvas).then(pose => {
 
-            const uniqueCoord = Math.round(pose.keypoints[9].position.y);
-            
-            if(!checkTeleport(uniqueCoord) || lastWristX === 0) {
-              console.log(uniqueCoord);
-              // check if pose.keypoints' wrist points are noise data.
-              // let isNoiseData = checkNoiseData(pose.keypoints);
-              // if isNoiseData is true, do not count it to analysisResults. 
-              // do not count it in coordinateDatas.
-              // do not count it in Cnts.
-              // do draw this point and skeleton in Red color.
-              // check the ellipseFactor pattern of the last index data of coordinatesDatas 
-              // and check if current ellipseFactor differs from it much.
-              // if difference larger than the threshold, return isNoiseData = true.
+            const wristX = pose.keypoints[10].position.x;
+            const wristY = pose.keypoints[10].position.y;
 
-              // console.log(ellipseFactorHistory);
-              // console.log(!checkNoiseData(pose.keypoints[9].position, pose.keypoints[10].position));
+            if(!checkTeleport(wristX, wristY)) {
+              analysisContext.drawImage(recordedVideo, 0, 0, 640, 480);
               if(
                 !checkNoiseData(
                   (pose.keypoints[9].position.x + pose.keypoints[10].position.x) / 2, 
@@ -478,7 +492,7 @@ export default function FullSwing(
             }
             // Move to the next frame
             isAnalyzingCurrentFrame = false;
-            recordedVideo.currentTime += 1/40;
+            recordedVideo.currentTime += 1/30;
         });
     }
 
@@ -516,7 +530,7 @@ export default function FullSwing(
         ellipseFactorHistory = [];
         noiseCnt = 0;
         Feedback = [];
-        lastWristX = 0;
+        moveDimension = false;
     }
   }
 
@@ -578,7 +592,7 @@ export default function FullSwing(
     const n = Math.min(ellipseFactorHistory.length, 5);
     const sumOfLastNValues = ellipseFactorHistory.slice(-n).reduce((sum, value) => sum + value, 0);
     const averageOfLastNValues = sumOfLastNValues / n;
-    const threshold = 0.5; // Adjust this value based on your requirements
+    const threshold = 0.65; // Adjust this value based on your requirements
 
     if (Math.abs(ellipseFactor - averageOfLastNValues) / averageOfLastNValues > threshold) return true;
     else {
@@ -586,12 +600,32 @@ export default function FullSwing(
       return false;
     }
   }
-  function checkTeleport(WristX) {
-    if(Math.abs(WristX - lastWristX) >= 30) {
-      return true;
+  function checkTeleport(WristX, WristY) {
+
+    if(WristX >= centerX) {
+      moveDimension = true;
     }
-    lastWristX = WristX;
-    return false;
+    if(!moveDimension) {
+      if(WristY < shoulderY) {
+        console.log("ERR!", WristY, shoulderY);
+        return true;
+      }
+      return false;
+    }
+    else {
+      if(WristX < centerX) {
+        console.log("ERR!", WristY, shoulderY);
+        return true;
+      }
+      return false; 
+    }
+
+    // if(WristY < shoulderY && WristX < centerX) {
+    //   console.log("ERR!", WristY, shoulderY);
+    //   return true;
+    // }
+    // console.log(WristY, shoulderY);
+    // return false;
   }
 
   // tensorflow에서 제공하는 js 파트

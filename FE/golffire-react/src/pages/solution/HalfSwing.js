@@ -75,11 +75,14 @@ export default function HalfSwing(
             console.log("hi");
           };
           // If the video is already loaded, call predict immediately
-          if (video.readyState >= 2) {
-            console.log("hi");
+          // if (video.readyState >= 2) {
+          //   console.log("hi");
+          //   predict();
+          // }
+
+          if (video.srcObject && video.srcObject.active) {
             predict();
           }
-
           function predict() {
             //frame이 들어올 때마다 estimate를 하므로 함수화
             model.estimateSinglePose(video).then(pose => {
@@ -570,7 +573,7 @@ export default function HalfSwing(
     const n = Math.min(ellipseFactorHistory.length, 5);
     const sumOfLastNValues = ellipseFactorHistory.slice(-n).reduce((sum, value) => sum + value, 0);
     const averageOfLastNValues = sumOfLastNValues / n;
-    const threshold = 0.5; // Adjust this value based on your requirements
+    const threshold = 0.65; // Adjust this value based on your requirements
 
     if (Math.abs(ellipseFactor - averageOfLastNValues) / averageOfLastNValues > threshold) return true;
     else {
