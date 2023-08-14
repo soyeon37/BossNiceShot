@@ -36,7 +36,7 @@ function AlertPage() {
 
     // 알림 내역 호출 함수
     const handleGetNotification = () => {
-        const apiUrl =  'http://localhost:8080/notification/read';
+        const apiUrl =  process.env.REACT_APP_SERVER_URL + '/api/notification/read';
         axios.get(apiUrl)
         .then((response)=>{
             console.log(response);
@@ -68,7 +68,7 @@ function AlertPage() {
     
     // 알림 전체 삭제 함수
     const handleDeleteAllNotification = () => {
-        const apiUrl =  'http://localhost:8080/notification/deleteAll';
+        const apiUrl =  process.env.REACT_APP_SERVER_URL + '/api/notification/deleteAll';
         axios.delete(apiUrl)
         .then((response)=>{
             console.log(response);
@@ -108,7 +108,7 @@ function AlertPage() {
 
     // 알림 read 갱신 함수
     const handleUpdateRead = () => {
-        const apiUrl = 'http://localhost:8080/notification/update';
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/notification/update';
         axios.put(apiUrl)
         .then((response) => {
             console.log(response);

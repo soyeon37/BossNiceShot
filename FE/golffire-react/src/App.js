@@ -48,6 +48,8 @@ import ErrorPage from "./setup/error-manager/ErrorPage";
 import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
 import "../src/assets/css/common.css";
+import "../src/assets/css/list-container.css";
+import "../src/assets/css/create-container.css";
 
 function App() {
   // cookie의 user 정보 확인
