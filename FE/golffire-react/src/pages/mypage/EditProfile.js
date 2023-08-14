@@ -177,7 +177,7 @@ function EditProfile() {
                                             name="teebox"
                                             type="radio"
                                         />
-                                        레드티
+                                        
                                         <img id="teebox-img" src={RedTeeImg}></img>
                                     </label>
                                     <label id="teebox">
@@ -187,7 +187,7 @@ function EditProfile() {
                                             name="teebox"
                                             type="radio"
                                         />
-                                        화이트티
+                                        
                                         <img id="teebox-img" src={WhiteTeeImg}></img>
                                     </label>
                                     <label id="teebox">
@@ -197,7 +197,7 @@ function EditProfile() {
                                             name="teebox"
                                             type="radio"
                                         />
-                                        블랙티
+                                        
                                         <img id="teebox-img" src={BlackTeeImg}></img>
                                     </label>
                                     <label id="teebox">
@@ -207,7 +207,7 @@ function EditProfile() {
                                             name="teebox"
                                             type="radio"
                                         />
-                                        상관없음
+                                        
                                         <img id="teebox-img" src={AllTeeImg}></img>
                                     </label>
                                 </div>
