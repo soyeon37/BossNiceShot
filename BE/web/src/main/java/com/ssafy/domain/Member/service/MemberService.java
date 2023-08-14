@@ -68,6 +68,7 @@ public class MemberService{
 
             // 2-1. 비밀번호 체크
             Optional<Member> member = memberRepository.findById(request.id());
+            log.info("member={}", member.get().getId());
             if(member.isEmpty()){
                 throw new UserAuthException(ExceptionMessage.USER_NOT_FOUND);
             } else if(!encoder.matches(request.password(), member.get().getPassword())) {
