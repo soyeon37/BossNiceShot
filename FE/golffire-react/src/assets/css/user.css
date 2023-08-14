@@ -26,22 +26,33 @@
 
 .user-banner-title {
     width: 100%;
-    height: 30%;
-    padding: 50px 0px 0px 50px;
+    padding: 50px 50px 0px;
     color: #000;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 800;
+    text-align: left;
+}
+
+.user-banner-context {
+    width: 100%;
+    height: 10%;
+    padding: 0px 50px;
+    color: #000;
+    font-size: 32px;
     text-align: left;
 }
 
 .user-banner-img {
     width: 100%;
     height: 70%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
 }
 
 .user-banner-img-style {
-    width: 100%;
-    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
     object-fit: contain;
 }
 
@@ -58,8 +69,17 @@
 .user-func-title {
     color: #000;
     text-align: center;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 800;
+}
+
+.user-func-context {
+    width: 100%;
+    height: 10%;
+    margin: 0px 0px 20px 0px;
+    color: #8D8F98;
+    font-size: 32px;
+    text-align: center;
 }
 
 .user-func-normal-input {
@@ -74,6 +94,17 @@
     border: 2px solid #000;
     background: #FFF;
     box-shadow: none;
+}
+
+.user-func-input-guide {
+    width: 580px;
+    height: 50px;
+    max-width: 80%;
+    margin: 0px 0px 10px;
+
+    color: #FF6C6C;
+    font-size: 16px;
+    text-align: left;
 }
 
 .user-func-email-login {
@@ -115,7 +146,7 @@
 }
 
 .user-button-text {
-    width: 480px;
+    width: 510px;
 
     text-align: center;
     font-size: 20px;
@@ -148,6 +179,115 @@
     color: #8D8F98;
     font-size: 24px;
     white-space: nowrap;
+}
+
+/* user email auth */
+.user-email-auth-block {
+    width: 580px;
+    height: 50px;
+    max-width: 80%;
+    margin: 10px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-email-auth-input {
+    width: 450px;
+    height: 50px;
+    max-width: 80%;
+
+    margin-right: 5px;
+    padding: 10px;
+
+    border-radius: 50px;
+    border: 2px solid #000;
+    background: #FFF;
+    box-shadow: none;
+}
+
+.user-email-auth-button {
+    width: 120px;
+    height: 50px;
+    max-width: 20%;
+
+    margin-left: 5px;
+    padding: 10px;
+
+    border-radius: 50px;
+    box-shadow: none;
+}
+
+.gr {
+    color: #FFF;
+    border: 2px solid #000;
+    background: #3BD641;
+}
+
+.wh {
+    color: #000;
+    border: 2px solid #000;
+    background: #FFF;
+}
+
+.user-func-box {
+    width: 580px;
+    height: 80px;
+    max-width: 80%;
+    margin: 10px;
+    display: flex;
+}
+
+.user-func-half {
+    width: 50%;
+    height: 100%;
+    margin: 0px 5px;
+}
+
+.user-func-label {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 5px;
+    
+    display: flex;
+    color: #8D8F98;
+    text-align: left;
+    font-size: 16px;
+}
+
+.user-func-half-input {
+    width: 100%;
+    height: 50px;
+
+    padding: 10px;
+
+    border-radius: 50px;
+    border: 2px solid #000;
+    background: #FFF;
+    box-shadow: none;
+}
+
+/* radio box */
+.user-func-radio{
+    width: 580px;
+    height: 80px;
+    max-width: 80%;
+}
+
+.user-func-radio-info{
+    width: 50px;
+    height: 100%;
+    font-size: 50px;
+    color: #000;
+    cursor: pointer;
+}
+
+.user-func-radio-block{
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    justify-content: space-between;
 }
 
 /* react-icon CSS */

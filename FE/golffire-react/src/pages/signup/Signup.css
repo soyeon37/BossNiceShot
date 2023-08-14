@@ -2,35 +2,23 @@
 #Signup {
   height: calc(100vh - 4rem);
   display: flex;
-  background: linear-gradient(90deg, rgba(184, 245, 0, 0) 0%, rgba(255, 224, 0, 0.3) 100%);
+  justify-content: center;
 }
 
-#signin-func {
-  width: 50%;
-  height: 100%;
-
+/* Signupchoice CSS */
+#SignupChoice {
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-#signin-banner {
-  width: 50%;
-  height: 100%;
-
-  display: flex;
-  align-items: center;
-}
-
-#signin-banner-image {
-  margin: 10%;
-}
-
-/* Signupchoice CSS */
-
 /* SignupEmail1 CSS */
-#email1 {
+#SignupEmail1 {
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -38,7 +26,9 @@
 }
 
 /* SignupEmail2 CSS */
-#email2 {
+#SignupEmail2 {
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,14 +36,9 @@
 }
 
 /* SignupInfo CSS */
-#signup-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-#signup-info-body {
+#SignupInfo {
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;

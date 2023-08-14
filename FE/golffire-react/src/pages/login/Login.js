@@ -7,12 +7,8 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUserId, setUserNickname, setUserLevel, setUserTee } from "../../features/userInfoSlice";
 
-import golfImage from "../../assets/source/icons/golf.png";
 import BackgroundImgage from "../../assets/source/imgs/golf-image-1.png";
-
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { IoMailOutline, IoChatbubbleSharp } from "react-icons/io5";
-
 import "./Login.css";
 
 const Login = () => {
@@ -93,6 +89,7 @@ const Login = () => {
 
   return (
     <div id="Login">
+
       <div className="user-container">
         <div className="user-banner">
           <div className="user-banner-title">
