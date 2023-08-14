@@ -1,6 +1,10 @@
 #container {
   min-height: 520px;
   min-width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .div {
@@ -36,7 +40,7 @@
   justify-content: center;
   align-items: center;
   font-size: 5px;
-  color: white;
+  /* color: white; */
   font-weight: bold;
 }
 
@@ -100,20 +104,13 @@
   border-radius: 20px;
   background-color: gray;
 }
-.toolbar-box {
-  height:20px;
-  position: relative ;
-  /* bottom: 10px ; */
-  left: 0 ;
-  width: 100% ;
-}
 
 .enterbox-head {
   /* position: absolute; */
-  width: 100%;
+  width: 1228px;
   height: 40px;
-  background-color: #FFFFFF;
   border-radius: 20px;
+  border:2px solid;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -124,17 +121,18 @@
 }
 
 .enterbox-body {
-  display: flex !important;
-  justify-content: center !important;
+  display: flex ;
+  justify-content: center ;
   align-items: center;
   height: 480px;
   width: 100%;
 }
 
 .check-box {
-  display: flex !important;
-  justify-content: center !important;
+  display: flex ;
+  justify-content: center ;
   align-items: center;
+  flex-direction: column;
   height: 400px;
   width: 700px;
   border-radius: 40px;
@@ -142,11 +140,29 @@
   box-shadow: 10px 10px 0px 0px yellow, 11px 11px 0px 0px black;
 }
 
+.toolbar-box {
+  height:64px;
+  position: relative ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px ;
+  margin-top: 10px;
+}
+
+.toolbar-enterbox{
+  height: 64px;
+  position: relative ;
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
 .roomtype {
   width: 75px;
-  height: 28px;
+  height: 40px;
   border-radius: 48px;
-  background: #FFE000;
   margin-right: 30px;
   margin-left: 30px;
   display: flex;
@@ -156,33 +172,33 @@
 
 .typename {
   font-size: 18px;
-  color: white;
+  color: black;
   font-weight: bold;
 }
 
 .copy-url {
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 1px solid;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
+  font-size: 24px;
   color: black;
   cursor: pointer;
   margin-left: auto;
 }
 
 .go-back {
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 1px solid;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
+  font-size: 24px;
   color: black;
   cursor: pointer;
   margin-right: 30px; /* 제일 오른쪽에 위치하도록 설정 */
@@ -198,7 +214,7 @@
 }
 
 .check-me {
-  width: 480px;
+  width: 360px;
   height: 270px;
   display: flex;
   border-radius: 30px;
@@ -206,12 +222,15 @@
 }
 
 .enter-button {
-  background-color: black;
+  background-color: white;
   border-radius: 10px;
   padding: 5px 10px; /* 옵션: 버튼 내부 여백 조절 */
-  color: white; /* 옵션: 텍스트 색상을 흰색으로 설정 */
+  color: black; /* 옵션: 텍스트 색상을 흰색으로 설정 */
   font-weight: bold; /* 옵션: 텍스트 굵기 설정 */
-  margin-top: 10px;
+  margin-top: 5px;
+  margin-left: 10px;
+  width: 100px;
+  height: 64px;
 }
 
 
@@ -226,7 +245,9 @@
 
 .enter {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  width: 360px;
+  height: 70px;
 }
 
 

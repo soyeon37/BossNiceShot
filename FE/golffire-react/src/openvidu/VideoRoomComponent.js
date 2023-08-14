@@ -610,7 +610,7 @@ class VideoRoomComponent extends Component {
 					<div className="roomtype">
 						<span className="typename">코칭</span>
 					</div>
-					방 제목
+					{ mySessionId }
 					<div className="copy-url" onClick={CopyUrl}>
 						<ImShare2/>
 					</div>
@@ -709,10 +709,21 @@ class VideoRoomComponent extends Component {
 									<div className="check-box">
 										<div className="check-me">
 											<StreamComponent user={localUser} isMe={"check"} />
-											<div onClick={this.enteredChanged} className="enter">
-												<button className="enter-button">
-													입장하기
-												</button>
+										</div>
+										<div className="enter">
+											<button className="enter-button" onClick={this.enteredChanged}>
+												입장하기
+											</button>
+											<div className="toolbar-enterbox">
+												<ToolbarComponent
+													sessionId={mySessionId}
+													user={localUser}
+													showNotification={this.state.messageReceived}
+													camStatusChanged={this.camStatusChanged}
+													micStatusChanged={this.micStatusChanged}
+													screenShare={this.screenShare}
+													stopScreenShare={this.stopScreenShare}
+												/>	
 											</div>
 										</div>
 									</div>
