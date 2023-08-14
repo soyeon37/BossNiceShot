@@ -133,6 +133,7 @@
 .control-arrow:disabled {
   margin: 10px;
   color: gray;
+  cursor: default;
 }
 
 #control-num {

@@ -165,6 +165,12 @@
   color: #D7D7D7;
 }
 
+.mascot-deco{
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
 /* CSS only used once */
 .giant-plus {
   color: #FFF;
