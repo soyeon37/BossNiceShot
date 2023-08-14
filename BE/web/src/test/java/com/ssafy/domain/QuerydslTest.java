@@ -38,10 +38,10 @@ public class QuerydslTest {
                 .selectFrom(companion)
                 .leftJoin(companion.member, member)
                 .where(
-                        eqTitle(null),
+                        eqTitle("제"),
                         eqMemberNickname(null),
                         eqTeeBox(TeeBox.NONE),
-                        getFolloweeList("han@ssafy.com"),
+                        getFolloweeList(null),
                         companion.teeUpTime.gt(LocalDateTime.now()),
                         companion.capacity.gt(companion.companionUserCount)
                 )
