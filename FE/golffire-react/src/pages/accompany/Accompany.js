@@ -12,9 +12,10 @@ function Accompany() {
         <div className="container-head-desc">
           원하는 날짜와 장소에 같이 갈 동행을 구해보아요.
         </div>
+        
+        <img className="list-head-pin" src={PinImg} alt="pin" />
+        <div className="list-head-shadow bg-accompany"></div>
       </div>
-      <img className="list-head-pin" src={PinImg} alt="pin" />
-      <div className="list-head-shadow bg-accompany"></div>
 
       <div className="container-body">
         <AccompanyList />
