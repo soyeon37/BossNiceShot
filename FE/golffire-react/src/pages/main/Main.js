@@ -1,9 +1,11 @@
 import React from "react";
+
 import MainBanner from "./MainBanner";
 import SplideGolf from "./SplideGolf";
 import SplideAccompany from "./SplideAccompany";
 import SplideLearning from "./SplideLearning";
 import Chatbot from "./Chatbot";
+import Footer from "./Footer";
 
 import "./Main.css";
 
@@ -19,6 +21,8 @@ function Main() {
       <SplideAccompany />
 
       <Chatbot />
+
+      <Footer />
     </div>
   );
 }
