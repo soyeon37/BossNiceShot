@@ -1,11 +1,13 @@
 import { React, useContext } from "react";
 
-import SplideGolf from "./SplideSolution";
 import RefContext from "./RefContext";
-
+import SlideStudy from "./SlideStudy";
 import "./Main.css";
+
 import { AwesomeButton, AwesomeButtonProgress, AwesomeButtonSocial } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
+
+import Fade from 'react-reveal/Fade';
 
 // import 'react-awesome-button/dist/themes/bruce.css';
 import AwesomeButtonStyles from "react-awesome-button/src/styles/themes/theme-bruce/styles.module.scss";
@@ -26,28 +28,32 @@ function MainStudy() {
     <div id="MainStudy">
       <div id="index-study">
         <div id="index-solution-2" onClick={scrollToSol}>
-          솔루션
         </div>
         <div id="index-study-1" onClick={scrollToStu}>
-          코칭/러닝
         </div>
         <div id="index-companion-3" onClick={scrollToCom}>
-          동행모집
         </div>
         <div id="index-study-bar">
           <span id="index-solution-bar-text">코칭/러닝룸</span>
-          <div id="index-solution-border-r"></div>
-          <div id="index-solution-border-l"></div>
+          <div id="index-study-border-r"></div>
+          <div id="index-study-border-l"></div>
         </div>
       </div>
       <div id="main-study" ref={goToStudy}>
-        <div id="main-study-header">스터디</div>
-        <div id="main-study-title">
-          <span id="main-title-medium">실시간으로 </span>
-          <span id="main-title-bold">코칭/러닝</span>
-          <span id="main-title-medium">을 경험해요!</span>
-        </div>
+        <Fade left>
+          <div id="main-study-header">스터디</div>
+        </Fade>
+        <Fade bottom>
+
+          <div id="main-study-title">
+            <span id="main-title-medium">실시간으로 </span>
+            <span id="main-title-bold">코칭/러닝</span>
+            <span id="main-title-medium">을 경험해요!</span>
+          </div>
+        </Fade>
+
         <div id="main-study-body">
+<Fade left>
           <div id="main-study-left">
             <div id="main-study-1">
               시간도, 돈도 부담된다면,
@@ -62,7 +68,7 @@ function MainStudy() {
             <div id="main-study-3">
               {/* <button id="main-button">솔루션 경험하기</button> */}
               {/* <ReactiveButton rounded       idleText={'Click Me'} /> */}
-              <a href="/">
+              <a href="/studylist">
                 <AwesomeButton
                   id="blackbutton"
                   cssModule={AwesomeButtonStyles}
@@ -74,10 +80,14 @@ function MainStudy() {
               </a>
             </div>
           </div>
-          <div id="main-study-right">
-            {/* 솔루션 페이지 카드 */}
-            <SplideGolf />
-          </div>
+          </Fade>
+          <Fade bottom>
+
+            <div id="main-study-right">
+              {/* 솔루션 페이지 카드 */}
+              <SlideStudy />
+            </div>
+          </Fade>
         </div>
       </div>
     </div>

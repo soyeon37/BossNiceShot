@@ -10,6 +10,7 @@ import Chatbot from "./Chatbot";
 import RefContext from "./RefContext";
 import "./Main.css";
 
+
 function Main() {
   const goToSolution = useRef();
   const goToStudy = useRef();
@@ -19,12 +20,8 @@ function Main() {
       <div id="Home">
         <MainBanner />
         <MainSolution />
-        {/* <hr /> */}
         <MainStudy />
-        {/* <hr /> */}
         <MainCompanion />
-        {/* <SplideAccompany /> */}
-
         <Chatbot />
       </div>
     </RefContext.Provider>
