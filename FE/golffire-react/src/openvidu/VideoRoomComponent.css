@@ -170,6 +170,14 @@
   justify-content: center;
 }
 
+.enterbox-head.learning-bg {
+  background-color: #F99417;
+}
+
+.enterbox-head.coaching-bg {
+  background-color: #78CD50;
+}
+
 .typename {
   font-size: 18px;
   color: black;
@@ -177,6 +185,7 @@
 }
 
 .copy-url {
+  background-color: white;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -191,6 +200,7 @@
 }
 
 .go-back {
+  background-color: white;
   width: 36px;
   height: 36px;
   border-radius: 50%;
