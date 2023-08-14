@@ -256,6 +256,9 @@ function AccompanyList() {
             <IoIosArrowForward className="option-title-icon" />
           </button>
         </div>
+        
+      {/* 배경 div */}
+      <div className="list-background-div bg-accompany"></div>
       </div>
 
       {/* 선택 시 나타나는 정보 */}
@@ -304,9 +307,6 @@ function AccompanyList() {
           </div>
         </div>
       )}
-
-      {/* 배경 div */}
-      <div className="list-background-div bg-accompany"></div>
     </div>
   );
 }
