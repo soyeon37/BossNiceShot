@@ -6,6 +6,8 @@ import { useCookies } from "react-cookie";
 import Navbar from "./setup/routes-manager/Navbar";
 import Main from "./pages/main/Main";
 import Solution from "./pages/solution/Solution";
+import Solution_HalfSwing from "./pages/solution/Solution_HalfSwing";
+import Solution_FullSwing from "./pages/solution/Solution_FullSwing";
 import StudyList from "./pages/study/StudyList";
 import Golffield from "./pages/golffield/Golffield";
 import Accompany from "./pages/accompany/Accompany";
@@ -91,7 +93,9 @@ function App() {
               /> */}
 
               <Route path="/solution/" element={<Solution />} />
-
+              <Route path="/solution/halfswing/" element={<Solution_HalfSwing />} />
+              <Route path="/solution/fullswing/" element={<Solution_FullSwing />} />
+              
               {/* Study */}
               <Route path="/studylist/" element={<StudyList />} />
               <Route path="/createcroom/" element={<CreateCRoom />} />
