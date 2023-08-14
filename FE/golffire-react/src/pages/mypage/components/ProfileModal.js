@@ -40,7 +40,7 @@ function ProfileModal({ id, pic, handleUnselect }) {
                     <div id="modal-title">
                         팔로잉 정보
                     </div>
-                    <h1><GrClose size={30} onClick={handleUnselect} /></h1>
+                    <h1 className="cursor-able"><GrClose size={30} onClick={handleUnselect} /></h1>
                 </div>
                 <div id="modal-body">
                     <div id="modal-info">
