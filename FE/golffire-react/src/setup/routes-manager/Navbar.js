@@ -144,54 +144,53 @@ function Navbar() {
               커뮤니티
             </MenuButton>
             <MenuList>
-              <MenuItem>
-                <NavLink
-                  to="/community/"
-                  style={({ isActive, isPending }) => {
-                    return {
-                      fontWeight: isActive ? "bold" : "",
-                    };
-                  }}
-                >
+              <NavLink
+                to="/community/"
+                style={({ isActive, isPending }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                  };
+                }}
+              ><MenuItem>
                   커뮤니티
-                </NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink
-                  to="/noticelist/"
-                  style={({ isActive, isPending }) => {
-                    return {
-                      fontWeight: isActive ? "bold" : "",
-                    };
-                  }}
-                >
+                </MenuItem>
+              </NavLink>
+              <NavLink
+                to="/noticelist/"
+                style={({ isActive, isPending }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                  };
+                }}
+              >
+                <MenuItem>
                   공지사항
-                </NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink
-                  to="/inquirylist/"
-                  style={({ isActive, isPending }) => {
-                    return {
-                      fontWeight: isActive ? "bold" : "",
-                    };
-                  }}
-                >
+                </MenuItem>
+              </NavLink>
+              <NavLink
+                to="/inquirylist/"
+                style={({ isActive, isPending }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                  };
+                }}
+              >
+                <MenuItem>
                   문의사항
-                </NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink
-                  to="/freeboardlist/"
-                  style={({ isActive, isPending }) => {
-                    return {
-                      fontWeight: isActive ? "bold" : "",
-                    };
-                  }}
-                >
+                </MenuItem>
+              </NavLink>
+              <NavLink
+                to="/freeboardlist/"
+                style={({ isActive, isPending }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                  };
+                }}
+              >
+                <MenuItem>
                   자유게시판
-                </NavLink>
-              </MenuItem>
+                </MenuItem>
+              </NavLink>
             </MenuList>
           </Menu>
         </li>
@@ -209,18 +208,18 @@ function Navbar() {
             <MenuList>
               {/* test code - will delete */}
               <MenuGroup title="">
-                <MenuItem>
-                  <NavLink
-                    to="/mypage/"
-                    style={({ isActive, isPending }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                      };
-                    }}
-                  >
+                <NavLink
+                  to="/mypage/"
+                  style={({ isActive, isPending }) => {
+                    return {
+                      fontWeight: isActive ? "bold" : "",
+                    };
+                  }}
+                >
+                  <MenuItem>
                     마이페이지
-                  </NavLink>
-                </MenuItem>
+                  </MenuItem>
+                </NavLink>
                 <MenuItem style={{ color: "gray" }} onClick={handleLogout}>
                   로그아웃
                 </MenuItem>
@@ -230,47 +229,47 @@ function Navbar() {
 
               {userId ? (
                 <MenuGroup title="">
-                  <MenuItem>
-                    <NavLink
-                      to="/mypage/"
-                      style={({ isActive, isPending }) => {
-                        return {
-                          fontWeight: isActive ? "bold" : "",
-                        };
-                      }}
-                    >
+                  <NavLink
+                    to="/mypage/"
+                    style={({ isActive, isPending }) => {
+                      return {
+                        fontWeight: isActive ? "bold" : "",
+                      };
+                    }}
+                  >
+                    <MenuItem>
                       마이페이지
-                    </NavLink>
-                  </MenuItem>
+                    </MenuItem>
+                  </NavLink>
                   <MenuDivider />
-                  <MenuItem style={{ color: "gray" }}>로그아웃</MenuItem>
+                  <MenuItem style={{ color: "gray" }} onClick={handleLogout}>로그아웃</MenuItem>
                 </MenuGroup>
               ) : (
                 <MenuGroup title="">
-                  <MenuItem>
-                    <NavLink
-                      to="/login/"
-                      style={({ isActive, isPending }) => {
-                        return {
-                          fontWeight: isActive ? "bold" : "",
-                        };
-                      }}
-                    >
+                  <NavLink
+                    to="/login/"
+                    style={({ isActive, isPending }) => {
+                      return {
+                        fontWeight: isActive ? "bold" : "",
+                      };
+                    }}
+                  >
+                    <MenuItem>
                       로그인
-                    </NavLink>
-                  </MenuItem>
-                  <MenuItem>
-                    <NavLink
-                      to="/signup/"
-                      style={({ isActive, isPending }) => {
-                        return {
-                          fontWeight: isActive ? "bold" : "",
-                        };
-                      }}
-                    >
+                    </MenuItem>
+                  </NavLink>
+                  <NavLink
+                    to="/signup/"
+                    style={({ isActive, isPending }) => {
+                      return {
+                        fontWeight: isActive ? "bold" : "",
+                      };
+                    }}
+                  >
+                    <MenuItem>
                       회원가입
-                    </NavLink>
-                  </MenuItem>
+                    </MenuItem>
+                  </NavLink>
                 </MenuGroup>
               )}
             </MenuList>

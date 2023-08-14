@@ -22,6 +22,11 @@
 .user-banner {
     width: 50%;
     height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .user-banner-title {
@@ -54,6 +59,24 @@
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+}
+
+.user-banner-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.user-banner-normal {
+    color: #000;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.user-banner-bold {
+    color: #000;
+    font-size: 40px;
+    font-weight: 700;
 }
 
 .user-func {
@@ -248,7 +271,7 @@
     width: 100%;
     height: 20px;
     margin-bottom: 5px;
-    
+
     display: flex;
     color: #8D8F98;
     text-align: left;
@@ -268,26 +291,71 @@
 }
 
 /* radio box */
-.user-func-radio{
+.user-func-radio {
     width: 580px;
     height: 80px;
     max-width: 80%;
 }
 
-.user-func-radio-info{
-    width: 50px;
-    height: 100%;
-    font-size: 50px;
-    color: #000;
-    cursor: pointer;
-}
-
-.user-func-radio-block{
+.user-func-radio-block {
     width: 100%;
     height: 50px;
 
     display: flex;
     justify-content: space-between;
+}
+
+/* tooltip */
+.tee-tooltip-icon {
+    width: 50px;
+    height: 100%;
+    font-size: 50px;
+    color: #000;
+    cursor: help;
+}
+
+.tee-tooltip {
+    position: relative;
+}
+
+.tee-tooltip-text {
+    visibility: hidden;
+    position: absolute;
+    z-index: 10;
+
+    top: -210px;
+    width: 400px;
+    height: 210px;
+    padding: 10px;
+
+    border: 20px;
+    background: rgba(0, 0, 0, 0.80);
+    border-radius: 20px;
+
+    color: #FFF;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: left;
+}
+
+.tee-tooltip:hover .tee-tooltip-text {
+    visibility: visible;
+}
+
+.user-banner-profile{
+    width: 40%;
+    height: 100%;
+    padding-bottom: 40%;
+    position: relative;
+}
+
+.user-banner-circle{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #000;
+    background-color: FFE000;
+    background-color: red;
 }
 
 /* react-icon CSS */

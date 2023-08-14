@@ -4,8 +4,12 @@ const initialState = {
   step: 1,
   email: "",
   password: "",
-  profile: "", // delete
   nickname: "",
+  profile: "",
+  introduce: "",
+  averageScore: "",
+  topScore: "",
+  teeBox: "",
   is_kakao: false,
 };
 
@@ -29,6 +33,21 @@ const signupSlice = createSlice({
     setStateNickname: (state, action) => {
       state.nickname = action.payload;
     },
+    setStateProfile: (state, action) => {
+      state.profile = action.payload;
+    },
+    setStateIntroduce: (state, action) => {
+      state.introduce = action.payload;
+    },
+    setStateAverageScore: (state, action) => {
+      state.averageScore = action.payload;
+    },
+    setStateTopScore: (state, action) => {
+      state.topScore = action.payload;
+    },
+    setStateTeeBox: (state, action) => {
+      state.teeBox = action.payload;
+    },
     setStateIsKakao: (state, action) => {
       state.is_kakao = action.payload;
     },
@@ -40,6 +59,11 @@ export const {
   setStateEmail,
   setStatePassword,
   setStateNickname,
+  setStateProfile,
+  setStateIntroduce,
+  setStateAverageScore,
+  setStateTopScore,
+  setStateTeeBox,
   setStateIsKakao,
 } = signupSlice.actions;
 
