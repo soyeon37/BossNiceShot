@@ -298,7 +298,7 @@
   font-weight: bold;
 }
 
-.copy-url {
+/* .copy-url {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -322,9 +322,9 @@
   align-items: center;
   font-size: 12px;
   color: white;
-  cursor: pointer;
-  margin-right: 30px; /* 제일 오른쪽에 위치하도록 설정 */
-}
+  cursor: pointer; 
+  margin-right: 30px; 제일 오른쪽에 위치하도록 설정
+}*/
 
 .box-body {
   margin-top: 30px; /* box-head와 간격 조정 */

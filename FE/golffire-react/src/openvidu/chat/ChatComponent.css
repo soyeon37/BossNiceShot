@@ -1,8 +1,8 @@
 #chatContainer {
-    position: absolute;
+    /* position: absolute; */
     z-index: 0;
-    width: 100%;
-    height: 100%;
+    width: 280px;
+    height: 500px;
   }
   
   #chatToolbar {
@@ -26,33 +26,33 @@
   
   #chatComponent {
     background-color: #b8b8b8;
-    position: absolute;
+    position: relative;
     z-index: 99999;
-    top: 0;
+    /* top: 0; */
     left: 0;
     right: 0;
     bottom: 0;
     margin: auto;
-    height: calc(100% - 30px);
-    width: calc(100% - 30px);
+    width: 280px;
+    height: 500px;
     border-radius: 20px;
   }
   
   .message-wrap {
-    padding: 0 15px;
+    padding: 0 5px;
     height: calc(100% - 80px);
     overflow: auto;
   }
   
   .message {
     position: relative;
-    padding: 7px 0;
+    padding: 3px 0;
   }
   .user-img {
     position: absolute;
     border-radius: 45px;
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
     top: 15px;
   }
   
@@ -76,7 +76,7 @@
     position: relative;
     margin-top: 5px;
     border-radius: 5px;
-    padding: 8px;
+    /* padding: 8px; */
     color: #000000;
     width: auto;
     max-width: 80%;
@@ -104,7 +104,7 @@
   }
   
   .message.left .msg-detail {
-    padding-left: 65px;
+    padding-left: 10px;
   }
   
   .message.left .user-img {
@@ -116,6 +116,11 @@
     background-color: #f0f0f0;
     float: left;
   }
+
+  .message.left .msg-detail .msg-info {
+    text-align: left;
+  }
+
   .message.left .msg-detail .msg-content span.triangle {
     background-color: #f0f0f0;
     border-bottom-width: 0;
@@ -127,9 +132,15 @@
   
   /* Start my messages */
   
+  .message.right .msg-detail {
+    padding-right: 10px;
+  }
+
+
   .message.right .msg-detail .msg-info {
     text-align: right;
   }
+
   .message.right .user-img {
     right: -5px;
     border: 1px solid #c8ffe8ab;
@@ -154,18 +165,18 @@
     width: 100%;
     background-color: #ffffff;
     text-align: center;
-    padding: 10px 0px;
+    padding: 0px;
     height: 30px;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
   }
   #messageInput input {
-    width: 90%;
+    width: 100%;
     height: 100%;
     border: none;
     outline: none;
     font-size: 14px;
-    margin-left: -6%;
+    /* margin-left: -6%; */
     color: #000000;
   }
   
@@ -185,7 +196,7 @@
   }
   
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 2px;
   }
   
   ::-webkit-scrollbar-thumb {
