@@ -51,6 +51,8 @@ import { useSelector } from "react-redux";
 import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
 import "../src/assets/css/common.css";
+import "../src/assets/css/list-container.css";
+import "../src/assets/css/create-container.css";
 
 function App() {
   // Redux

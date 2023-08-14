@@ -12,26 +12,20 @@ function SplideLearning({ props }) {
     {
       id: 1,
       type: "코칭",
-      title: "XX컵 메달리스트 꿀팁 방출",
-      detail: "지난 달 열린 XX컵 메달리스트가 알려주는 꿀팁! 10시까지 합니다!",
+      title: "제9회 골프대회 수상 꿀팁 방출",
       name: "골프러버S2",
-      member: "8",
     },
     {
       id: 2,
       type: "러닝",
-      title: "알려줘요",
-      detail: "스탠스 궁금해요!",
+      title: "궁금한거 알려주세요",
       name: "김싸피",
-      member: "1",
     },
     {
       id: 3,
       type: "코칭",
-      title: "XX컵 메달리스트 꿀팁 방출2",
-      detail: "지난 달 열린 XX컵 메달리스트가 알려주는 꿀팁! 10시까지 합니다!",
+      title: "지난 대회에서 써먹은 자세 교정법",
       name: "골프러버S2",
-      member: "8",
     },
   ];
 
@@ -46,8 +40,9 @@ function SplideLearning({ props }) {
         }}
         options={{
           type: "loop",
-          perPage: 2.5,
+          perPage: 3.5,
           focus: "center",
+          pagination: false,
         }}
       >
         {golfInfos.map((info) => (
@@ -55,9 +50,7 @@ function SplideLearning({ props }) {
             <PartLearning
               type={info.type}
               title={info.title}
-              detail={info.detial}
               name={info.name}
-              member={info.member}
             />
           </SplideSlide>
         ))}

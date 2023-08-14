@@ -6,15 +6,10 @@ import { useCookies } from "react-cookie";
 
 // Redux
 import { useDispatch } from "react-redux";
-import { setUserId, setUserNickname } from "../../features/userInfoSlice";
+import { setUserId, setUserNickname, setUserLevel, setUserTee } from "../../features/userInfoSlice";
 
 // Style
-import {
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-} from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import "./Login.css";
 import golfImage from "../../assets/source/icons/golf.png";
 
@@ -24,7 +19,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [cookies, setCookie] = useCookies(['refreshToken']);
+  const [cookies, setCookie] = useCookies(["refreshToken"]);
   const navigate = useNavigate();
 
   // 이메일 로그인 함수
@@ -33,7 +28,7 @@ const Login = () => {
     const data = {
       id: email,
       password: password,
-      isKakao: false
+      isKakao: false,
     };
 
     // 서버 API 엔드포인트 URL
@@ -52,13 +47,18 @@ const Login = () => {
         axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
         // 쿠키에 정보 저장
-        setCookie('refreshToken', refresh_token, { path: '/', maxAge: new Date().getDate() + 60 * 60 * 24 * 14 });
+        setCookie("refreshToken", refresh_token, {
+          path: "/",
+          maxAge: new Date().getDate() + 60 * 60 * 24 * 14,
+        });
 
         console.log(response.data); // Debug Code !!
-        
-        // NavBar에 사용자 정보 저장
+
+        // NavBar에 사용자 정보 저장 - data for test
         dispatch(setUserId("logined@ssafy.com"));
         dispatch(setUserNickname("로그인 됨"));
+        dispatch(setUserLevel("eagle"));
+        dispatch(setUserTee("Red"));
 
         // 로그인 성공 후 Main으로 복귀
         navigate("/");
@@ -99,11 +99,9 @@ const Login = () => {
       {/* 기능 공간 */}
       <div id="login-func">
         <div id="login-box">
-          <div id="box-title">
-            로그인
-          </div>
+          <div id="box-title">로그인</div>
           <div id="box-content">
-            <FormControl maxW={'sm'}>
+            <FormControl maxW={"sm"}>
               <FormLabel>이메일</FormLabel>
               <Input
                 type="email"
@@ -113,8 +111,7 @@ const Login = () => {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </FormControl>
-            <FormControl maxW={'sm'} paddingTop={'2%'}>
-
+            <FormControl maxW={"sm"} paddingTop={"2%"}>
               <FormLabel>비밀번호</FormLabel>
               <Input
                 type="password"
@@ -136,9 +133,12 @@ const Login = () => {
                 borderRadius: "30px",
                 background: "#B8F500",
               }}
-              maxW={'sm'}
-              marginBottom={'2.5rem'}
-            > 로그인</Button>
+              maxW={"sm"}
+              marginBottom={"2.5rem"}
+            >
+              {" "}
+              로그인
+            </Button>
             <Button
               onClick={handleKakaoLogin}
               style={{
@@ -149,20 +149,21 @@ const Login = () => {
                 borderRadius: "30px",
                 background: "#FFF500",
               }}
-              maxW={'sm'}
-              marginBottom={'2.5rem'}
-            > 카카오톡으로 로그인하기</Button>
-
+              maxW={"sm"}
+              marginBottom={"2.5rem"}
+            >
+              {" "}
+              카카오톡으로 로그인하기
+            </Button>
           </div>
           <div id="box-footer">
-            <NavLink to="/findpassword" >비밀번호 찾기</NavLink>
+            <NavLink to="/findpassword">비밀번호 찾기</NavLink>
             <br />
             <NavLink to="/signup">회원가입 하기</NavLink>
           </div>
         </div>
-      </div >
-
-    </div >
+      </div>
+    </div>
   );
 };
 
