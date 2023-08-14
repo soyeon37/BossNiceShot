@@ -2,7 +2,7 @@ import React from "react";
 import AccompanyList from "./AccompanyList";
 
 import PinImg from "../../assets/source/icons/pin.png";
-import "./Accompany.css";
+import "./accompany.css";
 
 function Accompany() {
   return (
