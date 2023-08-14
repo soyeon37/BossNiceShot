@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-
-import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import axios from "axios";
 
 // Redux
 import { useDispatch } from "react-redux";
 import { setUserId, setUserNickname, setUserLevel, setUserTee } from "../../features/userInfoSlice";
 
-// Style
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
-import "./Login.css";
 import golfImage from "../../assets/source/icons/golf.png";
 import BackgroundImgage from "../../assets/source/imgs/golf-image-1.png";
+
+import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { IoMailOutline, IoChatbubbleSharp } from "react-icons/io5";
+
+import "./Login.css";
 
 const Login = () => {
   // Redux
@@ -25,6 +26,15 @@ const Login = () => {
 
   // 이메일 로그인 함수
   const handleEmailLogin = () => {
+    if (email === "") {
+      alert("이메일을 입력해 주세요.");
+      return;
+    }
+    else if (password === "") {
+      alert("비밀번호를 입력해 주세요.");
+      return;
+    }
+
     // 로그인 정보
     const data = {
       id: email,
@@ -56,7 +66,7 @@ const Login = () => {
         console.log(response.data); // Debug Code !!
 
         // NavBar에 사용자 정보 저장 - data for test
-        dispatch(setUserId("logined@ssafy.com"));
+        dispatch(setUserId(email));
         dispatch(setUserNickname("로그인 됨"));
         dispatch(setUserLevel("eagle"));
         dispatch(setUserTee("Red"));
@@ -113,54 +123,25 @@ const Login = () => {
           <button
             className="user-func-email-login"
             onClick={handleEmailLogin} >
-              
+            <IoMailOutline className="button-react-icon" />
             <div className="user-button-text">로그인하기</div>
           </button>
-        </div>
-
-        {/* <div id="login-func">
-        <div id="login-box">
-          <div id="box-button">
-            <Button
-              onClick={handleEmailLogin}
-              style={{
-                height: "2.5rem",
-                width: "100%",
-
-                color: "black",
-                borderRadius: "30px",
-                background: "#B8F500",
-              }}
-              maxW={"sm"}
-              marginBottom={"2.5rem"}
-            >
-              {" "}
-              로그인
-            </Button>
-            <Button
-              onClick={handleKakaoLogin}
-              style={{
-                height: "2.5rem",
-                width: "100%",
-
-                color: "black",
-                borderRadius: "30px",
-                background: "#FFF500",
-              }}
-              maxW={"sm"}
-              marginBottom={"2.5rem"}
-            >
-              {" "}
-              카카오톡으로 로그인하기
-            </Button>
-          </div>
-          <div id="box-footer">
-            <NavLink to="/findpassword">비밀번호 찾기</NavLink>
-            <br />
-            <NavLink to="/signup">회원가입 하기</NavLink>
+          <button
+            className="user-func-kakao-login"
+            onClick={handleKakaoLogin} >
+            <IoChatbubbleSharp className="button-react-icon" />
+            <div className="user-button-text">카카오톡으로 로그인</div>
+          </button>
+          <hr className="user-hr" />
+          <div className="user-func-footer">
+            <NavLink to="/findpassword">
+              <div className="user-func-footer-half">비밀번호 찾기</div>
+            </NavLink>
+            <NavLink to="/signup">
+              <div className="user-func-footer-half">회원가입하기</div>
+            </NavLink>
           </div>
         </div>
-      </div> */}
 
         {/* 배경 및 모양 관련 div */}
         <div className="user-container-bump"></div>
