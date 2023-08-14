@@ -5,10 +5,10 @@ import { getNameById } from "../golffield/ParseGolfId";
 import AccompanyBox from "./AccompanyBox";
 
 import ProfileImg from "../../assets/source/imgs/favicon.png";
-import TeeRed from "../../assets/source/icons/flag-red.png";
-import TeeWhite from "../../assets/source/icons/flag-white.png";
-import TeeBlack from "../../assets/source/icons/flag-black.png";
-import TeeAll from "../../assets/source/icons/flag-all.png";
+import flagred from "../../assets/source/icons/flag-red.png";
+import flagwhite from "../../assets/source/icons/flag-white.png";
+import flagblack from "../../assets/source/icons/flag-black.png";
+import flagall from "../../assets/source/icons/flag-all.png";
 
 import { MdSportsGolf } from "react-icons/md";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -20,6 +20,7 @@ function AccompanyList() {
   // 검색을 위한 변수
   const [searchValue, setSearchValue] = useState("");
   const [searchFilter, setSearchFilter] = useState("title");
+  const [flagFilter, setFlagFilter] = useState("flagall");
   const [selectedFollow, setSelectedFollow] = useState(false);
 
   const handleInputChange = (event) => {
@@ -69,22 +70,18 @@ function AccompanyList() {
     { id: 6, title: "제목 6", authorId: "333333", authorNickname: "최싸피", tee: "red", placeId: 61, date: "2023.09.30 10:00" },
   ];
 
+  // 이미지 파일 경로를 객체로 관리
   const teeMap = {
-    red: TeeRed,
-    white: TeeWhite,
-    black: TeeBlack,
-    all: TeeAll,
-  }
+    red: flagred,
+    white: flagwhite,
+    black: flagblack,
+    all: flagall,
+};
 
   // 처음 화면이 로딩 될 때 동행 리스트 정보 호출
   useEffect(() => {
     setAccompanyList(accompanyData);
   }, []);
-
-  // accompanyData의 tee 값에 따라 티박스 이미지 변경 함수
-
-  // accompanyData의 placeId 값에 따라 골프장 이름 반환 함수
-  // 외부 component 사용
 
   const handleCreateRectangle = (title, author) => {
     const newRectangle = {
@@ -163,7 +160,26 @@ function AccompanyList() {
             {/* 검색창 */}
             {searchFilter === "tee" ? (
               <div className="search-input-container">
-
+                <div className="search-tee-item">
+                  <img src={flagred} alt="레드 티 박스"
+                  onClick={() => setFlagFilter('flagred')}
+                  className={`search-tee-img${flagFilter === 'flagred' ? '-selected' : ''}`} />
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagwhite} alt="화이트 티 박스"
+                  onClick={() => setFlagFilter('flagwhite')}
+                  className={`search-tee-img${flagFilter === 'flagwhite' ? '-selected' : ''}`} />
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagblack} alt="블랙 티 박스"
+                  onClick={() => setFlagFilter('flagblack')}
+                  className={`search-tee-img${flagFilter === 'flagblack' ? '-selected' : ''}`} />
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagall} alt="모든 티 박스"
+                  onClick={() => setFlagFilter('flagall')}
+                  className={`search-tee-img${flagFilter === 'flagall' ? '-selected' : ''}`} />
+                </div>
               </div>
             ) : (
               <div className="search-input-container">
