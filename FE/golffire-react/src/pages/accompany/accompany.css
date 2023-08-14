@@ -1,350 +1,90 @@
 /* Accompany.js */
-.accompany-container {
-  width: 100%;
-  height: calc(100vh - 4rem);
-}
-
-.accompany-head {
-  width: 100%;
-  height: 200px;
-  padding: 20px 0px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.accompany-title {
-  color: #000;
-  font-family: Inter;
-  font-size: 40px;
-  font-weight: 400;
-}
-
-.accompany-description {
-  color: #8d8f98;
-  font-family: Inter;
-  font-size: 24px;
-  font-weight: 400;
-}
-
 .accompany-body {
   width: 100%;
   height: calc(100% - 200px);
 }
 
 /* AccompanyList.js */
-.accompanylist-container {
-  width: 100%;
-  height: 100%;
+.search-filter {
+  height: 45px;
+  min-width: 150px;
+  margin-left: 10px;
 
-  display: flex;
-  justify-content: center;
-}
-
-.accompanylist {
-  width: 80%;
-  height: 650px;
-  max-width: 1820px;
-
-  padding: 20px;
   border-radius: 50px;
-  border: 2px solid #000;
-
-  background: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.accompanylist-head {
-  width: 100%;
-  height: 80px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.head-create-button {
-  width: 150px;
-  height: 30px;
-
-  border-radius: 20px;
   border: 1px solid #000;
+  background: #FFF;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: #000;
-  font-family: Inter;
+  padding: 10px;
   font-size: 16px;
 }
 
-.accompany-search {
-  width: 80%;
-  height: 80%;
-
-  display: flex;
+.search-filter option {
+  text-align: center;
+  background: #FFF;
 }
 
-.accompanylist-body {
-  width: 100%;
-  height: 480px;
-
-  display: flex;
-  align-content: flex-start;
-  flex-wrap: wrap;
-
-  overflow: auto;
-  background-color: yellow;
-}
-
-.accompany-room {
+/* AccompanyBox CSS */
+.accompany-box {
   width: 480px;
-  height: 220px;
+  min-height: 210px;
+
+  margin: 10px 10px;
+  padding: 10px 30px;
+  
+  border-radius: 30px;
+  border: 2px solid #000;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.accompany-box-title {
+  color: #000;
+  font-family: Inter;
+  font-size: 25px;
+  font-weight: 600;
+  
+  margin-bottom: 5px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accompany-box-date {
+  display: flex;
+  align-items: center;
+}
+
+.accompany-box-place {
+  display: flex;
+  align-items: center;
+}
+
+.accompany-box-button-position {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.accompany-box-button {
+  width: 200px;
+  height: 40px;
   max-width: 100%;
 
-  border: 1px solid #000;
-  margin: 10px 5px;
-  border-radius: 20px;
-}
-
-.accompanylist-footer {
-  width: 100%;
-  height: 50px;
   display: flex;
   justify-content: center;
-  background-color: red;
-}
-
-.joining-room {
-  height: 90%;
-  width: 33%;
-  border: 1px solid #000;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-}
 
-.joining-title {
-  text-align: left;
-}
-
-.joining-author {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.joining-author-box {
-  border: 1px solid #000;
-  border-radius: 5px;
-  padding: 5px 10px;
-}
-
-.joining-description {
-  text-align: center;
-  border: 1px solid #000;
-}
-
-.joining-button {
-  background-color: yellow;
-}
-
-/* 배경 div - 방 미선택 시 */
-.unselected-box {
-  position: fixed;
-  top: 284px;
-  left: calc(50% + 20px);
-  transform: translateX(-50%);
-
-  width: 80%;
-  height: 650px;
-  max-width: 1820px;
-
-  border-radius: 50px;
-  background-color: black;
-  z-index: -1;
-}
-
-/* 배경 div - 방 선택 시 */
-.selected-box {}
-
-/* CreateAccompony */
-.createA-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-.createA-mainbox {
-  width: 700px;
-  height: 580px;
-  border-radius: 50px;
-  border: 2px solid #000;
-  background: #fff;
-  padding: 3rem;
-  display: flex;
-  /* 가운데 정렬을 위해 flex로 설정 */
-  flex-direction: column;
-  /* 세로 방향으로 정렬되도록 설정 */
-  align-items: center;
-  /* 수평 가운데 정렬 */
-  box-shadow: 10px 10px 0px 0px #000;
-}
-
-.createA-title {
-  height: 40px;
-  width: 640px;
-  border: 1px solid #000;
-  padding: 10px 48px;
-  /* 텍스트 입력과 테두리 사이의 간격을 주기 위한 padding 추가 */
-  box-sizing: border-box;
-}
-
-.createA-content {
-  width: 640px;
-  height: 540px;
-  border: 1px solid #000;
-  padding: 10px 48px;
-  /* 텍스트 입력과 테두리 사이의 간격을 주기 위한 padding 추가 */
-  box-sizing: border-box;
-  /* 요소의 크기에 padding과 border를 포함시킴 */
-}
-
-.createA-password {
-  width: 640px;
-  height: 40px;
-  border: 1px solid #000;
-  padding: 5px 48px 5px 48px;
-  display: flex;
-  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between;
-  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center;
-  /* 수평 가운데 정렬 */
-}
-
-.createA-password input {
-  height: 30px;
-  text-align: center;
-  padding: 5px;
-}
-
-.createA-num {
-  width: 640px;
-  height: 40px;
-  border: 1px solid #000;
-  padding: 5px 48px 5px 48px;
-  display: flex;
-  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between;
-  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center;
-  /* 수평 가운데 정렬 */
-}
-
-.createA-num input {
-  height: 30px;
-  text-align: center;
-  padding: 5px;
-}
-
-.createA-accompanydate {
-  width: 640px;
-  height: 40px;
-  border: 1px solid #000;
-  padding: 5px 48px 5px 48px;
-  display: flex;
-  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between;
-  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center;
-  /* 수평 가운데 정렬 */
-}
-
-.createA-enddate {
-  width: 640px;
-  height: 40px;
-  border: 1px solid #000;
-  padding: 5px 48px 5px 48px;
-  display: flex;
-  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between;
-  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center;
-  /* 수평 가운데 정렬 */
-}
-
-.createA-map {
-  width: 640px;
-  height: 40px;
-  border: 1px solid #000;
-  padding: 5px 48px 5px 48px;
-  display: flex;
-  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between;
-  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center;
-  /* 수평 가운데 정렬 */
-}
-
-.createA-datetime-input {
-  width: 300px;
-  border: 1px solid #000;
-  justify-content: center;
-  align-items: center;
-}
-
-.createA-icon {
-  width: 640px;
-  height: 40px;
-  border: 1px solid #000;
-  padding: 5px 48px 5px 48px;
-  display: flex;
-  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between;
-  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  align-items: center;
-  /* 수평 가운데 정렬 */
-}
-
-.icon-list {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.icon img {
-  width: 30px;
-  height: 30px;
-  border: 3px solid #ccc;
-  padding: 2px;
-}
-
-.icon {
+  margin-top: 5px;
   cursor: pointer;
-}
+  background-color: #FFF;
+  border-radius: 50px;
+  border: 2px solid #3CADFF;
 
-.selected-icon {
-  border: 3px solid green;
-}
-
-.createA-buttons {
-  display: flex;
-  /* 버튼들을 가로로 나열하는 flex 컨테이너 */
-  justify-content: space-between;
-  /* 버튼들 사이에 공간을 최대한 분배하여 배치 */
-  width: 640px;
-  /* 부모 요소의 너비와 동일하게 설정 */
-  margin: 20px 0;
-  /* 버튼들 위아래에 20px 간격 주기 */
+  color: #3CADFF;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 900;
 }

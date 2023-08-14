@@ -67,7 +67,7 @@
   min-width: 50px;
 
   border-radius: 50%;
-  background-color: #72ce27;
+  background-color: #FFF;
   border: 1px solid #000;
 
   display: flex;
@@ -133,6 +133,7 @@
 .control-arrow:disabled {
   margin: 10px;
   color: gray;
+  cursor: default;
 }
 
 #control-num {
