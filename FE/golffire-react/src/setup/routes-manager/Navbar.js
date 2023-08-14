@@ -13,7 +13,7 @@ import { IoMdContact } from "react-icons/io";
 import { Avatar, AvatarBadge, AvatarGroup, Hide } from "@chakra-ui/react";
 
 // Redux
-import { setUserId, setUserNickname } from "../../features/userInfoSlice";
+import { resetUserState } from "../../features/userInfoSlice";
 
 import "./styles.css";
 import {
@@ -56,9 +56,10 @@ function Navbar() {
       console.log(response);
       if (response.data.data === "SUCCESS") {
         setCookie("refreshToken", cookies.refreshToken, { path: "/", maxAge: 0 });
+
         console.log("로그아웃하여 redux 정보 삭제");
-        dispatch(setUserId());
-        dispatch(setUserNickname());
+        resetUserState(); // reset redux data
+
         navigate("/");
       } else {
         alert("Error");
