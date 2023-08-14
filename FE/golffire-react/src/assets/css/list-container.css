@@ -20,6 +20,8 @@
     border-radius: 30px;
     border: 2px solid #000;
     background: #FFF;
+
+    position: relative;
 }
 
 .container-head-title {
@@ -68,6 +70,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    position: relative;
 }
 
 /* 선택 시 */
@@ -85,6 +89,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    position: relative;
 }
 
 .list-head {
@@ -318,14 +324,14 @@
 
 /* Shadow CSS */
 .list-head-shadow {
-    position: fixed;
-    top: 149px;
+    position: absolute;
+    top: 15px;
     left: calc(50% + 15px);
     transform: translateX(-50%);
 
-    width: 700px;
-    height: 160px;
-    max-width: 36%;
+    width: 100%;
+    height: 100%;
+
     border: 2px solid #000;
 
     border-radius: 30px;
@@ -333,9 +339,9 @@
 }
 
 .list-head-pin {
-    position: fixed;
-    top: 110px;
-    left: calc(50% + 300px);
+    position: absolute;
+    top: -40px;
+    left: calc(95%);
 
     width: 80px;
     height: 80px;
@@ -350,12 +356,13 @@
 }
 
 .list-background-div {
-    position: fixed;
-    top: 364px;
+    position: absolute;
+
+    top: 20px;
     left: calc(50% + 20px);
     transform: translateX(-50%);
 
-    width: 90%;
+    width: 100%;
     height: 650px;
     max-width: 1820px;
     border: 2px solid #000;
