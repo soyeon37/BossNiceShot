@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Datetime from 'react-datetime';
 import moment from 'moment';
@@ -35,8 +35,8 @@ function CreateAccompany() {
 
     const [title, setTitle] = useState('');
     const [value, setValue] = useState('');
-    const [accompanyDate, setAccompanyDate] = useState(null);
-    const [accompanyTime, setAccompanyTime] = useState(null);
+    const [accompanyDate, setAccompanyDate] = useState(new Date());
+    const [accompanyTime, setAccompanyTime] = useState(new Date());
     const [accompanyPlace, setAccompanyPlace] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
     const [endDate, setEndDate] = useState(null);
@@ -57,10 +57,17 @@ function CreateAccompany() {
 
     // 티업 날짜 및 시간 입력 함수
     const handleDateChange = (event) => {
-        setAccompanyDate(event.target.value);
+        const selectedDate = new Date(event.target.value);
+        setAccompanyDate(selectedDate);
     };
     const handleTimeChange = (event) => {
-        setAccompanyTime(event.target.value);
+        const selectedTime = event.target.value;
+        const [hours, minutes] = selectedTime.split(':');
+        const updatedTime = new Date(accompanyTime);
+        updatedTime.setHours(hours);
+        updatedTime.setMinutes(minutes);
+        updatedTime.setSeconds(0);
+        setAccompanyTime(updatedTime);
     };
 
     // "등록하기" 버튼 클릭 이벤트를 처리하는 함수
@@ -95,6 +102,13 @@ function CreateAccompany() {
             }
         }
     };
+
+    // 처음 화면이 로딩될 때 한 번 실행되는 함수
+    useEffect(() => {
+        const currentTime = new Date(accompanyTime);
+        currentTime.setSeconds(0);
+        setAccompanyTime(currentTime);
+    }, []);
 
     return (
         <div id="CreateAccompany" className='create-container'>
@@ -205,9 +219,16 @@ function CreateAccompany() {
                                                 )
                                             case 2:
                                                 return (
-                                                    <div>
-                                                        <input type="date" value={accompanyDate} onChange={handleDateChange} />
-                                                        <input type="time" value={accompanyTime} onChange={handleTimeChange} />
+                                                    <div className='option-datetime'>
+                                                        <input type="date"
+                                                            className='option-datetime-box'
+                                                            value={accompanyDate.toISOString().split('T')[0]}
+                                                            onChange={handleDateChange} />
+                                                        <input type="time"
+                                                            className='option-datetime-box'
+                                                            step={900}
+                                                            value={accompanyTime.toTimeString().split(' ')[0]}
+                                                            onChange={handleTimeChange} />
                                                     </div>
                                                 )
                                             case 3:
