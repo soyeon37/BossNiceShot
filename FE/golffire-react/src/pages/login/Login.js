@@ -12,6 +12,7 @@ import { setUserId, setUserNickname, setUserLevel, setUserTee } from "../../feat
 import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import "./Login.css";
 import golfImage from "../../assets/source/icons/golf.png";
+import BackgroundImgage from "../../assets/source/imgs/golf-image-1.png";
 
 const Login = () => {
   // Redux
@@ -82,46 +83,43 @@ const Login = () => {
 
   return (
     <div id="Login">
-      {/* 그림 공간 */}
-      <div id="login-banner">
-        <div id="login-banner-context">
-          <div id="banner-letter">
-            동료들이 당신을
-            <br />
-            기다리고 있어요!
+      <div className="user-container">
+        <div className="user-banner">
+          <div className="user-banner-title">
+            동료들이<br />기다리고 있어요!
+          </div>
+          <div className="user-banner-img">
+            <img className="user-banner-img-style" src={BackgroundImgage} alt="golf-mascot-image" />
           </div>
         </div>
-        <div id="login-banner-image">
-          <img src={golfImage} alt="banner-golf-icon" />
+        <div className="user-func">
+          <div className="user-func-title">
+            로그인
+          </div>
+          <input
+            className="user-func-normal-input"
+            type="email"
+            value={email}
+            placeholder="이메일"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            className="user-func-normal-input"
+            type="password"
+            value={password}
+            placeholder="비밀번호"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            className="user-func-email-login"
+            onClick={handleEmailLogin} >
+              
+            <div className="user-button-text">로그인하기</div>
+          </button>
         </div>
-      </div>
 
-      {/* 기능 공간 */}
-      <div id="login-func">
+        {/* <div id="login-func">
         <div id="login-box">
-          <div id="box-title">로그인</div>
-          <div id="box-content">
-            <FormControl maxW={"sm"}>
-              <FormLabel>이메일</FormLabel>
-              <Input
-                type="email"
-                placeholder="이메일을 입력하세요."
-                bg={"white"}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FormControl>
-            <FormControl maxW={"sm"} paddingTop={"2%"}>
-              <FormLabel>비밀번호</FormLabel>
-              <Input
-                type="password"
-                placeholder="비밀번호를 입력하세요."
-                bg={"white"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormControl>
-          </div>
           <div id="box-button">
             <Button
               onClick={handleEmailLogin}
@@ -162,7 +160,15 @@ const Login = () => {
             <NavLink to="/signup">회원가입 하기</NavLink>
           </div>
         </div>
+      </div> */}
+
+        {/* 배경 및 모양 관련 div */}
+        <div className="user-container-bump"></div>
       </div>
+      <div className="user-container-shadow">
+        <div className="user-container-shadow-bump"></div>
+      </div>
+
     </div>
   );
 };
