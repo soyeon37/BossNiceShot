@@ -15,6 +15,7 @@ import flagblack from '../../assets/source/icons/flag-black.png';
 import flagall from '../../assets/source/icons/flag-all.png';
 import PinImg from "../../assets/source/icons/pin.png";
 
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { BiTimeFive } from "react-icons/bi";
 import { BsArrowLeftCircle, BsArrowRightCircle, BsPeopleFill } from "react-icons/bs";
@@ -29,18 +30,20 @@ function CreateAccompany() {
     const isLastPage = page === 5;
 
     const handlePageChange = (pageNum) => {
-        // if (pageNum <= limit)
-        setPage(pageNum);
+        console.log(limit, " 제한인 상태에서 다음으로 넘어가려 함.");
+        if (pageNum <= limit) {
+            setPage(pageNum);
+        } else {
+            alert("값을 입력해 주세요!");
+        }
     }
 
     const [title, setTitle] = useState('');
     const [value, setValue] = useState('');
     const [accompanyDate, setAccompanyDate] = useState(new Date());
-    const [accompanyTime, setAccompanyTime] = useState(new Date());
     const [accompanyPlace, setAccompanyPlace] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
-    const [endDate, setEndDate] = useState(null);
-    const [maxParticipants, setMaxParticipants] = useState('');
+    const [maxParticipants, setMaxParticipants] = useState(2);
     const [selectedIcon, setSelectedIcon] = useState(null);
     const navigate = useNavigate();
 
@@ -55,19 +58,52 @@ function CreateAccompany() {
         window.open(naverSearchUrl, '_blank');
     }
 
+    // 골프장이 선택될 때마다 실행되는 함수
+    useEffect(() => {
+        if (limit === 1 && accompanyPlace !== 0) setLimit(4);
+    }, [accompanyPlace]);
+
+
     // 티업 날짜 및 시간 입력 함수
     const handleDateChange = (event) => {
         const selectedDate = new Date(event.target.value);
-        setAccompanyDate(selectedDate);
+        const updatedDate = new Date(accompanyDate);
+        updatedDate.setFullYear(selectedDate.getFullYear());
+        updatedDate.setMonth(selectedDate.getMonth());
+        updatedDate.setDate(selectedDate.getDate());
+        setAccompanyDate(updatedDate);
     };
     const handleTimeChange = (event) => {
         const selectedTime = event.target.value;
         const [hours, minutes] = selectedTime.split(':');
-        const updatedTime = new Date(accompanyTime);
+        const updatedTime = new Date(accompanyDate);
         updatedTime.setHours(hours);
         updatedTime.setMinutes(minutes);
         updatedTime.setSeconds(0);
-        setAccompanyTime(updatedTime);
+        setAccompanyDate(updatedTime);
+    };
+
+    // 이미지 파일 경로를 객체로 관리
+    const iconPaths = {
+        flagred: flagred,
+        flagwhite: flagwhite,
+        flagblack: flagblack,
+        flagall: flagall,
+    };
+
+    // 티 박스가 선택될 때마다 실행되는 함수
+    useEffect(() => {
+        if (limit === 4 && selectedIcon !== null) setLimit(5);
+    }, [selectedIcon]);
+
+    // Date() 객체를 원하는 format으로 출력
+    const optionDateTime = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false,
     };
 
     // "등록하기" 버튼 클릭 이벤트를 처리하는 함수
@@ -76,38 +112,24 @@ function CreateAccompany() {
             alert("제목을 입력해주세요.");
         } else if (value.trim() === '') {
             alert("내용을 입력해주세요.");
-        } else if (accompanyDate === null) {
-            alert("동행일을 선택해주세요.");
-        } else if (endDate === null) {
-            alert("마감일을 선택해주세요.");
-        } else if (maxParticipants.trim() === '') {
-            alert("최대인원수를 입력해주세요.");
-        } else if (selectedIcon === null) { // 추가: 선호 티박스 선택 여부 검사
-            alert("선호 티박스를 선택해주세요.");
         } else {
-            const maxParticipantsNum = parseInt(maxParticipants.trim(), 10);
-            if (isNaN(maxParticipantsNum) || maxParticipantsNum < 2 || maxParticipantsNum > 4) {
-                alert("최대인원수는 2에서 4사이의 숫자로 입력해주세요.");
+            // 등록 또는 제출 로직을 여기에 작성합니다.
+            // 예를 들어, 서버로 데이터를 전송하거나 원하는 다른 작업을 수행할 수 있습니다.
 
-            } else {
-                // 등록 또는 제출 로직을 여기에 작성합니다.
-                // 예를 들어, 서버로 데이터를 전송하거나 원하는 다른 작업을 수행할 수 있습니다.
-                console.log("Title:", title);
-                console.log("Content:", value);
-                console.log("Accompony Date:", accompanyDate);
-                console.log("End Date:", endDate);
-                console.log("Max Participants:", maxParticipants);
-                console.log("Selected Icon:", selectedIcon);
-                navigate('/accompany');
-            }
+            console.log("Title:", title);
+            console.log("Content:", value);
+            console.log("Accompony Date:", accompanyDate);
+            console.log("Max Participants:", maxParticipants);
+            console.log("Selected Icon:", selectedIcon);
+            navigate('/accompany');
         }
     };
 
     // 처음 화면이 로딩될 때 한 번 실행되는 함수
     useEffect(() => {
-        const currentTime = new Date(accompanyTime);
+        const currentTime = new Date(accompanyDate);
         currentTime.setSeconds(0);
-        setAccompanyTime(currentTime);
+        setAccompanyDate(currentTime);
     }, []);
 
     return (
@@ -226,26 +248,72 @@ function CreateAccompany() {
                                                             onChange={handleDateChange} />
                                                         <input type="time"
                                                             className='option-datetime-box'
-                                                            step={900}
-                                                            value={accompanyTime.toTimeString().split(' ')[0]}
+                                                            value={accompanyDate.toTimeString().split(' ')[0]}
                                                             onChange={handleTimeChange} />
                                                     </div>
                                                 )
                                             case 3:
                                                 return (
-                                                    <div>3번임</div>
+                                                    <div className='option-people'>
+                                                        <button className='option-people-icon'
+                                                            disabled={maxParticipants >= 4}
+                                                            onClick={() => setMaxParticipants(maxParticipants + 1)} >
+                                                            <AiOutlinePlus className='option-title-icon icon-background' />
+                                                        </button>
+                                                        <div className="option-people-div" >
+                                                            {maxParticipants}
+                                                        </div>
+                                                        <button className="option-people-icon"
+                                                            disabled={maxParticipants <= 2}
+                                                            onClick={() => setMaxParticipants(maxParticipants - 1)}>
+                                                            <AiOutlineMinus className='option-title-icon icon-background' />
+                                                        </button>
+                                                    </div>
                                                 )
                                             case 4:
                                                 return (
-                                                    <div>4번임</div>
+                                                    <div className='option-tee'>
+                                                        <div className='tee-grid-item'>
+                                                            <img src={flagred} alt='레드 티 박스'
+                                                                onClick={() => setSelectedIcon('flagred')}
+                                                                className={`option-tee-img${selectedIcon === 'flagred' ? '-selected' : ''}`} />
+                                                        </div>
+                                                        <div className='tee-grid-item'>
+                                                            <img src={flagwhite} alt='화이트 티 박스'
+                                                                onClick={() => setSelectedIcon('flagwhite')}
+                                                                className={`option-tee-img${selectedIcon === 'flagwhite' ? '-selected' : ''}`} />
+                                                        </div>
+                                                        <div className='tee-grid-item'>
+                                                            <img src={flagblack} alt='블랙 티 박스'
+                                                                onClick={() => setSelectedIcon('flagblack')}
+                                                                className={`option-tee-img${selectedIcon === 'flagblack' ? '-selected' : ''}`} />
+                                                        </div>
+                                                        <div className='tee-grid-item'>
+                                                            <img src={flagall} alt='모든 티 박스'
+                                                                onClick={() => setSelectedIcon('flagall')}
+                                                                className={`option-tee-img${selectedIcon === 'flagall' ? '-selected' : ''}`} />
+                                                        </div>
+                                                    </div>
                                                 )
-                                            case 5:
+                                            default: // 5
                                                 return (
-                                                    <div>5번임</div>
-                                                )
-                                            default:
-                                                return (
-                                                    <div>디폴트</div>
+                                                    <div className='option-total'>
+                                                        <div className='option-total-bold'>
+                                                            {getNameById(accompanyPlace)}
+                                                        </div>
+                                                        <div className='option-total-normal'>
+                                                            {new Intl.DateTimeFormat('ko-KR', optionDateTime).format(accompanyDate)}
+                                                        </div>
+                                                        <div className='option-total-bold'>
+                                                            {maxParticipants}명
+                                                        </div>
+                                                        <div className='option-total-normal'>
+                                                            <img className='tee-icon' src={iconPaths[selectedIcon]} alt={selectedIcon} />
+                                                        </div>
+                                                        <div className='option-total-img'>
+                                                            <img className='mascot-deco' src={flagall} alt="mascot-bear" />
+                                                        </div>
+                                                    </div>
                                                 )
 
                                         }
@@ -273,106 +341,18 @@ function CreateAccompany() {
                     </div>
                 </div>
                 <div className='create-body-shadow bg-shadow'></div>
-            </div>
-
-            {/* <div className='createA-mainbox'>
-                    
-                    <div className='createA-accompanydate'>
-                        <h2>동행일</h2>
-                        <Datetime
-                            value={moment(accompanyDate)}
-                            onChange={(date) => setAccompanyDate(date)}
-                            dateFormat="YYYY년MM월DD일 "
-                            timeFormat="HH시mm분"
-                            utc={true}
-                            inputProps={{
-                                className: 'createA-datetime-input',
-                                placeholder: "날짜와 시간을 선택하세요",
-                                readOnly: true
-                            }}
-                        />
-                    </div>
-                    <div className='createA-enddate'>
-                        <h2>동행일</h2>
-                        <Datetime
-                            value={moment(endDate)}
-                            onChange={(date) => setEndDate(date)}
-                            dateFormat="YYYY년MM월DD일 "
-                            timeFormat="HH시mm분"
-                            utc={true}
-                            inputProps={{
-                                className: 'createA-datetime-input',
-                                placeholder: "날짜와 시간을 선택하세요",
-                                readOnly: true
-                            }}
-                        />
-                    </div>
-                    <div className='createA-map'>
-                        <h2>동행 장소</h2>
-                        <button
-                            onClick={toggleModal}>
-                            {accompanyPlace === 0 ? (
-                                <div>골프장 선택하기</div>
-                            ) : (
-                                <div>{getNameById(accompanyPlace)} 선택 됨, 변경하기</div>
-                            )}
-                        </button>
-                    </div>
-                    <div className='createA-num'>
-                        <h2>동행 인원</h2>
-                        <input
-                            type="number"
-                            placeholder="본인포함 최대 4인"
-                            value={maxParticipants}
-                            onChange={(e) => setMaxParticipants(e.target.value)}
-                        />
-                    </div>
-                    <div className='createA-icon'>
-                        <h2>선호 티박스</h2>
-                        <div className='icon-list'>
-                            <div
-                                className={`icon ${selectedIcon === 'flagred' ? 'selected-icon' : ''}`}
-                                onClick={() => setSelectedIcon('flagred')}
-                            >
-                                <img src={flagred} alt="flagred 1" />
-                            </div>
-                            <div
-                                className={`icon ${selectedIcon === 'flagwhite' ? 'selected-icon' : ''}`}
-                                onClick={() => setSelectedIcon('flagwhite')}
-                            >
-                                <img src={flagwhite} alt="flagwhite 2" />
-                            </div>
-                            <div
-                                className={`icon ${selectedIcon === 'flagblack' ? 'selected-icon' : ''}`}
-                                onClick={() => setSelectedIcon('flagblack')}
-                            >
-                                <img src={flagblack} alt="flagblack 3" />
-                            </div>
-                            <div
-                                className={`icon ${selectedIcon === 'flagall' ? 'selected-icon' : ''}`}
-                                onClick={() => setSelectedIcon('flagall')}
-                            >
-                                <img src={flagall} alt="flagall 4" />
-                            </div>
-                        </div>
-                    </div>
-                    <div className='createA-buttons'>
-                        <Link to="/accompany" style={{ textDecoration: "none" }}>
-                            <button style={{ color: 'red' }}>취소</button>
-                        </Link>
-                        <button style={{ color: 'green' }} onClick={handleRegisterClick}>등록하기</button>
-                    </div>
-                </div> */}
+            </div >
 
             {/* 골프장 선택 Modal */}
-            {isVisible &&
+            {
+                isVisible &&
                 <GolffieldModal
                     toggleModal={toggleModal}
                     setAccompanyPlace={setAccompanyPlace}
                 />
             }
 
-        </div>
+        </div >
 
     )
 }
