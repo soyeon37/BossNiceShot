@@ -62,6 +62,7 @@ public class CompanionController {
 	@Operation(summary = "동행 모집 검색", description = "검색 조건 기반(제목, 작성자, 내용, 티박스, 팔로우) 동행 모집 조회 결과를 최신 등록 순으로 정렬한다.")
 	@PostMapping("/search")
 	public ResponseEntity<List<SimpleCompanionResponse>> searchList(@RequestBody CompanionSearchRequest companionSearchRequest, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
+		log.info("동행모집검색: {}", companionSearchRequest);
 		return ResponseEntity.ok(companionService.findPagingByKeyword(companionSearchRequest, pageable).stream().map(SimpleCompanionResponse::from).toList());
 	}
 

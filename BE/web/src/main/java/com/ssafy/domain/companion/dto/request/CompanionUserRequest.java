@@ -1,6 +1,5 @@
 package com.ssafy.domain.companion.dto.request;
 
-import com.ssafy.common.Status;
 import com.ssafy.domain.companion.entity.Companion;
 import com.ssafy.domain.companion.entity.CompanionUser;
 import com.ssafy.domain.member.entity.Member;

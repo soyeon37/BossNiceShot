@@ -1,15 +1,14 @@
 package com.ssafy.domain.companion.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.common.TeeBox;
 import com.ssafy.domain.companion.dto.request.CompanionSearchRequest;
 import com.ssafy.domain.companion.entity.Companion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.support.PageableExecutionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,15 +21,11 @@ import static com.ssafy.domain.member.entity.QMember.member;
 public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
-    /*
-    라연 - 팔로우 유무에 따라 수정 필요
-     */
     @Override
     public Page<Companion> searchAll(CompanionSearchRequest companionSearchRequest, Pageable pageable) {
         List<Companion> result = queryFactory
                 .selectFrom(companion)
                 .leftJoin(companion.member, member)
-                .fetchJoin()
                 .where(
                         eqTitle(companionSearchRequest.title()),
                         eqMemberNickname(companionSearchRequest.memberNickname()),
@@ -45,7 +40,7 @@ public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
                 .orderBy(companion.createdTime.desc())
                 .fetch();
 
-        JPAQuery<Long> countQuery = queryFactory
+        Long count = queryFactory
                 .select(companion.count())
                 .from(companion)
                 .where(
@@ -56,9 +51,10 @@ public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
                         getFolloweeList(companionSearchRequest.followerId()),
                         companion.teeUpTime.gt(LocalDateTime.now()),
                         companion.capacity.gt(companion.companionUserCount)
-                );
+                )
+                .fetchOne();
 
-        return PageableExecutionUtils.getPage(result, pageable, countQuery::fetchOne);
+        return new PageImpl<>(result, pageable, count);
     }
 
     private BooleanExpression eqTitle(String title) {
@@ -70,7 +66,7 @@ public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
     }
 
     private BooleanExpression eqDescription(String description) {
-        return description == null ? null : companion.description.contains(description);
+        return description == null ? null : companion.description.contains(description).or(companion.title.contains(description));
     }
 
     private BooleanExpression eqTeeBox(TeeBox teeBox) {
