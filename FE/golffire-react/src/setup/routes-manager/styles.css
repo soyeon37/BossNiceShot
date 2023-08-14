@@ -20,6 +20,23 @@ body {
     align-items: center;
     gap: 2rem;
     padding: 0 1rem;
+
+   
+
+    border-bottom: 2px solid black;
+}
+#nav-list{
+    height: 4rem;
+   
+}
+#nav-list-li{
+    height: 4rem;
+    /* width: 100px; */
+     /* margin: 0px 10px 0px 10px; */
+}
+#nav-list-link{
+    justify-content: center;
+  
 }
 
 .site-title {
