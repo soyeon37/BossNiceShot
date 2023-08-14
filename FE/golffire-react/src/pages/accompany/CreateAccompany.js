@@ -101,7 +101,7 @@ function CreateAccompany() {
 
                 createCompanion(companionCreateRequest);
 
-                navigate('/accompany');
+                navigate('/accompany', { replace: true }); // replace: true를 사용하여 브라우저 히스토리에 기록하지 않음
             }
         }
     };
