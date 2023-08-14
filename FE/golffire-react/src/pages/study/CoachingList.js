@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import SearchBox from './SearchBox'; 
 import FollowFilter from './FollowFilter';
@@ -6,45 +6,35 @@ import FollowFilter from './FollowFilter';
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import "./study.css";
 
+import axios from "axios";
+
 function CoachingList() {
-  
-  const mockRectangles = [
-    { id: 1, title: '제목 1', author: '작성자 1' },
-    { id: 2, title: '제목 2', author: '작성자 2' },
-    { id: 3, title: '제목 3', author: '작성자 3' },
-    { id: 4, title: '제목 4', author: '작성자 4' },
-    { id: 5, title: '제목 5', author: '작성자 5' },
-  ];
-
-  const [rectangles, setRectangles] = useState(mockRectangles);
-
-  const handleCreateRectangle = (title, author) => {
-    const newRectangle = {
-      id: rectangles.length + 1,
-      title: title,
-      author: author,
-    };
-    setRectangles([...rectangles, newRectangle]);
-  };
-
-  // Result Pagination
-  const itemsPerPage = 4; // 페이지 당 아이템 수
+  const pageSize = 6; 
   const [currentPage, setCurrentPage] = useState(1);
 
-  // 페이지 변환에 따른 아이템 출력
-  const getCurrentPageItems = () => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    return rectangles.slice(startIndex, endIndex);
-  };
+  const [coachingList, setCoachingList] = useState([]);
   
-   // 페이징 컨트롤 인식
+  useEffect(() => {
+    getCoachingList();
+  });
+
+  const getCoachingList = () => {
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING";
+
+    console.log("코칭 리스트 조회");
+    axios.get(apiUrl)
+    .then((response) => {
+      console.log(response);
+
+      setCoachingList(response.data);
+    });
+  }
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
   const isFirstPage = currentPage === 1;
-  const isLastPage = currentPage === Math.ceil(rectangles.length / itemsPerPage);
+  const isLastPage = currentPage === Math.ceil(coachingList.length / pageSize);
 
   // 참여하기 버튼
   const [isJoining, setIsJoining] = useState(false);
@@ -76,10 +66,10 @@ function CoachingList() {
           </div>
         </div>
         <div className='learninglist-body'>
-          {getCurrentPageItems().map(rectangle => (
+          {coachingList.map(rectangle => (
             <div key={rectangle.id} className='learning-room'>
               <h3>{rectangle.title}</h3>
-              <p>작성자: {rectangle.author}</p>
+              <p>작성자: {rectangle.memberNickname}</p>
               <button onClick={() => handleJoinButtonClick(rectangle)}>참여하기</button>
             </div>
           ))}

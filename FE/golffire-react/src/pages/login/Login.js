@@ -59,7 +59,7 @@ const Login = () => {
         console.log(response.data); // Debug Code !!
         
         // NavBar에 사용자 정보 저장
-        dispatch(setUserId("logined@ssafy.com"));
+        dispatch(setUserId(email));
         dispatch(setUserNickname("로그인 됨"));
 
         // 로그인 성공 후 Main으로 복귀

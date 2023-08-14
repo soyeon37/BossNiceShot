@@ -1,5 +1,10 @@
 /* StudyList */
 
+.study-body {
+  width: 100%;
+  height: calc(100% - 200px);
+}
+
 .list-container {
   height: 100%;
   width: 100%

@@ -21,13 +21,12 @@ function StudyList() {
   };
 
   return (
-    <div className='list-container'>
-      <div className='list-head'>
-        <h1>스터디</h1>
-        <h2>
-          희망하는 코칭/러닝 방에 입장하세요.<br />
-          새로운 방을 만들어도 됩니다.
-        </h2>
+    <div id = "study-container" className='study-container'>
+      <div className={`container-head shadow-${coachingActive ? 'coaching' : 'learning'}`}>
+        <div className="container-head-title">스터디</div>
+        <div className="container-head-desc">
+          희망하는 코칭/러닝 방에 입장하세요.
+        </div>
         <div className='button-container'>
           <Button
             w="50px"
@@ -47,21 +46,13 @@ function StudyList() {
           >
             러닝
           </Button>
-          <Link to='/coachingroom'>
-            <Button
-              w="50px"
-              h="30px"
-            >
-              임시
-            </Button>
-          </Link>
         </div>
       </div>
-      <div className='list-body'>
+      <div className='container-body'>
         {coachingActive ? <CoachingList /> : <LearningList />}
       </div>
     </div>
-  )
+  );
 }
 
 export default StudyList
