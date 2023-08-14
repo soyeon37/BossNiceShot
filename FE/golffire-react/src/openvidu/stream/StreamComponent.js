@@ -62,7 +62,7 @@ export default class StreamComponent extends Component {
 	render() {
 		return (
 			<div className="OT_widget-container">
-				<div className="pointer nickname">
+				<div className="pointer nickname" style={{ display: "flex", justifyContent: "center", width: "70%", backgroundColor: "gray"}}>
 					{this.state.showForm ? (
 						<FormControl id="nicknameForm">
 							<IconButton color="inherit" id="closeButton" onClick={this.toggleNicknameForm}>
@@ -87,10 +87,10 @@ export default class StreamComponent extends Component {
 							)}
 						</FormControl>
 					) : (
-						<div onClick={this.toggleNicknameForm}>
-							<span id="nickname">{this.props.user.getNickname()}</span>
-							{/* {this.props.user.isLocal() && <span id=""> (edit)</span>} */}
-						</div>
+						<span id="nickname">{this.props.user.getNickname()}</span>
+						// <div onClick={this.toggleNicknameForm} style={{ backgroundColor: "gray", width: "70%", display: "flex", justifyContent: "center" }}>
+						// 	<span id="nickname">{this.props.user.getNickname()}</span>
+						// </div>
 					)}
 				</div>
 

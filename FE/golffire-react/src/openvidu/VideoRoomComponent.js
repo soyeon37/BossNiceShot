@@ -7,9 +7,11 @@ import StreamComponent from './stream/StreamComponent';
 import OpenViduLayout from './layout/openvidu-layout';
 import UserModel from './models/user-model';
 import ToolbarComponent from './toolbar/ToolbarComponent';
+
+import { ImShare2, ImExit } from "react-icons/im";
 import "@splidejs/react-splide/css";
 import './VideoRoomComponent.css';
-// import ChatComponent from './chat/ChatComponent';
+import ChatComponent from './chat/ChatComponent';
 // import Button from "@mui/material/Button";
 // import Skeleton from "@mui/material/Skeleton";
 
@@ -48,8 +50,9 @@ class VideoRoomComponent extends Component {
 			localUser: undefined,
 			subscribers: [],
 			entered: false,
-			chatDisplay: 'none',
+			chatDisplay: 'block',
 			currentVideoDevice: undefined,
+			selectedSlideIndex: -1
 		};
 
 		this.joinSession = this.joinSession.bind(this);
@@ -555,7 +558,7 @@ class VideoRoomComponent extends Component {
 			console.log('chat', display);
 			this.setState({ chatDisplay: display });
 		}
-		this.updateLayout();
+		// this.updateLayout();
 	}
 
 	checkNotification(event) {
@@ -585,6 +588,14 @@ class VideoRoomComponent extends Component {
 		await this.joinSession();
   }
 
+	handleSlideClick = (index) => {
+		if (this.state.selectedSlideIndex === index) {
+      this.setState({ selectedSlideIndex: -1 }); // 이미 선택된 슬라이드를 다시 클릭하면 선택 취소
+    } else {
+      this.setState({ selectedSlideIndex: index });
+    }
+	};
+
 	render() {
 		const mySessionId = this.state.mySessionId;
 		const localUser = this.state.localUser;
@@ -595,31 +606,23 @@ class VideoRoomComponent extends Component {
 			<div className="container" id="container">
 
 				<DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} />
+				<div className="enterbox-head">
+					<div className="roomtype">
+						<span className="typename">코칭</span>
+					</div>
+					방 제목
+					<div className="copy-url" onClick={CopyUrl}>
+						<ImShare2/>
+					</div>
+					<div className="go-back" onClick={goBack}>
+						<ImExit/>
+					</div>
+				</div>
 
-				{/* <div id="layout" className="bounds">
-					{localUser !== undefined && localUser.getStreamManager() !== undefined && (
-						<div className="OT_root OT_publisher custom-class" id="localUser">
-							<StreamComponent user={localUser} handleNickname={this.nicknameChanged} />
-						</div>
-					)}
-
-					{this.state.subscribers.map((sub, i) => (
-						<div key={i} className="OT_root OT_publisher custom-class" id="remoteUsers">
-							<StreamComponent user={sub} streamId={sub.streamManager.stream.streamId} />
-						</div>
-					))} */}
 				{localUser !== undefined && 
 					localUser.getStreamManager() !== undefined && 
 						(isEntered ? (
-							<div>
-								<div className="enterbox-head">
-									<div className="roomtype">
-										<span className="typename">코칭</span>
-									</div>
-									방 제목
-									<div className="copy-url" onClick={CopyUrl}></div>
-									<div className="go-back" onClick={goBack}></div>
-								</div>
+							<div className="roombox-container">
 								<div className="roombox-body">
 									<div className="grid-room room1">
 										<div className="me">
@@ -628,6 +631,17 @@ class VideoRoomComponent extends Component {
 												handleNickname={this.nicknameChanged}
 												isMe={true}
 											/>
+										</div>
+										<div className="toolbar-box">
+											<ToolbarComponent
+												sessionId={mySessionId}
+												user={localUser}
+												showNotification={this.state.messageReceived}
+												camStatusChanged={this.camStatusChanged}
+												micStatusChanged={this.micStatusChanged}
+												screenShare={this.screenShare}
+												stopScreenShare={this.stopScreenShare}
+											/>	
 										</div>
 									</div>
 									{localUser !== undefined &&
@@ -652,7 +666,11 @@ class VideoRoomComponent extends Component {
 														}}
 													>
 														{this.state.subscribers.map((sub, i) => (
-															<SplideSlide key={i} className="other">
+															<SplideSlide 
+																key={i} 
+																className="other"
+																onClick={() => this.handleSlideClick(i)}
+															>
 																<StreamComponent 
 																	user={sub}
 																	streamId={sub.streamManager.stream.streaId}
@@ -663,76 +681,44 @@ class VideoRoomComponent extends Component {
 													</Splide>
 												</div>
 												<div className="box-mainrtc">
-													나는 화면공유
-												</div>
-												{/* {this.state.subscribers.map((sub, i) => (
-													<div key={i} className="other">
-														<StreamComponent 
-															user={sub}
-															streamId={sub.streamManager.stream.streaId}
+													{this.state.selectedSlideIndex !== -1 && (
+														<StreamComponent
+															user={this.state.subscribers[this.state.selectedSlideIndex]}
+															streamId={this.state.subscribers[this.state.selectedSlideIndex].streamManager.stream.streaId}
 															isMe={false}
 														/>
-													</div>
-												))} */}
+													)}
+												</div>
 											</div>
 										)}
 										<div className="grid-room room3">
-												
+											<div className="OT_root OT_publisher custom-class" style={chatDisplay}>
+												<ChatComponent
+													user={localUser}
+													chatDisplay={this.state.chatDisplay}
+													close={this.toggleChat}
+													messageReceived={this.checkNotification}
+												/>
+											</div>	
 										</div>
 								</div>
 							</div>
 						) : (
 							<div className="div">
-								<div className="enterbox-head">
-									<div className="roomtype">
-										<span className="typename">코칭</span>
-									</div>
-									방 제목
-									<div className="copy-url" onClick={CopyUrl}></div>
-									<div className="go-back" onClick={goBack}></div>
-								</div>
 								<div className="enterbox-body">
-									<div className="alert">
-										<div>
-											<p className="title">
-												방에 입장하기 전 <br/>오디오와 비디오를 <br/>✅체크✅ 해주세요.
-											</p>
+									<div className="check-box">
+										<div className="check-me">
+											<StreamComponent user={localUser} isMe={"check"} />
+											<div onClick={this.enteredChanged} className="enter">
+												<button className="enter-button">
+													입장하기
+												</button>
+											</div>
 										</div>
-										<div onClick={this.enteredChanged} className="enter">
-											<button className="enter-button">
-												입장하기
-											</button>
-										</div>
-									</div>
-									<div className="check-me">
-										<StreamComponent user={localUser} isMe={"check"} />
 									</div>
 								</div>
 							</div>
 						))}
-				{/* <div className="OT_root OT_publisher custom-class" style={chatDisplay}>
-					<ChatComponent
-						user={localUser}
-						chatDisplay={this.state.chatDisplay}
-						close={this.toggleChat}
-						messageReceived={this.checkNotification}
-					/>
-				</div> */}
-				<div className="toolbar-box">
-					<ToolbarComponent
-						sessionId={mySessionId}
-						user={localUser}
-						showNotification={this.state.messageReceived}
-						camStatusChanged={this.camStatusChanged}
-						micStatusChanged={this.micStatusChanged}
-						screenShare={this.screenShare}
-						stopScreenShare={this.stopScreenShare}
-						// toggleFullscreen={this.toggleFullscreen}
-						// switchCamera={this.switchCamera}
-						leaveSession={this.leaveSession}
-						toggleChat={this.toggleChat}
-					/>	
-				</div>
 			</div>
 		);
 	}
