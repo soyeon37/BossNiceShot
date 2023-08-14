@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import parseGolfId from "../golffield/ParseGolfId";
+import { getNameById } from "../golffield/ParseGolfId";
 import AccompanyBox from "./AccompanyBox";
 import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
 
 import ProfileImg from "../../assets/source/imgs/favicon.png";
-import TeeRed from "../../assets/source/icons/flag-red.png";
-import TeeWhite from "../../assets/source/icons/flag-white.png";
-import TeeBlack from "../../assets/source/icons/flag-black.png";
-import TeeAll from "../../assets/source/icons/flag-all.png";
-import PinImg from "../../assets/source/icons/pin.png";
+import flagred from "../../assets/source/icons/flag-red.png";
+import flagwhite from "../../assets/source/icons/flag-white.png";
+import flagblack from "../../assets/source/icons/flag-black.png";
+import flagall from "../../assets/source/icons/flag-all.png";
 
 import { MdSportsGolf } from "react-icons/md";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -73,6 +72,7 @@ function AccompanyList() {
   // 검색을 위한 변수
   const [searchValue, setSearchValue] = useState("");
   const [searchFilter, setSearchFilter] = useState("title");
+  const [flagFilter, setFlagFilter] = useState("flagall");
   const [selectedFollow, setSelectedFollow] = useState(false);
 
   useEffect(() => {
@@ -106,10 +106,10 @@ function AccompanyList() {
   }
 
   const teeMap = {
-    RED: TeeRed,
-    WHITE: TeeWhite,
-    BLACK: TeeBlack,
-    NONE: TeeAll,
+    RED: flagred,
+    WHITE: flagwhite,
+    BLACK: flagblack,
+    NONE: flagall,
   }
 
   const [isSelected, setIsSelected] = useState(false); // 글 선택 여부
@@ -154,7 +154,6 @@ function AccompanyList() {
     <div className="list-container">
       <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
         <div className="list-head">
-          <img className="list-head-pin" src={PinImg} alt="pin" />
           <Link to="/createaccompany">
             <div className="head-create-button bg-accompany">+ 모집하기</div>
           </Link>
@@ -162,7 +161,26 @@ function AccompanyList() {
             {/* 검색창 */}
             {searchFilter === "tee" ? (
               <div className="search-input-container">
-
+                <div className="search-tee-item">
+                  <img src={flagred} alt="레드 티 박스"
+                  onClick={() => setFlagFilter('flagred')}
+                  className={`search-tee-img${flagFilter === 'flagred' ? '-selected' : ''}`} />
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagwhite} alt="화이트 티 박스"
+                  onClick={() => setFlagFilter('flagwhite')}
+                  className={`search-tee-img${flagFilter === 'flagwhite' ? '-selected' : ''}`} />
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagblack} alt="블랙 티 박스"
+                  onClick={() => setFlagFilter('flagblack')}
+                  className={`search-tee-img${flagFilter === 'flagblack' ? '-selected' : ''}`} />
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagall} alt="모든 티 박스"
+                  onClick={() => setFlagFilter('flagall')}
+                  className={`search-tee-img${flagFilter === 'flagall' ? '-selected' : ''}`} />
+                </div>
               </div>
             ) : (
               <div className="search-input-container">
@@ -205,8 +223,6 @@ function AccompanyList() {
           </div>
 
         </div>
-        <div className="list-head-shadow bg-accompany"></div>
-
         <div className={isSelected ? 'list-body-selected' : 'list-body-unselected'}>
           {companionList.map((accompanyRoom) => (
             <AccompanyBox
@@ -215,7 +231,7 @@ function AccompanyList() {
               title={accompanyRoom.title}
               tee={teeMap[accompanyRoom.teeBox]}
               author={accompanyRoom.memberNickname}
-              place={parseGolfId(accompanyRoom.field)}
+              place={getNameById(accompanyRoom.field)}
               date={accompanyRoom.teeUptime}
               handleSelectButtonClick={handleSelectButtonClick}
               dateFormat = {dateFormat}
@@ -264,7 +280,7 @@ function AccompanyList() {
             <div className="selected-container-info">
               <FaMapMarkerAlt className="react-icon" color="red" />
               <div className="info-text-left">
-                {parseGolfId(selectedContent.field)}
+                {getNameById(selectedContent.field)}
               </div>
               <div className="info-text-right">
                 <img className="profile-icon" src={teeMap[selectedContent.teeBox]}></img>
@@ -282,7 +298,9 @@ function AccompanyList() {
             </div>
           </div>
           <div className="selected-container-footer">
-            <button className="button bg-accompany"> 참여하기</button>
+            <Link to={`/accompanyroom/${selectedContent.id}`}>
+              <button className="button bg-accompany"> 참여하기</button>
+            </Link>
           </div>
         </div>
       )}
