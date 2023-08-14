@@ -49,8 +49,6 @@ Rweb/src/main/java/com/ssafy/domain/Companion/dto/request/CompanionUserRequest.j
 Mweb/src/main/java/com/ssafy/domain/Companion/dto/request/CompanionCreate.java,0\3\0312003c1bd2f883684c85ad64e93430f1000ef3
 }
 Mweb/src/main/java/com/ssafy/domain/Companion/dto/request/CompanionSearch.java,6\0\60e9ccc3a1c4639cfd81a06567b0145999c918bd
-€
-Pweb/src/main/java/com/ssafy/domain/Companion/repository/CompanionRepository.java,c\5\c5369938e447da8187d9b195c6c7f82e9ee29f75
 x
 Hweb/src/main/java/com/ssafy/domain/study/dto/response/StudyResponse.java,6\f\6f5df6c07b5b1ddf8bcf93f2e5a43977532073c0
 €
@@ -59,13 +57,5 @@ Pweb/src/main/java/com/ssafy/domain/Companion/dto/response/CompanionResponse.jav
 Tweb/src/main/java/com/ssafy/domain/Companion/dto/response/CompanionUserResponse.java,c\9\c9f2950c3ef345456c89ada5fd3bce350b961315
 r
 Bweb/src/main/java/com/ssafy/domain/study/service/StudyService.java,4\3\43557bcc312ed90b2ee692b60b6743722aa85b21
-_
-/web/src/main/java/com/ssafy/WebApplication.java,a\0\a0e92d3752d78518448bc49c2b5e006d04011a22
-„
-Tweb/src/main/java/com/ssafy/domain/Companion/controller/CompanionUserController.java,4\4\4484beb50c3e226c7fd69e4bca9ef5fc760cf7f7
 x
 Hweb/src/main/java/com/ssafy/domain/study/controller/StudyController.java,9\d\9dcf161f011ffcad584517b06d2556543bcba685
-€
-Pweb/src/main/java/com/ssafy/domain/studyUser/controller/StudyUserController.java,c\7\c78170ef351de07f20dd69f77870d81714f55a67
-€
-Pweb/src/main/java/com/ssafy/domain/Companion/controller/CompanionController.java,9\2\9278089ce228b9cc1c8c81815732dacf7fe8f83d
