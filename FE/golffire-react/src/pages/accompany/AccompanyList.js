@@ -147,6 +147,48 @@ function AccompanyList() {
     });
   };
 
+  // 참여하기 버튼 클릭 시
+  const handleAttandClick = (companion) => {
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/' + companion.id;
+
+    // 해당 동행 모집의 현재 인원을 확인한다.
+    axios.get(apiUrl)
+    .then((response) => {
+      if (response.data.capacity > response.data.companionUserCount) { // 모집 인원보다 현재 인원이 적으면
+        checkDuplicateCompanionUser(response.data); // 사용자가 이미 신청한 동행인지 확인한다.
+      } else { // 모집 인원이 다 찬 경우
+        alert("참가 인원이 많아 동행 모집에 참여하실 수 없습니다.");
+      }
+    });
+  };
+
+  // 동행 모집 신청 여부 확인
+  const checkDuplicateCompanionUser = (companion) => {
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/user/check/' + companion.id;
+
+    axios.get(apiUrl)
+      .then((response) => {
+        if (!response.data) { // 동행 모집을 신청하지 않은 경우
+          const companionUserRequset = {
+            companionId: companion.id
+          };
+
+          addCompanionUser(companionUserRequset); // 동행 모집 신청
+        } else { // 동행 모집을 신청한 경우
+          alert("이미 신청한 동행입니다.");
+        }
+      });
+  };
+
+  const addCompanionUser = (companionUserRequset) => {
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/user"
+
+    console.log("동행 모집 참여자 생성");
+    axios.post(apiUrl, companionUserRequset).then((response) => {
+        console.log(response);
+    });
+  }
+
   const dateFormat = (input) => {
     const date = new Date(input);
     const year = date.getFullYear();
@@ -309,9 +351,7 @@ function AccompanyList() {
             </div>
           </div>
           <div className="selected-container-footer">
-            <Link to={`/accompanyroom/${selectedContent.id}`}>
-              <button className="button bg-accompany"> 참여하기</button>
-            </Link>
+            <button className="button bg-accompany" onClick={() => handleAttandClick(selectedContent)}> 참여하기</button>
           </div>
         </div>
       )}

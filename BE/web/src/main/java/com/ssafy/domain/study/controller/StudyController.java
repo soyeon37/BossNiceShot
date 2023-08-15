@@ -20,6 +20,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,6 +67,12 @@ public class StudyController {
         ConnectionProperties properties = ConnectionProperties.fromJson(params).build();
         Connection connection = session.createConnection(properties);
         return new ResponseEntity<>(connection.getToken(), HttpStatus.OK);
+    }
+
+    @Operation(summary = "스터디 한 건 조회", description = "스터디를 한 건 조회한다.")
+    @GetMapping("/api/study/info/{studyId}")
+    public ResponseEntity<StudyResponse> info(@PathVariable Long studyId) {
+        return ResponseEntity.ok(StudyResponse.from(studyService.findById(studyId)));
     }
 
     @Operation(summary = "스터디 생성", description = "스터디를 생성한다.")

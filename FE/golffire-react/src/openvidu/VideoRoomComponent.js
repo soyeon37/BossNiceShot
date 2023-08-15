@@ -627,7 +627,7 @@ class VideoRoomComponent extends Component {
 					<div className="copy-url" onClick={CopyUrl}>
 						<ImShare2/>
 					</div>
-					<div className="go-back" onClick={() => {this.leaveSession(); leaveRoom();}}>
+					<div className="go-back" onClick={leaveRoom}>
 						<ImExit/>
 					</div>
 				</div>

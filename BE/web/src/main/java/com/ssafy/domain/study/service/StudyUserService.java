@@ -32,9 +32,14 @@ public class StudyUserService {
     }
 
     @Transactional
-    public void delteByStudyIdAndMemberId(Long studyId, String memberId) {
+    public void deleteByStudyIdAndMemberId(Long studyId, String memberId) {
         studyUserRepository.deleteByStudyIdAndMemberId(studyId, memberId);
 
         studyService.findById(studyId).leaveUser();
+    }
+
+    @Transactional
+    public void deleteByStudyId(Long studyId) {
+        studyUserRepository.deleteByStudyId(studyId);
     }
 }
