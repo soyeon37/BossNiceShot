@@ -172,6 +172,13 @@
     align-items: center;
 }
 
+.user-only-text {
+    width: 510px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+}
+
 .user-button-text {
     width: 510px;
     margin-right: 8%;
@@ -351,7 +358,6 @@
     height: 300px;
     border-radius: 50%;
     border: 2px solid #000;
-    /* background-color: #000; */
     overflow: hidden;
     position: relative;
 }
