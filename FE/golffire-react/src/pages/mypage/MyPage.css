@@ -6,19 +6,12 @@
   position: relative;
 }
 
+
 /* MyPageBox CSS */
 #MyPageBox {
-  margin: 10px auto 20px;
-
-  width: 1820px;
-  height: 800px;
-  max-width: 95%;
-  max-height: 95%;
-
-  border-radius: 50px;
-  border: 1px solid #000;
+  width: 100vw;
+  height: 100hw;
   background-color: #fff;
-  box-shadow: 20px 20px 0px 0px #000;
 
   display: flex;
   align-items: center;
@@ -36,8 +29,8 @@
 
 /* MyPageNavbar CSS */
 #MyPageNavbar {
-  height: 100%;
   width: 20%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;

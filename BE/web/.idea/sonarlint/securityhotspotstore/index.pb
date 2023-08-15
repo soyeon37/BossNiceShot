@@ -1,19 +1,47 @@
 
+<<<<<<< HEAD
+=======
 ?
 settings.gradle,0\5\05efc8b1657769a27696d478ded1e95f38737233
 m
 =src/main/java/com/ssafy/config/security/jwt/RefreshToken.java,6\6\6620627bc3cee1cbbc4c896bb42768e6a6296895
 h
 8src/main/java/com/ssafy/domain/follow/entity/Follow.java,c\6\c6a027d6b07df01c534ca7f776fc21b75ba9e871
+>>>>>>> 53cdc63328f91fedbbd7f863bc610ff5dab4d15f
 t
-Dsrc/main/java/com/ssafy/domain/Member/dto/request/SignUpRequest.java,5\a\5a98c94072de0da6cea46c8215726cefe47808a9
-q
-Asrc/main/java/com/ssafy/config/security/jwt/JwtTokenProvider.java,d\5\d5ac0a34bcd34702b7831e3c045d8e4f2e9270e3
-~
-Nsrc/main/java/com/ssafy/domain/Member/dto/response/UpdatePasswordResponse.java,d\f\df53d113ca90d7f7e56536f076bd57528f240cc0
+Dsrc/main/java/com/ssafy/domain/study/controller/StudyController.java,8\f\8fd6ec9e322e5c05d3c3abf11e8d26dc5ca89fc9
+‚
+Rsrc/main/java/com/ssafy/domain/notification/controller/NotificationController.java,d\d\ddf55728677baae23ebeaa8abf63c70f0ff9bd24
+h
+8src/main/java/com/ssafy/domain/member/entity/Member.java,4\a\4a5bfc6ff4cc6d844d3324066465691e03d0ca6d
+‚
+Rsrc/main/java/com/ssafy/domain/notification/repository/NotificationRepository.java,1\9\19eae88de20689742893db0d0fcce7b7a87a24c8
+t
+Dsrc/main/java/com/ssafy/domain/notification/entity/Notification.java,1\9\19b1f7559fed9b1886788e4164b1edb8a4cca6ef
+€
+Psrc/main/java/com/ssafy/domain/notification/dto/request/NotificationRequest.java,5\8\588a8a518f069a31217d648464e496827070fe82
 |
-Lsrc/main/java/com/ssafy/domain/Member/dto/response/UpdateMemberResponse.java,b\0\b0b79f59638864367bdf64c09d66bba42d9b88dc
+Lsrc/main/java/com/ssafy/domain/notification/service/NotificationService.java,5\2\52f811d13253d46fa37d817896235eadc1327e1d
 v
+<<<<<<< HEAD
+Fsrc/main/java/com/ssafy/domain/member/controller/MemberController.java,4\9\4903ac90167b1e9f1b21d9938422778d2560c8d3
+Z
+*src/main/java/com/ssafy/common/Status.java,5\7\57a2d90ff762b1b7debbf93ade5247f4dff6a1b7
+Z
+*src/main/java/com/ssafy/common/TeeBox.java,5\f\5ff3de72e3efc4b97c364651dd2d1d0222f17ee9
+k
+;src/main/java/com/ssafy/config/security/SecurityConfig.java,0\f\0fb2165841132340adfa5dd54986ce849ed01895
+c
+3src/main/java/com/ssafy/common/api/ApiResponse.java,e\e\ee94f11c659cc3ce8c5a6e93e773bca43de492b5
+v
+Fsrc/main/java/com/ssafy/domain/member/dto/response/SignInResponse.java,b\f\bf4df718e83048fccb83c10787540feb7e5121f9
+x
+Hsrc/main/java/com/ssafy/domain/study/dto/request/StudyCreateRequest.java,d\e\de9f8f0a247e04f97807249c44844252ef488561
+x
+Hsrc/main/java/com/ssafy/config/security/jwt/JwtAuthenticationFilter.java,d\e\deafe3d09d1e9f1781ea0ea32e0fbe74ff66e7c3
+p
+@src/main/java/com/ssafy/domain/member/service/MemberService.java,6\4\64202b67486a3371f9adb4fc5d5fee134fb93ab8
+=======
 Fsrc/main/java/com/ssafy/domain/Member/dto/response/SignUpResponse.java,9\e\9e14fdcc66891525bee72c3d414ef5ed33cf5696
 v
 Fsrc/main/java/com/ssafy/domain/Member/dto/response/SignInResponse.java,e\f\efe5faa65026f8b8054140ac2585a2f23a879e42
@@ -124,3 +152,4 @@ r
 Bsrc/main/java/com/ssafy/domain/study/service/StudyUserService.java,4\f\4f148a7b5a8ec02810f675c4654827bf2f9f67a2
 €
 Psrc/main/java/com/ssafy/domain/companion/repository/CompanionRepositoryImpl.java,7\7\7790feb7b77f15c0bca32df60d57f68424294827
+>>>>>>> 53cdc63328f91fedbbd7f863bc610ff5dab4d15f

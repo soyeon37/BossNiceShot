@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setStateStep } from "../../features/signupSlice";
 
+import { IoMailOutline, IoChatbubbleSharp } from "react-icons/io5";
+
 function SignupChoice() {
   // Redux
   const dispatch = useDispatch();
@@ -24,44 +26,26 @@ function SignupChoice() {
 
   return (
     <div id="SignupChoice">
-      <div className="title">
-        <h1>회원가입</h1>
-      </div>
-      <div>
-        {/* <NavLink to="/signup/email1"> */}
-        <button
-          onClick={selectEmailSignup}
-          style={{
-            height: "2.5rem",
-            width: "100%",
 
-            color: "black",
-            borderRadius: "30px",
-            background: "#FFFFFF",
-          }}
-        >
-          이메일로 가입하기
-        </button>
-        {/* </NavLink> */}
+      <button
+        className="user-func-email-login"
+        onClick={selectEmailSignup} >
+        <IoMailOutline className="button-react-icon" />
+        <div className="user-button-text">회원가입</div>
+      </button>
+      <button
+        className="user-func-kakao-login"
+        onClick={selectKakaoSignup} >
+        <IoChatbubbleSharp className="button-react-icon" />
+        <div className="user-button-text">카카오톡으로 회원가입</div>
+      </button>
+      <hr className="user-hr" />
+      <div className="user-func-footer">
+        <NavLink to="/login">
+          <div className="user-func-footer-half">로그인하기</div>
+        </NavLink>
       </div>
-      <div>
-        <button
-          onClick={selectKakaoSignup}
-          style={{
-            height: "2.5rem",
-            width: "100%",
 
-            color: "black",
-            borderRadius: "30px",
-            background: "#FFF500",
-          }}
-        >
-          카카오톡으로 가입하기
-        </button>
-      </div>
-      <hr />
-      {/* NavBar Bold 적용 불가한 문제 발생 */}
-      <NavLink to="/login">로그인하기</NavLink>
     </div>
   );
 }
