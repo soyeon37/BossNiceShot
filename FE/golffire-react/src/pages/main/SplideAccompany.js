@@ -59,8 +59,14 @@ function SplideAccompany({ props }) {
         }}
       >
         {AccInfos.map((info) => (
-          <SplideSlide key={info.id}>
-            <PartAccompany title={info.title} golf={info.golf} date={info.date} />
+          <SplideSlide key={info.id} style={{ height: "500px" }}>
+            <PartAccompany
+              user_name={info.user_name}
+              title={info.title}
+              address={info.address}
+              member_num={info.member_num}
+              deadline={info.deadline}
+            />
           </SplideSlide>
         ))}
       </Splide>

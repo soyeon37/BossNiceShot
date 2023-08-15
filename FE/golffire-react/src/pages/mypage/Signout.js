@@ -40,15 +40,12 @@ function Signout() {
 
     const handleSignout = (e) => {
         console.log("탈퇴하기");
-    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/delete';
-    axios
-      .delete(apiUrl)
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/delete';
+        axios
+            .delete(apiUrl)
             .then((response) => {
                 console.log(response);
-
-        resetUserState(); // reset redux data
-
-        navigate("/");
+                navigate("/");
             })
             .catch((error) => {
                 console.error(error);
