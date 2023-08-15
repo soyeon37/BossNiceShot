@@ -25,7 +25,7 @@ import java.security.Principal;
 @Tag(name = "Member API")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/api/members")
 public class MemberController {
     private final MemberService memberService;
     private final RefreshTokenService refreshTokenService;
@@ -186,6 +186,5 @@ public class MemberController {
         log.info(authentication.getName());
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }
-
 }
 

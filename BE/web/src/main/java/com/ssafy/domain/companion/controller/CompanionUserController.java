@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @Tag(name = "CompanionUser API")
 @RestController
-@RequestMapping("/companion/user")
+@RequestMapping("/api/companion/user")
 @RequiredArgsConstructor
 public class CompanionUserController {
 	private final CompanionUserService companionUserService;
@@ -28,10 +28,10 @@ public class CompanionUserController {
 		return ResponseEntity.ok(CompanionUserResponse.from(companionUserService.createCompanionUser(companionUserRequest, userDetails.getUsername())));
 	}
 
-	@Operation(summary = "동행 모집 참여 취소", description = "참여된 동행 모집을 취소한다")
+	@Operation(summary = "동행 모집 참여 취소", description = "참여한 동행 모집을 취소한다")
 	@DeleteMapping("/{companionId}")
 	public ResponseEntity<Object> cancel(@PathVariable Long companionId, @AuthenticationPrincipal UserDetails userDetails) {
-		companionUserService.deleteByCompanionIdAndMemberId(companionId, userDetails.getUsername());
+		companionUserService.leaveCompanion(companionId, userDetails.getUsername());
 		return ResponseEntity.ok().build();
 	}
 
@@ -43,8 +43,21 @@ public class CompanionUserController {
 
 	@Operation(summary = "동행 모집 사용자 삭제", description = "동행 모집에 참여하는 모든 사용자를 삭제한다.")
 	@DeleteMapping("/{companionId}/all")
-	public ResponseEntity<Object> deleteByCompanionId(@PathVariable Long companionId) {
+	public ResponseEntity<Object> deleteAllCompanionUsers(@PathVariable Long companionId) {
 		companionUserService.deleteByCompanionId(companionId);
+		return ResponseEntity.ok().build();
+	}
+
+	@Operation(summary = "동행 모집 신청 승인", description = "동행 모집에 신청한 사용자를 승인한다.")
+	@PutMapping("/{companionUserId}")
+	public ResponseEntity<CompanionUserResponse> accept(@PathVariable Long companionUserId) {
+		return ResponseEntity.ok(CompanionUserResponse.from(companionUserService.acceptCompanionUser(companionUserId)));
+	}
+
+	@Operation(summary = "동행 모집 신청 거절", description = "동행 모집에 신청한 사용자를 거절한다.")
+	@DeleteMapping("/{companionUserId}")
+	public ResponseEntity<Object> refuse(@PathVariable Long companionUserId) {
+		companionUserService.refuseCompanionUser(companionUserId);
 		return ResponseEntity.ok().build();
 	}
 }

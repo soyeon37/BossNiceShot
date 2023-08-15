@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 @Tag(name = "StudyUser API")
 @RestController
-@RequestMapping("/study/user")
+@RequestMapping("/api/study/user")
 @RequiredArgsConstructor
 public class StudyUserController {
     private final StudyUserService studyUserService;

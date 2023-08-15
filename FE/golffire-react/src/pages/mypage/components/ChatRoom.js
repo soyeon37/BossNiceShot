@@ -29,7 +29,7 @@ function ChatRoom({ props }) {
         stompClient.connect( {Authorization: `${accessToken}`} , (frame) => {
             setStompClient(stompClient);
 
-            axios.get(process.env.REACT_APP_SERVER_URL + `/chat/message/${id}`)
+            axios.get(process.env.REACT_APP_SERVER_URL + `/api/companion/chat/${id}`)
               .then(response => {
                 setChatMessages(response.data);
             });
@@ -44,7 +44,7 @@ function ChatRoom({ props }) {
 
     useEffect(() => {
         if (stompClient) {
-            const subscription = stompClient.subscribe(`/sub/chat/message/` + id, response => {
+            const subscription = stompClient.subscribe(`/sub/chat/` + id, response => {
                 const message = JSON.parse(response.body);
                 setChatMessages((prevChatMessages) => [...prevChatMessages, message]);
             });
@@ -68,7 +68,7 @@ function ChatRoom({ props }) {
             chatRoomId: id
         };
 
-        stompClient.send('/pub/chat/message', {Authorization: `${accessToken}`}, JSON.stringify(newMessage));
+        stompClient.send('/pub/chat', {Authorization: `${accessToken}`}, JSON.stringify(newMessage));
         setMessageInput('');
     }
 

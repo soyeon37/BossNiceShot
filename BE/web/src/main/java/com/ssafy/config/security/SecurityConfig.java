@@ -46,21 +46,22 @@ public class SecurityConfig {
             "/api-docs/**",
             "/swagger*/**",
             "/swagger-ui/index.html",
-            "/solution/detect",
-            "/members/**",
-            "/auth/**",
-            "/study/sessions",
+            "/api/solution/detect",
+            "/api/members/**",
+            "/api/auth/**",
+            "/api/study/sessions",
             "/api/sessions",
             "/api/sessions/**",
             "/api/sessions/SessionA/connections",
-            "/ws/**"
+            "/ws/**",
+            "/api/companion/field"
     };
     private static final String[] USER_LIST = {
-            "/members/sign-in",
-            "/members/update",
-            "/members/logout",
-            "/members/delete",
-            "/oauth/code"
+            "/api/members/sign-in",
+            "/api/members/update",
+            "/api/members/logout",
+            "/api/members/delete",
+            "/api/oauth/code"
     };
 
     @Bean

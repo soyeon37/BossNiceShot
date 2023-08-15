@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-
-import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import axios from "axios";
 
 // Redux
 import { useDispatch } from "react-redux";
 import { setUserId, setUserNickname, setUserLevel, setUserTee } from "../../features/userInfoSlice";
 
-// Style
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import BackgroundImage from "../../assets/source/imgs/golf-image-1.svg";
+import { IoMailOutline, IoChatbubbleSharp } from "react-icons/io5";
 import "./Login.css";
-import golfImage from "../../assets/source/icons/golf.png";
 
 const Login = () => {
   // Redux
@@ -24,6 +22,15 @@ const Login = () => {
 
   // 이메일 로그인 함수
   const handleEmailLogin = () => {
+    if (email === "") {
+      alert("이메일을 입력해 주세요.");
+      return;
+    }
+    else if (password === "") {
+      alert("비밀번호를 입력해 주세요.");
+      return;
+    }
+
     // 로그인 정보
     const data = {
       id: email,
@@ -35,7 +42,7 @@ const Login = () => {
 
     // 서버 API 엔드포인트 URL
     // 추후 실제 서버 URL로 대체 필요 !!
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/sign-in";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-in";
 
     // Axios를 사용하여 POST 요청 보내기
     axios
@@ -55,9 +62,15 @@ const Login = () => {
         });
 
         console.log(response.data); // Debug Code !!
+        
+        // NavBar에 사용자 정보 저장
+        dispatch(setUserId(email));
+        dispatch(setUserNickname("로그인 됨"));
+        dispatch(setUserLevel("eagle"));
+        dispatch(setUserTee("Red"));
 
         // NavBar에 사용자 정보 저장 - data for test
-        dispatch(setUserId("logined@ssafy.com"));
+        dispatch(setUserId(email));
         dispatch(setUserNickname("로그인 됨"));
         dispatch(setUserLevel("eagle"));
         dispatch(setUserTee("Red"));
@@ -84,87 +97,64 @@ const Login = () => {
 
   return (
     <div id="Login">
-      {/* 그림 공간 */}
-      <div id="login-banner">
-        <div id="login-banner-context">
-          <div id="banner-letter">
-            동료들이 당신을
-            <br />
-            기다리고 있어요!
+
+      <div className="user-container">
+        <div className="user-banner">
+          <div className="user-banner-title">
+            동료들이<br />기다리고 있어요!
+          </div>
+          <div className="user-banner-img">
+            <img className="user-banner-img-style" src={BackgroundImage} alt="golf-mascot-image" />
           </div>
         </div>
-        <div id="login-banner-image">
-          <img src={golfImage} alt="banner-golf-icon" />
+        <div className="user-func">
+          <div className="user-func-title">
+            로그인
+          </div>
+          <input
+            className="user-func-normal-input"
+            type="email"
+            value={email}
+            placeholder="이메일"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            className="user-func-normal-input"
+            type="password"
+            value={password}
+            placeholder="비밀번호"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            className="user-func-email-login"
+            onClick={handleEmailLogin} >
+            <IoMailOutline className="button-react-icon" />
+            <div className="user-button-text">로그인하기</div>
+          </button>
+          <button
+            className="user-func-kakao-login"
+            onClick={handleKakaoLogin} >
+            <IoChatbubbleSharp className="button-react-icon" />
+            <div className="user-button-text">카카오톡으로 로그인</div>
+          </button>
+          <hr className="user-hr" />
+          <div className="user-func-footer">
+            <NavLink to="/findpassword">
+              <div className="user-func-footer-half">비밀번호 찾기</div>
+            </NavLink>
+            <NavLink to="/signup">
+              <div className="user-func-footer-half">회원가입하기</div>
+            </NavLink>
+          </div>
         </div>
+
+        {/* 배경 및 모양 관련 div */}
+        <div className="user-container-bump"></div>
+      </div>
+      <div className="user-container-shadow">
+        <div className="user-container-shadow-bump"></div>
       </div>
 
-      {/* 기능 공간 */}
-      <div id="login-func">
-        <div id="login-box">
-          <div id="box-title">로그인</div>
-          <div id="box-content">
-            <FormControl maxW={"sm"}>
-              <FormLabel>이메일</FormLabel>
-              <Input
-                type="email"
-                placeholder="이메일을 입력하세요."
-                bg={"white"}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </FormControl>
-            <FormControl maxW={"sm"} paddingTop={"2%"}>
-              <FormLabel>비밀번호</FormLabel>
-              <Input
-                type="password"
-                placeholder="비밀번호를 입력하세요."
-                bg={"white"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </FormControl>
-          </div>
-          <div id="box-button">
-            <Button
-              onClick={handleEmailLogin}
-              style={{
-                height: "2.5rem",
-                width: "100%",
-
-                color: "black",
-                borderRadius: "30px",
-                background: "#B8F500",
-              }}
-              maxW={"sm"}
-              marginBottom={"2.5rem"}
-            >
-              {" "}
-              로그인
-            </Button>
-            <Button
-              onClick={handleKakaoLogin}
-              style={{
-                height: "2.5rem",
-                width: "100%",
-
-                color: "black",
-                borderRadius: "30px",
-                background: "#FFF500",
-              }}
-              maxW={"sm"}
-              marginBottom={"2.5rem"}
-            >
-              {" "}
-              카카오톡으로 로그인하기
-            </Button>
-          </div>
-          <div id="box-footer">
-            <NavLink to="/findpassword">비밀번호 찾기</NavLink>
-            <br />
-            <NavLink to="/signup">회원가입 하기</NavLink>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

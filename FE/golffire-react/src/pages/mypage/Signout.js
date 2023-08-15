@@ -23,7 +23,7 @@ function Signout() {
     // cookie의 user 정보 확인
     const [cookies, setCookie] = useCookies(["refreshToken"]);
 
-    const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout'
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
     const data = {
         refreshToken: cookies.refreshToken
     }
@@ -40,11 +40,12 @@ function Signout() {
 
     const handleSignout = (e) => {
         console.log("탈퇴하기");
-        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/delete'
-        axios.delete(apiUrl)
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/delete';
+        axios
+            .delete(apiUrl)
             .then((response) => {
                 console.log(response);
-                navigate('/');
+                navigate("/");
             })
             .catch((error) => {
                 console.error(error);

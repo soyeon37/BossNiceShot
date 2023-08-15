@@ -74,7 +74,7 @@ const Kakao = (props) => {
       const data = {
         id: email
       }
-      const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/checkEmail";
+      const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/checkEmail";
       console.log(email);
       axios
         .post(apiUrl, data)
@@ -103,8 +103,7 @@ const Kakao = (props) => {
         password: "1234",
         isKakao: true,
       };
-
-      const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/sign-in"
+      const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-in"
       console.log("kakao login 시도중:", data);
       axios
         .post(apiUrl, data)
