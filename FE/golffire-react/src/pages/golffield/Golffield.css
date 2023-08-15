@@ -7,6 +7,7 @@
 
   color: #000;
   text-align: center;
+  font-family: Inter;
   font-size: 40px;
   font-style: normal;
   font-weight: 400;
@@ -14,18 +15,19 @@
 }
 
 #golf-search {
-  margin: 10px auto 20px;
   padding: 20px;
 
-  width: 1240px;
-  height: 800px;
+  margin-right:20px;
+
+  height: 100%;
+  width:50%;
   max-width: 90%;
-  max-height: 90%;
+  /* max-height: 90%; */
 
   border-radius: 50px;
-  border: 1px solid #000;
+  border: 2px solid #000;
   background-color: #fff;
-  box-shadow: 20px 20px 0px 0px #000;
+  /* box-shadow: 20px 20px 0px 0px #FE7377; */
 
   display: flex;
   flex-direction: column;
@@ -79,13 +81,15 @@
   width: 100%;
   height: calc(100% - 90px);
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
+
+  margin-top:30px;
 }
 
 #kakao-map {
-  width: 50%;
+  width: 38.5%;
   height: 100%;
 
   padding-right: 10px;
@@ -96,6 +100,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border-radius: 50px;
+  border:2px solid black;
+  padding:30px;
+
+  background-color:white;
+  /* box-shadow: 20px 20px 0px 0px #FE7377; */
 }
 
 #map {
@@ -105,36 +116,44 @@
 }
 
 #result {
-  width: 50%;
+  /* width: 50%; */
   height: 100%;
 }
 
 #result-list {
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(95%);
   overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
 }
 
 /* Pagination CSS */
 #result-control {
   width: 100%;
-  height: 50px;
+  height: 34px;
+
+  margin-top: 3px;
 
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .control-arrow {
-  width: 32px;
   height: 32px;
-  margin: 10px;
+  width: 32px;
+  margin-left: 10px;
+  margin-right: 10px;
   color: black;
 }
 
 .control-arrow:disabled {
-  width: 32px;
   height: 32px;
-  margin: 10px;
+  width: 32px;
+  margin-left: 10px;
+  margin-right: 10px;
   color: gray;
   cursor: default;
 }
@@ -143,7 +162,7 @@
   display: flex;
   align-items: center;
 
-  font-size: 26px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -151,10 +170,13 @@
 
 /* GolfBox CSS */
 .GolfBox {
-  width: calc(100% - 10px);
+  /* width: calc(100% - 10px); */
+  width: calc(50% - 10px); /* Subtracting 10px to account for a 5px margin on both sides */
+  box-sizing: border-box; /* This ensures padding and border are included in the 50% width */
+  /* margin: 5px; */
 
   margin-right: 10px;
-  padding: 10px;
+  padding: 30px;
   margin-bottom: 10px;
 
   border-radius: 20px;
@@ -162,6 +184,8 @@
   background: #fff;
 
   text-align: left;
+  border: 2px solid black;
+  height:150px;
 }
 
 .golfbox-title {
@@ -171,13 +195,14 @@
 
 .golfbox-name {
   color: #000;
-  font-size: 32px;
+  font-family: Inter;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-.golfbox-naver {
+.golfbox-naver{
   max-width: 30px;
   max-height: 30px;
   min-width: 30px;
@@ -187,16 +212,48 @@
 
 .golfbox-add {
   color: #8d8f98;
+  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-left:25px;
 }
 
 .golfbox-call {
   color: #8d8f98;
+  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-left:25px;
+}
+
+.react-icon-golf {
+  position:relative;
+  top:-5px;
+  left:-5px;
+}
+
+.react-icon-marker {
+  position:relative;
+  top:15px;
+  left:2px;
+}
+
+.golf-background-div {
+  position: absolute;
+
+  top: 295px;
+  left: calc(50% + 20px);
+  transform: translateX(-50%);
+
+  width: 1570px;
+  height: 650px;
+  max-width: 1820px;
+  border: 2px solid #000;
+
+  border-radius: 50px;
+  z-index: -1;
 }

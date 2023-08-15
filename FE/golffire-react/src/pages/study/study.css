@@ -6,8 +6,8 @@
 
 /* CoachingList */
 .search-filter {
-  height: 45px;
-  min-width: 150px;
+  height: 44px;
+  min-width: 130px;
   margin-left: 10px;
 
   border-radius: 50px;
@@ -16,7 +16,7 @@
   background: #FFF;
 
   padding: 10px;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 .search-filter option {
@@ -26,8 +26,8 @@
 
 /* CoachingBox CSS */
 .coaching-box {
-  width: 32%;
-  min-height: 210px;
+  width: calc(33% - 16px);
+  min-height: 195px;
 
   margin: 10px 10px;
   padding: 10px 30px;
@@ -41,7 +41,7 @@
 
 .coaching-box-title {
   color: #000;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 600;
   
   margin-bottom: 5px;
@@ -54,11 +54,15 @@
 .coaching-box-date {
   display: flex;
   align-items: center;
+
+  font-size: 14px;
 }
 
 .coaching-box-user-count {
   display: flex;
   align-items: center;
+
+  font-size: 14px;
 }
 
 .coaching-box-button-position {
@@ -84,7 +88,7 @@
   border: 2px solid #3BD641;
 
   color: #3BD641;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 900;
 }
 
