@@ -118,6 +118,19 @@ function CoachingList() {
     });
   };
 
+  const handleAttandClick = (study) => {
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/info/' + study.id;
+
+    axios.get(apiUrl)
+    .then((response) => {
+      if (response.data.capacity > response.data.studyUserCount) {
+        enterStudyUser(study);
+      } else {
+        alert("참가 인원이 많아 코칭룸에 참여하실 수 없습니다.");
+      }
+    });
+  }
+
   // 코칭룸 입장
   const enterStudyUser = (study) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/user';
@@ -345,7 +358,7 @@ function CoachingList() {
             </div>
           </div>
           <div className="selected-container-footer">
-            <button className="button bg-coaching" onClick={() => enterStudyUser(selectedContent)}> 참여하기</button>
+            <button className="button bg-coaching" onClick={() => handleAttandClick(selectedContent)}> 참여하기</button>
           </div>
         </div>
       )}

@@ -43,8 +43,6 @@ function CoachingRoom() {
           navigate('/studylist');
         });
     }
-    
-    //window.location.href = '/studylist';
   };
 
   if (location.state) {
