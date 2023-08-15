@@ -114,9 +114,9 @@
   cursor: pointer;
 }
 
-.clickable{
-cursor: pointer;
-text-decoration: underline;
+.clickable {
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .checkbox-div {
@@ -170,7 +170,7 @@ text-decoration: underline;
   color: #D7D7D7;
 }
 
-.mascot-deco{
+.mascot-deco {
   width: 200px;
   height: 200px;
   object-fit: contain;
