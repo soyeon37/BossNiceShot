@@ -27,6 +27,7 @@ function Main() {
         <MainStudy />
         <MainCompanion />
         <Chatbot />
+        <Footer />
       </div>
     </RefContext.Provider>
   );
