@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import ProfileImg from "../../assets/source/imgs/favicon.png";
 import { MdSportsGolf } from "react-icons/md";
