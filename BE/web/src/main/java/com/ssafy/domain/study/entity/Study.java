@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Entity
@@ -39,6 +37,9 @@ public class Study extends BaseTime {
     private Integer capacity;
 
     @Column(nullable = false)
+    private Integer studyUserCount;
+
+    @Column(nullable = false)
     private Boolean locked;
 
     private Integer password;
@@ -50,15 +51,13 @@ public class Study extends BaseTime {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
-    private List<StudyUser> studyUsers = new ArrayList<>();
-
     public Study(StudyType type, String title, String description, LocalDateTime reservedTime, Integer capacity, Boolean locked, Integer password, Member member) {
         this.type = type;
         this.title = title;
         this.description = description;
         this.reservedTime = reservedTime;
         this.capacity = capacity;
+        studyUserCount = 0;
         this.locked = locked;
         this.password = password;
         status = Status.INACTIVE;
@@ -76,5 +75,13 @@ public class Study extends BaseTime {
 
     public void active() {
         this.status = Status.ACTIVE;
+    }
+
+    public void enterUser() {
+        studyUserCount++;
+    }
+
+    public void leaveUser() {
+        studyUserCount--;
     }
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 // 토큰 재발급 함수
 export function reissueToken({ cookies, setCookie, removeCookie, navigate }) {
     console.log('refrshToken:', cookies.refresh_token);
-    const apiUrl = process.env.REACT_APP_SERVER_URL  + '/members/reissue';
+    const apiUrl = process.env.REACT_APP_SERVER_URL  + '/api/members/reissue';
     axios.post(apiUrl, cookies.refresh_token, { headers: { 'Authorization': 'Bearer ' + cookies.access_token } })
         .then((response) => {
             const message = response.data.data.message;
@@ -27,7 +27,7 @@ export function reissueToken({ cookies, setCookie, removeCookie, navigate }) {
 
 export function handleLogout(cookies, setCookie, navigate) {
     console.log('cookies.refreshToken:', cookies.refreshToken);
-    const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout';
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout';
     const data = {
         refreshToken: cookies.refreshToken
     }

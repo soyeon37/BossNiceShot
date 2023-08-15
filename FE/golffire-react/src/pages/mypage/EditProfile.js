@@ -24,7 +24,7 @@ function EditProfile() {
         const data = {
             nickname: nickname
         }
-        const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/checkNickname"
+        const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/checkNickname"
         axios
             .post(apiUrl, data)
             .then((response) => {
@@ -53,7 +53,7 @@ function EditProfile() {
 
         }
 
-        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/update';
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/update';
         console.log(cookies.access_token);
         axios.put(apiUrl, data)
             .then((response) => {

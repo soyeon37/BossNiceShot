@@ -13,8 +13,7 @@ public record CompanionCreateRequest(@NotNull String title,
                                      @NotNull Integer field,
                                      @NotNull TeeBox teeBox,
                                      @NotNull Integer capacity,
-                                     @NotNull String teeUptime,
-                                     @NotNull String applicationDeadline) {
+                                     @NotNull String teeUptime) {
     public Companion toCompanion(Member member) {
         return Companion.builder()
                 .title(title)
@@ -23,7 +22,6 @@ public record CompanionCreateRequest(@NotNull String title,
                 .teeBox(teeBox)
                 .capacity(capacity)
                 .teeUpTime(LocalDateTime.parse(teeUptime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-                .applicationDeadline(LocalDateTime.parse(applicationDeadline, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .member(member)
                 .build();
     }

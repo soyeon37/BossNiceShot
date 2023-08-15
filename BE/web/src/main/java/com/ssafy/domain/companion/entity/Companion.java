@@ -38,38 +38,42 @@ public class Companion extends BaseTime {
     @Column(nullable = false)
     private Integer capacity;
 
-    @Column(columnDefinition = "datetime", nullable = false)
-    private LocalDateTime teeUpTime;
+    @Column(nullable = false)
+    private Integer companionUserCount;
 
     @Column(columnDefinition = "datetime", nullable = false)
-    private LocalDateTime applicationDeadline;
+    private LocalDateTime teeUpTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "companion", cascade = CascadeType.ALL)
-    private List<CompanionUser> companionUsers = new ArrayList<>();
-
     @Builder
-    public Companion(String title, String description, Integer field, TeeBox teeBox, Integer capacity, LocalDateTime teeUpTime, LocalDateTime applicationDeadline, Member member) {
+    public Companion(String title, String description, Integer field, TeeBox teeBox, Integer capacity, LocalDateTime teeUpTime, Member member) {
         this.title = title;
         this.description = description;
         this.field = field;
         this.teeBox = teeBox;
         this.capacity = capacity;
+        companionUserCount = 0;
         this.teeUpTime = teeUpTime;
-        this.applicationDeadline = applicationDeadline;
         this.member = member;
     }
 
-    public void update(String title, String description, Integer field, TeeBox teeBox, Integer capacity, LocalDateTime teeUpTime, LocalDateTime applicationDeadline){
+    public void update(String title, String description, Integer field, TeeBox teeBox, Integer capacity, LocalDateTime teeUpTime){
         this.title = title;
         this.description = description;
         this.field = field;
         this.teeBox = teeBox;
         this.capacity = capacity;
         this.teeUpTime = teeUpTime;
-        this.applicationDeadline = applicationDeadline;
+    }
+
+    public void acceptUser() {
+        companionUserCount++;
+    }
+
+    public void leaveUser() {
+        companionUserCount--;
     }
 }
