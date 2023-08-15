@@ -1,13 +1,7 @@
 import React, { useState } from "react";
-
 import { NavLink } from "react-router-dom";
 
-import { 
-  Button,
-  FormControl, 
-  FormLabel, 
-  Input 
-} from "@chakra-ui/react";
+import BackgroundImage from "../../assets/source/imgs/golf-image-1.svg";
 
 function FindPassword() {
   const [email, setEmail] = useState("");
@@ -23,44 +17,53 @@ function FindPassword() {
 
   return (
     <div id="FindPassword">
-
-      <div id="email1">
-        <div className="title">
-          <h1>
+      <div className="user-container">
+        <div className="user-banner">
+          <div className="user-banner-title">
+            동료들이<br />기다리고 있어요!
+          </div>
+          <div className="user-banner-img">
+            <img className="user-banner-img-style" src={BackgroundImage} alt="golf-mascot-image" />
+          </div>
+        </div>
+        <div className="user-func">
+          <div className="user-func-title">
             비밀번호 찾기
-            <br />
-            가입한 이메일을 입력하세요
-          </h1>
-        </div>
-        <div className="signup-email-check">
-          <FormControl maxW={"sm"}>
-            <FormLabel>이메일</FormLabel>
-            <Input
-              type="email"
-              placeholder="이메일을 입력하세요."
-              bg={"white"}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </FormControl>
-          <Button
-            onClick={handleFindPassword}
-            style={{
-              height: "2.5rem",
-              width: "100%",
+          </div>
+          <div className="user-func-context">
+            가입한 이메일을 입력하세요.
+            <br />비밀번호 정보를 전송해 드립니다.
+          </div>
 
-              color: "black",
-              borderRadius: "30px",
-              background: "#B8F500",
-            }}
-            maxW={"sm"}
-            marginBottom={"2.5rem"}
-          >
-            가입 정보 확인하기
-          </Button>
+          <div style={{ height: "100px" }}></div>
+
+          <div className="user-email-auth-block">
+            <input
+              type="email"
+              value={email}
+              placeholder="이메일"
+              className="user-email-auth-input"
+              onChange={(e) => setEmail(e.target.value)}></input>
+            <button
+              className="user-email-auth-button gr"
+              onClick={handleFindPassword}>
+              전송
+            </button>
+          </div>
+
+          <hr className="user-hr" />
+          <div className="user-func-footer">
+            <NavLink to="/login">
+              <div className="user-func-footer-half">돌아가기</div>
+            </NavLink>
+          </div>
         </div>
-        <hr />
-        <NavLink to="/login">돌아가기</NavLink>
+
+        {/* 배경 및 모양 관련 div */}
+        <div className="user-container-bump"></div>
+      </div>
+      <div className="user-container-shadow">
+        <div className="user-container-shadow-bump"></div>
       </div>
 
     </div>
