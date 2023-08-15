@@ -1,0 +1,276 @@
+#container {
+  min-height: 520px;
+  min-width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.div {
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  height:100%;
+  width:100%;
+  min-height: 440px;
+  min-width: 800px;
+}
+
+.roombox-container{
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+.roombox-body {
+  /* display: flex !important; */
+  /* justify-content: center !important;
+  align-items: center; */
+  height: 540px;
+  width: 1268px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 2fr 6fr 3fr
+}
+
+.grid-room {
+  height: 500px; /* 높이 조정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5px;
+  /* color: white; */
+  font-weight: bold;
+}
+
+.room1 {
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.me {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 150px;
+}
+
+.room2 {
+  padding: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box-splide {
+  background-color: yellowgreen;
+  width: 540px;
+  height: 135px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-mainrtc {
+  background-color: yellowgreen;
+  width: 540px;
+  height: 350px;
+  /* margin-bottom: 10px; */
+  position:relative;
+}
+
+.room3 {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.banner {
+  background-color: gray;
+  margin: 5px;
+  height: 225px;
+  width: 300px;
+}
+
+.tempo {
+  width: 640px;
+  height: 486px;
+  max-width: 800px;
+  max-height: 600px;
+  border-radius: 20px;
+  background-color: gray;
+}
+
+.enterbox-head {
+  /* position: absolute; */
+  width: 1228px;
+  height: 40px;
+  border-radius: 20px;
+  border:2px solid;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  font-size: 28px;
+  color: black;
+  margin-top: 5px;
+  margin-bottom: 0; /* 마진 없애기 */
+}
+
+.enterbox-body {
+  display: flex ;
+  justify-content: center ;
+  align-items: center;
+  height: 480px;
+  width: 100%;
+}
+
+.check-box {
+  display: flex ;
+  justify-content: center ;
+  align-items: center;
+  flex-direction: column;
+  height: 400px;
+  width: 700px;
+  border-radius: 40px;
+  border: 2px solid black;
+  box-shadow: 10px 10px 0px 0px yellow, 11px 11px 0px 0px black;
+}
+
+.toolbar-box {
+  height:64px;
+  position: relative ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 160px ;
+  margin-top: 10px;
+}
+
+.toolbar-enterbox{
+  height: 64px;
+  position: relative ;
+  width: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5px;
+}
+.roomtype {
+  width: 75px;
+  height: 40px;
+  border-radius: 48px;
+  margin-right: 30px;
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.enterbox-head.learning-bg {
+  background-color: #F99417;
+}
+
+.enterbox-head.coaching-bg {
+  background-color: #78CD50;
+}
+
+.typename {
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+}
+
+.copy-url {
+  background-color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: black;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.go-back {
+  background-color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  color: black;
+  cursor: pointer;
+  margin-right: 30px; /* 제일 오른쪽에 위치하도록 설정 */
+}
+
+.alert {
+  width: 300px;
+  height: 400px;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.check-me {
+  width: 360px;
+  height: 270px;
+  display: flex;
+  border-radius: 30px;
+  flex-direction: column; /* 컴포넌트들을 세로로 나열 */
+}
+
+.enter-button {
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px 10px; /* 옵션: 버튼 내부 여백 조절 */
+  color: black; /* 옵션: 텍스트 색상을 흰색으로 설정 */
+  font-weight: bold; /* 옵션: 텍스트 굵기 설정 */
+  margin-top: 5px;
+  margin-left: 10px;
+  width: 100px;
+  height: 64px;
+}
+
+
+.title {
+  font-size: 1.2rem;
+}
+
+.content {
+  font-size: 1rem;
+}
+
+
+.enter {
+  display: flex;
+  justify-content: space-between;
+  width: 360px;
+  height: 70px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
