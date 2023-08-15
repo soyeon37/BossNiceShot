@@ -10,7 +10,7 @@ import AlertPage from "./alert/AlertPage";
 
 import { IoMdContact } from 'react-icons/io'
 import { Avatar, AvatarBadge, AvatarGroup, Hide } from "@chakra-ui/react";
-
+import Favicon from "../../assets/source/imgs/favicon.png";
 import "./styles.css";
 import {
   Menu,
