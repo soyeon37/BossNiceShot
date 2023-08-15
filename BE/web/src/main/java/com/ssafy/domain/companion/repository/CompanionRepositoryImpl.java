@@ -1,7 +1,7 @@
 package com.ssafy.domain.companion.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.impl.JPAQuery;
+import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.common.TeeBox;
 import com.ssafy.domain.companion.dto.request.CompanionSearchRequest;
@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static com.ssafy.domain.companion.entity.QCompanion.companion;
@@ -21,39 +22,38 @@ import static com.ssafy.domain.member.entity.QMember.member;
 public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
-    /*
-    라연 - 팔로우 유무에 따라 수정 필요
-     */
     @Override
     public Page<Companion> searchAll(CompanionSearchRequest companionSearchRequest, Pageable pageable) {
         List<Companion> result = queryFactory
                 .selectFrom(companion)
                 .leftJoin(companion.member, member)
-                .fetchJoin()
                 .where(
                         eqTitle(companionSearchRequest.title()),
                         eqMemberNickname(companionSearchRequest.memberNickname()),
                         eqDescription(companionSearchRequest.description()),
                         eqTeeBox(companionSearchRequest.teeBox()),
-                        companion.member.id.in(getFolloweeList(companionSearchRequest.followerId()))
+                        getFolloweeList(companionSearchRequest.followerId()),
+                        companion.teeUpTime.gt(LocalDateTime.now()),
+                        companion.capacity.gt(companion.companionUserCount)
                 )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .orderBy(companion.createdTime.desc())
                 .fetch();
 
-        JPAQuery<Long> countQuery = queryFactory
-                .select(companion.count())
-                .from(companion)
+        JPQLQuery<Companion> count = queryFactory
+                .selectFrom(companion)
                 .where(
                         eqTitle(companionSearchRequest.title()),
                         eqMemberNickname(companionSearchRequest.memberNickname()),
                         eqDescription(companionSearchRequest.description()),
                         eqTeeBox(companionSearchRequest.teeBox()),
-                        companion.member.id.in(getFolloweeList(companionSearchRequest.followerId()))
+                        getFolloweeList(companionSearchRequest.followerId()),
+                        companion.teeUpTime.gt(LocalDateTime.now()),
+                        companion.capacity.gt(companion.companionUserCount)
                 );
 
-        return PageableExecutionUtils.getPage(result, pageable, countQuery::fetchOne);
+        return PageableExecutionUtils.getPage(result, pageable, count::fetchCount);
     }
 
     private BooleanExpression eqTitle(String title) {
@@ -65,20 +65,21 @@ public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
     }
 
     private BooleanExpression eqDescription(String description) {
-        return description == null ? null : companion.description.contains(description);
+        return description == null ? null : companion.description.contains(description).or(companion.title.contains(description));
     }
 
     private BooleanExpression eqTeeBox(TeeBox teeBox) {
-        return teeBox == TeeBox.NONE ? null : companion.teeBox.eq(teeBox);
+        return teeBox == TeeBox.NONE || teeBox == null ? null : companion.teeBox.eq(teeBox);
     }
 
     private BooleanExpression eqFollowerId(String followerId) {
         return followerId == null ? null : follow.follower.id.eq(followerId);
     }
 
-    private List<String> getFolloweeList(String followerId){
-        if (followerId == null)
+    private BooleanExpression getFolloweeList(String followerId) {
+        if (followerId == null) {
             return null;
+        }
 
         List<String> followeeList = queryFactory
                 .select(follow.followee.id)
@@ -88,7 +89,7 @@ public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
                 )
                 .fetch();
 
-        return followeeList;
+        return followeeList == null ? null : companion.member.id.in(followeeList);
     }
 }
 

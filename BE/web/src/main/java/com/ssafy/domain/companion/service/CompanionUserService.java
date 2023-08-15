@@ -27,11 +27,11 @@ public class CompanionUserService {
     }
 
     @Transactional
-    public void deleteByCompanionIdAndMemberId(Long companionId, String memberId) {
-        companionUserRepository.findByCompanionIdAndMemberId(companionId, memberId)
-                .orElseThrow(EntityNotFoundException::new);
+    public void refuseCompanionUser(Long companionUserId) {
+        CompanionUser companionUser = companionUserRepository.findById(companionUserId)
+                        .orElseThrow(EntityNotFoundException::new);
 
-        companionUserRepository.deleteByCompanionIdAndMemberId(companionId, memberId);
+        companionUserRepository.delete(companionUser);
     }
 
     public List<CompanionUser> findByCompanionId(Long companionId){
@@ -41,5 +41,24 @@ public class CompanionUserService {
     @Transactional
     public void deleteByCompanionId(Long companionId) {
         companionUserRepository.deleteByCompanionId(companionId);
+    }
+
+    @Transactional
+    public CompanionUser acceptCompanionUser(Long companionUserId) {
+        CompanionUser companionUser = companionUserRepository.findById(companionUserId)
+                .orElseThrow(EntityNotFoundException::new);
+
+        companionUser.active();
+        companionService.findById(companionUser.getCompanion().getId()).acceptUser();
+        return companionUser;
+    }
+
+    @Transactional
+    public void leaveCompanion(Long companionId, String companionUserMemberId) {
+        CompanionUser companionUser = companionUserRepository.findByCompanionIdAndMemberId(companionId, companionUserMemberId)
+                .orElseThrow(EntityNotFoundException::new);
+
+        companionUserRepository.delete(companionUser);
+        companionService.findById(companionId).leaveUser();
     }
 }

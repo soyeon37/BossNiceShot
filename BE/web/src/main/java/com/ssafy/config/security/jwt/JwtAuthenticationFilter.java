@@ -32,11 +32,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/api/members/code")
                 || request.getRequestURI().equals("/api/members/checkNickname")
                 || request.getRequestURI().equals("/api/notification/**")
-                || request.getRequestURI().startsWith("/api/ws/**")
-                || request.getRequestURI().equals("/api/sessions")
-                || request.getRequestURI().equals("/api/sessions/**")
+                || request.getRequestURI().startsWith("/ws")
+                || request.getRequestURI().startsWith("/api/sessions")
                 || request.getRequestURI().equals("/api/study/sessions")
-                || request.getRequestURI().equals("/api/sessions/**/connections")){
+                || request.getRequestURI().equals("/api/companion/field")){
             log.info("권한 허가");
             chain.doFilter(request, response);
             return;
