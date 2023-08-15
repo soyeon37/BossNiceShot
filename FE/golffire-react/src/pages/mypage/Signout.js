@@ -4,30 +4,35 @@ import MyPageNavbar from "./MyPageNavbar";
 import "./MyPage.css";
 import CryImg from "../../assets/source/mascot/crying.png";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
-function Signout() {
-    const navigate = useNavigate();
-    const [cookies, setCookie] = useCookies(['refreshToken']);
-    const handleLogout = () => {
-        console.log('cookies.refreshToken:', cookies.refreshToken);
+// Redux
+import { useDispatch } from "react-redux";
+import { resetUserState } from "../../features/userInfoSlice";
 
-        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout'
-        const data = {
-            refreshToken: cookies.refreshToken
-        }
-        axios.post(apiUrl, data)
-            .then(response => {
-                console.log(response);
-                if (response.data.data === "SUCCESS") {
-                    setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
-                    handleSignout();
-                } else {
-                    alert('Error')
-                }
-            })
-    };
+import CryImg from "../../assets/source/mascot/mascot-cry-2.png";
+import "./MyPage.css";
+
+function Signout() {
+    // Redux
+    const dispatch = useDispatch();
+
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout'
+    const data = {
+        refreshToken: cookies.refreshToken
+    }
+    axios.post(apiUrl, data)
+        .then(response => {
+            console.log(response);
+            if (response.data.data === "SUCCESS") {
+                setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
+                handleSignout();
+            } else {
+                alert('Error')
+            }
+        })
+
     const handleSignout = (e) => {
         console.log("탈퇴하기");
         const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/delete'
@@ -40,7 +45,6 @@ function Signout() {
                 console.error(error);
             })
     };
-
 
     return (
         <div id="MyPage">
@@ -134,6 +138,7 @@ function Signout() {
             </div>
         </div >
     );
+
 }
 
 export default Signout;
