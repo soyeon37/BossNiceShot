@@ -13,11 +13,11 @@ public record CompanionResponse(
 		@NotNull Integer field,
 		@NotNull TeeBox teeBox,
 		@NotNull Integer capacity,
-		@NotNull Integer companionUerCount,
+		@NotNull Integer companionUserCount,
 		@NotNull String teeUpTime,
-		@NotNull String applicationDeadline,
 		@NotNull String memberId,
-		@NotNull String memberNickname
+		@NotNull String memberNickname,
+		@NotNull String memberImage
 ) {
 	public static CompanionResponse from(Companion companion) {
 		return new CompanionResponse(
@@ -27,11 +27,11 @@ public record CompanionResponse(
 				companion.getField(),
 				companion.getTeeBox(),
 				companion.getCapacity(),
-				companion.getCompanionUsers().size(),
+				companion.getCompanionUserCount(),
 				companion.getTeeUpTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-				companion.getApplicationDeadline().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
 				companion.getMember().getId(),
-				companion.getMember().getNickname()
+				companion.getMember().getNickname(),
+				companion.getMember().getImage()
 		);
 	}
 }

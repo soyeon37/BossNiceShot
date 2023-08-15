@@ -10,6 +10,7 @@ public record CompanionChatResponse(@NotNull MessageType type,
                                     @NotNull String content,
                                     @NotNull String memberId,
                                     @NotNull String memberNickname,
+                                    @NotNull String memberImage,
                                     @NotNull Long companionId,
                                     @NotNull String createdTime){
 
@@ -19,6 +20,7 @@ public record CompanionChatResponse(@NotNull MessageType type,
                 companionChat.getContent(),
                 companionChat.getMemberId(),
                 companionChat.getMemberNickname(),
+                companionChat.getMemberImage(),
                 companionChat.getCompanionId(),
                 companionChat.getCreatedTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"))
         );

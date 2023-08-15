@@ -7,9 +7,6 @@ import jakarta.validation.constraints.NotNull;
 
 public record CompanionUserRequest(@NotNull Long companionId) {
     public CompanionUser toCompanionUser(Companion companion, Member member) {
-        return CompanionUser.builder()
-                .companion(companion)
-                .member(member)
-                .build();
+        return new CompanionUser(member, companion);
     }
 }

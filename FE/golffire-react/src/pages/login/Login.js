@@ -40,7 +40,7 @@ const Login = () => {
 
     // 서버 API 엔드포인트 URL
     // 추후 실제 서버 URL로 대체 필요 !!
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/members/sign-in";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-in";
 
     // Axios를 사용하여 POST 요청 보내기
     axios

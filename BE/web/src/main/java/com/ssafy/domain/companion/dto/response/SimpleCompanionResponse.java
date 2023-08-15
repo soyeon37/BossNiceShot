@@ -12,7 +12,8 @@ public record SimpleCompanionResponse(@NotNull Long id,
                                       @NotNull TeeBox teeBox,
                                       @NotNull String teeUptime,
                                       @NotNull String memberId,
-                                      @NotNull String memberNickname){
+                                      @NotNull String memberNickname,
+                                      @NotNull String memberImage){
     public static SimpleCompanionResponse from(Companion companion) {
         return new SimpleCompanionResponse(
                 companion.getId(),
@@ -21,7 +22,8 @@ public record SimpleCompanionResponse(@NotNull Long id,
                 companion.getTeeBox(),
                 companion.getTeeUpTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
                 companion.getMember().getId(),
-                companion.getMember().getNickname()
+                companion.getMember().getNickname(),
+                companion.getMember().getImage()
         );
     }
 }
