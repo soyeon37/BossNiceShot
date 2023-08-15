@@ -27,12 +27,14 @@ public class StudyUserService {
         StudyUser studyUser = studyUserRepository.findByStudyIdAndMemberId(studyUserRequest.studyId(), memberId)
                 .orElseGet(() -> studyUserRepository.save(new StudyUser(studyService.findById(studyUserRequest.studyId()), memberService.findByMemberId(memberId))));
 
-        studyService.findById(studyUserRequest.studyId()).getStudyUsers().add(studyUser);
+        studyService.findById(studyUserRequest.studyId()).enterUser();
         return studyUser;
     }
 
     @Transactional
     public void delteByStudyIdAndMemberId(Long studyId, String memberId) {
         studyUserRepository.deleteByStudyIdAndMemberId(studyId, memberId);
+
+        studyService.findById(studyId).leaveUser();
     }
 }

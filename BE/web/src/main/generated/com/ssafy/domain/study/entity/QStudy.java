@@ -35,7 +35,7 @@ public class QStudy extends EntityPathBase<Study> {
 
     public final BooleanPath locked = createBoolean("locked");
 
-    public final com.ssafy.domain.Member.entity.QMember member;
+    public final com.ssafy.domain.member.entity.QMember member;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedTime = _super.modifiedTime;
@@ -44,9 +44,9 @@ public class QStudy extends EntityPathBase<Study> {
 
     public final DateTimePath<java.time.LocalDateTime> reservedTime = createDateTime("reservedTime", java.time.LocalDateTime.class);
 
-    public final EnumPath<Status> status = createEnum("status", Status.class);
+    public final EnumPath<com.ssafy.common.Status> status = createEnum("status", com.ssafy.common.Status.class);
 
-    public final ListPath<com.ssafy.domain.studyUser.entity.StudyUser, com.ssafy.domain.studyUser.entity.QStudyUser> studyUsers = this.<com.ssafy.domain.studyUser.entity.StudyUser, com.ssafy.domain.studyUser.entity.QStudyUser>createList("studyUsers", com.ssafy.domain.studyUser.entity.StudyUser.class, com.ssafy.domain.studyUser.entity.QStudyUser.class, PathInits.DIRECT2);
+    public final NumberPath<Integer> studyUserCount = createNumber("studyUserCount", Integer.class);
 
     public final StringPath title = createString("title");
 
@@ -70,7 +70,7 @@ public class QStudy extends EntityPathBase<Study> {
 
     public QStudy(Class<? extends Study> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new com.ssafy.domain.Member.entity.QMember(forProperty("member")) : null;
+        this.member = inits.isInitialized("member") ? new com.ssafy.domain.member.entity.QMember(forProperty("member")) : null;
     }
 
 }

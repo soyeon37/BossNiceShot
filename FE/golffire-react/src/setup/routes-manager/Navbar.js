@@ -44,7 +44,7 @@ function Navbar() {
   const handleLogout = () => {
     console.log('cookies.refreshToken:', cookies.refreshToken);
 
-    const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout'
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
     const data = {
       refreshToken: cookies.refreshToken
     }
@@ -61,7 +61,7 @@ function Navbar() {
   };
 
   const handleCheckNotification = () => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + '/notification/check';
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/notification/check';
     axios.get(apiUrl)
       .then((response) => {
         if (response.data.data === false) {
@@ -78,7 +78,8 @@ function Navbar() {
   return (
     <nav className="nav">
       <a href="/" className="site-title">
-        골프파이어
+        <img className="favicon-img" src={Favicon} alt="favicon" />
+        사장님, 나이스 샷
       </a>
       <ul id="nav-list">
         <li id="nav-list-li">
@@ -160,24 +161,6 @@ function Navbar() {
             </MenuButton>
             <MenuList>
 
-              {/* test code - will delete */}
-              <MenuGroup title=''>
-                <MenuItem>
-                  <NavLink to="/mypage/info" style={({ isActive, isPending }) => {
-                    return {
-                      fontWeight: isActive ? "bold" : "",
-                    };
-                  }}>
-                    마이페이지
-                  </NavLink>
-                </MenuItem>
-                <MenuItem style={{ color: "gray" }} onClick={handleLogout}>
-                  로그아웃
-                </MenuItem>
-              </MenuGroup>
-              <MenuDivider />
-              {/* test code end */}
-
               {userId ? (
                 <MenuGroup title=''>
                   <MenuItem>
@@ -190,7 +173,7 @@ function Navbar() {
                     </NavLink>
                   </MenuItem>
                   <MenuDivider />
-                  <MenuItem style={{ color: "gray" }}>로그아웃</MenuItem>
+                  <MenuItem style={{ color: "gray" }} onClick={handleLogout}>로그아웃</MenuItem>
                 </MenuGroup>
               ) : (<MenuGroup title=''>
                 <MenuItem>
@@ -219,7 +202,7 @@ function Navbar() {
           <AlertPage onClick={handleCheckNotification}>
           </AlertPage>
         </li>
-      </ul>
+      </ul >
     </nav >
   );
 };

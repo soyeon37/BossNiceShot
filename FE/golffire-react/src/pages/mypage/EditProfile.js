@@ -58,7 +58,7 @@ function EditProfile() {
 
         }
 
-        const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/update';
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/update';
         console.log(cookies.access_token);
         
         axios.put(apiUrl, data)
