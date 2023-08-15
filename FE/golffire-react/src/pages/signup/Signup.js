@@ -50,9 +50,9 @@ function Signup() {
   const colorMap = {
     "red": "#F24141",
     "yellow": "#FFE000",
-    "gree": "#3BD641",
+    "green": "#3BD641",
     "blue": "#80CAFF",
-    "white": "#FFFFF",
+    "white": "#FFFFFF",
   }
 
   // 모달 창 띄우고 내리는 변수 및 함수
@@ -105,17 +105,18 @@ function Signup() {
     axios
       .post(apiUrl, data)
       .then((response) => {
+        // 회원가입 성공
+        // alert 등으로 알린 뒤 화면 전환 필요
         console.log(response);
         console.log(response.data.data.id);
-        navigate("/Login");
+        // navigate("/Login");
       })
       .catch((error) => {
-        console.error("Error: ", error);
+        console.error("Error: ", error); // Debug Code !!!
         navigate("/error");
       });
 
-    console.log("data: ", data);
-    // navigate("/");
+    console.log("data: ", data); // Debug Code !!!
   };
 
   return (
@@ -129,7 +130,7 @@ function Signup() {
           {step === 3 && <SignupEmail2 />}
           {step === 4 && <SignupInfo />}
         </div>
-        {step === 1 ? (
+        {step === 4 ? (
           <div className="user-banner">
             <div className="user-banner-box">
               <div className="user-banner-normal">나만의&nbsp;</div>
