@@ -22,9 +22,9 @@ public class QFollow extends EntityPathBase<Follow> {
 
     public static final QFollow follow = new QFollow("follow");
 
-    public final com.ssafy.domain.Member.entity.QMember followee;
+    public final com.ssafy.domain.member.entity.QMember followee;
 
-    public final com.ssafy.domain.Member.entity.QMember follower;
+    public final com.ssafy.domain.member.entity.QMember follower;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -46,8 +46,8 @@ public class QFollow extends EntityPathBase<Follow> {
 
     public QFollow(Class<? extends Follow> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.followee = inits.isInitialized("followee") ? new com.ssafy.domain.Member.entity.QMember(forProperty("followee")) : null;
-        this.follower = inits.isInitialized("follower") ? new com.ssafy.domain.Member.entity.QMember(forProperty("follower")) : null;
+        this.followee = inits.isInitialized("followee") ? new com.ssafy.domain.member.entity.QMember(forProperty("followee")) : null;
+        this.follower = inits.isInitialized("follower") ? new com.ssafy.domain.member.entity.QMember(forProperty("follower")) : null;
     }
 
 }

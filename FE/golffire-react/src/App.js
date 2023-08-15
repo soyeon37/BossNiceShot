@@ -6,6 +6,8 @@ import { useCookies } from "react-cookie";
 import Navbar from "./setup/routes-manager/Navbar";
 import Main from "./pages/main/Main";
 import Solution from "./pages/solution/Solution";
+import Solution_HalfSwing from "./pages/solution/Solution_HalfSwing";
+import Solution_FullSwing from "./pages/solution/Solution_FullSwing";
 import StudyList from "./pages/study/StudyList";
 import Golffield from "./pages/golffield/Golffield";
 import Accompany from "./pages/accompany/Accompany";
@@ -15,6 +17,7 @@ import Community from "./pages/community/Community";
 import CreateCRoom from './pages/study/CreateCRoom';
 import CreateLRoom from './pages/study/CreateLRoom';
 import CoachingRoom from './pages/study/CoachingRoom';
+import LearningRoom from './pages/study/LearningRoom';
 
 //accompany
 import CreateAccompany from "./pages/accompany/CreateAccompany";
@@ -84,13 +87,16 @@ function App() {
               <Route path="/golffield/" element={<Golffield />} />
 
               {/* Solution */}
-              <Route path="/solution/" element={userId ? <Solution /> : <Navigate to="/Login" />} />
-
+              <Route path="/solution/" element={<Solution />} />
+              <Route path="/solution/halfswing/" element={<Solution_HalfSwing />} />
+              <Route path="/solution/fullswing/" element={<Solution_FullSwing />} />
+              
               {/* Study */}
               <Route path="/studylist/" element={<StudyList />} />
               <Route path="/createcroom/" element={userId ? <CreateCRoom /> : <Navigate to="/Login" />} />
               <Route path="/createlroom/" element={userId ? <CreateLRoom /> : <Navigate to="/Login" />} />
               <Route path="/coachingroom/" element={userId ? <CoachingRoom /> : <Navigate to="/Login" />} />
+              <Route path="/learningroom/" element={userId ? <LearningRoom /> : <Navigate to="/Login" />} />
 
               {/* Accompany */}
               <Route path="/accompany/" element={<Accompany />} />
@@ -105,9 +111,10 @@ function App() {
               {/* <Route path="/freeboard/:idx" element={<FreeBoardDetail />} /> */}
 
               {/* Profile */}
-              <Route path="/mypage/" element={userId ? <Profile /> : <Navigate to="/Login" />} />
-              <Route path="/mypage/editprofile/" element={userId ? <EditProfile /> : <Navigate to="/Login" />} />
-              <Route path="/mypage/editpassword/" element={userId ? <EditPassword /> : <Navigate to="/Login" />} />
+
+              <Route path="/mypage/info" element={userId ? <Profile /> : <Navigate to="/Login" />} />
+              <Route path="/mypage/info/editprofile/" element={userId ? <EditProfile /> : <Navigate to="/Login" />} />
+              <Route path="/mypage/info/editpassword/" element={userId ? <EditPassword /> : <Navigate to="/Login" />} />
               <Route path="/mypage/myaccompany" element={userId ? <MyAccompany /> : <Navigate to="/Login" />} />
               <Route path="/mypage/mychat" element={userId ? <MyChat /> : <Navigate to="/Login" />} />
               <Route path="/mypage/myfollow" element={userId ? <MyFollow /> : <Navigate to="/Login" />} />

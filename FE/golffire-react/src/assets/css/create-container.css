@@ -35,7 +35,7 @@
     height: 100%;
     max-width: 60%;
 
-    border-radius: 50px;
+    border-radius: 30px;
     border: 2px solid #000;
     background-color: #FFF;
 
@@ -81,7 +81,7 @@
 
     margin-left: 40px;
     padding: 20px;
-    border-radius: 50px;
+    border-radius: 30px;
     border: 2px solid #000;
     background-color: #FFF;
 }
@@ -351,8 +351,9 @@
 
 /* Shadow CSS */
 .create-body-shadow {
-    position: fixed;
-    top: 364px;
+    position: absolute;
+
+    top: 20px;
     left: calc(50% + 20px);
     transform: translateX(-50%);
 

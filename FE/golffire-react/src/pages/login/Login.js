@@ -38,9 +38,11 @@ const Login = () => {
       isKakao: false,
     };
 
+    console.log("data:", data);
+
     // 서버 API 엔드포인트 URL
     // 추후 실제 서버 URL로 대체 필요 !!
-    const apiUrl = "http://localhost:8080/members/sign-in";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-in";
 
     // Axios를 사용하여 POST 요청 보내기
     axios
@@ -60,6 +62,12 @@ const Login = () => {
         });
 
         console.log(response.data); // Debug Code !!
+        
+        // NavBar에 사용자 정보 저장
+        dispatch(setUserId(email));
+        dispatch(setUserNickname("로그인 됨"));
+        dispatch(setUserLevel("eagle"));
+        dispatch(setUserTee("Red"));
 
         // NavBar에 사용자 정보 저장 - data for test
         dispatch(setUserId(email));
