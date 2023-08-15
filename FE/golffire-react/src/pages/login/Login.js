@@ -7,7 +7,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUserId, setUserNickname, setUserLevel, setUserTee } from "../../features/userInfoSlice";
 
-import BackgroundImgage from "../../assets/source/imgs/golf-image-1.png";
+import BackgroundImage from "../../assets/source/imgs/golf-image-1.svg";
 import { IoMailOutline, IoChatbubbleSharp } from "react-icons/io5";
 import "./Login.css";
 
@@ -104,7 +104,7 @@ const Login = () => {
             동료들이<br />기다리고 있어요!
           </div>
           <div className="user-banner-img">
-            <img className="user-banner-img-style" src={BackgroundImgage} alt="golf-mascot-image" />
+            <img className="user-banner-img-style" src={BackgroundImage} alt="golf-mascot-image" />
           </div>
         </div>
         <div className="user-func">
