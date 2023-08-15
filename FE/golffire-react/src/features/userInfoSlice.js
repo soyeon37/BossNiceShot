@@ -5,6 +5,7 @@ const initialState = {
   userNickname: "",
   userLevel: "",
   userTee: "",
+  usetProfile: "",
 };
 
 const userInfoSlice = createSlice({
@@ -23,11 +24,15 @@ const userInfoSlice = createSlice({
     setUserTee: (state, action) => {
       state.userTee = action.payload;
     },
+    setUserProfile: (state, action) => {
+      state.userTee = action.payload;
+    },
     resetUserState: (state, action) => {
       state.userId = "";
       state.userNickname = "";
       state.userLevel = "";
       state.userTee = "";
+      state.usetProfile = "";
     },
   },
 });
@@ -37,6 +42,7 @@ export const {
   setUserNickname,
   setUserLevel,
   setUserTee,
+  setUserProfile,
   resetUserState,
 } = userInfoSlice.actions;
 
