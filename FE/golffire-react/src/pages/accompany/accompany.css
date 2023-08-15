@@ -6,8 +6,8 @@
 
 /* AccompanyList.js */
 .search-filter {
-  height: 45px;
-  min-width: 150px;
+  height: 44px;
+  min-width: 130px;
   margin-left: 10px;
 
   border-radius: 50px;
@@ -16,7 +16,7 @@
   background: #FFF;
 
   padding: 10px;
-  font-size: 16px;
+  font-size: 17px;
 }
 
 .search-filter option {
@@ -26,8 +26,8 @@
 
 /* AccompanyBox CSS */
 .accompany-box {
-  width: 32%;
-  min-height: 210px;
+  width: calc(33% - 16px);
+  min-height: 195px;
 
   margin: 10px 10px;
   padding: 10px 30px;
@@ -41,7 +41,7 @@
 
 .accompany-box-title {
   color: #000;
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 600;
   
   margin-bottom: 5px;
@@ -54,11 +54,15 @@
 .accompany-box-date {
   display: flex;
   align-items: center;
+
+  font-size: 14px;
 }
 
 .accompany-box-place {
   display: flex;
   align-items: center;
+
+  font-size: 14px;
 }
 
 .accompany-box-button-position {
@@ -84,8 +88,12 @@
   border: 2px solid #3CADFF;
 
   color: #3CADFF;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 900;
+}
+.accompany-box-button:hover{
+  color: #FFF;
+  background-color: #3CADFF;
 }
 
 .checkbox-div {
@@ -154,4 +162,11 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+
+/* accompany button */
+.accompany-button:hover{
+  background-color: #FFF;
+  color: #3CADFF;
 }

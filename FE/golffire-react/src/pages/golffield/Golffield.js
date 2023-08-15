@@ -1,10 +1,13 @@
+
 import React, { useState, useEffect } from "react";
 import KakaoMap from "./KakaoMap";
 
 import GolfBox from "./GolfBox";
 import file from "../../assets/golffield.json";
+import PinImg from "../../assets/source/icons/pin.png";
 import { SearchIcon, ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import "./Golffield.css";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 function Golffield() {
   // 출력할 골프장 정보 변수
@@ -101,64 +104,88 @@ function Golffield() {
   }
 
   return (
-    <div id="Golffield">
-      <div id="golf-title">골프장 검색</div>
-      <div id="golf-search">
-        <div id="search-box">
-          <input
-            id="searchWord"
-            defaultValue={searchWord}
-            onChange={handleSearchWord}
-            onKeyDown={handleKeyDown}
-            placeholder="검색어를 입력하세요"
-          />
-          <button id="search-icon" onClick={doSearchWord}>
-            <SearchIcon boxSize={6} />
-          </button>
+    // <div id="accompany-container" className="container">
+
+    // </div>
+    <div id="golffield-container" className="container">
+      <div className="container-head">
+        <div className="container-head-title">골프장</div>
+        <div className="container-head-desc">
+          근처 골프장을 찾아보아요.
         </div>
-        <div id="result-box">
-          <div id="kakao-map">
-            <KakaoMap
-              centerId={centerId}
-              getId={getId()}
-              getAddress={getAddress()}
-              getLatLng={getLatLng()}
-            />
-          </div>
-          <div id="result">
-            <div id="result-list">
-              {getCurrentPageItems(dataGolffield).map((club) => (
-                <GolfBox
-                  key={club.번호}
-                  id={club.번호}
-                  name={club.사업장명}
-                  address1={club.소재지전체주소}
-                  address2={club.도로명전체주소}
-                  callNumber={club.소재지전화}
-                  setCenter={setCenterId}
-                />
-              ))}
-            </div>
-            <div id="result-control">
-              <button
-                className="control-arrow"
-                disabled={isFirstPage}
-                onClick={() => handlePageChange(currentPage - 1)}
-              >
-                <ArrowLeftIcon boxSize={6} />
-              </button>
-              <div id="control-num">{currentPage}</div>
-              <button
-                className="control-arrow"
-                disabled={isLastPage}
-                onClick={() => handlePageChange(currentPage + 1)}
-              >
-                <ArrowRightIcon boxSize={6} />
+
+        <img className="list-head-pin" src={PinImg} alt="pin" />
+        <div className="list-head-shadow bg-golffield"></div>
+      </div>
+
+
+
+      <div className="container-body">
+        <div className="" id="golf-search">
+          <div className="search-container">
+            <div className="search-input-container">
+              <input
+                className="search-input-box"
+                defaultValue={searchWord}
+                onChange={handleSearchWord}
+                onKeyDown={handleKeyDown}
+                placeholder="검색어를 입력하세요"
+              />
+              <button id="search-input-icon" onClick={doSearchWord}>
+                <SearchIcon boxSize={6} color="#8D8F98" />
               </button>
             </div>
+
           </div>
+
+          <div id="result-box">
+
+            <div id="result">
+              <div id="result-list">
+                {getCurrentPageItems(dataGolffield).map((club) => (
+                  <GolfBox
+                    key={club.번호}
+                    id={club.번호}
+                    name={club.사업장명}
+                    address1={club.소재지전체주소}
+                    address2={club.도로명전체주소}
+                    callNumber={club.소재지전화}
+                    setCenter={setCenterId}
+                  />
+                ))}
+              </div>
+              <div id="result-control">
+                <button
+                  className="control-arrow"
+                  disabled={isFirstPage}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                >
+                  <IoIosArrowBack className="option-title-icon" />
+                </button>
+                <div id="control-num">{currentPage}</div>
+                <button
+                  className="control-arrow"
+                  disabled={isLastPage}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                >
+                    <IoIosArrowForward className="option-title-icon" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="list-background-div bg-golffield"></div>
+        <div id="kakao-map">
+          <KakaoMap
+            centerId={centerId}
+            getId={getId()}
+            getAddress={getAddress()}
+            getLatLng={getLatLng()}
+          />
         </div>
       </div>
+
     </div>
   );
 }
