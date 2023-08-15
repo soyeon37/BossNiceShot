@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+
 import MainBanner from "./MainBanner";
 import SplideGolf from "./SplideGolf";
 import SplideAccompany from "./SplideAccompany";
@@ -8,6 +9,9 @@ import MainStudy from "./MainStudy";
 import MainCompanion from "./MainCompanion";
 import Chatbot from "./Chatbot";
 import RefContext from "./RefContext";
+
+import Footer from "./Footer";
+
 import "./Main.css";
 
 

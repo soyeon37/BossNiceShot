@@ -60,6 +60,7 @@ pre {
 
 img {
   background-size: cover;
+  background-color: #FFE000;
 }
 
 /* Main Solution */
@@ -317,9 +318,14 @@ img {
 
   border-radius: 20px;
 }
+
 /* SplideSolution CSS */
 #splide-solution {
   height: 100%;
+}
+
+/* SplideGolf CSS */
+#splide-golf {
   width: 100%;
 
   display: "flex";
@@ -557,19 +563,26 @@ img {
 /* golf */
 
 .golf-info {
-  margin: 20%;
-  padding: 5%;
+  min-height: 100px;
 
-  border-radius: 36px;
-  background: #fff;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  margin: 10%;
+  padding: 10px;
+
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: #FFF;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .golf-name {
+  margin-bottom: 5px;
   color: #000;
   text-align: center;
   font-family: Inter;
-  font-size: 26px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -585,7 +598,121 @@ img {
   line-height: normal;
 }
 
+/* SplideLearning CSS */
+#splide-learning {
+  width: 100%;
+
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+}
+
+.learn-info {
+  min-height: 100px;
+
+  margin: 10%;
+  padding: 10px;
+
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: #FFF;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.learn-title {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.learn-type {
+  width: fit-content;
+  white-space: nowrap;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.learn-title-text {
+
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 400;
+
+}
+
+.learn-name {
+  color: #8d8f98;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+/* SplideAcoompany CSS */
+#splide-accompany {
+  width: 100%;
+
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+}
+
+.acc-info {
+  min-height: 100px;
+
+  margin: 10%;
+  padding: 10px;
+
+  border-radius: 50px;
+  border: 2px solid #000;
+  background: #FFF;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.acc-title {
+  margin-bottom: 5px;
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.acc-place {
+  color: #8d8f98;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.acc-date {
+  color: #8d8f98;
+  text-align: center;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+/* 더 많은 정보 찾기 CSS */
 .text-and-icon {
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -603,48 +730,6 @@ img {
 
 .text-and-icon-icon {
   margin-left: 1%;
-}
-
-/* ChatBot CSS */
-.chat-widget {}
-
-.chatbot-widget {
-  height: 60px;
-  width: 60px;
-
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-
-  border-radius: 50%;
-
-  background-color: #95e214;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-
-  cursor: pointer;
-  z-index: 999;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.chatbot-icon {
-  height: 40px;
-  width: 40px;
-
-  display: block;
-
-  background-color: #95e214;
-  border-radius: 50%;
-
-  display: flex;
-
-  justify-content: center;
-  align-items: center;
-
-  color: white;
-  font-size: 34px;
 }
 
 .animated-component {

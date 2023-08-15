@@ -8,7 +8,6 @@
   border-radius: 10px;
 }
 
-
 /* radio button */
 label {
   font-size: 18px;
@@ -67,4 +66,182 @@ label {
 [type="checkbox"] {
   cursor: pointer;
   box-shadow: none;
+}
+
+/* favicon image */
+.favicon-img {
+  height: 80%;
+}
+
+/* badge */
+.badge-coach {
+  border-radius: 50px;
+  background: #72ce27;
+  color: #fff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.badge-learn {
+  border-radius: 50px;
+  background: #ffe000;
+  color: #fff;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Color CSS */
+.bg-accompany {
+  background-color: #80CAFF;
+}
+
+.bg-golffield {
+  background-color: #FF8A8A;
+}
+
+.bg-coach {
+  background-color: #78CB50;
+}
+
+.bg-learn {
+  background-color: #FFE000;
+}
+
+.bg-shadow {
+  background-color: #FFF;
+}
+
+/* Button CSS */
+.button {
+  width: 250px;
+  height: 40px;
+  max-width: 60%;
+  border-radius: 50px;
+  border: 1px solid #000;
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.cancel {
+  background-color: #FFF;
+  border: 2px solid #F21414;
+
+  color: #F21414;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.confirm {
+  background-color: #fff;
+  border: 2px solid #3BD641;
+  margin-left: 10px;
+
+  color: #3BD641;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.golf {
+  background-color: #fff;
+  border: 2px solid #FF8A8A;
+  margin-left: 10px;
+
+  color: #FF8A8A;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+/* Common CSS */
+.cursor-able {
+  cursor: pointer;
+}
+
+.checkbox-div {
+  white-space: nowrap;
+}
+
+.checkbox {
+  box-shadow: none;
+  margin: 0px 5px 0px 10px;
+}
+
+.tee-icon {
+  width: 50px;
+  height: 50px;
+}
+
+.box-author-position {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.box-author {
+  width: auto;
+  height: 30px;
+  padding: 10px;
+
+  border-radius: 20px;
+  background-color: #EBEBEB;
+
+  display: flex;
+  align-items: center;
+
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+}
+
+.profile-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.react-icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+::placeholder {
+  color: #D7D7D7;
+}
+
+.mascot-deco{
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+/* CSS only used once */
+.giant-plus {
+  color: #FFF;
+  font-size: 120px;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+/* Footer */
+.Footer {
+  background-color: dodgerblue;
 }
