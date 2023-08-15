@@ -1,10 +1,9 @@
 package com.ssafy.domain.study.dto.response;
 
-import com.ssafy.domain.study.entity.Status;
+import com.ssafy.common.Status;
 import com.ssafy.domain.study.entity.Study;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public record StudyResponse(@NotNull Long id,
