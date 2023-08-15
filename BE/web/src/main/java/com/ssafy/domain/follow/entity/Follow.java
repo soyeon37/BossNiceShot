@@ -1,6 +1,6 @@
 package com.ssafy.domain.follow.entity;
 
-import com.ssafy.domain.Member.entity.Member;
+import com.ssafy.domain.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
