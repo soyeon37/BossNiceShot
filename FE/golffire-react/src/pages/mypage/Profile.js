@@ -69,7 +69,7 @@ function Profile() {
                             <div id="info-pic-wrapper">
                                 <div id="info-pic">
 
-                                (커다란 캐릭터 사진)
+                                    (커다란 캐릭터 사진)
                                 </div>
                             </div>
                             <div id="info-text">
@@ -139,16 +139,16 @@ function Profile() {
                         <div id="profile-history">
                             <div id="history-title">{personInfo.name}의 스코어</div>
                             <div id="history-list">
-                            {scoreHistory.map((history, index) => (
-                               <div className="HistoryBox">
-                               <div className="history-info">
-                                   <div className="history-place">{history.place}</div>
-                                   <div className="history-date">{history.date}</div>
-                               </div>
-                               <button className="history-score" onClick={()=>handleSaveScore(index)}>{history.score} 타</button>
-                           </div >
-                            ))}
-                        </div>
+                                {scoreHistory.map((history, index) => (
+                                    <div className="HistoryBox" key={index}>
+                                        <div className="history-info">
+                                            <div className="history-place">{history.place}</div>
+                                            <div className="history-date">{history.date}</div>
+                                        </div>
+                                        <button className="history-score" onClick={() => handleSaveScore(index)}>{history.score} 타</button>
+                                    </div >
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </div>

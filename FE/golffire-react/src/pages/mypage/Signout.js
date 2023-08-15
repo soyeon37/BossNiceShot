@@ -1,8 +1,4 @@
 import React from "react";
-import MyPageNavbar from "./MyPageNavbar";
-
-import "./MyPage.css";
-import CryImg from "../../assets/source/mascot/crying.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -11,12 +7,21 @@ import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { resetUserState } from "../../features/userInfoSlice";
 
+import MyPageNavbar from "./MyPageNavbar";
+
+import { handleLogout } from "../../setup/user-auth/UserAuth";
+
 import CryImg from "../../assets/source/mascot/mascot-cry-2.png";
 import "./MyPage.css";
 
 function Signout() {
     // Redux
     const dispatch = useDispatch();
+
+
+    const navigate = useNavigate();
+    // cookie의 user 정보 확인
+    const [cookies, setCookie] = useCookies(["refreshToken"]);
 
     const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout'
     const data = {
