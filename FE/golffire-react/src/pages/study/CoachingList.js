@@ -50,7 +50,7 @@ function CoachingList() {
       setCoachingList(response.data.studyList);
       setTotalPages(response.data.totalPages);
     });
-  };
+    };
 
   const getCoachingSearchList = (searchValue, currentPage) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
@@ -81,7 +81,7 @@ function CoachingList() {
     setCurrentPage(currentPage);
 
     console.log("참여 가능한 코칭 리스트 검색 조회");
-    
+
     axios.get(apiUrl)
     .then((response) => {
       console.log(response);
@@ -90,7 +90,7 @@ function CoachingList() {
       setTotalPages(response.data.totalPages);
     });
   };
-
+  
   const getCoachingAttandableSearchList = (searchValue, currentPage) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
 
@@ -200,9 +200,9 @@ function CoachingList() {
     <div className='list-container'>
       <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
       <div className="list-head">
-          <Link to="/createcroom">
+            <Link to="/createcroom">
             <div className="head-create-button bg-coaching">+ 모집하기</div>
-          </Link>
+            </Link>
 
           <div className="search-container">
             <div className="search-input-container">
@@ -275,7 +275,7 @@ function CoachingList() {
             onClick={() => handlePageChange(currentPage + 1)}
           >
             <IoIosArrowForward className="option-title-icon" />
-          </button>
+          </button>    
         </div>
       </div>
 

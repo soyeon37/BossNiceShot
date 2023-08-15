@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -26,7 +26,8 @@ import {
 // bell icon 삽입
 // import { GoBell } from "react-icons/go";
 
-import AlertList from './AlertList';
+import AlertList from "./AlertList";
+import "./alert.css";
 
 import { CloseButton } from "@chakra-ui/react";
 import { Avatar } from "@chakra-ui/react";
@@ -40,13 +41,22 @@ function AlertPage() {
 
   // 알림 내역 호출 함수
   const handleGetNotification = () => {
-        const apiUrl =  process.env.REACT_APP_SERVER_URL + '/api/notification/read';
-        axios.get(apiUrl)
-        .then((response)=>{
-            console.log(response);
-
-            setNotifications(response.data.data.NotificationList)
-            console.log('notification: ', response.data.data.NotificationList[0]);
+    const apiUrl = "http://localhost:8080/notification/read";
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        console.log("read:", response);
+        const num = 0;
+        const dataWithVisibility = response.data.data.NotificationList.map(
+          (notification, index) => ({
+            ...notification,
+            isVisible: true, // Set initial visibility for each notification
+            index: index + 1,
+          })
+        );
+        setNotifications(dataWithVisibility);
+        // setNotifications(response.data.data.NotificationList);
+        console.log("notification: ", notifications[1]);
         handleUpdateRead();
       })
       .catch((error) => {
@@ -56,13 +66,12 @@ function AlertPage() {
 
   // 알림 삭제 함수
   // id값 가져와야 함
-    const handleDeleteNotification = (id) => {
-        const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/notification/delete";
-        const data = {
-            id : id
-        };
-        axios.delete(apiUrl, data)
-        .then((response)=>{
+  const handleDeleteNotification = (id, index) => {
+    const apiUrl = `http://localhost:8080/notification/delete/${id}`;
+    console.log(id);
+    axios
+      .delete(apiUrl)
+      .then((response) => {
         console.log(response);
         handleVisibility(index);
       })
@@ -73,9 +82,12 @@ function AlertPage() {
 
   // 알림 전체 삭제 함수
   const handleDeleteAllNotification = () => {
-        const apiUrl =  process.env.REACT_APP_SERVER_URL + '/api/notification/deleteAll';
-        axios.delete(apiUrl)
-        .then((response)=>{
+    const confirmDelete = window.confirm("알림 전체 삭제를 진행하시겠습니까?");
+    if (confirmDelete) {
+      const apiUrl = "http://localhost:8080/notification/deleteAll";
+      axios
+        .delete(apiUrl)
+        .then((response) => {
           console.log(response);
           handleGetNotification();
         })
@@ -86,9 +98,9 @@ function AlertPage() {
   };
 
   // 알림 수락/거절 전송 함수
-    const handleSendResultNotification = (message, articleId, sender, recipient, type) => {
-        const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/notification/create"
-        
+  const handleSendResultNotification = (message, articleId, sender, recipient, type, index) => {
+    console.log("신청 결과 전송 시작");
+    const apiUrl = "http://localhost:8080/notification/create";
     const data = {
       id: "",
       type: type,
@@ -141,8 +153,9 @@ function AlertPage() {
 
   // 알림 read 갱신 함수
   const handleUpdateRead = () => {
-        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/notification/update';
-        axios.put(apiUrl)
+    const apiUrl = "http://localhost:8080/notification/update";
+    axios
+      .put(apiUrl)
       .then((response) => {
         console.log(response);
       })
@@ -381,5 +394,6 @@ function AlertPage() {
       </Drawer>
     </>
   );
+}
 
 export default AlertPage;

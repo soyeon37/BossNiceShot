@@ -1,24 +1,16 @@
 import axios from "axios";
 
 // 토큰 재발급 함수
-export function reissueToken({ refreshToken, setCookie, removeCookie, navigate }) {
-  console.log("전달받은 refrshToken:", refreshToken);
+export function reissueToken({ cookies, setCookie, removeCookie, navigate }) {
+  console.log('refrshToken:', cookies.refresh_token);
   const apiUrl = process.env.REACT_APP_SERVER_URL  + '/api/members/reissue';
-  const headers = {
-    "Content-Type": `application/json`,
-    refreshToken: refreshToken,
-  };
-
-  axios
-    .get(apiUrl, {
-      headers: headers,
-    })
+  axios.post(apiUrl, cookies.refresh_token, { headers: { 'Authorization': 'Bearer ' + cookies.access_token } })
     .then((response) => {
       const message = response.data.data.message;
       if (message === "SUCCESS") {
         const newAccessToken = response.data.data.accessToken;
         console.log("UserAuth - reissueToken; ", newAccessToken);
-        axios.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
+        removeCookie('access_token');
         setCookie('access_token', newAccessToken, { path: '/' });
         return true;
       } else {
@@ -33,23 +25,10 @@ export function reissueToken({ refreshToken, setCookie, removeCookie, navigate }
     });
 }
 
-// 로그아웃 처리 함수
-export function handleLogout(refreshToken, setCookie, navigate) {
-  console.log("로그아웃에서의 refreshToken:", refreshToken);
-  const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout';
+export function handleLogout(cookies, setCookie, navigate) {
+  console.log('cookies.refreshToken:', cookies.refreshToken);
+  const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout';
   const data = {
-    refreshToken: refreshToken,
-  };
-  axios.post(apiUrl, data).then((response) => {
-    console.log(response);
-    if (response.data.data === "SUCCESS") {
-      setCookie("refreshToken", refreshToken, { path: "/", maxAge: 0 });
-      console.log("로그아웃 처리 성공");
-      navigate("/");
-    } else {
-      alert("Error");
-      console.log("로그아웃 처리 실패");
-      navigate("/error");
+    refreshToken: cookies.refreshToken
   }
-  });
 }
