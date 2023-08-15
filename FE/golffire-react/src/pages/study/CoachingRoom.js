@@ -1,95 +1,70 @@
-import React, { useEffect, useState } from 'react'
-import DrawingTools from './DrawingTools';
-import Canvas from './Canvas';
-import SplideCam from './SplideCam';
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import VideoRoomComponent from "../../openvidu/VideoRoomComponent";
 
-import "./study.css";
+import axios from 'axios';
+import { error } from "jquery";
 
 function CoachingRoom() {
-  const [selectedTool, setSelectedTool] = useState('pen')
-  const [isCanvasVisible, setIsCanvasVisible] = useState(false);
-  const [drawColor, setDrawColor] = useState('black');
-  const handleCanvasVisibilityChange = () => {
-    setIsCanvasVisible((prevVisible) => !prevVisible);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  let type = '';
+  let study = null;
+  let studyUser = null;
+
+  const leaveRoom = () => {
+    console.log(studyUser.memberId + "님이" + study.id + "방을 떠났습니다.");
+    console.log(study);
+    console.log(studyUser);
+
+    // 방장이 나가는 경우
+    if (study.memberId == studyUser.memberId) {
+      console.log("방장이 나감");
+
+      axios.delete(process.env.REACT_APP_SERVER_URL + '/api/study/user/' + study.id + '/all')
+        .then((response) => {
+
+          console.log("모두 지우기:" , response);
+
+          axios.delete(process.env.REACT_APP_SERVER_URL + '/api/study/' + study.id)
+            .then((response) => {
+
+              console.log("스터디 지우기:", response);
+
+              navigate('/studylist');
+            });
+        }).catch((error) => {
+          console.log(error);
+        });
+    } else {
+      axios.delete(process.env.REACT_APP_SERVER_URL + '/api/study/user/' + study.id)
+        .then((response) => {
+          navigate('/studylist');
+        });
+    }
+    
+    //window.location.href = '/studylist';
   };
 
-  useEffect(() => {
-    // 스크롤 방지
-    document.body.style.overflow = 'hidden';
-    // 컴포넌트 언마운트 시 스크롤 다시 활성화
-    return () => {
-      document.body.style.overflow = 'auto';
-    };
-  }, []);
-  
-  const CopyUrl = () => {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(() => {
-      alert("URL이 복사되었습니다")
-    });
-  };
+  if (location.state) {
+    type = location.state.type;
+    study = location.state.study;
+    studyUser = location.state.studyUser;
 
-  const goBack = () => {
-    window.history.go(-1);
+    console.log("코칭룸");
+    console.log("Type:", type);
+    console.log("Study:", study);
+    console.log("StudyUser:", studyUser);
+  } else {
+    console.log("코칭룸 정보가 존재하지 않습니다.");
   }
-
-  const handleSelectTool =  (tool) => {
-    setSelectedTool(tool);
-    setIsCanvasVisible(true);
-  }
-
-  const handleColorChange = (color) => {
-    setDrawColor(color);
-  };
-
-  const handleTestButtonClick = () => {
-    // 테스트 버튼 클릭 시 원하는 동작을 처리하도록 하세요.
-    console.log("테스트 버튼이 클릭되었습니다!");
-  };
 
   return (
-    <div className="coachingroom-container">
-      <div className="box-head">
-        <div className="box-roomtype">
-          <span className="typename">코칭</span>
-        </div>
-        방 제목
-        <div className="copy-url" onClick={CopyUrl}></div>
-        <div className="go-back" onClick={goBack}></div>
-
-      </div>
-      <div className="box-body">
-        <div className="grid-item item1">
-          {/* 러닝룸에서 포함 시킬 것. <div className="coachcam">코치</div> */ }
-          <div className="mycam">나</div>
-        </div>
-        <div className="grid-item item2">
-          <div className="box-splide">
-            <SplideCam />
-          </div>
-          <div className="box-mainrtc">
-              {/* Canvas 컴포넌트 */}
-            {isCanvasVisible && (
-              <Canvas selectedTool={selectedTool} isCanvasVisible={isCanvasVisible} drawColor={drawColor} />
-            )}
-            나는 화면공유
-            <button onClick={handleTestButtonClick}>테스트</button>
-          </div>
-          {/* 그림판 기능 선택 컴포넌트 */}
-          <DrawingTools 
-            onSelectTool={handleSelectTool}
-            onColorChange={handleColorChange}
-            isCanvasVisible={isCanvasVisible}
-            toggleCanvasVisibility={handleCanvasVisibilityChange}
-          />
-        </div>
-        <div className="grid-item item3">
-          <div className="box-chatview">나는 채팅방</div>
-          <div className="box-chatinput">나는 채팅 입력창</div>
-        </div>
-      </div>
+    <div>
+      <VideoRoomComponent type={type} study={study} studyUser={studyUser} leaveRoom={leaveRoom}/>
     </div>
-  )
+  );
 }
 
-export default CoachingRoom
+export default CoachingRoom;

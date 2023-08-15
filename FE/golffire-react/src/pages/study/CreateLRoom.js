@@ -30,7 +30,7 @@ function MyEditor() {
             navigate('/LearningRoom', {
                 state: {
                     type: type,
-                    title: title,
+                    title: title
                 }
             });
         }
