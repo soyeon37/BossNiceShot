@@ -37,10 +37,23 @@
 
   display: flex;
   flex-direction: column;
+
+  transition: background-color 0.3s ease;
+}
+.accompany-box:hover{
+  border-color: #3CADFF;
+ }
+ .accompany-box:active{
+  background-color: #9ad5ff;
+  border-color: #3CADFF;
+}
+.accompany-box.selected{
+  background-color: #3CADFF;
+  color: white; 
+  border-color: #3CADFF;
 }
 
 .accompany-box-title {
-  color: #000;
   font-size: 22px;
   font-weight: 600;
   
@@ -86,6 +99,8 @@
   background-color: #FFF;
   border-radius: 50px;
   border: 2px solid #3CADFF;
+
+  transition: background-color 0.3s ease;
 
   color: #3CADFF;
   font-size: 16px;

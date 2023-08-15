@@ -39,6 +39,7 @@ body {
 .site-title {
   font-size: 2rem;
   white-space: nowrap;
+  font-family: 'KBO-Dia-Gothic_bold' !important;
 }
 
 .nav ul {
