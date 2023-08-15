@@ -1,14 +1,15 @@
 package com.ssafy.domain.companion.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPQLQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.ssafy.common.TeeBox;
 import com.ssafy.domain.companion.dto.request.CompanionSearchRequest;
 import com.ssafy.domain.companion.entity.Companion;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -40,9 +41,8 @@ public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
                 .orderBy(companion.createdTime.desc())
                 .fetch();
 
-        Long count = queryFactory
-                .select(companion.count())
-                .from(companion)
+        JPQLQuery<Companion> count = queryFactory
+                .selectFrom(companion)
                 .where(
                         eqTitle(companionSearchRequest.title()),
                         eqMemberNickname(companionSearchRequest.memberNickname()),
@@ -51,10 +51,9 @@ public class CompanionRepositoryImpl implements CompanionRepositoryCustom {
                         getFolloweeList(companionSearchRequest.followerId()),
                         companion.teeUpTime.gt(LocalDateTime.now()),
                         companion.capacity.gt(companion.companionUserCount)
-                )
-                .fetchOne();
+                );
 
-        return new PageImpl<>(result, pageable, count);
+        return PageableExecutionUtils.getPage(result, pageable, count::fetchCount);
     }
 
     private BooleanExpression eqTitle(String title) {
