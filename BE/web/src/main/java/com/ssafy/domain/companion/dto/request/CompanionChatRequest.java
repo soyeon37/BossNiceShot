@@ -8,8 +8,9 @@ public record CompanionChatRequest(@NotNull MessageType type,
                                    String content,
                                    @NotNull String memberId,
                                    @NotNull String memberNickname,
+                                   @NotNull String memberImage,
                                    @NotNull Long companionId){
     public CompanionChat toCompanionChat() {
-        return new CompanionChat(type, content, memberId, memberNickname, companionId);
+        return new CompanionChat(type, content, memberId, memberNickname, memberImage, companionId);
     }
 }

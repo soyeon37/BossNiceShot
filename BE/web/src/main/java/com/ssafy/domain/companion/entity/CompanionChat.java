@@ -28,14 +28,18 @@ public class CompanionChat extends BaseTime {
     @Field("member_nickname")
     private String memberNickname;
 
+    @Field("member_image")
+    private String memberImage;
+
     @Field("companion_id")
     private Long companionId;
 
-    public CompanionChat(MessageType type, String content, String memberId, String memberNickname, Long companionId) {
+    public CompanionChat(MessageType type, String content, String memberId, String memberNickname, String memberImage, Long companionId) {
         this.type = type;
         this.content = content;
         this.memberId = memberId;
         this.memberNickname = memberNickname;
+        this.memberImage = memberImage;
         this.companionId = companionId;
     }
 }

@@ -1,4 +1,4 @@
-package com.ssafy.domain.Member.entity;
+package com.ssafy.domain.member.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -16,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QMember extends EntityPathBase<Member> {
 
-    private static final long serialVersionUID = 1332972628L;
+    private static final long serialVersionUID = 1135499316L;
 
     public static final QMember member = new QMember("member1");
 
@@ -46,7 +46,7 @@ public class QMember extends EntityPathBase<Member> {
 
     public final ListPath<Role, EnumPath<Role>> roles = this.<Role, EnumPath<Role>>createList("roles", Role.class, EnumPath.class, PathInits.DIRECT2);
 
-    public final EnumPath<TeeBox> teeBox = createEnum("teeBox", TeeBox.class);
+    public final EnumPath<com.ssafy.common.TeeBox> teeBox = createEnum("teeBox", com.ssafy.common.TeeBox.class);
 
     public final NumberPath<Integer> topScore = createNumber("topScore", Integer.class);
 

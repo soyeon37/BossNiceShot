@@ -53,7 +53,8 @@ public class SecurityConfig {
             "/api/sessions",
             "/api/sessions/**",
             "/api/sessions/SessionA/connections",
-            "/ws/**"
+            "/ws/**",
+            "/api/companion/field"
     };
     private static final String[] USER_LIST = {
             "/api/members/sign-in",

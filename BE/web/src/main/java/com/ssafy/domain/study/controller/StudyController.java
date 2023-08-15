@@ -23,7 +23,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
@@ -95,30 +95,49 @@ public class StudyController {
 
     @Operation(summary = "전체 스터디 조회 - 최신 등록 순", description = "타입 별로 전체 스터디를 최신 등록 순으로 정렬한다.")
     @GetMapping("/api/study/{type}")
-    public ResponseEntity<List<StudyResponse>> studyList(@PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> studyList(@PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Study> paging = studyService.findPaging(pageable, type);
-        return ResponseEntity.ok(paging.stream().map(StudyResponse::from).toList());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("studyList", paging.stream().map(StudyResponse::from).toList());
+        response.put("totalPages", paging.getTotalPages());
+
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "검색 기반 스터디 조회", description = "타입 별로 검색 결과를 최신 등록 순으로 정렬한다.")
     @PostMapping("/api/study/{type}")
-    public ResponseEntity<List<StudyResponse>> searchList(@RequestBody StudySearchRequest studySearchRequest, @PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> searchList(@RequestBody StudySearchRequest studySearchRequest, @PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Study> paging = studyService.findByKeyword(pageable, type, studySearchRequest);
-        return ResponseEntity.ok(paging.stream().map(StudyResponse::from).toList());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("studyList", paging.stream().map(StudyResponse::from).toList());
+        response.put("totalPages", paging.getTotalPages());
+
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "참여 가능한 코칭 조회", description = "활성화된 코칭 중, 참가 인원이 코칭의 최대 인원보다 작은 코칭을 최신 등록 순으로 정렬한다.")
     @GetMapping("/api/study/{type}/attandable")
-    public ResponseEntity<List<StudyResponse>> attandableList(@PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
-        log.info("참여 가능한 코칭 조회");
+    public ResponseEntity<Map<String, Object>> attandableList(@PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Study> paging = studyService.findPagingAttandableCoaching(pageable, type);
-        return ResponseEntity.ok(paging.stream().map(StudyResponse::from).toList());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("studyList", paging.stream().map(StudyResponse::from).toList());
+        response.put("totalPages", paging.getTotalPages());
+
+        return ResponseEntity.ok(response);
     }
 
     @Operation(summary = "검색 기반 참여 가능한 코칭 조회 - 최신 등록 순", description = "활성화된 코칭 중, 참가 인원이 코칭의 최대 인원보다 작은 코칭 검색 결과를 최신 등록 순으로 정렬한다.")
     @PostMapping("/api/study/{type}/attandable")
-    public ResponseEntity<List<StudyResponse>> attandableSearchList(@RequestBody StudySearchRequest studySearchRequest, @PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> attandableSearchList(@RequestBody StudySearchRequest studySearchRequest, @PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Study> paging = studyService.findAttandableCoachingByKeyword(pageable, type, studySearchRequest);
-        return ResponseEntity.ok(paging.stream().map(StudyResponse::from).toList());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("studyList", paging.stream().map(StudyResponse::from).toList());
+        response.put("totalPages", paging.getTotalPages());
+
+        return ResponseEntity.ok(response);
     }
 }

@@ -186,6 +186,5 @@ public class MemberController {
         log.info(authentication.getName());
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }
-
 }
 
