@@ -6,6 +6,8 @@ import { useCookies } from "react-cookie";
 import Navbar from "./setup/routes-manager/Navbar";
 import Main from "./pages/main/Main";
 import Solution from "./pages/solution/Solution";
+import Solution_HalfSwing from "./pages/solution/Solution_HalfSwing";
+import Solution_FullSwing from "./pages/solution/Solution_FullSwing";
 import StudyList from "./pages/study/StudyList";
 import Golffield from "./pages/golffield/Golffield";
 import Accompany from "./pages/accompany/Accompany";
@@ -92,7 +94,9 @@ function App() {
               /> */}
 
               <Route path="/solution/" element={<Solution />} />
-
+              <Route path="/solution/halfswing/" element={<Solution_HalfSwing />} />
+              <Route path="/solution/fullswing/" element={<Solution_FullSwing />} />
+              
               {/* Study */}
               <Route path="/studylist/" element={<StudyList />} />
               <Route path="/createcroom/" element={<CreateCRoom />} />
@@ -114,9 +118,9 @@ function App() {
               {/* <Route path="/freeboard/:idx" element={<FreeBoardDetail />} /> */}
 
               {/* Profile */}
-              <Route path="/mypage/" element={<Profile />} />
-              <Route path="/mypage/editprofile/" element={<EditProfile />} />
-              <Route path="/mypage/editpassword/" element={<EditPassword />} />
+              <Route path="/mypage/info" element={<Profile />} />
+              <Route path="/mypage/info/editprofile/" element={<EditProfile />} />
+              <Route path="/mypage/info/editpassword/" element={<EditPassword />} />
               <Route path="/mypage/myaccompany" element={<MyAccompany />} />
               <Route path="/mypage/mychat" element={<MyChat />} />
               <Route path="/mypage/myfollow" element={<MyFollow />} />

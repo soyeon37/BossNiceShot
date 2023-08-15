@@ -45,181 +45,134 @@ function Navbar() {
   // cookie의 user 정보 확인
   const [cookies, setCookie] = useCookies(["refreshToken"]);
 
-
   const handleLogout = () => {
-      console.log('cookies.refreshToken:',cookies.refreshToken);
-    
+    console.log('cookies.refreshToken:', cookies.refreshToken);
+
       const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
-      const data = {
-          refreshToken: cookies.refreshToken
-      }
-      axios.post(apiUrl, data)
-          .then((response) => {
-              console.log(response);
-
-              if (response.data.data === "SUCCESS") {
-                  setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
-
-                  console.log("로그아웃하여 redux 정보 삭제");
-                  dispatch(resetUserState());
-
-                  navigate('/');
-              } else {
-                  alert('Error')
-              }
-          });
+    const data = {
+      refreshToken: cookies.refreshToken
+    }
+    axios.post(apiUrl, data)
+      .then(response => {
+        console.log(response);
+        if (response.data.data === "SUCCESS") {
+          setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
+          navigate('/');
+        } else {
+          alert('Error')
+        }
+      })
   };
 
   const handleCheckNotification = () => {
       const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/notification/check';
-      axios.get(apiUrl)
-          .then((response) => {
-              if (response.data.data === false) {
-                  // 새로운 알림 존재
-              } else {
-                  // 이미 읽은 알림들
-              }
-          })
-          .catch((error) => {
-              navigate('/');
-          })
+    axios.get(apiUrl)
+      .then((response) => {
+        if (response.data.data === false) {
+          // 새로운 알림 존재
+        } else {
+          // 이미 읽은 알림들
+        }
+      })
+      .catch((error) => {
+        navigate('/');
+      })
   }
 
   return (
     <nav className="nav">
       <a href="/" className="site-title">
-        {/* <img className="favicon-img" src={Favicon} alt="favicon" /> */}
+        <img className="favicon-img" src={Favicon} alt="favicon" />
         사장님, 나이스 샷
       </a>
-      <ul>
-        <li>
-          <NavLink
-            to="/solution"
-            style={({ isActive, isPending }) => {
-              return {
-                fontWeight: isActive ? "bold" : "",
-              };
-            }}
-          >
-            솔루션
-          </NavLink>
+      <ul id="nav-list">
+        <li id="nav-list-li">
+          <NavLink to="/solution" id="nav-list-link" style={({ isActive, isPending }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              borderTop: isActive ? '2px solid Black' : "",
+              borderLeft: isActive ? '2px solid Black' : "",
+              borderRight: isActive ? '2px solid Black' : "",
+              borderBottom: isActive ? '2px solid White' : "",
+              borderRadius: isActive ? '20px 20px 0px 0px' : '',
+              height: isActive ? ' 54px' : '',
+              marginTop: isActive ? '12px' : '',
+              paddingBottom: isActive ? '13px' : '',
+              width: '100px'
+            };
+          }}>솔루션</NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/studylist"
-            style={({ isActive, isPending }) => {
-              return {
-                fontWeight: isActive ? "bold" : "",
-              };
-            }}
-          >
-            스터디
-          </NavLink>
+        <li id="nav-list-li">
+          <NavLink to="/studylist" id="nav-list-link" style={({ isActive, isPending }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              borderTop: isActive ? '2px solid Black' : "",
+              borderLeft: isActive ? '2px solid Black' : "",
+              borderRight: isActive ? '2px solid Black' : "",
+              borderBottom: isActive ? '2px solid White' : "",
+              borderRadius: isActive ? '20px 20px 0px 0px' : '',
+              height: isActive ? ' 54px' : '',
+              marginTop: isActive ? '12px' : '',
+              paddingBottom: isActive ? '13px' : '',
+              width: '100px'
+            };
+          }}>스터디</NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/golffield"
-            style={({ isActive, isPending }) => {
-              return {
-                fontWeight: isActive ? "bold" : "",
-              };
-            }}
-          >
-            골프장
-          </NavLink>
+        <li id="nav-list-li">
+          <NavLink to="/golffield" id="nav-list-link" style={({ isActive, isPending }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              borderTop: isActive ? '2px solid Black' : "",
+              borderLeft: isActive ? '2px solid Black' : "",
+              borderRight: isActive ? '2px solid Black' : "",
+              borderBottom: isActive ? '2px solid White' : "",
+              borderRadius: isActive ? '20px 20px 0px 0px' : '',
+              height: isActive ? ' 54px' : '',
+              marginTop: isActive ? '12px' : '',
+              paddingBottom: isActive ? '13px' : '',
+              width: '100px'
+            };
+          }}>골프장</NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/accompany/"
-            style={({ isActive, isPending }) => {
-              return {
-                fontWeight: isActive ? "bold" : "",
-              };
-            }}
-          >
-            동행
-          </NavLink>
+        <li id="nav-list-li">
+          <NavLink to="/accompany/" id="nav-list-link" style={({ isActive, isPending }) => {
+            return {
+              fontWeight: isActive ? "bold" : "",
+              borderTop: isActive ? '2px solid Black' : "",
+              borderLeft: isActive ? '2px solid Black' : "",
+              borderRight: isActive ? '2px solid Black' : "",
+              borderBottom: isActive ? '2px solid White' : "",
+              borderRadius: isActive ? '20px 20px 0px 0px' : '',
+              height: isActive ? ' 54px' : '',
+              marginTop: isActive ? '12px' : '',
+              paddingBottom: isActive ? '13px' : '',
+              width: '100px'
+            };
+          }}>동행</NavLink>
         </li>
-        <li className="communitymenu">
+
+        <li className="mypagemenu" id="nav-list-li">
           <Menu>
-            <MenuButton as={Button} variant="unstyled" fontWeight={isActive ? "bold" : ""}>
-              커뮤니티
-            </MenuButton>
-            <MenuList>
-              <MenuItem>
-                <NavLink
-                  to="/community/"
-                  style={({ isActive, isPending }) => {
-                    return {
-                      fontWeight: isActive ? "bold" : "",
-                    };
-                  }}
-                >
-                  커뮤니티
-                </NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink
-                  to="/noticelist/"
-                  style={({ isActive, isPending }) => {
-                    return {
-                      fontWeight: isActive ? "bold" : "",
-                    };
-                  }}
-                >
-                  공지사항
-                </NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink
-                  to="/inquirylist/"
-                  style={({ isActive, isPending }) => {
-                    return {
-                      fontWeight: isActive ? "bold" : "",
-                    };
-                  }}
-                >
-                  문의사항
-                </NavLink>
-              </MenuItem>
-              <MenuItem>
-                <NavLink
-                  to="/freeboardlist/"
-                  style={({ isActive, isPending }) => {
-                    return {
-                      fontWeight: isActive ? "bold" : "",
-                    };
-                  }}
-                >
-                  자유게시판
-                </NavLink>
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </li>
-        <li className="mypagemenu">
-          <Menu>
+
             {/* 마이페이지 버튼 아바타로 수정했습니다. */}
             <MenuButton>
               <Avatar size={"sm"}>
                 {/* 여기서 bg 값을 알람이 있을때는 빨간색, 없을때는 초록색으로 변경해야 할듯, 그런데 badge클릭시 알림창 뜨게 하는게 생각보다 쉽지 않음  */}
-                <AvatarBadge boxSize={"1.25rem"} bg={"red"}>
+                <AvatarBadge boxSize={'1.25rem'} bg={'red'}>
                   {/* <AlertPage></AlertPage> */}
                 </AvatarBadge>
               </Avatar>
             </MenuButton>
             <MenuList>
+
               {/* test code - will delete */}
-              <MenuGroup title="">
+              <MenuGroup title=''>
                 <MenuItem>
-                  <NavLink
-                    to="/mypage/"
-                    style={({ isActive, isPending }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                      };
-                    }}
-                  >
+                  <NavLink to="/mypage/info" style={({ isActive, isPending }) => {
+                    return {
+                      fontWeight: isActive ? "bold" : "",
+                    };
+                  }}>
                     마이페이지
                   </NavLink>
                 </MenuItem>
@@ -231,59 +184,49 @@ function Navbar() {
               {/* test code end */}
 
               {userId ? (
-                <MenuGroup title="">
+                <MenuGroup title=''>
                   <MenuItem>
-                    <NavLink
-                      to="/mypage/"
-                      style={({ isActive, isPending }) => {
-                        return {
-                          fontWeight: isActive ? "bold" : "",
-                        };
-                      }}
-                    >
+                    <NavLink to="/mypage/" style={({ isActive, isPending }) => {
+                      return {
+                        fontWeight: isActive ? "bold" : "",
+                      };
+                    }}>
                       마이페이지
                     </NavLink>
                   </MenuItem>
                   <MenuDivider />
                   <MenuItem style={{ color: "gray" }}>로그아웃</MenuItem>
                 </MenuGroup>
-              ) : (
-                <MenuGroup title="">
-                  <MenuItem>
-                    <NavLink
-                      to="/login/"
-                      style={({ isActive, isPending }) => {
-                        return {
-                          fontWeight: isActive ? "bold" : "",
-                        };
-                      }}
-                    >
-                      로그인
-                    </NavLink>
-                  </MenuItem>
-                  <MenuItem>
-                    <NavLink
-                      to="/signup/"
-                      style={({ isActive, isPending }) => {
-                        return {
-                          fontWeight: isActive ? "bold" : "",
-                        };
-                      }}
-                    >
-                      회원가입
-                    </NavLink>
-                  </MenuItem>
-                </MenuGroup>
-              )}
+              ) : (<MenuGroup title=''>
+                <MenuItem>
+                  <NavLink to="/login/" style={({ isActive, isPending }) => {
+                    return {
+                      fontWeight: isActive ? "bold" : "",
+                    };
+                  }}>
+                    로그인
+                  </NavLink>
+                </MenuItem>
+                <MenuItem>
+                  <NavLink to="/signup/" style={({ isActive, isPending }) => {
+                    return {
+                      fontWeight: isActive ? "bold" : "",
+                    };
+                  }}>
+                    회원가입
+                  </NavLink>
+                </MenuItem>
+              </MenuGroup>)}
             </MenuList>
           </Menu>
         </li>
-        <li>
-          <AlertPage onClick={handleCheckNotification}></AlertPage>
+        <li id="nav-list-li">
+          <AlertPage onClick={handleCheckNotification}>
+          </AlertPage>
         </li>
       </ul>
-    </nav>
+    </nav >
   );
-}
+};
 
 export default Navbar;
