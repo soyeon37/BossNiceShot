@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import KakaoMap from "./KakaoMap";
 
@@ -10,6 +9,12 @@ import "./Golffield.css";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 function Golffield() {
+  const [selectedGolfBoxId, setSelectedGolfBoxId] = useState(null); // 선택된 GolfBox의 ID 저장
+
+  // GolfBox 선택 시 처리 함수
+  const handleGolfBoxSelect = (id) => {
+    setSelectedGolfBoxId(id);
+  };
   // 출력할 골프장 정보 변수
   const dataArray = file;
   const dataGolffield = dataArray.map((item) => ({
@@ -20,7 +25,7 @@ function Golffield() {
     소재지전화: item["소재지전화"],
     x: item["좌표정보(x)"],
     y: item["좌표정보(y)"],
-  }))
+  }));
   const dataSize = dataGolffield.length;
 
   const [golfClub, setGolfClub] = useState(dataGolffield); // 검색 필터링된 골프장 리스트
@@ -77,31 +82,31 @@ function Golffield() {
     const id = [];
     const cur = getCurrentPageItems(golfClub);
     for (var i = 0; i < cur.length; i++) {
-      id.push(cur[i].번호)
+      id.push(cur[i].번호);
     }
     // console.log("저장된 id: ", id);
     return id;
-  }
+  };
 
   const getAddress = () => {
     const add = [];
     const cur = getCurrentPageItems(golfClub);
     for (var i = 0; i < cur.length; i++) {
-      add.push(cur[i].소재지전체주소, cur[i].도로명전체주소)
+      add.push(cur[i].소재지전체주소, cur[i].도로명전체주소);
     }
     // console.log("저장된 add: ", add);
     return add;
-  }
+  };
 
   const getLatLng = () => {
     const latlng = [];
     const cur = getCurrentPageItems(golfClub);
     for (var i = 0; i < cur.length; i++) {
-      latlng.push(cur[i].x, cur[i].y)
+      latlng.push(cur[i].x, cur[i].y);
     }
     // console.log("저장된 latlng: ", latlng);
     return latlng;
-  }
+  };
 
   return (
     // <div id="accompany-container" className="container">
@@ -110,15 +115,11 @@ function Golffield() {
     <div id="golffield-container" className="container">
       <div className="container-head">
         <div className="container-head-title">골프장</div>
-        <div className="container-head-desc">
-          근처 골프장을 찾아보아요.
-        </div>
+        <div className="container-head-desc">근처 골프장을 찾아보아요.</div>
 
         <img className="list-head-pin" src={PinImg} alt="pin" />
         <div className="list-head-shadow bg-golffield"></div>
       </div>
-
-
 
       <div className="container-body">
         <div className="" id="golf-search">
@@ -135,11 +136,9 @@ function Golffield() {
                 <SearchIcon boxSize={6} color="#8D8F98" />
               </button>
             </div>
-
           </div>
 
           <div id="result-box">
-
             <div id="result">
               <div id="result-list">
                 {getCurrentPageItems(dataGolffield).map((club) => (
@@ -151,6 +150,8 @@ function Golffield() {
                     address2={club.도로명전체주소}
                     callNumber={club.소재지전화}
                     setCenter={setCenterId}
+                    isSelected={club.번호 === selectedGolfBoxId} // 해당 GolfBox가 선택되었는지 여부
+                    onSelect={handleGolfBoxSelect} // GolfBox 선택 시 처리 함수 호출
                   />
                 ))}
               </div>
@@ -168,7 +169,7 @@ function Golffield() {
                   disabled={isLastPage}
                   onClick={() => handlePageChange(currentPage + 1)}
                 >
-                    <IoIosArrowForward className="option-title-icon" />
+                  <IoIosArrowForward className="option-title-icon" />
                 </button>
               </div>
             </div>
@@ -185,7 +186,6 @@ function Golffield() {
           />
         </div>
       </div>
-
     </div>
   );
 }

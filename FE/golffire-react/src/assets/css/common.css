@@ -63,7 +63,7 @@
   border-radius: 50px;
   border: 2px solid #000;
   color: #000;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -103,10 +103,16 @@
   color: #FF8A8A;
   text-align: center;
   font-family: Inter;
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 900;
   line-height: normal;
+
+  transition: background-color 0.3s ease;
+}
+.golf:hover{
+  background-color: #FF8A8A;
+  color: white;
 }
 
 /* Common CSS */

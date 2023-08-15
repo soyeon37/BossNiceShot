@@ -89,7 +89,7 @@
 }
 
 #kakao-map {
-  width: 38.5%;
+  width: 38.8%;
   height: 100%;
 
   padding-right: 10px;
@@ -171,34 +171,65 @@
 /* GolfBox CSS */
 .GolfBox {
   /* width: calc(100% - 10px); */
-  width: calc(50% - 10px); /* Subtracting 10px to account for a 5px margin on both sides */
+  width: calc(50% - 15px); /* Subtracting 10px to account for a 5px margin on both sides */
   box-sizing: border-box; /* This ensures padding and border are included in the 50% width */
   /* margin: 5px; */
 
-  margin-right: 10px;
+  margin-right: 15px;
   padding: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 
-  border-radius: 20px;
+  border-radius: 30px;
   border: 1px solid #000;
   background: #fff;
 
   text-align: left;
   border: 2px solid black;
-  height:150px;
+  min-height: 195px;
+
+  transition: background-color 0.3s ease;
+}
+.GolfBox:hover{
+ border-color: #FF8A8A;
+}
+.GolfBox:active{
+  background-color: #ffb4b4;
+  border-color: #FF8A8A;
+}
+.GolfBox.selected {
+  background-color: #FF8A8A;
+  color: white; 
+  border-color: #FF8A8A;
+}
+.GolfBox.selected > .golfbox-top > .golfbox-content >.golfbox-add,
+.GolfBox.selected > .golfbox-top > .golfbox-content >.golfbox-call    {
+  color: white; 
+}
+.golfbox-top{
+  height: 85%;
+  width: 100%;
+}
+/* .golfbox-content{
+  height: 55%;
+  width: 100%;
+
+} */
+.golfbox-button{
+    height: 15%;
+      display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .golfbox-title {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+
 }
 
 .golfbox-name {
-  color: #000;
-  font-family: Inter;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
 }
 
