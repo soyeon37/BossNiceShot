@@ -1,10 +1,10 @@
 import React from "react";
-import PartGolf from "./slide-part/PartGolf";
-
-import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css";
-
 import { NavLink } from "react-router-dom";
+
+import PartGolf from "./slide-part/PartGolf";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+
+import "@splidejs/react-splide/css";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 function SplideGolf({ props }) {
@@ -50,6 +50,7 @@ function SplideGolf({ props }) {
           type: "loop",
           perPage: 3.5,
           focus: "center",
+          pagination: false,
         }}
       >
         

@@ -1,34 +1,160 @@
 /* StudyList */
-
-.list-container {
-  height: 100%;
-  width: 100%
-}
-.list-head {
-  height: 15%;
+.study-body {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-
-.list-body {
-  height: 80%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-}
-.button-container {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+  height: calc(100% - 200px);
 }
 
 /* CoachingList */
+.search-filter {
+  height: 45px;
+  min-width: 150px;
+  margin-left: 10px;
+
+  border-radius: 50px;
+  outline: none;
+  border: 1px solid #8D8F98;
+  background: #FFF;
+
+  padding: 10px;
+  font-size: 16px;
+}
+
+.search-filter option {
+  text-align: center;
+  background: #FFF;
+}
+
+/* CoachingBox CSS */
+.coaching-box {
+  width: 32%;
+  min-height: 210px;
+
+  margin: 10px 10px;
+  padding: 10px 30px;
+  
+  border-radius: 30px;
+  border: 2px solid #000;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.coaching-box-title {
+  color: #000;
+  font-size: 25px;
+  font-weight: 600;
+  
+  margin-bottom: 5px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coaching-box-date {
+  display: flex;
+  align-items: center;
+}
+
+.coaching-box-user-count {
+  display: flex;
+  align-items: center;
+}
+
+.coaching-box-button-position {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.coaching-box-button {
+  width: 200px;
+  height: 40px;
+  max-width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 5px;
+  cursor: pointer;
+  background-color: #FFF;
+  border-radius: 50px;
+  border: 2px solid #3BD641;
+
+  color: #3BD641;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.checkbox-div {
+  display: flex;
+  align-items: center; /* 세로 가운데 정렬 */
+  font-size: 18px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px; /* 작은 가로 크기 */
+  height: 25px; /* 작은 세로 크기 */
+  margin-right: 5px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider-coaching {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider-coaching:before {
+  position: absolute;
+  content: "";
+  height: 20px; /* 작은 크기 */
+  width: 20px; /* 작은 크기 */
+  left: 3px; /* 작은 크기 */
+  bottom: 3px; /* 작은 크기 */
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider-coaching {
+  background-color: #3BD641;
+}
+
+input:focus + .slider-coaching {
+  box-shadow: 0 0 1px #3BD641;
+}
+
+input:checked + .slider-coaching:before {
+  -webkit-transform: translateX(14px); /* 작은 크기 */
+  -ms-transform: translateX(14px); /* 작은 크기 */
+  transform: translateX(14px); /* 작은 크기 */
+}
+
+/* Rounded sliders */
+.slider-coaching.round {
+  border-radius: 20px; /* 작은 크기 */
+}
+
+.slider-coaching.round:before {
+  border-radius: 50%;
+}
 
 /* LearningList */
 
@@ -69,7 +195,6 @@
   margin-left: 10px;
   border: 1px solid #000;
   color: #000;
-  font-family: Inter;
   font-size: 5px;
   font-style: normal;
   line-height: normal;
@@ -298,7 +423,7 @@
   font-weight: bold;
 }
 
-.copy-url {
+/* .copy-url {
   width: 60px;
   height: 60px;
   border-radius: 50%;
@@ -322,9 +447,9 @@
   align-items: center;
   font-size: 12px;
   color: white;
-  cursor: pointer;
-  margin-right: 30px; /* 제일 오른쪽에 위치하도록 설정 */
-}
+  cursor: pointer; 
+  margin-right: 30px; 제일 오른쪽에 위치하도록 설정
+}*/
 
 .box-body {
   margin-top: 30px; /* box-head와 간격 조정 */
@@ -382,7 +507,7 @@
   align-items: center;
 }
 
-.box-splide {
+/* .box-splide {
   background-color: yellowgreen;
   width: 95%;
   height: 15%;
@@ -412,7 +537,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+} */
 
 .box-chatview {
   background-color: yellowgreen;
@@ -453,4 +578,12 @@
   display:flex;
   justify-content: space-between;
   padding: 0 30px;
+}
+
+.study-textarea {
+  width: 100%;
+  height: 340px;
+  padding: 10px;
+  text-align: left;
+  overflow-y: scroll;
 }

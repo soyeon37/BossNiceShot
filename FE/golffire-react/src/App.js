@@ -15,6 +15,7 @@ import Community from "./pages/community/Community";
 import CreateCRoom from './pages/study/CreateCRoom';
 import CreateLRoom from './pages/study/CreateLRoom';
 import CoachingRoom from './pages/study/CoachingRoom';
+import LearningRoom from './pages/study/LearningRoom';
 
 //accompany
 import CreateAccompany from "./pages/accompany/CreateAccompany";
@@ -48,6 +49,8 @@ import ErrorPage from "./setup/error-manager/ErrorPage";
 import { ChakraProvider } from "@chakra-ui/react";
 import "./App.css";
 import "../src/assets/css/common.css";
+import "../src/assets/css/list-container.css";
+import "../src/assets/css/create-container.css";
 
 function App() {
   // cookie의 user 정보 확인
@@ -95,6 +98,8 @@ function App() {
               <Route path="/createcroom/" element={<CreateCRoom />} />
               <Route path="/createlroom/" element={<CreateLRoom />} />
               <Route path="/coachingroom/" element={<CoachingRoom />} />
+              <Route path="/learningroom/" element={<LearningRoom />} />
+
 
               {/* Accompany */}
               <Route path="/accompany/" element={<Accompany />} />
