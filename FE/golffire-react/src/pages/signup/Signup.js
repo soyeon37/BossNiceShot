@@ -19,8 +19,10 @@ import SignupChoice from "./SignupChoice";
 import SignupEmail1 from "./SignupEmail1";
 import SignupEmail2 from "./SignupEmail2";
 import SignupInfo from "./SignupInfo";
+import ProfilePicModal from "./ProfilePicModal";
 
 import BackgroundImage from "../../assets/source/imgs/golf-image-2.svg";
+import "./ProfilePicModal.css";
 import "./Signup.css";
 
 function Signup() {
@@ -44,11 +46,19 @@ function Signup() {
   const [imgPic, setImgPic] = useState(state.profile);
   const [imgClr, setImgClr] = useState("white");
 
+  // 사진 배경 색상을 map으로 관리
+  const colorMap = {
+    "red": "#F24141",
+    "yellow": "#FFE000",
+    "gree": "#3BD641",
+    "blue": "#80CAFF",
+    "white": "#FFFFF",
+  }
+
   // 모달 창 띄우고 내리는 변수 및 함수
   const [modalVisible, setModalVisible] = useState(false);
   const handleProfilePicModal = () => {
     setModalVisible(!modalVisible);
-    console.log("모달~");
   }
 
   // 회원 가입 완료를 위한 함수들
@@ -133,7 +143,8 @@ function Signup() {
 
             <div className="user-banner-profile"
               onClick={handleProfilePicModal}>
-              <div className="user-banner-circle">
+              <div className="user-banner-circle"
+                style={{ backgroundColor: colorMap[imgClr] }}>
                 <img className="user-banner-circle-fill"
                   src={require(`../../assets/source/profile/${imgPic}.png`)} />
               </div>
@@ -141,7 +152,7 @@ function Signup() {
 
             <button className="user-func-email-login"
               onClick={handleEmailFinish}>
-              <div className="user-button-text">회원가입 완료</div>
+              <div className="user-only-text">회원가입 완료</div>
             </button>
           </div>
         ) : (
@@ -167,13 +178,13 @@ function Signup() {
 
       {/* 프로필 꾸미기 Modal */}
       {modalVisible && (
-        <div id="ProfilePicModal">
-          {/* color_clothes_animal.png */}
-          {/* green, red, yellow */}
-          {/* cap, hat, suncap */}
-          {/* bear, panda, rabbit, tiger */}
-
-        </div>
+        <ProfilePicModal
+          initialPic={imgPic}
+          initialClr={imgClr}
+          setImgPic={setImgPic}
+          setImgClr={setImgClr}
+          handleProfilePicModal={handleProfilePicModal}
+        />
       )}
 
     </div >
