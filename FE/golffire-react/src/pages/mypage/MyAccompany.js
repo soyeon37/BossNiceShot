@@ -75,7 +75,7 @@ function MyAccompany() {
                     <div id="myacc-list">
                         <div id="myacc-body">
                             {personInfo.map((companion, index) => (
-                                <div id="myacc-list-div">
+                                <div id="myacc-list-div" key={index}>
                                     <div id="myacc-list-top">
                                         <div id="myacc-list-top-div">
                                             <div id="myacc-list-title">
