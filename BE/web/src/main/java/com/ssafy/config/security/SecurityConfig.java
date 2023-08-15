@@ -5,7 +5,6 @@ import com.ssafy.config.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -17,7 +16,6 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static org.springframework.security.config.Customizer.withDefaults;
@@ -48,22 +46,22 @@ public class SecurityConfig {
             "/api-docs/**",
             "/swagger*/**",
             "/swagger-ui/index.html",
-            "/solution/detect",
-            "/members/**",
-            "/chat/**",
-            "/auth/**",
-            "/ws/**",
-            "/study/sessions",
+            "/api/solution/detect",
+            "/api/members/**",
+            "/api/auth/**",
+            "/api/study/sessions",
             "/api/sessions",
             "/api/sessions/**",
-            "api/sessions/SessionA/connections"
+            "/api/sessions/SessionA/connections",
+            "/ws/**",
+            "/api/companion/field"
     };
     private static final String[] USER_LIST = {
-            "/members/sign-in",
-            "/members/update",
-            "/members/logout",
-            "/members/delete",
-            "/oauth/code"
+            "/api/members/sign-in",
+            "/api/members/update",
+            "/api/members/logout",
+            "/api/members/delete",
+            "/api/oauth/code"
     };
 
     @Bean
@@ -90,13 +88,14 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/v3/api-docs/**",   "/swagger-ui/**", "/api-docs/json");
+        return (web) -> web.ignoring().requestMatchers("/v3/api-docs/**",   "/swagger-ui/**", "/api-docs/json/**");
     }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
+        config.setAllowCredentials(true);
         config.setAllowCredentials(true);
         config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));

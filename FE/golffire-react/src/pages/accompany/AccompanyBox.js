@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
 import ProfileImg from "../../assets/source/imgs/favicon.png";
 import { MdSportsGolf } from "react-icons/md";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-function AccompanyBox({ title, id, tee, author, place, date, handleSelectButtonClick }) {
-
-
+function AccompanyBox({ title, id, tee, author, place, date, handleSelectButtonClick, dateFormat }) {
     return (
-        <div className="accompany-box">
+        <div className="accompany-box" onClick={() => handleSelectButtonClick(id)}>
             <div className="accompany-box-title">
                 {title}
                 <img className="tee-icon" src={tee} alt="tee-image" />
@@ -21,7 +19,7 @@ function AccompanyBox({ title, id, tee, author, place, date, handleSelectButtonC
             </div>
             <div className="accompany-box-date">
                 <MdSportsGolf className="react-icon" />
-                {date}
+                {dateFormat(date)}
             </div>
             <div className="accompany-box-place">
                 <FaMapMarkerAlt className="react-icon" color="red" />
