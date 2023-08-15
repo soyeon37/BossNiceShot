@@ -39,8 +39,10 @@ function EditRoom() {
             } else if (selectedDate === null) {
                 alert("날짜를 선택해주세요.");
             } else {
+                const type = "COACHING"
                 // 등록 또는 제출 로직을 여기에 작성합니다.
                 // 예를 들어, 서버로 데이터를 전송하거나 원하는 다른 작업을 수행할 수 있습니다.
+                console.log("Type:", type);
                 console.log("Title:", title);
                 console.log("Content:", value);
                 console.log("Password:", password);
