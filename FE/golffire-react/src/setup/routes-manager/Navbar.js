@@ -45,43 +45,45 @@ function Navbar() {
   // cookie의 user 정보 확인
   const [cookies, setCookie] = useCookies(["refreshToken"]);
 
+
   const handleLogout = () => {
-    console.log("cookies.refreshToken:", cookies.refreshToken);
-
-    const apiUrl = "http://localhost:8080/members/logout";
-    const data = {
-      refreshToken: cookies.refreshToken,
-    };
-    axios.post(apiUrl, data).then((response) => {
-      console.log(response);
-      if (response.data.data === "SUCCESS") {
-        setCookie("refreshToken", cookies.refreshToken, { path: "/", maxAge: 0 });
-
-        console.log("로그아웃하여 redux 정보 삭제");
-        resetUserState(); // reset redux data
-
-        navigate("/");
-      } else {
-        alert("Error");
+      console.log('cookies.refreshToken:',cookies.refreshToken);
+    
+      const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
+      const data = {
+          refreshToken: cookies.refreshToken
       }
-    });
+      axios.post(apiUrl, data)
+          .then((response) => {
+              console.log(response);
+
+              if (response.data.data === "SUCCESS") {
+                  setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
+
+                  console.log("로그아웃하여 redux 정보 삭제");
+                  dispatch(resetUserState());
+
+                  navigate('/');
+              } else {
+                  alert('Error')
+              }
+          });
   };
 
   const handleCheckNotification = () => {
-    const apiUrl = "http://localhost:8080/notification/check";
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        if (response.data.data === false) {
-          // 새로운 알림 존재
-        } else {
-          // 이미 읽은 알림들
-        }
-      })
-      .catch((error) => {
-        navigate("/");
-      });
-  };
+      const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/notification/check';
+      axios.get(apiUrl)
+          .then((response) => {
+              if (response.data.data === false) {
+                  // 새로운 알림 존재
+              } else {
+                  // 이미 읽은 알림들
+              }
+          })
+          .catch((error) => {
+              navigate('/');
+          })
+  }
 
   return (
     <nav className="nav">

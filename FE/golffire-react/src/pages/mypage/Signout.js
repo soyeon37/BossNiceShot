@@ -21,7 +21,7 @@ function Signout() {
   const handleLogout = () => {
     console.log("cookies.refreshToken:", cookies.refreshToken);
 
-    const apiUrl = "http://localhost:8080/members/logout";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
     const data = {
       refreshToken: cookies.refreshToken,
     };
@@ -37,7 +37,7 @@ function Signout() {
   };
   const handleSignout = (e) => {
     console.log("탈퇴하기");
-    const apiUrl = "http://localhost:8080/members/delete";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/delete';
     axios
       .delete(apiUrl)
       .then((response) => {

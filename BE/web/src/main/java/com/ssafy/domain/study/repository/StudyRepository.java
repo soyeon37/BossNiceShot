@@ -29,19 +29,19 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
             countQuery = "select count(s) from Study s")
     Page<Study> findPagingByTypeAndTitleContainingOrDescriptionContaining(Pageable pageable, @Param("type")StudyType type, @Param("keyword") String keyword);
 
-    @Query(value = "select s from Study s where s.type = :type and s.status = 'ACTIVE' and size(s.studyUsers) < s.capacity order by s.createdTime desc ",
+    @Query(value = "select s from Study s where s.type = :type and s.status = 'ACTIVE' and s.studyUserCount < s.capacity order by s.createdTime desc ",
             countQuery = "select count(s) from Study s")
     Page<Study> findPagingAttandableByType(Pageable pageable, @Param("type")StudyType type);
 
-    @Query(value = "select s from Study s where s.type = :type and s.status = 'ACTIVE' and size(s.studyUsers) < s.capacity and s.title like concat('%', :keyword, '%') order by s.createdTime desc",
+    @Query(value = "select s from Study s where s.type = :type and s.status = 'ACTIVE' and s.studyUserCount < s.capacity and s.title like concat('%', :keyword, '%') order by s.createdTime desc",
             countQuery = "select count(s) from Study s")
     Page<Study> findPagingAttandableByTypeAndTitleContaining(Pageable pageable, @Param("type")StudyType type, @Param("keyword") String keyword);
 
-    @Query(value = "select s from Study s join fetch s.member where s.type = :type and s.status = 'ACTIVE' and size(s.studyUsers) < s.capacity and s.member.nickname like concat('%', :keyword, '%') order by s.createdTime desc",
+    @Query(value = "select s from Study s join fetch s.member where s.type = :type and s.status = 'ACTIVE' and s.studyUserCount < s.capacity and s.member.nickname like concat('%', :keyword, '%') order by s.createdTime desc",
             countQuery = "select count(s) from Study s")
     Page<Study> findPagingAttandableByTypeAndMemberNickNameContaining(Pageable pageable, @Param("type")StudyType type, @Param("keyword") String keyword);
 
-    @Query(value = "select s from Study s where s.type = :type and s.status = 'ACTIVE' and size(s.studyUsers) < s.capacity and s.title like concat('%', :keyword, '%') or s.description like concat('%', :keyword, '%') order by s.createdTime desc",
+    @Query(value = "select s from Study s where s.type = :type and s.status = 'ACTIVE' and s.studyUserCount < s.capacity and s.title like concat('%', :keyword, '%') or s.description like concat('%', :keyword, '%') order by s.createdTime desc",
             countQuery = "select count(s) from Study s")
     Page<Study> findPagingAttandableByTypeAndTitleContainingOrDescriptionContaining(Pageable pageable, @Param("type")StudyType type, @Param("keyword") String keyword);
 }

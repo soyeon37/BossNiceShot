@@ -1,6 +1,6 @@
 package com.ssafy.domain.study.service;
 
-import com.ssafy.domain.Member.service.MemberService;
+import com.ssafy.domain.member.service.MemberService;
 import com.ssafy.domain.study.dto.request.StudyCreateRequest;
 import com.ssafy.domain.study.dto.request.StudySearchRequest;
 import com.ssafy.domain.study.dto.request.StudyUpdateRequest;

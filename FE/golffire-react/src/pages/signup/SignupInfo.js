@@ -36,7 +36,7 @@ const SignupInfo = () => {
     const data = {
       nickname: nickname,
     };
-    const apiUrl = "http://localhost:8080/members/checkNickname";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/checkNickname";
     axios
       .post(apiUrl, data)
       .then((response) => {
@@ -85,7 +85,7 @@ const SignupInfo = () => {
       isKakao: isKakao,
     };
     console.log("isKakao: ", isKakao);
-    const apiUrl = "http://localhost:8080/members/sign-up";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-up";
     axios
       .post(apiUrl, data)
       .then((response) => {
