@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import { getNameById } from "../golffield/ParseGolfId";
 import AccompanyBox from "./AccompanyBox";
-import { Checkbox, CheckboxGroup } from "@chakra-ui/react";
 
 import ProfileImg from "../../assets/source/imgs/favicon.png";
 import flagred from "../../assets/source/icons/flag-red.png";
@@ -167,7 +166,6 @@ function AccompanyList() {
             <div className="head-create-button bg-accompany">+ 모집하기</div>
           </Link>
 
-          
           <div className="search-container">
           {searchFilter === "tee" ? (
               <div className = "search-tee-box-container">
