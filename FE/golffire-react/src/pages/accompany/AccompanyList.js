@@ -90,6 +90,7 @@ function AccompanyList() {
 
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
+    // 검색 기능을 추가하고 원하는 작업을 수행할 수 있습니다.
   };
 
   const handleFilterChange = (event) => {
@@ -101,18 +102,44 @@ function AccompanyList() {
   };
 
   const handleSearchClick = () => {
-    if (searchValue.trim() == "") {
-      alert("검색어를 입력하세요.");
-    } else {
-      getCompanionList(searchValue, 1);
+    // 검색 버튼을 클릭할 때 서버로 검색 필터와 검색 값 전송하는 로직을 추가합니다.
+    if (searchValue.trim() !== "") {
+      const searchData = {
+        filter: searchFilter,
+        value: searchValue,
+      };
+
+      // 여기서 searchData를 서버로 전송하는 API 호출 등의 작업을 수행할 수 있습니다.
+      console.log("Sending searchData to server:", searchData);
     }
-  }
+  };
+  const [switchValue, setSwitchValue] = useState(false);
+
+  const handleSwitchChange = () => {
+    setSwitchValue(!switchValue);
+    // 필터 기능을 추가하고 원하는 작업을 수행할 수 있습니다.
+  };
 
   // 팔로잉 라디오 버튼 함수
   const handleFollowChange = () => {
     setSelectedFollow(!selectedFollow);
   }
 
+  // 이 위는 검색 필터 기능들
+  // 이 아래는 리스트 관련 기능들
+  const [accompanyList, setAccompanyList] = useState([{}, {}, {}, {}, {}, {}]);
+
+  // 동행 모집 리스트
+  const accompanyData = [
+    { id: 1, title: "제목 1", authorId: "123456", authorNickname: "김싸피가 먹는 고구마", tee: "red", placeId: 1, date: "2023-09-30 13:00" },
+    { id: 2, title: "제목 2", authorId: "456789", authorNickname: "황싸피", tee: "white", placeId: 4, date: "2023.09.30 13:00" },
+    { id: 3, title: "제목 3", authorId: "789777", authorNickname: "한싸피", tee: "all", placeId: 5, date: "2023.09.30 13:00" },
+    { id: 4, title: "제목 4", authorId: "123123", authorNickname: "함싸피", tee: "black", placeId: 89, date: "2024.09.30 13:00" },
+    { id: 5, title: "제목 5", authorId: "999999", authorNickname: "문싸피", tee: "white", placeId: 210, date: "2023.09.30 18:00" },
+    { id: 6, title: "제목 6", authorId: "333333", authorNickname: "최싸피", tee: "red", placeId: 61, date: "2023.09.30 10:00" },
+  ];
+
+  // 이미지 파일 경로를 객체로 관리
   const teeMap = {
     RED: flagred,
     WHITE: flagwhite,
@@ -167,45 +194,48 @@ function AccompanyList() {
           </Link>
 
           <div className="search-container">
-          {searchFilter === "tee" ? (
+            {/* 검색창 */}
+            {searchFilter === "tee" ? (
               <div className = "search-tee-box-container">
                 <div className = "search-tee-items">
-                  <div className="search-tee-item">
-                    <img src={flagred} alt="레드 티 박스"
+                <div className="search-tee-item">
+                  <img src={flagred} alt="레드 티 박스"
                       onClick={() => handleTeeBoxChange('RED')}
                       className={`search-tee-img${teeMap[searchTeeBox] === 'flagred' ? '-selected' : ''}`} />
-                  </div>
-                  <div className="search-tee-item">
-                    <img src={flagwhite} alt="화이트 티 박스"
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagwhite} alt="화이트 티 박스"
                       onClick={() => handleTeeBoxChange('WHITE')}
                       className={`search-tee-img${teeMap[searchTeeBox] === 'flagwhite' ? '-selected' : ''}`} />
-                  </div>
-                  <div className="search-tee-item">
-                    <img src={flagblack} alt="블랙 티 박스"
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagblack} alt="블랙 티 박스"
                       onClick={() => handleTeeBoxChange('BLACK')}
                       className={`search-tee-img${teeMap[searchTeeBox] === 'flagblack' ? '-selected' : ''}`} />
-                  </div>
-                  <div className="search-tee-item">
-                    <img src={flagall} alt="모든 티 박스"
+                </div>
+                <div className="search-tee-item">
+                  <img src={flagall} alt="모든 티 박스"
                       onClick={() => handleTeeBoxChange('NONE')}
                       className={`search-tee-img${teeMap[searchTeeBox] === 'flagall' ? '-selected' : ''}`} />
                   </div>  
                 </div>
               </div>
             ) : (
-            <div className="search-input-container">
-              <input
-                className="search-input-box"
-                type="text"
-                value={searchValue}
-                onChange={handleInputChange}
-                placeholder="검색어를 입력하세요"
-              />
-              <button id="search-input-icon" onClick={handleSearchClick}>
-                <SearchIcon boxSize={6} color="#8D8F98" />
-              </button>
-            </div>
+              <div className="search-input-container">
+                <input
+                  className="search-input-box"
+                  type="text"
+                  value={searchValue}
+                  onChange={handleInputChange}
+                  placeholder="검색어를 입력하세요"
+                />
+                <button id="search-input-icon" onClick={handleSearchClick}>
+                  <SearchIcon boxSize={6} color="#8D8F98" />
+                </button>
+              </div>
             )}
+
+
             {/* 검색 필터 */}
             <select
               id="searchFilter"
@@ -264,7 +294,7 @@ function AccompanyList() {
             <IoIosArrowForward className="option-title-icon" />
           </button>
         </div>
-
+        
       </div>
       {/* 배경 div */}
       <div className="list-background-div bg-accompany"></div>

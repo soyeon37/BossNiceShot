@@ -27,13 +27,6 @@ import axios from 'axios';
 function CreateAccompany() {
     const navigate = useNavigate();
 
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [teeUpTime, setTeeUpTime] = useState(null);
-    const [field, setField] = useState(0);
-    const [capacity, setCapacity] = useState('');
-    const [teeBox, setTeeBox] = useState(null);
-
     const [isGoldFieldVisible, setIsGoldFieldVisible] = useState(false);
 
     const handleGoldFieldModal = () => {
@@ -92,6 +85,25 @@ function CreateAccompany() {
         } else {
             alert("값을 입력해 주세요!");
         }
+    }
+
+    const [description, setDescription] = useState('');
+    const [teeUpTime, setTeeUpTime] = useState(null);
+    const [field, setField] = useState(0);
+    const [capacity, setCapacity] = useState('');
+    const [teeBox, setTeeBox] = useState(null);
+
+    const [title, setTitle] = useState('');
+    const [value, setValue] = useState('');
+    const [accompanyDate, setAccompanyDate] = useState(new Date());
+    const [accompanyPlace, setAccompanyPlace] = useState(0);
+    const [isVisible, setIsVisible] = useState(false);
+    const [maxParticipants, setMaxParticipants] = useState(2);
+    const [selectedIcon, setSelectedIcon] = useState(null);
+
+    // 골프장 모달을 열고 닫는 함수
+    const toggleModal = () => {
+        setIsVisible(!isVisible);
     }
 
     // 네이버 검색창 연결 함수
