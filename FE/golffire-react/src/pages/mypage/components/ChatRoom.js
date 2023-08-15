@@ -10,15 +10,18 @@ import axios from "axios";
 import SockJS from "sockjs-client";
 import { Stomp } from '@stomp/stompjs';
 
+// Redux
+import { useSelector } from "react-redux";
+
 function ChatRoom({ props }) {
+    const currentUserId = useSelector((state) => state.userInfoFeatrue.userId);
+    const currentUserNickname = useSelector((state) => state.userInfoFeatrue.userNickname);
+    const currentUserImage = "1.jpg";
+
     const { id, title, teeBox, field, teeUpTime } = props;
     const [chatMessages, setChatMessages] = useState([]);
     const [messageInput, setMessageInput] = useState("");
     const [stompClient, setStompClient] = useState(null);
-
-    // 사용자(지금 로그인 한 사람)의 ID와 닉네임으로 변경
-    const currentUserId = "kim@ssafy.com";
-    const currentUserNickname = "킴";
 
     const accessToken = axios.defaults.headers.common["Authorization"];
 
@@ -65,12 +68,28 @@ function ChatRoom({ props }) {
             content: messageInput,
             memberId: currentUserId,
             memberNickname: currentUserNickname,
-            chatRoomId: id
+            memberImage: currentUserImage,
+            companionId: id
         };
 
         stompClient.send('/pub/chat', {Authorization: `${accessToken}`}, JSON.stringify(newMessage));
         setMessageInput('');
     }
+
+    const dateFormat = (input) => {
+        if (input == null) {
+            return;
+        }
+
+        const date = new Date(input);
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+
+        return (hours < 13 ? `오전` : `오후`)  + ` ${hours % 12 == 0 ? 12 : hours % 12}:${String(minutes).padStart(2, "0")}`;
+    };
 
     return (
         <div className="ChatRoom">
@@ -84,9 +103,9 @@ function ChatRoom({ props }) {
             <div id="room-text">
                 {chatMessages.map((chatMessage, index) => (
                     chatMessage.memberId === currentUserId ? (
-                        <MyChatBox key={index} props={chatMessage} />
+                        <MyChatBox key={index} props={chatMessage} dateFormat={dateFormat}/>
                     ) : (
-                        <OtherChatBox key={index} props={chatMessage} />
+                        <OtherChatBox key={index} props={chatMessage} dateFormat={dateFormat}/>
                     )
                 ))}
             </div>
