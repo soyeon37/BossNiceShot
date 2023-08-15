@@ -28,6 +28,8 @@ function Signup() {
   const state = useSelector((state) => state.signupFeature);
   const dispatch = useDispatch();
 
+  const step = state.step;
+
   useEffect(() => {
     dispatch(setStateStep(1));
     dispatch(setStateEmail());
@@ -38,12 +40,16 @@ function Signup() {
     dispatch(setStateIsKakao(false));
   }, []);
 
-  const step = state.step;
-  const [image, setImage] = useState(state.profile);
-
   // 사진 출력을 위한 변수
-  const ProfileURL = "../../assets/source/profile/";
-  const tmp = "green_suncap_tiger";
+  const [imgPic, setImgPic] = useState(state.profile);
+  const [imgClr, setImgClr] = useState("white");
+
+  // 모달 창 띄우고 내리는 변수 및 함수
+  const [modalVisible, setModalVisible] = useState(false);
+  const handleProfilePicModal = () => {
+    setModalVisible(!modalVisible);
+    console.log("모달~");
+  }
 
   // 회원 가입 완료를 위한 함수들
   const navigate = useNavigate();
@@ -76,7 +82,7 @@ function Signup() {
       id: email,
       password: password,
       nickname: nickname,
-      image: image,
+      image: imgPic + "_" + imgClr,
       introduction: introduce,
       averageScore: averageScore,
       topScore: topScore,
@@ -84,7 +90,7 @@ function Signup() {
       teeBox: teeBox,
       isKakao: isKakao,
     };
-    console.log("isKakao: ", isKakao);
+    console.log("isKakao: ", data.isKakao);
     const apiUrl = "http://localhost:8080/members/sign-up";
     axios
       .post(apiUrl, data)
@@ -125,10 +131,11 @@ function Signup() {
               <div className="user-banner-normal">해주세요!</div>
             </div>
 
-            <div className="user-banner-profile">
+            <div className="user-banner-profile"
+              onClick={handleProfilePicModal}>
               <div className="user-banner-circle">
                 <img className="user-banner-circle-fill"
-                  src={require(`../../assets/source/profile/${image}.png`)} />
+                  src={require(`../../assets/source/profile/${imgPic}.png`)} />
               </div>
             </div>
 
@@ -159,10 +166,15 @@ function Signup() {
       </div>
 
       {/* 프로필 꾸미기 Modal */}
-      {/* color_clothes_animal.png */}
-      {/* green, red, yellow */}
-      {/* cap, hat, suncap */}
-      {/* bear, panda, rabbit, tiger */}
+      {modalVisible && (
+        <div id="ProfilePicModal">
+          {/* color_clothes_animal.png */}
+          {/* green, red, yellow */}
+          {/* cap, hat, suncap */}
+          {/* bear, panda, rabbit, tiger */}
+
+        </div>
+      )}
 
     </div >
   );
