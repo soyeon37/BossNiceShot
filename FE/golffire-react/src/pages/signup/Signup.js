@@ -20,7 +20,7 @@ import SignupEmail1 from "./SignupEmail1";
 import SignupEmail2 from "./SignupEmail2";
 import SignupInfo from "./SignupInfo";
 
-import BackgroundImgage from "../../assets/source/imgs/golf-image-2.png";
+import BackgroundImage from "../../assets/source/imgs/golf-image-2.svg";
 import "./Signup.css";
 
 function Signup() {
@@ -41,7 +41,9 @@ function Signup() {
   const step = state.step;
   const [image, setImage] = useState(state.profile);
 
+  // 사진 출력을 위한 변수
   const ProfileURL = "../../assets/source/profile/";
+  const tmp = "green_suncap_tiger";
 
   // 회원 가입 완료를 위한 함수들
   const navigate = useNavigate();
@@ -125,10 +127,8 @@ function Signup() {
 
             <div className="user-banner-profile">
               <div className="user-banner-circle">
-                {/* <img src={BackgroundImgage} /> */}
-                {/* <image src={BackgroundImgage} /> */}
                 <img className="user-banner-circle-fill"
-                  src={ProfileURL + image + ".png"} alt="사용자 프로필 사진" />
+                  src={require(`../../assets/source/profile/${image}.png`)} />
               </div>
             </div>
 
@@ -146,7 +146,7 @@ function Signup() {
               같이 시작해볼까요?
             </div>
             <div className="user-banner-img">
-              <img className="user-banner-img-style" src={BackgroundImgage} alt="golf-mascot-image" />
+              <img className="user-banner-img-style" src={BackgroundImage} alt="golf-mascot-image" />
             </div>
           </div>
         )}
