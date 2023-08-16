@@ -202,15 +202,15 @@ function Navbar() {
 
               {userId ? (
                 <MenuGroup title=''>
-                  <MenuItem>
-                    <NavLink to="/mypage/" style={({ isActive, isPending }) => {
+                  <NavLink to="/mypage/info" style={({ isActive, isPending }) => {
                       return {
                         fontWeight: isActive ? "bold" : "",
                       };
                     }}>
-                      마이페이지
-                    </NavLink>
-                  </MenuItem>
+                    <MenuItem>
+                        마이페이지
+                    </MenuItem>
+                  </NavLink>
                   <MenuDivider />
                   <MenuItem style={{ color: "gray" }} onClick={handleLogout}>로그아웃</MenuItem>
                 </MenuGroup>
