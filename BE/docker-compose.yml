@@ -1,0 +1,65 @@
+version: "3.8"
+services:
+  db:
+    image: mariadb:latest
+    container_name: ssafy-db
+    environment:
+      MYSQL_ROOT_PASSWORD: hllove0908
+      MYSQL_USER: ssafy
+      MYSQL_PASSWORD: ssafy
+      MYSQL_DATABASE: ssafy_web
+      MYSQL_CHARACTER_SET_SERVER: utf8mb4
+      MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+    volumes:
+      - ssafy-db:/var/lib/mysql
+    networks:
+      - deploy
+
+  mongo-docker:
+    image: mongo:latest
+    container_name: docker-mongo
+    environment:
+      MONGO_ROOT_PASSWORD: root
+      MONGO_USER: ssafy
+      MONGO_PASSWORD: ssafy
+      MONGO_DATABASE: ssafy_web
+      MONGO_CHARACTER_SET_SERVER: utf8mb4
+    ports:
+      - "27017:27017"
+    volumes:
+      - docker-mongo:/data/db
+    networks:
+      - deploy
+
+
+  redis-docker:
+    image: redis:latest
+    container_name: docker-redis
+    volumes:
+      - docker-redis:/data
+    ports:
+      - "6379:6379"
+
+  application:
+    build:
+      context: web
+      dockerfile: web/Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://localhost:3306/ssafy_web?useUnicode=true
+      SPRING_DATASOURCE_USERNAME: ssafy
+      SPRING_DATASOURCE_PASSWORD: ssafy
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
+
+networks:
+  deploy:
+    external: true
+
+volumes:
+  ssafy-db:
+  docker-mongo:
+  docker-redis:
