@@ -19,7 +19,7 @@ import ChatComponent from './chat/ChatComponent';
 var localUser = new UserModel();
 
 // 애플리케이션 서버 URL
-const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'https://i9a309.p.ssafy.io:5000';
+const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : process.env.REACT_APP_SERVER_URL;
 // https://i9a309.p.ssafy.io
 
 // 기타 함수
