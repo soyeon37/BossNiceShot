@@ -49,7 +49,7 @@ function StudyList() {
           </Button>
         </div>
         <img className="list-head-pin" src={PinImg} alt="pin" />
-        <div className={`list-head-shadow bg-${coachingActive ? 'coaching' : 'learning'}`}></div>
+        <div className={`list-head-shadow bg-${coachingActive ? 'coach' : 'learn'}`}></div>
       </div>
 
       <div className='container-body'>

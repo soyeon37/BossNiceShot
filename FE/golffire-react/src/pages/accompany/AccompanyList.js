@@ -371,7 +371,7 @@ function AccompanyList() {
             </div>
           </div>
           <div className="selected-container-footer">
-            <button className="button bg-accompany" onClick={() => handleAttandClick(selectedContent)}> 참여하기</button>
+            <button className="button accompany-button bg-accompany" onClick={() => handleAttandClick(selectedContent)}> 참여하기</button>
           </div>
         </div>
       )}

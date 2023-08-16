@@ -127,23 +127,25 @@
 .control-arrow {
   width: 32px;
   height: 32px;
-  margin: 10px;
   color: black;
 }
 
 .control-arrow:disabled {
   width: 32px;
   height: 32px;
-  margin: 10px;
   color: gray;
   cursor: default;
 }
 
 #control-num {
+  margin-left: 10px;
+  margin-right: 10px;
+
+  justify-items: center;
   display: flex;
   align-items: center;
 
-  font-size: 26px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;

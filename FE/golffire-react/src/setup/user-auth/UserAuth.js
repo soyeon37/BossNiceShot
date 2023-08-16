@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // 토큰 재발급 함수
-export function reissueToken({ refreshToken, setCookie, removeCookie, navigate }) {
+export function reissueToken({ cookies, refreshToken, setCookie, removeCookie, navigate }) {
   console.log("전달받은 refrshToken:", refreshToken);
   const apiUrl = process.env.REACT_APP_SERVER_URL  + '/api/members/reissue';
   const headers = {
@@ -34,7 +34,7 @@ export function reissueToken({ refreshToken, setCookie, removeCookie, navigate }
 }
 
 // 로그아웃 처리 함수
-export function handleLogout(refreshToken, setCookie, navigate) {
+export function handleLogout(cookies, refreshToken, setCookie, navigate) {
   console.log("로그아웃에서의 refreshToken:", refreshToken);
   const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout';
   const data = {
