@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Datetime from 'react-datetime';
 import moment from 'moment';
 
 import GolffieldModal from './GolffieldModal';
@@ -13,6 +12,7 @@ import flagred from '../../assets/source/icons/flag-red.png';
 import flagwhite from '../../assets/source/icons/flag-white.png';
 import flagblack from '../../assets/source/icons/flag-black.png';
 import flagall from '../../assets/source/icons/flag-all.png';
+
 import PinImg from "../../assets/source/icons/pin.png";
 
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"
@@ -27,6 +27,13 @@ import axios from 'axios';
 
 function CreateAccompany() {
     const navigate = useNavigate();
+
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [teeUpTime, setTeeUpTime] = useState(null);
+    const [field, setField] = useState(0);
+    const [capacity, setCapacity] = useState('');
+    const [teeBox, setTeeBox] = useState(null);
 
     const [isGoldFieldVisible, setIsGoldFieldVisible] = useState(false);
 
@@ -86,25 +93,6 @@ function CreateAccompany() {
         } else {
             alert("값을 입력해 주세요!");
         }
-    }
-
-    const [description, setDescription] = useState('');
-    const [teeUpTime, setTeeUpTime] = useState(null);
-    const [field, setField] = useState(0);
-    const [capacity, setCapacity] = useState('');
-    const [teeBox, setTeeBox] = useState(null);
-
-    const [title, setTitle] = useState('');
-    const [value, setValue] = useState('');
-    const [accompanyDate, setAccompanyDate] = useState(new Date());
-    const [accompanyPlace, setAccompanyPlace] = useState(0);
-    const [isVisible, setIsVisible] = useState(false);
-    const [maxParticipants, setMaxParticipants] = useState(2);
-    const [selectedIcon, setSelectedIcon] = useState(null);
-
-    // 골프장 모달을 열고 닫는 함수
-    const toggleModal = () => {
-        setIsVisible(!isVisible);
     }
 
     // 네이버 검색창 연결 함수

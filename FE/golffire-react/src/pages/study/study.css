@@ -92,6 +92,26 @@
   font-weight: 900;
 }
 
+.learning-box-button {
+  width: 200px;
+  height: 40px;
+  max-width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 5px;
+  cursor: pointer;
+  background-color: #FFF;
+  border-radius: 50px;
+  border: 2px solid #FFE000;
+
+  color: #FFE000;
+  font-size: 16px;
+  font-weight: 900;
+
+}
 .checkbox-div {
   display: flex;
   align-items: center; /* 세로 가운데 정렬 */
@@ -160,6 +180,53 @@ input:checked + .slider-coaching:before {
   border-radius: 50%;
 }
 
+/* The slider */
+.slider-learning {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider-learning:before {
+  position: absolute;
+  content: "";
+  height: 20px; /* 작은 크기 */
+  width: 20px; /* 작은 크기 */
+  left: 3px; /* 작은 크기 */
+  bottom: 3px; /* 작은 크기 */
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider-learning {
+  background-color: #FFE000;
+}
+
+input:focus + .slider-learning {
+  box-shadow: 0 0 1px #FFE000;
+}
+
+input:checked + .slider-learning:before {
+  -webkit-transform: translateX(14px); /* 작은 크기 */
+  -ms-transform: translateX(14px); /* 작은 크기 */
+  transform: translateX(14px); /* 작은 크기 */
+}
+
+/* Rounded sliders */
+.slider-learning.round {
+  border-radius: 20px; /* 작은 크기 */
+}
+
+.slider-learning.round:before {
+  border-radius: 50%;
+}
 /* LearningList */
 
 .learninglist-container {
@@ -382,212 +449,3 @@ input:checked + .slider-coaching:before {
   margin: 20px 0; /* 버튼들 위아래에 20px 간격 주기 */
 }
 
-
-
-/* CoachingRoom */
-.coachingroom-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #C8FD26;
-  position: relative;
-  overflow: hidden; /*스크롤링 방지*/
-}
-
-.box-head {
-  position: absolute;
-  top: 10px;
-  width: 95%;
-  height: 80px;
-  background-color: #FFFFFF;
-  border-radius: 20px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  font-size: 48px;
-  color: black;
-}
-
-.box-roomtype {
-  width: 75px;
-  height: 48px;
-  border-radius: 48px;
-  background: #FFE000;
-  margin-right: 30px;
-  margin-left: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.typename {
-  font-size: 18px;
-  color: white;
-  font-weight: bold;
-}
-
-/* .copy-url {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: #FF7F50;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-  color: white;
-  cursor: pointer;
-  margin-left: auto;
-}
-
-.go-back {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: red;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 12px;
-  color: white;
-  cursor: pointer;
-  margin-right: 30px; 제일 오른쪽에 위치하도록 설정
-}*/
-
-.box-body {
-  margin-top: 30px; /* box-head와 간격 조정 */
-  margin-bottom: 10px; /* 화면 맨 밑과의 마진 설정 */
-  width: 95%;
-  height: calc(100vh - 4rem - 120px); /* 화면 높이에서 여백들을 뺀 값으로 설정 */
-  display: grid;
-  grid-template-columns: 2fr 6fr 3fr; /* 각각 3칸, 6칸, 3칸으로 지정 */
-  
-}
-
-.grid-item {
-  height: 100%; /* 높이 조정 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px;
-  color: white;
-  font-weight: bold;
-}
-
-.item1 {
-  background-color: #FF5733;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.coachcam {
-  width: 95%;
-  height: 30%;
-  background-color: yellowgreen;
-  display: flex;
-  flex-direction: column;
-  margin-top:10px;
-  margin-bottom:10px;
-}
-
-.mycam {
-  margin-top: 10px;
-  width: 95%;
-  height: 30%;
-  background-color: yellowgreen;
-  display: flex;
-  flex-direction: column;
-  
-}
-
-.item2 {
-  background-color: #33FF57;
-  padding: 3px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* .box-splide {
-  background-color: yellowgreen;
-  width: 95%;
-  height: 15%;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.box-mainrtc {
-  background-color: yellowgreen;
-  width: 95%;
-  height: 70%;
-  margin-bottom: 10px;
-  position:relative;
-}
-
-.box-art {
-  background-color: yellowgreen;
-  width: 95%;
-  height: 15%;
-  margin-bottom: 10px
-}
-.item3 {
-  background-color: #5733FF;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-} */
-
-.box-chatview {
-  background-color: yellowgreen;
-  width: 95%;
-  height: calc(75% + 10px);
-  margin-bottom: 10px;
-}
-
-.box-chatinput {
-  background-color: yellowgreen;
-  width: 95%;
-  height: 15%;
-  margin-bottom: 10px;
-}
-
-.canvas-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1; /* 적절한 값으로 설정합니다. */
-}
-
-.canvas {
-  width: 100%;
-  height: 100%;
-}
-
-.drawing-tools {
-  border: 1px solid #000;
-  border-radius: 5px;
-  width: 95%;
-  height: 9%;
-  display:flex;
-  justify-content: space-between;
-  padding: 0 30px;
-}
-
-.study-textarea {
-  width: 100%;
-  height: 340px;
-  padding: 10px;
-  text-align: left;
-  overflow-y: scroll;
-}

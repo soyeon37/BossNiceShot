@@ -1,8 +1,17 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 c
 java:S1192"MDefine a constant instead of duplicating this literal "recipient={}" 4 times.(ÓòÑ³
 =======
 j
 java:S1192"MDefine a constant instead of duplicating this literal "recipient={}" 4 times.(ÓòÑ³8ãÎ›1
 >>>>>>> e209dfd7554e286729046cf8b8d25a2587dd1224
+=======
+j
+java:S1192"MDefine a constant instead of duplicating this literal "recipient={}" 4 times.(ÓòÑ³8ãÎ›1
+=======
+c
+java:S1192"MDefine a constant instead of duplicating this literal "recipient={}" 4 times.(ÓòÑ³
+>>>>>>> 53cdc63328f91fedbbd7f863bc610ff5dab4d15f
+>>>>>>> 774f453faf234a48cb36843c73690893d45c6ccc

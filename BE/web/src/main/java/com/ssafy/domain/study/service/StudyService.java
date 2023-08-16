@@ -91,4 +91,8 @@ public class StudyService {
 
         throw new EntityNotFoundException();
     }
+
+    public List<Study> findOrderByCreatedTimeLimitFive() {
+        return studyRepository.findOrderByCreatedTimeLimitFive();
+    }
 }

@@ -27,12 +27,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         logRequest(request);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 774f453faf234a48cb36843c73690893d45c6ccc
         if(request.getRequestURI().equals("/api/members/sign-in") || request.getRequestURI().equals("/api/members/sign-up")
                 || request.getRequestURI().equals("/api/members/sendEmailVerification")
                 || request.getRequestURI().equals("/api/members/checkEmail")
                 || request.getRequestURI().equals("/api/members/code")
                 || request.getRequestURI().equals("/api/members/checkNickname")
                 || request.getRequestURI().equals("/api/notification/**")
+<<<<<<< HEAD
                 || request.getRequestURI().startsWith("/api/ws")
 =======
         if(request.getRequestURI().equals("/members/sign-in") || request.getRequestURI().equals("/members/sign-up")
@@ -47,6 +51,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/api/study/sessions")
                 || request.getRequestURI().equals("/api/sessions/**/connections")
                 || request.getRequestURI().equals("/api/companion/field")){
+=======
+                || request.getRequestURI().startsWith("/ws")
+                || request.getRequestURI().startsWith("/api/sessions")
+                || request.getRequestURI().equals("/api/companion/field") // 메인 페이지 인기 골프장 5개
+                || request.getRequestURI().equals("/api/companion/main") // 메인 페이지 최근 동행 5개
+                || request.getRequestURI().equals("/api/study/main") // 메인 페이지 최근 스터디 5개
+                || request.getRequestURI().equals("/api/companion/search") // 동행 모집 리스트 조회
+                || request.getRequestURI().equals("/api/companion/info/**") // 동행 모집 한 건 조회
+                || request.getRequestURI().startsWith("/api/study/list") // 스터디 리스트 조회
+                || request.getRequestURI().equals("/api/study/info/**") // 스터디 한 건 조회
+        ){
+>>>>>>> 774f453faf234a48cb36843c73690893d45c6ccc
             log.info("권한 허가");
             chain.doFilter(request, response);
             return;

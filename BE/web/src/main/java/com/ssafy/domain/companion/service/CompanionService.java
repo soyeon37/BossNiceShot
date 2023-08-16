@@ -76,4 +76,8 @@ public class CompanionService {
     public List<Integer> findFieldOrderByCountDesc() {
         return companionRepository.findFieldOrderByCountDesc();
     }
+
+    public List<Companion> findOrderByCreatedTimeLimitFive() {
+        return companionRepository.findOrderByCreatedTimeLimitFive();
+    }
 }

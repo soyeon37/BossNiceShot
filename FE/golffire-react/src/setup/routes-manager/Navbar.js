@@ -6,15 +6,16 @@ import axios from "axios";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 
-import AlertPage from "./alert/AlertPage";
-import Favicon from "../../assets/source/imgs/favicon.png";
 
-import { IoMdContact } from 'react-icons/io'
-import { Avatar, AvatarBadge, AvatarGroup, Hide, background } from '@chakra-ui/react'
 
 // Redux
 import { resetUserState } from "../../features/userInfoSlice";
 
+import AlertPage from "./alert/AlertPage";
+
+import { IoMdContact } from 'react-icons/io'
+import { Avatar, AvatarBadge, AvatarGroup, Hide } from "@chakra-ui/react";
+import Favicon from "../../assets/source/imgs/favicon.png";
 import "./styles.css";
 import {
   Menu,
@@ -35,48 +36,70 @@ function Navbar() {
 
   // Redux
   const dispatch = useDispatch();
+
   // 사용자 정보(userId)로 로그인 여부 판단
   const userId = useSelector((state) => state.userInfoFeatrue.userId);
   const userNickname = useSelector((state) => state.userInfoFeatrue.userNickname);
-  console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname);
+  // const userProfile = useSelector((state) => state.userInfoFeatrue.userProfile);
+  const userProfile = "green_cap_bear yellow";
+  console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
+
+  // 사진 출력을 위한 변수
+  let profileValues = "";
+  if (userProfile) profileValues = userProfile.split(' ');
+
+  // 사진 배경 색상을 map으로 관리
+  const colorMap = {
+    "red": "#F24141",
+    "yellow": "#FFE000",
+    "green": "#3BD641",
+    "blue": "#80CAFF",
+    "white": "#FFFFFF",
+  }
 
   const navigate = useNavigate();
 
   // cookie의 user 정보 확인
   const [cookies, setCookie] = useCookies(["refreshToken"]);
 
-  const handleLogout = () => {
-    console.log('cookies.refreshToken:', cookies.refreshToken);
 
+  const handleLogout = () => {
+      console.log('cookies.refreshToken:',cookies.refreshToken);
+    
       const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
-    const data = {
-      refreshToken: cookies.refreshToken
-    }
-    axios.post(apiUrl, data)
-      .then(response => {
-        console.log(response);
-        if (response.data.data === "SUCCESS") {
-          setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
-          navigate('/');
-        } else {
-          alert('Error')
-        }
-      })
+      const data = {
+          refreshToken: cookies.refreshToken
+      }
+      axios.post(apiUrl, data)
+          .then((response) => {
+              console.log(response);
+
+              if (response.data.data === "SUCCESS") {
+                  setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
+
+                  console.log("로그아웃하여 redux 정보 삭제");
+                  dispatch(resetUserState());
+
+                  navigate('/');
+              } else {
+                  alert('Error')
+              }
+          });
   };
 
   const handleCheckNotification = () => {
       const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/notification/check';
-    axios.get(apiUrl)
-      .then((response) => {
-        if (response.data.data === false) {
-          // 새로운 알림 존재
-        } else {
-          // 이미 읽은 알림들
-        }
-      })
-      .catch((error) => {
-        navigate('/');
-      })
+      axios.get(apiUrl)
+          .then((response) => {
+              if (response.data.data === false) {
+                  // 새로운 알림 존재
+              } else {
+                  // 이미 읽은 알림들
+              }
+          })
+          .catch((error) => {
+              navigate('/');
+          })
   }
 
   return (
@@ -156,32 +179,24 @@ function Navbar() {
 
             {/* 마이페이지 버튼 아바타로 수정했습니다. */}
             <MenuButton>
-              <Avatar size={"sm"}>
-                {/* 여기서 bg 값을 알람이 있을때는 빨간색, 없을때는 초록색으로 변경해야 할듯, 그런데 badge클릭시 알림창 뜨게 하는게 생각보다 쉽지 않음  */}
-                <AvatarBadge boxSize={'1.25rem'} bg={'red'}>
-                  {/* <AlertPage></AlertPage> */}
-                </AvatarBadge>
-              </Avatar>
+              {!userProfile ? (
+                <div className="navbar-user-icon">
+                  <div className="navbar-user-circle"
+                    style={{ backgroundColor: colorMap[profileValues[1]] }}>
+                    <img className="navbar-user-image"
+                      src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+                  </div>
+                </div>
+              ) : (
+                <Avatar size={"sm"}>
+                  {/* 여기서 bg 값을 알람이 있을때는 빨간색, 없을때는 초록색으로 변경해야 할듯, 그런데 badge클릭시 알림창 뜨게 하는게 생각보다 쉽지 않음  */}
+                  <AvatarBadge boxSize={'1.25rem'} bg={'red'}>
+                    {/* <AlertPage></AlertPage> */}
+                  </AvatarBadge>
+                </Avatar>
+              )}
             </MenuButton>
             <MenuList>
-
-              {/* test code - will delete */}
-              <MenuGroup title=''>
-                <MenuItem>
-                  <NavLink to="/mypage/info" style={({ isActive, isPending }) => {
-                    return {
-                      fontWeight: isActive ? "bold" : "",
-                    };
-                  }}>
-                    마이페이지
-                  </NavLink>
-                </MenuItem>
-                <MenuItem style={{ color: "gray" }} onClick={handleLogout}>
-                  로그아웃
-                </MenuItem>
-              </MenuGroup>
-              <MenuDivider />
-              {/* test code end */}
 
               {userId ? (
                 <MenuGroup title=''>
@@ -195,7 +210,7 @@ function Navbar() {
                     </NavLink>
                   </MenuItem>
                   <MenuDivider />
-                  <MenuItem style={{ color: "gray" }}>로그아웃</MenuItem>
+                  <MenuItem style={{ color: "gray" }} onClick={handleLogout}>로그아웃</MenuItem>
                 </MenuGroup>
               ) : (<MenuGroup title=''>
                 <MenuItem>
@@ -224,7 +239,7 @@ function Navbar() {
           <AlertPage onClick={handleCheckNotification}>
           </AlertPage>
         </li>
-      </ul>
+      </ul >
     </nav >
   );
 };

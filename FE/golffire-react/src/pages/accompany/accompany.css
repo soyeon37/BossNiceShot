@@ -12,8 +12,8 @@
 
   border-radius: 50px;
   outline: none;
-  border: 1px solid #8D8F98;
-  background: #FFF;
+  border: 1px solid #8d8f98;
+  background: #fff;
 
   padding: 10px;
   font-size: 17px;
@@ -21,7 +21,7 @@
 
 .search-filter option {
   text-align: center;
-  background: #FFF;
+  background: #fff;
 }
 
 /* AccompanyBox CSS */
@@ -31,7 +31,7 @@
 
   margin: 10px 10px;
   padding: 10px 30px;
-  
+
   border-radius: 30px;
   border: 2px solid #000;
 
@@ -56,7 +56,7 @@
 .accompany-box-title {
   font-size: 22px;
   font-weight: 600;
-  
+
   margin-bottom: 5px;
 
   display: flex;
@@ -96,9 +96,9 @@
 
   margin-top: 5px;
   cursor: pointer;
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 50px;
-  border: 2px solid #3CADFF;
+  border: 2px solid #3cadff;
 
   transition: background-color 0.3s ease;
 
@@ -140,8 +140,8 @@
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -152,16 +152,16 @@
   left: 3px; /* 작은 크기 */
   bottom: 3px; /* 작은 크기 */
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #3CADFF;
+  background-color: #3cadff;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #3CADFF;
+  box-shadow: 0 0 1px #3cadff;
 }
 
 input:checked + .slider:before {

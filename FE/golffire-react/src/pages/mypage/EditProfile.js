@@ -60,7 +60,6 @@ function EditProfile() {
 
         const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/update';
         console.log(cookies.access_token);
-        
         axios.put(apiUrl, data)
             .then((response) => {
                 console.log(response.data); // 서버에서 반환된 데이터
