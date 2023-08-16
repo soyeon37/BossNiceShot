@@ -36,7 +36,13 @@
 
 #modal-title {
   margin-top: 10px;
+<<<<<<< HEAD
   font-size: 25px;
+=======
+  color: #000;
+  font-size: 35px;
+  font-style: normal;
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
   font-weight: 700;
   line-height: 28px;
   margin-left: 30px;
@@ -105,7 +111,13 @@
 }
 
 .context-title {
+<<<<<<< HEAD
   font-size: 13px;
+=======
+  color: #000;
+  font-size: 16px;
+  font-weight: 400;
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
 }
 
 .context-content {
@@ -114,7 +126,12 @@
   border: none;
   border-bottom: 2px solid #D9D9D9;
 
+<<<<<<< HEAD
   font-size: 17px;
+=======
+  color: #000;
+  font-size: 20px;
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
   font-weight: 400;
 }
 
@@ -139,9 +156,14 @@
 #history-title {
   height: 50px;
   color: #000;
+<<<<<<< HEAD
   font-family: Inter;
   font-size: 25px;
   font-weight: 600;
+=======
+  font-size: 30px;
+  font-weight: 500;
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
   text-align: left;
   margin: 0px 0px 5px 5px;
 }
@@ -191,22 +213,34 @@
 .history-place {
   margin-right: 5px;
   color: #000;
+<<<<<<< HEAD
   font-family: Inter;
   font-size: 18px;
+=======
+  font-size: 24px;
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
   font-weight: 400;
 }
 
 .history-date {
   color: #8D8F98;
+<<<<<<< HEAD
   font-family: Inter;
   font-size: 14px;
+=======
+  font-size: 20px;
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
   font-weight: 400;
 }
 
 .history-score {
   color: #000;
+<<<<<<< HEAD
   font-family: Inter;
   font-size: 18px;
+=======
+  font-size: 24px;
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
   font-weight: 400;
 }
 /**/

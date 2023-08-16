@@ -15,6 +15,7 @@ import CryImg from "../../assets/source/mascot/mascot-cry-2.png";
 import "./MyPage.css";
 
 function Signout() {
+<<<<<<< HEAD
     // Redux
     const dispatch = useDispatch();
 
@@ -40,6 +41,32 @@ function Signout() {
 
     const handleSignout = (e) => {
         console.log("탈퇴하기");
+=======
+  // Redux
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["refreshToken"]);
+  const handleLogout = () => {
+    console.log("cookies.refreshToken:", cookies.refreshToken);
+
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
+    const data = {
+      refreshToken: cookies.refreshToken,
+    };
+    axios.post(apiUrl, data).then((response) => {
+      console.log(response);
+      if (response.data.data === "SUCCESS") {
+        setCookie("refreshToken", cookies.refreshToken, { path: "/", maxAge: 0 });
+        handleSignout();
+      } else {
+        alert("Error");
+      }
+    });
+  };
+  const handleSignout = (e) => {
+    console.log("탈퇴하기");
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
     const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/delete';
     axios
       .delete(apiUrl)

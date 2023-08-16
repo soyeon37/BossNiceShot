@@ -13,6 +13,15 @@
 #bold{
   font-weight: bold;
 }
+
+#banner-letter {
+  text-align: left;
+  color: #000;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 pre {
   white-space: pre-wrap;
   word-break: break-all;
@@ -580,7 +589,6 @@ img {
   margin-bottom: 5px;
   color: #000;
   text-align: center;
-  font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -590,7 +598,6 @@ img {
 .golf-add {
   color: #8d8f98;
   text-align: center;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -640,7 +647,6 @@ img {
 
   color: #000;
   text-align: center;
-  font-family: Inter;
   font-size: 20px;
   font-weight: 400;
 
@@ -648,7 +654,6 @@ img {
 
 .learn-name {
   color: #8d8f98;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -682,7 +687,6 @@ img {
   margin-bottom: 5px;
   color: #000;
   text-align: center;
-  font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -692,7 +696,6 @@ img {
 .acc-place {
   color: #8d8f98;
   text-align: center;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -702,7 +705,6 @@ img {
 .acc-date {
   color: #8d8f98;
   text-align: center;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -720,7 +722,6 @@ img {
 .text-and-icon-text {
   color: #000;
   text-align: center;
-  font-family: Inter;
   font-size: 26px;
   font-style: normal;
   font-weight: 400;
