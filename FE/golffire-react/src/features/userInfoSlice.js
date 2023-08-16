@@ -5,7 +5,7 @@ const initialState = {
   userNickname: "",
   userLevel: "",
   userTee: "",
-  userImage: "",
+  usetProfile: "",
   userAccessToken: "",
 };
 
@@ -25,8 +25,8 @@ const userInfoSlice = createSlice({
     setUserTee: (state, action) => {
       state.userTee = action.payload;
     },
-    setUserImage: (state, action) => {
-      state.userImage = action.payload;
+    setUserProfile: (state, action) => {
+      state.userTee = action.payload;
     },
     setUserAccessToken: (state, action) => {
       state.userAccessToken = action.payload;
@@ -36,6 +36,7 @@ const userInfoSlice = createSlice({
       state.userNickname = "";
       state.userLevel = "";
       state.userTee = "";
+      state.usetProfile = "";
     },
   },
 });
@@ -45,7 +46,7 @@ export const {
   setUserNickname,
   setUserLevel,
   setUserTee,
-  setUserImage,
+  setUserProfile,
   setUserAccessToken,
   resetUserState,
 } = userInfoSlice.actions;

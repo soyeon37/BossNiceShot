@@ -92,7 +92,7 @@ function Signup() {
       id: email,
       password: password,
       nickname: nickname,
-      image: imgPic + "_" + imgClr,
+      image: imgPic + " " + imgClr,
       introduction: introduce,
       averageScore: averageScore,
       topScore: topScore,
