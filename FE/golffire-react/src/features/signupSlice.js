@@ -22,10 +22,6 @@ const signupSlice = createSlice({
     },
     setStateEmail: (state, action) => {
       state.email = action.payload;
-      console.log("action.payload: ", action.payload);
-      console.log("state: ", state);
-      console.log("action: ", action);
-      console.log("changed email: ", state.email);
     },
     setStatePassword: (state, action) => {
       state.password = action.payload;
