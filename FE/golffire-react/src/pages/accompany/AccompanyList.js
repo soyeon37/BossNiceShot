@@ -310,7 +310,7 @@ function AccompanyList() {
           </div>
           <div className="selected-container-footer">
             <Link to={`/accompanyroom/${selectedContent.id}`}>
-              <button className="button bg-accompany"> 참여하기</button>
+              <button className="button accompany-button bg-accompany"> 참여하기</button>
             </Link>
           </div>
         </div>

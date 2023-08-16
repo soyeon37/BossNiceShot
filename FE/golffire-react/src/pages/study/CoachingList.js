@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 
-import "./study.css";
+import CoachingBox from './CoachingBox';
+import CoachingRoom from './CoachingRoom';
 
 import ProfileImg from "../../assets/source/imgs/favicon.png";
 
@@ -11,11 +12,19 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { SearchIcon } from "@chakra-ui/icons";
 
+// Redux
+import { useSelector } from "react-redux";
+
 import axios from "axios";
-import CoachingRoom from './CoachingRoom';
-import CoachingBox from './CoachingBox';
+
+import "./study.css";
+
 
 function CoachingList() {
+  // 사용자 정보(userId)로 로그인 여부 판단
+  const userId = useSelector((state) => state.userInfoFeatrue.userId);
+
+  // 페이징 컨트롤
   const pageSize = 6; 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -280,7 +289,7 @@ function CoachingList() {
       </div>
 
       {/* 배경 div */}
-      <div className="list-background-div bg-coaching"></div>
+      <div className="list-background-div bg-coach"></div>
 
       {/* 선택 시 나타나는 정보 */}
       {isSelected && selectedId && (
@@ -306,17 +315,17 @@ function CoachingList() {
             <div className="selected-container-info">
               <MdSportsGolf className="react-icon" />
               <div className="info-text-left">
-                {dateFormat(selectedContent.teeUpTime)}
+                {dateFormat(selectedContent.reservedTime)}
               </div>
               <div className="info-text-right">
                 <BsFillPersonFill className="react-icon" />
-                {selectedContent.companionUserCount} / {selectedContent.capacity}
+                {selectedContent.studyUserCount} / {selectedContent.capacity}
               </div>
             </div>
           </div>
           <div className="selected-container-footer">
             <Link to={`/coachingroom/${selectedContent.id}`}>
-              <button className="button bg-coaching"> 참여하기</button>
+              <button className="button bg-coach"> 참여하기</button>
             </Link>
           </div>
         </div>
