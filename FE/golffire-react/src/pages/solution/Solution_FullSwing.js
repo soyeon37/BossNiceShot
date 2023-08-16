@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import FullSwing from "./FullSwing";
 import "./Solution.css";
-import loadingImage from "./swing_4.gif";
+import loadingImage from "./swing_5.gif";
 
 function Solution_FullSwing() {
   const videoRef = useRef(null);
