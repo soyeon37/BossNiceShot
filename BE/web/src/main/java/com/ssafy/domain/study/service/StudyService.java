@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -90,5 +91,9 @@ public class StudyService {
         }
 
         throw new EntityNotFoundException();
+    }
+
+    public List<Study> findOrderByCreatedTimeLimitFive() {
+        return studyRepository.findOrderByCreatedTimeLimitFive();
     }
 }

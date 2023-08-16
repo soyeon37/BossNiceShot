@@ -23,10 +23,11 @@ body {
 
   border-bottom: 2px solid black;
 }
+
 #nav-list{
-    height: 4rem;
-}
-#nav-list-li{
+  height: 4rem;
+ 
+}#nav-list-li{
     height: 4rem;
     /* width: 100px; */
      /* margin: 0px 10px 0px 10px; */
@@ -39,6 +40,7 @@ body {
 .site-title {
   font-size: 2rem;
   white-space: nowrap;
+  font-family: 'KBO-Dia-Gothic_bold' !important;
 }
 
 .nav ul {
@@ -56,4 +58,24 @@ body {
   display: flex;
   align-items: center;
   padding: 0.25rem;
+}
+
+.navbar-user-icon {
+  width: 4rem;
+  height: 100%;
+}
+
+.navbar-user-circle {
+  width: 80%;
+  height: 80%;
+  overflow: hidden;
+
+  border-radius: 50%;
+  border: 2px solid #000;
+}
+
+.navbar-user-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

@@ -36,7 +36,7 @@ const SignupInfo = () => {
     const data = {
       nickname: nickname,
     };
-    const apiUrl = "http://localhost:8080/members/checkNickname";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/checkNickname";
     axios
       .post(apiUrl, data)
       .then((response) => {
@@ -109,7 +109,7 @@ const SignupInfo = () => {
       isKakao: isKakao,
     };
     console.log("isKakao: ", isKakao);
-    const apiUrl = "http://localhost:8080/members/sign-up";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-up";
     axios
       .post(apiUrl, data)
       .then((response) => {
@@ -203,23 +203,7 @@ const SignupInfo = () => {
             className={`option-tee-img${teeBox === 'flagall' ? '-selected' : ''}`} />
         </div>
       </div>
-
-      <Button
-        onClick={handleEmailFinish}
-        style={{
-          height: "2.5rem",
-          width: "100%",
-
-          color: "black",
-          borderRadius: "30px",
-          background: "#B8F500",
-        }}
-        maxW={"sm"}
-        marginBottom={"2.5rem"}
-      >
-        회원가입 완료하기
-      </Button>
-
+      
     </div>
   );
 };

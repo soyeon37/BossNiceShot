@@ -13,6 +13,15 @@
 #bold{
   font-weight: bold;
 }
+
+#banner-letter {
+  text-align: left;
+  color: #000;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+}
+
 pre {
   white-space: pre-wrap;
   word-break: break-all;
@@ -317,14 +326,9 @@ img {
 
   border-radius: 20px;
 }
-
 /* SplideSolution CSS */
 #splide-solution {
   height: 100%;
-}
-
-/* SplideGolf CSS */
-#splide-golf {
   width: 100%;
 
   display: "flex";
@@ -559,28 +563,37 @@ img {
   padding: 20px;
 }
 
+.slide-solution{
+  border-radius:20px;
+  height:200px;
+  width: 620px;
+  margin-top:40px;
+  /* margin-left:70px; */
+  object-fit: cover;
+  object-position: 0 210;
+}
+
+.slide-solution-title{
+  font-weight:bold;
+  font-size: 20px;
+  position:relative;
+  top:-243px;
+}
+
 /* golf */
 
 .golf-info {
-  min-height: 100px;
+  margin: 20%;
+  padding: 5%;
 
-  margin: 10%;
-  padding: 10px;
-
-  border-radius: 50px;
-  border: 2px solid #000;
-  background: #FFF;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  border-radius: 36px;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 .golf-name {
-  margin-bottom: 5px;
   color: #000;
   text-align: center;
-  font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -590,7 +603,6 @@ img {
 .golf-add {
   color: #8d8f98;
   text-align: center;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -640,7 +652,6 @@ img {
 
   color: #000;
   text-align: center;
-  font-family: Inter;
   font-size: 20px;
   font-weight: 400;
 
@@ -648,7 +659,6 @@ img {
 
 .learn-name {
   color: #8d8f98;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -682,7 +692,6 @@ img {
   margin-bottom: 5px;
   color: #000;
   text-align: center;
-  font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -692,7 +701,6 @@ img {
 .acc-place {
   color: #8d8f98;
   text-align: center;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -702,7 +710,6 @@ img {
 .acc-date {
   color: #8d8f98;
   text-align: center;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -711,7 +718,6 @@ img {
 
 /* 더 많은 정보 찾기 CSS */
 .text-and-icon {
-  margin-bottom: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -720,7 +726,6 @@ img {
 .text-and-icon-text {
   color: #000;
   text-align: center;
-  font-family: Inter;
   font-size: 26px;
   font-style: normal;
   font-weight: 400;
@@ -741,7 +746,45 @@ img {
   opacity: 1;
   transform: translateX(0);
 }
-
+/* 챗봇 CSS */
+.rsc-float-button{
+  border: 2px solid black;
+}
+.rsc-container{
+  border: 2px solid black;
+  font-family: "NanumBarunGothic" !important;
+  text-align: left;
+}
+.rsc-header-title{
+  font-weight: bold;
+  font-family: "NanumBarunGothic" !important;
+}
+.rsc-ts-image{
+  background-color: #fff;
+}
+.rsc-ts-bubble{
+  max-width: 80%;
+  border: 2px solid black;
+}
+.rsc-os-options{
+  text-align: center;
+}
+.rsc-os-option-element{
+  border: 2px solid black;
+}
+.rsc-footer{
+  background-color: white;
+}
+#href-link{
+  color: blue;
+}
+.span-bold{
+  font-weight:bold;
+}
+.span-link{
+  font-weight: bold;
+  text-decoration: underline;
+}
 /* Footer */
 
 footer {

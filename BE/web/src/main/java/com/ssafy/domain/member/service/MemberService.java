@@ -81,8 +81,9 @@ public class MemberService{
             String nickname = member.get().getNickname();
             String level = member.get().getLevel();
             TeeBox teeBox = member.get().getTeeBox();
+            String image = member.get().getImage();
 
-            return new SignInResponse(request.id(), nickname, level, teeBox, tokenInfo);
+            return new SignInResponse(request.id(), nickname, level, teeBox, image, tokenInfo);
     }
 
     @Transactional

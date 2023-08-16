@@ -68,8 +68,7 @@ function Profile() {
                         <div id="profile-info">
                             <div id="info-pic-wrapper">
                                 <div id="info-pic">
-
-                                    (커다란 캐릭터 사진)
+                                (커다란 캐릭터 사진)
                                 </div>
                             </div>
                             <div id="info-text">
