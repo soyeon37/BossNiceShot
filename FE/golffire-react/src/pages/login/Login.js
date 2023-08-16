@@ -123,6 +123,11 @@ const Login = () => {
             value={password}
             placeholder="비밀번호"
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleEmailLogin();
+              }
+            }}
           />
           <button
             className="user-func-email-login"
