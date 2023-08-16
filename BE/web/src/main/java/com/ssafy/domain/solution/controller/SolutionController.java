@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 
 @Tag(name = "Solution API")
 @RestController
-@RequestMapping("/solution")
+@RequestMapping("/api/solution")
 //@CrossOrigin(origins = "*", methods = {RequestMethod.GET , RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class SolutionController {
     @Operation(summary = "관절 감지", description = "관절 감지")

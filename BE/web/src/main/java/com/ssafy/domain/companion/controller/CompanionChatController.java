@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @Slf4j
-@Tag(name = "ChatMessage API")
+@Tag(name = "CompanionChat API")
 @RestController
 @RequiredArgsConstructor
 public class CompanionChatController {
@@ -26,20 +26,20 @@ public class CompanionChatController {
     private final CompanionChatService companionChatService;
 
     @Operation(summary = "메세지 전송", description = "메세지를 전송한다.")
-    @MessageMapping("/chat/message")
+    @MessageMapping("/chat")
     public void sendMessage(CompanionChatRequest companionChatRequest) {
         CompanionChatResponse companionChatResponse = CompanionChatResponse.from(companionChatService.insert(companionChatRequest));
-        sendingOperations.convertAndSend("/sub/chat/message/" + companionChatResponse.companionId(), companionChatResponse);
+        sendingOperations.convertAndSend("/sub/chat/" + companionChatResponse.companionId(), companionChatResponse);
     }
 
     @Operation(summary = "채팅 방 내 전체 메세지 조회", description = "특정 채팅 방 내 전체 메세지를 보낸 시간 오름차순으로 정렬한다.")
-    @GetMapping("/companion/chat/{companionId}")
+    @GetMapping("/api/companion/chat/{companionId}")
     public ResponseEntity<List<CompanionChatResponse>> messageList(@PathVariable Long companionId) {
         return ResponseEntity.ok(companionChatService.findByCompanionId(companionId).stream().map(CompanionChatResponse::from).toList());
     }
 
     @Operation(summary = "채팅 방 내 전체 메세지 삭제", description = "특정 채팅 방 내 전체 메세지를 삭제한다.")
-    @DeleteMapping("/companion/chat/{companionId}")
+    @DeleteMapping("/api/companion/chat/{companionId}")
     public ResponseEntity<Object> deleteByCompanionId(@PathVariable Long companionId) {
         companionChatService.deleteByCompanionId(companionId);
         return ResponseEntity.ok().build();

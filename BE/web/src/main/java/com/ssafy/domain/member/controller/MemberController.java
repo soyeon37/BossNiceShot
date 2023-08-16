@@ -25,7 +25,7 @@ import java.security.Principal;
 @Tag(name = "Member API")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/api/members")
 public class MemberController {
     private final MemberService memberService;
     private final RefreshTokenService refreshTokenService;
@@ -71,7 +71,7 @@ public class MemberController {
         return ApiResponse.success(memberService.sendEmail(request));
     }
 
-
+    @Operation(summary = "회원가입", description = "이메일, 비밀번호, 기타 정보를 입력받아 회원가입 한다.")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 실패"),
@@ -179,11 +179,11 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "사용자 없음"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    @PostMapping("/reissue")
-    public ApiResponse reissue(@RequestBody ReIssueRequest request){
+    @GetMapping("/reissue")
+    public ApiResponse reissue(@RequestHeader("refreshToken") String refreshToken){
         log.info("토큰 재발급 시작");
-        String refreshToken = request.refreshToken();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        log.info(authentication.getName());
         return ApiResponse.success(memberService.reissue(refreshToken, authentication));
     }
 }

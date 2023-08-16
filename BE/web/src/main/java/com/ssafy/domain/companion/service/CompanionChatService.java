@@ -19,10 +19,10 @@ public class CompanionChatService {
     @Transactional
     public CompanionChat insert(CompanionChatRequest companionChatRequest) {
         if (companionChatRequest.type().equals(MessageType.ENTER)) {
-            companionChatRequest = new CompanionChatRequest(companionChatRequest.type(), companionChatRequest.memberNickname() + "님이 입장했습니다.", companionChatRequest.memberId(), companionChatRequest.memberNickname(), companionChatRequest.companionId());
+            companionChatRequest = new CompanionChatRequest(companionChatRequest.type(), companionChatRequest.memberNickname() + "님이 입장했습니다.", companionChatRequest.memberId(), companionChatRequest.memberNickname(), companionChatRequest.memberImage(), companionChatRequest.companionId());
         }
         if (companionChatRequest.type().equals(MessageType.EXIT)) {
-            companionChatRequest = new CompanionChatRequest(companionChatRequest.type(), companionChatRequest.memberNickname() + "님이 퇴장했습니다.", companionChatRequest.memberId(), companionChatRequest.memberNickname(), companionChatRequest.companionId());
+            companionChatRequest = new CompanionChatRequest(companionChatRequest.type(), companionChatRequest.memberNickname() + "님이 퇴장했습니다.", companionChatRequest.memberId(), companionChatRequest.memberNickname(), companionChatRequest.memberImage(), companionChatRequest.companionId());
         }
 
         return companionChatRepository.insert(companionChatRequest.toCompanionChat());

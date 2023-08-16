@@ -8,6 +8,5 @@ public record CompanionUpdateRequest(@NotNull String title,
 									 @NotNull Integer field,
 									 @NotNull TeeBox teeBox,
 									 @NotNull Integer capacity,
-									 @NotNull String teeUpTime,
-									 @NotNull String applicationDeadline) {
+									 @NotNull String teeUpTime) {
 }

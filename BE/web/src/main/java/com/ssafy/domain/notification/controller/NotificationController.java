@@ -14,7 +14,7 @@ import java.security.Principal;
 @Slf4j
 @Tag(name = "Notification API")
 @RestController
-@RequestMapping("/notification")
+@RequestMapping("/api/notification")
 @RequiredArgsConstructor
 public class NotificationController {
     private final NotificationService notificationService;
@@ -46,10 +46,10 @@ public class NotificationController {
     }
 
     // 알림 삭제
-    @DeleteMapping("/delete")
-    public ApiResponse deleteNotification(@RequestBody DeleteNotificationRequest request){
+    @DeleteMapping("/delete/{id}")
+    public ApiResponse deleteNotification(@PathVariable String id){
         log.info("알림 삭제");
-        return ApiResponse.success(notificationService.delete(request));
+        return ApiResponse.success(notificationService.delete(id));
     }
 
     // 알림 생성

@@ -1,53 +1,44 @@
 import React from "react";
-import PartAccompany from "./slide-part/PartAccompany";
+import { NavLink } from "react-router-dom";
 
+import PartAccompany from "./slide-part/PartAccompany";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import "@splidejs/react-splide/css";
 
-import { NavLink } from "react-router-dom";
-import { ArrowForwardIcon } from "@chakra-ui/icons";
-
 function SplideAccompany({ props }) {
+  // 서버로부터 받은 동행 모집 관련 정보
   const AccInfos = [
     {
       id: 1,
-      user_name: "김싸피",
       title: "같이 골프 칠 분 구합니다!",
-      address: "서울특별시 동작구",
-      member_num: "1/6",
-      deadline: "2023.08.31",
+      golf: 1,
+      date: "2023.08.31",
     },
     {
       id: 2,
-      user_name: "이싸피",
       title: "같이 골프 칠 분?",
-      address: "서울특별시 강남구",
-      member_num: "2/7",
-      deadline: "2023.08.31",
+      golf: 2,
+      date: "2023.08.31",
     },
     {
       id: 3,
-      user_name: "이싸피2",
-      title: "같이 골프 칠 분?",
-      address: "서울특별시 강남구",
-      member_num: "2/7",
-      deadline: "2023.08.31",
+      title: "골프짱 3인방",
+      golf: 3,
+      date: "2023.08.31",
     },
     {
       id: 4,
-      user_name: "이싸피3",
-      title: "같이 골프 칠 분?",
-      address: "서울특별시 강남구",
-      member_num: "2/7",
-      deadline: "2023.08.31",
+      title: "레드 고? 4명 찾음",
+      golf: 4,
+      date: "2023.08.31",
     },
     {
       id: 5,
-      user_name: "이싸피4",
-      title: "같이 골프 칠 분?",
-      address: "서울특별시 강남구",
-      member_num: "2/7",
-      deadline: "2023.08.31",
+      title: "딱 5번만 해볼라구요",
+      golf: 5,
+      date: "2023.08.31",
     },
   ];
 
@@ -64,10 +55,11 @@ function SplideAccompany({ props }) {
           type: "loop",
           perPage: 3.5,
           focus: "center",
+          pagination: false,
         }}
       >
         {AccInfos.map((info) => (
-          <SplideSlide key={info.id}>
+          <SplideSlide key={info.id} style={{ height: "500px" }}>
             <PartAccompany
               user_name={info.user_name}
               title={info.title}

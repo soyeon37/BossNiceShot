@@ -4,7 +4,7 @@ import VideoRoomComponent from "../../openvidu/VideoRoomComponent";
 
 function LearningRoom() {
   const location = useLocation();
-
+  
   let type = '';
   let title = '';
 

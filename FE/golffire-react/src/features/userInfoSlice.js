@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    userId: "",
-    userNickname: "",
+  userId: "",
+  userNickname: "",
+  userLevel: "",
+  userTee: "",
+  usetProfile: "",
 };
 
 const userInfoSlice = createSlice({
@@ -10,17 +13,37 @@ const userInfoSlice = createSlice({
   initialState: initialState,
   reducers: {
     setUserId: (state, action) => {
-        state.userId = action.payload;
+      state.userId = action.payload;
     },
     setUserNickname: (state, action) => {
-        state.userNickname = action.payload;
-    }
+      state.userNickname = action.payload;
+    },
+    setUserLevel: (state, action) => {
+      state.userLevel = action.payload;
+    },
+    setUserTee: (state, action) => {
+      state.userTee = action.payload;
+    },
+    setUserProfile: (state, action) => {
+      state.userTee = action.payload;
+    },
+    resetUserState: (state, action) => {
+      state.userId = "";
+      state.userNickname = "";
+      state.userLevel = "";
+      state.userTee = "";
+      state.usetProfile = "";
+    },
   },
 });
 
 export const {
-    setUserId,
-    setUserNickname,
+  setUserId,
+  setUserNickname,
+  setUserLevel,
+  setUserTee,
+  setUserProfile,
+  resetUserState,
 } = userInfoSlice.actions;
 
 export default userInfoSlice.reducer;
