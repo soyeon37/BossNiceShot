@@ -41,7 +41,7 @@ function AlertPage() {
 
   // 알림 내역 호출 함수
   const handleGetNotification = () => {
-    const apiUrl = "http://localhost:8080/notification/read";
+    const apiUrl =  process.env.REACT_APP_SERVER_URL + '/api/notification/read';
     axios
       .get(apiUrl)
       .then((response) => {
@@ -67,7 +67,7 @@ function AlertPage() {
   // 알림 삭제 함수
   // id값 가져와야 함
   const handleDeleteNotification = (id, index) => {
-    const apiUrl = `http://localhost:8080/notification/delete/${id}`;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + `/api/notification/delete/${id}`;
     console.log(id);
     axios
       .delete(apiUrl)
@@ -84,7 +84,7 @@ function AlertPage() {
   const handleDeleteAllNotification = () => {
     const confirmDelete = window.confirm("알림 전체 삭제를 진행하시겠습니까?");
     if (confirmDelete) {
-      const apiUrl = "http://localhost:8080/notification/deleteAll";
+      const apiUrl = process.env.REACT_APP_SERVER_URL +  + "/notification/deleteAll";
       axios
         .delete(apiUrl)
         .then((response) => {
@@ -100,7 +100,7 @@ function AlertPage() {
   // 알림 수락/거절 전송 함수
   const handleSendResultNotification = (message, articleId, sender, recipient, type, index) => {
     console.log("신청 결과 전송 시작");
-    const apiUrl = "http://localhost:8080/notification/create";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/notification/create";
     const data = {
       id: "",
       type: type,

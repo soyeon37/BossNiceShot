@@ -19,8 +19,7 @@ import ChatComponent from './chat/ChatComponent';
 var localUser = new UserModel();
 
 // 애플리케이션 서버 URL
-const APPLICATION_SERVER_URL = process.env.NODE_ENV === 'production' ? '' : 'https://i9a309.p.ssafy.io:5000';
-// https://i9a309.p.ssafy.io
+const APPLICATION_SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
 // 기타 함수
 const CopyUrl = () => {
@@ -30,17 +29,18 @@ const CopyUrl = () => {
 	});
 };
 
-const goBack = () => {
-	window.location.href = '/studylist';
-}
-
 class VideoRoomComponent extends Component {
 	constructor(props) {
+		console.log("VideoRoomComponent 들어옴");
+		console.log(props);
+
 		super(props);
 		this.hasBeenUpdated = false;
 		this.layout = new OpenViduLayout();
-		let sessionName = this.props.sessionName ? this.props.sessionName : 'SessionA';
-		let userName = this.props.user ? this.props.user : 'OpenVidu_User' + Math.floor(Math.random() * 100);
+
+		let sessionName = 'session' + this.props.study.id;
+		let userName = this.props.studyUser.memberNickname;
+
 		this.remotes = [];
 		this.localUserAccessAllowed = false;
 		this.state = {
@@ -262,8 +262,8 @@ class VideoRoomComponent extends Component {
 		this.setState({
 			session: undefined,
 			subscribers: [],
-			mySessionId: 'SessionA', //이부분 다른데선 지웠음 왜지웠지
-			myUserName: 'OpenVidu_User' + Math.floor(Math.random() * 100),
+			mySessionId: undefined, 
+			myUserName: undefined,
 			localUser: undefined,
 		});
 		if (this.props.leaveSession) {
@@ -576,15 +576,23 @@ class VideoRoomComponent extends Component {
 	// 	}
 	// }
 	async enteredChanged() {
-	this.remotes = [];
-		const { sessionName } = this.props;
-	this.setState({
-		mySessionId: sessionName ? sessionName : 'SessionA',
-		subscribers: [],
-		entered: true,
-	});
+		console.log("화면 전환");
+		console.log(this.props);
+
+		this.remotes = [];
 
 		await this.leaveSession();
+
+		let sessionName = 'session' + this.props.study.id;
+		let userName = this.props.studyUser.memberNickname;
+
+		this.setState({
+			mySessionId: sessionName,
+			myUserName: userName,
+			subscribers: [],
+			entered: true,
+		});
+
 		await this.joinSession();
   }
 
@@ -600,7 +608,7 @@ class VideoRoomComponent extends Component {
 		const mySessionId = this.state.mySessionId;
 		const localUser = this.state.localUser;
 		const isEntered = this.state.entered;
-		const { type, title } = this.props;
+		const { type, study, studyUser, leaveRoom } = this.props;
 		var chatDisplay = { display: this.state.chatDisplay };
 
 		return (
@@ -615,11 +623,11 @@ class VideoRoomComponent extends Component {
 					<div className="roomtype">
 						<span className="typename">{type === 'LEARNING' ? '러닝' : '코칭'}</span>
 					</div>
-					{ title }
+					{ study.title }
 					<div className="copy-url" onClick={CopyUrl}>
 						<ImShare2/>
 					</div>
-					<div className="go-back" onClick={goBack}>
+					<div className="go-back" onClick={leaveRoom}>
 						<ImExit/>
 					</div>
 				</div>
@@ -755,13 +763,18 @@ class VideoRoomComponent extends Component {
 	 * more about the integration of OpenVidu in your application server.
 	 */
 	async getToken() {
-		console.log("before createsession")
+		console.log("before createsession");
+		console.log(this.state);
+
 		const sessionId = await this.createSession(this.state.mySessionId);
 		console.log("ing createsession")
 		return await this.createToken(sessionId);
 	}
 
 	async createSession(sessionId) {
+		console.log("createSession 들어옴");
+		console.log(sessionId);
+
 		const response = await axios.post(
 			APPLICATION_SERVER_URL + '/api/sessions', 
 			{ customSessionId: sessionId }, 

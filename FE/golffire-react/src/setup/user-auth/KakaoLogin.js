@@ -23,27 +23,28 @@ const Kakao = (props) => {
   let params = new URL(document.URL).searchParams; // get query string
   let CODE = params.get("code");
   console.log("CODE: ", CODE); // Debug !!
-
   // KAKAO Token 발급
-  const grant_type = 'authorization_code'
-  const client_id = 'cd0c9cf0cf49dae9a987aebb769ee0d6' // REST-API-TOKEN
-  const REDIRECT_URI = 'http://localhost:3000/auth/kakao/login/callback'
-  axios.post(
-    `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${REDIRECT_URI}&code=${CODE}`,
-    {
-      headers: {
-        'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
-      },
-    },
-  ).then((response) => {
-    console.log('token: ', response);
-    // accessToken & refreshToken & 만료시간 모두 WAS로 전송
-    const access_token = response.data.access_token;
-    const expires_in = response.data.expires_in;
-    const refresh_token = response.data.refresh_token;
-    const refresh_token_expires_in = response.data.refresh_token_expires_in;
-    getInfo(access_token);
-  })
+  const grant_type = "authorization_code";
+  const client_id = "cd0c9cf0cf49dae9a987aebb769ee0d6"; // REST-API-TOKEN
+  const REDIRECT_URI = "http://localhost:3000/auth/kakao/login/callback";
+  axios
+    .post(
+      `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${REDIRECT_URI}&code=${CODE}`,
+      {
+        headers: {
+          "Content-type": "application/x-www-form-urlencoded;charset=utf-8",
+        },
+      }
+    )
+    .then((response) => {
+      console.log("token: ", response);
+      // accessToken & refreshToken & 만료시간 모두 WAS로 전송
+      const access_token = response.data.access_token;
+      const expires_in = response.data.expires_in;
+      const refresh_token = response.data.refresh_token;
+      const refresh_token_expires_in = response.data.refresh_token_expires_in;
+      getInfo(access_token);
+    })
     .catch((error) => {
       console.error('Error:', error); // Debug Code
     });

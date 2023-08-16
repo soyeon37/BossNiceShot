@@ -63,7 +63,9 @@ const Login = () => {
 
         console.log(response.data); // Debug Code !!
         
-        // NavBar에 사용자 정보 저장 // 수정 필요
+        // 로그인 후 사용자 정보 넣기 (라연)
+
+        // NavBar에 사용자 정보 저장
         dispatch(setUserId(email));
         dispatch(setUserNickname("로그인 됨"));
         dispatch(setUserLevel("eagle"));

@@ -9,6 +9,11 @@ h
 8src/main/java/com/ssafy/domain/follow/entity/Follow.java,c\6\c6a027d6b07df01c534ca7f776fc21b75ba9e871
 >>>>>>> 53cdc63328f91fedbbd7f863bc610ff5dab4d15f
 t
+<<<<<<< HEAD
+Dsrc/main/java/com/ssafy/domain/Member/dto/request/SignUpRequest.java,5\a\5a98c94072de0da6cea46c8215726cefe47808a9
+~
+Nsrc/main/java/com/ssafy/domain/Member/dto/response/UpdatePasswordResponse.java,d\f\df53d113ca90d7f7e56536f076bd57528f240cc0
+=======
 Dsrc/main/java/com/ssafy/domain/study/controller/StudyController.java,8\f\8fd6ec9e322e5c05d3c3abf11e8d26dc5ca89fc9
 ‚
 Rsrc/main/java/com/ssafy/domain/notification/controller/NotificationController.java,d\d\ddf55728677baae23ebeaa8abf63c70f0ff9bd24
@@ -20,6 +25,7 @@ t
 Dsrc/main/java/com/ssafy/domain/notification/entity/Notification.java,1\9\19b1f7559fed9b1886788e4164b1edb8a4cca6ef
 €
 Psrc/main/java/com/ssafy/domain/notification/dto/request/NotificationRequest.java,5\8\588a8a518f069a31217d648464e496827070fe82
+>>>>>>> ce804c144cf011807e20421d716f591db657f885
 |
 Lsrc/main/java/com/ssafy/domain/notification/service/NotificationService.java,5\2\52f811d13253d46fa37d817896235eadc1327e1d
 v
@@ -53,8 +59,6 @@ Gsrc/main/java/com/ssafy/domain/Member/dto/response/ReIssueResponse.java,5\7\57
 Msrc/main/java/com/ssafy/domain/Member/dto/response/CheckNicknameResponse.java,4\5\45a7bf26bc83d8d47f925407ba05bb936130e218
 [
 +src/main/java/com/ssafy/WebApplication.java,0\f\0f9bbfd495ae9c564561852817173cc458a0e7ef
-m
-=src/main/java/com/ssafy/config/websocket/WebSocketConfig.java,7\8\78a33feca7eadf6a9fa333715dd9158c15562dd3
 v
 Fsrc/main/java/com/ssafy/domain/Member/controller/MemberController.java,5\6\564f42bfa4474922fd95073418e143c11cff706c
 c
@@ -78,8 +82,11 @@ a
 +src/main/java/com/ssafy/audit/BaseTime.java,8\6\86de5ce15e2887197e5a6d642374a0f47db2e014
 z
 Jsrc/main/java/com/ssafy/domain/solution/controller/SolutionController.java,9\7\973c64484d3df1050828c45918c2381d5a209b1e
+<<<<<<< HEAD
 €
 Psrc/main/java/com/ssafy/domain/companion/controller/CompanionChatController.java,7\2\728557dc8d4cf7018b279700e1c592a7b80c80dd
+=======
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
 ]
 -src/main/java/com/ssafy/config/WebConfig.java,4\4\4409c8247fbae185f9437e32dc6b81c0c2685b22
 i
@@ -90,8 +97,11 @@ h
 8src/main/java/com/ssafy/domain/member/entity/Member.java,4\a\4a5bfc6ff4cc6d844d3324066465691e03d0ca6d
 t
 Dsrc/main/java/com/ssafy/domain/member/dto/request/SignUpRequest.java,4\3\4350bd915a231d1903aa67350258a1c8c4f3024f
+<<<<<<< HEAD
 v
 Fsrc/main/java/com/ssafy/domain/follow/controller/FollowController.java,0\f\0fbc6a8130677f75c885727ac403282f298b7e90
+=======
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
 ‚
 Rsrc/main/java/com/ssafy/domain/notification/controller/NotificationController.java,d\d\ddf55728677baae23ebeaa8abf63c70f0ff9bd24
 t
@@ -104,6 +114,7 @@ Z
 *src/main/java/com/ssafy/common/TeeBox.java,5\f\5ff3de72e3efc4b97c364651dd2d1d0222f17ee9
 ‚
 Rsrc/main/java/com/ssafy/domain/companion/repository/CompanionRepositoryCustom.java,d\c\dc35312551cdf426823df635846b503bf518ed94
+<<<<<<< HEAD
 x
 Hsrc/main/java/com/ssafy/domain/study/dto/response/StudyUserResponse.java,5\1\519fa5caa5b025f854f60899561ee280582a6cfb
 f
@@ -126,20 +137,32 @@ r
 Bsrc/main/java/com/ssafy/domain/companion/entity/CompanionUser.java,b\1\b1592402aa78f19a7f1be126c661052e5dd23391
 r
 Bsrc/main/java/com/ssafy/domain/companion/entity/CompanionChat.java,4\1\41a7d1a12dad82610f2c4f70cb834fd5edf048ff
+=======
+f
+6src/main/java/com/ssafy/domain/study/entity/Study.java,5\8\58e41815dde5b306f2a70683bcfb698934f39e06
+x
+Hsrc/main/java/com/ssafy/domain/study/dto/request/StudyUpdateRequest.java,7\7\77dd5f57b476a8cc852940a7c8c8ce420b208836
+r
+Bsrc/main/java/com/ssafy/domain/companion/entity/CompanionUser.java,b\1\b1592402aa78f19a7f1be126c661052e5dd23391
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
 n
 >src/main/java/com/ssafy/domain/companion/entity/Companion.java,4\a\4a02930c0e58118ea258c9bf0d10a4c7d6db302d
 ‚
 Rsrc/main/java/com/ssafy/domain/companion/dto/response/SimpleCompanionResponse.java,3\a\3a0c83b484320898bf1c5e8582abe098e3445a7a
 €
 Psrc/main/java/com/ssafy/domain/companion/dto/response/CompanionUserResponse.java,e\4\e470f855b73ac69599fce2adea3b401ad9c88a54
+<<<<<<< HEAD
 |
 Lsrc/main/java/com/ssafy/domain/companion/dto/response/CompanionResponse.java,6\0\60908c04965ebad64de6920c34088e448fdd77f3
 €
 Psrc/main/java/com/ssafy/domain/companion/dto/response/CompanionChatResponse.java,a\f\afb35cbc611f3350842df4e4b575be5faad5e980
+=======
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
 ~
 Nsrc/main/java/com/ssafy/domain/companion/dto/request/CompanionUserRequest.java,b\9\b9ba5d438e819e5aacd0329b5d16dc64be751639
 €
 Psrc/main/java/com/ssafy/domain/companion/dto/request/CompanionUpdateRequest.java,d\8\d8dc743baed93da0954cc454932753d511dd3039
+<<<<<<< HEAD
 €
 Psrc/main/java/com/ssafy/domain/companion/dto/request/CompanionSearchRequest.java,6\a\6a980b5a243068489816c57491204718febb3bc6
 ~
@@ -152,4 +175,35 @@ r
 Bsrc/main/java/com/ssafy/domain/study/service/StudyUserService.java,4\f\4f148a7b5a8ec02810f675c4654827bf2f9f67a2
 €
 Psrc/main/java/com/ssafy/domain/companion/repository/CompanionRepositoryImpl.java,7\7\7790feb7b77f15c0bca32df60d57f68424294827
+<<<<<<< HEAD
+=======
+€
+Psrc/main/java/com/ssafy/domain/companion/dto/request/CompanionSearchRequest.java,6\a\6a980b5a243068489816c57491204718febb3bc6
+€
+Psrc/main/java/com/ssafy/domain/companion/repository/CompanionRepositoryImpl.java,7\7\7790feb7b77f15c0bca32df60d57f68424294827
+r
+Bsrc/main/java/com/ssafy/domain/companion/entity/CompanionChat.java,4\1\41a7d1a12dad82610f2c4f70cb834fd5edf048ff
+z
+Jsrc/main/java/com/ssafy/domain/companion/service/CompanionChatService.java,d\0\d09a455a83230b5fb4c603305734d23d6040a527
+€
+Psrc/main/java/com/ssafy/domain/companion/controller/CompanionChatController.java,7\2\728557dc8d4cf7018b279700e1c592a7b80c80dd
+€
+Psrc/main/java/com/ssafy/domain/companion/repository/CompanionChatRepository.java,7\4\7446feb614b01190cc512270b743b6ac591a71a9
+|
+Lsrc/main/java/com/ssafy/domain/companion/dto/response/CompanionResponse.java,6\0\60908c04965ebad64de6920c34088e448fdd77f3
+`
+0src/test/java/com/ssafy/domain/QuerydslTest.java,8\9\8914c0b5e3e88cb5f3bdbf338b2fdde8ea891cd0
+m
+=src/main/java/com/ssafy/config/websocket/WebSocketConfig.java,7\8\78a33feca7eadf6a9fa333715dd9158c15562dd3
+€
+Psrc/main/java/com/ssafy/domain/companion/dto/response/CompanionChatResponse.java,a\f\afb35cbc611f3350842df4e4b575be5faad5e980
+v
+Fsrc/main/java/com/ssafy/domain/follow/controller/FollowController.java,0\f\0fbc6a8130677f75c885727ac403282f298b7e90
+x
+Hsrc/main/java/com/ssafy/config/security/jwt/JwtAuthenticationFilter.java,d\e\deafe3d09d1e9f1781ea0ea32e0fbe74ff66e7c3
+q
+Asrc/main/java/com/ssafy/config/security/jwt/JwtTokenProvider.java,d\5\d5ac0a34bcd34702b7831e3c045d8e4f2e9270e3
+>>>>>>> 4a9ec4d7459b1d1ba6e4c0f061e0bbb0ba6463be
+=======
 >>>>>>> 53cdc63328f91fedbbd7f863bc610ff5dab4d15f
+>>>>>>> ce804c144cf011807e20421d716f591db657f885
