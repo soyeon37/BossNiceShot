@@ -1,192 +1,158 @@
 /* Accompany.js */
 .accompany-body {
-  width: 100%;
-  height: calc(100% - 200px);
-}
-
-/* AccompanyList.js */
-.search-filter {
-  height: 44px;
-  min-width: 130px;
-  margin-left: 10px;
-
-  border-radius: 50px;
-  outline: none;
+    width: 100%;
+    height: calc(100% - 200px);
+  }
+  
+  /* AccompanyList.js */
+  .search-filter {
+    height: 45px;
+    min-width: 150px;
+    margin-left: 10px;
+  
+    border-radius: 50px;
+    outline: none;
     border: 1px solid #8D8F98;
     background: #FFF;
-
-  padding: 10px;
-  font-size: 17px;
-}
-
-.search-filter option {
-  text-align: center;
+  
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .search-filter option {
+    text-align: center;
     background: #FFF;
-}
-
-/* AccompanyBox CSS */
-.accompany-box {
-  width: calc(33% - 16px);
-  min-height: 195px;
-
-  margin: 10px 10px;
-  padding: 10px 30px;
-
-  border-radius: 30px;
-  border: 2px solid #000;
-
-  display: flex;
-  flex-direction: column;
-
-  transition: background-color 0.3s ease;
-}
-.accompany-box:hover{
-  border-color: #3CADFF;
- }
- .accompany-box:active{
-  background-color: #9ad5ff;
-  border-color: #3CADFF;
-}
-.accompany-box.selected{
-  background-color: #3CADFF;
-  color: white; 
-  border-color: #3CADFF;
-}
-
-.accompany-box-title {
-  font-size: 22px;
-  font-weight: 600;
-
-  margin-bottom: 5px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.accompany-box-date {
-  display: flex;
-  align-items: center;
-
-  font-size: 14px;
-}
-
-.accompany-box-place {
-  display: flex;
-  align-items: center;
-
-  font-size: 14px;
-}
-
-.accompany-box-button-position {
-  width: 100%;
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-.accompany-box-button {
-  width: 200px;
-  height: 40px;
-  max-width: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 5px;
-  cursor: pointer;
+  }
+  
+  /* AccompanyBox CSS */
+  .accompany-box {
+    width: 32%;
+    min-height: 210px;
+  
+    margin: 10px 10px;
+    padding: 10px 30px;
+    
+    border-radius: 30px;
+    border: 2px solid #000;
+  
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .accompany-box-title {
+    color: #000;
+    font-size: 25px;
+    font-weight: 600;
+    
+    margin-bottom: 5px;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .accompany-box-date {
+    display: flex;
+    align-items: center;
+  }
+  
+  .accompany-box-place {
+    display: flex;
+    align-items: center;
+  }
+  
+  .accompany-box-button-position {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .accompany-box-button {
+    width: 200px;
+    height: 40px;
+    max-width: 100%;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    margin-top: 5px;
+    cursor: pointer;
     background-color: #FFF;
-  border-radius: 50px;
+    border-radius: 50px;
     border: 2px solid #3CADFF;
-
-<<<<<<< HEAD
-  transition: background-color 0.3s ease;
-
-  color: #3CADFF;
-  font-size: 16px;
-=======
+  
     color: #3CADFF;
-  font-size: 20px;
->>>>>>> 2b3699fcce55e8f7d24b4787c478f888683a43d3
-  font-weight: 900;
-}
-.accompany-box-button:hover{
-  color: #FFF;
-  background-color: #3CADFF;
-}
-
-.checkbox-div {
-  display: flex;
-  align-items: center; /* 세로 가운데 정렬 */
-  font-size: 18px;
-}
-
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 40px; /* 작은 가로 크기 */
-  height: 25px; /* 작은 세로 크기 */
-  margin-right: 5px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
+    font-size: 20px;
+    font-weight: 900;
+  }
+  
+  .checkbox-div {
+    display: flex;
+    align-items: center; /* 세로 가운데 정렬 */
+    font-size: 18px;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px; /* 작은 가로 크기 */
+    height: 25px; /* 작은 세로 크기 */
+    margin-right: 5px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 20px; /* 작은 크기 */
-  width: 20px; /* 작은 크기 */
-  left: 3px; /* 작은 크기 */
-  bottom: 3px; /* 작은 크기 */
-  background-color: white;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px; /* 작은 크기 */
+    width: 20px; /* 작은 크기 */
+    left: 3px; /* 작은 크기 */
+    bottom: 3px; /* 작은 크기 */
+    background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-}
-
-input:checked + .slider {
+  }
+  
+  input:checked + .slider {
     background-color: #3CADFF;
-}
-
-input:focus + .slider {
+  }
+  
+  input:focus + .slider {
     box-shadow: 0 0 1px #3CADFF;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(14px); /* 작은 크기 */
-  -ms-transform: translateX(14px); /* 작은 크기 */
-  transform: translateX(14px); /* 작은 크기 */
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 20px; /* 작은 크기 */
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-
-/* accompany button */
-.accompany-button:hover{
-  background-color: #FFF;
-  color: #3CADFF;
-}
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(14px); /* 작은 크기 */
+    -ms-transform: translateX(14px); /* 작은 크기 */
+    transform: translateX(14px); /* 작은 크기 */
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 20px; /* 작은 크기 */
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
