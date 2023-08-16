@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import {
   setStateStep,
   setStateEmail,
+  setStatePassword,
   setStateNickname,
   setStateIsKakao,
 } from "../../features/signupSlice";
@@ -96,6 +97,7 @@ const Kakao = (props) => {
             // Redux
             dispatch(setStateEmail(kakaoData.email));
             dispatch(setStateNickname(kakaoData.profile.nickname));
+            dispatch(setStatePassword(1234)); // axios를 위한 test value
             dispatch(setStateIsKakao(true));
             dispatch(setStateStep(5));
             navigate("/signup");
