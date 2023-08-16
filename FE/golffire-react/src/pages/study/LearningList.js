@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import "./study.css";
 
+// Redux
+import { useSelector, useDispatch } from "react-redux";
+
 import ProfileImg from "../../assets/source/imgs/favicon.png";
 
 import { MdSportsGolf } from "react-icons/md";
@@ -16,16 +19,26 @@ import LearningRoom from './LearningRoom';
 import LearningBox from './LearningBox';
 
 function LearningList() {
+  // Redux
+  const dispatch = useDispatch();
+  // AccessToken (Redux)
+  const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+  // Header (AccessToken)
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  };
+  console.log("세팅된 헤더: ", headers);
+
   const navigate = useNavigate();
 
   const studyType = 'LEARNING';
 
-  const pageSize = 6; 
+  const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   const [learningList, setLearningList] = useState([]);
-  
+
   // 검색 조건
   const [searchValue, setSearchValue] = useState("");
   const [searchFilter, setSearchFilter] = useState("title");
@@ -40,21 +53,29 @@ function LearningList() {
   }, [searchFilter]);
 
   const getLearningList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/LEARNING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl =
+      process.env.REACT_APP_SERVER_URL +
+      "/api/study/allsearch?page=" +
+      (currentPage - 1) +
+      "&size=" +
+      pageSize;
 
     console.log(apiUrl);
-
+    const data = {
+      type: "LEARNING",
+    };
     setCurrentPage(currentPage);
 
-    console.log("러닝 리스트 조회");
-    axios.get(apiUrl)
-    .then((response) => {
+    console.log("러닝 리스트 조회, header: ", headers);
+    axios.post(apiUrl, data, { headers }).then((response) => {
       console.log(response);
 
       setLearningList(response.data.studyList);
       setTotalPages(response.data.totalPages);
     });
   };
+
+
 
   const getLearningSearchList = (searchValue, currentPage) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/LEARNING?page=" + (currentPage - 1) + "&size=" + pageSize;
@@ -69,14 +90,14 @@ function LearningList() {
 
     console.log("러닝 리스트 검색 조회");
     console.log(studySearchRequest);
-    
-    axios.post(apiUrl, studySearchRequest)
-    .then((response) => {
-      console.log(response);
 
-      setLearningList(response.data.studyList);
-      setTotalPages(response.data.totalPages);
-    });
+    axios.post(apiUrl, studySearchRequest)
+      .then((response) => {
+        console.log(response);
+
+        setLearningList(response.data.studyList);
+        setTotalPages(response.data.totalPages);
+      });
   };
 
   const getLearningAttandableList = (currentPage) => {
@@ -85,14 +106,14 @@ function LearningList() {
     setCurrentPage(currentPage);
 
     console.log("참여 가능한 러닝 리스트 검색 조회");
-    
-    axios.get(apiUrl)
-    .then((response) => {
-      console.log(response);
 
-      setLearningList(response.data.studyList);
-      setTotalPages(response.data.totalPages);
-    });
+    axios.get(apiUrl)
+      .then((response) => {
+        console.log(response);
+
+        setLearningList(response.data.studyList);
+        setTotalPages(response.data.totalPages);
+      });
   };
 
   const getLearningAttandableSearchList = (searchValue, currentPage) => {
@@ -108,27 +129,27 @@ function LearningList() {
 
     console.log("참여 가능한 러닝 리스트 검색 조회");
     console.log(studySearchRequest);
-    
-    axios.post(apiUrl, studySearchRequest)
-    .then((response) => {
-      console.log(response);
 
-      setLearningList(response.data.studyList);
-      setTotalPages(response.data.totalPages);
-    });
+    axios.post(apiUrl, studySearchRequest)
+      .then((response) => {
+        console.log(response);
+
+        setLearningList(response.data.studyList);
+        setTotalPages(response.data.totalPages);
+      });
   };
 
   const handleAttandClick = (study) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/info/' + study.id;
 
     axios.get(apiUrl)
-    .then((response) => {
-      if (response.data.capacity > response.data.studyUserCount) {
-        enterStudyUser(study);
-      } else {
-        alert("참가 인원이 많아 러닝룸에 참여하실 수 없습니다.");
-      }
-    });
+      .then((response) => {
+        if (response.data.capacity > response.data.studyUserCount) {
+          enterStudyUser(study);
+        } else {
+          alert("참가 인원이 많아 러닝룸에 참여하실 수 없습니다.");
+        }
+      });
   }
 
   // 러닝룸 입장
@@ -143,19 +164,19 @@ function LearningList() {
     console.log(studyUserRequest);
 
     axios.post(apiUrl, studyUserRequest)
-        .then((response) => {
-            console.log(response);
+      .then((response) => {
+        console.log(response);
 
-            // 러닝룸으로 이동
-            navigate('/LearningRoom', {
-                state: {
-                    type: studyType,
-                    study: study,
-                    studyUser: response.data
-                }
-            });
+        // 러닝룸으로 이동
+        navigate('/LearningRoom', {
+          state: {
+            type: studyType,
+            study: study,
+            studyUser: response.data
+          }
         });
-};
+      });
+  };
 
   const handlePageChange = (pageNumber) => {
     if (selectedAttandable) { // 참여 가능한 러닝 리스트
@@ -242,7 +263,7 @@ function LearningList() {
   return (
     <div className='list-container'>
       <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
-      <div className="list-head">
+        <div className="list-head">
           <Link to="/createlroom">
             <div className="head-create-button bg-coaching">+ 러닝하기</div>
           </Link>
@@ -284,7 +305,7 @@ function LearningList() {
             </div>
           </div>
         </div>
-        
+
         <div className={isSelected ? 'list-body-selected' : 'list-body-unselected'}>
           {learningList.map((learning, index) => (
             <LearningBox
