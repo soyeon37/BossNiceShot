@@ -1,0 +1,17 @@
+
+`	java:S112G"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+`	java:S112I"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¤¿ôåþÿÿÿÿ
+Z
+java:S2147H"DCombine this catch with the one at line 70, which has the same body.(ï­£Ä
+V	java:S125+"<This block of commented-out lines of code should be removed.(•šòÃøÿÿÿÿ
+M
+java:S1874<"2Remove this use of "JsonParser"; it is deprecated.(ªµ’ÿùÿÿÿÿ
+H
+java:S1874="-Remove this use of "parse"; it is deprecated.(ô„õ±ùÿÿÿÿ
+O
+java:S4719O"9Replace charset name argument with StandardCharsets.UTF_8(Ü»Åö
+f
+java:S1858U"K"response" is already a string, there's no need to call "toString()" on it.(ÐØÂÒûÿÿÿÿ
+`
+java:S1858V"K"response" is already a string, there's no need to call "toString()" on it.(æÑº5

@@ -21,11 +21,18 @@ function MyEditor() {
         } else if (value.trim() === '') {
             alert("내용을 입력해주세요.");
         } else {
+            const type = "LEARNING"
             // 등록 또는 제출 로직을 여기에 작성합니다.
             // 예를 들어, 서버로 데이터를 전송하거나 원하는 다른 작업을 수행할 수 있습니다.
+            console.log("Type:", type);
             console.log("Title:", title);
             console.log("Content:", value);
-            navigate('/studylist');
+            navigate('/LearningRoom', {
+                state: {
+                    type: type,
+                    title: title,
+                }
+            });
         }
     };
 

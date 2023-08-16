@@ -29,7 +29,7 @@ const Kakao = (props) => {
   const data = {
     code: CODE,
   };
-  const apiUrl = "http://localhost:8080/members/code";
+  const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/code";
 
   // KAKAO Token 발급
   const grant_type = "authorization_code";
@@ -83,7 +83,7 @@ const Kakao = (props) => {
       const data = {
         id: email,
       };
-      const apiUrl = "http://localhost:8080/members/checkEmail";
+      const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/checkEmail";
       console.log(email);
       axios
         .post(apiUrl, data)
@@ -94,14 +94,7 @@ const Kakao = (props) => {
             navigate("/");
           } else {
             console.log("유효한 이메일입니다.");
-            // SignupInfo 페이지로 회원정보를 가지고 돌아가기
-            // navigate("/signup/info", {
-            //   state: {
-            //     email: email,
-            //     image: image,
-            //     nickname: nickname,
-            //   },
-            // });
+            // Redux
             dispatch(setStateEmail(email));
             dispatch(setStateNickname(nickname));
             dispatch(setStateIsKakao(true));

@@ -1,6 +1,6 @@
 package com.ssafy.domain.study.dto.request;
 
-import com.ssafy.domain.Member.entity.Member;
+import com.ssafy.domain.member.entity.Member;
 import com.ssafy.domain.study.entity.Study;
 import com.ssafy.domain.study.entity.StudyType;
 import jakarta.validation.constraints.NotNull;

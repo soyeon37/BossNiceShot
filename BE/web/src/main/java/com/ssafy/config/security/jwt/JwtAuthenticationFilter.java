@@ -2,25 +2,18 @@ package com.ssafy.config.security.jwt;
 
 import com.ssafy.Exception.message.ExceptionMessage;
 import com.ssafy.Exception.model.TokenCheckFailException;
-import io.jsonwebtoken.Jwt;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.PatternMatchUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Enumeration;
 
 @Slf4j
@@ -31,21 +24,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         logRequest(request);
 
-        if(request.getRequestURI().equals("/members/sign-in") || request.getRequestURI().equals("/members/sign-up")
-                || request.getRequestURI().equals("/members/sendEmailVerification")
-                || request.getRequestURI().equals("/members/checkEmail")
-                || request.getRequestURI().equals("/members/code")
-                || request.getRequestURI().equals("/members/checkNickname")
-                || request.getRequestURI().equals("/notification/**")
-                || request.getRequestURI().equals("/ws/**")
-                || request.getRequestURI().equals("/api/sessions")
-                || request.getRequestURI().equals("/api/sessions/**")
-                || request.getRequestURI().equals("/study/sessions")
-                || request.getRequestURI().equals("/api/sessions/SessionA/connections")
-                || request.getRequestURI().equals("/study/sessions/**")){
+        if(request.getRequestURI().equals("/api/members/sign-in") || request.getRequestURI().equals("/api/members/sign-up")
+                || request.getRequestURI().equals("/api/members/sendEmailVerification")
+                || request.getRequestURI().equals("/api/members/checkEmail")
+                || request.getRequestURI().equals("/api/members/code")
+                || request.getRequestURI().equals("/api/members/checkNickname")
+                || request.getRequestURI().equals("/api/notification/**")
+                || request.getRequestURI().startsWith("/ws")
+                || request.getRequestURI().startsWith("/api/sessions")
+                || request.getRequestURI().equals("/api/study/sessions")
+                || request.getRequestURI().equals("/api/companion/field")){
             log.info("권한 허가");
             chain.doFilter(request, response);
             return;
@@ -56,7 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         log.info("headerToken={}",token); // Access Token
 
         // 2. validateToken 으로 토큰 유효성 검사
-        if (token != null && jwtTokenProvider.validateToken(token) || request.getRequestURI().equals("/members/reissue")) {
+        if (request.getRequestURI().equals("/members/reissue") || (token != null && jwtTokenProvider.validateToken(token))) {
             // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
             log.info("유효한 토큰입니다.");
             Authentication authentication = jwtTokenProvider.getAuthentication(token);

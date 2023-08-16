@@ -1,0 +1,432 @@
+/* user container CSS */
+.user-container {
+    /* 모양 관련 CSS */
+    top: 150px;
+
+    width: 90%;
+    height: 650px;
+    max-width: 1820px;
+
+    border-radius: 50px;
+    border: 2px solid #000;
+    background: #FFF;
+
+    position: absolute;
+    z-index: 5;
+
+    /* 일반 CSS */
+    display: flex;
+    justify-content: center;
+}
+
+.user-banner {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-banner-title {
+    width: 100%;
+    margin-bottom: 0px;
+    padding: 30px 30px 20px;
+    color: #000;
+    font-size: 40px;
+    font-weight: 800;
+    text-align: left;
+}
+
+.user-banner-context {
+    width: 100%;
+    height: 10%;
+    padding: 0px 50px;
+    color: #000;
+    font-size: 32px;
+    text-align: left;
+}
+
+.user-banner-img {
+    width: 100%;
+    height: 80%;
+    padding: 20px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.user-banner-img-style {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.user-banner-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.user-banner-normal {
+    color: #000;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.user-banner-bold {
+    color: #000;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.user-func {
+    width: 50%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-func-title {
+    color: #000;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.user-func-context {
+    width: 100%;
+    height: 10%;
+    margin: 0px 0px 20px 0px;
+    color: #8D8F98;
+    font-size: 32px;
+    text-align: center;
+}
+
+.user-func-normal-input {
+    width: 480px;
+    height: 55px;
+    max-width: 80%;
+
+    margin: 15px;
+    padding: 10px;
+
+    border-radius: 50px;
+    border: 2px solid #000;
+    background: #FFF;
+    box-shadow: none;
+}
+
+.user-func-input-guide {
+    width: 480px;
+    height: 60px;
+    max-width: 80%;
+    margin: 0px 0px 10px;
+
+    color: #FF6C6C;
+    font-size: 16px;
+    text-align: left;
+}
+
+.user-func-email-login {
+    width: 480px;
+    height: 60px;
+    max-width: 80%;
+
+    margin: 10px;
+    padding: 10px;
+
+    border-radius: 50px;
+    border: 2px solid #000;
+    background: #3BD641;
+    box-shadow: none;
+    color: #FFF;
+
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-func-kakao-login {
+    width: 480px;
+    height: 60px;
+    max-width: 80%;
+
+    margin: 10px;
+    padding: 10px;
+
+    border-radius: 50px;
+    border: 2px solid #000;
+    background: #FEE500;
+    box-shadow: none;
+    color: #3C1E1E;
+
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-only-text {
+    width: 510px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.user-button-text {
+    width: 510px;
+    margin-right: 8%;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.user-hr {
+    width: 83%;
+    height: 6px;
+    margin: 5px;
+    border-radius: 5px;
+    background: #E0E0E0;
+}
+
+.user-func-footer {
+    width: 580px;
+    height: 30px;
+    max-width: 80%;
+    margin: 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-func-footer-half {
+    width: 50%;
+    height: 100%;
+    margin: 20px;
+    color: #8D8F98;
+    font-size: 16px;
+    white-space: nowrap;
+}
+
+/* user email auth */
+.user-email-auth-block {
+    width: 480px;
+    height: 55px;
+    max-width: 80%;
+    margin: 15px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.user-email-auth-input {
+    width: 450px;
+    height: 100%;
+    max-width: 80%;
+
+    margin-right: 5px;
+    padding: 10px;
+
+    border-radius: 50px;
+    border: 2px solid #000;
+    background: #FFF;
+    box-shadow: none;
+}
+
+.user-email-auth-button {
+    width: 120px;
+    height: 100%;
+    max-width: 20%;
+
+    margin-left: 5px;
+    padding: 10px;
+
+    border-radius: 50px;
+    box-shadow: none;
+}
+
+.gr {
+    color: #FFF;
+    border: 2px solid #000;
+    background: #3BD641;
+}
+
+.wh {
+    color: #000;
+    border: 2px solid #000;
+    background: #FFF;
+}
+
+.user-func-box {
+    width: 480px;
+    height: 80px;
+    max-width: 80%;
+    margin: 0px 10px 20px;
+    display: flex;
+}
+
+.user-func-half {
+    width: 50%;
+    height: 100%;
+    margin: 0px 5px;
+}
+
+.user-func-label {
+    width: 100%;
+    height: 20px;
+    margin-bottom: 10px;
+
+    display: flex;
+    color: #8D8F98;
+    text-align: left;
+    font-size: 16px;
+}
+
+.user-func-half-input {
+    width: 100%;
+    height: 55px;
+
+    padding: 10px;
+
+    border-radius: 50px;
+    border: 2px solid #000;
+    background: #FFF;
+    box-shadow: none;
+}
+
+/* radio box */
+.user-func-radio {
+    width: 480px;
+    height: 80px;
+    max-width: 80%;
+}
+
+.user-func-radio-block {
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+/* tooltip */
+.tee-tooltip-icon {
+    width: 50px;
+    height: 100%;
+    font-size: 50px;
+    color: #000;
+    cursor: help;
+}
+
+.tee-tooltip {
+    position: relative;
+}
+
+.tee-tooltip-text {
+    visibility: hidden;
+    position: absolute;
+    z-index: 10;
+
+    top: -210px;
+    width: 400px;
+    height: 210px;
+    padding: 10px;
+
+    border: 20px;
+    background: rgba(0, 0, 0, 0.80);
+    border-radius: 20px;
+
+    color: #FFF;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: left;
+}
+
+.tee-tooltip:hover .tee-tooltip-text {
+    visibility: visible;
+}
+
+.user-banner-profile {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 2px solid #000;
+    overflow: hidden;
+    position: relative;
+}
+
+.user-banner-circle {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* react-icon CSS */
+.button-react-icon {
+    margin-left: 10px;
+    width: 80px;
+    height: 100%;
+    font-size: 50px;
+}
+
+/* 배경 및 모양 관련 CSS */
+.user-container-bump {
+    top: -50px;
+    left: calc(89%);
+    transform: translateX(-50%);
+
+    width: 14%;
+    height: 50px;
+
+    border: 2px solid #000;
+    border-bottom: 0px;
+    border-radius: 30px 30px 0px 0px;
+    background-color: #FFF;
+
+    position: absolute;
+    z-index: 4;
+}
+
+.user-container-shadow {
+    top: 170px;
+    transform: translateX(20px);
+
+    width: 90%;
+    height: 650px;
+    max-width: 1820px;
+
+    border-radius: 50px;
+    border: 2px solid #000;
+    background: #3BD641;
+
+    position: absolute;
+    z-index: 3;
+}
+
+.user-container-shadow-bump {
+    top: -50px;
+    left: calc(89%);
+    transform: translateX(-50%);
+
+    width: 14%;
+    height: 50px;
+
+    border: 2px solid #000;
+    border-bottom: 0px;
+    border-radius: 30px 30px 0px 0px;
+    background-color: #3BD641;
+
+    position: absolute;
+    z-index: 2;
+
+}

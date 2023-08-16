@@ -65,7 +65,8 @@ public class JwtTokenProvider {
 
         long now = (new Date()).getTime();
         // Access Token 생성
-        Date accessTokenExpiresIn = new Date(now + 60*60*24*1000);
+//        Date accessTokenExpiresIn = new Date(now + 60*60*24*1000);
+        Date accessTokenExpiresIn = new Date(now + 60*1000);
         return(
                  Jwts.builder()
                 .setSubject(authentication.getName())
