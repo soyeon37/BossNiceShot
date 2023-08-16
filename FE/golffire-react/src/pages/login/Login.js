@@ -5,7 +5,7 @@ import axios from "axios";
 
 // Redux
 import { useDispatch } from "react-redux";
-import { setUserId, setUserNickname, setUserLevel, setUserTee } from "../../features/userInfoSlice";
+import { setUserId, setUserNickname, setUserLevel, setUserTee, setUserImage, setUserAccessToken } from "../../features/userInfoSlice";
 
 import BackgroundImage from "../../assets/source/imgs/golf-image-1.svg";
 import { IoMailOutline, IoChatbubbleSharp } from "react-icons/io5";
@@ -70,6 +70,9 @@ const Login = () => {
         dispatch(setUserNickname("로그인 됨"));
         dispatch(setUserLevel("eagle"));
         dispatch(setUserTee("Red"));
+        dispatch(setUserImage("red_cap_bear blue"));
+        
+        dispatch(setUserAccessToken(access_token));
 
         // 로그인 성공 후 Main으로 복귀
         navigate("/");
