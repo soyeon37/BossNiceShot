@@ -165,15 +165,6 @@ function Signup() {
   // 회원 가입 완료를 위한 함수들
   const navigate = useNavigate();
   const handleEmailFinish = () => {
-    const email = state.email;
-    const password = state.password;
-    const nickname = state.nickname;
-    const introduce = introduce;
-    const averageScore = averageScore;
-    const topScore = topScore;
-    const teeBox = teeBox;
-    const isKakao = state.isKakao;
-
     var referrer = document.referrer;
     console.log("이전 페이지 URL: " + referrer);
 
@@ -189,17 +180,27 @@ function Signup() {
     } else {
       level = "더블 플레이어";
     }
+    
+    // const email = state.email;
+    // const password = state.password;
+    // const nickname = state.nickname;
+    // const introduce = introduce;
+    // const averageScore = averageScore;
+    // const topScore = topScore;
+    // const teeBox = teeBox;
+    // const isKakao = state.isKakao;
+    
     const data = {
-      id: email,
-      password: password,
+      id: state.email,
+      password: state.password,
       nickname: nickname,
       image: imgPic + " " + imgClr,
       introduction: introduce,
       averageScore: averageScore,
       topScore: topScore,
       level: level,
-      teeBox: "RED", // teeBox
-      isKakao: isKakao,
+      teeBox: teeBox,
+      isKakao: state.isKakao,
     };
     console.log("현재 가진 데이터?: ", data);
     console.log("isKakao: ", data.isKakao);
