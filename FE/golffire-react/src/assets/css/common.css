@@ -8,6 +8,66 @@
   border-radius: 10px;
 }
 
+/* radio button */
+label {
+  font-size: 18px;
+  line-height: 2rem;
+  padding: 0.2em 0.4em;
+}
+
+
+[type="radio"], span {
+  vertical-align: middle;
+}
+
+[type="radio"] {
+  margin: 5px;
+  appearance: none;
+  border: max(2px, 0.1em) solid black;
+  border-radius: 50%;
+  width: 1.25em;
+  height: 1.25em;
+  transition: border 0.1s ease-in-out;
+  box-shadow: none;
+}
+
+[type="radio"]:checked {
+  border: 0.4em solid rgba(59, 214, 65, 1);
+}
+
+[type="radio"]:focus-visible {
+  outline-offset: max(2px, 0.1em);
+  outline: max(2px, 0.1em) dotted rgba(59, 214, 65, 1);
+}
+
+[type="radio"]:hover {
+  box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+  cursor: pointer;
+}
+
+[type="radio"]:hover + span {
+  cursor: pointer;
+}
+
+[type="radio"]:disabled {
+  background-color: lightgray;
+  box-shadow: none;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+[type="radio"]:disabled + span {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+
+/* checkbox */
+[type="checkbox"] {
+  cursor: pointer;
+  box-shadow: none;
+}
+
 /* favicon image */
 .favicon-img {
   height: 80%;
@@ -108,6 +168,11 @@
   cursor: pointer;
 }
 
+.clickable {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .checkbox-div {
   white-space: nowrap;
 }
@@ -158,7 +223,7 @@
   color: #D7D7D7;
 }
 
-.mascot-deco{
+.mascot-deco {
   width: 200px;
   height: 200px;
   object-fit: contain;

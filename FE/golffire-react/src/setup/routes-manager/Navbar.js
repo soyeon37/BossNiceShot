@@ -7,14 +7,10 @@ import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 
 import AlertPage from "./alert/AlertPage";
-import Favicon from "../../assets/source/imgs/favicon.png";
 
-import { IoMdContact } from "react-icons/io";
+import { IoMdContact } from 'react-icons/io'
 import { Avatar, AvatarBadge, AvatarGroup, Hide } from "@chakra-ui/react";
-
-// Redux
-import { resetUserState } from "../../features/userInfoSlice";
-
+import Favicon from "../../assets/source/imgs/favicon.png";
 import "./styles.css";
 import {
   Menu,
@@ -171,24 +167,6 @@ function Navbar() {
             </MenuButton>
             <MenuList>
 
-              {/* test code - will delete */}
-              <MenuGroup title=''>
-                <MenuItem>
-                  <NavLink to="/mypage/info" style={({ isActive, isPending }) => {
-                    return {
-                      fontWeight: isActive ? "bold" : "",
-                    };
-                  }}>
-                    마이페이지
-                  </NavLink>
-                </MenuItem>
-                <MenuItem style={{ color: "gray" }} onClick={handleLogout}>
-                  로그아웃
-                </MenuItem>
-              </MenuGroup>
-              <MenuDivider />
-              {/* test code end */}
-
               {userId ? (
                 <MenuGroup title=''>
                   <MenuItem>
@@ -201,7 +179,7 @@ function Navbar() {
                     </NavLink>
                   </MenuItem>
                   <MenuDivider />
-                  <MenuItem style={{ color: "gray" }}>로그아웃</MenuItem>
+                  <MenuItem style={{ color: "gray" }} onClick={handleLogout}>로그아웃</MenuItem>
                 </MenuGroup>
               ) : (<MenuGroup title=''>
                 <MenuItem>
@@ -230,7 +208,7 @@ function Navbar() {
           <AlertPage onClick={handleCheckNotification}>
           </AlertPage>
         </li>
-      </ul>
+      </ul >
     </nav >
   );
 };
