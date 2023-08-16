@@ -191,16 +191,16 @@ function Signup() {
     // const isKakao = state.isKakao;
     
     const data = {
-      id: state.email,
-      password: state.password,
-      nickname: nickname,
-      image: imgPic + " " + imgClr,
-      introduction: introduce,
-      averageScore: averageScore,
-      topScore: topScore,
-      level: level,
-      teeBox: teeBox,
-      isKakao: state.isKakao,
+      "id": state.email,
+      "password": state.password,
+      "nickname": nickname,
+      "teeBox": teeBox,
+      "topScore": topScore,
+      "averageScore": averageScore,
+      "level": level,
+      "image": imgPic + " " + imgClr,
+      "introduction": introduce,
+      "isKakao": state.isKakao,
     };
     console.log("현재 가진 데이터?: ", data);
     console.log("isKakao: ", data.isKakao);
