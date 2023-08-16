@@ -4,7 +4,7 @@ import AccompanyList from "./AccompanyList";
 import { useNavigate } from 'react-router-dom';
 
 import PinImg from "../../assets/source/icons/pin.png";
-import "./AccompanyBox";
+import "./Accompany.css";
 
 function Accompany() {
   const navigate = useNavigate();
