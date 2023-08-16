@@ -1,0 +1,11 @@
+
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¤¿ôåþÿÿÿÿ
+f
+java:S18540"KRemove this useless assignment to local variable "smtpSendFailedException".(ñäÙþÿÿÿÿÿ
+V	java:S125,"<This block of commented-out lines of code should be removed.(—ô÷ÿÿÿÿÿ
+V
+java:S1193/"@Replace the usage of the "instanceof" operator by a catch block.(ªËûÿ
+~
+java:S6201/"hReplace this instanceof check and cast with 'instanceof SMTPSendFailedException smtpSendFailedException'(ªËûÿ
+W
+java:S14810"<Remove this unused "smtpSendFailedException" local variable.(ñäÙþÿÿÿÿÿ

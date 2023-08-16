@@ -29,7 +29,7 @@ function LearningBox({ index, id, title, reservedTime, capacity, studyUserCount,
             </div>
 
             <div className="coaching-box-button-position">
-                <div className="coaching-box-button" onClick={() => handleSelectButtonClick(id, index)}>
+                <div className="learning-box-button" onClick={() => handleSelectButtonClick(id, index)}>
                     자세히 보기
                 </div></div>
         </div >

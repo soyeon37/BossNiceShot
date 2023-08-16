@@ -277,7 +277,7 @@ function LearningList() {
           <div className="checkbox-div">
             <label class="switch" value={selectedAttandable} onChange={handleAttadableChange}>
               <input type="checkbox" />
-              <span class="slider-coaching round"></span>
+              <span class="slider-learning round"></span>
             </label>
             <div>
               참여 가능
@@ -323,7 +323,7 @@ function LearningList() {
       </div>
 
       {/* 배경 div */}
-      <div className="list-background-div bg-coaching"></div>
+      <div className="list-background-div bg-learn"></div>
 
       {/* 선택 시 나타나는 정보 */}
       {isSelected && selectedId && (

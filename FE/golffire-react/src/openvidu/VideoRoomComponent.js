@@ -262,7 +262,7 @@ class VideoRoomComponent extends Component {
 		this.setState({
 			session: undefined,
 			subscribers: [],
-			mySessionId: undefined, //이부분 다른데선 지웠음 왜지웠지
+			mySessionId: undefined, 
 			myUserName: undefined,
 			localUser: undefined,
 		});

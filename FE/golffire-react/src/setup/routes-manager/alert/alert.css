@@ -1,0 +1,74 @@
+.accept {
+    background: rgba(59, 214, 65, 1);
+    border: 2px solid black; 
+    border-radius: 10px;
+    padding: 3px 12px;
+    margin-right: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: small;
+    transition: background-color 0.3s ease;
+}
+.accept:hover {
+    background: white;
+    color: rgba(59, 214, 65, 1);
+}
+.refuse {
+    background: #FF5757;
+    border: 2px solid black; 
+    border-radius: 10px;
+    padding: 3px 12px;
+    color: white;
+    font-weight: bold;
+    font-size: small;
+    transition: background-color 0.3s ease;
+}
+.refuse:hover {
+    background: white;
+    color: #FF5757;
+}
+.delete-all-button{
+    margin-left: auto;
+    width:100px;
+    height: 30px;
+    border: 2px solid black; 
+    border-radius: 10px;
+    background-color: #FF5757; 
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.delete-all-button:hover{
+    background-color: aliceblue;
+    color: #E53E3E;
+}
+
+
+.alert-sidebar {
+    background: #FFE000; 
+    border: 2px solid black; 
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px 0px;
+}
+.alert-top {
+    display: flex; 
+    align-items: center;
+}
+.alert-avatar {
+    margin-right: 10px;
+}
+.alert-text {
+    margin-right: 10px;
+}
+.alert-bottom {
+    text-align: end;
+}
+
+.bold {
+    font-weight: bold;
+}
