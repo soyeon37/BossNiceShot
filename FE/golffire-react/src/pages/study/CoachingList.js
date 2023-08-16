@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
-import "./study.css";
+import CoachingBox from './CoachingBox';
+import CoachingRoom from './CoachingRoom';
 
 import ProfileImg from "../../assets/source/imgs/favicon.png";
 
@@ -11,9 +12,13 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { SearchIcon } from "@chakra-ui/icons";
 
+// Redux
+import { useSelector } from "react-redux";
+
 import axios from "axios";
-import CoachingRoom from './CoachingRoom';
-import CoachingBox from './CoachingBox';
+
+import "./study.css";
+
 
 function CoachingList() {
   const navigate = useNavigate();
@@ -323,7 +328,7 @@ function CoachingList() {
       </div>
 
       {/* 배경 div */}
-      <div className="list-background-div bg-coaching"></div>
+      <div className="list-background-div bg-coach"></div>
 
       {/* 선택 시 나타나는 정보 */}
       {isSelected && selectedId && (
