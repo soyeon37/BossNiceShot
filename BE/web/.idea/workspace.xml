@@ -5,36 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd34f159-9b12-440b-8d67-1f0f3a97241e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/f/1fb84a2d79703081f11451b4d2608bc34a059f20" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/f/4f148a7b5a8ec02810f675c4654827bf2f9f67a2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/1/519fa5caa5b025f854f60899561ee280582a6cfb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/1/817b063dfefcba65c6ebee0dff81863ca814f948" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/b/abaf0e31b2b4c7a4ad18014ace41ae12c1ef7c85" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/0/b0d9f5e36720b332b636c3c1461fbaaf80061a9a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/9/b9dcf089628cf523a4d95021bf5c4d19f7df9479" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/7/f7b6695cd1e5aebb17d1d9892864e5e58b4dadd9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/f/0fb2165841132340adfa5dd54986ce849ed01895" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/4/4409c8247fbae185f9437e32dc6b81c0c2685b22" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/4/64202b67486a3371f9adb4fc5d5fee134fb93ab8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/f/bf4df718e83048fccb83c10787540feb7e5121f9" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/f/1fb84a2d79703081f11451b4d2608bc34a059f20" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/f/4f148a7b5a8ec02810f675c4654827bf2f9f67a2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/1/519fa5caa5b025f854f60899561ee280582a6cfb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/1/817b063dfefcba65c6ebee0dff81863ca814f948" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/a/b/abaf0e31b2b4c7a4ad18014ace41ae12c1ef7c85" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/0/b0d9f5e36720b332b636c3c1461fbaaf80061a9a" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/9/b9dcf089628cf523a4d95021bf5c4d19f7df9479" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/f/7/f7b6695cd1e5aebb17d1d9892864e5e58b4dadd9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/f/0fb2165841132340adfa5dd54986ce849ed01895" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/4/4409c8247fbae185f9437e32dc6b81c0c2685b22" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/4/64202b67486a3371f9adb4fc5d5fee134fb93ab8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/f/bf4df718e83048fccb83c10787540feb7e5121f9" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/jwt/JwtTokenProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/jwt/JwtTokenProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/controller/CompanionUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/controller/CompanionUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/service/CompanionUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/service/CompanionUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/controller/StudyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/controller/StudyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/controller/StudyUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/controller/StudyUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/repository/StudyUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/repository/StudyUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/service/StudyUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/service/StudyUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/openvidu/VideoRoomComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/openvidu/VideoRoomComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CoachingList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CoachingList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CoachingRoom.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CoachingRoom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CreateLRoom.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CreateLRoom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/css/common.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/Navbar.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
