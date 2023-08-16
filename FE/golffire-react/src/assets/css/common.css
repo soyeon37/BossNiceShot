@@ -19,7 +19,6 @@
   background: #72ce27;
   color: #fff;
   text-align: center;
-  font-family: Inter;
   font-size: 16px;
   font-weight: 400;
 }
@@ -29,7 +28,6 @@
   background: #ffe000;
   color: #fff;
   text-align: center;
-  font-family: Inter;
   font-size: 16px;
   font-weight: 400;
 }
@@ -63,7 +61,6 @@
   border-radius: 50px;
   border: 1px solid #000;
   color: #000;
-  font-family: Inter;
   font-size: 20px;
   font-weight: 400;
 }
@@ -74,7 +71,6 @@
 
   color: #F21414;
   text-align: center;
-  font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 900;
@@ -88,7 +84,6 @@
 
   color: #3BD641;
   text-align: center;
-  font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 900;
@@ -102,7 +97,6 @@
 
   color: #FF8A8A;
   text-align: center;
-  font-family: Inter;
   font-size: 20px;
   font-style: normal;
   font-weight: 900;
@@ -147,7 +141,6 @@
 
   color: #000;
   text-align: center;
-  font-family: Inter;
   font-size: 16px;
 }
 

@@ -9,49 +9,104 @@ import {
 } from '@chakra-ui/react'
 
 import "./study.css";
+import axios from 'axios';
 
-function EditRoom() {
-    
+function CreateCRoom() {
+    const studyType = 'COACHING';
     const [title, setTitle] = useState('');
-    const [value, setValue] = useState('');
-    const [password, setPassword] = useState('');
-    const [maxParticipants, setMaxParticipants] = useState('');
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [description, setDescription] = useState('');
+    const [capacity, setCapacity] = useState('');
     const navigate = useNavigate();
-
     
     // "등록하기" 버튼 클릭 이벤트를 처리하는 함수
     const handleRegisterClick = () => {
         if (title.trim() === '') {
             alert("제목을 입력해주세요.");
-        } else if (value.trim() === '') {
+        } else if (description.trim() === '') {
             alert("내용을 입력해주세요.");
-        } else if (password.trim() === '') {
-            alert("비밀번호를 입력해주세요.");
-        } else if (password.trim().length !== 4 || !/^\d+$/.test(password.trim())) {
-            alert("비밀번호는 4자리 숫자로 입력해주세요.");
-        } else if (maxParticipants.trim() === '') {
-            alert("최대인원수를 입력해주세요.");
         } else {
-            const maxParticipantsNum = parseInt(maxParticipants.trim(), 10);
-            if (isNaN(maxParticipantsNum) || maxParticipantsNum < 2 || maxParticipantsNum > 20) {
-                alert("최대인원수는 2에서 20 사이의 숫자로 입력해주세요.");
-            } else if (selectedDate === null) {
-                alert("날짜를 선택해주세요.");
-            } else {
-                const type = "COACHING"
-                // 등록 또는 제출 로직을 여기에 작성합니다.
-                // 예를 들어, 서버로 데이터를 전송하거나 원하는 다른 작업을 수행할 수 있습니다.
-                console.log("Type:", type);
-                console.log("Title:", title);
-                console.log("Content:", value);
-                console.log("Password:", password);
-                console.log("Max Participants:", maxParticipants);
-                console.log("Selected Date:", selectedDate);
-                navigate('/studylist');
+            const studyCreateRequest = {
+                type: studyType,
+                title: title,
+                description: description,
+                capacity: capacity,
+                reservedTime: getNowTime(),
+                locked: false,
+                password: null
             }
+
+            createCoaching(studyCreateRequest);
         }
     };
+ 
+    // 코칭룸 생성
+    const createCoaching = (studyCreateRequest) => {
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study';
+
+        console.log("스터디(코칭) 등록하기");
+        console.log(studyCreateRequest);
+
+        axios.post(apiUrl, studyCreateRequest)
+            .then((response) => {
+                console.log(response);
+                
+                activeCoaching(response.data.id);
+            });
+    };
+
+    // 코칭룸 활성화
+    const activeCoaching = (studyId) => {
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/' + studyId + '/active';
+
+        console.log("스터디(코칭) 활성화");
+        console.log(studyId);
+
+        axios.put(apiUrl)
+            .then((response) => {
+                console.log(response);
+
+                const studyUserRequest = {
+                    studyId: response.data.id
+                };
+
+                enterStudyUser(studyUserRequest, response.data);
+            });
+    };
+
+    // 코치 코칭룸 입장
+    const enterStudyUser = (studyUserRequest, studyResponse) => {
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/user';
+
+        console.log("코칭룸 입장");
+        console.log(studyUserRequest);
+
+        axios.post(apiUrl, studyUserRequest)
+            .then((response) => {
+                console.log(response);
+
+                // 코칭룸으로 이동
+                navigate('/CoachingRoom', {
+                    state: {
+                        type: studyType,
+                        study: studyResponse,
+                        studyUser: response.data
+                    }
+                });
+            });
+    };
+
+    // 현재 시간 request 타입에 맞게 포맷
+    const getNowTime = () => {
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1;
+        const day = now.getDate();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+
+        return  `${year}-${month >= 10 ? month : '0' + month}-${day >= 10 ? day : '0' + day} ${hours >= 10 ? hours : '0' + hours}:${minutes >= 10 ? minutes : '0' + minutes}:00`;
+    }
 
     return (
         <div className='editor-container'>
@@ -65,38 +120,18 @@ function EditRoom() {
                     className='editor-title'
                 />
                 <textarea
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder="내용"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="소개"
                     className='editor-content'
                 />
-                <div className='editor-password'>
-                    <Text fontSize='xxl'>비밀번호</Text>
-                    <input
-                        type="password"
-                        placeholder="4자리 비밀번호"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        pattern="[0-9]{4}"
-                        title="4자리의 숫자를 입력해주세요."
-                    />
-                </div>
                 <div className='editor-num'>
-                    <Text fontSize='xxl'>최대인원</Text>   
+                    <Text fontSize='xxl'>인원 수</Text>   
                     <input
                     type="number"
                     placeholder="2~20명 까지 가능"
-                    value={maxParticipants}
-                    onChange={(e) => setMaxParticipants(e.target.value)}
-                    /> 
-                </div>
-                <div className='editor-date'>
-                    <Text fontSize='xxl'>진행일시</Text>
-                    <DatePicker
-                        selected={selectedDate}
-                        onChange={date => setSelectedDate(date)}
-                        dateFormat="yyyy년 MM월 dd일"
-                        placeholderText="날짜를 선택하세요"
+                    value={capacity}
+                    onChange={(e) => setCapacity(e.target.value)}
                     /> 
                 </div>
                 <div className='editor-buttons'>
@@ -111,4 +146,4 @@ function EditRoom() {
 }
 
 
-export default EditRoom;
+export default CreateCRoom;

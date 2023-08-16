@@ -27,7 +27,6 @@
 .container-head-title {
     color: #000;
     text-align: center;
-    font-family: Inter;
     font-size: 36px;
     font-weight: 600;
 }
@@ -35,7 +34,6 @@
 .container-head-desc {
     color: #000;
     text-align: center;
-    font-family: Inter;
     font-size: 24px;
     font-weight: 400;
 }
@@ -120,7 +118,6 @@
     justify-content: center;
 
     color: #000;
-    font-family: Inter;
     font-size: 20px;
     font-weight: 600;
 }
@@ -292,6 +289,14 @@ width: 47%;
 .accompany-textarea {
     width: 100%;
     height: 340px;
+    padding: 10px;
+    text-align: left;
+    overflow-y: scroll;
+}
+
+.coaching-textarea {
+    width: 100%;
+    height: 390px;
     padding: 10px;
     text-align: left;
     overflow-y: scroll;

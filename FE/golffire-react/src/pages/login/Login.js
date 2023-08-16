@@ -56,14 +56,10 @@ const Login = () => {
 
         console.log(response.data); // Debug Code !!
         
+        // 로그인 후 사용자 정보 넣기 (라연)
+
         // NavBar에 사용자 정보 저장
         dispatch(setUserId(email));
-        dispatch(setUserNickname("로그인 됨"));
-        dispatch(setUserLevel("eagle"));
-        dispatch(setUserTee("Red"));
-
-        // NavBar에 사용자 정보 저장 - data for test
-        dispatch(setUserId("logined@ssafy.com"));
         dispatch(setUserNickname("로그인 됨"));
         dispatch(setUserLevel("eagle"));
         dispatch(setUserTee("Red"));
