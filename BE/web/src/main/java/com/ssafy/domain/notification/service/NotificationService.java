@@ -63,8 +63,8 @@ public class NotificationService {
         return new NotificationResponse("SUCCESS");
     }
 
-    public NotificationResponse delete(DeleteNotificationRequest request){
-        mongoTemplate.remove(new Query(Criteria.where("_id").is(request.id())), Notification.class);
+    public NotificationResponse delete(String id){
+        mongoTemplate.remove(new Query(Criteria.where("_id").is(id)), Notification.class);
         return new NotificationResponse("SUCCESS");
     }
     public NotificationResponse deleteAll(String recipient){

@@ -9,8 +9,8 @@ import { useSelector, useDispatch } from "react-redux";
 import AlertPage from "./alert/AlertPage";
 import Favicon from "../../assets/source/imgs/favicon.png";
 
-import { IoMdContact } from "react-icons/io";
-import { Avatar, AvatarBadge, AvatarGroup, Hide } from "@chakra-ui/react";
+import { IoMdContact } from 'react-icons/io'
+import { Avatar, AvatarBadge, AvatarGroup, Hide, background } from '@chakra-ui/react'
 
 // Redux
 import { resetUserState } from "../../features/userInfoSlice";
@@ -135,7 +135,7 @@ function Navbar() {
           }}>골프장</NavLink>
         </li>
         <li id="nav-list-li">
-          <NavLink to="/accompany/" id="nav-list-link" style={({ isActive, isPending }) => {
+          <NavLink to="/accompany" id="nav-list-link" style={({ isActive, isPending }) => {
             return {
               fontWeight: isActive ? "bold" : "",
               borderTop: isActive ? '2px solid Black' : "",

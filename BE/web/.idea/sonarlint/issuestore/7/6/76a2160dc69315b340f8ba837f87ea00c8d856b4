@@ -1,0 +1,12 @@
+
+j
+java:S1192f"HDefine a constant instead of duplicating this literal "SUCCESS" 5 times.(ÌİÌşÿÿÿÿ8éåì†›1
+|
+java:S1488Ø"^Immediately return this expression instead of assigning it to the temporary variable "member".(ûŸ‹ß8’»÷ºš1
+{
+java:S1488ß"^Immediately return this expression instead of assigning it to the temporary variable "member".(Æ”®
+8’»÷ºš1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(¤¿ôåşÿÿÿÿ8±‘ßºš1
+Y	java:S125‰"<This block of commented-out lines of code should be removed.(·ÁÁ×8Ÿ»÷ºš1
+;
+java:S2119Ë"Save and re-use this "Random".(¼İÅf8§»÷ºš1

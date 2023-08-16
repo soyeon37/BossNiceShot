@@ -5,6 +5,7 @@ import com.ssafy.Exception.model.TokenCheckFailException;
 import com.ssafy.Exception.model.TokenNotFoundException;
 import com.ssafy.Exception.model.UserAuthException;
 import com.ssafy.Exception.model.UserException;
+import com.ssafy.common.TeeBox;
 import com.ssafy.config.security.jwt.JwtTokenProvider;
 import com.ssafy.domain.member.dto.request.*;
 import com.ssafy.domain.member.dto.response.*;
@@ -76,7 +77,13 @@ public class MemberService{
             }
             // 3. 인증 정보를 기반으로 JWT 토큰 생성
             TokenInfo tokenInfo = jwtTokenProvider.generateToken(authentication);
-            return new SignInResponse(request.id(), tokenInfo);
+
+            String nickname = member.get().getNickname();
+            String level = member.get().getLevel();
+            TeeBox teeBox = member.get().getTeeBox();
+            String image = member.get().getImage();
+
+            return new SignInResponse(request.id(), nickname, level, teeBox, image, tokenInfo);
     }
 
     @Transactional
