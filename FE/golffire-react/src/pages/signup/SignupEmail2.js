@@ -67,7 +67,7 @@ const SignupEmail2 = () => {
 
       <button className="user-func-email-login"
         onClick={handleEmailSetPassword}>
-        <div className="user-button-text">다음으로</div>
+        <div className="user-only-text">다음으로</div>
       </button>
 
     </div>

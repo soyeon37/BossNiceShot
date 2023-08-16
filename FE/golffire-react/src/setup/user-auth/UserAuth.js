@@ -1,10 +1,18 @@
 import axios from "axios";
 
 // 토큰 재발급 함수
-export function reissueToken({ cookies, setCookie, removeCookie, navigate }) {
-  console.log('refrshToken:', cookies.refresh_token);
+export function reissueToken({ cookies, refreshToken, setCookie, removeCookie, navigate }) {
+  console.log("전달받은 refrshToken:", refreshToken);
   const apiUrl = process.env.REACT_APP_SERVER_URL  + '/api/members/reissue';
-  axios.post(apiUrl, cookies.refresh_token, { headers: { 'Authorization': 'Bearer ' + cookies.access_token } })
+  const headers = {
+    "Content-Type": `application/json`,
+    refreshToken: refreshToken,
+  };
+
+  axios
+    .get(apiUrl, {
+      headers: headers,
+    })
     .then((response) => {
       const message = response.data.data.message;
       if (message === "SUCCESS") {
@@ -25,10 +33,23 @@ export function reissueToken({ cookies, setCookie, removeCookie, navigate }) {
     });
 }
 
-export function handleLogout(cookies, setCookie, navigate) {
-  console.log('cookies.refreshToken:', cookies.refreshToken);
-  const apiUrl = process.env.REACT_APP_SERVER_URL + '/members/logout';
+// 로그아웃 처리 함수
+export function handleLogout(cookies, refreshToken, setCookie, navigate) {
+  console.log("로그아웃에서의 refreshToken:", refreshToken);
+  const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout';
   const data = {
-    refreshToken: cookies.refreshToken
-  }
+    refreshToken: refreshToken,
+  };
+  axios.post(apiUrl, data).then((response) => {
+    console.log(response);
+    if (response.data.data === "SUCCESS") {
+      setCookie("refreshToken", refreshToken, { path: "/", maxAge: 0 });
+      console.log("로그아웃 처리 성공");
+      navigate("/");
+    } else {
+      alert("Error");
+      console.log("로그아웃 처리 실패");
+      navigate("/error");
+    }
+  });
 }

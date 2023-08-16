@@ -19,8 +19,10 @@ import SignupChoice from "./SignupChoice";
 import SignupEmail1 from "./SignupEmail1";
 import SignupEmail2 from "./SignupEmail2";
 import SignupInfo from "./SignupInfo";
+import ProfilePicModal from "./ProfilePicModal";
 
 import BackgroundImage from "../../assets/source/imgs/golf-image-2.svg";
+import "./ProfilePicModal.css";
 import "./Signup.css";
 
 function Signup() {
@@ -44,11 +46,19 @@ function Signup() {
   const [imgPic, setImgPic] = useState(state.profile);
   const [imgClr, setImgClr] = useState("white");
 
+  // 사진 배경 색상을 map으로 관리
+  const colorMap = {
+    "red": "#F24141",
+    "yellow": "#FFE000",
+    "green": "#3BD641",
+    "blue": "#80CAFF",
+    "white": "#FFFFFF",
+  }
+
   // 모달 창 띄우고 내리는 변수 및 함수
   const [modalVisible, setModalVisible] = useState(false);
   const handleProfilePicModal = () => {
     setModalVisible(!modalVisible);
-    console.log("모달~");
   }
 
   // 회원 가입 완료를 위한 함수들
@@ -82,7 +92,7 @@ function Signup() {
       id: email,
       password: password,
       nickname: nickname,
-      image: imgPic + "_" + imgClr,
+      image: imgPic + " " + imgClr,
       introduction: introduce,
       averageScore: averageScore,
       topScore: topScore,
@@ -91,21 +101,22 @@ function Signup() {
       isKakao: isKakao,
     };
     console.log("isKakao: ", data.isKakao);
-    const apiUrl = "http://localhost:8080/members/sign-up";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-up";
     axios
       .post(apiUrl, data)
       .then((response) => {
+        // 회원가입 성공
+        // alert 등으로 알린 뒤 화면 전환 필요
         console.log(response);
         console.log(response.data.data.id);
-        navigate("/Login");
+        // navigate("/Login");
       })
       .catch((error) => {
-        console.error("Error: ", error);
+        console.error("Error: ", error); // Debug Code !!!
         navigate("/error");
       });
 
-    console.log("data: ", data);
-    // navigate("/");
+    console.log("data: ", data); // Debug Code !!!
   };
 
   return (
@@ -119,7 +130,7 @@ function Signup() {
           {step === 3 && <SignupEmail2 />}
           {step === 4 && <SignupInfo />}
         </div>
-        {step === 1 ? (
+        {step === 4 ? (
           <div className="user-banner">
             <div className="user-banner-box">
               <div className="user-banner-normal">나만의&nbsp;</div>
@@ -133,7 +144,8 @@ function Signup() {
 
             <div className="user-banner-profile"
               onClick={handleProfilePicModal}>
-              <div className="user-banner-circle">
+              <div className="user-banner-circle"
+                style={{ backgroundColor: colorMap[imgClr] }}>
                 <img className="user-banner-circle-fill"
                   src={require(`../../assets/source/profile/${imgPic}.png`)} />
               </div>
@@ -141,7 +153,7 @@ function Signup() {
 
             <button className="user-func-email-login"
               onClick={handleEmailFinish}>
-              <div className="user-button-text">회원가입 완료</div>
+              <div className="user-only-text">회원가입 완료</div>
             </button>
           </div>
         ) : (
@@ -167,13 +179,13 @@ function Signup() {
 
       {/* 프로필 꾸미기 Modal */}
       {modalVisible && (
-        <div id="ProfilePicModal">
-          {/* color_clothes_animal.png */}
-          {/* green, red, yellow */}
-          {/* cap, hat, suncap */}
-          {/* bear, panda, rabbit, tiger */}
-
-        </div>
+        <ProfilePicModal
+          initialPic={imgPic}
+          initialClr={imgClr}
+          setImgPic={setImgPic}
+          setImgClr={setImgClr}
+          handleProfilePicModal={handleProfilePicModal}
+        />
       )}
 
     </div >

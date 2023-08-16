@@ -1,4 +1,7 @@
 import React from "react";
+import MyPageNavbar from "./MyPageNavbar";
+
+import "./MyPage.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -6,8 +9,6 @@ import { useCookies } from "react-cookie";
 // Redux
 import { useDispatch } from "react-redux";
 import { resetUserState } from "../../features/userInfoSlice";
-
-import MyPageNavbar from "./MyPageNavbar";
 
 import { handleLogout } from "../../setup/user-auth/UserAuth";
 
@@ -22,22 +23,24 @@ function Signout() {
     const navigate = useNavigate();
     // cookie의 user 정보 확인
     const [cookies, setCookie] = useCookies(["refreshToken"]);
+    const handleLogout = () => {
+        console.log('cookies.refreshToken:', cookies.refreshToken);
 
-    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
-    const data = {
-        refreshToken: cookies.refreshToken
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
+        const data = {
+            refreshToken: cookies.refreshToken
+        }
+        axios.post(apiUrl, data)
+            .then(response => {
+                console.log(response);
+                if (response.data.data === "SUCCESS") {
+                    setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
+                    handleSignout();
+                } else {
+                    alert('Error')
+                }
+            })
     }
-    axios.post(apiUrl, data)
-        .then(response => {
-            console.log(response);
-            if (response.data.data === "SUCCESS") {
-                setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
-                handleSignout();
-            } else {
-                alert('Error')
-            }
-        })
-
     const handleSignout = (e) => {
         console.log("탈퇴하기");
         const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/delete';
@@ -45,6 +48,9 @@ function Signout() {
             .delete(apiUrl)
             .then((response) => {
                 console.log(response);
+
+                resetUserState(); // reset redux data
+
                 navigate("/");
             })
             .catch((error) => {

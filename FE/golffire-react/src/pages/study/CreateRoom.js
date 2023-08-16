@@ -49,6 +49,7 @@ function CreateRoom() {
 // 알림 설정 함수
 const handleCreateNotification = () => {
   const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/notification/create";
+
   const data = {
     id:"",
     type: "learning",

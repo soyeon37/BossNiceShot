@@ -38,7 +38,15 @@ public class StudyUserController {
     @Operation(summary = "스터디룸에서 유저 퇴장", description = "스터디룸에서 유저가 퇴장한다.")
     @DeleteMapping("/{studyId}")
     public ResponseEntity<Object> exit(@PathVariable Long studyId, @AuthenticationPrincipal UserDetails userDetails) {
-        studyUserService.delteByStudyIdAndMemberId(studyId, userDetails.getUsername());
+        studyUserService.deleteByStudyIdAndMemberId(studyId, userDetails.getUsername());
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "스터디룸에 속한 유저 삭제", description = "스터디룸에 있는 모든 유저를 삭제한다.")
+    @DeleteMapping("/{studyId}/all")
+    public ResponseEntity<Object> deleteByStudyId(@PathVariable Long studyId) {
+        studyUserService.deleteByStudyId(studyId);
+
         return ResponseEntity.ok().build();
     }
 }

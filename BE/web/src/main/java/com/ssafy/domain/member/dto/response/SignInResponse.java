@@ -13,6 +13,8 @@ public record SignInResponse(
         String level,
         @Schema(description = "회원 티박스", example = "RED")
         TeeBox teeBox,
+        @Schema(description = "회원 프로필 이미지", example = "red_hat_tiger.jpg")
+        String image,
         TokenInfo token
 ) {
 }

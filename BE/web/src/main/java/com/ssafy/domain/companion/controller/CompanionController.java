@@ -52,7 +52,7 @@ public class CompanionController {
 	}
 
 	@Operation(summary = "동행 모집 한 건 조회", description = "동행 모집 한 건의 정보를 조회한다")
-	@GetMapping("/{companionId}")
+	@GetMapping("/info/{companionId}")
 	public ResponseEntity<CompanionResponse> getCompanionById(@PathVariable Long companionId) {
 		return ResponseEntity.ok(CompanionResponse.from(companionService.findById(companionId)));
 	}
@@ -97,5 +97,11 @@ public class CompanionController {
 	@GetMapping("/field")
 	public ResponseEntity<List<Integer>> fieldList() {
 		return ResponseEntity.ok(companionService.findFieldOrderByCountDesc());
+	}
+
+	@Operation(summary = "메인 페이지 최신 동행 모집 5개 조회", description = "메인 페이지에 노출할 최근 동행 모집 5개를 조회한다.")
+	@GetMapping("/main")
+	public ResponseEntity<List<SimpleCompanionResponse>> mainList() {
+		return ResponseEntity.ok(companionService.findOrderByCreatedTimeLimitFive().stream().map(SimpleCompanionResponse::from).toList());
 	}
 }

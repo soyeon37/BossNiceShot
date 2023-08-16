@@ -1,5 +1,4 @@
 import React, { useRef } from "react";
-
 import MainBanner from "./MainBanner";
 import SplideGolf from "./SplideGolf";
 import SplideAccompany from "./SplideAccompany";

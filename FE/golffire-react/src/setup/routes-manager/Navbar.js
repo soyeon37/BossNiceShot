@@ -6,6 +6,11 @@ import axios from "axios";
 // Redux
 import { useSelector, useDispatch } from "react-redux";
 
+
+
+// Redux
+import { resetUserState } from "../../features/userInfoSlice";
+
 import AlertPage from "./alert/AlertPage";
 
 import { IoMdContact } from 'react-icons/io'
@@ -31,33 +36,57 @@ function Navbar() {
 
   // Redux
   const dispatch = useDispatch();
+
   // 사용자 정보(userId)로 로그인 여부 판단
   const userId = useSelector((state) => state.userInfoFeatrue.userId);
   const userNickname = useSelector((state) => state.userInfoFeatrue.userNickname);
-  console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname);
+  // const userProfile = useSelector((state) => state.userInfoFeatrue.userProfile);
+  const userProfile = "green_cap_bear yellow";
+  console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
+
+  // 사진 출력을 위한 변수
+  let profileValues = "";
+  if (userProfile) profileValues = userProfile.split(' ');
+
+  // 사진 배경 색상을 map으로 관리
+  const colorMap = {
+    "red": "#F24141",
+    "yellow": "#FFE000",
+    "green": "#3BD641",
+    "blue": "#80CAFF",
+    "white": "#FFFFFF",
+  }
 
   const navigate = useNavigate();
 
   // cookie의 user 정보 확인
   const [cookies, setCookie] = useCookies(["refreshToken"]);
 
+  // 로그아웃 함수
   const handleLogout = () => {
-    console.log('cookies.refreshToken:', cookies.refreshToken);
+    console.log('cookies.refreshToken:', cookies.refreshToken); // Debug Code !!!
 
     const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
     const data = {
       refreshToken: cookies.refreshToken
     }
     axios.post(apiUrl, data)
-      .then(response => {
+      .then((response) => {
         console.log(response);
+
         if (response.data.data === "SUCCESS") {
-          setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
-          navigate('/');
+          setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 }); //
+          console.log("로그아웃하여 redux 정보 삭제");
+          dispatch(resetUserState());
+
+          // navigate('/');
+          window.location.replace('/');
         } else {
+          console.log("Logout Error, responsed data: ", response.data);
+          console.log("로그아웃 실패!");
           alert('Error')
         }
-      })
+      });
   };
 
   const handleCheckNotification = () => {
@@ -131,7 +160,7 @@ function Navbar() {
           }}>골프장</NavLink>
         </li>
         <li id="nav-list-li">
-          <NavLink to="/accompany/" id="nav-list-link" style={({ isActive, isPending }) => {
+          <NavLink to="/accompany" id="nav-list-link" style={({ isActive, isPending }) => {
             return {
               fontWeight: isActive ? "bold" : "",
               borderTop: isActive ? '2px solid Black' : "",
@@ -152,12 +181,22 @@ function Navbar() {
 
             {/* 마이페이지 버튼 아바타로 수정했습니다. */}
             <MenuButton>
-              <Avatar size={"sm"}>
-                {/* 여기서 bg 값을 알람이 있을때는 빨간색, 없을때는 초록색으로 변경해야 할듯, 그런데 badge클릭시 알림창 뜨게 하는게 생각보다 쉽지 않음  */}
-                <AvatarBadge boxSize={'1.25rem'} bg={'red'}>
-                  {/* <AlertPage></AlertPage> */}
-                </AvatarBadge>
-              </Avatar>
+              {!userProfile ? (
+                <div className="navbar-user-icon">
+                  <div className="navbar-user-circle"
+                    style={{ backgroundColor: colorMap[profileValues[1]] }}>
+                    <img className="navbar-user-image"
+                      src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+                  </div>
+                </div>
+              ) : (
+                <Avatar size={"sm"}>
+                  {/* 여기서 bg 값을 알람이 있을때는 빨간색, 없을때는 초록색으로 변경해야 할듯, 그런데 badge클릭시 알림창 뜨게 하는게 생각보다 쉽지 않음  */}
+                  <AvatarBadge boxSize={'1.25rem'} bg={'red'}>
+                    {/* <AlertPage></AlertPage> */}
+                  </AvatarBadge>
+                </Avatar>
+              )}
             </MenuButton>
             <MenuList>
 
