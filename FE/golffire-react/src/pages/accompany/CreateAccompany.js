@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Datetime from 'react-datetime';
 import moment from 'moment';
 
 import GolffieldModal from './GolffieldModal';

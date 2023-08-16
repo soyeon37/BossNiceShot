@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import CoachingBox from './CoachingBox';
 import CoachingRoom from './CoachingRoom';
@@ -21,10 +21,10 @@ import "./study.css";
 
 
 function CoachingList() {
-  // 사용자 정보(userId)로 로그인 여부 판단
-  const userId = useSelector((state) => state.userInfoFeatrue.userId);
+  const navigate = useNavigate();
 
-  // 페이징 컨트롤
+  const studyType = 'COACHING';
+
   const pageSize = 6; 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -45,7 +45,7 @@ function CoachingList() {
   }, [searchFilter]);
 
   const getCoachingList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     console.log(apiUrl);
 
@@ -62,7 +62,7 @@ function CoachingList() {
   };
 
   const getCoachingSearchList = (searchValue, currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     const studySearchRequest = {
       category: searchFilter,
@@ -85,7 +85,7 @@ function CoachingList() {
   };
 
   const getCoachingAttandableList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     setCurrentPage(currentPage);
 
@@ -101,7 +101,7 @@ function CoachingList() {
   };
 
   const getCoachingAttandableSearchList = (searchValue, currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     setSearchValue(searchValue);
     setCurrentPage(currentPage);
@@ -122,6 +122,45 @@ function CoachingList() {
       setTotalPages(response.data.totalPages);
     });
   };
+
+  const handleAttandClick = (study) => {
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/info/' + study.id;
+
+    axios.get(apiUrl)
+    .then((response) => {
+      if (response.data.capacity > response.data.studyUserCount) {
+        enterStudyUser(study);
+      } else {
+        alert("참가 인원이 많아 코칭룸에 참여하실 수 없습니다.");
+      }
+    });
+  }
+
+  // 코칭룸 입장
+  const enterStudyUser = (study) => {
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/user';
+
+    const studyUserRequest = {
+      studyId: study.id
+    };
+
+    console.log("코칭룸 입장");
+    console.log(studyUserRequest);
+
+    axios.post(apiUrl, studyUserRequest)
+        .then((response) => {
+            console.log(response);
+
+            // 코칭룸으로 이동
+            navigate('/CoachingRoom', {
+                state: {
+                    type: studyType,
+                    study: study,
+                    studyUser: response.data
+                }
+            });
+        });
+};
 
   const handlePageChange = (pageNumber) => {
     if (selectedAttandable) { // 참여 가능한 코칭 리스트
@@ -210,7 +249,7 @@ function CoachingList() {
       <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
       <div className="list-head">
           <Link to="/createcroom">
-            <div className="head-create-button bg-coaching">+ 모집하기</div>
+            <div className="head-create-button bg-coaching">+ 코칭하기</div>
           </Link>
 
           <div className="search-container">
@@ -324,9 +363,7 @@ function CoachingList() {
             </div>
           </div>
           <div className="selected-container-footer">
-            <Link to={`/coachingroom/${selectedContent.id}`}>
-              <button className="button bg-coach"> 참여하기</button>
-            </Link>
+            <button className="button bg-coaching" onClick={() => handleAttandClick(selectedContent)}> 참여하기</button>
           </div>
         </div>
       )}

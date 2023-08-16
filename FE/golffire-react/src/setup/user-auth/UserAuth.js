@@ -17,24 +17,20 @@ export function reissueToken({ refreshToken, setCookie, removeCookie, navigate }
       const message = response.data.data.message;
       if (message === "SUCCESS") {
         const newAccessToken = response.data.data.accessToken;
-        console.log("새 access 토큰: ", newAccessToken);
-        
-        axios.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
-        removeCookie("access_token");
-        console.log("엑세스 토큰 연장 성공");
+        console.log("UserAuth - reissueToken; ", newAccessToken);
+        removeCookie('access_token');
+        setCookie('access_token', newAccessToken, { path: '/' });
         return true;
       } else {
-        console.log("EXPIRED_TOKEN_MESSAGE: ", message);
-        // 로그아웃 시켜주는 func 실행
-        console.log("리프레시 토큰 만료됨 -> 로그아웃");
+        console.log('EXPIRED_TOKEN_MESSAGE: ', message);
+        handleLogout(cookies = { cookies }, setCookie = { setCookie }, navigate = { navigate });
         return false;
       }
     })
     .catch((error) => {
-      console.error("토큰 재발급 중 Error:", error); // Debug Code
+      console.error('Error:', error); // Debug Code
       return false;
     });
-  return false;
 }
 
 // 로그아웃 처리 함수

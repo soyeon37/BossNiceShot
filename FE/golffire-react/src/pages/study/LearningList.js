@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import LearningBox from './LearningBox';
-import LearningRoom from './LearningRoom';
+import "./study.css";
 
 import ProfileImg from "../../assets/source/imgs/favicon.png";
 
@@ -12,19 +11,15 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { SearchIcon } from "@chakra-ui/icons";
 
-// Redux
-import { useSelector } from "react-redux";
-
 import axios from "axios";
-
-import "./study.css";
-
+import LearningRoom from './LearningRoom';
+import LearningBox from './LearningBox';
 
 function LearningList() {
-  // 사용자 정보(userId)로 로그인 여부 판단
-  const userId = useSelector((state) => state.userInfoFeatrue.userId);
+  const navigate = useNavigate();
 
-  // 페이징 컨트롤
+  const studyType = 'LEARNING';
+
   const pageSize = 6; 
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -51,7 +46,7 @@ function LearningList() {
 
     setCurrentPage(currentPage);
 
-    console.log("코칭 리스트 조회");
+    console.log("러닝 리스트 조회");
     axios.get(apiUrl)
     .then((response) => {
       console.log(response);
@@ -89,7 +84,7 @@ function LearningList() {
 
     setCurrentPage(currentPage);
 
-    console.log("참여 가능한 코칭 리스트 검색 조회");
+    console.log("참여 가능한 러닝 리스트 검색 조회");
     
     axios.get(apiUrl)
     .then((response) => {
@@ -123,14 +118,53 @@ function LearningList() {
     });
   };
 
+  const handleAttandClick = (study) => {
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/info/' + study.id;
+
+    axios.get(apiUrl)
+    .then((response) => {
+      if (response.data.capacity > response.data.studyUserCount) {
+        enterStudyUser(study);
+      } else {
+        alert("참가 인원이 많아 러닝룸에 참여하실 수 없습니다.");
+      }
+    });
+  }
+
+  // 러닝룸 입장
+  const enterStudyUser = (study) => {
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/user';
+
+    const studyUserRequest = {
+      studyId: study.id
+    };
+
+    console.log("러닝룸 입장");
+    console.log(studyUserRequest);
+
+    axios.post(apiUrl, studyUserRequest)
+        .then((response) => {
+            console.log(response);
+
+            // 러닝룸으로 이동
+            navigate('/LearningRoom', {
+                state: {
+                    type: studyType,
+                    study: study,
+                    studyUser: response.data
+                }
+            });
+        });
+};
+
   const handlePageChange = (pageNumber) => {
-    if (selectedAttandable) { // 참여 가능한 코칭 리스트
+    if (selectedAttandable) { // 참여 가능한 러닝 리스트
       if (searchValue.trim() == "") { // 미검색
         getLearningAttandableList(pageNumber);
       } else { // 검색
         getLearningAttandableSearchList(searchValue, pageNumber);
       }
-    } else { // 전체 코칭 리스트
+    } else { // 전체 러닝 리스트
       if (searchValue.trim() == "") { // 미검색
         getLearningList(pageNumber);
       } else { // 검색
@@ -156,7 +190,7 @@ function LearningList() {
     if (searchValue.trim() == "") {
       alert("검색어를 입력하세요.");
     } else {
-      if (selectedAttandable) { // 참여 가능한 코칭 리스트
+      if (selectedAttandable) { // 참여 가능한 러닝 리스트
         if (searchValue.trim() == "") { // 미검색
           getLearningAttandableList(currentPage);
         } else { // 검색
@@ -210,7 +244,7 @@ function LearningList() {
       <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
       <div className="list-head">
           <Link to="/createlroom">
-            <div className="head-create-button bg-coaching">+ 모집하기</div>
+            <div className="head-create-button bg-coaching">+ 러닝하기</div>
           </Link>
 
           <div className="search-container">
@@ -311,7 +345,7 @@ function LearningList() {
           </div>
 
           <div className="selected-container-body">
-            <div className="learning-textarea">{selectedContent.description}</div>
+            <div className="coaching-textarea">{selectedContent.description}</div>
             <div className="selected-container-info">
               <MdSportsGolf className="react-icon" />
               <div className="info-text-left">
@@ -324,9 +358,7 @@ function LearningList() {
             </div>
           </div>
           <div className="selected-container-footer">
-            <Link to={`/learningroom/${selectedContent.id}`}>
-              <button className="button bg-learn"> 참여하기</button>
-            </Link>
+            <button className="button bg-coaching" onClick={() => handleAttandClick(selectedContent)}> 참여하기</button>
           </div>
         </div>
       )}
