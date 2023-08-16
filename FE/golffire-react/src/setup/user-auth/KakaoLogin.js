@@ -7,12 +7,17 @@ import axios from "axios";
 // Redux
 import { useDispatch } from "react-redux";
 import { setUserId, setUserNickname, setUserLevel, setUserTee, setUserImage, setUserAccessToken, resetUserState } from "../../features/userInfoSlice";
+import Interceptor from "./Interceptor";
 
 import { Box, Code } from "@chakra-ui/react";
 
 const Kakao = (props) => {
   // Redux
   const dispatch = useDispatch();
+
+  const [checkToken, setCheckToken] = useState(0);
+  const [doLogin, setDoLogin] = useState(0);
+  const [doLogout, setDoLogout] = useState(0);
 
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -104,35 +109,35 @@ const Kakao = (props) => {
         password: "1234",
         isKakao: true,
       };
-      const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-in"
-      console.log("kakao login 시도중:", data);
-      axios
-        .post(apiUrl, data)
-        .then((response) => {
-          console.log(response);
-          // 사용자 정보를 작성하는 코드
-          // ...
-          // accessToken은 헤더로 설정
-          const access_token = response.data.data.token.accessToken;
-          const refresh_token = response.data.data.token.refreshToken;
-          axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
-          setCookie("refreshToken", refresh_token, {
-            path: "/",
-            maxAge: new Date().getDate() + 60 * 60 * 24 * 14,
-          });
+      setDoLogin(data);
+      
+      //
+      // const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-in"
+      // console.log("kakao login 시도중:", data);
+      // axios
+      //   .post(apiUrl, data)
+      //   .then((response) => {
+      //     // 사용자 정보를 작성하는 코드
+      //     const responsedData = response.data.data;
 
-          // NavBar에 사용자 정보 저장 - data for test
-          dispatch(setUserId("logined@ssafy.com"));
-          dispatch(setUserNickname("로그인 됨"));
-          dispatch(setUserLevel("eagle"));
-          dispatch(setUserTee("Red"));
+      //     // accessToken은 헤더로 설정
+      //     const access_token = responsedData.token.accessToken;
+      //     const refresh_token = responsedData.token.refreshToken;
+      //     // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
 
-          navigate("/");
-        })
-        .catch((error) => {
-          console.error("Error: ", error);
-          navigate("/error");
-        });
+      //     setCookie("refreshToken", refresh_token, {
+      //       path: "/",
+      //       maxAge: new Date().getDate() + 60 * 60 * 24 * 14,
+      //     });
+
+      //     // NavBar에 사용자 정보 저장 - data for test
+
+      //     navigate("/");
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error: ", error);
+      //     navigate("/error");
+      //   });
     };
   };
 
@@ -145,6 +150,13 @@ const Kakao = (props) => {
       <Box maxW="md" mx="auto">
         <div>잠시만 기다려 주세요! 로그인 중입니다.</div>
       </Box>
+
+      <Interceptor
+        checkToken={checkToken}
+        doLogin={doLogin}
+        doLogout={doLogout}
+      />
+
     </Box>
   );
 };
