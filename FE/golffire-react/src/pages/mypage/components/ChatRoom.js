@@ -14,9 +14,9 @@ import { Stomp } from '@stomp/stompjs';
 import { useSelector } from "react-redux";
 
 function ChatRoom({ props }) {
-    const currentUserId = useSelector((state) => state.userInfoFeatrue.userId);
-    const currentUserNickname = useSelector((state) => state.userInfoFeatrue.userNickname);
-    const currentUserImage = "1.jpg";
+    const currentUserId = useSelector((state) => state.userInfoFeature.userId);
+    const currentUserNickname = useSelector((state) => state.userInfoFeature.userNickname);
+    const currentUserImage = useSelector((state) => state.userInfoFeature.userImage);
 
     const { id, title, teeBox, field, teeUpTime } = props;
     const [chatMessages, setChatMessages] = useState([]);

@@ -10,7 +10,7 @@ const preloadedState = loadStateFromLocalStorage();
 const store = configureStore({
   reducer: {
     signupFeature: signupReducer,
-    userInfoFeatrue: userInfoReducer,
+    userInfoFeature: userInfoReducer,
   },
   preloadedState,
 });
