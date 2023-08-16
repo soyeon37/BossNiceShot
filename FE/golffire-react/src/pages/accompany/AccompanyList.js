@@ -94,7 +94,6 @@ function AccompanyList() {
 
   const handleInputChange = (event) => {
     setSearchValue(event.target.value);
-    // 검색 기능을 추가하고 원하는 작업을 수행할 수 있습니다.
   };
 
   const handleFilterChange = (event) => {
@@ -106,23 +105,12 @@ function AccompanyList() {
   };
 
   const handleSearchClick = () => {
-    // 검색 버튼을 클릭할 때 서버로 검색 필터와 검색 값 전송하는 로직을 추가합니다.
-    if (searchValue.trim() !== "") {
-      const searchData = {
-        filter: searchFilter,
-        value: searchValue,
-      };
-
-      // 여기서 searchData를 서버로 전송하는 API 호출 등의 작업을 수행할 수 있습니다.
-      console.log("Sending searchData to server:", searchData);
+    if (searchValue.trim() == "") {
+      alert("검색어를 입력하세요.");
+    } else {
+      getCompanionList(searchValue, 1);
     }
-  };
-  const [switchValue, setSwitchValue] = useState(false);
-
-  const handleSwitchChange = () => {
-    setSwitchValue(!switchValue);
-    // 필터 기능을 추가하고 원하는 작업을 수행할 수 있습니다.
-  };
+  }
 
   // 팔로잉 라디오 버튼 함수
   const handleFollowChange = () => {
@@ -234,8 +222,11 @@ function AccompanyList() {
       getSelectedContent(id);
     }
   };
+
+  const { attandableStatus, setAttandableStatus } = useState(false); 
+
   const getSelectedContent = (id) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/" + id;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/info" + id;
 
     axios.get(apiUrl).then((response) => {
       setSelectedContent(response.data);
@@ -243,10 +234,71 @@ function AccompanyList() {
       console.log("동행 모집 한 건 조회");
       console.log(response);
 
+      // 사용자 로그인 유무 확인
+      if (userId) { // 로그인한 경우
+        const companion = response.data;
+
+        // 사용자가 이미 신청한 동행인지 확인하기
+        checkDuplicateCompanionUser(companion);
+      } else { // 로그인하지 않은 경우
+        setAttandableStatus(true);
+      }
+      
       setIsSelected(true);
       setSelectedId(id);
     });
   };
+  
+  // 동행 모집 신청 여부 확인
+  const checkDuplicateCompanionUser = (companion) => {
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/user/check/' + companion.id;
+
+    axios.get(apiUrl)
+      .then((response) => {
+        if (!response.data) { // 동행 모집을 신청하지 않은 경우
+          setAttandableStatus(true);
+        } else { // 동행 모집을 신청한 경우
+          setAttandableStatus(false);
+        }
+      });
+  };
+
+  // 참여하기 버튼 클릭 시
+  const handleAttandClick = (companion) => {
+    if (attandableStatus) { // 참여하기 버튼 클릭
+      if (!userId) { // 로그인 하지 않은 경우
+        alert("로그인 후 신청합니다.");
+      } else { // 로그인한 경우
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/' + companion.id;
+
+        axios.get(apiUrl) // 동행 모집의 현재 인원 확인한다.
+        .then((response) => {
+          if (response.data.capacity > response.data.companionUserCount) { // 모집 인원보다 현재 인원이 적으면
+            const companionUserRequset = {
+              companionId: companion.id
+            };
+
+            addCompanionUser(companionUserRequset); // 사용자가 이미 신청한 동행인지 확인한다.
+          } else { // 모집 인원이 다 찬 경우
+            alert("참가 인원이 많아 동행 모집에 참여하실 수 없습니다.");
+          }
+        });
+      }
+    } else { // 취소하기 버튼 클릭
+      const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/user/' + companion.id;
+
+      axios.delete(apiUrl);
+    }
+  };
+
+  const addCompanionUser = (companionUserRequset) => {
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/user";
+
+    console.log("동행 모집 참여자 생성");
+    axios.post(apiUrl, companionUserRequset).then((response) => {
+        console.log(response);
+    });
+  }
 
   const dateFormat = (input) => {
     const date = new Date(input);
@@ -317,20 +369,19 @@ function AccompanyList() {
                 </div>
               </div>
             ) : (
-              <div className="search-input-container">
-                <input
-                  className="search-input-box"
-                  type="text"
-                  value={searchValue}
-                  onChange={handleInputChange}
-                  placeholder="검색어를 입력하세요"
-                />
-                <button id="search-input-icon" onClick={handleSearchClick}>
-                  <SearchIcon boxSize={6} color="#8D8F98" />
-                </button>
-              </div>
+            <div className="search-input-container">
+              <input
+                className="search-input-box"
+                type="text"
+                value={searchValue}
+                onChange={handleInputChange}
+                placeholder="검색어를 입력하세요"
+              />
+              <button id="search-input-icon" onClick={handleSearchClick}>
+                <SearchIcon boxSize={6} color="#8D8F98" />
+              </button>
+            </div>
             )}
-
             {/* 검색 필터 */}
             <select
               id="searchFilter"
@@ -426,9 +477,7 @@ function AccompanyList() {
             </div>
           </div>
           <div className="selected-container-footer">
-            <Link to={`/accompanyroom/${selectedContent.id}`}>
-              <button className="button accompany-button bg-accompany">참여하기</button>
-            </Link>
+            <button className="button accompany-button bg-accompany" onClick={() => handleAttandClick(selectedContent)}> 참여하기</button>
           </div>
         </div>
       )}

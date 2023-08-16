@@ -159,6 +159,10 @@
 }
 
 #control-num {
+  margin-left: 10px;
+  margin-right: 10px;
+
+  justify-items: center;
   display: flex;
   align-items: center;
 

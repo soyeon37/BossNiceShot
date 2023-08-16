@@ -29,12 +29,12 @@ public class CompanionUserService {
     @Transactional
     public void refuseCompanionUser(Long companionUserId) {
         CompanionUser companionUser = companionUserRepository.findById(companionUserId)
-                        .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(EntityNotFoundException::new);
 
         companionUserRepository.delete(companionUser);
     }
 
-    public List<CompanionUser> findByCompanionId(Long companionId){
+    public List<CompanionUser> findByCompanionId(Long companionId) {
         return companionUserRepository.findByCompanionIdAndStatus(companionId, Status.ACTIVE);
     }
 
@@ -60,5 +60,11 @@ public class CompanionUserService {
 
         companionUserRepository.delete(companionUser);
         companionService.findById(companionId).leaveUser();
+    }
+
+    public Boolean findByCompanionIdAndMemberId(Long companionId, String memberId) {
+        CompanionUser companionUser = companionUserRepository.findByCompanionIdAndMemberId(companionId, memberId).orElse(null);
+
+        return companionUser != null;
     }
 }

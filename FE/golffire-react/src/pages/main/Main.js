@@ -8,6 +8,9 @@ import MainStudy from "./MainStudy";
 import MainCompanion from "./MainCompanion";
 import Chatbot from "./Chatbot";
 import RefContext from "./RefContext";
+
+import Footer from "./Footer";
+
 import "./Main.css";
 
 
@@ -23,6 +26,7 @@ function Main() {
         <MainStudy />
         <MainCompanion />
         <Chatbot />
+        <Footer />
       </div>
     </RefContext.Provider>
   );
