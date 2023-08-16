@@ -5,6 +5,7 @@ import axios from "axios";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
+import { resetUserState } from "../../features/userInfoSlice";
 
 import AlertPage from "./alert/AlertPage";
 
