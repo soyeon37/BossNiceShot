@@ -46,20 +46,20 @@ const Kakao = (props) => {
       getInfo(access_token);
     })
     .catch((error) => {
-      console.error("Error:", error); // Debug Code
+      console.error('Error:', error); // Debug Code
     });
 
-  // KAKAO 회원 정보 가져오기
+  // KAKAO 회원 정보 가져오기 
   const getInfo = (access_token) => {
-    const apiUrl = "https://kapi.kakao.com/v2/user/me";
+    const apiUrl = 'https://kapi.kakao.com/v2/user/me';
+
 
     // Axios를 사용하여 GET 요청 보내기
-    axios
-      .get(apiUrl, {
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      })
+    axios.get(apiUrl, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      }
+    })
       .then((response) => {
         console.log("kakao info ", response);
         console.log(response.data.kakao_account.email);

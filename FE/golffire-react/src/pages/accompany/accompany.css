@@ -6,32 +6,32 @@
 
 /* AccompanyList.js */
 .search-filter {
-  height: 44px;
-  min-width: 130px;
+  height: 45px;
+  min-width: 150px;
   margin-left: 10px;
 
   border-radius: 50px;
   outline: none;
-  border: 1px solid #8D8F98;
-  background: #FFF;
+  border: 1px solid #8d8f98;
+  background: #fff;
 
   padding: 10px;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .search-filter option {
   text-align: center;
-  background: #FFF;
+  background: #fff;
 }
 
 /* AccompanyBox CSS */
 .accompany-box {
-  width: calc(33% - 16px);
-  min-height: 195px;
+  width: 32%;
+  min-height: 210px;
 
   margin: 10px 10px;
   padding: 10px 30px;
-  
+
   border-radius: 30px;
   border: 2px solid #000;
 
@@ -41,9 +41,9 @@
 
 .accompany-box-title {
   color: #000;
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 600;
-  
+
   margin-bottom: 5px;
 
   display: flex;
@@ -54,15 +54,11 @@
 .accompany-box-date {
   display: flex;
   align-items: center;
-
-  font-size: 14px;
 }
 
 .accompany-box-place {
   display: flex;
   align-items: center;
-  
-  font-size: 14px;
 }
 
 .accompany-box-button-position {
@@ -83,17 +79,13 @@
 
   margin-top: 5px;
   cursor: pointer;
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 50px;
-  border: 2px solid #3CADFF;
+  border: 2px solid #3cadff;
 
-  color: #3CADFF;
-  font-size: 16px;
+  color: #3cadff;
+  font-size: 20px;
   font-weight: 900;
-}
-.accompany-box-button:hover{
-  color: #FFF;
-  background-color: #3CADFF;
 }
 
 .checkbox-div {
@@ -125,8 +117,8 @@
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -137,16 +129,16 @@
   left: 3px; /* 작은 크기 */
   bottom: 3px; /* 작은 크기 */
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
-  background-color: #3CADFF;
+  background-color: #3cadff;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #3CADFF;
+  box-shadow: 0 0 1px #3cadff;
 }
 
 input:checked + .slider:before {
@@ -162,11 +154,4 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-}
-
-
-/* accompany button */
-.accompany-button:hover{
-  background-color: #FFF;
-  color: #3CADFF;
 }

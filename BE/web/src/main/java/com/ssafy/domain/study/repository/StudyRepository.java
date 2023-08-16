@@ -44,4 +44,7 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
     @Query(value = "select s from Study s where s.type = :type and s.status = 'ACTIVE' and s.studyUserCount < s.capacity and s.title like concat('%', :keyword, '%') or s.description like concat('%', :keyword, '%') order by s.createdTime desc",
             countQuery = "select count(s) from Study s")
     Page<Study> findPagingAttandableByTypeAndTitleContainingOrDescriptionContaining(Pageable pageable, @Param("type")StudyType type, @Param("keyword") String keyword);
+
+    @Query(value = "select s from Study s order by s.createdTime desc limit 5")
+    List<Study> findOrderByCreatedTimeLimitFive();
 }

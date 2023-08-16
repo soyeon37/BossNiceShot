@@ -71,7 +71,7 @@ public class MemberController {
         return ApiResponse.success(memberService.sendEmail(request));
     }
 
-
+    @Operation(summary = "회원가입", description = "이메일, 비밀번호, 기타 정보를 입력받아 회원가입 한다.")
     @ApiResponses({
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "성공"),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "인증 실패"),

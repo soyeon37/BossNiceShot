@@ -2,6 +2,7 @@ package com.ssafy.domain.companion.controller;
 
 import com.ssafy.domain.companion.dto.request.CompanionUserRequest;
 import com.ssafy.domain.companion.dto.response.CompanionUserResponse;
+import com.ssafy.domain.companion.entity.CompanionUser;
 import com.ssafy.domain.companion.service.CompanionUserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -59,5 +60,10 @@ public class CompanionUserController {
 	public ResponseEntity<Object> refuse(@PathVariable Long companionUserId) {
 		companionUserService.refuseCompanionUser(companionUserId);
 		return ResponseEntity.ok().build();
+	}
+	@Operation(summary = "동행 모집 신청 여부 확인", description = "사용자가 동행 모집에 신청했는지 확인한다.")
+	@GetMapping("/check/{companionId}")
+	public ResponseEntity<Boolean> check(@PathVariable Long companionId, @AuthenticationPrincipal UserDetails userDetails) {
+		return ResponseEntity.ok(companionUserService.findByCompanionIdAndMemberId(companionId, userDetails.getUsername()));
 	}
 }
