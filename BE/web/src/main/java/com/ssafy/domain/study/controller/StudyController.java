@@ -20,11 +20,11 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -101,7 +101,7 @@ public class StudyController {
     }
 
     @Operation(summary = "전체 스터디 조회 - 최신 등록 순", description = "타입 별로 전체 스터디를 최신 등록 순으로 정렬한다.")
-    @GetMapping("/api/study/{type}")
+    @GetMapping("/api/study/list/{type}")
     public ResponseEntity<Map<String, Object>> studyList(@PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Study> paging = studyService.findPaging(pageable, type);
 
@@ -113,7 +113,7 @@ public class StudyController {
     }
 
     @Operation(summary = "검색 기반 스터디 조회", description = "타입 별로 검색 결과를 최신 등록 순으로 정렬한다.")
-    @PostMapping("/api/study/{type}")
+    @PostMapping("/api/study/list/{type}")
     public ResponseEntity<Map<String, Object>> searchList(@RequestBody StudySearchRequest studySearchRequest, @PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Study> paging = studyService.findByKeyword(pageable, type, studySearchRequest);
 
@@ -125,7 +125,7 @@ public class StudyController {
     }
 
     @Operation(summary = "참여 가능한 코칭 조회", description = "활성화된 코칭 중, 참가 인원이 코칭의 최대 인원보다 작은 코칭을 최신 등록 순으로 정렬한다.")
-    @GetMapping("/api/study/{type}/attandable")
+    @GetMapping("/api/study/list/{type}/attandable")
     public ResponseEntity<Map<String, Object>> attandableList(@PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Study> paging = studyService.findPagingAttandableCoaching(pageable, type);
 
@@ -137,7 +137,7 @@ public class StudyController {
     }
 
     @Operation(summary = "검색 기반 참여 가능한 코칭 조회 - 최신 등록 순", description = "활성화된 코칭 중, 참가 인원이 코칭의 최대 인원보다 작은 코칭 검색 결과를 최신 등록 순으로 정렬한다.")
-    @PostMapping("/api/study/{type}/attandable")
+    @PostMapping("/api/study/list/{type}/attandable")
     public ResponseEntity<Map<String, Object>> attandableSearchList(@RequestBody StudySearchRequest studySearchRequest, @PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
         Page<Study> paging = studyService.findAttandableCoachingByKeyword(pageable, type, studySearchRequest);
 
@@ -146,5 +146,11 @@ public class StudyController {
         response.put("totalPages", paging.getTotalPages());
 
         return ResponseEntity.ok(response);
+    }
+
+    @Operation(summary = "메인 페이지 최신 스터디 5개 조회", description = "메인 페이지에 노출할 최근 스터디 5개를 조회한다.")
+    @GetMapping("/api/study/main")
+    public ResponseEntity<List<StudyResponse>> mainList() {
+        return ResponseEntity.ok(studyService.findOrderByCreatedTimeLimitFive().stream().map(StudyResponse::from).toList());
     }
 }

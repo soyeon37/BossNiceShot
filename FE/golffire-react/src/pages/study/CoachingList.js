@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
-import "./study.css";
+import CoachingBox from './CoachingBox';
+import CoachingRoom from './CoachingRoom';
 
 import ProfileImg from "../../assets/source/imgs/favicon.png";
 
@@ -11,9 +12,13 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { SearchIcon } from "@chakra-ui/icons";
 
+// Redux
+import { useSelector } from "react-redux";
+
 import axios from "axios";
-import CoachingRoom from './CoachingRoom';
-import CoachingBox from './CoachingBox';
+
+import "./study.css";
+
 
 function CoachingList() {
   const navigate = useNavigate();
@@ -40,7 +45,7 @@ function CoachingList() {
   }, [searchFilter]);
 
   const getCoachingList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     console.log(apiUrl);
 
@@ -57,7 +62,7 @@ function CoachingList() {
   };
 
   const getCoachingSearchList = (searchValue, currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     const studySearchRequest = {
       category: searchFilter,
@@ -80,7 +85,7 @@ function CoachingList() {
   };
 
   const getCoachingAttandableList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     setCurrentPage(currentPage);
 
@@ -96,7 +101,7 @@ function CoachingList() {
   };
 
   const getCoachingAttandableSearchList = (searchValue, currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     setSearchValue(searchValue);
     setCurrentPage(currentPage);
@@ -244,7 +249,7 @@ function CoachingList() {
       <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
       <div className="list-head">
           <Link to="/createcroom">
-            <div className="head-create-button bg-coaching">+ 모집하기</div>
+            <div className="head-create-button bg-coaching">+ 코칭하기</div>
           </Link>
 
           <div className="search-container">
@@ -323,7 +328,7 @@ function CoachingList() {
       </div>
 
       {/* 배경 div */}
-      <div className="list-background-div bg-coaching"></div>
+      <div className="list-background-div bg-coach"></div>
 
       {/* 선택 시 나타나는 정보 */}
       {isSelected && selectedId && (
