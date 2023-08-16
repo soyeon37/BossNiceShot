@@ -10,7 +10,7 @@ export const saveStateToLocalStorage = (state) => {
 export const loadStateFromLocalStorage = () => {
     try {
         const dataFOREVER = localStorage.getItem('reduxState');
-        console.log("저장된 놈???", dataFOREVER)
+        console.log("local storage에 저장된 값: ", dataFOREVER)
         
         const serializedState = localStorage.getItem('reduxState');
         if (serializedState === null) {

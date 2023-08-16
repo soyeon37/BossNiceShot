@@ -5,7 +5,7 @@ import axios from "axios";
 
 // Redux
 import { useDispatch } from "react-redux";
-import { setUserId, setUserNickname, setUserLevel, setUserTee, setUserImage, setUserAccessToken } from "../../features/userInfoSlice";
+import { setUserId, setUserNickname, setUserLevel, setUserTee, setUserImage, setUserAccessToken, resetUserState } from "../../features/userInfoSlice";
 
 import BackgroundImage from "../../assets/source/imgs/golf-image-1.svg";
 import { IoMailOutline, IoChatbubbleSharp } from "react-icons/io5";
@@ -38,10 +38,9 @@ const Login = () => {
       isKakao: false,
     };
 
-    console.log("data:", data);
+    // console.log("data:", data); // Debug Code !!!
 
     // 서버 API 엔드포인트 URL
-    // 추후 실제 서버 URL로 대체 필요 !!
     const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-in";
 
     // Axios를 사용하여 POST 요청 보내기
@@ -49,11 +48,14 @@ const Login = () => {
       .post(apiUrl, data)
       .then((response) => {
         // 서버로부터 받은 정보
-        const access_token = response.data.data.token.accessToken;
-        const refresh_token = response.data.data.token.refreshToken;
+        const responsedData = response.data.data;
+        const access_token = responsedData.token.accessToken;
+        const refresh_token = responsedData.token.refreshToken;
 
         // header에 accesstoken 저장
         axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+        // Redux(Local Storage)에 accesstoken 저장
+        dispatch(setUserAccessToken(access_token));
 
         // 쿠키에 정보 저장
         setCookie("refreshToken", refresh_token, {
@@ -61,25 +63,21 @@ const Login = () => {
           maxAge: new Date().getDate() + 60 * 60 * 24 * 14,
         });
 
-        console.log(response.data); // Debug Code !!
+        console.log(responsedData); // Debug Code !!
         
-        // 로그인 후 사용자 정보 넣기 (라연)
-
         // NavBar에 사용자 정보 저장
-        dispatch(setUserId(email));
-        dispatch(setUserNickname("로그인 됨"));
-        dispatch(setUserLevel("eagle"));
-        dispatch(setUserTee("Red"));
-        dispatch(setUserImage("red_cap_bear blue"));
-        
-        dispatch(setUserAccessToken(access_token));
+        dispatch(setUserId(responsedData.id)); // email과 동일한 값
+        dispatch(setUserImage(responsedData.image));
+        dispatch(setUserLevel(responsedData.level));
+        dispatch(setUserTee(responsedData.teeBox));
+        dispatch(setUserNickname(responsedData.nickname));
 
         // 로그인 성공 후 Main으로 복귀
         navigate("/");
       })
       .catch((error) => {
         console.error("Error:", error); // Debug Code !!
-
+        dispatch(resetUserState());
         // 로그인 실패를 화면에 표시하는 코드 필요 !!
         navigate("/error");
       });
