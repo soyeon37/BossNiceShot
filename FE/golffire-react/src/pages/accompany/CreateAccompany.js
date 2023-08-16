@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment';
-
+import { ko } from "date-fns/esm/locale";
 import GolffieldModal from './GolffieldModal';
 import { getNameById, getAddressById, getCallById } from "../golffield/ParseGolfId";
-
-import 'react-datetime/css/react-datetime.css';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import './GolffieldModal.css';
 
 import flagred from '../../assets/source/icons/flag-red.png';
 import flagwhite from '../../assets/source/icons/flag-white.png';
 import flagblack from '../../assets/source/icons/flag-black.png';
 import flagall from '../../assets/source/icons/flag-all.png';
+import bearImg from '../../assets/source/mascot/bear-fullswing.png';
 
 import PinImg from "../../assets/source/icons/pin.png";
 
@@ -27,7 +28,8 @@ import axios from 'axios';
 
 function CreateAccompany() {
     const navigate = useNavigate();
-
+    const [checkInDate, setCheckInDate] = useState(new Date());
+    const [time, setTime] = useState('12:34pm')
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [teeUpTime, setTeeUpTime] = useState(null);
@@ -248,7 +250,9 @@ function CreateAccompany() {
                                             )
                                         default: // 5
                                             return (
-                                                <div></div>
+                                                <div className='option-title'>
+                                                    <IoGolf className='option-title-icon' />티업 정보
+                                                </div>
                                             )
 
                                     }
@@ -295,11 +299,20 @@ function CreateAccompany() {
                                             case 2:
                                                 return (
                                                     <div className='option-datetime'>
-                                                        <input type="date"
+                                                        {/* <input type="date"
                                                             className='option-datetime-box'
                                                             value={teeUpTime.toISOString().split('T')[0]}
-                                                            onChange={handleDateChange} />
-                                                        <input type="time"
+                                                            onChange={handleDateChange} /> */}
+                                                       
+                                                        <DatePicker locale={ko}
+                                                            dateFormat="yyyy-MM-dd"
+                                                            className="input-datepicker"
+                                                            minDate={new Date()}
+                                                            closeOnScroll={true}
+                                                            placeholderText="체크인 날짜 선택"
+                                                            selected={checkInDate}
+                                                            onChange={(date) => setCheckInDate(date)} />
+                                                             <input type="time"
                                                             className='option-datetime-box'
                                                             value={teeUpTime.toTimeString().split(' ')[0]}
                                                             onChange={handleTimeChange} />
@@ -333,8 +346,8 @@ function CreateAccompany() {
                                                         </div>
                                                         <div className='tee-grid-item'>
                                                             <img src={flagwhite} alt='화이트 티 박스'
-                                                                onClick={() => setTeeBox('WHTIE')}
-                                                                className={`option-tee-img${teeBox === 'WHTIE' ? '-selected' : ''}`} />
+                                                                onClick={() => setTeeBox('WHITE')}
+                                                                className={`option-tee-img${teeBox === 'WHITE' ? '-selected' : ''}`} />
                                                         </div>
                                                         <div className='tee-grid-item'>
                                                             <img src={flagblack} alt='블랙 티 박스'
@@ -357,14 +370,14 @@ function CreateAccompany() {
                                                         <div className='option-total-normal'>
                                                             {new Intl.DateTimeFormat('ko-KR', optionDateTime).format(field)}
                                                         </div>
-                                                        <div className='option-total-bold'>
+                                                        <div className='option-total-normal'>
                                                             {capacity}명
                                                         </div>
-                                                        <div className='option-total-normal'>
+                                                        <div className='option-total-tee'>
                                                             <img className='tee-icon' src={iconPaths[teeBox]} alt={teeBox} />
                                                         </div>
                                                         <div className='option-total-img'>
-                                                            <img className='mascot-deco' src={flagall} alt="mascot-bear" />
+                                                            <img className='mascot-deco' src={bearImg} alt="mascot-bear" />
                                                         </div>
                                                     </div>
                                                 )
@@ -385,10 +398,10 @@ function CreateAccompany() {
                     </div>
                     <div className='create-main-footer'>
                         <Link to="/accompany">
-                            <button className='button cancel'>취소하기</button>
+                            <button className='cancel'>취소하기</button>
                         </Link>
                         <button
-                            className='button confirm'
+                            className='confirm'
                             onClick={handleRegisterClick}
                         >등록하기</button>
                     </div>
