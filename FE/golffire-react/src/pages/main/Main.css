@@ -563,6 +563,23 @@ img {
   padding: 20px;
 }
 
+.slide-solution{
+  border-radius:20px;
+  height:200px;
+  width: 620px;
+  margin-top:40px;
+  /* margin-left:70px; */
+  object-fit: cover;
+  object-position: 0 210;
+}
+
+.slide-solution-title{
+  font-weight:bold;
+  font-size: 20px;
+  position:relative;
+  top:-243px;
+}
+
 /* golf */
 
 .golf-info {

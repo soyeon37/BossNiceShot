@@ -119,6 +119,8 @@
     border: 2px solid #000;
     background: #FFF;
     box-shadow: none;
+    
+    padding-left:30px;
 }
 
 .user-func-input-guide {
@@ -238,6 +240,8 @@
     border: 2px solid #000;
     background: #FFF;
     box-shadow: none;
+
+    padding-left: 30px;
 }
 
 .user-email-auth-button {
