@@ -27,7 +27,6 @@ function LearningList() {
   const headers = {
     Authorization: `Bearer ${accessToken}`,
   };
-  console.log("세팅된 헤더: ", headers);
 
   const navigate = useNavigate();
 
