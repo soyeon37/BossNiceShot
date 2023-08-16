@@ -24,7 +24,7 @@ import axios from "axios";
 
 function AccompanyList() {
   // 사용자 정보(userId)로 로그인 여부 판단
-  const userId = useSelector((state) => state.userInfoFeatrue.userId);
+  const userId = useSelector((state) => state.userInfoFeature.userId);
 
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
@@ -69,6 +69,8 @@ function AccompanyList() {
 
       setCompanionList(response.data.companionList);
       setTotalPages(response.data.totalPages);
+    }).catch((error)=> {
+      console.log("리스트 받다가 에러남;;");
     });
   };
 

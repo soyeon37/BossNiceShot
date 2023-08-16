@@ -10,8 +10,6 @@ import { useCookies } from "react-cookie";
 import { useDispatch } from "react-redux";
 import { resetUserState } from "../../features/userInfoSlice";
 
-import { handleLogout } from "../../setup/user-auth/UserAuth";
-
 import CryImg from "../../assets/source/mascot/mascot-cry-2.png";
 import "./MyPage.css";
 

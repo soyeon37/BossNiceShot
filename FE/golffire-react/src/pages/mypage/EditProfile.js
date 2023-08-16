@@ -3,8 +3,11 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
+// Redux
+import { useDispatch } from "react-redux";
+import { setUserAccessToken, resetUserState } from "../../features/userInfoSlice";
+
 import { InfoOutlineIcon } from '@chakra-ui/icons'
-import { reissueToken } from "../../setup/user-auth/UserAuth";
 import MyPageNavbar from "./MyPageNavbar";
 import "./MyPage.css";
 
@@ -17,6 +20,9 @@ import {
 } from "@chakra-ui/react";
 
 function EditProfile() {
+    // Redux
+    const dispatch = useDispatch();
+
     const { state } = useLocation();
     const [cookies, setCookie, removeCookie] = useCookies(["user"]);
     const [nickname, setNickname] = useState("");
@@ -88,12 +94,7 @@ function EditProfile() {
 
     const callReissueToken = () => {
         console.log("EditProfile에서의 토큰 값: ", cookies.refreshToken);
-        let isSuccess = reissueToken({
-            refreshToken: cookies.refreshToken,
-            setCookie,
-            removeCookie,
-            navigate,
-        })
+        let isSuccess = false;
 
         if (isSuccess) {
             console.log("토큰 재발급 및 로그인 연장 성공");
