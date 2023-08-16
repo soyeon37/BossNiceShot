@@ -101,7 +101,7 @@ function Signup() {
       isKakao: isKakao,
     };
     console.log("isKakao: ", data.isKakao);
-    const apiUrl = "http://localhost:8080/members/sign-up";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-up";
     axios
       .post(apiUrl, data)
       .then((response) => {
