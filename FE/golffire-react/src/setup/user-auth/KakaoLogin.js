@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLocation } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
@@ -6,7 +6,7 @@ import axios from "axios";
 
 // Redux
 import { useDispatch } from "react-redux";
-import { setUserId, setUserNickname, setUserLevel, setUserTee } from "../../features/userInfoSlice";
+import { setUserId, setUserNickname, setUserLevel, setUserTee, setUserImage, setUserAccessToken, resetUserState } from "../../features/userInfoSlice";
 
 import { Box, Code } from "@chakra-ui/react";
 
@@ -23,6 +23,7 @@ const Kakao = (props) => {
   let params = new URL(document.URL).searchParams; // get query string
   let CODE = params.get("code");
   console.log("CODE: ", CODE); // Debug !!
+
   // KAKAO Token 발급
   const grant_type = "authorization_code";
   const client_id = "cd0c9cf0cf49dae9a987aebb769ee0d6"; // REST-API-TOKEN
@@ -52,7 +53,6 @@ const Kakao = (props) => {
   // KAKAO 회원 정보 가져오기 
   const getInfo = (access_token) => {
     const apiUrl = 'https://kapi.kakao.com/v2/user/me';
-
 
     // Axios를 사용하여 GET 요청 보내기
     axios.get(apiUrl, {
