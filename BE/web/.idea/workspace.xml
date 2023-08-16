@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd34f159-9b12-440b-8d67-1f0f3a97241e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/f/0fb2165841132340adfa5dd54986ce849ed01895" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/4/4409c8247fbae185f9437e32dc6b81c0c2685b22" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/4/64202b67486a3371f9adb4fc5d5fee134fb93ab8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/f/bf4df718e83048fccb83c10787540feb7e5121f9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/f/0fb2165841132340adfa5dd54986ce849ed01895" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/4/4409c8247fbae185f9437e32dc6b81c0c2685b22" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/4/64202b67486a3371f9adb4fc5d5fee134fb93ab8" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/f/bf4df718e83048fccb83c10787540feb7e5121f9" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/css/common.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/Accompany.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/Accompany.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,6 +156,7 @@
       <workItem from="1692088674336" duration="786000" />
       <workItem from="1692089708156" duration="7980000" />
       <workItem from="1692114955840" duration="8583000" />
+      <workItem from="1692189758631" duration="32000" />
     </task>
     <servers />
   </component>
