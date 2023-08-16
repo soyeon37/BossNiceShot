@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import FullSwing from "./FullSwing";
 import "./Solution.css";
-import loadingImage from "./swing_1.gif";
+import loadingImage from "./swing_4.gif";
 
 function Solution_FullSwing() {
   const videoRef = useRef(null);
@@ -93,6 +93,15 @@ function Solution_FullSwing() {
       ? "recorded-video-wrapper-yellow"
       : "recorded-video-wrapper-red"; // default class
 
+  const bgClass =
+  myEllipseScore !== null && isReady === false && isAnalyzing === false
+      ? "bgGreen"
+      : isAnalyzing === true
+      ? "bgYellow"
+      : isReady === true && isAnalyzing === false
+      ? "bgYellow"
+      : "bgRed"; // default class
+
   FullSwing(
     videoRef,
     canvasRef,
@@ -139,7 +148,7 @@ function Solution_FullSwing() {
 
           </div>
           <canvas ref={canvasRef} id="canvas_live"></canvas>
-          
+          <div className={`swing-background-div ${bgClass}`}></div>
         </div>
 
         <div className={`recorded-video-wrapper ${recordedWrapperClass}`}>
@@ -362,6 +371,7 @@ function Solution_FullSwing() {
               </div>
             </div>
           )}
+          <div className={`swing-recorded-background-div ${bgClass}`}></div>
         </div>
       </div>
     </div>
