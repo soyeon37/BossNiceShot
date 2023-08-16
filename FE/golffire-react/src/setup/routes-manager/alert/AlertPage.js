@@ -186,7 +186,7 @@ function AlertPage() {
       if (notifications[i].type === "coaching") {
         arr.push(
           <div
-            className="alert"
+            className="alert-sidebar"
             key={i}
             style={{ display: notifications[i].isVisible ? "block" : "none" }}
           >
@@ -213,7 +213,7 @@ function AlertPage() {
       } else if (notifications[i].type === "learning") {
         arr.push(
           <div
-            className="alert"
+            className="alert-sidebar"
             key={i}
             style={{ display: notifications[i].isVisible ? "block" : "none" }}
           >
@@ -240,7 +240,7 @@ function AlertPage() {
       } else if (notifications[i].type === "result") {
         arr.push(
           <div
-            className="alert"
+            className="alert-sidebar"
             key={i}
             style={{ display: notifications[i].isVisible ? "block" : "none" }}
           >
@@ -267,7 +267,7 @@ function AlertPage() {
         );
       } else if (notifications[i].type === "apply") {
         arr.push(
-          <div className="alert">
+          <div className="alert-sidebar">
             <div className="alert-top">
               <div className="alert-avatar">
                 <Avatar />
@@ -299,7 +299,7 @@ function AlertPage() {
         // 동행 모집 글
         arr.push(
           <div
-            className="alert"
+            className="alert-sidebar"
             key={i}
             style={{ display: notifications[i].isVisible ? "block" : "none" }}
           >
@@ -355,7 +355,7 @@ function AlertPage() {
             {handleFilteringNotification()}
             {/* 컴포넌트 CSS 적용 */}
 
-            <div className="alert">
+            <div className="alert-sidebar">
               <div className="alert-top">
                 <div className="alert-avatar">
                   <Avatar />
@@ -371,7 +371,7 @@ function AlertPage() {
               </div>
             </div>
 
-            <div className="alert">
+            <div className="alert-sidebar ">
               <div className="alert-top">
                 <div className="alert-avatar">
                   <Avatar />

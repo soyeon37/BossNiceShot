@@ -26,6 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         logRequest(request);
 
+<<<<<<< HEAD
         if(request.getRequestURI().equals("/api/members/sign-in") || request.getRequestURI().equals("/api/members/sign-up")
                 || request.getRequestURI().equals("/api/members/sendEmailVerification")
                 || request.getRequestURI().equals("/api/members/checkEmail")
@@ -33,6 +34,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/api/members/checkNickname")
                 || request.getRequestURI().equals("/api/notification/**")
                 || request.getRequestURI().startsWith("/api/ws")
+=======
+        if(request.getRequestURI().equals("/members/sign-in") || request.getRequestURI().equals("/members/sign-up")
+                || request.getRequestURI().equals("/members/sendEmailVerification")
+                || request.getRequestURI().equals("/members/checkEmail")
+                || request.getRequestURI().equals("/members/code")
+                || request.getRequestURI().equals("/members/checkNickname")
+                || request.getRequestURI().equals("/notification/**")
+>>>>>>> e209dfd7554e286729046cf8b8d25a2587dd1224
                 || request.getRequestURI().equals("/api/sessions")
                 || request.getRequestURI().equals("/api/sessions/**")
                 || request.getRequestURI().equals("/api/study/sessions")
