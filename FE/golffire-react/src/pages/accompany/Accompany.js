@@ -1,24 +1,31 @@
-import React, { useState } from 'react'
-import AccompanyList from './AccompanyList';
-import "./accompany.css";
+import React from "react";
+import AccompanyList from "./AccompanyList";
+
+import { useNavigate } from 'react-router-dom';
+
+import PinImg from "../../assets/source/icons/pin.png";
+import "./AccompanyBox";
 
 function Accompany() {
-
+  const navigate = useNavigate();
 
   return (
-    <div className='accompany-container'>
-      <div className='accompany-head'>
-        <h1>Accompany</h1>
-        <h2>
-          함께 골프치러가용 '-'
-        </h2>
+    <div id="accompany-container" className="container">
+      <div className="container-head">
+        <div className="container-head-title" onClick={() => { navigate('/accompany'); }}>동행</div>
+        <div className="container-head-desc">
+          원하는 날짜와 장소에 같이 갈 동행을 구해보아요.
+        </div>
         
-      <div className='accompany-body'>
+        <img className="list-head-pin" src={PinImg} alt="pin" />
+        <div className="list-head-shadow bg-accompany"></div>
+      </div>
+
+      <div className="container-body">
         <AccompanyList />
       </div>
-      </div>
     </div>
-  )
+  );
 }
 
-export default Accompany
+export default Accompany;

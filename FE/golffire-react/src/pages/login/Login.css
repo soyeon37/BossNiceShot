@@ -2,71 +2,13 @@
 #Login {
   height: calc(100vh - 4rem);
   display: flex;
-  background: linear-gradient(90deg, rgba(184, 245, 0, 0.3) 0%, rgba(184, 245, 0, 0) 100%);
-}
-
-#Login>div {
-  width: 50%;
-}
-
-/* Banner CSS */
-#login-banner {
-  /* width: 50%; */
-
-  display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
-#login-banner-context {
-  margin: 5%;
-}
-
-/* #login-banner-letter {} */
-
-#login-banner-image {
-  margin: 10%;
-}
-
-/* 로그인 폼 CSS */
-#login-func {
-  width: 100%;
-
+/* FindPassword CSS */
+#FindPassword {
+  height: calc(100vh - 4rem);
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-}
-
-#login-box {
-  width: 100%;
-  padding: 2%;
-}
-
-#box-title {
-  color: #000;
-  text-align: center;
-  font-family: Inter;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-}
-
-#box-content {
-  width: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-input {
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-#box-button {
-  padding-top: 2.5rem;
+  position: relative;
 }
