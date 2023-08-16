@@ -40,7 +40,7 @@ function CoachingList() {
   }, [searchFilter]);
 
   const getCoachingList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     console.log(apiUrl);
 
@@ -57,7 +57,7 @@ function CoachingList() {
   };
 
   const getCoachingSearchList = (searchValue, currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     const studySearchRequest = {
       category: searchFilter,
@@ -80,7 +80,7 @@ function CoachingList() {
   };
 
   const getCoachingAttandableList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     setCurrentPage(currentPage);
 
@@ -96,7 +96,7 @@ function CoachingList() {
   };
 
   const getCoachingAttandableSearchList = (searchValue, currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     setSearchValue(searchValue);
     setCurrentPage(currentPage);

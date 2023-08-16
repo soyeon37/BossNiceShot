@@ -133,8 +133,10 @@ function AccompanyList() {
     }
   };
 
+  const { attandableStatus, setAttandableStatus } = useState(false); 
+
   const getSelectedContent = (id) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/" + id;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/info" + id;
 
     axios.get(apiUrl).then((response) => {
       setSelectedContent(response.data);
@@ -142,26 +144,21 @@ function AccompanyList() {
       console.log("동행 모집 한 건 조회");
       console.log(response);
 
+      // 사용자 로그인 유무 확인
+      if (userId) { // 로그인한 경우
+        const companion = response.data;
+
+        // 사용자가 이미 신청한 동행인지 확인하기
+        checkDuplicateCompanionUser(companion);
+      } else { // 로그인하지 않은 경우
+        setAttandableStatus(true);
+      }
+      
       setIsSelected(true);
       setSelectedId(id);
     });
   };
-
-  // 참여하기 버튼 클릭 시
-  const handleAttandClick = (companion) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/' + companion.id;
-
-    // 해당 동행 모집의 현재 인원을 확인한다.
-    axios.get(apiUrl)
-    .then((response) => {
-      if (response.data.capacity > response.data.companionUserCount) { // 모집 인원보다 현재 인원이 적으면
-        checkDuplicateCompanionUser(response.data); // 사용자가 이미 신청한 동행인지 확인한다.
-      } else { // 모집 인원이 다 찬 경우
-        alert("참가 인원이 많아 동행 모집에 참여하실 수 없습니다.");
-      }
-    });
-  };
-
+  
   // 동행 모집 신청 여부 확인
   const checkDuplicateCompanionUser = (companion) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/user/check/' + companion.id;
@@ -169,19 +166,43 @@ function AccompanyList() {
     axios.get(apiUrl)
       .then((response) => {
         if (!response.data) { // 동행 모집을 신청하지 않은 경우
-          const companionUserRequset = {
-            companionId: companion.id
-          };
-
-          addCompanionUser(companionUserRequset); // 동행 모집 신청
+          setAttandableStatus(true);
         } else { // 동행 모집을 신청한 경우
-          alert("이미 신청한 동행입니다.");
+          setAttandableStatus(false);
         }
       });
   };
 
+  // 참여하기 버튼 클릭 시
+  const handleAttandClick = (companion) => {
+    if (attandableStatus) { // 참여하기 버튼 클릭
+      if (!userId) { // 로그인 하지 않은 경우
+        alert("로그인 후 신청합니다.");
+      } else { // 로그인한 경우
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/' + companion.id;
+
+        axios.get(apiUrl) // 동행 모집의 현재 인원 확인한다.
+        .then((response) => {
+          if (response.data.capacity > response.data.companionUserCount) { // 모집 인원보다 현재 인원이 적으면
+            const companionUserRequset = {
+              companionId: companion.id
+            };
+
+            addCompanionUser(companionUserRequset); // 사용자가 이미 신청한 동행인지 확인한다.
+          } else { // 모집 인원이 다 찬 경우
+            alert("참가 인원이 많아 동행 모집에 참여하실 수 없습니다.");
+          }
+        });
+      }
+    } else { // 취소하기 버튼 클릭
+      const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/user/' + companion.id;
+
+      axios.delete(apiUrl);
+    }
+  };
+
   const addCompanionUser = (companionUserRequset) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/user"
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/user";
 
     console.log("동행 모집 참여자 생성");
     axios.post(apiUrl, companionUserRequset).then((response) => {
