@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-import CoachingBox from './CoachingBox';
-import CoachingRoom from './CoachingRoom';
+import CoachingBox from "./CoachingBox";
+import CoachingRoom from "./CoachingRoom";
 
 import ProfileImg from "../../assets/source/imgs/favicon.png";
 
 import { MdSportsGolf } from "react-icons/md";
 import { GrClose } from "react-icons/gr";
-import { BsFillPersonFill } from 'react-icons/bs';
+import { BsFillPersonFill } from "react-icons/bs";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { SearchIcon } from "@chakra-ui/icons";
 
@@ -19,18 +19,17 @@ import axios from "axios";
 
 import "./study.css";
 
-
 function CoachingList() {
   const navigate = useNavigate();
 
-  const studyType = 'COACHING';
+  const studyType = "COACHING";
 
-  const pageSize = 6; 
+  const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   const [coachingList, setCoachingList] = useState([]);
-  
+
   // 검색 조건
   const [searchValue, setSearchValue] = useState("");
   const [searchFilter, setSearchFilter] = useState("title");
@@ -45,15 +44,21 @@ function CoachingList() {
   }, [searchFilter]);
 
   const getCoachingList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl =
+      process.env.REACT_APP_SERVER_URL +
+      "/api/study/allsearch?page=" +
+      (currentPage - 1) +
+      "&size=" +
+      pageSize;
 
     console.log(apiUrl);
 
     setCurrentPage(currentPage);
-
+    const data = {
+      type: "COACHING",
+    };
     console.log("코칭 리스트 조회");
-    axios.get(apiUrl)
-    .then((response) => {
+    axios.post(apiUrl, data).then((response) => {
       console.log(response);
 
       setCoachingList(response.data.studyList);
@@ -62,21 +67,25 @@ function CoachingList() {
   };
 
   const getCoachingSearchList = (searchValue, currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl =
+      process.env.REACT_APP_SERVER_URL +
+      "/api/study/list/COACHING?page=" +
+      (currentPage - 1) +
+      "&size=" +
+      pageSize;
 
     const studySearchRequest = {
       category: searchFilter,
-      keyword: searchValue
-    }
+      keyword: searchValue,
+    };
 
     setSearchValue(searchValue);
     setCurrentPage(currentPage);
 
     console.log("코칭 리스트 검색 조회");
     console.log(studySearchRequest);
-    
-    axios.post(apiUrl, studySearchRequest)
-    .then((response) => {
+
+    axios.post(apiUrl, studySearchRequest).then((response) => {
       console.log(response);
 
       setCoachingList(response.data.studyList);
@@ -85,14 +94,18 @@ function CoachingList() {
   };
 
   const getCoachingAttandableList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl =
+      process.env.REACT_APP_SERVER_URL +
+      "/api/study/list/COACHING/attandable?page=" +
+      (currentPage - 1) +
+      "&size=" +
+      pageSize;
 
     setCurrentPage(currentPage);
 
     console.log("참여 가능한 코칭 리스트 검색 조회");
-    
-    axios.get(apiUrl)
-    .then((response) => {
+
+    axios.get(apiUrl).then((response) => {
       console.log(response);
 
       setCoachingList(response.data.studyList);
@@ -101,21 +114,25 @@ function CoachingList() {
   };
 
   const getCoachingAttandableSearchList = (searchValue, currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl =
+      process.env.REACT_APP_SERVER_URL +
+      "/api/study/list/COACHING/attandable?page=" +
+      (currentPage - 1) +
+      "&size=" +
+      pageSize;
 
     setSearchValue(searchValue);
     setCurrentPage(currentPage);
 
     const studySearchRequest = {
       category: searchFilter,
-      keyword: searchValue
-    }
+      keyword: searchValue,
+    };
 
     console.log("참여 가능한 코칭 리스트 검색 조회");
     console.log(studySearchRequest);
-    
-    axios.post(apiUrl, studySearchRequest)
-    .then((response) => {
+
+    axios.post(apiUrl, studySearchRequest).then((response) => {
       console.log(response);
 
       setCoachingList(response.data.studyList);
@@ -124,55 +141,59 @@ function CoachingList() {
   };
 
   const handleAttandClick = (study) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/info/' + study.id;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/info/" + study.id;
 
-    axios.get(apiUrl)
-    .then((response) => {
+    axios.get(apiUrl).then((response) => {
       if (response.data.capacity > response.data.studyUserCount) {
         enterStudyUser(study);
       } else {
         alert("참가 인원이 많아 코칭룸에 참여하실 수 없습니다.");
       }
     });
-  }
+  };
 
   // 코칭룸 입장
   const enterStudyUser = (study) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/user';
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/user";
 
     const studyUserRequest = {
-      studyId: study.id
+      studyId: study.id,
     };
 
     console.log("코칭룸 입장");
     console.log(studyUserRequest);
 
-    axios.post(apiUrl, studyUserRequest)
-        .then((response) => {
-            console.log(response);
+    axios.post(apiUrl, studyUserRequest).then((response) => {
+      console.log(response);
 
-            // 코칭룸으로 이동
-            navigate('/CoachingRoom', {
-                state: {
-                    type: studyType,
-                    study: study,
-                    studyUser: response.data
-                }
-            });
-        });
-};
+      // 코칭룸으로 이동
+      navigate("/CoachingRoom", {
+        state: {
+          type: studyType,
+          study: study,
+          studyUser: response.data,
+        },
+      });
+    });
+  };
 
   const handlePageChange = (pageNumber) => {
-    if (selectedAttandable) { // 참여 가능한 코칭 리스트
-      if (searchValue.trim() == "") { // 미검색
+    if (selectedAttandable) {
+      // 참여 가능한 코칭 리스트
+      if (searchValue.trim() == "") {
+        // 미검색
         getCoachingAttandableList(pageNumber);
-      } else { // 검색
+      } else {
+        // 검색
         getCoachingAttandableSearchList(searchValue, pageNumber);
       }
-    } else { // 전체 코칭 리스트
-      if (searchValue.trim() == "") { // 미검색
+    } else {
+      // 전체 코칭 리스트
+      if (searchValue.trim() == "") {
+        // 미검색
         getCoachingList(pageNumber);
-      } else { // 검색
+      } else {
+        // 검색
         getCoachingSearchList(searchValue, pageNumber);
       }
     }
@@ -195,25 +216,31 @@ function CoachingList() {
     if (searchValue.trim() == "") {
       alert("검색어를 입력하세요.");
     } else {
-      if (selectedAttandable) { // 참여 가능한 코칭 리스트
-        if (searchValue.trim() == "") { // 미검색
+      if (selectedAttandable) {
+        // 참여 가능한 코칭 리스트
+        if (searchValue.trim() == "") {
+          // 미검색
           getCoachingAttandableList(currentPage);
-        } else { // 검색
+        } else {
+          // 검색
           getCoachingAttandableSearchList(searchValue, currentPage);
         }
-      } else { // 전체 코칭 리스트
-        if (searchValue.trim() == "") { // 미검색
+      } else {
+        // 전체 코칭 리스트
+        if (searchValue.trim() == "") {
+          // 미검색
           getCoachingList(currentPage);
-        } else { // 검색
+        } else {
+          // 검색
           getCoachingSearchList(searchValue, currentPage);
         }
       }
     }
-  }
+  };
 
   const handleAttadableChange = () => {
     setSelectedAttandable(!selectedAttandable);
-  }
+  };
 
   const [isSelected, setIsSelected] = useState(false); // 글 선택 여부
   const [selectedId, setSelectedId] = useState(null); // 선택된 글 번호
@@ -245,9 +272,11 @@ function CoachingList() {
   };
 
   return (
-    <div className='list-container'>
-      <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
-      <div className="list-head">
+    <div className="list-container">
+      <div
+        className={isSelected ? "list-container-list-selected" : "list-container-list-unselected"}
+      >
+        <div className="list-head">
           <Link to="/createcroom">
             <div className="head-create-button bg-coaching">+ 코칭하기</div>
           </Link>
@@ -284,13 +313,11 @@ function CoachingList() {
               <input type="checkbox" />
               <span class="slider-coaching round"></span>
             </label>
-            <div>
-              참여 가능
-            </div>
+            <div>참여 가능</div>
           </div>
         </div>
-        
-        <div className={isSelected ? 'list-body-selected' : 'list-body-unselected'}>
+
+        <div className={isSelected ? "list-body-selected" : "list-body-unselected"}>
           {coachingList.map((coaching, index) => (
             <CoachingBox
               key={coaching.id}
@@ -308,7 +335,7 @@ function CoachingList() {
           ))}
         </div>
 
-        <div className='list-footer'>
+        <div className="list-footer">
           <button
             className="control-arrow"
             disabled={currentPage == 1}
@@ -335,15 +362,19 @@ function CoachingList() {
         <div className="selected-container">
           <div className="selected-container-head">
             <div className="selected-container-title">
-              <div className="title-text">
-                {selectedContent.title}
-              </div>
-              <h1 className="cursor-able"><GrClose size={30} onClick={() => setIsSelected(false)} /></h1>
+              <div className="title-text">{selectedContent.title}</div>
+              <h1 className="cursor-able">
+                <GrClose size={30} onClick={() => setIsSelected(false)} />
+              </h1>
             </div>
 
             <div className="box-author-position">
               <div className="box-author">
-                <img className="profile-icon" src={ProfileImg} alt={`${selectedContent.memberNickname}님`} />
+                <img
+                  className="profile-icon"
+                  src={ProfileImg}
+                  alt={`${selectedContent.memberNickname}님`}
+                />
                 {selectedContent.memberNickname}
               </div>
             </div>
@@ -353,9 +384,7 @@ function CoachingList() {
             <div className="coaching-textarea">{selectedContent.description}</div>
             <div className="selected-container-info">
               <MdSportsGolf className="react-icon" />
-              <div className="info-text-left">
-                {dateFormat(selectedContent.reservedTime)}
-              </div>
+              <div className="info-text-left">{dateFormat(selectedContent.reservedTime)}</div>
               <div className="info-text-right">
                 <BsFillPersonFill className="react-icon" />
                 {selectedContent.studyUserCount} / {selectedContent.capacity}
@@ -363,7 +392,13 @@ function CoachingList() {
             </div>
           </div>
           <div className="selected-container-footer">
-            <button className="button bg-coaching" onClick={() => handleAttandClick(selectedContent)}> 참여하기</button>
+            <button
+              className="button bg-coaching"
+              onClick={() => handleAttandClick(selectedContent)}
+            >
+              {" "}
+              참여하기
+            </button>
           </div>
         </div>
       )}

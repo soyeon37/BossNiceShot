@@ -26,32 +26,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         logRequest(request);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 774f453faf234a48cb36843c73690893d45c6ccc
         if(request.getRequestURI().equals("/api/members/sign-in") || request.getRequestURI().equals("/api/members/sign-up")
                 || request.getRequestURI().equals("/api/members/sendEmailVerification")
                 || request.getRequestURI().equals("/api/members/checkEmail")
                 || request.getRequestURI().equals("/api/members/code")
                 || request.getRequestURI().equals("/api/members/checkNickname")
                 || request.getRequestURI().equals("/api/notification/**")
-<<<<<<< HEAD
-                || request.getRequestURI().startsWith("/api/ws")
-=======
-        if(request.getRequestURI().equals("/members/sign-in") || request.getRequestURI().equals("/members/sign-up")
-                || request.getRequestURI().equals("/members/sendEmailVerification")
                 || request.getRequestURI().equals("/members/checkEmail")
                 || request.getRequestURI().equals("/members/code")
                 || request.getRequestURI().equals("/members/checkNickname")
                 || request.getRequestURI().equals("/notification/**")
->>>>>>> e209dfd7554e286729046cf8b8d25a2587dd1224
-                || request.getRequestURI().equals("/api/sessions")
-                || request.getRequestURI().equals("/api/sessions/**")
-                || request.getRequestURI().equals("/api/study/sessions")
-                || request.getRequestURI().equals("/api/sessions/**/connections")
-                || request.getRequestURI().equals("/api/companion/field")){
-=======
                 || request.getRequestURI().startsWith("/ws")
                 || request.getRequestURI().startsWith("/api/sessions")
                 || request.getRequestURI().equals("/api/companion/field") // 메인 페이지 인기 골프장 5개
@@ -62,7 +46,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().startsWith("/api/study/list") // 스터디 리스트 조회
                 || request.getRequestURI().equals("/api/study/info/**") // 스터디 한 건 조회
         ){
->>>>>>> 774f453faf234a48cb36843c73690893d45c6ccc
             log.info("권한 허가");
             chain.doFilter(request, response);
             return;
@@ -91,7 +74,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         log.info(String.format(
                 "[%s] %s %s",
                 request.getMethod(),
-                request.getRequestURI().toLowerCase(),
+                request.getRequestURI().toLowerCadominse(),
                 request.getQueryString() == null ? "" : request.getQueryString())
         );
     }
