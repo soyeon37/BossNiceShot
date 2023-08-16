@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import HalfSwing from "./HalfSwing";
 import "./Solution.css";
-import loadingImage from "./swing_4.gif";
+import loadingImage from "./swing_5.gif";
 
 function Solution_HalfSwing() {
   const videoRef = useRef(null);
