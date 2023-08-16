@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import HalfSwing from "./HalfSwing";
 import "./Solution.css";
-import loadingImage from "./swing_1.gif";
+import loadingImage from "./swing_4.gif";
 
 function Solution_HalfSwing() {
   const videoRef = useRef(null);
@@ -93,6 +93,15 @@ function Solution_HalfSwing() {
       ? "recorded-video-wrapper-yellow"
       : "recorded-video-wrapper-red"; // default class
 
+  const bgClass =
+  myEllipseScore !== null && isReady === false && isAnalyzing === false
+      ? "bgGreen"
+      : isAnalyzing === true
+      ? "bgYellow"
+      : isReady === true && isAnalyzing === false
+      ? "bgYellow"
+      : "bgRed"; // default class
+
   HalfSwing(
     videoRef,
     canvasRef,
@@ -139,7 +148,7 @@ function Solution_HalfSwing() {
 
           </div>
           <canvas ref={canvasRef} id="canvas_live"></canvas>
-          
+          <div className={`swing-background-div ${bgClass}`}></div>
         </div>
 
         <div className={`recorded-video-wrapper ${recordedWrapperClass}`}>
@@ -240,7 +249,7 @@ function Solution_HalfSwing() {
               )}
               {currentPage === 3 && (
                 <>
-                <div className="pageTitle">인식된 관절의 히트맵 및 타원방정식</div>
+                <div className="pageTitle">인식된 관절의 히트맵 및 체형 기반의 타원방정식</div>
                   <canvas className="coordinatesDiv" id="coordinatesCanvas" width="487" height="350"></canvas>
                   <div className="equationDiv" ref={equationContainerRef}></div>
                 </>
@@ -362,6 +371,7 @@ function Solution_HalfSwing() {
               </div>
             </div>
           )}
+          <div className={`swing-recorded-background-div ${bgClass}`}></div>
         </div>
       </div>
     </div>
