@@ -210,6 +210,7 @@
     display: flex;
     align-content: flex-start;
     flex-wrap: wrap;
+    justify-content: center;
 
     overflow: hidden;
     /* justify-content: center; */
@@ -222,6 +223,7 @@
     display: flex;
     align-content: flex-start;
     flex-wrap: wrap;
+    justify-content: center;
 
     overflow: scroll;
     /* justify-content: center; */
