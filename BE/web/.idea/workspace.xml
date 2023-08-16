@@ -5,282 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd34f159-9b12-440b-8d67-1f0f3a97241e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/3/033b3737c3369c391069602e5422a531cf584b65" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/6/067eef2274f576be5b1b0b265552b34cb4664f53" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/9/09ed2fbc8029d5d6752b7c31d2ef3dfc862a15f8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/0/1016c065f6ca5f9eaf3a2f6937601782134e55a2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/9/19eae88de20689742893db0d0fcce7b7a87a24c8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/7/27a71171105511d98effd40785aa63bd9fdaa804" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/0/30dea7b38057562c6bdf0755c66a4e1659002b47" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/1/3158c26516d9d13daa4bf5bd9b8942651ad82f8c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/2/3223716b9fc6397fdced0c78d159e73d2ee4767f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/9/39651b49cf51cc5f3b3a81aa6626115389372b9b" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/b/3b817f26ff496037f34d750a46a485897f36b102" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/3/e/3e5f81a214e4a48fdb7974340c9500001922603b" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/9/4903ac90167b1e9f1b21d9938422778d2560c8d3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/a/4a5a776d87fd0bf72e659018bcde7ddbae76ec78" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/d/4d6f321dc1791ae69b38bafc5e07724961583244" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/e/4e234b5d2b50ad06189a413898881a4d76b73a59" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/1/519fa5caa5b025f854f60899561ee280582a6cfb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/2/5299aa25c3dfcc0169b8b84a4fc1ab8201929cc9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/2/52f811d13253d46fa37d817896235eadc1327e1d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/8/588a8a518f069a31217d648464e496827070fe82" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/9/59ddad169e83b22f6bfd80a4b690a28b6257b923" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/f/5f0ff47482134ebc9bf4e375d196aa89079ab815" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/1/618d044046dac875ad25fe96b0ecb47cb2038248" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/1/61f3242fa8349319eba19a7c40e2ce1168a0925e" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/4/64202b67486a3371f9adb4fc5d5fee134fb93ab8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/4/644b8e28592908044eadda049064fa856003c642" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/4/64e5f89b81c0c4125b8bacad3c4fc198bc67c52c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/9/69ecc9621b3a93ed1a61f3e29c8272238d1999b5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/3/738a06119811422cc1b2e06989df494629a78710" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/6/76a2160dc69315b340f8ba837f87ea00c8d856b4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/7/772c21854a50132f6fc9cde9a982d53702585a3c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/9/79fcd9d5abfe0deb1d2c92c7405c0cf86d5c907f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/7/e/7e90fac0b964d4b2c492424b21e137686682c1c4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/f/8fa0f90de76cc305109d3a0424f6170f0cc0515d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/8/981261fb0420dfb956c84e7252bd93ca184cd0b2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/c/9c7dbab3096e2ab386bb090cfc92791642dd2f77" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/b/abaf0e31b2b4c7a4ad18014ace41ae12c1ef7c85" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/f/bf4df718e83048fccb83c10787540feb7e5121f9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/0/c067daa0bba0db3d4960fe26dbfdf1b1662cb74c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/3/c3fed3e4e5153ecc92bdfe3e04dd1ef9b3fd73b7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/6/c62a793ed4e0af226d6daa0f21328e4903de3d6a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/d/cd94eb25d2d0ca4c78f39dd3f503030fe3a878a1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/e/ce3b2228d13983eceb6c5675ffb52109440d6d4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/3/d310357018cdc1dc1f614f15d85a6affb37227d6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/4/d41833a0cd6cd71015a2bcf5b6194c585202e01f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/7/d739d31a1c21e093a88dd864e3d2ae7cb70981b8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/c/ec66c8136ed44a424e60ecda91347565156d8f83" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/d/edd97ca3ddaae56dfac2119312818fdf5c187cb6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/4/f4f593a402dc93de8a6fb06f1eb6f472c74aa981" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/b/fb931518314c37a9d83b8e6abdd9649af2618b02" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/c/fc08831e13b6e62a3a8692f88d701afba351787c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/d/fd8748008ca1740b347f50b769f8ae85df56bba1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/3/033b3737c3369c391069602e5422a531cf584b65" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/6/067eef2274f576be5b1b0b265552b34cb4664f53" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/9/09ed2fbc8029d5d6752b7c31d2ef3dfc862a15f8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/0/1016c065f6ca5f9eaf3a2f6937601782134e55a2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/9/19eae88de20689742893db0d0fcce7b7a87a24c8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/2/7/27a71171105511d98effd40785aa63bd9fdaa804" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/0/30dea7b38057562c6bdf0755c66a4e1659002b47" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/1/3158c26516d9d13daa4bf5bd9b8942651ad82f8c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/2/3223716b9fc6397fdced0c78d159e73d2ee4767f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/9/39651b49cf51cc5f3b3a81aa6626115389372b9b" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/b/3b817f26ff496037f34d750a46a485897f36b102" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/3/e/3e5f81a214e4a48fdb7974340c9500001922603b" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/9/4903ac90167b1e9f1b21d9938422778d2560c8d3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/a/4a5a776d87fd0bf72e659018bcde7ddbae76ec78" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/d/4d6f321dc1791ae69b38bafc5e07724961583244" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/e/4e234b5d2b50ad06189a413898881a4d76b73a59" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/1/519fa5caa5b025f854f60899561ee280582a6cfb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/2/5299aa25c3dfcc0169b8b84a4fc1ab8201929cc9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/2/52f811d13253d46fa37d817896235eadc1327e1d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/8/588a8a518f069a31217d648464e496827070fe82" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/9/59ddad169e83b22f6bfd80a4b690a28b6257b923" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/5/f/5f0ff47482134ebc9bf4e375d196aa89079ab815" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/1/618d044046dac875ad25fe96b0ecb47cb2038248" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/1/61f3242fa8349319eba19a7c40e2ce1168a0925e" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/4/64202b67486a3371f9adb4fc5d5fee134fb93ab8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/4/644b8e28592908044eadda049064fa856003c642" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/4/64e5f89b81c0c4125b8bacad3c4fc198bc67c52c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/9/69ecc9621b3a93ed1a61f3e29c8272238d1999b5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/3/738a06119811422cc1b2e06989df494629a78710" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/6/76a2160dc69315b340f8ba837f87ea00c8d856b4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/7/772c21854a50132f6fc9cde9a982d53702585a3c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/9/79fcd9d5abfe0deb1d2c92c7405c0cf86d5c907f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/7/e/7e90fac0b964d4b2c492424b21e137686682c1c4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/8/f/8fa0f90de76cc305109d3a0424f6170f0cc0515d" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/8/981261fb0420dfb956c84e7252bd93ca184cd0b2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/9/c/9c7dbab3096e2ab386bb090cfc92791642dd2f77" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/a/b/abaf0e31b2b4c7a4ad18014ace41ae12c1ef7c85" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/f/bf4df718e83048fccb83c10787540feb7e5121f9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/c/3/c3fed3e4e5153ecc92bdfe3e04dd1ef9b3fd73b7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/c/6/c62a793ed4e0af226d6daa0f21328e4903de3d6a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/c/d/cd94eb25d2d0ca4c78f39dd3f503030fe3a878a1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/c/e/ce3b2228d13983eceb6c5675ffb52109440d6d4a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/3/d310357018cdc1dc1f614f15d85a6affb37227d6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/4/d41833a0cd6cd71015a2bcf5b6194c585202e01f" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/7/d739d31a1c21e093a88dd864e3d2ae7cb70981b8" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/c/ec66c8136ed44a424e60ecda91347565156d8f83" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/e/d/edd97ca3ddaae56dfac2119312818fdf5c187cb6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/f/4/f4f593a402dc93de8a6fb06f1eb6f472c74aa981" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/f/b/fb931518314c37a9d83b8e6abdd9649af2618b02" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/f/c/fc08831e13b6e62a3a8692f88d701afba351787c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/f/d/fd8748008ca1740b347f50b769f8ae85df56bba1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/golffire-react.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/css/user.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/imgs/golf-image-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/imgs/golf-image-1.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/imgs/golf-image-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/imgs/golf-image-2.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/imgs/main.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/mascot/crying.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_cap_bear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_cap_panda.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_cap_rabbit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_cap_tiger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_hat_bear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_hat_panda.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_hat_rabbit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_hat_tiger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_suncap_bear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_suncap_panda.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_suncap_rabbit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/green_suncap_tiger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_cap_bear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_cap_panda.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_cap_rabbit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_cap_tiger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_hat_bear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_hat_panda.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_hat_rabbit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_hat_tiger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_suncap_bear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_suncap_panda.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_suncap_rabbit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/red_suncap_tiger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_cap_bear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_cap_panda.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_cap_rabbit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_cap_tiger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_hat_bear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_hat_panda.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_hat_rabbit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_hat_tiger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_suncap_bear.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_suncap_panda.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_suncap_rabbit.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/source/profile/yellow_suncap_tiger.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/Accompany.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/MainCompanion.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/MainSolution.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/MainStudy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/RefContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/SlideCompanion.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/SlideSolution.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/SlideStudy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/SplideSolution.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/slide-part/PartSolution.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/ProfilePicModal.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/ProfilePicModal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/FullSwing.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/HalfSwing.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/Solution.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/Solution_FullSwing.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/Solution_HalfSwing.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/full_fixed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/fullswing.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/half_fixed.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/half_fixed2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/halfswing_2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/swing_1.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/swing_2.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/swing_3.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/swing_4.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/swing_5.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/alert/alert.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/utils/localStorage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/S09P12A309.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/f/0fb2165841132340adfa5dd54986ce849ed01895" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/f/0fb2165841132340adfa5dd54986ce849ed01895" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/a/5a98c94072de0da6cea46c8215726cefe47808a9" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/5/a/5a98c94072de0da6cea46c8215726cefe47808a9" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/5/d5ac0a34bcd34702b7831e3c045d8e4f2e9270e3" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/5/d5ac0a34bcd34702b7831e3c045d8e4f2e9270e3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/d/ddf55728677baae23ebeaa8abf63c70f0ff9bd24" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/d/ddf55728677baae23ebeaa8abf63c70f0ff9bd24" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/e/deafe3d09d1e9f1781ea0ea32e0fbe74ff66e7c3" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/e/deafe3d09d1e9f1781ea0ea32e0fbe74ff66e7c3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/f/1fb84a2d79703081f11451b4d2608bc34a059f20" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/4/449b6669f29fc814c019d86d7b61de17b84ca8df" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/8/d8ce9f4a4b8131491c1284088b2b4390c167bda0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/ssafy/domain/chat/entity/QChatParticipant.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/ssafy/domain/chat/entity/QChatRoom.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/generated/com/ssafy/domain/studyUser/entity/QStudyUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/config/Querydsl/QuerydslConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/config/querydsl/QuerydslConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/jwt/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/jwt/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/controller/CompanionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/controller/CompanionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/controller/CompanionUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/controller/CompanionUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/repository/CompanionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/repository/CompanionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/service/CompanionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/service/CompanionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/member/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/member/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/member/dto/response/SignInResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/member/dto/response/SignInResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/member/service/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/member/service/MemberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/notification/controller/NotificationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/notification/controller/NotificationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/notification/service/NotificationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/notification/service/NotificationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/controller/StudyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/controller/StudyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/repository/StudyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/repository/StudyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/service/StudyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/service/StudyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/css/common.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/css/create-container.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/css/create-container.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/css/list-container.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/assets/css/list-container.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/features/signupSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/features/signupSlice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/features/userInfoSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/features/userInfoSlice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/openvidu/VideoRoomComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/openvidu/VideoRoomComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/Accompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/Accompany.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/AccompanyBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/AccompanyBox.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/AccompanyList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/AccompanyList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/CreateAccompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/CreateAccompany.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/GolffieldModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/GolffieldModal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/GolffieldModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/GolffieldModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/accompany.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/accompany.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/golffield/GolfBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/golffield/GolfBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/golffield/Golffield.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/golffield/Golffield.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/golffield/Golffield.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/golffield/Golffield.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/login/FindPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/login/FindPassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/login/Login.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/login/Login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/login/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/login/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/Footer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/Footer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/Main.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/Main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/Main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/MainBanner.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/MainBanner.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/SplideAccompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/SplideAccompany.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/chatbot/ChatBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/chatbot/ChatBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/slide-part/PartAccompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/slide-part/PartAccompany.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/slide-part/PartLearning.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/main/slide-part/PartLearning.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/EditPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/EditPassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/EditProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/EditProfile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/MyAccompany.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/MyAccompany.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/MyFollow.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/MyFollow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/MyPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/MyPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/MyPageNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/MyPageNavbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/Signout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/Signout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/components/ProfileModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/components/ProfileModal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/Signup.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/Signup.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/Signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupChoice.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupChoice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupEmail1.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupEmail1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupEmail2.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupEmail2.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupSample.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/Solution.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/solution/Solution.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CoachingList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CoachingList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CreateRoom.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CreateRoom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/LearningBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/LearningBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/LearningList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/LearningList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/StudyList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/StudyList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/study.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/study.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/Navbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/alert/AlertPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/alert/AlertPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/user-auth/KakaoLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/user-auth/KakaoLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/user-auth/KakaoSignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/user-auth/KakaoSignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/user-auth/UserAuth.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/user-auth/UserAuth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/store.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -300,12 +28,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="BOSSNICESHOT" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -339,7 +62,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/BOSSNICESHOT/S09P12A309/BE/web",
+    "last_opened_file_path": "C:/SSAFY/BE 협업중 - gitlab/BE",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -437,6 +160,7 @@
       <workItem from="1692114955840" duration="8933000" />
       <workItem from="1692151220580" duration="837000" />
       <workItem from="1692167280599" duration="1155000" />
+      <workItem from="1692191931200" duration="24000" />
     </task>
     <servers />
   </component>

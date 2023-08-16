@@ -1,10 +1,12 @@
-import { React, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { React, useEffect, useState } from "react";
 import axios from "axios";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-import { setStateStep } from "../../features/signupSlice";
+import {
+  setStateStep,
+  setStateNickname,
+} from "../../features/signupSlice";
 
 import flagred from '../../assets/source/icons/flag-red.png';
 import flagwhite from '../../assets/source/icons/flag-white.png';
@@ -13,22 +15,20 @@ import flagall from '../../assets/source/icons/flag-all.png';
 
 import { Button, FormControl, FormLabel, Input, Radio, RadioGroup, VStack } from "@chakra-ui/react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { setUserNickname } from "../../features/userInfoSlice";
 
-const SignupInfo = () => {
+const SignupInfo = ({ setStateIntroduce, setStateAverageScore, setStateTopScore, setStateTeeBox }) => {
   // Redux
   const dispatch = useDispatch();
   const state = useSelector((state) => state.signupFeature);
 
-  // const { state } = useLocation();
-  const [image, setImage] = useState("../../assets/source/icons/no-image.png");
-  const [password] = useState(state.password);
+  // const { state } = useLocation();  const [password] = useState(state.password);
   const [introduce, setIntroduce] = useState("");
   const [email, setEmail] = useState(state.email);
   const [nickname, setNickname] = useState(state.nickname);
   const [averageScore, setAverageScore] = useState(state.averageScore);
   const [topScore, setTopScore] = useState(state.topScore);
   const [teeBox, setTeeBox] = useState(state.teeBox);
-  const [isKakao, setIsKakao] = useState(state.isKakao);
 
   // 닉네임 중복 검사
   const handleCheckNickname = () => {
@@ -40,11 +40,13 @@ const SignupInfo = () => {
     axios
       .post(apiUrl, data)
       .then((response) => {
+        console.log("닉넴 체크 함, ", response);
         if (response.data.data.resultMessage === "FAIL") {
           console.log("닉네임이 중복되었습니다.");
           alert("이미 존재하는 닉네임입니다.");
         } else {
           console.log("유효한 닉네임입니다.");
+          dispatch(setStateNickname(nickname));
         }
       })
       .catch((error) => {
@@ -52,11 +54,19 @@ const SignupInfo = () => {
       });
   };
 
+  // 자기소개 함수
+  const handleIntroduction = (e) => {
+    const introduceText = e.target.value;
+    setIntroduce(introduceText);
+    setStateIntroduce(introduceText);
+  }
+
   // 최고 타수 함수
   const handleTopScoreChange = (e) => {
     const newValue = e.target.value;
     if (!isNaN(newValue) && newValue >= 0 && newValue <= 144) {
       setTopScore(newValue);
+      setStateTopScore(newValue);
     }
   }
 
@@ -65,65 +75,15 @@ const SignupInfo = () => {
     const newValue = e.target.value;
     if (!isNaN(newValue) && newValue >= 0 && newValue <= 144) {
       setAverageScore(newValue);
+      setStateAverageScore(newValue);
     }
   }
 
-  // 이미지 파일 경로를 객체로 관리
-  const iconPaths = {
-    flagred: flagred,
-    flagwhite: flagwhite,
-    flagblack: flagblack,
-    flagall: flagall,
-  };
-
-  const navigate = useNavigate();
-
-  const handleEmailFinish = () => {
-    var referrer = document.referrer;
-
-    console.log("이전 페이지 URL: " + referrer);
-    setIsKakao(isKakao);
-    console.log(isKakao);
-    let level = "";
-    if (averageScore <= 60) {
-      level = "이글 플레이어";
-    } else if (averageScore <= 70) {
-      level = "버디 플레이어";
-    } else if (averageScore <= 80) {
-      level = "파 플레이어";
-    } else if (averageScore <= 90) {
-      level = "보기 플레이어";
-    } else {
-      level = "더블 플레이어";
-    }
-    const data = {
-      id: email,
-      image: image,
-      password: password,
-      nickname: nickname,
-      introduction: introduce,
-      averageScore: averageScore,
-      topScore: topScore,
-      level: level,
-      teeBox: teeBox,
-      isKakao: isKakao,
-    };
-    console.log("isKakao: ", isKakao);
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-up";
-    axios
-      .post(apiUrl, data)
-      .then((response) => {
-        console.log(response);
-        console.log(response.data.data.id);
-        navigate("/Login");
-      })
-      .catch((error) => {
-        console.error("Error: ", error);
-      });
-
-    console.log("data: ", data);
-    // navigate("/");
-  };
+  // 티 박스 함수
+  const handleTeeBox = (e) => {
+    setStateTeeBox(teeBox);
+    console.log("티박스 셀렉 됨", teeBox);
+  }
 
   return (
     <div id="SignupInfo">
@@ -151,7 +111,7 @@ const SignupInfo = () => {
         value={introduce}
         placeholder="자기소개"
         className="user-func-normal-input"
-        onChange={(e) => setIntroduce(e.target.value)}
+        onChange={handleIntroduction}
       />
 
       <div className="user-func-box">
@@ -188,7 +148,8 @@ const SignupInfo = () => {
           </div>
 
         </div>
-        <div className="user-func-radio-block">
+        <div className="user-func-radio-block"
+          onChange={handleTeeBox}>
           <img src={flagred} alt="레드 티 박스"
             onClick={() => setTeeBox('flagred')}
             className={`option-tee-img${teeBox === 'flagred' ? '-selected' : ''}`} />
@@ -203,7 +164,7 @@ const SignupInfo = () => {
             className={`option-tee-img${teeBox === 'flagall' ? '-selected' : ''}`} />
         </div>
       </div>
-      
+
     </div>
   );
 };
