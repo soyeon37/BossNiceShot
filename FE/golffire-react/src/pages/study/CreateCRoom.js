@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import DatePicker from 'react-datepicker'; // react-datepicker 라이브러리를 import합니다.
-import 'react-datepicker/dist/react-datepicker.css'; // react-datepicker의 CSS 파일을 import합니다. 
 
-import {
-    Text,
-    Button,
-} from '@chakra-ui/react'
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"
+import { BsArrowLeftCircle, BsArrowRightCircle, BsPeopleFill } from "react-icons/bs";
+import { IoGolf } from "react-icons/io5";
+import PinImg from "../../assets/source/icons/pin.png";
 
 import "./study.css";
 import axios from 'axios';
@@ -15,7 +13,7 @@ function CreateCRoom() {
     const studyType = 'COACHING';
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [capacity, setCapacity] = useState('');
+    const [capacity, setCapacity] = useState(2);
     const navigate = useNavigate();
     
     // "등록하기" 버튼 클릭 이벤트를 처리하는 함수
@@ -36,9 +34,25 @@ function CreateCRoom() {
             }
 
             createCoaching(studyCreateRequest);
+
         }
     };
- 
+    
+    // 옵션 관련 pagination 변수
+    const [page, setPage] = useState(1);
+    const [limit, setLimit] = useState(2);
+    const isFirstPage = page === 1;
+    const isLastPage = page === 2;
+
+    const handlePageChange = (pageNum) => {
+        console.log(limit, " 제한인 상태에서 다음으로 넘어가려 함.");
+        if (pageNum <= limit) {
+            setPage(pageNum);
+        // } else {
+        //     alert("값을 입력해 주세요!");
+        }
+    }
+
     // 코칭룸 생성
     const createCoaching = (studyCreateRequest) => {
         const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study';
@@ -109,37 +123,120 @@ function CreateCRoom() {
     }
 
     return (
-        <div className='editor-container'>
-            <Text fontSize='3xl'>코칭룸 만들기</Text>
-            <div className='editor-mainbox'>
-                <input
-                    type="text"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                    placeholder="제목"
-                    className='editor-title'
-                />
-                <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="소개"
-                    className='editor-content'
-                />
-                <div className='editor-num'>
-                    <Text fontSize='xxl'>인원 수</Text>   
-                    <input
-                    type="number"
-                    placeholder="2~20명 까지 가능"
-                    value={capacity}
-                    onChange={(e) => setCapacity(e.target.value)}
-                    /> 
+        <div id="CreateCoachingRoom" className='create-container'>
+            <div className="container-head">
+                <div className="container-head-title">
+                    코칭룸 만들기
                 </div>
-                <div className='editor-buttons'>
-                    <Link to="/studylist" style={{ textDecoration: "none" }}> 
-                        <Button width='8rem'colorScheme='red'>취소</Button>
-                    </Link>
-                    <Button width='8rem' colorScheme='green' onClick={handleRegisterClick}>등록하기</Button>
+                <div className="container-head-desc">
+                    코칭룸을 개설해보세요.
                 </div>
+                <img className="list-head-pin" src={PinImg} alt="pin" />
+                <div className="list-head-shadow bg-coach"></div>
+            </div>
+
+            <div className='container-body'>
+                <div className='create-main bg-coach'>
+                    <div className='create-main-body'>
+                        <div className='create-body-text'>
+                            <div className='create-body-text-title'>
+                                <input
+                                    className='create-title-input'
+                                    type='text'
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
+                                    placeholder='제목을 입력하세요' />
+                            </div>
+                            <div className='create-body-text-content'>
+                                <textarea
+                                    className='create-content-textarea'
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
+                                    placeholder='내용을 입력하세요' />
+                            </div>
+                        </div>
+                        <div className='create-body-option'>
+                            <div className='option-head'>
+                                {(() => {
+                                    switch (page) {
+                                        case 1:
+                                            return (
+                                                <div className='option-title'>
+                                                    <BsPeopleFill className='option-title-icon' />인원수
+                                                </div>
+                                            )
+                                        default: // 2
+                                            return (
+                                                <div className='option-title'>
+                                                    <IoGolf className='option-title-icon' />코칭룸 정보
+                                                </div>
+                                            )
+                                    }
+                                })()}
+                            </div>
+                            <div className='option-body'>
+                                <div className='option-left'>
+                                    <button
+                                        className='option-arrow'
+                                        disabled={isFirstPage}
+                                        onClick={() => handlePageChange(page -1)}>
+                                        <BsArrowLeftCircle />
+                                    </button>
+                                </div>
+                                <div className='option-content'>
+                                    {(() => {
+                                        switch (page) {
+                                            case 1:
+                                                return (
+                                                    <div className='option-people'>
+                                                        <button className='option-people-icon'
+                                                            disabled={capacity >= 20}
+                                                            onClick={() => setCapacity(capacity + 1)} >
+                                                            <AiOutlinePlus className='option-title-icon icon-background' />
+                                                        </button>
+                                                        <div className="option-people-div" >
+                                                            {capacity}
+                                                        </div>
+                                                        <button className="option-people-icon"
+                                                            disabled={capacity <= 2}
+                                                            onClick={() => setCapacity(capacity - 1)}>
+                                                            <AiOutlineMinus className='option-title-icon icon-background' />
+                                                        </button>
+                                                    </div>
+                                                )
+                                            default: // 2
+                                                return (
+                                                    <div className='option-total' style={{ justifyContent: 'center', alignItems: 'center' }}>
+                                                        <div className='option-total-bold'>
+                                                            {capacity}명
+                                                        </div>
+                                                    </div>
+                                                )
+                                        }
+                                    })()}
+                                </div>
+                                <div className='option-right'>
+                                    <button
+                                        className='option-arrow'
+                                        disabled={isLastPage}
+                                        onClick={() => handlePageChange(page + 1)}>
+                                        <BsArrowRightCircle />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='create-main-footer'>
+                        <Link to="/studylist">
+                            <button className='button cancel'>취소하기</button>
+                        </Link>
+                        <button
+                            className='button confirm'
+                            onClick={handleRegisterClick}
+                        >등록하기</button>
+                    </div>
+                </div>
+                <div className='create-body-shadow bg-shadow'></div>
             </div>
         </div>
     )

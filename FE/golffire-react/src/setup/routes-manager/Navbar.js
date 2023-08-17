@@ -5,15 +5,10 @@ import axios from "axios";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-
-
-
-// Redux
-import { resetUserState } from "../../features/userInfoSlice";
+import Interceptor from "../../setup/user-auth/Interceptor";
 
 import AlertPage from "./alert/AlertPage";
 
-import { IoMdContact } from 'react-icons/io'
 import { Avatar, AvatarBadge, AvatarGroup, Hide } from "@chakra-ui/react";
 import Favicon from "../../assets/source/imgs/favicon.png";
 import "./styles.css";
@@ -36,12 +31,15 @@ function Navbar() {
 
   // Redux
   const dispatch = useDispatch();
+  const [checkToken, setCheckToken] = useState(0);
+  const [doLogin, setDoLogin] = useState(0);
+  const [doLogout, setDoLogout] = useState(0);
 
   // 사용자 정보(userId)로 로그인 여부 판단
-  const userId = useSelector((state) => state.userInfoFeatrue.userId);
-  const userNickname = useSelector((state) => state.userInfoFeatrue.userNickname);
-  // const userProfile = useSelector((state) => state.userInfoFeatrue.userProfile);
-  const userProfile = "green_cap_bear yellow";
+  const userId = useSelector((state) => state.userInfoFeature.userId);
+  const userNickname = useSelector((state) => state.userInfoFeature.userNickname);
+  const userProfile = useSelector((state) => state.userInfoFeature.userImage);
+  // const userProfile = "green_cap_bear yellow";
   console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
 
   // 사진 출력을 위한 변수
@@ -57,49 +55,45 @@ function Navbar() {
     "white": "#FFFFFF",
   }
 
+  const checkProfilePic = () => {
+    // console.log("프로필 값을 확인: ", userProfile);
+
+    if (userProfile !== undefined &&
+      userProfile !== null &&
+      userProfile !== '' &&
+      !userProfile) {
+      // console.log("가능!");
+      return true;
+    } else {
+      // console.log("쓸 수 없는 사진임");
+      return false;
+    }
+  }
+
   const navigate = useNavigate();
 
   // cookie의 user 정보 확인
-  const [cookies, setCookie] = useCookies(["refreshToken"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["refreshToken"]);
 
-
+  // 로그아웃 함수
   const handleLogout = () => {
-      console.log('cookies.refreshToken:',cookies.refreshToken);
-    
-      const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
-      const data = {
-          refreshToken: cookies.refreshToken
-      }
-      axios.post(apiUrl, data)
-          .then((response) => {
-              console.log(response);
-
-              if (response.data.data === "SUCCESS") {
-                  setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
-
-                  console.log("로그아웃하여 redux 정보 삭제");
-                  dispatch(resetUserState());
-
-                  navigate('/');
-              } else {
-                  alert('Error')
-              }
-          });
+    console.log("네브바에서 로그아웃 호출함");
+    setDoLogout(doLogout + 1);
   };
 
   const handleCheckNotification = () => {
-      const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/notification/check';
-      axios.get(apiUrl)
-          .then((response) => {
-              if (response.data.data === false) {
-                  // 새로운 알림 존재
-              } else {
-                  // 이미 읽은 알림들
-              }
-          })
-          .catch((error) => {
-              navigate('/');
-          })
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/notification/check';
+    axios.get(apiUrl)
+      .then((response) => {
+        if (response.data.data === false) {
+          // 새로운 알림 존재
+        } else {
+          // 이미 읽은 알림들
+        }
+      })
+      .catch((error) => {
+        navigate('/');
+      })
   }
 
   return (
@@ -179,7 +173,7 @@ function Navbar() {
 
             {/* 마이페이지 버튼 아바타로 수정했습니다. */}
             <MenuButton>
-              {!userProfile ? (
+              {checkProfilePic() ? (
                 <div className="navbar-user-icon">
                   <div className="navbar-user-circle"
                     style={{ backgroundColor: colorMap[profileValues[1]] }}>
@@ -200,17 +194,28 @@ function Navbar() {
 
               {userId ? (
                 <MenuGroup title=''>
-                  <MenuItem>
-                    <NavLink to="/mypage/info" style={({ isActive, isPending }) => {
+                  <NavLink to="/mypage/info" style={({ isActive, isPending }) => {
                       return {
                         fontWeight: isActive ? "bold" : "",
                       };
                     }}>
-                      마이페이지
-                    </NavLink>
-                  </MenuItem>
+                    <MenuItem>
+                        마이페이지
+                    </MenuItem>
+                  </NavLink>
                   <MenuDivider />
-                  <MenuItem style={{ color: "gray" }} onClick={handleLogout}>로그아웃</MenuItem>
+                  <MenuItem style={{ color: "gray" }}
+                    onClick={handleLogout}>
+                    로그아웃</MenuItem>
+                  {/* <MenuItem style={{ color: "gray" }}
+                    onClick={handleLogout({
+                      refreshToken: cookies.refreshToken,
+                      setCookie,
+                      navigate,
+                      dispatch,
+                      resetUserState
+                    })}>
+                    로그아웃</MenuItem> */}
                 </MenuGroup>
               ) : (<MenuGroup title=''>
                 <MenuItem>
@@ -240,6 +245,13 @@ function Navbar() {
           </AlertPage>
         </li>
       </ul >
+
+      <Interceptor
+        checkToken={checkToken}
+        doLogin={doLogin}
+        doLogout={doLogout}
+      />
+
     </nav >
   );
 };

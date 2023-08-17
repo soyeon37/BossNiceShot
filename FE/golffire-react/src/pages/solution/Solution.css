@@ -73,7 +73,11 @@ canvas {
     width:712px;
     border-radius:30px;
     border:2px solid black;
-    background-image: url('./swing_3.gif');
+    background-image: url('./load.png');
+    background-size: 700px;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-color:#80caff;
 }
 
 .live-video-fullswing {
@@ -81,7 +85,11 @@ canvas {
   width:712px;
   border-radius:30px;
   border:2px solid black;
-  background-image: url('./swing_3.gif');
+  background-image: url('./load.png');
+  background-size: 700px;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-color:#80caff;
 }
 
 .swing-background-div{

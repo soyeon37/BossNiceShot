@@ -37,6 +37,7 @@ const userInfoSlice = createSlice({
       state.userLevel = "";
       state.userTee = "";
       state.usetProfile = "";
+      state.userAccessToken = "";
     },
   },
 });

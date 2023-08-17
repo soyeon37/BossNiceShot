@@ -32,7 +32,7 @@ function CreateAccompany() {
     const [description, setDescription] = useState('');
     const [teeUpTime, setTeeUpTime] = useState(null);
     const [field, setField] = useState(0);
-    const [capacity, setCapacity] = useState('');
+    const [capacity, setCapacity] = useState(2);
     const [teeBox, setTeeBox] = useState(null);
 
     const [isGoldFieldVisible, setIsGoldFieldVisible] = useState(false);

@@ -24,8 +24,9 @@ import axios from "axios";
 
 function AccompanyList() {
   // 사용자 정보(userId)로 로그인 여부 판단
-  const userId = useSelector((state) => state.userInfoFeatrue.userId);
-
+  const userId = useSelector((state) => state.userInfoFeature.userId);
+  const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -43,7 +44,7 @@ function AccompanyList() {
   }, []);
 
   const getCompanionList = (searchValue, currentPage) => {
-    const apiUrl =
+      const apiUrl =
       process.env.REACT_APP_SERVER_URL +
       "/api/companion/search?page=" +
       (currentPage - 1) +
@@ -64,11 +65,19 @@ function AccompanyList() {
     console.log("검색:");
     console.log(companionSearchRequest);
 
+    // access token을 넣어서 해보기 위한 테스트 코드 부분
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+    };
+
     axios.post(apiUrl, companionSearchRequest).then((response) => {
+    // axios.post(apiUrl, companionSearchRequest, { headers }).then((response) => {
       console.log(response);
 
       setCompanionList(response.data.companionList);
       setTotalPages(response.data.totalPages);
+    }).catch((error) => {
+      console.log("리스트 받다가 에러: ", error);
     });
   };
 
@@ -134,11 +143,12 @@ function AccompanyList() {
       setIsSelected(false);
       setSelectedId(null);
     } else {
+      console.log("로그인한 상태라서 이렇게 검색");
       getSelectedContent(id);
     }
   };
 
-  const { attandableStatus, setAttandableStatus } = useState(false); 
+  const { attandableStatus, setAttandableStatus } = useState(false);
 
   const getSelectedContent = (id) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/info/" + id;
@@ -158,12 +168,12 @@ function AccompanyList() {
       } else { // 로그인하지 않은 경우
         setAttandableStatus(true);
       }
-      
+
       setIsSelected(true);
       setSelectedId(id);
     });
   };
-  
+
   // 동행 모집 신청 여부 확인
   const checkDuplicateCompanionUser = (companion) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/user/check/' + companion.id;
@@ -187,17 +197,17 @@ function AccompanyList() {
         const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/' + companion.id;
 
         axios.get(apiUrl) // 동행 모집의 현재 인원 확인한다.
-        .then((response) => {
-          if (response.data.capacity > response.data.companionUserCount) { // 모집 인원보다 현재 인원이 적으면
-            const companionUserRequset = {
-              companionId: companion.id
-            };
+          .then((response) => {
+            if (response.data.capacity > response.data.companionUserCount) { // 모집 인원보다 현재 인원이 적으면
+              const companionUserRequset = {
+                companionId: companion.id
+              };
 
-            addCompanionUser(companionUserRequset); // 사용자가 이미 신청한 동행인지 확인한다.
-          } else { // 모집 인원이 다 찬 경우
-            alert("참가 인원이 많아 동행 모집에 참여하실 수 없습니다.");
-          }
-        });
+              addCompanionUser(companionUserRequset); // 사용자가 이미 신청한 동행인지 확인한다.
+            } else { // 모집 인원이 다 찬 경우
+              alert("참가 인원이 많아 동행 모집에 참여하실 수 없습니다.");
+            }
+          });
       }
     } else { // 취소하기 버튼 클릭
       const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/user/' + companion.id;
@@ -211,7 +221,7 @@ function AccompanyList() {
 
     console.log("동행 모집 참여자 생성");
     axios.post(apiUrl, companionUserRequset).then((response) => {
-        console.log(response);
+      console.log(response);
     });
   }
 
@@ -246,9 +256,8 @@ function AccompanyList() {
                       src={flagred}
                       alt="레드 티 박스"
                       onClick={() => handleTeeBoxChange("RED")}
-                      className={`search-tee-img${
-                        teeMap[searchTeeBox] === "flagred" ? "-selected" : ""
-                      }`}
+                      className={`search-tee-img${teeMap[searchTeeBox] === "flagred" ? "-selected" : ""
+                        }`}
                     />
                   </div>
                   <div className="search-tee-item">
@@ -256,9 +265,8 @@ function AccompanyList() {
                       src={flagwhite}
                       alt="화이트 티 박스"
                       onClick={() => handleTeeBoxChange("WHITE")}
-                      className={`search-tee-img${
-                        teeMap[searchTeeBox] === "flagwhite" ? "-selected" : ""
-                      }`}
+                      className={`search-tee-img${teeMap[searchTeeBox] === "flagwhite" ? "-selected" : ""
+                        }`}
                     />
                   </div>
                   <div className="search-tee-item">
@@ -266,9 +274,8 @@ function AccompanyList() {
                       src={flagblack}
                       alt="블랙 티 박스"
                       onClick={() => handleTeeBoxChange("BLACK")}
-                      className={`search-tee-img${
-                        teeMap[searchTeeBox] === "flagblack" ? "-selected" : ""
-                      }`}
+                      className={`search-tee-img${teeMap[searchTeeBox] === "flagblack" ? "-selected" : ""
+                        }`}
                     />
                   </div>
                   <div className="search-tee-item">
@@ -276,26 +283,25 @@ function AccompanyList() {
                       src={flagall}
                       alt="모든 티 박스"
                       onClick={() => handleTeeBoxChange("NONE")}
-                      className={`search-tee-img${
-                        teeMap[searchTeeBox] === "flagall" ? "-selected" : ""
-                      }`}
+                      className={`search-tee-img${teeMap[searchTeeBox] === "flagall" ? "-selected" : ""
+                        }`}
                     />
                   </div>
                 </div>
               </div>
             ) : (
-            <div className="search-input-container">
-              <input
-                className="search-input-box"
-                type="text"
-                value={searchValue}
-                onChange={handleInputChange}
-                placeholder="검색어를 입력하세요"
-              />
-              <button id="search-input-icon" onClick={handleSearchClick}>
-                <SearchIcon boxSize={6} color="#8D8F98" />
-              </button>
-            </div>
+              <div className="search-input-container">
+                <input
+                  className="search-input-box"
+                  type="text"
+                  value={searchValue}
+                  onChange={handleInputChange}
+                  placeholder="검색어를 입력하세요"
+                />
+                <button id="search-input-icon" onClick={handleSearchClick}>
+                  <SearchIcon boxSize={6} color="#8D8F98" />
+                </button>
+              </div>
             )}
             {/* 검색 필터 */}
             <select
