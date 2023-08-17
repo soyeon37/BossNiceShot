@@ -40,7 +40,11 @@ function Navbar() {
   const userNickname = useSelector((state) => state.userInfoFeature.userNickname);
   const userProfile = useSelector((state) => state.userInfoFeature.userImage);
   // const userProfile = "green_cap_bear yellow";
-  console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
+
+  useEffect(() => {
+    console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
+    setCheckToken(1);
+  }, [])
 
   // 사진 출력을 위한 변수
   let profileValues = "";
@@ -195,12 +199,12 @@ function Navbar() {
               {userId ? (
                 <MenuGroup title=''>
                   <NavLink to="/mypage/info" style={({ isActive, isPending }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                      };
-                    }}>
+                    return {
+                      fontWeight: isActive ? "bold" : "",
+                    };
+                  }}>
                     <MenuItem>
-                        마이페이지
+                      마이페이지
                     </MenuItem>
                   </NavLink>
                   <MenuDivider />

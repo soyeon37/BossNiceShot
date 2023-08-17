@@ -28,8 +28,6 @@ function EditProfile() {
     const userAccessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
     axios.defaults.headers.common["Authorization"] = `Bearer ${userAccessToken}`;
 
-
-    const { state } = useLocation();
     const [cookies, setCookie, removeCookie] = useCookies(["user"]);
     const [nickname, setNickname] = useState("");
 
