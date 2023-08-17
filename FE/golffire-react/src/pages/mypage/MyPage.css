@@ -445,9 +445,9 @@
   margin: 5px;
 
   border-radius: 20px;
-  
+
   cursor: pointer;
-  
+
   transition: background-color 0.1s ease-in-out;
 }
 
@@ -582,13 +582,13 @@
 
 #chat-list {
   width: 100%;
-  height: calc(100% - 50px);
-  margin-right: 10px;
-  margin-bottom: 50px;
-  padding: 10px;
+  height: 100%;
+  margin: 10px 10px 10px 20px;
+  padding: 15px;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   overflow-y: scroll;
 }
@@ -596,11 +596,17 @@
 #chat-room {
   width: 70%;
   height: 100%;
+  /* margin: 10px; */
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   justify-content: center;
+}
+
+.chat-box {
+  width: 100%;
+  height: auto;
 }
 
 /* ListRoom (Component) CSS */

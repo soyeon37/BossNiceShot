@@ -1,11 +1,14 @@
 import React, {  useEffect, useState } from "react";
-
 import { IoSendSharp } from "react-icons/io5";
+import axios from "axios";
 
 import MyChatBox from "./MyChatBox";
 import OtherChatBox from "./OtherChatBox";
 
-import axios from "axios";
+import flagred from "../../../assets/source/icons/flag-red.png";
+import flagwhite from "../../../assets/source/icons/flag-white.png";
+import flagblack from "../../../assets/source/icons/flag-black.png";
+import flagall from "../../../assets/source/icons/flag-all.png";
 
 import SockJS from "sockjs-client";
 import { Stomp } from '@stomp/stompjs';
@@ -30,6 +33,14 @@ function ChatRoom({ props }) {
         Authorization: `Bearer ${accessToken}`,
     };
 
+    // 이미지 파일 경로를 객체로 관리
+    const teeMap = {
+        RED: flagred,
+        WHITE: flagwhite,
+        BLACK: flagblack,
+        NONE: flagall,
+    };
+    
     useEffect(() => {
         const socket = new SockJS(process.env.REACT_APP_SERVER_URL + '/ws');
         const stompClient = Stomp.over(socket);

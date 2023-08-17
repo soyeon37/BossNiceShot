@@ -110,7 +110,8 @@ function EditProfile() {
     }
 
     // 사용자 정보 수정 함수
-    const testPut = () => {
+    const handleChangeInfo = () => {
+        console.log("수정할 예정");
         let level = "";
         if (averageScore <= 60) {
             level = "이글 플레이어";
@@ -140,10 +141,12 @@ function EditProfile() {
             .then((response) => {
                 console.log(response.data); // 서버에서 반환된 데이터
                 const statusCode = response.status;
-                console.log('HTTP status code:', statusCode); // HTTP 상태 코드
+                console.log('정보 수정 성공, HTTP status code:', statusCode); // HTTP 상태 코드
+                
+                navigate('/mypage/info');
             })
             .catch((error) => {
-                console.error('Error:', error); // 오류 처리
+                console.error('정보 수정 실패 Error:', error); // 오류 처리
                 if (error.response) {
                     console.log('HTTP status code:', error.response.status); // HTTP 상태 코드
                     // HTTP 상태 코드로 토큰 만료 여부 확인
@@ -298,7 +301,7 @@ function EditProfile() {
                                 </div>
                             </div>
                             <div id="edit-button-div">
-                                <button id="edit-button" onClick={testPut}>
+                                <button id="edit-button" onClick={handleChangeInfo}>
                                     저장하기</button>
                             </div>
                         </div>
