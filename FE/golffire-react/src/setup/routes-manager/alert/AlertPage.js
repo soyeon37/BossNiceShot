@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
+
+// Redux
+import { useSelector } from "react-redux";
 
 import {
   AvatarBadge,
@@ -27,6 +30,11 @@ import { Avatar } from "@chakra-ui/react";
 import { red } from "@mui/material/colors";
 
 function AlertPage() {
+  // 사용자 정보(userId)로 axios 수행
+  const userId = useSelector((state) => state.userInfoFeature.userId);
+  const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const navigate = useNavigate();

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+// Redux
+import { useSelector } from "react-redux";
+
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"
 import { BsArrowLeftCircle, BsArrowRightCircle, BsPeopleFill } from "react-icons/bs";
 import { IoGolf } from "react-icons/io5";
@@ -10,6 +13,11 @@ import "./study.css";
 import axios from 'axios';
 
 function CreateLRoom() {
+    // 사용자 정보(userId)로 axios 수행
+    const userId = useSelector((state) => state.userInfoFeature.userId);
+    const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
     const studyType = 'LEARNING';
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');

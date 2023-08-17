@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+// Redux
+import { useSelector } from "react-redux";
+
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai"
 import { BsArrowLeftCircle, BsArrowRightCircle, BsPeopleFill } from "react-icons/bs";
 import { IoGolf } from "react-icons/io5";
@@ -10,12 +13,17 @@ import "./study.css";
 import axios from 'axios';
 
 function CreateCRoom() {
+    // 사용자 정보(userId)로 axios 수행
+    const userId = useSelector((state) => state.userInfoFeature.userId);
+    const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
     const studyType = 'COACHING';
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [capacity, setCapacity] = useState(2);
     const navigate = useNavigate();
-    
+
     // "등록하기" 버튼 클릭 이벤트를 처리하는 함수
     const handleRegisterClick = () => {
         if (title.trim() === '') {
@@ -37,7 +45,7 @@ function CreateCRoom() {
 
         }
     };
-    
+
     // 옵션 관련 pagination 변수
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(2);
@@ -48,8 +56,8 @@ function CreateCRoom() {
         console.log(limit, " 제한인 상태에서 다음으로 넘어가려 함.");
         if (pageNum <= limit) {
             setPage(pageNum);
-        // } else {
-        //     alert("값을 입력해 주세요!");
+            // } else {
+            //     alert("값을 입력해 주세요!");
         }
     }
 
@@ -63,7 +71,7 @@ function CreateCRoom() {
         axios.post(apiUrl, studyCreateRequest)
             .then((response) => {
                 console.log(response);
-                
+
                 activeCoaching(response.data.id);
             });
     };
@@ -119,7 +127,7 @@ function CreateCRoom() {
         const hours = now.getHours();
         const minutes = now.getMinutes();
 
-        return  `${year}-${month >= 10 ? month : '0' + month}-${day >= 10 ? day : '0' + day} ${hours >= 10 ? hours : '0' + hours}:${minutes >= 10 ? minutes : '0' + minutes}:00`;
+        return `${year}-${month >= 10 ? month : '0' + month}-${day >= 10 ? day : '0' + day} ${hours >= 10 ? hours : '0' + hours}:${minutes >= 10 ? minutes : '0' + minutes}:00`;
     }
 
     return (
@@ -179,7 +187,7 @@ function CreateCRoom() {
                                     <button
                                         className='option-arrow'
                                         disabled={isFirstPage}
-                                        onClick={() => handlePageChange(page -1)}>
+                                        onClick={() => handlePageChange(page - 1)}>
                                         <BsArrowLeftCircle />
                                     </button>
                                 </div>
