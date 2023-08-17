@@ -630,18 +630,12 @@
 
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  justify-content: center;
 }
 
 .listroom-title {
   color: #000;
-  text-align: center;
-  font-family: Inter;
+  text-align: left;
   font-size: 32px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 }
 
 .listroom-tee {
@@ -650,14 +644,9 @@
 }
 
 .listroom-data>div {
-
   color: #000;
-  text-align: center;
-  font-family: Inter;
+  text-align: left;
   font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 }
 
 /* ChatRoom (Component) CSS */
@@ -670,15 +659,13 @@
   width: 100%;
   height: 100px;
   padding: 10px;
-  border-radius: 0px 50px 0px 0px;
-  border: 1px solid #000;
+  border-bottom: 1px solid #000;
   background: #4ab4ff;
 }
 
 #room-title {
   color: white;
   text-align: left;
-  font-family: Inter;
   font-size: 32px;
   font-style: normal;
   font-weight: bold;
@@ -710,20 +697,32 @@
 #room-footer {
   width: 100%;
   height: 100px;
-  border-radius: 0px 0px 50px 0px;
-  border: 1px solid #000;
+  border-top: 1px solid #000;
   background-color: white;
   padding: 20px;
   padding-right: 100px;
+
+  display: flex;
 }
 
-#message {
-  padding: 30px;
-  width: 100%;
+.chat-footer-input {
+  width: calc(100% - 30px);
   height: 60px;
+
+  margin: 20px;
+  padding: 20px;
+
   border-radius: 20px;
   border: 1px solid black;
   box-shadow: none;
+
+  background-color: yellow;
+}
+
+.chat-footer-button {
+  width: 10px;
+  height: 100%;
+  background-color: red;
 }
 
 #icon-div {
@@ -1334,7 +1333,7 @@ li {
 #info-golf-info2-2 {
   border: 2px solid black;
   border-radius: 50px;
-  padding: 10px 30px;
+  padding: 2px 10px;
   height: 30px;
   display: flex;
   /* justify-content: center; */
@@ -1345,6 +1344,7 @@ li {
 #info-email,
 #info-nickname {
   margin: 2px 50px;
+  padding: 2px 20px;
 }
 
 #info-golf-info1-1,
@@ -1361,13 +1361,15 @@ li {
 
 #info-introduction {
   width: calc(100% - 100px);
+  margin: 2px 50px;
+  padding: 2px 20px;
+
   border: 2px solid black;
   border-radius: 50px;
-  margin: 2px 50px;
+  
   display: flex;
   align-items: center;
   text-align: left;
-  padding: 2px 0px 2px 30px;
   /* justify-content: center; */
 }
 
@@ -1381,6 +1383,7 @@ li {
 #info-golf-info2 {
   display: flex;
   justify-content: center;
+  /* padding: 2px 20px; */
 }
 
 #info-golf-info1-1-div,
@@ -1394,6 +1397,7 @@ li {
 }
 
 #info-edit {
+  width: calc(100% - 100px);
   height: 100px;
   display: flex;
   align-items: center;
@@ -1402,17 +1406,24 @@ li {
 
 
 #info-edit-button {
+  width: 100%;
   height: 35px;
   background: rgba(59, 214, 65, 1);
   border: 2px solid black;
   border-radius: 50px;
-  padding: 0px 20px 0px 20px;
+  padding: 0px 10px;
   color: white;
   transition: background-color 0.3s ease;
 }
 
 #info-edit-profile {
-  margin-right: 50px;
+  width: 50%;
+  margin-right: 10px;
+}
+
+#info-edit-password {
+  width: 50%;
+  margin-left: 10px;
 }
 
 #info-edit-button:hover {

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
+// Redux
+import { useSelector } from "react-redux";
+
 import GolffieldModal from './GolffieldModal';
 import { getNameById, getAddressById, getCallById } from "../golffield/ParseGolfId";
 
@@ -27,6 +30,11 @@ import axios from 'axios';
 
 function CreateAccompany() {
     const navigate = useNavigate();
+
+    // 사용자 정보(userId)로 axios 수행
+    const userId = useSelector((state) => state.userInfoFeature.userId);
+    const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');

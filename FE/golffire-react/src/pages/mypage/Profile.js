@@ -13,13 +13,16 @@ import { useStatStyles } from "@chakra-ui/react";
 
 function Profile() {
     const navigate = useNavigate();
+    const state = useSelector((state) => state.userInfoFeature);
 
-    // 사용자 정보 및 AccessToken
-    const userId = useSelector((state) => state.userInfoFeature.userId);
-    const userNickname = useSelector((state) => state.userInfoFeature.userNickname);
-    const userLevel = useSelector((state) => state.userInfoFeature.userLevel);
-    const userTee = useSelector((state) => state.userInfoFeature.userTee);
-    const userImage = useSelector((state) => state.userInfoFeature.userImage);
+    // 사용자 정보
+    const [userId, setUserId] = useState(state.userId);
+    const [userNickname, setUserNickname] = useState(state.userNickname);
+    const [userLevel, setUserLevel] = useState(state.userLevel);
+    const [userTee, setUserTee] = useState(state.userTee);
+    const [userProfile, setUserProfile] = useState(state.userProfile);
+
+    // AccessToken
     const userAccessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
     axios.defaults.headers.common["Authorization"] = `Bearer ${userAccessToken}`;
 
@@ -27,10 +30,8 @@ function Profile() {
     const [personInfo, setPersonInfo] = useState(null);
     const [scoreHistory, setScoreHistory] = useState(null);
 
-    // axios to get user information
+    // 사용자 정보 재호출
     useEffect(() => {
-        console.log("처음 실행할 때 사용자 정보 요청해 저장하기");
-
         // axios code
         const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/info";
         axios.get(apiUrl)
@@ -42,11 +43,18 @@ function Profile() {
                 console.error('error 발생: ', error);
             });
 
-        // 성공
-        // 실패
-        console.log("personInfo:", personInfo);
-        console.log("scoreHistory:", scoreHistory);
-    }, [])
+        // TEST CODE // Debug Code !!!
+        const testProfile = {
+            nickname: "문싸피",
+            teeBox: "RED",
+            topScore: 40,
+            averageScore: 80,
+            level: "보기 플레이어",
+            image: "green_suncap_tiger white",
+            introduce: "안녕하세요. 제 이름은 문싸피, 반가워요.",
+        }
+        // setUserProfile(testProfile.image);
+    }, []);
 
     // 정보 수정 & 비밀번호 수정 route
     const moveEditProfile = () => {
@@ -63,7 +71,7 @@ function Profile() {
         topScore: 40,
         averageScore: 80,
         level: "보기 플레이어",
-        image: "yellow_cap_bear yellow",
+        image: "green_suncap_tiger white",
         introduce: "안녕하세요. 제 이름은 문싸피, 반가워요.",
     }
     const testHistory = [
@@ -102,6 +110,18 @@ function Profile() {
         "blue": "#80CAFF",
         "white": "#FFFFFF",
     }
+
+    // 일시 변환 함수
+    const dateFormat = (input) => {
+        const date = new Date(input);
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+
+        return `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분`;
+    };
 
     return (
         <div id="MyPage">
@@ -160,7 +180,7 @@ function Profile() {
                                 {testHistory.map((history, index) => (
                                     <div className="HistoryBox" key={index}>
                                         <div className="history-place">{history.place}</div>
-                                        <div className="history-date">{history.date}</div>
+                                        <div className="history-date">{dateFormat(history.date)}</div>
                                     </div >
                                 ))}
                             </div>

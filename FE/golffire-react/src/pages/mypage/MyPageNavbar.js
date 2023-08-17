@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios";
 
 // Redux
@@ -13,53 +13,49 @@ import { MdPeopleOutline } from "react-icons/md";
 import "./MyPage.css";
 
 function MyPageNavbar() {
+    const state = useSelector((state) => state.userInfoFeature);
 
-    // 사용자 정보 및 AccessToken
-    const userId = useSelector((state) => state.userInfoFeature.userId);
-    const userNickname = useSelector((state) => state.userInfoFeature.userNickname);
-    const userLevel = useSelector((state) => state.userInfoFeature.userLevel);
-    const userTee = useSelector((state) => state.userInfoFeature.userTee);
-    const userProfile = useSelector((state) => state.userInfoFeature.userImage);
+    // 사용자 정보
+    const [userId, setUserId] = useState(state.userId);
+    const [userNickname, setUserNickname] = useState(state.userNickname);
+    const [userLevel, setUserLevel] = useState(state.userLevel);
+    const [userTee, setUserTee] = useState(state.userTee);
+    const [userProfile, setUserProfile] = useState(state.userProfile);
+
+    // AccessToken
     const userAccessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
     axios.defaults.headers.common["Authorization"] = `Bearer ${userAccessToken}`;
 
-    // TEST CODE // Debug Code !!!
-    const testProfile = {
-        nickname: "문싸피",
-        teeBox: "RED",
-        topScore: 40,
-        averageScore: 80,
-        level: "보기 플레이어",
-        image: "yellow_cap_bear yellow",
-        introduce: "안녕하세요. 제 이름은 문싸피, 반가워요.",
-    }
-    const testHistory = [
-        {
-            place: "랄라골프장", date: "2023-08-03", score: 80
-        }, {
-            place: "해피골프장", date: "2023-08-01", score: 80
-        }, {
-            place: "꿈 꾸는 필드 - 상암점", date: "2023-07-03", score: 80
-        }, {
-            place: "해피스크린", date: "2023-06-03", score: 80
-        }, {
-            place: "샷샷샷", date: "2023-05-03", score: 80
-        }, {
-            place: "드림스크린", date: "2023-02-03", score: 60
-        }, {
-            place: "드림스크린", date: "2023-02-03", score: 60
-        }, {
-            place: "드림스크린", date: "2023-02-03", score: 60
-        }, {
-            place: "드림스크린", date: "2023-02-03", score: 60
-        }, {
-            place: "드림스크린", date: "2023-02-03", score: 60
-        },
-    ]
+    // 사용자 정보 재호출
+    useEffect(() => {
+        // axios code
+        const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/info";
+        axios.get(apiUrl)
+            .then(response => {
+                console.log("성공, ", response)
+                // 사용자 정보 저장 필요
+            })
+            .catch(error => {
+                console.error('error 발생: ', error);
+            });
+
+        // TEST CODE // Debug Code !!!
+        const testProfile = {
+            nickname: "문싸피",
+            teeBox: "RED",
+            topScore: 40,
+            averageScore: 80,
+            level: "보기 플레이어",
+            image: "green_suncap_tiger white",
+            introduce: "안녕하세요. 제 이름은 문싸피, 반가워요.",
+        }
+        // setUserProfile(testProfile.image);
+    }, []);
 
     // 사진 출력을 위한 변수
     let profileValues = "";
-    if (testProfile.image) profileValues = testProfile.image.split(' ');
+    if (userProfile) profileValues = userProfile.split(' ');
+    console.log('userProfile: ', userProfile);
 
     // 사진 배경 색상을 map으로 관리
     const colorMap = {
@@ -81,8 +77,13 @@ function MyPageNavbar() {
                     <div className="user-photo">
                         <div id="info-pic-wrapper"
                             style={{ backgroundColor: colorMap[profileValues[1]] }}>
-                            <img className="info-pic-image"
-                                src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+                            {profileValues[0] ? (
+                                <img className="info-pic-image"
+                                    src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+                            ) : (
+                                <img className="info-pic-image"
+                                    src={require(`../../assets/source/profile/green_suncap_tiger.png`)} />
+                            )}
                         </div>
                     </div>
                     <div className="user-title">
@@ -91,7 +92,7 @@ function MyPageNavbar() {
                             {/* 배지 필요 */}
                         </div>
                         <div className="user-name">
-                            {testProfile.nickname}
+                            {userNickname}
                         </div>
                     </div>
                 </div>
