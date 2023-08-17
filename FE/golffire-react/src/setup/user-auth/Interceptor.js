@@ -188,10 +188,10 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
 
                 // NavBar에 사용자 정보 저장
                 dispatch(setUserId(responsedData.id)); // email과 동일한 값
+                dispatch(setUserNickname(responsedData.nickname));
                 dispatch(setUserImage(responsedData.image));
                 dispatch(setUserLevel(responsedData.level));
                 dispatch(setUserTee(responsedData.teeBox));
-                dispatch(setUserNickname(responsedData.nickname));
 
                 // 로그인 성공 후 Main으로 복귀
                 navigate("/");
