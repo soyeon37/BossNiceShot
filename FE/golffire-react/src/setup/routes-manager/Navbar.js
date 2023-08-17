@@ -11,6 +11,7 @@ import AlertPage from "./alert/AlertPage";
 
 import { HiUserCircle } from "react-icons/hi";
 import Favicon from "../../assets/source/imgs/favicon.png";
+import Logo from "../../assets/source/imgs/BNS_LOGO.png"
 import "./styles.css";
 import {
   Menu,
@@ -103,7 +104,7 @@ function Navbar() {
     <nav className="nav">
       <NavLink to="/" className="site-title">
         <img className="favicon-img" src={Favicon} alt="favicon" />
-        사장님, 나이스 샷
+        <img className="favicon-img" src={Logo} alt="logo" />
       </NavLink>
       <ul id="nav-list">
         <li id="nav-list-li">
