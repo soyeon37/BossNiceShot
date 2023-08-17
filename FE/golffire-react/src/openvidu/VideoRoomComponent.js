@@ -750,6 +750,7 @@ class VideoRoomComponent extends Component {
 												/>	
 											</div>
 										</div>
+										<div className={`check-box-background-div ${type === 'LEARNING' ? 'learning-bg' : 'coaching-bg'}`}></div>
 									</div>
 								</div>
 							</div>

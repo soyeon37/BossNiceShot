@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
 
 // Navigation Bar
 import Navbar from "./setup/routes-manager/Navbar";
@@ -61,11 +60,8 @@ import "../src/assets/css/create-container.css";
 function App() {
   // Redux
   // 사용자 정보(userId)로 로그인 여부 판단
-  const userId = useSelector((state) => state.userInfoFeatrue.userId);
-  const userNickname = useSelector((state) => state.userInfoFeatrue.userNickname);
-
-  // cookie의 user 정보 확인
-  const [cookies] = useCookies(["user"]);
+  const userId = useSelector((state) => state.userInfoFeature.userId);
+  const userNickname = useSelector((state) => state.userInfoFeature.userNickname);
 
   return (
     <ChakraProvider>

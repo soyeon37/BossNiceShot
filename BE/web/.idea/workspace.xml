@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd34f159-9b12-440b-8d67-1f0f3a97241e" name="Changes" comment="">
+<<<<<<< HEAD
       <change afterPath="$PROJECT_DIR$/.idea/libraries/gradle_wrapper.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/f/1fb84a2d79703081f11451b4d2608bc34a059f20" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/c/6cdf3f11bfe55a6923229945e0db9521f7904161" afterDir="false" />
@@ -43,6 +44,12 @@
       <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/LearningList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/LearningList.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/Navbar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/alert/AlertPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/alert/AlertPage.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/features/signupSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/features/signupSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/AccompanyList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/AccompanyList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/Signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupInfo.js" afterDir="false" />
+>>>>>>> e433f8c1954c55246b726109349585c89187d8cf
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,12 +69,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="BOSSNICESHOT" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -102,7 +104,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/BOSSNICESHOT/S09P12A309/BE/web",
+    "last_opened_file_path": "C:/SSAFY/BE 협업중 - gitlab/BE",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -199,10 +201,15 @@
       <workItem from="1692089708156" duration="7980000" />
       <workItem from="1692114955840" duration="8933000" />
       <workItem from="1692151220580" duration="837000" />
+<<<<<<< HEAD
       <workItem from="1692167280599" duration="6214000" />
       <workItem from="1692181456884" duration="6120000" />
       <workItem from="1692202889897" duration="626000" />
       <workItem from="1692231514181" duration="928000" />
+=======
+      <workItem from="1692167280599" duration="1155000" />
+      <workItem from="1692191931200" duration="24000" />
+>>>>>>> e433f8c1954c55246b726109349585c89187d8cf
     </task>
     <servers />
   </component>
