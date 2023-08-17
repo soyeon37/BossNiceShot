@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import axios from "axios";
+
 import MyPageNavbar from "./MyPageNavbar";
 import "./MyPage.css";
-import axios from "axios";
 
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 import Interceptor from "../../setup/user-auth/Interceptor";
 
 function EditPassword() {
+    const navigate = useNavigate();
+
     const [passOrigin, setPassOrigin] = useState("");
     const [passNew, setPassNew] = useState("");
     const [passCheck, setPassCheck] = useState("");
@@ -80,6 +85,7 @@ function EditPassword() {
                 console.log(response);
                 if (response.data.data.resultMessage === "SUCCESS") {
                     alert('비밀번호 변경에 성공했습니다.');
+                    navigate('/mypage/info')
                 }
             })
             .catch((error) => {
