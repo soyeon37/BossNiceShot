@@ -39,12 +39,14 @@ function Navbar() {
   const userId = useSelector((state) => state.userInfoFeature.userId);
   const userNickname = useSelector((state) => state.userInfoFeature.userNickname);
   const userProfile = useSelector((state) => state.userInfoFeature.userImage);
+  const userAccessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
   // const userProfile = "green_cap_bear yellow";
 
+  // URL이 바뀔 때마다 실행되는 코드
   useEffect(() => {
-    console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
-    setCheckToken(1);
-  }, [])
+    // console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
+    // console.log("새로고침마다 확인하는 access token? ", userAccessToken);
+  }, )
 
   // 사진 출력을 위한 변수
   let profileValues = "";
@@ -102,10 +104,10 @@ function Navbar() {
 
   return (
     <nav className="nav">
-      <a href="/" className="site-title">
+      <NavLink to="/" className="site-title">
         <img className="favicon-img" src={Favicon} alt="favicon" />
         사장님, 나이스 샷
-      </a>
+      </NavLink>
       <ul id="nav-list">
         <li id="nav-list-li">
           <NavLink to="/solution" id="nav-list-link" style={({ isActive, isPending }) => {
