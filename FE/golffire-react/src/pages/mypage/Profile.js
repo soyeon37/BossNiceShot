@@ -14,12 +14,14 @@ import { useStatStyles } from "@chakra-ui/react";
 function Profile() {
     const navigate = useNavigate();
 
-    // 사용자 정보 (id, AccessToken)
+    // 사용자 정보 및 AccessToken
     const userId = useSelector((state) => state.userInfoFeature.userId);
+    const userNickname = useSelector((state) => state.userInfoFeature.userNickname);
+    const userLevel = useSelector((state) => state.userInfoFeature.userLevel);
+    const userTee = useSelector((state) => state.userInfoFeature.userTee);
+    const userProfile = useSelector((state) => state.userInfoFeature.userImage);
     const userAccessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
-    const headers = {
-        Authorization: `Bearer ${userAccessToken}`,
-    };
+    axios.defaults.headers.common["Authorization"] = `Bearer ${userAccessToken}`;
 
     // 사용자 정보 (서버로 부터 받은 userId 기반 정보)
     const [personInfo, setPersonInfo] = useState(null);
@@ -31,7 +33,7 @@ function Profile() {
 
         // axios code
         const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/info";
-        axios.get(apiUrl, { headers })
+        axios.get(apiUrl)
             .then(response => {
                 console.log("성공, ", response)
                 // 사용자 정보 저장 필요
@@ -46,6 +48,7 @@ function Profile() {
         console.log("scoreHistory:", scoreHistory);
     }, [])
 
+    // 정보 수정 & 비밀번호 수정 route
     const moveEditProfile = () => {
         navigate("/mypage/info/editprofile/");
     }
@@ -53,11 +56,13 @@ function Profile() {
         navigate("/mypage/info/editpassword");
     }
 
+    // 동행 기록에 score 저장
     const handleSaveScore = (index) => {
         // 동행 기록에 score 저장 axios
         console.log("정보 추가: ", index);
     }
 
+    // TEST DATA // Debug Code !!!
     const testProfile = {
         nickname: "문싸피",
         teeBox: "RED",
@@ -89,11 +94,12 @@ function Profile() {
         }, {
             place: "드림스크린", date: "2023-02-03", score: 60
         },
-    ] // Debug Code !!!
+    ]
 
     // 사진 출력을 위한 변수
     let profileValues = "";
     if (testProfile.image) profileValues = testProfile.image.split(' ');
+
     // 사진 배경 색상을 map으로 관리
     const colorMap = {
         "red": "#F24141",
@@ -121,7 +127,7 @@ function Profile() {
                                 <div id="info-header">이메일</div>
                                 <div id="info-email">{userId}</div>
                                 <div id="info-header">닉네임</div>
-                                <div id="info-nickname">{testProfile.nickname}</div>
+                                <div id="info-nickname">{userNickname}</div>
                                 <div id="info-header">자기소개</div>
                                 <div id="info-introduction">{testProfile.introduce}</div>
                                 <div id="info-golf-info1">
@@ -137,11 +143,11 @@ function Profile() {
                                 <div id="info-golf-info2">
                                     <div id="info-golf-info2-1-div">
                                         <div id="info-header">레벨</div>
-                                        <div id="info-golf-info2-1">{testProfile.level}</div>
+                                        <div id="info-golf-info2-1">{userLevel}</div>
                                     </div>
                                     <div id="info-golf-info2-2-div">
                                         <div id="info-golf-info-header">선호 티박스</div>
-                                        <div id="info-golf-info2-2">{testProfile.teeBox}</div>
+                                        <div id="info-golf-info2-2">{userTee}</div>
                                     </div>
                                 </div>
                             </div>
