@@ -9,7 +9,7 @@ import Interceptor from "../../setup/user-auth/Interceptor";
 
 import AlertPage from "./alert/AlertPage";
 
-import { Avatar, AvatarBadge, AvatarGroup, Hide } from "@chakra-ui/react";
+import { HiUserCircle } from "react-icons/hi";
 import Favicon from "../../assets/source/imgs/favicon.png";
 import "./styles.css";
 import {
@@ -46,7 +46,7 @@ function Navbar() {
   useEffect(() => {
     // console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
     // console.log("새로고침마다 확인하는 access token? ", userAccessToken);
-  }, )
+  },)
 
   // 사진 출력을 위한 변수
   let profileValues = "";
@@ -64,10 +64,7 @@ function Navbar() {
   const checkProfilePic = () => {
     // console.log("프로필 값을 확인: ", userProfile);
 
-    if (userProfile !== undefined &&
-      userProfile !== null &&
-      userProfile !== '' &&
-      !userProfile) {
+    if (userProfile) {
       // console.log("가능!");
       return true;
     } else {
@@ -176,26 +173,31 @@ function Navbar() {
 
         <li className="mypagemenu" id="nav-list-li">
           <Menu>
-
-            {/* 마이페이지 버튼 아바타로 수정했습니다. */}
-            <MenuButton>
-              {checkProfilePic() ? (
-                <div className="navbar-user-icon">
-                  <div className="navbar-user-circle"
-                    style={{ backgroundColor: colorMap[profileValues[1]] }}>
-                    <img className="navbar-user-image"
-                      src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+            {checkProfilePic() ? (
+              <div className="nav-alarm-parent">
+                <MenuButton>
+                  <div className="nav-alarm-pic">
+                    <div className="navbar-user-icon">
+                      <div className="navbar-user-circle"
+                        style={{ backgroundColor: colorMap[profileValues[1]] }}>
+                        <img className="navbar-user-image"
+                          src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <Avatar size={"sm"}>
-                  {/* 여기서 bg 값을 알람이 있을때는 빨간색, 없을때는 초록색으로 변경해야 할듯, 그런데 badge클릭시 알림창 뜨게 하는게 생각보다 쉽지 않음  */}
-                  <AvatarBadge boxSize={'1.25rem'} bg={'red'}>
-                    {/* <AlertPage></AlertPage> */}
-                  </AvatarBadge>
-                </Avatar>
-              )}
-            </MenuButton>
+                </MenuButton>
+                <AlertPage onClick={handleCheckNotification}>
+                </AlertPage>
+              </div>
+            ) : (
+              <div className="nav-alarm-parent">
+                <MenuButton>
+                  <HiUserCircle className="nav-alarm-pic" />
+                </MenuButton>
+                {/* <AlertPage onClick={handleCheckNotification}>
+                </AlertPage> */}
+              </div>
+            )}
             <MenuList>
 
               {userId ? (
@@ -213,15 +215,6 @@ function Navbar() {
                   <MenuItem style={{ color: "gray" }}
                     onClick={handleLogout}>
                     로그아웃</MenuItem>
-                  {/* <MenuItem style={{ color: "gray" }}
-                    onClick={handleLogout({
-                      refreshToken: cookies.refreshToken,
-                      setCookie,
-                      navigate,
-                      dispatch,
-                      resetUserState
-                    })}>
-                    로그아웃</MenuItem> */}
                 </MenuGroup>
               ) : (<MenuGroup title=''>
                 <MenuItem>
@@ -245,10 +238,6 @@ function Navbar() {
               </MenuGroup>)}
             </MenuList>
           </Menu>
-        </li>
-        <li id="nav-list-li">
-          <AlertPage onClick={handleCheckNotification}>
-          </AlertPage>
         </li>
       </ul >
 
