@@ -11,6 +11,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Interceptor from "../../setup/user-auth/Interceptor";
 
 function EditPassword() {
+    // 사용자 정보(userId)로 axios 수행
+    const userId = useSelector((state) => state.userInfoFeature.userId);
+    const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
     const navigate = useNavigate();
 
     const [passOrigin, setPassOrigin] = useState("");

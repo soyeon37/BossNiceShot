@@ -19,14 +19,10 @@ import LearningRoom from './LearningRoom';
 import LearningBox from './LearningBox';
 
 function LearningList() {
-  // Redux
-  const dispatch = useDispatch();
-  // AccessToken (Redux)
+  // 사용자 정보(userId)로 axios 수행
+  const userId = useSelector((state) => state.userInfoFeature.userId);
   const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
-  // Header (AccessToken)
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-  };
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
   const navigate = useNavigate();
 
@@ -66,7 +62,7 @@ function LearningList() {
     setCurrentPage(currentPage);
 
     console.log("러닝 리스트 조회");
-    axios.post(apiUrl, data, { headers }).then((response) => {
+    axios.post(apiUrl, data).then((response) => {
       console.log(response);
 
       setLearningList(response.data.studyList);
