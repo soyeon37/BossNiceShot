@@ -314,11 +314,12 @@ function AccompanyList() {
             </select>
           </div>
           <div className="checkbox-div">
-            <label className="switch" value={selectedFollow} onChange={handleFollowChange}>
+            {/* 팔로잉 필터 제거 */}
+            {/* <label className="switch" value={selectedFollow} onChange={handleFollowChange}>
               <input type="checkbox" />
               <span className="slider round"></span>
             </label>
-            <div>팔로잉</div>
+            <div>팔로잉</div> */}
           </div>
         </div>
         <div className={isSelected ? "list-body-selected" : "list-body-unselected"}>
