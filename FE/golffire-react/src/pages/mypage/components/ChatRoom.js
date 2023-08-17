@@ -23,13 +23,18 @@ function ChatRoom({ props }) {
     const [messageInput, setMessageInput] = useState("");
     const [stompClient, setStompClient] = useState(null);
 
-    const accessToken = axios.defaults.headers.common["Authorization"];
+    // AccessToken (Redux)
+    const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    // Header (AccessToken)
+    const headers = {
+        Authorization: `Bearer ${accessToken}`,
+    };
 
     useEffect(() => {
         const socket = new SockJS(process.env.REACT_APP_SERVER_URL + '/ws');
         const stompClient = Stomp.over(socket);
 
-        stompClient.connect( {Authorization: `${accessToken}`} , (frame) => {
+        stompClient.connect( {headers} , (frame) => {
             setStompClient(stompClient);
 
             console.log("들어옴");
