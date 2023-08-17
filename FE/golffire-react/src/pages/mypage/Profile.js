@@ -19,7 +19,7 @@ function Profile() {
     const userNickname = useSelector((state) => state.userInfoFeature.userNickname);
     const userLevel = useSelector((state) => state.userInfoFeature.userLevel);
     const userTee = useSelector((state) => state.userInfoFeature.userTee);
-    const userProfile = useSelector((state) => state.userInfoFeature.userImage);
+    const userImage = useSelector((state) => state.userInfoFeature.userImage);
     const userAccessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
     axios.defaults.headers.common["Authorization"] = `Bearer ${userAccessToken}`;
 
