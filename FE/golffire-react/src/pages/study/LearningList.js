@@ -40,14 +40,19 @@ function LearningList() {
   }, [searchFilter]);
 
   const getLearningList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/LEARNING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/allsearch?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     console.log(apiUrl);
 
     setCurrentPage(currentPage);
 
     console.log("러닝 리스트 조회");
-    axios.get(apiUrl)
+
+    const data = {
+      type: "LEARNING"
+    };
+
+    axios.get(apiUrl, data)
     .then((response) => {
       console.log(response);
 

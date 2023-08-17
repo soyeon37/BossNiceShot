@@ -153,7 +153,7 @@ function AlertPage() {
 
   // 알림 read 갱신 함수
   const handleUpdateRead = () => {
-    const apiUrl = "http://localhost:8080/notification/update";
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/notification/update";
     axios
       .put(apiUrl)
       .then((response) => {
