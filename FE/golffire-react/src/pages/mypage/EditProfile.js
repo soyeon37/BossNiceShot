@@ -4,8 +4,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 
 // Redux
-import { useDispatch } from "react-redux";
-import { setUserAccessToken, resetUserState } from "../../features/userInfoSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 import { InfoOutlineIcon } from '@chakra-ui/icons'
 import MyPageNavbar from "./MyPageNavbar";
@@ -15,15 +14,20 @@ import RedTeeImg from "../../assets/source/icons/flag-red.png";
 import WhiteTeeImg from "../../assets/source/icons/flag-white.png";
 import BlackTeeImg from "../../assets/source/icons/flag-black.png";
 import AllTeeImg from "../../assets/source/icons/flag-all.png";
-import {
-    Button,
-} from "@chakra-ui/react";
 
 function EditProfile() {
     // Redux
     const dispatch = useDispatch();
+    
+    // 사용자 정보 및 AccessToken
+    const userId = useSelector((state) => state.userInfoFeature.userId);
+    const userNickname = useSelector((state) => state.userInfoFeature.userNickname);
+    const userLevel = useSelector((state) => state.userInfoFeature.userLevel);
+    const userTee = useSelector((state) => state.userInfoFeature.userTee);
+    const userProfile = useSelector((state) => state.userInfoFeature.userImage);
+    const userAccessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${userAccessToken}`;
 
-    const { state } = useLocation();
     const [cookies, setCookie, removeCookie] = useCookies(["user"]);
     const [nickname, setNickname] = useState("");
 

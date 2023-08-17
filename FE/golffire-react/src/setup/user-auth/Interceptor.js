@@ -33,6 +33,7 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
     // interceptor의 기능, 항상 실행되야 하는 코드
     // token 만료 여부 확인 후 만료 시 재발급
     useEffect(() => {
+        console.log("token 만료 확인... 그런데 되나?");
         if (!checkToken) return;
 
         console.log("token 만료 확인"); // Debug Code !!!
@@ -101,7 +102,7 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
                     const newAccessToken = response.data.data.accessToken;
                     console.log("refreshtoken 재발급 성공!");
                     console.log("reissueToken - Interceptor; ", newAccessToken); // Debug Code !!!
-                    
+
                     dispatch(setUserAccessToken(newAccessToken));
                     return true;
                 } else {
@@ -113,7 +114,8 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
             })
             .catch((error) => {
                 console.error('재발급 중 에러 발생, ', error); // Debug Code !!!
-                return false;
+                handleLogout();
+                // return false;
             });
     }
 
@@ -195,10 +197,15 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
                 navigate("/");
             })
             .catch((error) => {
-                console.error("Error:", error); // Debug Code !!
-                dispatch(resetUserState());
-                // 로그인 실패를 화면에 표시하는 코드 필요 !!
-                navigate("/error");
+                console.log("에러내용확인:", error.response.status)
+                if (error.response.status === 500) {
+                    alert("로그인 정보가 잘못되었습니다. 다시 확인해 주세요.");
+                } else {
+                    console.error("Error:", error); // Debug Code !!
+                    dispatch(resetUserState());
+                    // 로그인 실패를 화면에 표시하는 코드 필요 !!
+                    // navigate("/error");
+                }
             });
     }
 }
