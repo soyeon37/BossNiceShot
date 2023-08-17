@@ -70,7 +70,7 @@ function CoachingList() {
     };
 
     console.log("코칭 리스트 조회");
-    axios.get(apiUrl, data, { headers })
+    axios.post(apiUrl, data, { headers })
     .then((response) => {
       console.log(response);
 
