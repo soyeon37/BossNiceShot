@@ -1,8 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MyPageNavbar from "./MyPageNavbar";
+import axios from "axios";
+
+// Redux
+import { useSelector } from "react-redux";
+
 import "./MyPage.css";
 import RedTeeImg from "../../assets/source/icons/flag-red.png";
+
 function MyAccompany() {
+    // 사용자 정보(userId)로 axios 수행
+    const userId = useSelector((state) => state.userInfoFeature.userId);
+    const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
+    const [owned, setOwned] = useState([]);
+    const [joined, setJoined] = useState([]);
+
+    useEffect(() => {
+        const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/created";
+
+        console.log("사용자 id(", userId, ") 기반으로 동행 리스트 호출"); // Debug Code !!!
+
+        axios.get(apiUrl).then((response) => {
+            setOwned(response.data);
+            console.log("데이터: ", response.data); // Debug Code !!!
+
+        }).catch((error) => {
+            console.log("생성한 리스트 호출 중 에러 발생: ", error);
+        });
+
+    }, [])
+
     const personInfo = [
         {
             title: "골프러버들",
@@ -61,6 +90,7 @@ function MyAccompany() {
             currentpeople: 2,
         }
     ]
+
     return (
         <div id="MyPage">
             <div id="MyPageBox">
@@ -74,7 +104,7 @@ function MyAccompany() {
                     </div>
                     <div id="myacc-list">
                         <div id="myacc-body">
-                            {personInfo.map((companion, index) => (
+                            {owned.map((companion, index) => (
                                 <div id="myacc-list-div" key={index}>
                                     <div id="myacc-list-top">
                                         <div id="myacc-list-top-div">
