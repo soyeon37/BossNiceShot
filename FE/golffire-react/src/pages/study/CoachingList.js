@@ -64,11 +64,14 @@ function CoachingList() {
     console.log(apiUrl);
 
     setCurrentPage(currentPage);
+
     const data = {
       type: "COACHING",
     };
+
     console.log("코칭 리스트 조회");
-    axios.post(apiUrl, data, { headers }).then((response) => {
+    axios.get(apiUrl, data, { headers })
+    .then((response) => {
       console.log(response);
 
       setCoachingList(response.data.studyList);

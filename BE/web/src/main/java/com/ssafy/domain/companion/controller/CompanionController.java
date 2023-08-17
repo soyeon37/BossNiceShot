@@ -29,7 +29,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/companion")
 @RequiredArgsConstructor
-public class CompanionController {
+public class
+CompanionController {
 	private final CompanionService companionService;
 
 	@Operation(summary = "동행 모집 생성", description = "동행 모집을 등록한다.")

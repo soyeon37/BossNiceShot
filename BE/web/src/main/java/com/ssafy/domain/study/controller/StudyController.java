@@ -3,6 +3,7 @@ package com.ssafy.domain.study.controller;
 import com.ssafy.domain.study.dto.request.StudyCreateRequest;
 import com.ssafy.domain.study.dto.request.StudySearchRequest;
 import com.ssafy.domain.study.dto.request.StudyUpdateRequest;
+import com.ssafy.domain.study.dto.request.StudyTypeRequest;
 import com.ssafy.domain.study.dto.response.StudyResponse;
 import com.ssafy.domain.study.entity.Study;
 import com.ssafy.domain.study.service.StudyService;
@@ -46,7 +47,6 @@ public class StudyController {
     public void init() {
         this.openvidu = new OpenVidu(OPENVIDU_URL, OPENVIDU_SECRET);
     }
-
     @PostMapping("/api/sessions")
     public ResponseEntity<String> initializeSession(@RequestBody(required = false) Map<String, Object> params)
             throws OpenViduJavaClientException, OpenViduHttpException {
@@ -93,7 +93,6 @@ public class StudyController {
         studyService.deleteById(studyId);
         return ResponseEntity.ok().build();
     }
-
     @Operation(summary = "스터디 활성화", description = "방장이 스터디룸을 열어 스터디가 활성화된다.")
     @PutMapping("/api/study/{studyId}/active")
     public ResponseEntity<StudyResponse> active(@PathVariable Long studyId) {
@@ -101,10 +100,10 @@ public class StudyController {
     }
 
     @Operation(summary = "전체 스터디 조회 - 최신 등록 순", description = "타입 별로 전체 스터디를 최신 등록 순으로 정렬한다.")
-    @GetMapping("/api/study/list/{type}")
-    public ResponseEntity<Map<String, Object>> studyList(@PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
-        Page<Study> paging = studyService.findPaging(pageable, type);
-
+    @PostMapping("/api/study/allsearch")
+    public ResponseEntity<Map<String, Object>> studyList(@RequestBody StudyTypeRequest studyTypeRequest, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<Study> paging = studyService.findPaging(pageable, studyTypeRequest.type());
+        log.info("전체 스터디 조회 시작 = {}", studyTypeRequest.type());
         Map<String, Object> response = new HashMap<>();
         response.put("studyList", paging.stream().map(StudyResponse::from).toList());
         response.put("totalPages", paging.getTotalPages());
@@ -135,7 +134,6 @@ public class StudyController {
 
         return ResponseEntity.ok(response);
     }
-
     @Operation(summary = "검색 기반 참여 가능한 코칭 조회 - 최신 등록 순", description = "활성화된 코칭 중, 참가 인원이 코칭의 최대 인원보다 작은 코칭 검색 결과를 최신 등록 순으로 정렬한다.")
     @PostMapping("/api/study/list/{type}/attandable")
     public ResponseEntity<Map<String, Object>> attandableSearchList(@RequestBody StudySearchRequest studySearchRequest, @PathVariable String type, @PageableDefault(page = 0, size = 6, sort = "createdTime", direction = Sort.Direction.DESC) Pageable pageable) {
