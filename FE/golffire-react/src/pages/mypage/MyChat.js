@@ -4,8 +4,6 @@ import MyPageNavbar from "./MyPageNavbar";
 // Redux
 import { useSelector } from "react-redux";
 
-import { getNameById } from "../golffield/ParseGolfId";
-
 import ListRoom from "./components/ListRoom";
 import ChatRoom from "./components/ChatRoom";
 
@@ -36,13 +34,14 @@ function MyChat() {
     }, [])
 
     // 리스트에서 선택된 방의 채팅방 보이기
-    const handleRoomClick = (roomId) => {
-        setRoomId(roomId);
-        console.log("전체 채팅 방 정보: ", chatRooms);
-        console.log("선택된 방의 번호: ", roomId);
+    const handleRoomClick = (id) => {
+        if (id !== roomId)
+            setRoomId(id);
+        else
+            setRoomId(0);
     };
 
-    const selectedoomData = chatRooms.find((chatRooms) => chatRooms.id === roomId);
+    const selectedRoomData = chatRooms.find((chatRooms) => chatRooms.id === roomId);
 
     return (
         <div id="MyPage">
@@ -73,7 +72,7 @@ function MyChat() {
                             </>
                         ) : (
                             <>
-                                <ChatRoom props={selectedoomData} />
+                                <ChatRoom props={selectedRoomData} />
                             </>
                         )}
                     </div>

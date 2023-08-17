@@ -15,6 +15,18 @@ function ListRoom({ title, teeBox, field, teeUpTime }) {
         NONE: flagall,
     };
 
+    // 날짜 출력을 위한 함수
+    const dateFormat = (input) => {
+        const date = new Date(input);
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+
+        return `${year}년 ${month}월 ${day}일 ${hours}시 ${minutes}분`;
+    };
+
     return (
         <div className="ListRoom">
             <div className="listroom-header">
@@ -23,7 +35,7 @@ function ListRoom({ title, teeBox, field, teeUpTime }) {
             </div>
             <div className="listroom-data">
                 <div>{getNameById(field)}</div>
-                <div>{teeUpTime}</div>
+                <div>{dateFormat(teeUpTime)}</div>
             </div>
         </div>
     );
