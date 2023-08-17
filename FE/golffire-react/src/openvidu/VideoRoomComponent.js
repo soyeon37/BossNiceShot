@@ -31,27 +31,29 @@ const CopyUrl = () => {
 
 class VideoRoomComponent extends Component {
 	constructor(props) {
-		console.log("VideoRoomComponent 들어옴");
-		console.log(props);
+		console.log("1. VideoRoomComponent");
+		console.log("props:", props);
 
 		super(props);
+
+		this.remotes = [];
 		this.hasBeenUpdated = false;
 		this.layout = new OpenViduLayout();
+		this.localUserAccessAllowed = false;
 
 		let sessionName = 'session' + this.props.study.id;
 		let userName = this.props.studyUser.memberNickname;
 
-		this.remotes = [];
-		this.localUserAccessAllowed = false;
 		this.state = {
 			mySessionId: sessionName,
 			myUserName: userName,
 			session: undefined,
 			localUser: undefined,
+			mainStreamManager: undefined,
 			subscribers: [],
 			entered: false,
-			chatDisplay: 'block',
 			currentVideoDevice: undefined,
+			chatDisplay: 'block',
 			selectedSlideIndex: -1
 		};
 
@@ -69,7 +71,7 @@ class VideoRoomComponent extends Component {
 		this.closeDialogExtension = this.closeDialogExtension.bind(this);
 		this.toggleChat = this.toggleChat.bind(this);
 		this.checkNotification = this.checkNotification.bind(this);
-		// this.checkSize = this.checkSize.bind(this);
+		this.checkSize = this.checkSize.bind(this);
 		this.enteredChanged = this.enteredChanged.bind(this);
 	}
 
@@ -92,6 +94,7 @@ class VideoRoomComponent extends Component {
 			document.getElementById('layout'), 
 			openViduLayoutOptions
 		);
+		
 		window.addEventListener('beforeunload', this.onbeforeunload);
 		window.addEventListener('resize', this.updateLayout);
 		window.addEventListener('resize', this.checkSize);
@@ -110,7 +113,7 @@ class VideoRoomComponent extends Component {
 	}
 
 	joinSession() {
-		console.log("쪼인");
+		console.log("2. Join");
 		this.OV = new OpenVidu();
 
 		this.setState(
@@ -126,11 +129,11 @@ class VideoRoomComponent extends Component {
 
 	async connectToSession() {
 		if (this.props.token !== undefined) {
-			console.log('token received: ', this.props.token);
+			console.log('3-1. 받은 토큰: ', this.props.token);
 			this.connect(this.props.token);
 		} else {
 			try {
-				console.log("토큰get시도");
+				console.log("3-2. 토큰 받기 시도");
 				var token = await this.getToken();
 
 				this.connect(token);
@@ -196,7 +199,7 @@ class VideoRoomComponent extends Component {
 		});
 
 		if (this.state.session.capabilities.publish) {
-			publisher.on('accessAllowed' , () => {
+			publisher.on('4. 접근 허용' , () => {
 				this.state.session.publish(publisher).then(() => {
 					this.updateSubscribers();
 					this.localUserAccessAllowed = true;
@@ -206,6 +209,7 @@ class VideoRoomComponent extends Component {
 				});
 			});
 		}
+
 		localUser.setNickname(this.state.myUserName);
 		localUser.setConnectionId(this.state.session.connection.connectionId);
 		localUser.setScreenShareActive(false);
@@ -250,7 +254,7 @@ class VideoRoomComponent extends Component {
 	}
 
 	leaveSession() {
-		console.log("leave 시행");
+		console.log("5. leave Session 시도");
 		const mySession = this.state.session;
 
 		if (mySession) {
@@ -270,6 +274,7 @@ class VideoRoomComponent extends Component {
 			this.props.leaveSession();
 		}
 	}
+
 	camStatusChanged() {
 		localUser.setVideoActive(!localUser.isVideoActive());
 		localUser.getStreamManager().publishVideo(localUser.isVideoActive());
@@ -315,10 +320,12 @@ class VideoRoomComponent extends Component {
 				this.checkSomeoneShareScreen();
 				subscriber.videos[0].video.parentElement.classList.remove('custom-class');
 			});
+
 			const newUser = new UserModel();
 			newUser.setStreamManager(subscriber);
 			newUser.setConnectionId(event.stream.connection.connectionId);
 			newUser.setType('remote');
+
 			const nickname = event.stream.connection.data.split('%')[0];
 			newUser.setNickname(JSON.parse(nickname).clientData);
 			this.remotes.push(newUser);
@@ -344,10 +351,12 @@ class VideoRoomComponent extends Component {
 	subscribeToUserChanged() {
 		this.state.session.on('signal:userChanged', (event) => {
 			let remoteUsers = this.state.subscribers;
+
 			remoteUsers.forEach((user) => {
 				if (user.getConnectionId() === event.from.connectionId) {
 					const data = JSON.parse(event.data);
-					console.log('EVENTO REMOTE: ', event.data);
+					console.log('6. 이벤트 REMOTE: ', event.data);
+
 					if (data.isAudioActive !== undefined) {
 						user.setAudioActive(data.isAudioActive);
 					}
@@ -376,24 +385,26 @@ class VideoRoomComponent extends Component {
 	// 		this.layout.updateLayout();
 	// 	}, 20);
 	// }
+
 	updateLayout() {
-    console.log('Before setTimeout:', this.layout); // 확인용 로그
-    setTimeout(() => {
-        console.log('Inside setTimeout:', this.layout); // 확인용 로그
+    	console.log('7. timeout 실행 전:', this.layout); // 확인용 로그
 
-        if (this.layout === null) {
-            console.error('this.layout is null inside setTimeout. Cannot call updateLayout().');
-            return;
-        }
+    	setTimeout(() => {
+        	console.log('7-1. timeout 내부:', this.layout); // 확인용 로그
 
-        try {
-            this.layout.updateLayout();
-        } catch (error) {
-            console.error('An error occurred inside setTimeout:', error);
-        }
+			if (this.layout === null) {
+				console.error('this.layout is null inside setTimeout. Cannot call updateLayout().');
+				return;
+			}
 
-        console.log('After updateLayout:', this.layout); // 확인용 로그
-    }, 20);
+			try {
+				this.layout.updateLayout();
+			} catch (error) {
+				console.error('An error occurred inside setTimeout:', error);
+			}
+
+       		console.log('7-2. timeout 실행 후:', this.layout); // 확인용 로그
+    	}, 20);
 	}
 
 	sendSignalUserChanged(data) {
@@ -401,6 +412,7 @@ class VideoRoomComponent extends Component {
 			data: JSON.stringify(data),
 			type: 'userChanged',
 		};
+
 		this.state.session.signal(signalOptions);
 	}
 
@@ -576,12 +588,10 @@ class VideoRoomComponent extends Component {
 	// 	}
 	// }
 	async enteredChanged() {
-		console.log("화면 전환");
+		console.log("9. 스터디룸 입장");
 		console.log(this.props);
 
 		this.remotes = [];
-
-		await this.leaveSession();
 
 		let sessionName = 'session' + this.props.study.id;
 		let userName = this.props.studyUser.memberNickname;
@@ -592,7 +602,8 @@ class VideoRoomComponent extends Component {
 			subscribers: [],
 			entered: true,
 		});
-
+		
+		await this.leaveSession();
 		await this.joinSession();
   }
 

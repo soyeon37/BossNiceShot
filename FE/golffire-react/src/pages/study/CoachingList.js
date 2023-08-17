@@ -45,14 +45,18 @@ function CoachingList() {
   }, [searchFilter]);
 
   const getCoachingList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/list/COACHING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/allsearch?page=" + (currentPage - 1) + "&size=" + pageSize;
 
     console.log(apiUrl);
 
     setCurrentPage(currentPage);
 
+    const data = {
+      type: "COACHING",
+    };
+
     console.log("코칭 리스트 조회");
-    axios.get(apiUrl)
+    axios.get(apiUrl, data)
     .then((response) => {
       console.log(response);
 
