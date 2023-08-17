@@ -176,13 +176,11 @@ function Navbar() {
             {checkProfilePic() ? (
               <div className="nav-alarm-parent">
                 <MenuButton>
-                  <div className="nav-alarm-pic">
-                    <div className="navbar-user-icon">
-                      <div className="navbar-user-circle"
-                        style={{ backgroundColor: colorMap[profileValues[1]] }}>
-                        <img className="navbar-user-image"
-                          src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
-                      </div>
+                  <div className="navbar-user-icon">
+                    <div className="navbar-user-circle"
+                      style={{ backgroundColor: colorMap[profileValues[1]] }}>
+                      <img className="navbar-user-image"
+                        src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
                     </div>
                   </div>
                 </MenuButton>

@@ -81,34 +81,3 @@
 .bold {
     font-weight: bold;
 }
-
-/* nav alarm CSS */
-.nav-alarm-parent {
-    position: relative;
-    width: 4rem;
-    height: 4rem;
-
-    padding: 2%;
-}
-
-.nav-alarm-pic {
-    margin: 4px;
-    padding: 2%;
-    color: black;
-    width: 96%;
-    height: 96%;
-    font-size: 80px;
-    justify-content: center;
-    align-items: center;
-}
-
-.nav-alarm-bell {
-    position: absolute;
-    bottom: 8%;
-    right: 8%;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: red;
-    cursor: pointer;
-}
