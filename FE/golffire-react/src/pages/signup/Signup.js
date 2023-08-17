@@ -136,7 +136,7 @@ function Signup() {
   }
 
   // 사진 출력을 위한 변수
-  const [imgPic, setImgPic] = useState(state.profile);
+  const [imgPic, setImgPic] = useState("green_suncap_tiger");
   const [imgClr, setImgClr] = useState("white");
 
   // 사진 배경 색상을 map으로 관리
@@ -213,7 +213,7 @@ function Signup() {
         // alert 등으로 알린 뒤 화면 전환 필요
         console.log(response);
         console.log(response.data.data.id);
-        // navigate("/Login");
+        navigate("/Login");
       })
       .catch((error) => {
         console.error("Error: ", error); // Debug Code !!!

@@ -128,8 +128,10 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
-  align-items: center; /* 수평 정렬 */
-  justify-content: center; /* 수직 정렬 */
+  align-items: center;
+  /* 수평 정렬 */
+  justify-content: center;
+  /* 수직 정렬 */
 }
 
 #edit-title {
@@ -199,9 +201,11 @@
   display: flex;
   width: 100%;
 }
-#edit-intro{
+
+#edit-intro {
   width: 100%;
 }
+
 #edit-check-button {
   background-color: rgba(59, 214, 65, 1);
   color: white;
@@ -267,9 +271,11 @@
   margin-left: 15px;
   padding: 0px 5px;
 }
-#edit-golf-info2-div{
+
+#edit-golf-info2-div {
   width: 100%;
 }
+
 #teebox {
   background-color: #FFF;
   display: flex;
@@ -343,8 +349,10 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* 수평 정렬 */
-  justify-content: center; /* 수직 정렬 */
+  align-items: center;
+  /* 수평 정렬 */
+  justify-content: center;
+  /* 수직 정렬 */
 }
 
 #edit-pass-header {
@@ -369,7 +377,7 @@
 #input-origin,
 #input-new,
 #input-check {
-  
+
   padding: 0px 30px 0px 30px;
   font-size: 16px;
   border: 2px solid black;
@@ -433,14 +441,16 @@
   width: calc(33.3% - 40px);
   height: 200px;
   margin: 10px 20px 10px 20px;
-  
-  white-space: normal; /* 내용이 범위를 벗어나면 자동으로 줄바꿈 */
+
+  white-space: normal;
+  /* 내용이 범위를 벗어나면 자동으로 줄바꿈 */
 }
 
-#myacc-list-div:hover{
+#myacc-list-div:hover {
   border: 2px solid rgba(59, 214, 65, 1);
   transition: background-color 0.3s ease;
- }
+}
+
 #myacc-list-top-div {
   display: flex;
   align-items: center;
@@ -492,7 +502,8 @@
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
-#myacc-list-button:hover{
+
+#myacc-list-button:hover {
   background-color: #FFF;
   border-color: #3BD641;
   color: rgba(59, 214, 65, 1);
@@ -619,8 +630,8 @@
 }
 
 #room-tee {
-  position:absolute;
-  right:25px;
+  position: absolute;
+  right: 25px;
 }
 
 #room-field {
@@ -634,10 +645,10 @@
 #room-text {
   width: 100%;
   height: calc(100% - 200px);
-  background-color:#80caff;
+  background-color: #80caff;
   overflow: auto;
-  padding-top:20px;
-  padding-bottom:20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #room-footer {
@@ -645,47 +656,48 @@
   height: 100px;
   border-radius: 0px 0px 50px 0px;
   border: 1px solid #000;
-  background-color:white;
-  padding:20px;
-  padding-right:100px;
+  background-color: white;
+  padding: 20px;
+  padding-right: 100px;
 }
 
 #message {
-  padding:30px;
-  width:100%;
-  height:60px;
-  border-radius:20px;
-  border:1px solid black;
+  padding: 30px;
+  width: 100%;
+  height: 60px;
+  border-radius: 20px;
+  border: 1px solid black;
   box-shadow: none;
 }
 
 #icon-div {
   position: absolute;
-  margin-top:11px;
+  margin-top: 11px;
 }
 
 /* MyChatBox (Component) CSS */
 .MyChatBox>div {
   float: right;
-  padding:7px;
+  padding: 7px;
 }
+
 .MyChatBox>img {
   float: right;
   position: relative;
-  right:20px;
+  right: 20px;
 }
 
 .mychat-time {
-  color:#343434;
-  font-size:12px;
-  margin-top:15px;
-  margin-left:5px;
-  position:relative;
-  right:40px;
+  color: #343434;
+  font-size: 12px;
+  margin-top: 15px;
+  margin-left: 5px;
+  position: relative;
+  right: 40px;
 }
 
 .mychat-message.right {
-  right:40px;
+  right: 40px;
   background-color: white;
   border-radius: 10px;
   position: relative;
@@ -716,42 +728,43 @@
 }
 
 .mychat-nickname {
-  position:relative;
-  font-weight:bold;
-  float:right;
-  right:120px;
+  position: relative;
+  font-weight: bold;
+  float: right;
+  right: 120px;
 }
 
 #mychat-pic {
-  border-radius:100%;
-  border:1px solid black;
-  background-color:#77c2fc;
-  position:relative;
-  top:-20px;
+  border-radius: 100%;
+  border: 1px solid black;
+  background-color: #77c2fc;
+  position: relative;
+  top: -20px;
 }
 
 /* OtherChatBox (Component) CSS */
 .OtherChatBox>div {
   float: left;
-  padding:7px;
+  padding: 7px;
 }
+
 .OtherChatBox>img {
   float: left;
   position: relative;
-  left:20px;
+  left: 20px;
 }
 
 .otherchat-time {
-  color:#343434;
-  font-size:12px;
-  margin-top:15px;
-  margin-left:5px;
-  position:relative;
-  left:40px;
+  color: #343434;
+  font-size: 12px;
+  margin-top: 15px;
+  margin-left: 5px;
+  position: relative;
+  left: 40px;
 }
 
 .otherchat-message.left {
-  left:40px;
+  left: 40px;
   background-color: #ffdd67;
   border-radius: 10px;
   position: relative;
@@ -782,18 +795,18 @@
 }
 
 .otherchat-nickname {
-  position:relative;
-  font-weight:bold;
-  float:left;
-  left:120px;
+  position: relative;
+  font-weight: bold;
+  float: left;
+  left: 120px;
 }
 
 #otherchat-pic {
-  border-radius:100%;
-  border:1px solid black;
-  background-color:#77c2fc;
-  position:relative;
-  top:-20px;
+  border-radius: 100%;
+  border: 1px solid black;
+  background-color: #77c2fc;
+  position: relative;
+  top: -20px;
 }
 
 /* ChatBox Common CSS */
@@ -801,7 +814,7 @@
   width: 100%;
   height: auto;
   display: inline-block;
-  padding:5px;
+  padding: 5px;
 }
 
 /* MyFollow CSS */
@@ -821,13 +834,14 @@
   font-size: 27px;
 }
 
-#myfollow-list-wrap{
+#myfollow-list-wrap {
   align-items: center;
   justify-content: center;
   overflow-y: scroll;
   padding-left: 20px;
   padding-right: 20px;
 }
+
 #myfollow-list {
   width: 100%;
   height: 100%;
@@ -1111,11 +1125,15 @@
 .nav-list {
   list-style: none;
 }
-#nav-list-click{
-  display: block; /*블록 레벨 요소로 설정 */
-  cursor: pointer; /* 마우스 커서를 손가락 모양으로 변경 */
+
+#nav-list-click {
+  display: block;
+  /*블록 레벨 요소로 설정 */
+  cursor: pointer;
+  /* 마우스 커서를 손가락 모양으로 변경 */
   padding-top: 4px;
 }
+
 .nav-list-text {
   font-size: 17px;
   display: flex;
@@ -1225,11 +1243,21 @@ li {
 #info-pic-wrapper {
   width: 150px;
   height: 150px;
-  background-color: #3498db;
   border: 2px solid black;
   border-radius: 50%;
-  /* 50%로 설정하여 원 모양으로 만듭니다. */
+  overflow: hidden;
   margin: 20px auto 15px auto;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-pic-image {
+  width: 80%;
+  height: 80%;
+  object-fit: cover;
+  overflow: visible;
 }
 
 #info-text {
@@ -1276,11 +1304,13 @@ li {
 }
 
 #info-introduction {
+  width: calc(100% - 100px);
   border: 2px solid black;
   border-radius: 50px;
   margin: 2px 50px;
   display: flex;
   align-items: center;
+  text-align: left;
   padding: 2px 0px 2px 30px;
   /* justify-content: center; */
 }
