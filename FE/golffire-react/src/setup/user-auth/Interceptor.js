@@ -174,7 +174,7 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
                 const refresh_token = responsedData.token.refreshToken;
 
                 // header에 accesstoken 저장 (사용불가)
-                // axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
+                axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
                 // Redux(Local Storage)에 accesstoken 저장
                 dispatch(setUserAccessToken(access_token));
 
