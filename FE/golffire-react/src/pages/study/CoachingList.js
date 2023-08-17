@@ -23,12 +23,12 @@ import "./study.css";
 function CoachingList() {
   // Redux
   const dispatch = useDispatch();
+  // 사용자 정보(userId)로 axios 수행
+  const userId = useSelector((state) => state.userInfoFeature.userId);
   // AccessToken (Redux)
   const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
   // Header (AccessToken)
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-  };
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
   const navigate = useNavigate();
 
@@ -70,13 +70,13 @@ function CoachingList() {
     };
 
     console.log("코칭 리스트 조회");
-    axios.post(apiUrl, data, { headers })
-    .then((response) => {
-      console.log(response);
+    axios.post(apiUrl, data)
+      .then((response) => {
+        console.log(response);
 
-      setCoachingList(response.data.studyList);
-      setTotalPages(response.data.totalPages);
-    });
+        setCoachingList(response.data.studyList);
+        setTotalPages(response.data.totalPages);
+      });
   };
 
   const getCoachingSearchList = (searchValue, currentPage) => {
