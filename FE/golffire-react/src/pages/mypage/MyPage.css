@@ -104,14 +104,23 @@
 
 #pic-circle {
   width: 60%;
-  padding-bottom: 55%;
-
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
 
-  border-radius: 50%;
+#edit-pic {
+  width: 90%;
+  height: 90%;
 
-  border: 2px solid black;
-  background-color: #3498db;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
 }
 
 #edit-info {
@@ -274,6 +283,10 @@
 
 #edit-golf-info2-div {
   width: 100%;
+  padding: 0px 80px 0px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #teebox {
@@ -299,6 +312,7 @@
 }
 
 #edit-button-div {
+  width: 100%;
   margin-top: 20px;
   display: flex;
   justify-content: center;
@@ -310,7 +324,7 @@
   border-radius: 50px;
   border: 2px solid #000;
   background: #3BD641;
-  width: 480px;
+  width: 80%;
   height: 50px;
   display: flex;
   align-items: center;
@@ -1247,7 +1261,7 @@ li {
   border-radius: 50%;
   overflow: hidden;
   margin: 20px auto 15px auto;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;

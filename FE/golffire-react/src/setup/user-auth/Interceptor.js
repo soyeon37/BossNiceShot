@@ -197,8 +197,8 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
                 navigate("/");
             })
             .catch((error) => {
-                console.log("에러내용확인:", error.response.status)
-                if (error.response.status === 500) {
+                console.log("에러내용확인:", error)
+                if (error.response == 500) {
                     alert("로그인 정보가 잘못되었습니다. 다시 확인해 주세요.");
                 } else {
                     console.error("Error:", error); // Debug Code !!
