@@ -15,6 +15,10 @@ import ChatComponent from './chat/ChatComponent';
 // import Button from "@mui/material/Button";
 // import Skeleton from "@mui/material/Skeleton";
 
+import pandaswing from '../assets/source/imgs/panda_swing.png'
+import tigerswing from '../assets/source/imgs/tiger_swing.png'
+
+
 // 유저 생성
 var localUser = new UserModel();
 
@@ -617,10 +621,6 @@ class VideoRoomComponent extends Component {
 
 				<DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} />
 				<div className={`enterbox-head ${type === 'LEARNING' ? 'learning-bg' : 'coaching-bg'}`}>
-					{/* <div className="roomtype">
-						<span className="typename">코칭</span>
-					</div>
-					{ mySessionId } */}
 					<div className="roomtype">
 						<span className="typename">{type === 'LEARNING' ? '러닝' : '코칭'}</span>
 					</div>
@@ -720,14 +720,14 @@ class VideoRoomComponent extends Component {
 						) : (
 							<div className="div">
 								<div className="enterbox-body">
+									<div className='enter-img-box'>
+                                        <img className='swing-mascot' src={`${type === 'LEARNING' ? pandaswing : tigerswing}`} alt="swingmascot" />
+                                    </div>
 									<div className="check-box">
 										<div className="check-me">
 											<StreamComponent user={localUser} isMe={"check"} />
 										</div>
 										<div className="enter">
-											<button className="enter-button" onClick={this.enteredChanged}>
-												입장하기
-											</button>
 											<div className="toolbar-enterbox">
 												<ToolbarComponent
 													sessionId={mySessionId}
@@ -739,9 +739,14 @@ class VideoRoomComponent extends Component {
 													stopScreenShare={this.stopScreenShare}
 												/>	
 											</div>
+											<button className={`enter-button ${type === 'LEARNING' ? 'learning-bg' : 'coaching-bg'}`} onClick={this.enteredChanged}>
+												입장하기
+											</button>
 										</div>
 										<div className={`check-box-background-div ${type === 'LEARNING' ? 'learning-bg' : 'coaching-bg'}`}></div>
 									</div>
+									<div className='enter-img-box'>
+                                    </div>
 								</div>
 							</div>
 						))}
@@ -807,7 +812,7 @@ class VideoRoomComponent extends Component {
 		);
 
 		console.log(response.data);
-		return response.data; // The token, response 안되면 axait axiosAPi.post로 바꿔보기
+		return response.data.token; // The token, response 안되면 axait axiosAPi.post로 바꿔보기
 	}
 }
 export default VideoRoomComponent;

@@ -11,7 +11,7 @@ function Footer() {
       <li>한라연</li>
       <li>함소연</li>
       <li>김재아</li>
-      <li>문요한</li>
+      <li>문요환</li>
     </ul>
     
     <div className="info">
@@ -23,7 +23,7 @@ function Footer() {
 
     <div className="github-comment">
       <button className="github"><Link to='https://lab.ssafy.com/s09-webmobile1-sub2/S09P12A309'>GitLab</Link></button>
-      <span className="commont">본 사이트의 콘텐츠는 삼성 청년소프트웨어 아카데미와 함께합니다.</span>
+      <span className="comment">본 사이트의 콘텐츠는 삼성 청년소프트웨어 아카데미와 함께합니다.</span>
     </div>
     <p className="copyright">
       &copy; <span className="this-year"></span> Bossniceshot company. All Rights Reseved.
