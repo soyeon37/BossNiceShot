@@ -56,12 +56,6 @@ function Profile() {
         navigate("/mypage/info/editpassword");
     }
 
-    // 동행 기록에 score 저장
-    const handleSaveScore = (index) => {
-        // 동행 기록에 score 저장 axios
-        console.log("정보 추가: ", index);
-    }
-
     // TEST DATA // Debug Code !!!
     const testProfile = {
         nickname: "문싸피",
@@ -161,15 +155,12 @@ function Profile() {
                             </div>
                         </div>
                         <div id="profile-history">
-                            <div id="history-title">{testProfile.nickname}의 스코어</div>
+                            <div id="history-title">{userNickname}의 스코어</div>
                             <div id="history-list">
                                 {testHistory.map((history, index) => (
                                     <div className="HistoryBox" key={index}>
-                                        <div className="history-info">
-                                            <div className="history-place">{history.place}</div>
-                                            <div className="history-date">{history.date}</div>
-                                        </div>
-                                        <button className="history-score" onClick={() => handleSaveScore(index)}>{history.score} 타</button>
+                                        <div className="history-place">{history.place}</div>
+                                        <div className="history-date">{history.date}</div>
                                     </div >
                                 ))}
                             </div>

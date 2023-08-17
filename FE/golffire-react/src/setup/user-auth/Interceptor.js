@@ -33,7 +33,6 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
     // interceptor의 기능, 항상 실행되야 하는 코드
     // token 만료 여부 확인 후 만료 시 재발급
     useEffect(() => {
-        console.log("token 만료 확인... 그런데 되나?");
         if (!checkToken) return;
 
         console.log("token 만료 확인"); // Debug Code !!!
@@ -82,7 +81,7 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
     // RefreshToken로 AccessToken 재발급 후 true 반환
     // RefreshToken 만료 시, 재발급 실패 후 false 반환
     const reissueToken = () => {
-        console.log("access token 재발급"); // Debug Code !!!
+        console.log("access token 재발급, 저장된 refresh token? ", refreshToken); // Debug Code !!!
 
         const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/reissue';
         const headers = {
@@ -108,6 +107,7 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
                 } else {
                     console.log("refreshtoken 재발급 실패!");
                     console.log('EXPIRED_TOKEN_MESSAGE: ', message);
+                    alert("토큰 만료되어 자동 로그아웃 됩니다.");
                     handleLogout();
                     return false;
                 }
