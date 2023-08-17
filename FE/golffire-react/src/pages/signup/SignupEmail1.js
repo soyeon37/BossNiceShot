@@ -51,7 +51,7 @@ const SignupEmail1 = () => {
     axios
       .post(apiUrl, data)
       .then((response) => {
-        setVerifyNum(response.data.data.authNum); // 인증번호
+        setVerifyNum(response.data.data.certificationNum); // 인증번호
       })
       .catch((error) => {
         console.error("Error:", error);
