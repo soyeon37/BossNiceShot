@@ -32,9 +32,14 @@ function ChatRoom({ props }) {
         stompClient.connect( {Authorization: `${accessToken}`} , (frame) => {
             setStompClient(stompClient);
 
+            console.log("들어옴");
+
             axios.get(process.env.REACT_APP_SERVER_URL + `/api/companion/chat/${id}`)
               .then(response => {
                 setChatMessages(response.data);
+
+                console.log("?");
+                console.log(response.data);
             });
         });
 

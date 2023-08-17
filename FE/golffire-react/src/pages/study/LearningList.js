@@ -65,7 +65,7 @@ function LearningList() {
     };
     setCurrentPage(currentPage);
 
-    console.log("러닝 리스트 조회, header: ", headers);
+    console.log("러닝 리스트 조회");
     axios.post(apiUrl, data, { headers }).then((response) => {
       console.log(response);
 
