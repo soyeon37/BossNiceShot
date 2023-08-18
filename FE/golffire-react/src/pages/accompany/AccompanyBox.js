@@ -31,7 +31,7 @@ function AccompanyBox({
   }
 
   const checkProfilePic = () => {
-    return false;
+    // return false;
     // console.log("프로필 값을 확인: ", authorImage);
 
     if (authorImage) {
@@ -53,20 +53,14 @@ function AccompanyBox({
       <div className="box-author-position">
         <div className="box-author">
           {checkProfilePic() ? (
-            <div className="profile-icon">
-              <div className="navbar-user-circle"
-                style={{ backgroundColor: colorMap[profileValues[1]] }}>
-                <img className="navbar-user-image" alt={`&{author}님`}
-                  src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
-              </div>
+            <div className="profile-icon" style={{ backgroundColor: colorMap[profileValues[1]] }}>
+              <img className="navbar-user-image" alt={`&{author}님`}
+                src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
             </div>
           ) : (
-            <div className="profile-icon">
-              <div className="navbar-user-circle"
-                style={{ backgroundColor: "white" }}>
-                <img className="navbar-user-image" alt={`&{author}님`}
-                  src={require(`../../assets/source/profile/green_suncap_tiger.png`)} />
-              </div>
+            <div className="profile-icon" style={{ backgroundColor: colorMap[profileValues[1]] }}>
+              <img className="navbar-user-image" alt={`&{author}님`}
+                src={require(`../../assets/source/profile/green_suncap_tiger.png`)} />
             </div>
           )}
           {author}
