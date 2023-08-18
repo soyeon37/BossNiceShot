@@ -18,7 +18,7 @@ function AccompanyBox({
 
   // 사진 출력을 위한 변수
   let profileValues = "";
-  if (testProfile.image) profileValues = testProfile.image.split(' ');
+  // if (testProfile.image) profileValues = testProfile.image.split(' ');
 
   // 사진 배경 색상을 map으로 관리
   const colorMap = {
@@ -30,8 +30,9 @@ function AccompanyBox({
   }
   const checkProfilePic = () => {
     // console.log("프로필 값을 확인: ", userProfile);
-
-    if (userProfile) {
+    
+    if (true) {
+    // if (userProfile) {
       // console.log("가능!");
       return true;
     } else {
