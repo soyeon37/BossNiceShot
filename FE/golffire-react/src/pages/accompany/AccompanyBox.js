@@ -31,14 +31,12 @@ function AccompanyBox({
   }
 
   const checkProfilePic = () => {
-    console.log("프로필 값을 확인: ", authorImage);
+    return false;
+    // console.log("프로필 값을 확인: ", authorImage);
 
-    if (true) {
-      // if (userProfile) {
-      // console.log("가능!");
+    if (authorImage) {
       return true;
     } else {
-      // console.log("쓸 수 없는 사진임");
       return false;
     }
   }
@@ -54,15 +52,31 @@ function AccompanyBox({
       </div>
       <div className="box-author-position">
         <div className="box-author">
-          <img className="profile-icon" src={ProfileImg} alt={`$author님`} />
-
+          {checkProfilePic() ? (
+            <div className="profile-icon">
+              <div className="navbar-user-circle"
+                style={{ backgroundColor: colorMap[profileValues[1]] }}>
+                <img className="navbar-user-image" alt={`&{author}님`}
+                  src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+              </div>
+            </div>
+          ) : (
+            <div className="profile-icon">
+              <div className="navbar-user-circle"
+                style={{ backgroundColor: "white" }}>
+                <img className="navbar-user-image" alt={`&{author}님`}
+                  src={require(`../../assets/source/profile/green_suncap_tiger.png`)} />
+              </div>
+            </div>
+          )}
           {author}
         </div>
       </div>
-      <div className="accompany-box-date">
+
+      < div className="accompany-box-date" >
         <MdSportsGolf className="react-icon" />
         {dateFormat(date)}
-      </div>
+      </div >
       <div className="accompany-box-place">
         <FaMapMarkerAlt className="react-icon" color="red" />
         {place}
@@ -72,7 +86,7 @@ function AccompanyBox({
           자세히 보기
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
