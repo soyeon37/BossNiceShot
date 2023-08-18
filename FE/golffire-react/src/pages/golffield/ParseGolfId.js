@@ -1,4 +1,4 @@
-import file from "../../assets/golffield.json";
+import file from "../../assets/golffield";
 
 const dataArray = file;
 const dataGolffield = dataArray.map((item) => ({
