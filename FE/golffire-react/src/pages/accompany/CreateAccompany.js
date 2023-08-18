@@ -89,6 +89,8 @@ function CreateAccompany() {
         console.log("동행 모집 참여자 수락");
         axios.put(apiUrl).then((response) => {
             console.log(response);
+
+            window.location.replace('/accompany');
         })
     }
 
@@ -185,8 +187,6 @@ function CreateAccompany() {
             console.log(companionCreateRequest);
 
             createCompanion(companionCreateRequest);
-
-            window.location.replace('/accompany');
         }
     };
 
