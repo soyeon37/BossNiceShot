@@ -30,7 +30,7 @@ const SignupEmail2 = () => {
   };
 
   const verifyPassword = (password) => {
-    return true; // Debug Code !!!
+    // return true; // Debug Code !!!
 
     const hasUpperCase = /[A-Z]/.test(password); // 대문자 포함
     const hasLowerCase = /[a-z]/.test(password); // 소문자 포함
