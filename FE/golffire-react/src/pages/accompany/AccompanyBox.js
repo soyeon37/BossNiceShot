@@ -58,7 +58,7 @@ function AccompanyBox({
                 src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
             </div>
           ) : (
-            <div className="profile-icon" style={{ backgroundColor: colorMap[profileValues[1]] }}>
+            <div className="profile-icon" style={{ backgroundColor: "white" }}>
               <img className="navbar-user-image" alt={`&{author}님`}
                 src={require(`../../assets/source/profile/green_suncap_tiger.png`)} />
             </div>
