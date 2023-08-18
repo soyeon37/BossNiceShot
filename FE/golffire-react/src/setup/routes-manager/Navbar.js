@@ -5,17 +5,13 @@ import axios from "axios";
 
 // Redux
 import { useSelector, useDispatch } from "react-redux";
-
-
-
-// Redux
-import { resetUserState } from "../../features/userInfoSlice";
+import Interceptor from "../../setup/user-auth/Interceptor";
 
 import AlertPage from "./alert/AlertPage";
 
-import { IoMdContact } from 'react-icons/io'
-import { Avatar, AvatarBadge, AvatarGroup, Hide } from "@chakra-ui/react";
+import { HiUserCircle } from "react-icons/hi";
 import Favicon from "../../assets/source/imgs/favicon.png";
+import Logo from "../../assets/source/imgs/BNS_LOGO.png"
 import "./styles.css";
 import {
   Menu,
@@ -36,13 +32,22 @@ function Navbar() {
 
   // Redux
   const dispatch = useDispatch();
+  const [checkToken, setCheckToken] = useState(0);
+  const [doLogin, setDoLogin] = useState(0);
+  const [doLogout, setDoLogout] = useState(0);
 
   // 사용자 정보(userId)로 로그인 여부 판단
-  const userId = useSelector((state) => state.userInfoFeatrue.userId);
-  const userNickname = useSelector((state) => state.userInfoFeatrue.userNickname);
-  // const userProfile = useSelector((state) => state.userInfoFeatrue.userProfile);
-  const userProfile = "green_cap_bear yellow";
-  console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
+  const userId = useSelector((state) => state.userInfoFeature.userId);
+  const userNickname = useSelector((state) => state.userInfoFeature.userNickname);
+  const userProfile = useSelector((state) => state.userInfoFeature.userImage);
+  const userAccessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+  // const userProfile = "green_cap_bear yellow";
+
+  // URL이 바뀔 때마다 실행되는 코드
+  useEffect(() => {
+    // console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
+    // console.log("새로고침마다 확인하는 access token? ", userAccessToken);
+  },)
 
   // 사진 출력을 위한 변수
   let profileValues = "";
@@ -57,57 +62,50 @@ function Navbar() {
     "white": "#FFFFFF",
   }
 
+  const checkProfilePic = () => {
+    // console.log("프로필 값을 확인: ", userProfile);
+
+    if (userProfile) {
+      // console.log("가능!");
+      return true;
+    } else {
+      // console.log("쓸 수 없는 사진임");
+      return false;
+    }
+  }
+
   const navigate = useNavigate();
 
   // cookie의 user 정보 확인
-  const [cookies, setCookie] = useCookies(["refreshToken"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["refreshToken"]);
 
-
+  // 로그아웃 함수
   const handleLogout = () => {
-      console.log('cookies.refreshToken:',cookies.refreshToken);
-    
-      const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/logout'
-      const data = {
-          refreshToken: cookies.refreshToken
-      }
-      axios.post(apiUrl, data)
-          .then((response) => {
-              console.log(response);
-
-              if (response.data.data === "SUCCESS") {
-                  setCookie('refreshToken', cookies.refreshToken, { path: '/', maxAge: 0 });
-
-                  console.log("로그아웃하여 redux 정보 삭제");
-                  dispatch(resetUserState());
-
-                  navigate('/');
-              } else {
-                  alert('Error')
-              }
-          });
+    console.log("네브바에서 로그아웃 호출함");
+    setDoLogout(doLogout + 1);
   };
 
   const handleCheckNotification = () => {
-      const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/notification/check';
-      axios.get(apiUrl)
-          .then((response) => {
-              if (response.data.data === false) {
-                  // 새로운 알림 존재
-              } else {
-                  // 이미 읽은 알림들
-              }
-          })
-          .catch((error) => {
-              navigate('/');
-          })
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/notification/check';
+    axios.get(apiUrl)
+      .then((response) => {
+        if (response.data.data === false) {
+          // 새로운 알림 존재
+        } else {
+          // 이미 읽은 알림들
+        }
+      })
+      .catch((error) => {
+        navigate('/');
+      })
   }
 
   return (
     <nav className="nav">
-      <a href="/" className="site-title">
+      <NavLink to="/" className="site-title">
         <img className="favicon-img" src={Favicon} alt="favicon" />
-        사장님, 나이스 샷
-      </a>
+        <img className="favicon-img" src={Logo} alt="logo" />
+      </NavLink>
       <ul id="nav-list">
         <li id="nav-list-li">
           <NavLink to="/solution" id="nav-list-link" style={({ isActive, isPending }) => {
@@ -176,41 +174,46 @@ function Navbar() {
 
         <li className="mypagemenu" id="nav-list-li">
           <Menu>
-
-            {/* 마이페이지 버튼 아바타로 수정했습니다. */}
-            <MenuButton>
-              {!userProfile ? (
-                <div className="navbar-user-icon">
-                  <div className="navbar-user-circle"
-                    style={{ backgroundColor: colorMap[profileValues[1]] }}>
-                    <img className="navbar-user-image"
-                      src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+            {checkProfilePic() ? (
+              <div className="nav-alarm-parent">
+                <MenuButton>
+                  <div className="navbar-user-icon">
+                    <div className="navbar-user-circle"
+                      style={{ backgroundColor: colorMap[profileValues[1]] }}>
+                      <img className="navbar-user-image"
+                        src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <Avatar size={"sm"}>
-                  {/* 여기서 bg 값을 알람이 있을때는 빨간색, 없을때는 초록색으로 변경해야 할듯, 그런데 badge클릭시 알림창 뜨게 하는게 생각보다 쉽지 않음  */}
-                  <AvatarBadge boxSize={'1.25rem'} bg={'red'}>
-                    {/* <AlertPage></AlertPage> */}
-                  </AvatarBadge>
-                </Avatar>
-              )}
-            </MenuButton>
+                </MenuButton>
+                <AlertPage onClick={handleCheckNotification}>
+                </AlertPage>
+              </div>
+            ) : (
+              <div className="nav-alarm-parent">
+                <MenuButton>
+                  <HiUserCircle className="nav-alarm-pic" />
+                </MenuButton>
+                {/* <AlertPage onClick={handleCheckNotification}>
+                </AlertPage> */}
+              </div>
+            )}
             <MenuList>
 
               {userId ? (
                 <MenuGroup title=''>
-                  <MenuItem>
-                    <NavLink to="/mypage/info" style={({ isActive, isPending }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                      };
-                    }}>
+                  <NavLink to="/mypage/info" style={({ isActive, isPending }) => {
+                    return {
+                      fontWeight: isActive ? "bold" : "",
+                    };
+                  }}>
+                    <MenuItem>
                       마이페이지
-                    </NavLink>
-                  </MenuItem>
+                    </MenuItem>
+                  </NavLink>
                   <MenuDivider />
-                  <MenuItem style={{ color: "gray" }} onClick={handleLogout}>로그아웃</MenuItem>
+                  <MenuItem style={{ color: "gray" }}
+                    onClick={handleLogout}>
+                    로그아웃</MenuItem>
                 </MenuGroup>
               ) : (<MenuGroup title=''>
                 <MenuItem>
@@ -235,11 +238,14 @@ function Navbar() {
             </MenuList>
           </Menu>
         </li>
-        <li id="nav-list-li">
-          <AlertPage onClick={handleCheckNotification}>
-          </AlertPage>
-        </li>
       </ul >
+
+      <Interceptor
+        checkToken={checkToken}
+        doLogin={doLogin}
+        doLogout={doLogout}
+      />
+
     </nav >
   );
 };

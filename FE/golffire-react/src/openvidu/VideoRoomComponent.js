@@ -15,11 +15,16 @@ import ChatComponent from './chat/ChatComponent';
 // import Button from "@mui/material/Button";
 // import Skeleton from "@mui/material/Skeleton";
 
+import pandaswing from '../assets/source/imgs/panda_swing.png'
+import tigerswing from '../assets/source/imgs/tiger_swing.png'
+
+
 // 유저 생성
 var localUser = new UserModel();
 
 // 애플리케이션 서버 URL
-const APPLICATION_SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const APPLICATION_SERVER_URL = process.env.REACT_APP_SERVER_URL + ":8443";
+const OPENVIDU_SERVER_SECRET = 'ssafy';
 
 // 기타 함수
 const CopyUrl = () => {
@@ -616,10 +621,6 @@ class VideoRoomComponent extends Component {
 
 				<DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} />
 				<div className={`enterbox-head ${type === 'LEARNING' ? 'learning-bg' : 'coaching-bg'}`}>
-					{/* <div className="roomtype">
-						<span className="typename">코칭</span>
-					</div>
-					{ mySessionId } */}
 					<div className="roomtype">
 						<span className="typename">{type === 'LEARNING' ? '러닝' : '코칭'}</span>
 					</div>
@@ -719,14 +720,14 @@ class VideoRoomComponent extends Component {
 						) : (
 							<div className="div">
 								<div className="enterbox-body">
+									<div className='enter-img-box'>
+                                        <img className='swing-mascot' src={`${type === 'LEARNING' ? pandaswing : tigerswing}`} alt="swingmascot" />
+                                    </div>
 									<div className="check-box">
 										<div className="check-me">
 											<StreamComponent user={localUser} isMe={"check"} />
 										</div>
 										<div className="enter">
-											<button className="enter-button" onClick={this.enteredChanged}>
-												입장하기
-											</button>
 											<div className="toolbar-enterbox">
 												<ToolbarComponent
 													sessionId={mySessionId}
@@ -738,8 +739,14 @@ class VideoRoomComponent extends Component {
 													stopScreenShare={this.stopScreenShare}
 												/>	
 											</div>
+											<button className={`enter-button ${type === 'LEARNING' ? 'learning-bg' : 'coaching-bg'}`} onClick={this.enteredChanged}>
+												입장하기
+											</button>
 										</div>
+										<div className={`check-box-background-div ${type === 'LEARNING' ? 'learning-bg' : 'coaching-bg'}`}></div>
 									</div>
+									<div className='enter-img-box'>
+                                    </div>
 								</div>
 							</div>
 						))}
@@ -768,6 +775,7 @@ class VideoRoomComponent extends Component {
 
 		const sessionId = await this.createSession(this.state.mySessionId);
 		console.log("ing createsession")
+		console.log(sessionId);
 		return await this.createToken(sessionId);
 	}
 
@@ -776,24 +784,35 @@ class VideoRoomComponent extends Component {
 		console.log(sessionId);
 
 		const response = await axios.post(
-			APPLICATION_SERVER_URL + '/api/sessions', 
+			APPLICATION_SERVER_URL + '/openvidu/api/sessions', 
 			{ customSessionId: sessionId }, 
 			{
-				headers: { 'Content-Type': 'application/json', },
+				headers: { Authorization:
+					'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+				  'Content-Type': 'application/json', },
 			}
 		);
-		return response.data; // The sessionId to getToken(), response 안되면 axait axiosAPi.post로 바꿔보기
+		return response.data.customSessionId; // The sessionId to getToken(), response 안되면 axait axiosAPi.post로 바꿔보기
 	}
 
 	async createToken(sessionId) {
+
+		console.log("createToken!!");
+
+		console.log(sessionId);
+
 		const response = await axios.post(
-			APPLICATION_SERVER_URL + '/api/sessions/' + sessionId + '/connections', 
+			APPLICATION_SERVER_URL + '/openvidu/api/sessions/' + sessionId + '/connection', 
 			{}, 
 			{
-				headers: { 'Content-Type': 'application/json', },
+				headers: { Authorization:
+					'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+				  'Content-Type': 'application/json', },
 			}
 		);
-		return response.data; // The token, response 안되면 axait axiosAPi.post로 바꿔보기
+
+		console.log(response.data);
+		return response.data.token; // The token, response 안되면 axait axiosAPi.post로 바꿔보기
 	}
 }
 export default VideoRoomComponent;

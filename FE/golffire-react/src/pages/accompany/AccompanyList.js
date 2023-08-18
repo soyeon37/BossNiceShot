@@ -24,7 +24,9 @@ import axios from "axios";
 
 function AccompanyList() {
   // 사용자 정보(userId)로 로그인 여부 판단
-  const userId = useSelector((state) => state.userInfoFeatrue.userId);
+  const userId = useSelector((state) => state.userInfoFeature.userId);
+  const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,6 +45,7 @@ function AccompanyList() {
   }, []);
 
   const getCompanionList = (searchValue, currentPage) => {
+    console.log("동행 리스트 호출");
     const apiUrl =
       process.env.REACT_APP_SERVER_URL +
       "/api/companion/search?page=" +
@@ -65,10 +68,13 @@ function AccompanyList() {
     console.log(companionSearchRequest);
 
     axios.post(apiUrl, companionSearchRequest).then((response) => {
-      console.log(response);
+      // axios.post(apiUrl, companionSearchRequest, { headers }).then((response) => {
+      console.log("리스트 받은거 성공: ",response);
 
       setCompanionList(response.data.companionList);
       setTotalPages(response.data.totalPages);
+    }).catch((error) => {
+      console.log("리스트 받다가 에러: ", error);
     });
   };
 
@@ -117,68 +123,6 @@ function AccompanyList() {
     setSelectedFollow(!selectedFollow);
   };
 
-  // 이 위는 검색 필터 기능들
-  // 이 아래는 리스트 관련 기능들
-  const [accompanyList, setAccompanyList] = useState([{}, {}, {}, {}, {}, {}]);
-
-  // 동행 모집 리스트
-  const accompanyData = [
-    {
-      id: 1,
-      title: "제목 1",
-      authorId: "123456",
-      authorNickname: "김싸피가 먹는 고구마",
-      tee: "red",
-      placeId: 1,
-      date: "2023-09-30 13:00",
-    },
-    {
-      id: 2,
-      title: "제목 2",
-      authorId: "456789",
-      authorNickname: "황싸피",
-      tee: "white",
-      placeId: 4,
-      date: "2023.09.30 13:00",
-    },
-    {
-      id: 3,
-      title: "제목 3",
-      authorId: "789777",
-      authorNickname: "한싸피",
-      tee: "all",
-      placeId: 5,
-      date: "2023.09.30 13:00",
-    },
-    {
-      id: 4,
-      title: "제목 4",
-      authorId: "123123",
-      authorNickname: "함싸피",
-      tee: "black",
-      placeId: 89,
-      date: "2024.09.30 13:00",
-    },
-    {
-      id: 5,
-      title: "제목 5",
-      authorId: "999999",
-      authorNickname: "문싸피",
-      tee: "white",
-      placeId: 210,
-      date: "2023.09.30 18:00",
-    },
-    {
-      id: 6,
-      title: "제목 6",
-      authorId: "333333",
-      authorNickname: "최싸피",
-      tee: "red",
-      placeId: 61,
-      date: "2023.09.30 10:00",
-    },
-  ];
-
   // 이미지 파일 경로를 객체로 관리
   const teeMap = {
     RED: flagred,
@@ -191,42 +135,20 @@ function AccompanyList() {
   const [selectedId, setSelectedId] = useState(null); // 선택된 글 번호
   const [selectedContent, setSelectedContent] = useState(null); // 선택된 글 내용
 
-  // const handleSelectButtonClick = (id) => {
-  //   if (isSelected && selectedId && selectedId === id) {
-  //     setIsSelected(false);
-  //     setSelectedId(null);
-  //   } else {
-  //     getSelectedContent(id);
-  //   }
-  // };
   const handleSelectButtonClick = (id) => {
-    // 리스트에서 선택된 accompanyRoom 찾기
-    const updatedCompanionList = companionList.map((accompanyRoom) => {
-      if (accompanyRoom.id === id) {
-        return {
-          ...accompanyRoom,
-          isSelected: !accompanyRoom.isSelected, // isSelected 프로퍼티 토글
-        };
-      }
-      return {
-        ...accompanyRoom,
-        isSelected: false, // 다른 accompanyRoom 선택 해제
-      };
-    });
-
-    setCompanionList(updatedCompanionList);
     if (isSelected && selectedId && selectedId === id) {
       setIsSelected(false);
       setSelectedId(null);
     } else {
+      console.log("로그인한 상태라서 이렇게 검색");
       getSelectedContent(id);
     }
   };
 
-  const { attandableStatus, setAttandableStatus } = useState(false); 
+  const { attandableStatus, setAttandableStatus } = useState(false);
 
   const getSelectedContent = (id) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/info" + id;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/info/" + id;
 
     axios.get(apiUrl).then((response) => {
       setSelectedContent(response.data);
@@ -243,12 +165,12 @@ function AccompanyList() {
       } else { // 로그인하지 않은 경우
         setAttandableStatus(true);
       }
-      
+
       setIsSelected(true);
       setSelectedId(id);
     });
   };
-  
+
   // 동행 모집 신청 여부 확인
   const checkDuplicateCompanionUser = (companion) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/user/check/' + companion.id;
@@ -272,17 +194,17 @@ function AccompanyList() {
         const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/' + companion.id;
 
         axios.get(apiUrl) // 동행 모집의 현재 인원 확인한다.
-        .then((response) => {
-          if (response.data.capacity > response.data.companionUserCount) { // 모집 인원보다 현재 인원이 적으면
-            const companionUserRequset = {
-              companionId: companion.id
-            };
+          .then((response) => {
+            if (response.data.capacity > response.data.companionUserCount) { // 모집 인원보다 현재 인원이 적으면
+              const companionUserRequset = {
+                companionId: companion.id
+              };
 
-            addCompanionUser(companionUserRequset); // 사용자가 이미 신청한 동행인지 확인한다.
-          } else { // 모집 인원이 다 찬 경우
-            alert("참가 인원이 많아 동행 모집에 참여하실 수 없습니다.");
-          }
-        });
+              addCompanionUser(companionUserRequset); // 사용자가 이미 신청한 동행인지 확인한다.
+            } else { // 모집 인원이 다 찬 경우
+              alert("참가 인원이 많아 동행 모집에 참여하실 수 없습니다.");
+            }
+          });
       }
     } else { // 취소하기 버튼 클릭
       const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/user/' + companion.id;
@@ -296,7 +218,7 @@ function AccompanyList() {
 
     console.log("동행 모집 참여자 생성");
     axios.post(apiUrl, companionUserRequset).then((response) => {
-        console.log(response);
+      console.log(response);
     });
   }
 
@@ -331,9 +253,8 @@ function AccompanyList() {
                       src={flagred}
                       alt="레드 티 박스"
                       onClick={() => handleTeeBoxChange("RED")}
-                      className={`search-tee-img${
-                        teeMap[searchTeeBox] === "flagred" ? "-selected" : ""
-                      }`}
+                      className={`search-tee-img${teeMap[searchTeeBox] === "flagred" ? "-selected" : ""
+                        }`}
                     />
                   </div>
                   <div className="search-tee-item">
@@ -341,9 +262,8 @@ function AccompanyList() {
                       src={flagwhite}
                       alt="화이트 티 박스"
                       onClick={() => handleTeeBoxChange("WHITE")}
-                      className={`search-tee-img${
-                        teeMap[searchTeeBox] === "flagwhite" ? "-selected" : ""
-                      }`}
+                      className={`search-tee-img${teeMap[searchTeeBox] === "flagwhite" ? "-selected" : ""
+                        }`}
                     />
                   </div>
                   <div className="search-tee-item">
@@ -351,9 +271,8 @@ function AccompanyList() {
                       src={flagblack}
                       alt="블랙 티 박스"
                       onClick={() => handleTeeBoxChange("BLACK")}
-                      className={`search-tee-img${
-                        teeMap[searchTeeBox] === "flagblack" ? "-selected" : ""
-                      }`}
+                      className={`search-tee-img${teeMap[searchTeeBox] === "flagblack" ? "-selected" : ""
+                        }`}
                     />
                   </div>
                   <div className="search-tee-item">
@@ -361,26 +280,25 @@ function AccompanyList() {
                       src={flagall}
                       alt="모든 티 박스"
                       onClick={() => handleTeeBoxChange("NONE")}
-                      className={`search-tee-img${
-                        teeMap[searchTeeBox] === "flagall" ? "-selected" : ""
-                      }`}
+                      className={`search-tee-img${teeMap[searchTeeBox] === "flagall" ? "-selected" : ""
+                        }`}
                     />
                   </div>
                 </div>
               </div>
             ) : (
-            <div className="search-input-container">
-              <input
-                className="search-input-box"
-                type="text"
-                value={searchValue}
-                onChange={handleInputChange}
-                placeholder="검색어를 입력하세요"
-              />
-              <button id="search-input-icon" onClick={handleSearchClick}>
-                <SearchIcon boxSize={6} color="#8D8F98" />
-              </button>
-            </div>
+              <div className="search-input-container">
+                <input
+                  className="search-input-box"
+                  type="text"
+                  value={searchValue}
+                  onChange={handleInputChange}
+                  placeholder="검색어를 입력하세요"
+                />
+                <button id="search-input-icon" onClick={handleSearchClick}>
+                  <SearchIcon boxSize={6} color="#8D8F98" />
+                </button>
+              </div>
             )}
             {/* 검색 필터 */}
             <select
@@ -396,11 +314,12 @@ function AccompanyList() {
             </select>
           </div>
           <div className="checkbox-div">
-            <label class="switch" value={selectedFollow} onChange={handleFollowChange}>
+            {/* 팔로잉 필터 제거 */}
+            {/* <label className="switch" value={selectedFollow} onChange={handleFollowChange}>
               <input type="checkbox" />
-              <span class="slider round"></span>
+              <span className="slider round"></span>
             </label>
-            <div>팔로잉</div>
+            <div>팔로잉</div> */}
           </div>
         </div>
         <div className={isSelected ? "list-body-selected" : "list-body-unselected"}>

@@ -7,10 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetUserState } from "../../features/userInfoSlice";
-
-import { handleLogout } from "../../setup/user-auth/UserAuth";
 
 import CryImg from "../../assets/source/mascot/mascot-cry-2.png";
 import "./MyPage.css";
@@ -19,6 +17,10 @@ function Signout() {
     // Redux
     const dispatch = useDispatch();
 
+    // 사용자 정보(userId)로 axios 수행
+    const userId = useSelector((state) => state.userInfoFeature.userId);
+    const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
     const navigate = useNavigate();
     // cookie의 user 정보 확인

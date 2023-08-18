@@ -13,13 +13,22 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { SearchIcon } from "@chakra-ui/icons";
 
 // Redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import axios from "axios";
 
 import "./study.css";
 
 function CoachingList() {
+  // Redux
+  const dispatch = useDispatch();
+  // 사용자 정보(userId)로 axios 수행
+  const userId = useSelector((state) => state.userInfoFeature.userId);
+  // AccessToken (Redux)
+  const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+  // Header (AccessToken)
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
   const navigate = useNavigate();
 
   const studyType = "COACHING";
@@ -54,16 +63,19 @@ function CoachingList() {
     console.log(apiUrl);
 
     setCurrentPage(currentPage);
+
     const data = {
       type: "COACHING",
     };
-    console.log("코칭 리스트 조회");
-    axios.post(apiUrl, data).then((response) => {
-      console.log(response);
 
-      setCoachingList(response.data.studyList);
-      setTotalPages(response.data.totalPages);
-    });
+    console.log("코칭 리스트 조회");
+    axios.post(apiUrl, data)
+      .then((response) => {
+        console.log(response);
+
+        setCoachingList(response.data.studyList);
+        setTotalPages(response.data.totalPages);
+      });
   };
 
   const getCoachingSearchList = (searchValue, currentPage) => {
@@ -85,12 +97,13 @@ function CoachingList() {
     console.log("코칭 리스트 검색 조회");
     console.log(studySearchRequest);
 
-    axios.post(apiUrl, studySearchRequest).then((response) => {
-      console.log(response);
+    axios.post(apiUrl, studySearchRequest)
+      .then((response) => {
+        console.log(response);
 
-      setCoachingList(response.data.studyList);
-      setTotalPages(response.data.totalPages);
-    });
+        setCoachingList(response.data.studyList);
+        setTotalPages(response.data.totalPages);
+      });
   };
 
   const getCoachingAttandableList = (currentPage) => {
@@ -105,12 +118,13 @@ function CoachingList() {
 
     console.log("참여 가능한 코칭 리스트 검색 조회");
 
-    axios.get(apiUrl).then((response) => {
-      console.log(response);
+    axios.get(apiUrl)
+      .then((response) => {
+        console.log(response);
 
-      setCoachingList(response.data.studyList);
-      setTotalPages(response.data.totalPages);
-    });
+        setCoachingList(response.data.studyList);
+        setTotalPages(response.data.totalPages);
+      });
   };
 
   const getCoachingAttandableSearchList = (searchValue, currentPage) => {
@@ -132,25 +146,27 @@ function CoachingList() {
     console.log("참여 가능한 코칭 리스트 검색 조회");
     console.log(studySearchRequest);
 
-    axios.post(apiUrl, studySearchRequest).then((response) => {
-      console.log(response);
+    axios.post(apiUrl, studySearchRequest)
+      .then((response) => {
+        console.log(response);
 
-      setCoachingList(response.data.studyList);
-      setTotalPages(response.data.totalPages);
-    });
+        setCoachingList(response.data.studyList);
+        setTotalPages(response.data.totalPages);
+      });
   };
 
   const handleAttandClick = (study) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/info/" + study.id;
 
-    axios.get(apiUrl).then((response) => {
-      if (response.data.capacity > response.data.studyUserCount) {
-        enterStudyUser(study);
-      } else {
-        alert("참가 인원이 많아 코칭룸에 참여하실 수 없습니다.");
-      }
-    });
-  };
+    axios.get(apiUrl)
+      .then((response) => {
+        if (response.data.capacity > response.data.studyUserCount) {
+          enterStudyUser(study);
+        } else {
+          alert("참가 인원이 많아 코칭룸에 참여하실 수 없습니다.");
+        }
+      });
+  }
 
   // 코칭룸 입장
   const enterStudyUser = (study) => {
@@ -163,18 +179,19 @@ function CoachingList() {
     console.log("코칭룸 입장");
     console.log(studyUserRequest);
 
-    axios.post(apiUrl, studyUserRequest).then((response) => {
-      console.log(response);
+    axios.post(apiUrl, studyUserRequest)
+      .then((response) => {
+        console.log(response);
 
-      // 코칭룸으로 이동
-      navigate("/CoachingRoom", {
-        state: {
-          type: studyType,
-          study: study,
-          studyUser: response.data,
-        },
+        // 코칭룸으로 이동
+        navigate('/CoachingRoom', {
+          state: {
+            type: studyType,
+            study: study,
+            studyUser: response.data
+          }
+        });
       });
-    });
   };
 
   const handlePageChange = (pageNumber) => {
@@ -272,10 +289,8 @@ function CoachingList() {
   };
 
   return (
-    <div className="list-container">
-      <div
-        className={isSelected ? "list-container-list-selected" : "list-container-list-unselected"}
-      >
+    <div className='list-container'>
+      <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
         <div className="list-head">
           <Link to="/createcroom">
             <div className="head-create-button bg-coaching">+ 코칭하기</div>
@@ -317,7 +332,7 @@ function CoachingList() {
           </div>
         </div>
 
-        <div className={isSelected ? "list-body-selected" : "list-body-unselected"}>
+        <div className={isSelected ? 'list-body-selected' : 'list-body-unselected'}>
           {coachingList.map((coaching, index) => (
             <CoachingBox
               key={coaching.id}

@@ -5,7 +5,55 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cd34f159-9b12-440b-8d67-1f0f3a97241e" name="Changes" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/Accompany.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/Accompany.css" afterDir="false" />
+=======
+<<<<<<< HEAD
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/gradle_wrapper.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/f/1fb84a2d79703081f11451b4d2608bc34a059f20" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/c/6cdf3f11bfe55a6923229945e0db9521f7904161" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/9/a9de8bb798e149194867b0ddb06253f701dc182a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/8/d8ce9f4a4b8131491c1284088b2b4390c167bda0" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/1/f/1fb84a2d79703081f11451b4d2608bc34a059f20" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/c/6cdf3f11bfe55a6923229945e0db9521f7904161" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/a/9/a9de8bb798e149194867b0ddb06253f701dc182a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/d/8/d8ce9f4a4b8131491c1284088b2b4390c167bda0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/f/0fb2165841132340adfa5dd54986ce849ed01895" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/3/4350bd915a231d1903aa67350258a1c8c4f3024f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/9/4903ac90167b1e9f1b21d9938422778d2560c8d3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/4/64202b67486a3371f9adb4fc5d5fee134fb93ab8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/a/6a980b5a243068489816c57491204718febb3bc6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/f/bf4df718e83048fccb83c10787540feb7e5121f9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/5/d5ac0a34bcd34702b7831e3c045d8e4f2e9270e3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/0/f/0fb2165841132340adfa5dd54986ce849ed01895" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/3/4350bd915a231d1903aa67350258a1c8c4f3024f" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/4/9/4903ac90167b1e9f1b21d9938422778d2560c8d3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/4/64202b67486a3371f9adb4fc5d5fee134fb93ab8" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/6/a/6a980b5a243068489816c57491204718febb3bc6" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/b/f/bf4df718e83048fccb83c10787540feb7e5121f9" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/securityhotspotstore/index.pb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/jwt/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/config/security/jwt/JwtAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/controller/CompanionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/companion/controller/CompanionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/controller/StudyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/domain/study/controller/StudyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/openvidu/VideoRoomComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/openvidu/VideoRoomComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/AccompanyList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/AccompanyList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/components/ChatRoom.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/mypage/components/ChatRoom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CoachingList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/CoachingList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/LearningList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/study/LearningList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/alert/AlertPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/setup/routes-manager/alert/AlertPage.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/features/signupSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/features/signupSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/AccompanyList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/accompany/AccompanyList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/Signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../FE/golffire-react/src/pages/signup/SignupInfo.js" afterDir="false" />
+>>>>>>> e433f8c1954c55246b726109349585c89187d8cf
+>>>>>>> 638d039b3a18c2d72a103171896541c794b59b4d
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,12 +73,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="BOSSNICESHOT" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -41,6 +84,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -54,24 +98,28 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/BOSSNICESHOT/S09P12A309/BE/web&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;0d896d7f47ac9d09059e1cd5a5baae5f&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/SSAFY/BE 협업중 - gitlab/BE",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "spring.configuration.checksum": "0d896d7f47ac9d09059e1cd5a5baae5f",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -155,8 +203,22 @@
       <workItem from="1692075843936" duration="8910000" />
       <workItem from="1692088674336" duration="786000" />
       <workItem from="1692089708156" duration="7980000" />
+<<<<<<< HEAD
       <workItem from="1692114955840" duration="8583000" />
       <workItem from="1692189758631" duration="32000" />
+=======
+      <workItem from="1692114955840" duration="8933000" />
+      <workItem from="1692151220580" duration="837000" />
+<<<<<<< HEAD
+      <workItem from="1692167280599" duration="6214000" />
+      <workItem from="1692181456884" duration="6120000" />
+      <workItem from="1692202889897" duration="626000" />
+      <workItem from="1692231514181" duration="928000" />
+=======
+      <workItem from="1692167280599" duration="1155000" />
+      <workItem from="1692191931200" duration="24000" />
+>>>>>>> e433f8c1954c55246b726109349585c89187d8cf
+>>>>>>> 638d039b3a18c2d72a103171896541c794b59b4d
     </task>
     <servers />
   </component>

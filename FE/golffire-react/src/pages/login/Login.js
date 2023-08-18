@@ -1,32 +1,26 @@
 import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import axios from "axios";
+import { NavLink } from "react-router-dom";
 
-// Redux
-import { useDispatch } from "react-redux";
-import { setUserId, setUserNickname, setUserLevel, setUserTee, setUserImage, setUserAccessToken } from "../../features/userInfoSlice";
+import Interceptor from "../../setup/user-auth/Interceptor";
 
 import BackgroundImage from "../../assets/source/imgs/golf-image-1.svg";
 import { IoMailOutline, IoChatbubbleSharp } from "react-icons/io5";
 import "./Login.css";
 
 const Login = () => {
-  // Redux
-  const dispatch = useDispatch();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [cookies, setCookie] = useCookies(["refreshToken"]);
-  const navigate = useNavigate();
+
+  const [checkToken, setCheckToken] = useState(0);
+  const [doLogin, setDoLogin] = useState(0);
+  const [doLogout, setDoLogout] = useState(0);
 
   // 이메일 로그인 함수
   const handleEmailLogin = () => {
     if (email === "") {
       alert("이메일을 입력해 주세요.");
       return;
-    }
-    else if (password === "") {
+    } else if (password === "") {
       alert("비밀번호를 입력해 주세요.");
       return;
     }
@@ -38,51 +32,8 @@ const Login = () => {
       isKakao: false,
     };
 
-    console.log("data:", data);
-
-    // 서버 API 엔드포인트 URL
-    // 추후 실제 서버 URL로 대체 필요 !!
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/sign-in";
-
-    // Axios를 사용하여 POST 요청 보내기
-    axios
-      .post(apiUrl, data)
-      .then((response) => {
-        // 서버로부터 받은 정보
-        const access_token = response.data.data.token.accessToken;
-        const refresh_token = response.data.data.token.refreshToken;
-
-        // header에 accesstoken 저장
-        axios.defaults.headers.common["Authorization"] = `Bearer ${access_token}`;
-
-        // 쿠키에 정보 저장
-        setCookie("refreshToken", refresh_token, {
-          path: "/",
-          maxAge: new Date().getDate() + 60 * 60 * 24 * 14,
-        });
-
-        console.log(response.data); // Debug Code !!
-        
-        // 로그인 후 사용자 정보 넣기 (라연)
-
-        // NavBar에 사용자 정보 저장
-        dispatch(setUserId(email));
-        dispatch(setUserNickname("로그인 됨"));
-        dispatch(setUserLevel("eagle"));
-        dispatch(setUserTee("Red"));
-        dispatch(setUserImage("red_cap_bear blue"));
-        
-        dispatch(setUserAccessToken(access_token));
-
-        // 로그인 성공 후 Main으로 복귀
-        navigate("/");
-      })
-      .catch((error) => {
-        console.error("Error:", error); // Debug Code !!
-
-        // 로그인 실패를 화면에 표시하는 코드 필요 !!
-        navigate("/error");
-      });
+    // 로그인 정보로 Interceptor의 로그인 함수 실행
+    setDoLogin(data);
   };
 
   const handleKakaoLogin = () => {
@@ -123,6 +74,11 @@ const Login = () => {
             value={password}
             placeholder="비밀번호"
             onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleEmailLogin();
+              }
+            }}
           />
           <button
             className="user-func-email-login"
@@ -154,6 +110,12 @@ const Login = () => {
         <div className="user-container-shadow-bump"></div>
       </div>
 
+      <Interceptor
+        checkToken={checkToken}
+        doLogin={doLogin}
+        doLogout={doLogout}
+      />
+      
     </div>
   );
 };
