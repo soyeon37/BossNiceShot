@@ -186,7 +186,7 @@ function CreateAccompany() {
 
             createCompanion(companionCreateRequest);
 
-            navigate('/accompany', { replace: true });
+            window.location.replace('/accompany');
         }
     };
 
