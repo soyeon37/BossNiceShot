@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 
 v
 Fsrc/main/java/com/ssafy/domain/companion/service/CompanionService.java,6\c\6cdf3f11bfe55a6923229945e0db9521f7904161
@@ -7,6 +9,7 @@ n
 >src/main/java/com/ssafy/domain/study/service/StudyService.java,d\8\d8ce9f4a4b8131491c1284088b2b4390c167bda0
 €
 Psrc/main/java/com/ssafy/domain/companion/controller/CompanionUserController.java,1\f\1fb84a2d79703081f11451b4d2608bc34a059f20
+<<<<<<< HEAD
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 t
@@ -21,3 +24,6 @@ p
 @src/main/java/com/ssafy/domain/member/service/MemberService.java,6\4\64202b67486a3371f9adb4fc5d5fee134fb93ab8
 |
 Lsrc/main/java/com/ssafy/domain/companion/controller/CompanionController.java,4\4\449b6669f29fc814c019d86d7b61de17b84ca8df
+=======
+>>>>>>> 638d039b3a18c2d72a103171896541c794b59b4d
+>>>>>>> 8224daba9065ccf5aef467639f14680f994f3214

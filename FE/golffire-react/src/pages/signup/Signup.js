@@ -42,9 +42,9 @@ function Signup() {
   const step = state.step;
 
   // 사용자 정보를 관리하는 변수들
-  const [email, setEmail] = useState(state.email);
+  const [email, setEmail] = useState("");
   const [introduce, setIntroduce] = useState("");
-  const [nickname, setNickname] = useState(state.nickname);
+  const [nickname, setNickname] = useState("");
   const [averageScore, setAverageScore] = useState(0);
   const [topScore, setTopScore] = useState(0);
   const [teeBox, setTeeBox] = useState("NONE");
@@ -52,11 +52,13 @@ function Signup() {
   useEffect(() => {
     if (state.step == 5) {
       dispatch(setStateStep(4));
+      dispatch(setEmail(state.email));
+      dispatch(setNickname(state.nickname));
     } else {
       dispatch(setStateStep(1));
-      dispatch(setStateEmail());
-      dispatch(setStatePassword());
-      dispatch(setStateNickname());
+      dispatch(setStateEmail(""));
+      dispatch(setStatePassword(""));
+      dispatch(setStateNickname(""));
       dispatch(setStateProfile("green_suncap_tiger"));
       // dispatch(setStateTeeBox("flagall"));
       dispatch(setStateIsKakao(false));
@@ -136,7 +138,7 @@ function Signup() {
   }
 
   // 사진 출력을 위한 변수
-  const [imgPic, setImgPic] = useState(state.profile);
+  const [imgPic, setImgPic] = useState("green_suncap_tiger");
   const [imgClr, setImgClr] = useState("white");
 
   // 사진 배경 색상을 map으로 관리
@@ -213,7 +215,7 @@ function Signup() {
         // alert 등으로 알린 뒤 화면 전환 필요
         console.log(response);
         console.log(response.data.data.id);
-        // navigate("/Login");
+        navigate("/Login");
       })
       .catch((error) => {
         console.error("Error: ", error); // Debug Code !!!

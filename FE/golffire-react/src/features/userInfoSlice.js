@@ -36,7 +36,7 @@ const userInfoSlice = createSlice({
       state.userNickname = "";
       state.userLevel = "";
       state.userTee = "";
-      state.usetProfile = "";
+      state.userImage = "";
       state.userAccessToken = "";
     },
   },

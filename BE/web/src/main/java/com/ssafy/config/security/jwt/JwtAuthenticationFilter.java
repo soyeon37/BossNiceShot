@@ -72,7 +72,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         log.info(String.format(
                 "[%s] %s %s",
                 request.getMethod(),
-                request.getRequestURI().toLowerCase(),
+                request.getRequestURI().toLowerCadominse(),
                 request.getQueryString() == null ? "" : request.getQueryString())
         );
     }
