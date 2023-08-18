@@ -37,12 +37,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/api/companion/field") // 메인 페이지 인기 골프장 5개
                 || request.getRequestURI().equals("/api/companion/main") // 메인 페이지 최근 동행 5개
                 || request.getRequestURI().equals("/api/study/main") // 메인 페이지 최근 스터디 5개
-                || request.getRequestURI().startsWith("/api/companion/search") // 동행 모집 리스트 조회
-                || request.getRequestURI().equals("/api/companion/info/**") // 동행 모집 한 건 조회
-                //|| request.getRequestURI().startsWith("/api/study/list/COACHING") // 스터디 코칭 리스트 조회
-                //|| request.getRequestURI().startsWith("/api/study/list/LEARNING") // 스터디 러닝 리스트 조회
-                || request.getRequestURI().startsWith("/api/study/allsearch")
-                || request.getRequestURI().equals("/api/study/info/**") // 스터디 한 건 조회
+            //|| request.getRequestURI().startsWith("/api/companion/search") // 동행 모집 리스트 조회
+            //|| request.getRequestURI().equals("/api/companion/info/**") // 동행 모집 한 건 조회
+            //|| request.getRequestURI().startsWith("/api/study/list/COACHING") // 스터디 코칭 리스트 조회
+            //|| request.getRequestURI().startsWith("/api/study/list/LEARNING") // 스터디 러닝 리스트 조회
+            // || request.getRequestURI().startsWith("/api/study/allsearch")
+            //|| request.getRequestURI().equals("/api/study/info/**") // 스터디 한 건 조회
         ){
             log.info("권한 허가");
             chain.doFilter(request, response);

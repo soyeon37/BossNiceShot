@@ -1,0 +1,7 @@
+
+g
+java:S1192l"JDefine a constant instead of duplicating this literal "studyList" 4 times.(öÌ˜8š¡‡ 1
+h
+java:S1192m"KDefine a constant instead of duplicating this literal "totalPages" 4 times.(êÎ¶¡8›¡‡ 1
+s	java:S116("WRename this field "OPENVIDU_URL" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÖöäŸ8Ä¡‡ 1
+{	java:S116*"ZRename this field "OPENVIDU_SECRET" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(­Æë–ıÿÿÿÿ8Ä¡‡ 1

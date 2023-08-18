@@ -1,0 +1,13 @@
+
+c
+java:S1192n"HDefine a constant instead of duplicating this literal "SUCCESS" 5 times.(ÌİÌşÿÿÿÿ
+u
+java:S1488à"^Immediately return this expression instead of assigning it to the temporary variable "member".(ûŸ‹ß
+t
+java:S1488ç"^Immediately return this expression instead of assigning it to the temporary variable "member".(Æ”®
+
+R	java:S125‘"<This block of commented-out lines of code should be removed.(·ÁÁ×
+E
+java:S1905È")Remove this unnecessary cast to "String".(˜İ’úÿÿÿÿ
+4
+java:S2119Ó"Save and re-use this "Random".(¼İÅf

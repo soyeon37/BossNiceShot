@@ -3,13 +3,15 @@ import './StreamComponent.css';
 
 export default class OvVideoComponent extends Component {
     constructor(props) {
+        console.log("<< OvVideoComponent >>")
+
         super(props);
         this.videoRef = React.createRef();
     }
 
     componentDidMount() {
         if (this.props && this.props.user.streamManager && !!this.videoRef) {
-            console.log('PROPS: ', this.props);
+            console.log('OvVideoComponent - PROPS: ', this.props);
             this.props.user.getStreamManager().addVideoElement(this.videoRef.current);
         }
 
