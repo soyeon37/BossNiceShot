@@ -1,0 +1,32 @@
+.error-page{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.error-page-top{
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 70%;
+}
+.error-page-img{
+    height: 80%;
+}
+.error-page-bottom{
+    height: 30%;
+}
+.error-page-text{
+    font-family: 'KBO-Dia-Gothic_bold' !important;
+    font-size: 100px;
+    height: 20%;
+    align-items: center;
+    justify-content: center;
+}
+.go-main-button{
+
+}
