@@ -293,7 +293,7 @@ function CoachingList() {
       <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
         <div className="list-head">
           <Link to="/createcroom">
-            <div className="head-create-button bg-coaching">+ 코칭하기</div>
+            <div className="head-create-button bg-coach">+ 코칭하기</div>
           </Link>
 
           <div className="search-container">
