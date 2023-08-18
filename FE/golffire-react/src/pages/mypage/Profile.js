@@ -8,8 +8,6 @@ import "./MyPage.css";
 import { useSelector } from "react-redux";
 
 import { NavLink, useNavigate } from "react-router-dom";
-import { current } from "@reduxjs/toolkit";
-import { useStatStyles } from "@chakra-ui/react";
 
 function Profile() {
     const navigate = useNavigate();
