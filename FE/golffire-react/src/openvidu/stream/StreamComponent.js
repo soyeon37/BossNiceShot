@@ -16,13 +16,17 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 export default class StreamComponent extends Component {
 	constructor(props) {
 		super(props);
+		
+		console.log("<< StreamComponent >>");
 		console.log(this.props);
+
 		this.state = { 
 			nickname: this.props.user.getNickname(), 
 			showForm: false, 
 			mutedSound: false, 
 			isFormValid: true 
 		};
+		
 		this.handleChange = this.handleChange.bind(this);
 		this.handlePressKey = this.handlePressKey.bind(this);
 		this.toggleNicknameForm = this.toggleNicknameForm.bind(this);
