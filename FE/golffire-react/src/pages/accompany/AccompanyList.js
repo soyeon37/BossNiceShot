@@ -69,7 +69,7 @@ function AccompanyList() {
 
     axios.post(apiUrl, companionSearchRequest).then((response) => {
       // axios.post(apiUrl, companionSearchRequest, { headers }).then((response) => {
-      console.log("리스트 받은거 성공: ",response);
+      console.log("리스트 받은거 성공: ", response);
 
       setCompanionList(response.data.companionList);
       setTotalPages(response.data.totalPages);
@@ -136,6 +136,7 @@ function AccompanyList() {
   const [selectedContent, setSelectedContent] = useState(null); // 선택된 글 내용
 
   const handleSelectButtonClick = (id) => {
+    console.log("자세히보기!")
     if (isSelected && selectedId && selectedId === id) {
       setIsSelected(false);
       setSelectedId(null);
@@ -145,7 +146,7 @@ function AccompanyList() {
     }
   };
 
-  const { attandableStatus, setAttandableStatus } = useState(false);
+  const [attandableStatus, setAttandableStatus] = useState(false);
 
   const getSelectedContent = (id) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/info/" + id;
@@ -333,9 +334,9 @@ function AccompanyList() {
               authorImage={accompanyRoom.memberImage}
               place={getNameById(accompanyRoom.field)}
               date={accompanyRoom.teeUptime}
+              dateFormat={dateFormat}
               isSelected={accompanyRoom.isSelected} // isSelected를 prop으로 전달
               handleSelectButtonClick={handleSelectButtonClick}
-              dateFormat={dateFormat}
             />
           ))}
         </div>

@@ -5,20 +5,21 @@ import { MdSportsGolf } from "react-icons/md";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 function AccompanyBox({
-  title,
   id,
+  title,
   tee,
   author,
+  authorImage,
   place,
   date,
-  handleSelectButtonClick,
   dateFormat,
   isSelected,
+  handleSelectButtonClick,
 }) {
 
   // 사진 출력을 위한 변수
   let profileValues = "";
-  // if (testProfile.image) profileValues = testProfile.image.split(' ');
+  if (authorImage) profileValues = authorImage.split(' ');
 
   // 사진 배경 색상을 map으로 관리
   const colorMap = {
@@ -28,15 +29,14 @@ function AccompanyBox({
     "blue": "#80CAFF",
     "white": "#FFFFFF",
   }
+
   const checkProfilePic = () => {
-    // console.log("프로필 값을 확인: ", userProfile);
-    
-    if (true) {
-    // if (userProfile) {
-      // console.log("가능!");
+    // return false;
+    // console.log("프로필 값을 확인: ", authorImage);
+
+    if (profileValues[0]) {
       return true;
     } else {
-      // console.log("쓸 수 없는 사진임");
       return false;
     }
   }
@@ -52,15 +52,25 @@ function AccompanyBox({
       </div>
       <div className="box-author-position">
         <div className="box-author">
-          <img className="profile-icon" src={ProfileImg} alt={`$author님`} />
-
+          {checkProfilePic() ? (
+            <div className="profile-icon" style={{ backgroundColor: colorMap[profileValues[1]] }}>
+              <img className="navbar-user-image" alt={`&{author}님`}
+                src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+            </div>
+          ) : (
+            <div className="profile-icon" style={{ backgroundColor: "white" }}>
+              <img className="navbar-user-image" alt={`&{author}님`}
+                src={require(`../../assets/source/profile/green_suncap_tiger.png`)} />
+            </div>
+          )}
           {author}
         </div>
       </div>
-      <div className="accompany-box-date">
+
+      < div className="accompany-box-date" >
         <MdSportsGolf className="react-icon" />
         {dateFormat(date)}
-      </div>
+      </div >
       <div className="accompany-box-place">
         <FaMapMarkerAlt className="react-icon" color="red" />
         {place}
@@ -70,7 +80,7 @@ function AccompanyBox({
           자세히 보기
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
