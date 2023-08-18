@@ -222,6 +222,7 @@ function AccompanyList() {
     console.log("동행 모집 참여자 생성");
     axios.post(apiUrl, companionUserRequset).then((response) => {
       console.log(response);
+      alert("동행 참여 완료!");
     });
   }
 
