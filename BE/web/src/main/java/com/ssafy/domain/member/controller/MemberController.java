@@ -12,7 +12,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -125,8 +124,8 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PutMapping("/update")
-    public ApiResponse updateMember (@RequestBody UpdateMemberRequest request, Principal principal){
-        String memberId =  principal.getName();
+    public ApiResponse updateMember (@RequestBody UpdateMemberRequest request, UserDetails principal){
+        String memberId =  principal.getUsername();
         return ApiResponse.success(memberService.updateMember(request, memberId));
     }
 
@@ -138,8 +137,8 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @PutMapping("/updatePassword")
-    public ApiResponse updatePasswod (@RequestBody UpdatePasswordRequest request, Principal principal){
-        String memberId =  principal.getName();
+    public ApiResponse updatePasswod (@RequestBody UpdatePasswordRequest request, UserDetails principal){
+        String memberId =  principal.getUsername();
         log.info(request.toString());
         return ApiResponse.success(memberService.updatePassword(request, memberId));
     }
@@ -152,8 +151,8 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @DeleteMapping("/delete")
-    public ApiResponse deleteMember (Principal principal){
-        String memberId =  principal.getName();
+    public ApiResponse deleteMember (UserDetails principal){
+        String memberId =  principal.getUsername();
         return ApiResponse.success(memberService.deleteMember(memberId));
     }
 
@@ -166,11 +165,11 @@ public class MemberController {
     })
     @GetMapping("/info")
     public ApiResponse info(@AuthenticationPrincipal UserDetails userDetails){
-        log.info("name={}",userDetails.getName());
-        if (userDetails == null || userDetails.getName() == null){
+        log.info("name={}",userDetails.getUsername());
+        if (userDetails == null || userDetails.getUsername() == null){
             throw new UserAuthException(ExceptionMessage.NOT_AUTHORIZED_ACCESS);
         }
-        return ApiResponse.success(memberService.findByMemberId(userDetails.getName()));
+        return ApiResponse.success(memberService.findByMemberId(userDetails.getUsername()));
     }
 
     @Operation(summary = "Token 재발급", description = "만료된 Token을 재발급 한다.")
