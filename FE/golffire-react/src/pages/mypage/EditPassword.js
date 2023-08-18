@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
+import {getImage, getBackground} from "../../setup/error-manager/ParseProfile";
 import MyPageNavbar from "./MyPageNavbar";
 import "./MyPage.css";
 
@@ -42,6 +43,8 @@ function EditPassword() {
 
                 const gotImage = response.data.data.image;
                 if (gotImage) setImage(gotImage);
+                setImgPic(getImage(image));
+                setImgClr(getBackground(image));
             })
             .catch(error => {
                 console.error('error 발생: ', error);

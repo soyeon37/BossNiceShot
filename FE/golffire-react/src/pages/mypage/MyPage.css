@@ -1361,6 +1361,7 @@ li {
 
 #info-introduction {
   width: calc(100% - 100px);
+  min-height: 30px;
   margin: 2px 50px;
   padding: 2px 20px;
 

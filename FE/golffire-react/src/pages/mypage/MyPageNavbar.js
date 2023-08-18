@@ -4,6 +4,8 @@ import axios from "axios";
 // Redux
 import { useDispatch, useSelector } from "react-redux";
 
+import { getImage, getBackground } from "../../setup/error-manager/ParseProfile";
+
 import { NavLink, Navigate } from "react-router-dom"
 import { InfoOutlineIcon } from '@chakra-ui/icons'
 import { IoGolfOutline } from "react-icons/io5";
@@ -34,6 +36,7 @@ function MyPageNavbar() {
             .then(response => {
                 console.log("성공, ", response)
                 // 사용자 정보 저장 필요
+                setUserProfile(response.data.data.image);
             })
             .catch(error => {
                 console.error('error 발생: ', error);
@@ -50,6 +53,7 @@ function MyPageNavbar() {
             introduce: "안녕하세요. 제 이름은 문싸피, 반가워요.",
         }
         // setUserProfile(testProfile.image);
+        if (!userProfile) setUserProfile("green_suncap_tiger white");
     }, []);
 
     // 사진 출력을 위한 변수
@@ -76,10 +80,10 @@ function MyPageNavbar() {
 
                     <div className="user-photo">
                         <div id="info-pic-wrapper"
-                            style={{ backgroundColor: colorMap[profileValues[1]] }}>
+                            style={{ backgroundColor: getBackground(userProfile) }}>
                             {profileValues[0] ? (
                                 <img className="info-pic-image"
-                                    src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+                                    src={require(`../../assets/source/profile/${getImage(userProfile)}.png`)} />
                             ) : (
                                 <img className="info-pic-image"
                                     src={require(`../../assets/source/profile/green_suncap_tiger.png`)} />

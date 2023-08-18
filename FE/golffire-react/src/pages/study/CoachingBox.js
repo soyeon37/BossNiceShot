@@ -1,10 +1,11 @@
 import React from "react";
 
+import { getAble, getImage, getBackground } from "../../setup/error-manager/ParseProfile";
 import ProfileImg from "../../assets/source/imgs/favicon.png";
 import { MdSportsGolf } from "react-icons/md";
 import { BsFillPersonFill } from 'react-icons/bs';
 
-function CoachingBox({ index, id, title, reservedTime, capacity, studyUserCount, memberNickname, memberImage, handleSelectButtonClick, dateFormat}) {
+function CoachingBox({ index, id, title, reservedTime, capacity, studyUserCount, memberNickname, memberImage, handleSelectButtonClick, dateFormat }) {
     return (
         <div className="coaching-box" onClick={() => handleSelectButtonClick(id, index)}>
             <div className="coaching-box-title">
@@ -13,7 +14,13 @@ function CoachingBox({ index, id, title, reservedTime, capacity, studyUserCount,
 
             <div className="box-author-position">
                 <div className="box-author">
-                    <img className="profile-icon" src={ProfileImg} alt={`${memberNickname}님`} />
+                    {getAble(memberImage) ? (
+                        <img className="box-profile-icon" alt={`&{author}님`}
+                            src={require(`../../assets/source/profile/${getImage(memberImage)}.png`)} />
+                    ) : (
+                        <img className="box-profile-icon" alt={`&{author}님`}
+                            src={require(`../../assets/source/profile/green_suncap_tiger.png`)} />
+                    )}
                     {memberNickname}
                 </div>
             </div>
@@ -24,7 +31,7 @@ function CoachingBox({ index, id, title, reservedTime, capacity, studyUserCount,
             </div>
 
             <div className="coaching-box-user-count">
-                <BsFillPersonFill className="react-icon" color="grey"/>
+                <BsFillPersonFill className="react-icon" color="grey" />
                 {studyUserCount} / {capacity}
             </div>
 
