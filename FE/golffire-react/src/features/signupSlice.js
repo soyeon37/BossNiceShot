@@ -10,7 +10,7 @@ const initialState = {
   averageScore: "",
   topScore: "",
   teeBox: "",
-  is_kakao: false,
+  isKakao: false,
 };
 
 const signupSlice = createSlice({
@@ -45,7 +45,7 @@ const signupSlice = createSlice({
       state.teeBox = action.payload;
     },
     setStateIsKakao: (state, action) => {
-      state.is_kakao = action.payload;
+      state.isKakao = action.payload;
     },
   },
 });

@@ -26,9 +26,8 @@
 
 /* AccompanyBox CSS */
 .accompany-box {
-  width: 32%;
-  min-height: 210px;
-
+  width: calc(33% - 16px);
+  min-height: 195px;
   margin: 10px 10px;
   padding: 10px 30px;
 

@@ -26,6 +26,6 @@ public interface CompanionRepository extends JpaRepository<Companion, Long>, Com
     @Query("select c.field from Companion c group by c.field order by count(c) limit 5")
     List<Integer>  findFieldOrderByCountDesc();
 
-    @Query(value = "select c from Companion c order by s.createdTime desc limit 5")
+    @Query(value = "select c from Companion c order by c.createdTime desc limit 5")
     List<Companion> findOrderByCreatedTimeLimitFive();
 }

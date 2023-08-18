@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { ko } from "date-fns/esm/locale";
+
+// Redux
+import { useSelector } from "react-redux";
+
 import GolffieldModal from './GolffieldModal';
 import { getNameById, getAddressById, getCallById } from "../golffield/ParseGolfId";
 import DatePicker from "react-datepicker";
@@ -28,16 +32,22 @@ import axios from 'axios';
 
 function CreateAccompany() {
     const navigate = useNavigate();
+
     const [checkInDate, setCheckInDate] = useState(new Date());
     const [time, setTime] = useState('12:34pm')
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [teeUpTime, setTeeUpTime] = useState(null);
     const [field, setField] = useState(0);
-    const [capacity, setCapacity] = useState('');
+    const [capacity, setCapacity] = useState(2);
     const [teeBox, setTeeBox] = useState(null);
 
     const [isGoldFieldVisible, setIsGoldFieldVisible] = useState(false);
+
+    // 사용자 정보(userId)로 axios 수행
+    const userId = useSelector((state) => state.userInfoFeature.userId);
+    const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
     const handleGoldFieldModal = () => {
         setIsGoldFieldVisible(!isGoldFieldVisible);

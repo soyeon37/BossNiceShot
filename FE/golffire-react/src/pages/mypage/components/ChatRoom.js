@@ -1,41 +1,65 @@
-import React, {  useEffect, useState } from "react";
-
+import React, { useEffect, useState } from "react";
 import { IoSendSharp } from "react-icons/io5";
+import axios from "axios";
 
 import MyChatBox from "./MyChatBox";
 import OtherChatBox from "./OtherChatBox";
 
-import axios from "axios";
+import flagred from "../../../assets/source/icons/flag-red.png";
+import flagwhite from "../../../assets/source/icons/flag-white.png";
+import flagblack from "../../../assets/source/icons/flag-black.png";
+import flagall from "../../../assets/source/icons/flag-all.png";
 
 import SockJS from "sockjs-client";
 import { Stomp } from '@stomp/stompjs';
 
 // Redux
 import { useSelector } from "react-redux";
+import { getNameById } from "../../golffield/ParseGolfId";
 
 function ChatRoom({ props }) {
-    const currentUserId = useSelector((state) => state.userInfoFeatrue.userId);
-    const currentUserNickname = useSelector((state) => state.userInfoFeatrue.userNickname);
-    const currentUserImage = "1.jpg";
+    const currentUserId = useSelector((state) => state.userInfoFeature.userId);
+    const currentUserNickname = useSelector((state) => state.userInfoFeature.userNickname);
+    const currentUserImage = useSelector((state) => state.userInfoFeature.userImage);
 
-    const { id, title, teeBox, field, teeUpTime } = props;
+    // 서버에서 반환하는 값 그대로 받은 props 요소 분리
+    const { field, id, memberId, memberNickname, teeBox, teeUptime, title } = props;
+
     const [chatMessages, setChatMessages] = useState([]);
     const [messageInput, setMessageInput] = useState("");
     const [stompClient, setStompClient] = useState(null);
 
-    const accessToken = axios.defaults.headers.common["Authorization"];
+    // AccessToken (Redux)
+    const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    // Header (AccessToken)
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
+    // 이미지 파일 경로를 객체로 관리
+    const teeMap = {
+        RED: flagred,
+        WHITE: flagwhite,
+        BLACK: flagblack,
+        NONE: flagall,
+    };
+
+    // 한라연 ...
 
     useEffect(() => {
         const socket = new SockJS(process.env.REACT_APP_SERVER_URL + '/ws');
         const stompClient = Stomp.over(socket);
 
-        stompClient.connect( {Authorization: `${accessToken}`} , (frame) => {
+        stompClient.connect((frame) => {
             setStompClient(stompClient);
 
+            console.log("들어옴"); //
+
             axios.get(process.env.REACT_APP_SERVER_URL + `/api/companion/chat/${id}`)
-              .then(response => {
-                setChatMessages(response.data);
-            });
+                .then(response => {
+                    setChatMessages(response.data);
+
+                    console.log("?");
+                    console.log(response.data);
+                });
         });
 
         return () => {
@@ -72,7 +96,7 @@ function ChatRoom({ props }) {
             companionId: id
         };
 
-        stompClient.send('/pub/chat', {Authorization: `${accessToken}`}, JSON.stringify(newMessage));
+        stompClient.send('/pub/chat', { Authorization: `${accessToken}` }, JSON.stringify(newMessage));
         setMessageInput('');
     }
 
@@ -88,35 +112,45 @@ function ChatRoom({ props }) {
         const hours = date.getHours();
         const minutes = date.getMinutes();
 
-        return (hours < 13 ? `오전` : `오후`)  + ` ${hours % 12 == 0 ? 12 : hours % 12}:${String(minutes).padStart(2, "0")}`;
+        return (hours < 13 ? `오전` : `오후`) + ` ${hours % 12 == 0 ? 12 : hours % 12}:${String(minutes).padStart(2, "0")}`;
     };
+
+    // title={chatRoomData.title}
+    // teeBox={chatRoomData.teeBox}
+    // field={chatRoomData.field}
+    // teeUpTime={chatRoomData.teeUptime}
 
     return (
         <div className="ChatRoom">
             <div id="room-header">
                 {/* 티박스 이미지 출력 문제 해결 필요 */}
-                <div id="room-title">{title} 방 </div>
-                <div id="room-tee">{teeBox}</div>
-                <div id="room-field">{field}</div>
-                <div id="room-date">{teeUpTime}</div>
+                <div id="room-title">{title}</div>
+                <div id="room-tee">
+                    <img className="listroom-tee" src={teeMap[teeBox]} alt="tee" />
+                </div>
+                <div id="room-field">{getNameById(field)}</div>
+                <div id="room-date">{teeUptime}</div>
             </div>
             <div id="room-text">
                 {chatMessages.map((chatMessage, index) => (
                     chatMessage.memberId === currentUserId ? (
-                        <MyChatBox key={index} props={chatMessage} dateFormat={dateFormat}/>
+                        <MyChatBox key={index} props={chatMessage} dateFormat={dateFormat} />
                     ) : (
-                        <OtherChatBox key={index} props={chatMessage} dateFormat={dateFormat}/>
+                        <OtherChatBox key={index} props={chatMessage} dateFormat={dateFormat} />
                     )
                 ))}
             </div>
             <div id="room-footer">
                 <input
                     id="message"
+                    className="chat-footer-input"
                     value={messageInput}
                     onChange={e => setMessageInput(e.target.value)}
-                    placeholder="메시지를 입력하세요."
-                />
-                <button id="icon-div" onClick={handleSendMessage}>
+                    placeholder="메시지를 입력하세요." />
+                <button
+                    id="icon-div"
+                    className="chat-footer-button"
+                    onClick={handleSendMessage}>
                     <h1>
                         <IoSendSharp />
                     </h1>
