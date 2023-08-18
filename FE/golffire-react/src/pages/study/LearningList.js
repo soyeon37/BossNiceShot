@@ -75,7 +75,7 @@ function LearningList() {
   const getLearningSearchList = (searchValue, currentPage) => {
     const apiUrl =
       process.env.REACT_APP_SERVER_URL +
-      "/api/study/LEARNING?page=" +
+      "/api/study/list/LEARNING?page=" +
       (currentPage - 1) +
       "&size=" +
       pageSize;
@@ -103,7 +103,7 @@ function LearningList() {
   const getLearningAttandableList = (currentPage) => {
     const apiUrl =
       process.env.REACT_APP_SERVER_URL +
-      "/api/study/LEARNING/attandable?page=" +
+      "/api/study/list/LEARNING/attandable?page=" +
       (currentPage - 1) +
       "&size=" +
       pageSize;
@@ -124,7 +124,7 @@ function LearningList() {
   const getLearningAttandableSearchList = (searchValue, currentPage) => {
     const apiUrl =
       process.env.REACT_APP_SERVER_URL +
-      "/api/study/LEARNING/attandable?page=" +
+      "/api/study/list/LEARNING/attandable?page=" +
       (currentPage - 1) +
       "&size=" +
       pageSize;
