@@ -53,7 +53,7 @@ public class SecurityConfig {
             "/api/sessions",
             "/api/sessions/**",
             "/api/sessions/SessionA/connections",
-            "/ws/**",
+            "/companion-ws/**",
             "/api/companion/field",
             "/api/companion/search",
             "/api/stduy/allsearch",

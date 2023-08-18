@@ -32,7 +32,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 || request.getRequestURI().equals("/api/members/code")
                 || request.getRequestURI().equals("/api/members/checkNickname")
                 || request.getRequestURI().equals("/api/notification/**")
-                || request.getRequestURI().startsWith("/ws")
+                || request.getRequestURI().startsWith("/companion-ws")
                 || request.getRequestURI().startsWith("/api/sessions")
                 || request.getRequestURI().equals("/api/companion/field") // 메인 페이지 인기 골프장 5개
                 || request.getRequestURI().equals("/api/companion/main") // 메인 페이지 최근 동행 5개

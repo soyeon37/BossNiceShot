@@ -3,9 +3,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import VideoRoomComponent from "../../openvidu/VideoRoomComponent";
 
 import axios from 'axios';
-import { error } from "jquery";
+
+// Redux
+import { useSelector } from "react-redux";
 
 function CoachingRoom() {
+  // 사용자 정보(userId)로 axios 수행
+  const userId = useSelector((state) => state.userInfoFeature.userId);
+  const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
   const location = useLocation();
   const navigate = useNavigate();
 

@@ -9,8 +9,9 @@ import Interceptor from "../../setup/user-auth/Interceptor";
 
 import AlertPage from "./alert/AlertPage";
 
-import { Avatar, AvatarBadge, AvatarGroup, Hide } from "@chakra-ui/react";
+import { HiUserCircle } from "react-icons/hi";
 import Favicon from "../../assets/source/imgs/favicon.png";
+import Logo from "../../assets/source/imgs/BNS_LOGO.png"
 import "./styles.css";
 import {
   Menu,
@@ -39,8 +40,14 @@ function Navbar() {
   const userId = useSelector((state) => state.userInfoFeature.userId);
   const userNickname = useSelector((state) => state.userInfoFeature.userNickname);
   const userProfile = useSelector((state) => state.userInfoFeature.userImage);
+  const userAccessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
   // const userProfile = "green_cap_bear yellow";
-  console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
+
+  // URL이 바뀔 때마다 실행되는 코드
+  useEffect(() => {
+    // console.log("Navbar에 저장된 사용자 정보: ", userId, "&", userNickname, "&", userProfile);
+    // console.log("새로고침마다 확인하는 access token? ", userAccessToken);
+  },)
 
   // 사진 출력을 위한 변수
   let profileValues = "";
@@ -58,10 +65,7 @@ function Navbar() {
   const checkProfilePic = () => {
     // console.log("프로필 값을 확인: ", userProfile);
 
-    if (userProfile !== undefined &&
-      userProfile !== null &&
-      userProfile !== '' &&
-      !userProfile) {
+    if (userProfile) {
       // console.log("가능!");
       return true;
     } else {
@@ -98,10 +102,10 @@ function Navbar() {
 
   return (
     <nav className="nav">
-      <a href="/" className="site-title">
+      <NavLink to="/" className="site-title">
         <img className="favicon-img" src={Favicon} alt="favicon" />
-        사장님, 나이스 샷
-      </a>
+        <img className="favicon-img" src={Logo} alt="logo" />
+      </NavLink>
       <ul id="nav-list">
         <li id="nav-list-li">
           <NavLink to="/solution" id="nav-list-link" style={({ isActive, isPending }) => {
@@ -170,52 +174,46 @@ function Navbar() {
 
         <li className="mypagemenu" id="nav-list-li">
           <Menu>
-
-            {/* 마이페이지 버튼 아바타로 수정했습니다. */}
-            <MenuButton>
-              {checkProfilePic() ? (
-                <div className="navbar-user-icon">
-                  <div className="navbar-user-circle"
-                    style={{ backgroundColor: colorMap[profileValues[1]] }}>
-                    <img className="navbar-user-image"
-                      src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+            {checkProfilePic() ? (
+              <div className="nav-alarm-parent">
+                <MenuButton>
+                  <div className="navbar-user-icon">
+                    <div className="navbar-user-circle"
+                      style={{ backgroundColor: colorMap[profileValues[1]] }}>
+                      <img className="navbar-user-image"
+                        src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <Avatar size={"sm"}>
-                  {/* 여기서 bg 값을 알람이 있을때는 빨간색, 없을때는 초록색으로 변경해야 할듯, 그런데 badge클릭시 알림창 뜨게 하는게 생각보다 쉽지 않음  */}
-                  <AvatarBadge boxSize={'1.25rem'} bg={'red'}>
-                    {/* <AlertPage></AlertPage> */}
-                  </AvatarBadge>
-                </Avatar>
-              )}
-            </MenuButton>
+                </MenuButton>
+                <AlertPage onClick={handleCheckNotification}>
+                </AlertPage>
+              </div>
+            ) : (
+              <div className="nav-alarm-parent">
+                <MenuButton>
+                  <HiUserCircle className="nav-alarm-pic" />
+                </MenuButton>
+                {/* <AlertPage onClick={handleCheckNotification}>
+                </AlertPage> */}
+              </div>
+            )}
             <MenuList>
 
               {userId ? (
                 <MenuGroup title=''>
                   <NavLink to="/mypage/info" style={({ isActive, isPending }) => {
-                      return {
-                        fontWeight: isActive ? "bold" : "",
-                      };
-                    }}>
+                    return {
+                      fontWeight: isActive ? "bold" : "",
+                    };
+                  }}>
                     <MenuItem>
-                        마이페이지
+                      마이페이지
                     </MenuItem>
                   </NavLink>
                   <MenuDivider />
                   <MenuItem style={{ color: "gray" }}
                     onClick={handleLogout}>
                     로그아웃</MenuItem>
-                  {/* <MenuItem style={{ color: "gray" }}
-                    onClick={handleLogout({
-                      refreshToken: cookies.refreshToken,
-                      setCookie,
-                      navigate,
-                      dispatch,
-                      resetUserState
-                    })}>
-                    로그아웃</MenuItem> */}
                 </MenuGroup>
               ) : (<MenuGroup title=''>
                 <MenuItem>
@@ -239,10 +237,6 @@ function Navbar() {
               </MenuGroup>)}
             </MenuList>
           </Menu>
-        </li>
-        <li id="nav-list-li">
-          <AlertPage onClick={handleCheckNotification}>
-          </AlertPage>
         </li>
       </ul >
 

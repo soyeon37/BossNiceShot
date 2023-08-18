@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
+
+// Redux
+import { useSelector } from "react-redux";
 
 import {
-  Box,
-  Button,
+  AvatarBadge,
   ButtonGroup,
   useDisclosure,
   Input,
@@ -18,13 +20,7 @@ import {
   DrawerCloseButton,
   Icon,
   Flex,
-  Text,
-  background,
-  Center,
 } from "@chakra-ui/react";
-
-// bell icon 삽입
-// import { GoBell } from "react-icons/go";
 
 import AlertList from "./AlertList";
 import "./alert.css";
@@ -34,6 +30,11 @@ import { Avatar } from "@chakra-ui/react";
 import { red } from "@mui/material/colors";
 
 function AlertPage() {
+  // 사용자 정보(userId)로 axios 수행
+  const userId = useSelector((state) => state.userInfoFeature.userId);
+  const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ function AlertPage() {
 
   // 알림 내역 호출 함수
   const handleGetNotification = () => {
-    const apiUrl =  process.env.REACT_APP_SERVER_URL + '/api/notification/read';
+    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/notification/read';
     axios
       .get(apiUrl)
       .then((response) => {
@@ -84,7 +85,7 @@ function AlertPage() {
   const handleDeleteAllNotification = () => {
     const confirmDelete = window.confirm("알림 전체 삭제를 진행하시겠습니까?");
     if (confirmDelete) {
-      const apiUrl = process.env.REACT_APP_SERVER_URL +  + "/notification/deleteAll";
+      const apiUrl = process.env.REACT_APP_SERVER_URL + + "/notification/deleteAll";
       axios
         .delete(apiUrl)
         .then((response) => {
@@ -328,18 +329,17 @@ function AlertPage() {
     return arr;
   };
 
+  // HTML
   return (
     <>
-      <Button
-        ref={btnRef}
-        colorScheme="teal"
+      <div
+        className="nav-alarm-bell"
         onClick={() => {
+          console.log("작은게 눌림!");
           onOpen();
           handleGetNotification();
-        }}
-      >
-        벨
-      </Button>
+        }} div />
+
       <Drawer isOpen={isOpen} placement="right" onClose={onClose} finalFocusRef={btnRef}>
         <DrawerOverlay />
         <DrawerContent>
@@ -389,7 +389,6 @@ function AlertPage() {
             </div>
           </DrawerBody>
 
-          <DrawerFooter></DrawerFooter>
         </DrawerContent>
       </Drawer>
     </>
