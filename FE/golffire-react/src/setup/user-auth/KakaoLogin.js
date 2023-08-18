@@ -32,7 +32,7 @@ const Kakao = (props) => {
   // KAKAO Token 발급
   const grant_type = "authorization_code";
   const client_id = "cd0c9cf0cf49dae9a987aebb769ee0d6"; // REST-API-TOKEN
-  const REDIRECT_URI = "http://localhost:3000/auth/kakao/login/callback";
+  const REDIRECT_URI = process.env.REACT_APP_SERVER_URL + "/auth/kakao/login/callback";
   axios
     .post(
       `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${REDIRECT_URI}&code=${CODE}`,
