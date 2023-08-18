@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import KakaoMap from "./KakaoMap";
 
 import GolfBox from "./GolfBox";
-import file from "../../assets/golffield.json";
+import file from "../../assets/golffield";
 import PinImg from "../../assets/source/icons/pin.png";
 import { SearchIcon, ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 import "./Golffield.css";
