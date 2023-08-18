@@ -14,10 +14,6 @@ import './VideoRoomComponent.css';
 import ChatComponent from './chat/ChatComponent';
 import { error } from 'jquery';
 
-import pandaswing from '../assets/source/imgs/panda_swing.png'
-import tigerswing from '../assets/source/imgs/tiger_swing.png'
-
-
 // 유저 생성
 var localUser = new UserModel();
 
@@ -70,6 +66,7 @@ class VideoRoomComponent extends Component {
                         entered: false,
                         chatDisplay: 'block',
                         currentVideoDevice: undefined,
+                        currentVideoDeviceId: undefined,
                         selectedSlideIndex: -1,
                         isEntered: true
                 };
@@ -290,7 +287,7 @@ class VideoRoomComponent extends Component {
                 });
 
                 this.setState(
-                        { currentVideoDevice: videoDevices[0], localUser: localUser },
+                        { currentVideoDevice: videoDevices[0], currentVideoDeviceId: videoDevices[0].deviceId, localUser: localUser },
                         () => {
                                 this.state.localUser.getStreamManager().on('streamPlaying', (e) => {
                                         this.updateLayout();
@@ -455,7 +452,7 @@ class VideoRoomComponent extends Component {
                         setTimeout(() => {
                                 this.checkSomeoneShareScreen();
                         }, 20);
-                        event.preventDefault();
+
                         this.updateLayout();
                 });
         }
@@ -497,7 +494,7 @@ class VideoRoomComponent extends Component {
         }
 
         subscribeToSessionClosed() {
-                this.state.session.on('signal:classClosed', (evnet) => {
+                this.state.session.on('signal:classClosed', (event) => {
                         this.leaveSession();
                 });
         }
@@ -928,6 +925,5 @@ class VideoRoomComponent extends Component {
                 console.log(response.data);
                 return response.data.token; // The token, response 안되면 axait axiosAPi.post로 바꿔보기
         }
-
 }
 export default VideoRoomComponent;
