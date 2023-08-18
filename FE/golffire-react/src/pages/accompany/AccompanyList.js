@@ -178,6 +178,8 @@ function AccompanyList() {
 
     axios.get(apiUrl)
       .then((response) => {
+        console.log("동행 모집 신청 여부 확인:", response);
+
         if (!response.data) { // 동행 모집을 신청하지 않은 경우
           setAttandableStatus(true);
         } else { // 동행 모집을 신청한 경우
@@ -192,7 +194,7 @@ function AccompanyList() {
       if (!userId) { // 로그인 하지 않은 경우
         alert("로그인 후 신청합니다.");
       } else { // 로그인한 경우
-        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/' + companion.id;
+        const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/companion/info/' + companion.id;
 
         axios.get(apiUrl) // 동행 모집의 현재 인원 확인한다.
           .then((response) => {
@@ -220,6 +222,7 @@ function AccompanyList() {
     console.log("동행 모집 참여자 생성");
     axios.post(apiUrl, companionUserRequset).then((response) => {
       console.log(response);
+      alert("동행 참여 완료!");
     });
   }
 
