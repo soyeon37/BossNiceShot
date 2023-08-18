@@ -264,7 +264,7 @@ function LearningList() {
       <div className={isSelected ? 'list-container-list-selected' : 'list-container-list-unselected'}>
         <div className="list-head">
           <Link to="/createlroom">
-            <div className="head-create-button bg-coaching">+ 러닝하기</div>
+            <div className="head-create-button bg-learn">+ 러닝하기</div>
           </Link>
 
           <div className="search-container">

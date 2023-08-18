@@ -1,11 +1,13 @@
 .nickname {
-    /* background: rgba(58, 64, 74, 0.651); */
-    /* padding: 5px !important; */
+    background-color: white !important; 
+    border-radius: 20px;
+    font-weight: bold;
+    margin-top:5px;
     position: absolute;
     z-index: 999;
-    color: #ffffff;
+    color: black;
     /* height: 10%; */
-    width: 100%;
+    width: 30% !important;
 }
 .form-control {
     color: black;
