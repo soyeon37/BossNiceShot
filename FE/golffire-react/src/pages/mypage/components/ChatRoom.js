@@ -46,7 +46,9 @@ function ChatRoom({ props }) {
 
     useEffect(() => {
         const socket = new SockJS(process.env.REACT_APP_SERVER_URL + '/companion-ws');
-        const stompClient = Stomp.over(socket);
+        const stompClient = Stomp.over(socket, {
+        protocols: ['v12.stomp', 'v11.stomp']
+        });
 
         stompClient.connect((frame) => {
             setStompClient(stompClient);
