@@ -8,6 +8,7 @@ import Interceptor from "../../setup/user-auth/Interceptor";
 
 import MyPageNavbar from "./MyPageNavbar";
 import ProfilePicModal from "../signup/ProfilePicModal";
+import { getImage, getBackground } from "../../setup/error-manager/ParseProfile";
 
 import RedTeeImg from "../../assets/source/icons/flag-red.png";
 import WhiteTeeImg from "../../assets/source/icons/flag-white.png";
@@ -58,10 +59,10 @@ function EditProfile() {
                 // 닉네임, 자기소개, 최고 타수, 평균타수, 티박스, 사진
 
                 // 사진 변수 설정
-                let profileValues = "";
-                if (image) profileValues = image.split(' ');
-                setImgPic(profileValues[0]);
-                setImgClr(profileValues[1]);
+                // let profileValues = "";
+                // if (image) profileValues = image.split(' ');
+                // setImgPic(profileValues[0]);
+                // setImgClr(profileValues[1]);
             })
             .catch(error => {
                 console.error('error 발생: ', error);
@@ -111,7 +112,7 @@ function EditProfile() {
 
     // 사용자 정보 수정 함수
     const handleChangeInfo = () => {
-        console.log("수정할 예정");
+        // console.log("수정할 예정");
         let level = "";
         if (averageScore <= 60) {
             level = "이글 플레이어";
@@ -142,7 +143,8 @@ function EditProfile() {
                 console.log(response.data); // 서버에서 반환된 데이터
                 const statusCode = response.status;
                 console.log('정보 수정 성공, HTTP status code:', statusCode); // HTTP 상태 코드
-                
+
+                alert("정보가 수정되었습니다.")
                 navigate('/mypage/info');
             })
             .catch((error) => {

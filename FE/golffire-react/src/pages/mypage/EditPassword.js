@@ -27,7 +27,7 @@ function EditPassword() {
 
     const [imgPic, setImgPic] = useState("green_suncap_tiger");
     const [imgClr, setImgClr] = useState("white");
-    
+
     // 처음 한 번만 실행되는 함수
     useEffect(() => {
         console.log("처음 실행할 때 사용자 정보 요청해 보여주기");
@@ -36,15 +36,12 @@ function EditPassword() {
         const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/info";
         axios.get(apiUrl)
             .then(response => {
-                console.log("성공, ", response)
+                console.log("성공, ", response.data.data);
                 // 사용자 정보 저장 필요
                 // 닉네임, 자기소개, 최고 타수, 평균타수, 티박스, 사진
 
-                // 사진 변수 설정
-                let profileValues = "";
-                if (image) profileValues = image.split(' ');
-                setImgPic(profileValues[0]);
-                setImgClr(profileValues[1]);
+                const gotImage = response.data.data.image;
+                if (gotImage) setImage(gotImage);
             })
             .catch(error => {
                 console.error('error 발생: ', error);
