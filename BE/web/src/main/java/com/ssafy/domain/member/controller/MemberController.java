@@ -164,12 +164,12 @@ public class MemberController {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "500", description = "서버 오류")
     })
     @GetMapping("/info")
-    public ApiResponse info(@AuthenticationPrincipal SecurityProperties.User authentication){
-        log.info("name={}",authentication.getName());
-        if (authentication == null || authentication.getName() == null){
+    public ApiResponse info(@AuthenticationPrincipal UserDetails userDetails){
+        log.info("name={}",userDetails.getName());
+        if (userDetails == null || userDetails.getName() == null){
             throw new UserAuthException(ExceptionMessage.NOT_AUTHORIZED_ACCESS);
         }
-        return ApiResponse.success(memberService.findByMemberId(authentication.getName()));
+        return ApiResponse.success(memberService.findByMemberId(userDetails.getName()));
     }
 
     @Operation(summary = "Token 재발급", description = "만료된 Token을 재발급 한다.")
