@@ -24,17 +24,20 @@ body {
   border-bottom: 2px solid black;
 }
 
-#nav-list{
+#nav-list {
   height: 4rem;
- 
-}#nav-list-li{
-    height: 4rem;
-    /* width: 100px; */
-     /* margin: 0px 10px 0px 10px; */
+
 }
-#nav-list-link{
-    justify-content: center;
-  
+
+#nav-list-li {
+  height: 4rem;
+  /* width: 100px; */
+  /* margin: 0px 10px 0px 10px; */
+}
+
+#nav-list-link {
+  justify-content: center;
+
 }
 
 .site-title {
@@ -60,14 +63,43 @@ body {
   padding: 0.25rem;
 }
 
+/* nav alarm CSS */
+.nav-alarm-parent {
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+}
+
+.nav-alarm-pic {
+  width: 100%;
+  height: 100%;
+
+  color: black;
+  font-size: 80px;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-alarm-bell {
+  position: absolute;
+  bottom: 8%;
+  right: 8%;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red;
+  cursor: pointer;
+}
+
 .navbar-user-icon {
   width: 4rem;
-  height: 100%;
+  height: 4rem;
 }
 
 .navbar-user-circle {
-  width: 80%;
-  height: 80%;
+  width: 70%;
+  height: 70%;
+  margin: 15%;
   overflow: hidden;
 
   border-radius: 50%;

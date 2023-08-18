@@ -51,7 +51,7 @@ const SignupEmail1 = () => {
     axios
       .post(apiUrl, data)
       .then((response) => {
-        setVerifyNum(response.data.data.authNum); // 인증번호
+        setVerifyNum(response.data.data.certificationNum); // 인증번호
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -64,6 +64,7 @@ const SignupEmail1 = () => {
       alert("인증이 완료되었습니다.");
       dispatch(setStateEmail(email));
     } else {
+      console.log("인증번호: ", verifyNum);
       alert("인증번호를 다시 확인해 주세요.");
     }
   };

@@ -14,6 +14,10 @@ import './VideoRoomComponent.css';
 import ChatComponent from './chat/ChatComponent';
 import { error } from 'jquery';
 
+import pandaswing from '../assets/source/imgs/panda_swing.png'
+import tigerswing from '../assets/source/imgs/tiger_swing.png'
+
+
 // 유저 생성
 var localUser = new UserModel();
 
@@ -180,8 +184,8 @@ class VideoRoomComponent extends Component {
 
                                         this.connect(token);
                                 })
-                                .catch ((error) => {
-                                        if(this.props.error){
+                                .catch((error) => {
+                                        if (this.props.error) {
                                                 this.props.error({
                                                         error: error.error,
                                                         message: error.message, // 여기서 오류나면 메세지가 아니라 메스개
@@ -215,7 +219,7 @@ class VideoRoomComponent extends Component {
                                 this.connectWebCam();
                         })
                         .catch((error) => {
-                                if(this.props.error){
+                                if (this.props.error) {
                                         this.props.error({
                                                 error: error.error,
                                                 messgae: error.message,
@@ -257,7 +261,7 @@ class VideoRoomComponent extends Component {
 
                 // 접근 허용 시 설정 변경
                 if (this.state.session.capabilities.publish) {
-                        publisher.on('accessAllowed' , () => {
+                        publisher.on('accessAllowed', () => {
                                 this.state.session.publish(publisher).then(() => {
                                         this.updateSubscribers();
                                         this.localUserAccessAllowed = true;
@@ -436,7 +440,7 @@ class VideoRoomComponent extends Component {
                         newUser.setNickname(JSON.parse(nickname).clientData);
 
                         this.remotes.push(newUser);
-                        if(this.localUserAccessAllowed) {
+                        if (this.localUserAccessAllowed) {
                                 this.updateSubscribers();
                         }
                 });
@@ -500,7 +504,7 @@ class VideoRoomComponent extends Component {
 
         // 레이아웃 업데이트
         updateLayout() {
-        setTimeout(() => {
+                setTimeout(() => {
                         this.layout.updateLayout();
                 }, 20);
         }
@@ -669,10 +673,10 @@ class VideoRoomComponent extends Component {
 
         handleSlideClick = (index) => {
                 if (this.state.selectedSlideIndex === index) {
-                this.setState({ selectedSlideIndex: -1 }); // 이미 선택된 슬라이드를 다시 클릭하면 선택 취소
-        } else {
-                this.setState({ selectedSlideIndex: index });
-        }
+                        this.setState({ selectedSlideIndex: -1 }); // 이미 선택된 슬라이드를 다시 클릭하면 선택 취소
+                } else {
+                        this.setState({ selectedSlideIndex: index });
+                }
         };
 
         render() {
@@ -689,34 +693,141 @@ class VideoRoomComponent extends Component {
                         <div className="container" id="container">
                                 <DialogExtensionComponent showDialog={this.state.showExtensionDialog} cancelClicked={this.closeDialogExtension} />
                                 <div className={`enterbox-head ${type === 'LEARNING' ? 'learning-bg' : 'coaching-bg'}`}>                                        <div className="roomtype">
-                                                <span className="typename">{type === 'LEARNING' ? '러닝' : '코칭'}</span>
-                                        </div>
-                                        { study.title }
+                                        <span className="typename">{type === 'LEARNING' ? '러닝' : '코칭'}</span>
+                                </div>
+                                        {study.title}
                                         <div className="copy-url" onClick={CopyUrl}>
-                                                <ImShare2/>
+                                                <ImShare2 />
                                         </div>
                                         <div className="go-back" onClick={leaveRoom}>
-                                                <ImExit/>
+                                                <ImExit />
                                         </div>
                                 </div>
 
                                 <div id="layout">
                                         {localUser !== undefined &&
                                                 localUser.getStreamManager() !== undefined &&
-                                                        (isEntered ? (
-                                                                <div className="roombox-container">
-                                                                        <div className="roombox-body">
-                                                                                <div className="grid-room room1">
-                                                                                        <div className="me">
-                                                                                                <StreamComponent
-                                                                                                        user={localUser}                                                                                                        handleNickname={this.nicknameChanged}
-                                                                                                        isMe={true}
-                                                                                                />
+                                                (isEntered ? (
+                                                        <div className="roombox-container">
+                                                                <div className="roombox-body">
+                                                                        <div className="grid-room room1">
+                                                                                <div className="me">
+                                                                                        <StreamComponent
+                                                                                                user={localUser} handleNickname={this.nicknameChanged}
+                                                                                                isMe={true}
+                                                                                        />
+                                                                                </div>
+                                                                                <div className="toolbar-box">
+                                                                                        <ToolbarComponent
+                                                                                                sessionId={mySessionId}
+                                                                                                user={localUser} showNotification={this.state.messageReceived}
+                                                                                                camStatusChanged={this.camStatusChanged}
+                                                                                                micStatusChanged={this.micStatusChanged}
+                                                                                                screenShare={this.screenShare}
+                                                                                                stopScreenShare={this.stopScreenShare}
+                                                                                        />
+                                                                                </div>
+                                                                        </div>
+                                                                        {localUser !== undefined &&
+                                                                                localUser.getStreamManager() !== undefined && (
+                                                                                        <div className="grid-room room2">
+                                                                                                <div className="box-splide">
+                                                                                                        <Splide
+                                                                                                                style={{
+
+                                                                                                                        display: "flex",
+
+                                                                                                                        justifyContent: "center",
+
+                                                                                                                        alignItems: "center",
+                                                                                                                }}
+                                                                                                                options={{
+
+                                                                                                                        type: 'slide',
+
+                                                                                                                        rewind: true, // 무한 루프 활성화
+
+                                                                                                                        perPage: 3,
+
+                                                                                                                        arrows: true,
+
+                                                                                                                        autoplay: false, // 자동 슬라이드 비활성화
+
+                                                                                                                        gap: '3px', // 슬라이드 사이 간격 없음
+
+                                                                                                                        focus: 'center',
+
+                                                                                                                        pagination: false,
+                                                                                                                }}
+                                                                                                        >
+                                                                                                                {this.state.subscribers.map((sub, i) => (
+
+                                                                                                                        <SplideSlide
+
+                                                                                                                                key={i}
+
+                                                                                                                                className="other"
+
+                                                                                                                                onClick={() => this.handleSlideClick(i)}
+
+                                                                                                                        >
+
+                                                                                                                                <StreamComponent
+
+                                                                                                                                        user={sub}
+
+                                                                                                                                        streamId={sub.streamManager.stream.streamId}
+
+                                                                                                                                        isMe={false}
+
+                                                                                                                                />
+
+                                                                                                                        </SplideSlide>
+                                                                                                                ))}
+                                                                                                        </Splide>
+                                                                                                </div>
+                                                                                                <div className="box-mainrtc">
+                                                                                                        {this.state.selectedSlideIndex !== -1 && (
+                                                                                                                <StreamComponent
+
+                                                                                                                        user={this.state.subscribers[this.state.selectedSlideIndex]}
+
+                                                                                                                        streamId={this.state.subscribers[this.state.selectedSlideIndex].streamManager.stream.streamId}
+
+                                                                                                                        isMe={false}
+                                                                                                                />
+                                                                                                        )}
+                                                                                                </div>
                                                                                         </div>
-                                                                                        <div className="toolbar-box">
+                                                                                )}
+                                                                        <div className="grid-room room3">
+                                                                                <div className="OT_root OT_publisher custom-class" style={chatDisplay}>
+                                                                                        <ChatComponent
+                                                                                                user={localUser}
+                                                                                                chatDisplay={this.state.chatDisplay}
+                                                                                                close={this.toggleChat}
+                                                                                                messageReceived={this.checkNotification}
+                                                                                        />
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                ) : (
+                                                        <div className="div">
+                                                                <div className="enterbox-body">
+                                                                        <div className="check-box">
+                                                                                <div className="check-me">
+                                                                                        <StreamComponent user={localUser} isMe={"check"} />
+                                                                                </div>
+                                                                                <div className="enter">
+                                                                                        <button className="enter-button" onClick={this.entereRoom}>
+                                                                                                입장하기
+                                                                                        </button>
+                                                                                        <div className="toolbar-enterbox">
                                                                                                 <ToolbarComponent
                                                                                                         sessionId={mySessionId}
-                                                                                                        user={localUser}                                                                                                        showNotification={this.state.messageReceived}
+                                                                                                        user={localUser}
+                                                                                                        showNotification={this.state.messageReceived}
                                                                                                         camStatusChanged={this.camStatusChanged}
                                                                                                         micStatusChanged={this.micStatusChanged}
                                                                                                         screenShare={this.screenShare}
@@ -724,118 +835,11 @@ class VideoRoomComponent extends Component {
                                                                                                 />
                                                                                         </div>
                                                                                 </div>
-                                                                                {localUser !== undefined &&
-                                                                                        localUser.getStreamManager() !== undefined && (
-                                                                                                <div className="grid-room room2">
-                                                                                                        <div className="box-splide">
-                                                                                                                <Splide
-                                                                                                                       style={{
-
-display: "flex",
-
-justifyContent: "center",
-
-alignItems: "center",
-                                                                                                                       }}
-                                                                                                                       options={{
-
-type: 'slide',
-
-rewind: true, // 무한 루프 활성화
-
-perPage: 3,
-
-arrows: true,
-
-autoplay: false, // 자동 슬라이드 비활성화
-
-gap: '3px', // 슬라이드 사이 간격 없음
-
-focus: 'center',
-
-pagination: false,
-                                                                                                                       }}
-                                                                                                                >
-                                                                                                                       {this.state.subscribers.map((sub, i) => (
-
-<SplideSlide
-
-        key={i}
-
-        className="other"
-
-        onClick={() => this.handleSlideClick(i)}
-
->
-
-        <StreamComponent
-
-                user={sub}
-
-                streamId={sub.streamManager.stream.streamId}
-
-                isMe={false}
-
-        />
-
-</SplideSlide>
-                                                                                                                       ))}
-                                                                                                                </Splide>
-                                                                                                        </div>
-                                                                                                        <div className="box-mainrtc">
-                                                                                                                {this.state.selectedSlideIndex !== -1 && (
-                                                                                                                       <StreamComponent
-
-user={this.state.subscribers[this.state.selectedSlideIndex]}
-
-streamId={this.state.subscribers[this.state.selectedSlideIndex].streamManager.stream.streamId}
-
-isMe={false}
-                                                                                                                       />
-                                                                                                                )}
-                                                                                                        </div>
-                                                                                                </div>
-                                                                                        )}
-                                                                                        <div className="grid-room room3">
-                                                                                                <div className="OT_root OT_publisher custom-class" style={chatDisplay}>
-                                                                                                        <ChatComponent
-                                                                                                                user={localUser}
-                                                                                                                chatDisplay={this.state.chatDisplay}
-                                                                                                                close={this.toggleChat}
-                                                                                                                messageReceived={this.checkNotification}
-                                                                                                        />
-                                                                                                </div>
-                                                                                        </div>
+                                                                                <div className={`check-box-background-div ${type === 'LEARNING' ? 'learning-bg' : 'coaching-bg'}`}></div>
                                                                         </div>
                                                                 </div>
-                                                        ) : (
-                                                                <div className="div">
-                                                                        <div className="enterbox-body">
-                                                                                <div className="check-box">
-                                                                                        <div className="check-me">
-                                                                                                <StreamComponent user={localUser} isMe={"check"} />
-                                                                                        </div>
-                                                                                        <div className="enter">
-                                                                                                <button className="enter-button" onClick={this.entereRoom}>
-                                                                                                        입장하기
-                                                                                                </button>
-                                                                                                <div className="toolbar-enterbox">
-                                                                                                        <ToolbarComponent
-                                                                                                                sessionId={mySessionId}
-                                                                                                                user={localUser}
-                                                                                                                showNotification={this.state.messageReceived}
-                                                                                                                camStatusChanged={this.camStatusChanged}
-                                                                                                                micStatusChanged={this.micStatusChanged}
-                                                                                                                screenShare={this.screenShare}
-                                                                                                                stopScreenShare={this.stopScreenShare}
-                                                                                                        />
-                                                                                                </div>
-                                                                                        </div>
-                                                                                        <div className={`check-box-background-div ${type === 'LEARNING' ? 'learning-bg' : 'coaching-bg'}`}></div>
-                                                                                </div>
-                                                                        </div>
-                                                                </div>
-                                                        ))}
+                                                        </div>
+                                                ))}
                                 </div>
 
                         </div>
@@ -877,9 +881,11 @@ isMe={false}
                                 OPENVIDU_SERVER_URL + '/openvidu/api/sessions',
                                 { customSessionId: sessionId },
                                 {
-                                        headers: { Authorization:
-                                          'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
-                                          'Content-Type': 'application/json', },
+                                        headers: {
+                                                Authorization:
+                                                        'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+                                                'Content-Type': 'application/json',
+                                        },
                                 }
                         );
 
@@ -911,14 +917,17 @@ isMe={false}
                         OPENVIDU_SERVER_URL + '/openvidu/api/sessions/' + sessionId + '/connection',
                         {},
                         {
-                                headers: { Authorization:
-                                        'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
-                                  'Content-Type': 'application/json', },
+                                headers: {
+                                        Authorization:
+                                                'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+                                        'Content-Type': 'application/json',
+                                },
                         }
                 );
 
                 console.log(response.data);
                 return response.data.token; // The token, response 안되면 axait axiosAPi.post로 바꿔보기
         }
+
 }
 export default VideoRoomComponent;

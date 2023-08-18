@@ -86,16 +86,16 @@ function App() {
               <Route path="/solution/" element={<Solution />} />
               <Route path="/solution/halfswing/" element={<Solution_HalfSwing />} />
               <Route path="/solution/fullswing/" element={<Solution_FullSwing />} />
-              
+
               {/* Study */}
-              <Route path="/studylist/" element={<StudyList />} />
+              <Route path="/studylist/" element={userId ? <StudyList /> : <Navigate to="/Login" />} />
               <Route path="/createcroom/" element={userId ? <CreateCRoom /> : <Navigate to="/Login" />} />
               <Route path="/createlroom/" element={userId ? <CreateLRoom /> : <Navigate to="/Login" />} />
               <Route path="/coachingroom/" element={userId ? <CoachingRoom /> : <Navigate to="/Login" />} />
               <Route path="/learningroom/" element={userId ? <LearningRoom /> : <Navigate to="/Login" />} />
 
               {/* Accompany */}
-              <Route path="/accompany/" element={<Accompany />} />
+              <Route path="/accompany/" element={userId ? <Accompany /> : <Navigate to="/Login" />} />
               <Route path="/createaccompany/" element={userId ? <CreateAccompany /> : <Navigate to="/Login" />} />
 
               {/* Community */}
