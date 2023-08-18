@@ -25,6 +25,7 @@
   /* margin-top: 30px; */
   left: 0px !important;
   top: 0px !important;
+  margin-top: 50px;
 }
 
 .roombox-container{
@@ -35,22 +36,22 @@
   margin-top: 30px;
   left: 0px !important;
   top: 0px !important;
-  width: 100% !important;
+  width: 90% !important;
   height: 100% !important;
 }
 .roombox-body {
   /* display: flex !important; */
   /* justify-content: center !important;
   align-items: center; */
-  height: 840px;
-  width: 1680px;
-  padding: 20px;
+  height: 680px;
+  width: 1330px;
+  padding: 16px;
   display: grid;
   grid-template-columns: 2fr 6fr 3fr
 }
 
 .grid-room {
-  height: 800px; /* 높이 조정 */
+  height: 680px; /* 높이 조정 */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,8 +69,8 @@
 .me {
   display: flex;
   flex-direction: column;
-  width: 320px;
-  height: 240px;
+  width: 256px;
+  height: 192px;
 }
 
 .room2 {
@@ -80,9 +81,9 @@
 }
 
 .box-splide {
-  border: 1px solid;
-  width: 780px;
-  height: 180px;
+  border: 2px solid;
+  width: 650px;
+  height: 150px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
@@ -91,9 +92,9 @@
 }
 
 .box-mainrtc {
-  border: 1px solid;
-  width: 780px;
-  height: 600px;
+  border: 2px solid;
+  width: 650px;
+  height: 510px;
   /* margin-bottom: 10px; */
   position:relative;
   border-radius: 50px;
@@ -141,14 +142,14 @@
   display: flex ;
   justify-content: center ;
   align-items: center;
-  height: 80%;
-  width: 90%;
+  height: 70%;
+  width: 80%;
   margin-top: 50px;
 }
 
 .enter-img-box {
-  height: 700px;
-  width: 200px;
+  height: 600px;
+  width: 160px;
   position:relative;
   margin-left: 20px;
   margin-right: 20px;
@@ -165,8 +166,8 @@
   justify-content: center ;
   align-items: center;
   flex-direction: column;
-  height: 700px;
-  width: 900px;
+  height: 600px;
+  width: 700px;
   border-radius: 40px;
   border: 2px solid black;
   background-color:white;
@@ -178,8 +179,8 @@
     top: 15px;
     left: calc(50% + 15px);
     transform: translateX(-50%);
-    height: 700px;
-    width: 900px;
+    height: 600px;
+    width: 700px;
     max-width: 1820px;
     border: 2px solid #000;
     border-radius: 50px;
@@ -204,7 +205,7 @@
 }
 
 .toolbar-enterbox{
-  height: 96px;
+  height: 64px;
   position: relative ;
   width: 160px;
   display: flex;
@@ -290,7 +291,6 @@
   border-radius: 50px;
   padding: 5px 10px; /* 옵션: 버튼 내부 여백 조절 */
   font-weight: bold; /* 옵션: 텍스트 굵기 설정 */
-  margin-top: 10px;
   margin-left: 10px;
   width: 320px;
   height: 36px;

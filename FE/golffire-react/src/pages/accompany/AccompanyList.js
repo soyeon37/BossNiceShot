@@ -26,7 +26,8 @@ function AccompanyList() {
   // 사용자 정보(userId)로 로그인 여부 판단
   const userId = useSelector((state) => state.userInfoFeature.userId);
   const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
-    
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -44,7 +45,8 @@ function AccompanyList() {
   }, []);
 
   const getCompanionList = (searchValue, currentPage) => {
-      const apiUrl =
+    console.log("동행 리스트 호출");
+    const apiUrl =
       process.env.REACT_APP_SERVER_URL +
       "/api/companion/search?page=" +
       (currentPage - 1) +
@@ -65,14 +67,9 @@ function AccompanyList() {
     console.log("검색:");
     console.log(companionSearchRequest);
 
-    // access token을 넣어서 해보기 위한 테스트 코드 부분
-    const headers = {
-      Authorization: `Bearer ${accessToken}`,
-    };
-
     axios.post(apiUrl, companionSearchRequest).then((response) => {
-    // axios.post(apiUrl, companionSearchRequest, { headers }).then((response) => {
-      console.log(response);
+      // axios.post(apiUrl, companionSearchRequest, { headers }).then((response) => {
+      console.log("리스트 받은거 성공: ",response);
 
       setCompanionList(response.data.companionList);
       setTotalPages(response.data.totalPages);
@@ -317,11 +314,12 @@ function AccompanyList() {
             </select>
           </div>
           <div className="checkbox-div">
-            <label class="switch" value={selectedFollow} onChange={handleFollowChange}>
+            {/* 팔로잉 필터 제거 */}
+            {/* <label className="switch" value={selectedFollow} onChange={handleFollowChange}>
               <input type="checkbox" />
-              <span class="slider round"></span>
+              <span className="slider round"></span>
             </label>
-            <div>팔로잉</div>
+            <div>팔로잉</div> */}
           </div>
         </div>
         <div className={isSelected ? "list-body-selected" : "list-body-unselected"}>

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import "./study.css";
 
@@ -10,27 +10,23 @@ import ProfileImg from "../../assets/source/imgs/favicon.png";
 
 import { MdSportsGolf } from "react-icons/md";
 import { GrClose } from "react-icons/gr";
-import { BsFillPersonFill } from 'react-icons/bs';
+import { BsFillPersonFill } from "react-icons/bs";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { SearchIcon } from "@chakra-ui/icons";
 
 import axios from "axios";
-import LearningRoom from './LearningRoom';
-import LearningBox from './LearningBox';
+import LearningRoom from "./LearningRoom";
+import LearningBox from "./LearningBox";
 
 function LearningList() {
-  // Redux
-  const dispatch = useDispatch();
-  // AccessToken (Redux)
+  // 사용자 정보(userId)로 axios 수행
+  const userId = useSelector((state) => state.userInfoFeature.userId);
   const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
-  // Header (AccessToken)
-  const headers = {
-    Authorization: `Bearer ${accessToken}`,
-  };
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
   const navigate = useNavigate();
 
-  const studyType = 'LEARNING';
+  const studyType = "LEARNING";
 
   const pageSize = 6;
   const [currentPage, setCurrentPage] = useState(1);
@@ -66,7 +62,7 @@ function LearningList() {
     setCurrentPage(currentPage);
 
     console.log("러닝 리스트 조회");
-    axios.post(apiUrl, data, { headers }).then((response) => {
+    axios.post(apiUrl, data).then((response) => {
       console.log(response);
 
       setLearningList(response.data.studyList);
@@ -77,12 +73,17 @@ function LearningList() {
 
 
   const getLearningSearchList = (searchValue, currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/LEARNING?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl =
+      process.env.REACT_APP_SERVER_URL +
+      "/api/study/LEARNING?page=" +
+      (currentPage - 1) +
+      "&size=" +
+      pageSize;
 
     const studySearchRequest = {
       category: searchFilter,
-      keyword: searchValue
-    }
+      keyword: searchValue,
+    };
 
     setSearchValue(searchValue);
     setCurrentPage(currentPage);
@@ -100,7 +101,12 @@ function LearningList() {
   };
 
   const getLearningAttandableList = (currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/LEARNING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl =
+      process.env.REACT_APP_SERVER_URL +
+      "/api/study/LEARNING/attandable?page=" +
+      (currentPage - 1) +
+      "&size=" +
+      pageSize;
 
     setCurrentPage(currentPage);
 
@@ -116,15 +122,20 @@ function LearningList() {
   };
 
   const getLearningAttandableSearchList = (searchValue, currentPage) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/LEARNING/attandable?page=" + (currentPage - 1) + "&size=" + pageSize;
+    const apiUrl =
+      process.env.REACT_APP_SERVER_URL +
+      "/api/study/LEARNING/attandable?page=" +
+      (currentPage - 1) +
+      "&size=" +
+      pageSize;
 
     setSearchValue(searchValue);
     setCurrentPage(currentPage);
 
     const studySearchRequest = {
       category: searchFilter,
-      keyword: searchValue
-    }
+      keyword: searchValue,
+    };
 
     console.log("참여 가능한 러닝 리스트 검색 조회");
     console.log(studySearchRequest);
@@ -139,7 +150,7 @@ function LearningList() {
   };
 
   const handleAttandClick = (study) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/info/' + study.id;
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/info/" + study.id;
 
     axios.get(apiUrl)
       .then((response) => {
@@ -153,10 +164,10 @@ function LearningList() {
 
   // 러닝룸 입장
   const enterStudyUser = (study) => {
-    const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/study/user';
+    const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/study/user";
 
     const studyUserRequest = {
-      studyId: study.id
+      studyId: study.id,
     };
 
     console.log("러닝룸 입장");
@@ -178,16 +189,22 @@ function LearningList() {
   };
 
   const handlePageChange = (pageNumber) => {
-    if (selectedAttandable) { // 참여 가능한 러닝 리스트
-      if (searchValue.trim() == "") { // 미검색
+    if (selectedAttandable) {
+      // 참여 가능한 러닝 리스트
+      if (searchValue.trim() == "") {
+        // 미검색
         getLearningAttandableList(pageNumber);
-      } else { // 검색
+      } else {
+        // 검색
         getLearningAttandableSearchList(searchValue, pageNumber);
       }
-    } else { // 전체 러닝 리스트
-      if (searchValue.trim() == "") { // 미검색
+    } else {
+      // 전체 러닝 리스트
+      if (searchValue.trim() == "") {
+        // 미검색
         getLearningList(pageNumber);
-      } else { // 검색
+      } else {
+        // 검색
         getLearningSearchList(searchValue, pageNumber);
       }
     }
@@ -210,25 +227,31 @@ function LearningList() {
     if (searchValue.trim() == "") {
       alert("검색어를 입력하세요.");
     } else {
-      if (selectedAttandable) { // 참여 가능한 러닝 리스트
-        if (searchValue.trim() == "") { // 미검색
+      if (selectedAttandable) {
+        // 참여 가능한 러닝 리스트
+        if (searchValue.trim() == "") {
+          // 미검색
           getLearningAttandableList(currentPage);
-        } else { // 검색
+        } else {
+          // 검색
           getLearningAttandableSearchList(searchValue, currentPage);
         }
-      } else { // 전체 코칭 리스트
-        if (searchValue.trim() == "") { // 미검색
+      } else {
+        // 전체 코칭 리스트
+        if (searchValue.trim() == "") {
+          // 미검색
           getLearningList(currentPage);
-        } else { // 검색
+        } else {
+          // 검색
           getLearningSearchList(searchValue, currentPage);
         }
       }
     }
-  }
+  };
 
   const handleAttadableChange = () => {
     setSelectedAttandable(!selectedAttandable);
-  }
+  };
 
   const [isSelected, setIsSelected] = useState(false); // 글 선택 여부
   const [selectedId, setSelectedId] = useState(null); // 선택된 글 번호
@@ -299,13 +322,11 @@ function LearningList() {
               <input type="checkbox" />
               <span class="slider-learning round"></span>
             </label>
-            <div>
-              참여 가능
-            </div>
+            <div>참여 가능</div>
           </div>
         </div>
 
-        <div className={isSelected ? 'list-body-selected' : 'list-body-unselected'}>
+        <div className={isSelected ? "list-body-selected" : "list-body-unselected"}>
           {learningList.map((learning, index) => (
             <LearningBox
               key={learning.id}
@@ -323,7 +344,7 @@ function LearningList() {
           ))}
         </div>
 
-        <div className='list-footer'>
+        <div className="list-footer">
           <button
             className="control-arrow"
             disabled={currentPage == 1}
@@ -350,15 +371,19 @@ function LearningList() {
         <div className="selected-container">
           <div className="selected-container-head">
             <div className="selected-container-title">
-              <div className="title-text">
-                {selectedContent.title}
-              </div>
-              <h1 className="cursor-able"><GrClose size={30} onClick={() => setIsSelected(false)} /></h1>
+              <div className="title-text">{selectedContent.title}</div>
+              <h1 className="cursor-able">
+                <GrClose size={30} onClick={() => setIsSelected(false)} />
+              </h1>
             </div>
 
             <div className="box-author-position">
               <div className="box-author">
-                <img className="profile-icon" src={ProfileImg} alt={`${selectedContent.memberNickname}님`} />
+                <img
+                  className="profile-icon"
+                  src={ProfileImg}
+                  alt={`${selectedContent.memberNickname}님`}
+                />
                 {selectedContent.memberNickname}
               </div>
             </div>
@@ -368,9 +393,7 @@ function LearningList() {
             <div className="coaching-textarea">{selectedContent.description}</div>
             <div className="selected-container-info">
               <MdSportsGolf className="react-icon" />
-              <div className="info-text-left">
-                {dateFormat(selectedContent.reservedTime)}
-              </div>
+              <div className="info-text-left">{dateFormat(selectedContent.reservedTime)}</div>
               <div className="info-text-right">
                 <BsFillPersonFill className="react-icon" />
                 {selectedContent.studyUserCount} / {selectedContent.capacity}
@@ -378,7 +401,13 @@ function LearningList() {
             </div>
           </div>
           <div className="selected-container-footer">
-            <button className="button bg-coaching" onClick={() => handleAttandClick(selectedContent)}> 참여하기</button>
+            <button
+              className="button bg-coaching"
+              onClick={() => handleAttandClick(selectedContent)}
+            >
+              {" "}
+              참여하기
+            </button>
           </div>
         </div>
       )}
