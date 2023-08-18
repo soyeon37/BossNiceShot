@@ -5,20 +5,21 @@ import { MdSportsGolf } from "react-icons/md";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 function AccompanyBox({
-  title,
   id,
+  title,
   tee,
   author,
+  authorImage,
   place,
   date,
-  handleSelectButtonClick,
   dateFormat,
   isSelected,
+  handleSelectButtonClick,
 }) {
 
   // 사진 출력을 위한 변수
   let profileValues = "";
-  // if (testProfile.image) profileValues = testProfile.image.split(' ');
+  if (authorImage) profileValues = authorImage.image.split(' ');
 
   // 사진 배경 색상을 map으로 관리
   const colorMap = {
@@ -28,11 +29,12 @@ function AccompanyBox({
     "blue": "#80CAFF",
     "white": "#FFFFFF",
   }
+
   const checkProfilePic = () => {
-    // console.log("프로필 값을 확인: ", userProfile);
-    
+    console.log("프로필 값을 확인: ", authorImage);
+
     if (true) {
-    // if (userProfile) {
+      // if (userProfile) {
       // console.log("가능!");
       return true;
     } else {
