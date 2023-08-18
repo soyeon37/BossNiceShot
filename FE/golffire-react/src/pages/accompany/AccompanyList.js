@@ -136,6 +136,7 @@ function AccompanyList() {
   const [selectedContent, setSelectedContent] = useState(null); // 선택된 글 내용
 
   const handleSelectButtonClick = (id) => {
+    console.log("자세히보기!")
     if (isSelected && selectedId && selectedId === id) {
       setIsSelected(false);
       setSelectedId(null);
@@ -145,7 +146,7 @@ function AccompanyList() {
     }
   };
 
-  const { attandableStatus, setAttandableStatus } = useState(false);
+  const [attandableStatus, setAttandableStatus] = useState(false);
 
   const getSelectedContent = (id) => {
     const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/companion/info/" + id;
