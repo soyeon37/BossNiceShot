@@ -330,6 +330,7 @@ function AccompanyList() {
               title={accompanyRoom.title}
               tee={teeMap[accompanyRoom.teeBox]}
               author={accompanyRoom.memberNickname}
+              authorImage={accompanyRoom.memberImage}
               place={getNameById(accompanyRoom.field)}
               date={accompanyRoom.teeUptime}
               isSelected={accompanyRoom.isSelected} // isSelected를 prop으로 전달
