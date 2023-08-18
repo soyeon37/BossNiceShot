@@ -401,17 +401,26 @@ function AccompanyList() {
             </div>
           </div>
           <div className="selected-container-footer">
-            {selectedContent.attandableStatus ? (
+            {userId == selectedContent.id ? (
               <button className="button accompany-button bg-accompany"
-                onClick={() => handleAttandClick(selectedContent)}> 취소하기</button>
+                onClick={() => handleAttandClick(selectedContent)}> 수정하기</button>
             ) : (
-              <button className="button accompany-button bg-accompany"
-                onClick={() => handleAttandClick(selectedContent)}> 참여하기</button>
+              <>
+                {selectedContent.attandableStatus ? (
+                  <button className="button accompany-button bg-accompany"
+                    onClick={() => handleAttandClick(selectedContent)}> 취소하기</button>
+                ) : (
+                  <button className="button accompany-button bg-accompany"
+                    onClick={() => handleAttandClick(selectedContent)}> 참여하기</button>
+                )}
+              </>
             )}
+
           </div>
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 }
 

@@ -17,6 +17,9 @@ function Profile() {
     // 사용자 정보
     const [userId, setUserId] = useState(state.userId);
     const [userNickname, setUserNickname] = useState(state.userNickname);
+    const [userIntroduce, setUserIntroduce] = useState("");
+    const [userTopScore, setUserTopScore] = useState("");
+    const [userAverageScore, setUserAverageScore] = useState("");
     const [userLevel, setUserLevel] = useState(state.userLevel);
     const [userTee, setUserTee] = useState(state.userTee);
     const [userProfile, setUserProfile] = useState(state.userProfile);
@@ -37,23 +40,13 @@ function Profile() {
             .then(response => {
                 console.log("성공, ", response)
                 // 사용자 정보 저장 필요
+
+                setUserProfile(response.data.data.image);
+                // 자기소개
             })
             .catch(error => {
                 console.error('error 발생: ', error);
             });
-
-        // TEST CODE // Debug Code !!!
-        const testProfile = {
-            nickname: "문싸피",
-            teeBox: "RED",
-            topScore: 40,
-            averageScore: 80,
-            level: "보기 플레이어",
-            image: "green_suncap_tiger white",
-            introduce: "안녕하세요. 제 이름은 문싸피, 반가워요.",
-        }
-        // setUserProfile(testProfile.image);
-        if (!userProfile) setUserProfile("green_suncap_tiger white");
     }, []);
 
     // 정보 수정 & 비밀번호 수정 route
@@ -65,15 +58,16 @@ function Profile() {
     }
 
     // TEST DATA // Debug Code !!!
-    const testProfile = {
-        nickname: "문싸피",
-        teeBox: "RED",
-        topScore: 40,
-        averageScore: 80,
-        level: "보기 플레이어",
-        image: "green_suncap_tiger white",
-        introduce: "안녕하세요. 제 이름은 문싸피, 반가워요.",
-    }
+    // const testProfile = {
+    //     nickname: "문싸피",
+    //     teeBox: "RED",
+    //     topScore: 40,
+    //     averageScore: 80,
+    //     level: "보기 플레이어",
+    //     image: "green_suncap_tiger white",
+    //     introduce: "안녕하세요. 제 이름은 문싸피, 반가워요.",
+    // }
+
     const testHistory = [
         {
             place: "랄라골프장", date: "2023-08-03", score: 80
@@ -97,10 +91,6 @@ function Profile() {
             place: "드림스크린", date: "2023-02-03", score: 60
         },
     ]
-
-    // 사진 출력을 위한 변수
-    let profileValues = "";
-    if (testProfile.image) profileValues = testProfile.image.split(' ');
 
     // 사진 배경 색상을 map으로 관리
     const colorMap = {
@@ -133,9 +123,9 @@ function Profile() {
                     <div id="profile-text">
                         <div id="profile-info">
                             <div id="info-pic-wrapper"
-                                style={{ backgroundColor: getBackground(testProfile) }}>
+                                style={{ backgroundColor: getBackground(userProfile) }}>
                                 <img className="info-pic-image"
-                                    src={require(`../../assets/source/profile/${getImage(testProfile)}.png`)} />
+                                    src={require(`../../assets/source/profile/${getImage(userProfile)}.png`)} />
                             </div>
                             <div id="info-text">
                                 <div id="info-header">이메일</div>
@@ -143,15 +133,15 @@ function Profile() {
                                 <div id="info-header">닉네임</div>
                                 <div id="info-nickname">{userNickname}</div>
                                 <div id="info-header">자기소개</div>
-                                <div id="info-introduction">{testProfile.introduce}</div>
+                                <div id="info-introduction">{userIntroduce}</div>
                                 <div id="info-golf-info1">
                                     <div id="info-golf-info1-1-div">
                                         <div id="info-header">최고타수</div>
-                                        <div id="info-golf-info1-1">{testProfile.topScore}</div>
+                                        <div id="info-golf-info1-1">{userTopScore}</div>
                                     </div>
                                     <div id="info-golf-info1-2-div">
                                         <div id="info-golf-info-header">평균타수</div>
-                                        <div id="info-golf-info1-2">{testProfile.averageScore}</div>
+                                        <div id="info-golf-info1-2">{userAverageScore}</div>
                                     </div>
                                 </div>
                                 <div id="info-golf-info2">

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { GrClose } from "react-icons/gr";
 
 function ProfilePicModal({ initialPic, initialClr, setImgPic, setImgClr, handleProfilePicModal }) {
+    console.log("프로필 모달? ", initialPic, initialClr)
     const values = initialPic.split('_');
     const [color, setColor] = useState(values[0]);
     const [clothes, setClothes] = useState(values[1]);

@@ -1,6 +1,5 @@
 import React from "react";
 
-import ProfileImg from "../../assets/source/imgs/favicon.png";
 import { MdSportsGolf } from "react-icons/md";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
@@ -53,15 +52,11 @@ function AccompanyBox({
       <div className="box-author-position">
         <div className="box-author">
           {checkProfilePic() ? (
-            <div className="profile-icon" style={{ backgroundColor: colorMap[profileValues[1]] }}>
-              <img className="navbar-user-image" alt={`&{author}님`}
-                src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
-            </div>
+            <img className="box-profile-icon" alt={`&{author}님`}
+              src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
           ) : (
-            <div className="profile-icon" style={{ backgroundColor: "white" }}>
-              <img className="navbar-user-image" alt={`&{author}님`}
-                src={require(`../../assets/source/profile/green_suncap_tiger.png`)} />
-            </div>
+            <img className="box-profile-icon" alt={`&{author}님`}
+              src={require(`../../assets/source/profile/green_suncap_tiger.png`)} />
           )}
           {author}
         </div>

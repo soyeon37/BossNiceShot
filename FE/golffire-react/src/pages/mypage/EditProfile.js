@@ -43,8 +43,8 @@ function EditProfile() {
     const [teeBox, setTeeBox] = useState(state.userTee);
     const [image, setImage] = useState(state.image);
 
-    const [imgPic, setImgPic] = useState("green_suncap_tiger");
-    const [imgClr, setImgClr] = useState("white");
+    const [imgPic, setImgPic] = useState(getImage(image));
+    const [imgClr, setImgClr] = useState(getBackground(image));
 
     // 처음 한 번만 실행되는 함수
     useEffect(() => {
@@ -57,12 +57,16 @@ function EditProfile() {
                 console.log("성공, ", response)
                 // 사용자 정보 저장 필요
                 // 닉네임, 자기소개, 최고 타수, 평균타수, 티박스, 사진
+                const gotData = response.data.data;
+                setNickname(gotData.nickname);
+                setIntroduce(gotData.introduce);
+                setTopScore(gotData.topScore)
+                setAverageScore(gotData.averageScore);
+                setTeeBox(gotData.teeBox);
+                setImage(gotData.image);
 
-                // 사진 변수 설정
-                // let profileValues = "";
-                // if (image) profileValues = image.split(' ');
-                // setImgPic(profileValues[0]);
-                // setImgClr(profileValues[1]);
+                setImgPic(getImage(image))
+                setImgClr(getBackground(image))
             })
             .catch(error => {
                 console.error('error 발생: ', error);
@@ -314,8 +318,8 @@ function EditProfile() {
             {/* 프로필 꾸미기 Modal */}
             {modalVisible && (
                 <ProfilePicModal
-                    initialPic={imgPic}
-                    initialClr={imgClr}
+                    initialPic={getImage(image)}
+                    initialClr={getBackground(image)}
                     setImgPic={setImgPic}
                     setImgClr={setImgClr}
                     handleProfilePicModal={handleProfilePicModal}

@@ -1,3 +1,14 @@
+// 변환 가능 여부 반환
+function getAble(profile) {
+    if (typeof profile === 'string' && profile.length >= 20) {
+        let profileValues = null;
+        if (profile) profileValues = profile.toString().split(' ');
+        if (profileValues[0] && profileValues[1]) return true;
+        else return false;
+    } else {
+        return false;
+    }
+}
 
 // 프로필 이미지 반환
 function getImage(profile) {
@@ -26,4 +37,4 @@ function getBackground(profile) {
 }
 
 
-export { getImage, getBackground };
+export { getAble, getImage, getBackground };
