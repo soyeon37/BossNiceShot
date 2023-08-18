@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MyPageNavbar from "./MyPageNavbar";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import "./MyPage.css";
@@ -7,7 +7,8 @@ import "./MyPage.css";
 // Redux
 import { useSelector } from "react-redux";
 
-import { NavLink, useNavigate } from "react-router-dom";
+import MyPageNavbar from "./MyPageNavbar";
+import { getImage, getBackground } from "../../setup/error-manager/ParseProfile";
 
 function Profile() {
     const navigate = useNavigate();
@@ -52,6 +53,7 @@ function Profile() {
             introduce: "안녕하세요. 제 이름은 문싸피, 반가워요.",
         }
         // setUserProfile(testProfile.image);
+        if (!userProfile) setUserProfile("green_suncap_tiger white");
     }, []);
 
     // 정보 수정 & 비밀번호 수정 route
@@ -131,9 +133,9 @@ function Profile() {
                     <div id="profile-text">
                         <div id="profile-info">
                             <div id="info-pic-wrapper"
-                                style={{ backgroundColor: colorMap[profileValues[1]] }}>
+                                style={{ backgroundColor: getBackground(testProfile) }}>
                                 <img className="info-pic-image"
-                                    src={require(`../../assets/source/profile/${profileValues[0]}.png`)} />
+                                    src={require(`../../assets/source/profile/${getImage(testProfile)}.png`)} />
                             </div>
                             <div id="info-text">
                                 <div id="info-header">이메일</div>
