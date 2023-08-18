@@ -45,7 +45,7 @@ function ChatRoom({ props }) {
     // 한라연 ...
 
     useEffect(() => {
-        const socket = new SockJS(process.env.REACT_APP_SERVER_URL + '/ws');
+        const socket = new SockJS(process.env.REACT_APP_SERVER_URL + '/companion-ws');
         const stompClient = Stomp.over(socket);
 
         stompClient.connect((frame) => {
