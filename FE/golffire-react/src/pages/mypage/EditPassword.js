@@ -1,14 +1,64 @@
-import React, { useState } from "react";
-import MyPageNavbar from "./MyPageNavbar";
-import "./MyPage.css";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
+import MyPageNavbar from "./MyPageNavbar";
+import "./MyPage.css";
+
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+import Interceptor from "../../setup/user-auth/Interceptor";
+
 function EditPassword() {
+    // 사용자 정보(userId)로 axios 수행
+    const userId = useSelector((state) => state.userInfoFeature.userId);
+    const accessToken = useSelector((state) => state.userInfoFeature.userAccessToken);
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
+    const navigate = useNavigate();
+
     const [passOrigin, setPassOrigin] = useState("");
     const [passNew, setPassNew] = useState("");
     const [passCheck, setPassCheck] = useState("");
 
-    // 카카오 계정이면 비밀번호 변경 불가 코드 작성 필요
+    const state = useSelector((state) => state.userInfoFeature);
+    const [image, setImage] = useState(state.image);
+
+    const [imgPic, setImgPic] = useState("green_suncap_tiger");
+    const [imgClr, setImgClr] = useState("white");
+    
+    // 처음 한 번만 실행되는 함수
+    useEffect(() => {
+        console.log("처음 실행할 때 사용자 정보 요청해 보여주기");
+
+        // axios code
+        const apiUrl = process.env.REACT_APP_SERVER_URL + "/api/members/info";
+        axios.get(apiUrl)
+            .then(response => {
+                console.log("성공, ", response)
+                // 사용자 정보 저장 필요
+                // 닉네임, 자기소개, 최고 타수, 평균타수, 티박스, 사진
+
+                // 사진 변수 설정
+                let profileValues = "";
+                if (image) profileValues = image.split(' ');
+                setImgPic(profileValues[0]);
+                setImgClr(profileValues[1]);
+            })
+            .catch(error => {
+                console.error('error 발생: ', error);
+            });
+    }, [])
+
+    // 사진 배경 색상을 map으로 관리
+    const colorMap = {
+        "red": "#F24141",
+        "yellow": "#FFE000",
+        "green": "#3BD641",
+        "blue": "#80CAFF",
+        "white": "#FFFFFF",
+    }
 
     // 현재 비밀번호 입력 감지
     const handlePassOrigin = (e) => {
@@ -40,6 +90,7 @@ function EditPassword() {
                 console.log(response);
                 if (response.data.data.resultMessage === "SUCCESS") {
                     alert('비밀번호 변경에 성공했습니다.');
+                    navigate('/mypage/info')
                 }
             })
             .catch((error) => {
@@ -55,10 +106,15 @@ function EditPassword() {
                 <MyPageNavbar />
                 <div id="EditPassword">
                     <div id="edit-pic">
-                        <div id="pic-circle">
-                            큰 사진 들어가는 곳
+                        <div id="edit-pic">
+                            <div className="user-banner-profile">
+                                <div className="user-banner-circle"
+                                    style={{ backgroundColor: colorMap[imgClr] }}>
+                                    <img className="user-banner-circle-fill"
+                                        src={require(`../../assets/source/profile/${imgPic}.png`)} />
+                                </div>
+                            </div>
                         </div>
-                        <div>ddd</div>
                     </div>
                     <div id="edit-pass">
                         <div id="edit-title">

@@ -81,7 +81,7 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
     // RefreshToken로 AccessToken 재발급 후 true 반환
     // RefreshToken 만료 시, 재발급 실패 후 false 반환
     const reissueToken = () => {
-        console.log("access token 재발급"); // Debug Code !!!
+        console.log("access token 재발급, 저장된 refresh token? ", refreshToken); // Debug Code !!!
 
         const apiUrl = process.env.REACT_APP_SERVER_URL + '/api/members/reissue';
         const headers = {
@@ -101,19 +101,21 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
                     const newAccessToken = response.data.data.accessToken;
                     console.log("refreshtoken 재발급 성공!");
                     console.log("reissueToken - Interceptor; ", newAccessToken); // Debug Code !!!
-                    
+
                     dispatch(setUserAccessToken(newAccessToken));
                     return true;
                 } else {
                     console.log("refreshtoken 재발급 실패!");
                     console.log('EXPIRED_TOKEN_MESSAGE: ', message);
+                    alert("토큰 만료되어 자동 로그아웃 됩니다.");
                     handleLogout();
                     return false;
                 }
             })
             .catch((error) => {
                 console.error('재발급 중 에러 발생, ', error); // Debug Code !!!
-                return false;
+                handleLogout();
+                // return false;
             });
     }
 
@@ -186,19 +188,24 @@ const Interceptor = ({ checkToken, doLogin, doLogout }) => {
 
                 // NavBar에 사용자 정보 저장
                 dispatch(setUserId(responsedData.id)); // email과 동일한 값
+                dispatch(setUserNickname(responsedData.nickname));
                 dispatch(setUserImage(responsedData.image));
                 dispatch(setUserLevel(responsedData.level));
                 dispatch(setUserTee(responsedData.teeBox));
-                dispatch(setUserNickname(responsedData.nickname));
 
                 // 로그인 성공 후 Main으로 복귀
                 navigate("/");
             })
             .catch((error) => {
-                console.error("Error:", error); // Debug Code !!
-                dispatch(resetUserState());
-                // 로그인 실패를 화면에 표시하는 코드 필요 !!
-                navigate("/error");
+                console.log("에러내용확인:", error)
+                if (error.response == 500) {
+                    alert("로그인 정보가 잘못되었습니다. 다시 확인해 주세요.");
+                } else {
+                    console.error("Error:", error); // Debug Code !!
+                    dispatch(resetUserState());
+                    // 로그인 실패를 화면에 표시하는 코드 필요 !!
+                    // navigate("/error");
+                }
             });
     }
 }

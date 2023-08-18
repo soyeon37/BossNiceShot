@@ -11,7 +11,7 @@
 
 #follow-modal {
   width: 1240px;
-  height: 800px;
+  height: 700px;
   max-width: 90%;
   max-height: 90%;
 
@@ -191,16 +191,14 @@
 .history-place {
   margin-right: 5px;
   color: #000;
-  font-family: Inter;
   font-size: 18px;
-  font-weight: 400;
+  text-align: left;
 }
 
 .history-date {
   color: #8D8F98;
-  font-family: Inter;
   font-size: 14px;
-  font-weight: 400;
+  text-align: left;
 }
 
 .history-score {
